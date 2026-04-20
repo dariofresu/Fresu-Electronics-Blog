@@ -6,6 +6,24 @@
   <title>How to Conduct an EMI Design Review for Your PCB — Fresu Electronics</title>
   <meta name="description" content="An EMI design review is not a checklist exercise. It is a structured examination of where electromagnetic fields are generated, how they propagate, and whe">
   <meta property="og:title" content="How to Conduct an EMI Design Review for Your PCB">
+  <meta property="og:description" content="A structured examination of where electromagnetic fields are generated, how they propagate, and whether the design contains them.">
+  <meta property="og:url" content="https://blog.fresuelectronics.com/emi-design-review-pcb">
+  <meta property="og:image" content="https://static.wixstatic.com/media/61d609_17ac5cf4b2dc4c49852db7b08c9857d4~mv2.jpg/v1/fill/w_1200,h_630,fp_0.50_0.50,q_90,enc_avif,quality_auto/61d609_17ac5cf4b2dc4c49852db7b08c9857d4~mv2.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:type" content="article">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:site" content="@dario_fresu">
+  <meta name="twitter:image" content="https://static.wixstatic.com/media/61d609_17ac5cf4b2dc4c49852db7b08c9857d4~mv2.jpg/v1/fill/w_1200,h_630,fp_0.50_0.50,q_90,enc_avif,quality_auto/61d609_17ac5cf4b2dc4c49852db7b08c9857d4~mv2.jpg">
+  <meta property="og:image" content="https://static.wixstatic.com/media/61d609_17ac5cf4b2dc4c49852db7b08c9857d4~mv2.jpg/v1/fill/w_1200,h_630,fp_0.50_0.50,q_90,enc_avif,quality_auto/61d609_17ac5cf4b2dc4c49852db7b08c9857d4~mv2.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:type" content="article">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:site" content="@dario_fresu">
+  <meta name="twitter:image" content="https://static.wixstatic.com/media/61d609_17ac5cf4b2dc4c49852db7b08c9857d4~mv2.jpg/v1/fill/w_1200,h_630,fp_0.50_0.50,q_90,enc_avif,quality_auto/61d609_17ac5cf4b2dc4c49852db7b08c9857d4~mv2.jpg">
+  <!-- og:title already set above -->
+  <meta property="og:title" content="How to Conduct an EMI Design Review for Your PCB">
   <meta property="og:url" content="https://blog.fresuelectronics.com/emi-design-review-pcb">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -94,6 +112,46 @@
     .container>*{animation:fadeUp 0.7s cubic-bezier(0.22,1,0.36,1) both}
     .container>*:nth-child(1){animation-delay:0ms}.container>*:nth-child(2){animation-delay:60ms}.container>*:nth-child(3){animation-delay:120ms}.container>*:nth-child(4){animation-delay:180ms}
     @media(max-width:560px){.contrast-block{grid-template-columns:1fr}.contrast-col.wrong{border-right:1px solid var(--border);border-bottom:none}.container{padding:48px 20px 80px}.cta-section{padding:40px 20px}.site-header{padding:16px 20px}.header-nav a:not(.header-cta){display:none}}
+
+    /* Share strip */
+    .share-strip {
+      display: flex; align-items: center; gap: 12px;
+      margin: 56px 0 0; padding-top: 32px;
+      border-top: 1px solid var(--border);
+      flex-wrap: wrap;
+    }
+    .share-label {
+      font-size: 12px; font-weight: 600; letter-spacing: 0.1em;
+      text-transform: uppercase; color: var(--label); margin-right: 4px;
+    }
+    .share-btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-family: 'Poppins', sans-serif; font-size: 13px; font-weight: 600;
+      padding: 9px 18px; border-radius: 3px; text-decoration: none;
+      border: none; cursor: pointer; transition: opacity 0.2s, transform 0.15s;
+      white-space: nowrap;
+    }
+    .share-btn:hover { opacity: 0.88; transform: translateY(-1px); }
+    .share-btn svg { width: 16px; height: 16px; flex-shrink: 0; }
+    .share-btn.linkedin { background: #0A66C2; color: #ffffff; }
+    .share-btn.twitter  { background: #000000; color: #ffffff; }
+    .share-btn.youtube  { background: #FF0000; color: #ffffff; }
+    .share-btn.copylink { background: var(--surface); color: var(--accent);
+                          border: 1px solid var(--accent); }
+    .share-btn.copylink.copied { color: var(--correct); border-color: var(--correct); }
+    /* Cover hero */
+    .post-cover {
+      width: 100%; border-radius: 6px; display: block;
+      margin-bottom: 44px; border: 1px solid var(--border);
+      aspect-ratio: 16/9; object-fit: cover;
+    }
+    .post-cover-svg {
+      width: 100%; border-radius: 6px; overflow: hidden;
+      margin-bottom: 44px; border: 1px solid var(--border);
+      background: var(--surface); aspect-ratio: 16/9;
+      display: flex; align-items: center; justify-content: center;
+    }
+
   </style>
 </head>
 <body>
@@ -141,6 +199,44 @@
   <div class="closing">
     <div class="tags"><span class="tag">#EMCReview</span> <span class="tag">#PCBDesign</span> <span class="tag">#EMI</span> <span class="tag">#DesignProcess</span> <span class="tag">#HardwareEngineering</span></div>
   </div>
+  <div class="share-strip">
+    <span class="share-label">Share</span>
+
+    <a href="https://www.linkedin.com/shareArticle?mini=true&url=https://blog.fresuelectronics.com/emi-design-review-pcb&title=How to Conduct an EMI Design Review for Your PCB&summary=A structured examination of where electromagnetic fields are generated, how they propagate, and whether the design contains them." target="_blank" rel="noopener" class="share-btn linkedin">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+      LinkedIn
+    </a>
+
+    <a href="https://twitter.com/intent/tweet?url=https://blog.fresuelectronics.com/emi-design-review-pcb&text=How to Conduct an EMI Design Review for Your PCB+by+%40dario_fresu&via=dario_fresu" target="_blank" rel="noopener" class="share-btn twitter">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+      X / Twitter
+    </a>
+
+    <button class="share-btn youtube" onclick="copyLink(this, 'https://blog.fresuelectronics.com/emi-design-review-pcb')" title="Copy link to share in a YouTube Community post">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+      Copy for YouTube
+    </button>
+
+    <button class="share-btn copylink" id="copy-main" onclick="copyLink(this, 'https://blog.fresuelectronics.com/emi-design-review-pcb')">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+      Copy Link
+    </button>
+  </div>
+
+  <script>
+  function copyLink(btn, url) {
+    navigator.clipboard.writeText(url).then(function() {
+      var orig = btn.innerHTML;
+      btn.classList.add('copied');
+      btn.innerHTML = btn.innerHTML.replace(/(LinkedIn|Copy for YouTube|Copy Link)/, '✓ Copied!');
+      setTimeout(function() {
+        btn.classList.remove('copied');
+        btn.innerHTML = orig;
+      }, 2000);
+    });
+  }
+  </script>
+
   <div class="cta-section">
     <span class="cta-eyebrow">Work with Dario Fresu</span>
     <h2 class="cta-headline" style="margin:0 0 16px;">A professional EMI review <em>before your next spin.</em></h2>
