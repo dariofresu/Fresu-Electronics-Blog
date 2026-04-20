@@ -14,13 +14,21 @@
   <style>
     *, *::before, *::after { box-sizing:border-box; margin:0; padding:0; }
     :root {
-      --bg:#0b0b0d; --surface:#111114; --surface-2:#18181d;
-      --border:#252530; --label:#a0a0b0;
-      --accent:#ff5c2b; --accent-dim:rgba(255,92,43,0.12);
-      --correct:#3dffa0; --correct-dim:rgba(61,255,160,0.08); --wrong:#ff4444;
+      --bg:         #071F2F;
+      --surface:    #0d2b3e;
+      --surface-2:  #102f45;
+      --border:     #1a3d52;
+      --fg:         #ffffff;
+      --label:      #a0aab8;
+      --accent:     #116DFF;
+      --accent-dim: rgba(17, 109, 255, 0.12);
+      --accent-hover:#1443FF;
+      --correct:    #3dffa0;
+      --correct-dim:rgba(61, 255, 160, 0.08);
+      --wrong:      #ff4d4d;
     }
     body { background:var(--bg); color:#ffffff; font-family:'Poppins',sans-serif; font-size:17px; line-height:1.75; min-height:100vh; overflow-x:hidden; }
-    body::before { content:''; position:fixed; inset:0; pointer-events:none; z-index:1000; opacity:0.3; background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E"); }
+    body::before { content:''; position:fixed; inset:0; pointer-events:none; z-index:1000; opacity:0.25; background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E"); }
 
     header { border-bottom:1px solid var(--border); }
     .site-header { max-width:1100px; margin:0 auto; padding:18px 40px; display:flex; align-items:center; justify-content:space-between; }
@@ -28,7 +36,8 @@
     .header-nav { display:flex; align-items:center; gap:28px; }
     .header-nav a { font-size:11px; font-weight:600; letter-spacing:0.08em; text-transform:uppercase; color:#ffffff; text-decoration:none; opacity:0.6; transition:opacity 0.2s; }
     .header-nav a:hover { opacity:1; }
-    .header-cta { opacity:1 !important; background:var(--accent); color:#ffffff !important; padding:9px 20px; border-radius:3px; }
+    .header-cta { opacity:1 !important; background:var(--accent); color:#ffffff !important; padding:9px 20px; border-radius:3px; transition:background 0.2s; }
+    .header-cta:hover { background:var(--accent-hover) !important; }
 
     .container { max-width:740px; margin:0 auto; padding:72px 32px 80px; }
 
@@ -37,7 +46,6 @@
 
     h1 { font-size:clamp(34px,5.5vw,54px); font-weight:800; line-height:1.1; letter-spacing:-0.02em; color:#ffffff; margin-bottom:24px; }
     h1 em { font-style:italic; color:var(--accent); }
-
     .deck { font-size:18px; font-weight:400; color:#ffffff; line-height:1.7; margin-bottom:48px; padding-bottom:48px; border-bottom:1px solid var(--border); }
 
     .author-row { display:flex; align-items:center; gap:16px; margin-bottom:48px; padding-bottom:48px; border-bottom:1px solid var(--border); }
@@ -64,7 +72,7 @@
     .contrast-col.right .contrast-list li::before { content:'✓'; color:var(--correct); font-size:12px; margin-top:2px; flex-shrink:0; }
 
     .pull-quote { margin:44px 0; padding:32px 36px; border-left:3px solid var(--accent); background:var(--accent-dim); border-radius:0 4px 4px 0; position:relative; }
-    .pull-quote::before { content:'"'; font-size:80px; color:var(--accent); opacity:0.25; position:absolute; top:-10px; left:24px; line-height:1; font-weight:800; }
+    .pull-quote::before { content:'"'; font-size:80px; color:var(--accent); opacity:0.2; position:absolute; top:-10px; left:24px; line-height:1; font-weight:800; }
     .pull-quote p { font-size:20px; font-weight:500; font-style:italic; line-height:1.55; color:#ffffff; margin:0; padding-top:8px; }
 
     .concept-grid { display:grid; gap:2px; margin:44px 0; }
@@ -82,9 +90,8 @@
     .tags { display:flex; flex-wrap:wrap; gap:8px; margin-top:32px; }
     .tag { font-size:11px; font-weight:500; letter-spacing:0.05em; padding:5px 12px; border:1px solid var(--border); border-radius:2px; color:var(--label); background:var(--surface); }
 
-    /* CTA */
     .cta-section { margin-top:80px; padding:56px 48px; background:var(--surface); border:1px solid var(--border); border-radius:6px; position:relative; overflow:hidden; text-align:center; }
-    .cta-section::before { content:''; position:absolute; inset:0; background:radial-gradient(ellipse at 50% 0%,rgba(255,92,43,0.14) 0%,transparent 70%); pointer-events:none; }
+    .cta-section::before { content:''; position:absolute; inset:0; background:radial-gradient(ellipse at 50% 0%,rgba(17,109,255,0.12) 0%,transparent 70%); pointer-events:none; }
     .cta-section::after  { content:''; position:absolute; top:0; left:0; right:0; height:2px; background:linear-gradient(90deg,transparent,var(--accent),transparent); }
     .cta-eyebrow { font-size:11px; font-weight:600; letter-spacing:0.2em; text-transform:uppercase; color:var(--accent); margin-bottom:20px; display:block; }
     .cta-headline { font-size:clamp(26px,4vw,38px); font-weight:800; line-height:1.15; letter-spacing:-0.02em; color:#ffffff; margin-bottom:16px; }
@@ -92,9 +99,9 @@
     .cta-sub { font-size:16px; font-weight:400; color:#ffffff; max-width:520px; margin:0 auto 36px; line-height:1.7; }
 
     .cta-buttons { display:flex; flex-wrap:wrap; gap:12px; justify-content:center; margin-bottom:32px; }
-    .btn-primary  { display:inline-flex; align-items:center; gap:8px; background:var(--accent); color:#ffffff; font-size:14px; font-weight:600; padding:14px 28px; border-radius:3px; text-decoration:none; transition:opacity 0.2s,transform 0.2s; font-family:'Poppins',sans-serif; }
-    .btn-primary:hover { opacity:0.9; transform:translateY(-1px); }
-    .btn-secondary { display:inline-flex; align-items:center; gap:8px; color:#ffffff; font-size:14px; font-weight:500; padding:14px 28px; border:1px solid var(--border); border-radius:3px; text-decoration:none; transition:border-color 0.2s,transform 0.2s; font-family:'Poppins',sans-serif; }
+    .btn-primary  { display:inline-flex; align-items:center; gap:8px; background:var(--accent); color:#ffffff; font-family:'Poppins',sans-serif; font-size:14px; font-weight:600; padding:14px 28px; border-radius:3px; text-decoration:none; transition:background 0.2s,transform 0.2s; }
+    .btn-primary:hover  { background:var(--accent-hover); transform:translateY(-1px); }
+    .btn-secondary { display:inline-flex; align-items:center; gap:8px; color:#ffffff; font-family:'Poppins',sans-serif; font-size:14px; font-weight:500; padding:14px 28px; border:1px solid var(--border); border-radius:3px; text-decoration:none; transition:border-color 0.2s,transform 0.2s; }
     .btn-secondary:hover { border-color:#ffffff; transform:translateY(-1px); }
 
     .cta-proof { display:flex; flex-wrap:wrap; gap:20px; justify-content:center; padding-top:28px; border-top:1px solid var(--border); margin-bottom:40px; }
@@ -154,9 +161,7 @@
   <p class="deck">It's not a layout problem. It's not a component problem. It's a mental model problem — and until you fix the vocabulary in your team's head, you'll keep losing weeks to the chamber.</p>
 
   <div class="author-row">
-    <img class="author-photo"
-      src="https://raw.githubusercontent.com/dariofresu/Fresu-Electronics-Blog/main/assets/dario-fresu.jpg"
-      alt="Dario Fresu">
+    <img class="author-photo" src="https://raw.githubusercontent.com/dariofresu/Fresu-Electronics-Blog/main/assets/dario-fresu.jpg" alt="Dario Fresu">
     <div>
       <span class="author-name">Dario Fresu</span>
       <span class="author-title">Principal EMC Architect · Fresu Electronics</span>
@@ -207,10 +212,9 @@
 
   <h2>Reference planes and potential stability</h2>
   <p>Instead of "ground," think <strong>reference plane</strong>. A reference plane has a job: it is a low-impedance, low-inductance surface that all signals within a domain can reference without their reference potential moving. A ground plane stitched to chassis at one point per board doesn't do this job at 500 MHz — the inductance of that single bond wire makes the plane's potential bounce relative to chassis at exactly the frequencies where your radiated emissions are failing.</p>
-  <p>When you think in terms of reference plane quality — its continuity, its impedance at the frequencies you care about, how many times per wavelength it is bonded to chassis — you naturally design better. You place stitching vias at calculated intervals rather than randomly.</p>
 
   <h2>Electromagnetic field containment, not "shielding"</h2>
-  <p>Fields want to propagate. Your job as a designer is to define the geometry of where they are allowed to propagate and where they are not, then construct the physical structures that enforce that geometry. This is a completely different mindset from "put a box around it."</p>
+  <p>Fields want to propagate. Your job as a designer is to define the geometry of where they are allowed to propagate and where they are not, then construct the physical structures that enforce that geometry.</p>
 
   <div class="concept-grid">
     <div class="concept-card">
@@ -221,7 +225,7 @@
     <div class="concept-card">
       <span class="concept-num">02 — Channeling</span>
       <h3>Guide the field, don't just block it</h3>
-      <p>A cable entering a shielded enclosure is a field guide — it carries whatever field is on the conductor straight through your containment structure. A cable filtered at the wall breaks the field propagation at the boundary. The termination geometry and the bond impedance at the point of entry are everything.</p>
+      <p>A cable entering a shielded enclosure is a field guide — it carries whatever field is on the conductor straight through your containment structure. A cable filtered at the wall breaks the field propagation at the boundary. The termination geometry and bond impedance at the point of entry are everything.</p>
     </div>
     <div class="concept-card">
       <span class="concept-num">03 — Common-Mode</span>
@@ -235,12 +239,8 @@
     </div>
   </div>
 
-  <h2>The consequence of the wrong model</h2>
-  <p>Teams operating with the old vocabulary don't just fail more tests — they fail them in unpredictable ways. Because their interventions are based on vague intuition rather than field and current-path reasoning, they can't predict which fix will work before they apply it. They're doing random walks through design space under time pressure, which is the worst possible position when the chamber books at two-week lead time.</p>
-  <p>The right vocabulary makes interventions predictable. If you know your emissions peak at 192 MHz and you can identify the switching loop whose area, when multiplied by the current and frequency, predicts that emission — you have a hypothesis. You reduce the loop area. You verify. This is engineering. The other approach is superstition with a soldering iron.</p>
-
   <h2>What to change</h2>
-  <p>Start at the design review stage. Ban the word "ground" as a verb. Make people say what they actually mean: "reduce return path inductance," "close the switching loop," "bond the chassis seam to below 10 mΩ at 200 MHz." Make people draw current return paths on the schematic and layout — not just signal paths.</p>
+  <p>Start at the design review stage. Ban the word "ground" as a verb. Make people say what they actually mean: "reduce return path inductance," "close the switching loop," "bond the chassis seam to below 10 mΩ at 200 MHz." Make people draw current return paths on the schematic and layout — not just signal paths. Make people identify every aperture and its largest linear dimension relative to λ at the clock frequency and its harmonics.</p>
   <p>And get the whole team — firmware, mechanical, EE — into the same mental model. EMC failures are almost always system failures. The only way to align everyone is a shared, physics-based vocabulary.</p>
 
   <div class="closing">
@@ -271,7 +271,7 @@
       <a href="https://www.fresuelectronics.com/emc-audit" class="product-card" target="_blank">
         <div class="product-icon">🔍</div>
         <div class="product-name">EMC Design Audit</div>
-        <div class="product-desc">Full design review before the chamber. Return paths, apertures, field geometry. One-off engagement.</div>
+        <div class="product-desc">Full design review before the chamber. Return paths, apertures, field geometry.</div>
         <div class="product-link">Apply — €8,000 →</div>
       </a>
       <a href="https://www.fresuelectronics.com/emc-audit" class="product-card" target="_blank">
@@ -283,7 +283,7 @@
       <a href="https://www.fresuelectronics.com/free-tool-1" class="product-card" target="_blank">
         <div class="product-icon">📐</div>
         <div class="product-name">Free Stackup Template Tool</div>
-        <div class="product-desc">EMI-controlled stackup template tool. Free resource for your next board design.</div>
+        <div class="product-desc">EMI-controlled stackup template. Free resource for your next board design.</div>
         <div class="product-link">Get free resource →</div>
       </a>
     </div>
