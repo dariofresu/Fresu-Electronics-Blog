@@ -10,188 +10,88 @@
   <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400;1,700&display=swap" rel="stylesheet">
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
     :root {
-      --bg: #0b0b0d;
-      --surface: #111114;
-      --surface-2: #18181d;
-      --border: #252530;
-      --fg: #ffffff;
-      --label: #a0a0b0;
-      --accent: #ff5c2b;
-      --accent-dim: rgba(255, 92, 43, 0.12);
-      --correct: #3dffa0;
-      --correct-dim: rgba(61, 255, 160, 0.08);
+      --bg: #0b0b0d; --surface: #111114; --surface-2: #18181d;
+      --border: #252530; --label: #a0a0b0;
+      --accent: #ff5c2b; --accent-dim: rgba(255,92,43,0.12);
+      --correct: #3dffa0; --correct-dim: rgba(61,255,160,0.08);
     }
+    body { background: var(--bg); color: #ffffff; font-family: 'Poppins', sans-serif; font-size: 16px; line-height: 1.7; min-height: 100vh; overflow-x: hidden; }
+    body::before { content:''; position:fixed; inset:0; pointer-events:none; z-index:1000; opacity:0.3; background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E"); }
 
-    body {
-      background: var(--bg);
-      color: #ffffff;
-      font-family: 'Poppins', sans-serif;
-      font-size: 16px;
-      line-height: 1.7;
-      min-height: 100vh;
-      overflow-x: hidden;
-    }
-
-    body::before {
-      content: ''; position: fixed; inset: 0; pointer-events: none; z-index: 1000; opacity: 0.3;
-      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
-    }
-
-    /* HEADER */
     header { border-bottom: 1px solid var(--border); }
-    .site-header {
-      max-width: 1100px; margin: 0 auto;
-      padding: 18px 40px;
-      display: flex; align-items: center; justify-content: space-between;
-    }
-    .site-header img { height: 44px; width: auto; display: block; }
-    .header-nav { display: flex; align-items: center; gap: 28px; }
-    .header-nav a {
-      font-size: 11px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase;
-      color: #ffffff; text-decoration: none; opacity: 0.6; transition: opacity 0.2s;
-    }
-    .header-nav a:hover { opacity: 1; }
-    .header-cta {
-      opacity: 1 !important; background: var(--accent);
-      color: #ffffff !important; padding: 9px 20px; border-radius: 3px;
-    }
+    .site-header { max-width:1100px; margin:0 auto; padding:18px 40px; display:flex; align-items:center; justify-content:space-between; }
+    .site-header img { height:44px; width:auto; display:block; }
+    .header-nav { display:flex; align-items:center; gap:28px; }
+    .header-nav a { font-size:11px; font-weight:600; letter-spacing:0.08em; text-transform:uppercase; color:#ffffff; text-decoration:none; opacity:0.6; transition:opacity 0.2s; }
+    .header-nav a:hover { opacity:1; }
+    .header-cta { opacity:1 !important; background:var(--accent); color:#ffffff !important; padding:9px 20px; border-radius:3px; }
 
-    /* HERO */
-    .hero {
-      max-width: 1100px; margin: 0 auto;
-      padding: 80px 40px 64px;
-      border-bottom: 1px solid var(--border);
-    }
-    .hero-label {
-      font-size: 11px; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase;
-      color: var(--accent); margin-bottom: 20px; display: block;
-    }
-    .hero-title {
-      font-size: clamp(40px, 5.5vw, 68px); font-weight: 800;
-      line-height: 1.06; letter-spacing: -0.025em;
-      color: #ffffff; margin-bottom: 20px;
-    }
-    .hero-title em { font-style: italic; color: var(--accent); }
-    .hero-sub { font-size: 17px; font-weight: 400; color: #ffffff; max-width: 560px; line-height: 1.7; }
+    .hero { max-width:1100px; margin:0 auto; padding:80px 40px 64px; border-bottom:1px solid var(--border); }
+    .hero-label { font-size:11px; font-weight:600; letter-spacing:0.2em; text-transform:uppercase; color:var(--accent); margin-bottom:20px; display:block; }
+    .hero-title { font-size:clamp(40px,5.5vw,68px); font-weight:800; line-height:1.06; letter-spacing:-0.025em; color:#ffffff; margin-bottom:20px; }
+    .hero-title em { font-style:italic; color:var(--accent); }
+    .hero-sub { font-size:17px; font-weight:400; color:#ffffff; max-width:560px; line-height:1.7; }
 
-    /* POSTS */
-    .posts-section { max-width: 1100px; margin: 0 auto; padding: 64px 40px 120px; }
-    .section-label {
-      font-size: 11px; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase;
-      color: var(--label); margin-bottom: 32px; padding-bottom: 16px;
-      border-bottom: 1px solid var(--border);
-    }
-    .posts-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 2px; }
+    .posts-section { max-width:1100px; margin:0 auto; padding:64px 40px 120px; }
+    .section-label { font-size:11px; font-weight:600; letter-spacing:0.18em; text-transform:uppercase; color:var(--label); margin-bottom:32px; padding-bottom:16px; border-bottom:1px solid var(--border); }
+    .posts-grid { display:grid; grid-template-columns:repeat(auto-fill, minmax(320px,1fr)); gap:2px; }
 
-    .post-card {
-      background: var(--surface); border: 1px solid var(--border);
-      padding: 32px; border-radius: 4px;
-      text-decoration: none; display: flex; flex-direction: column; gap: 14px;
-      position: relative; overflow: hidden;
-      transition: border-color 0.2s, transform 0.2s;
-    }
-    .post-card:hover { border-color: var(--accent); transform: translateY(-2px); }
+    .post-card { background:var(--surface); border:1px solid var(--border); padding:32px; border-radius:4px; text-decoration:none; display:flex; flex-direction:column; gap:14px; position:relative; overflow:hidden; transition:border-color 0.2s, transform 0.2s; }
+    .post-card:hover { border-color:var(--accent); transform:translateY(-2px); }
+    .post-card.featured { grid-column:1/-1; display:grid; grid-template-columns:1fr 1fr; gap:56px; align-items:center; padding:52px; }
+    .post-card.featured::after { content:''; position:absolute; top:0; left:0; right:0; height:2px; background:linear-gradient(90deg,var(--accent),transparent); }
 
-    .post-card.featured {
-      grid-column: 1 / -1;
-      display: grid; grid-template-columns: 1fr 1fr; gap: 56px;
-      align-items: center; padding: 52px;
-    }
-    .post-card.featured::after {
-      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
-      background: linear-gradient(90deg, var(--accent), transparent);
-    }
+    .post-meta { display:flex; align-items:center; gap:10px; flex-wrap:wrap; }
+    .post-tag { font-size:10px; font-weight:600; letter-spacing:0.12em; text-transform:uppercase; color:var(--accent); border:1px solid var(--accent); padding:3px 9px; border-radius:2px; background:var(--accent-dim); }
+    .post-date { font-size:11px; font-weight:400; color:var(--label); }
+    .post-new { font-size:10px; font-weight:600; letter-spacing:0.1em; text-transform:uppercase; color:var(--correct); border:1px solid var(--correct); padding:3px 9px; border-radius:2px; background:var(--correct-dim); }
+    .post-title { font-weight:700; letter-spacing:-0.01em; color:#ffffff; line-height:1.25; }
+    .post-card.featured .post-title { font-size:30px; }
+    .post-card:not(.featured) .post-title { font-size:19px; }
+    .post-excerpt { font-size:14px; font-weight:400; color:#ffffff; line-height:1.75; flex-grow:1; }
+    .post-read-more { font-size:12px; font-weight:600; letter-spacing:0.05em; color:var(--accent); margin-top:6px; }
 
-    .post-meta { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
-    .post-tag {
-      font-size: 10px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase;
-      color: var(--accent); border: 1px solid var(--accent);
-      padding: 3px 9px; border-radius: 2px; background: var(--accent-dim);
-    }
-    .post-date { font-size: 11px; font-weight: 400; color: var(--label); }
-    .post-new {
-      font-size: 10px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase;
-      color: var(--correct); border: 1px solid var(--correct);
-      padding: 3px 9px; border-radius: 2px; background: var(--correct-dim);
-    }
+    .featured-visual { aspect-ratio:4/3; background:var(--surface-2); border:1px solid var(--border); border-radius:4px; display:flex; align-items:center; justify-content:center; overflow:hidden; }
+    .featured-visual svg { width:88%; height:88%; }
 
-    .post-title {
-      font-weight: 700; letter-spacing: -0.01em; color: #ffffff; line-height: 1.25;
-    }
-    .post-card.featured .post-title { font-size: 30px; }
-    .post-card:not(.featured) .post-title { font-size: 19px; }
+    .post-card.coming-soon { opacity:0.4; pointer-events:none; }
+    .coming-tag { font-size:10px; font-weight:600; letter-spacing:0.1em; text-transform:uppercase; color:var(--label); border:1px solid var(--border); padding:3px 9px; border-radius:2px; }
 
-    .post-excerpt { font-size: 14px; font-weight: 400; color: #ffffff; line-height: 1.75; flex-grow: 1; }
-    .post-read-more { font-size: 12px; font-weight: 600; letter-spacing: 0.05em; color: var(--accent); margin-top: 6px; }
+    /* CTA banner */
+    .cta-banner { margin-top:72px; background:var(--surface); border:1px solid var(--border); border-radius:4px; overflow:hidden; position:relative; }
+    .cta-banner::after { content:''; position:absolute; top:0; left:0; right:0; height:2px; background:linear-gradient(90deg,var(--accent),transparent); }
+    .cta-banner-top { padding:52px 52px 40px; display:grid; grid-template-columns:1fr auto; gap:48px; align-items:center; }
+    .cta-banner h3 { font-size:26px; font-weight:700; color:#ffffff; margin-bottom:12px; letter-spacing:-0.01em; }
+    .cta-banner p { font-size:15px; font-weight:400; color:#ffffff; margin:0; line-height:1.7; }
+    .cta-actions { display:flex; flex-direction:column; gap:10px; flex-shrink:0; }
 
-    .featured-visual {
-      aspect-ratio: 4/3; background: var(--surface-2);
-      border: 1px solid var(--border); border-radius: 4px;
-      display: flex; align-items: center; justify-content: center; overflow: hidden;
-    }
-    .featured-visual svg { width: 88%; height: 88%; }
+    /* About strip */
+    .about-strip { padding:32px 52px 40px; border-top:1px solid var(--border); display:flex; align-items:center; gap:20px; }
+    .about-strip img { width:56px; height:56px; border-radius:50%; object-fit:cover; border:2px solid var(--accent); flex-shrink:0; }
+    .about-text { font-size:14px; font-weight:400; color:#ffffff; line-height:1.65; }
+    .about-text strong { font-weight:600; color:#ffffff; }
 
-    .post-card.coming-soon { opacity: 0.4; pointer-events: none; }
-    .coming-tag {
-      font-size: 10px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase;
-      color: var(--label); border: 1px solid var(--border); padding: 3px 9px; border-radius: 2px;
-    }
+    .btn-primary { display:inline-flex; align-items:center; gap:8px; background:var(--accent); color:#ffffff; font-size:13px; font-weight:600; letter-spacing:0.02em; padding:13px 24px; border-radius:3px; text-decoration:none; white-space:nowrap; transition:opacity 0.2s; font-family:'Poppins',sans-serif; }
+    .btn-primary:hover { opacity:0.88; }
+    .btn-outline { display:inline-flex; align-items:center; justify-content:center; color:#ffffff; font-size:11px; font-weight:600; letter-spacing:0.08em; text-transform:uppercase; text-decoration:none; padding:11px 24px; border:1px solid var(--border); border-radius:3px; transition:border-color 0.2s; font-family:'Poppins',sans-serif; }
+    .btn-outline:hover { border-color:#ffffff; }
 
-    /* CTA BANNER */
-    .cta-banner {
-      margin-top: 72px; padding: 52px;
-      background: var(--surface); border: 1px solid var(--border); border-radius: 4px;
-      display: grid; grid-template-columns: 1fr auto; gap: 48px; align-items: center;
-      position: relative; overflow: hidden;
-    }
-    .cta-banner::after {
-      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
-      background: linear-gradient(90deg, var(--accent), transparent);
-    }
-    .cta-banner h3 { font-size: 26px; font-weight: 700; color: #ffffff; margin-bottom: 10px; letter-spacing: -0.01em; }
-    .cta-banner p  { font-size: 15px; font-weight: 400; color: #ffffff; margin: 0; line-height: 1.7; }
-    .cta-actions { display: flex; flex-direction: column; gap: 10px; flex-shrink: 0; }
+    footer { border-top:1px solid var(--border); }
+    .site-footer { max-width:1100px; margin:0 auto; padding:28px 40px; display:flex; align-items:center; justify-content:space-between; font-size:11px; font-weight:400; color:#ffffff; opacity:0.5; flex-wrap:wrap; gap:12px; }
+    .site-footer a { color:var(--accent); text-decoration:none; }
 
-    .btn-primary {
-      display: inline-flex; align-items: center; gap: 8px;
-      background: var(--accent); color: #ffffff;
-      font-size: 13px; font-weight: 600; letter-spacing: 0.02em;
-      padding: 13px 24px; border-radius: 3px; text-decoration: none; white-space: nowrap;
-      transition: opacity 0.2s;
-    }
-    .btn-primary:hover { opacity: 0.88; }
-    .btn-outline {
-      display: inline-flex; align-items: center; justify-content: center;
-      color: #ffffff; font-size: 11px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase;
-      text-decoration: none; padding: 11px 24px;
-      border: 1px solid var(--border); border-radius: 3px;
-      transition: border-color 0.2s;
-    }
-    .btn-outline:hover { border-color: #ffffff; }
+    @keyframes fadeUp { from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)} }
+    .hero          { animation:fadeUp 0.7s cubic-bezier(0.22,1,0.36,1) both; }
+    .posts-section { animation:fadeUp 0.7s cubic-bezier(0.22,1,0.36,1) 100ms both; }
 
-    /* FOOTER */
-    footer { border-top: 1px solid var(--border); }
-    .site-footer {
-      max-width: 1100px; margin: 0 auto; padding: 28px 40px;
-      display: flex; align-items: center; justify-content: space-between;
-      font-size: 11px; font-weight: 400; color: #ffffff; opacity: 0.5;
-      flex-wrap: wrap; gap: 12px;
-    }
-    .site-footer a { color: var(--accent); text-decoration: none; }
-
-    /* ANIMATIONS */
-    @keyframes fadeUp { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
-    .hero          { animation: fadeUp 0.7s cubic-bezier(0.22,1,0.36,1) both; }
-    .posts-section { animation: fadeUp 0.7s cubic-bezier(0.22,1,0.36,1) 100ms both; }
-
-    @media (max-width: 760px) {
-      .site-header, .hero, .posts-section, .site-footer { padding-left: 20px; padding-right: 20px; }
-      .header-nav a:not(.header-cta) { display: none; }
-      .post-card.featured { grid-template-columns: 1fr; padding: 28px; }
-      .featured-visual { display: none; }
-      .cta-banner { grid-template-columns: 1fr; padding: 28px 20px; }
+    @media(max-width:760px){
+      .site-header,.hero,.posts-section,.site-footer{padding-left:20px;padding-right:20px;}
+      .header-nav a:not(.header-cta){display:none;}
+      .post-card.featured{grid-template-columns:1fr;padding:28px;}
+      .featured-visual{display:none;}
+      .cta-banner-top{grid-template-columns:1fr;padding:28px 20px 24px;}
+      .about-strip{padding:24px 20px 28px;}
     }
   </style>
 </head>
@@ -220,7 +120,6 @@
   <div class="section-label">All Posts</div>
   <div class="posts-grid">
 
-    <!-- FEATURED -->
     <a href="./emc-mental-model" class="post-card featured">
       <div>
         <div class="post-meta">
@@ -277,7 +176,7 @@
     <a href="https://www.fresuelectronics.com/post/current-return-path-high-speed-vs-low-speed-signals" class="post-card" target="_blank">
       <div class="post-meta"><span class="post-tag">Signal Integrity</span><span class="post-date">2025</span></div>
       <h3 class="post-title">Managing EMI: Low and High-Speed Signal Return Currents</h3>
-      <p class="post-excerpt">Return current doesn't follow ground. It follows the path of least impedance — and at high frequency, that path is nothing like what you drew in the schematic.</p>
+      <p class="post-excerpt">Return current doesn't follow ground. It follows the path of least impedance — and at high frequency, that's nothing like what you drew in the schematic.</p>
       <span class="post-read-more">Read post →</span>
     </a>
 
@@ -291,14 +190,14 @@
     <a href="https://www.fresuelectronics.com/post/the-concept-of-electromagnetic-fields-in-a-pcb" class="post-card" target="_blank">
       <div class="post-meta"><span class="post-tag">Electromagnetism</span><span class="post-date">2025 · 6 min</span></div>
       <h3 class="post-title">The Concept of Electromagnetic Fields in a PCB</h3>
-      <p class="post-excerpt">PCBs don't conduct electrons — they guide electromagnetic fields. Understanding what that actually means changes how you lay out every trace.</p>
+      <p class="post-excerpt">PCBs don't conduct electrons — they guide electromagnetic fields. Understanding what that means changes how you lay out every trace.</p>
       <span class="post-read-more">Read post →</span>
     </a>
 
     <a href="https://www.fresuelectronics.com/post/90-degree-bends-in-a-pcb-design" class="post-card" target="_blank">
       <div class="post-meta"><span class="post-tag">PCB Design</span><span class="post-date">2025 · 8 min</span></div>
       <h3 class="post-title">Understanding 90-Degree Bends in PCB Design</h3>
-      <p class="post-excerpt">The debate isn't settled by folklore — it's settled by impedance discontinuity analysis and the frequencies you're actually running.</p>
+      <p class="post-excerpt">Settled by impedance discontinuity analysis and the frequencies you're actually running — not by folklore or outdated rules of thumb.</p>
       <span class="post-read-more">Read post →</span>
     </a>
 
@@ -312,7 +211,7 @@
     <div class="post-card coming-soon">
       <div class="post-meta"><span class="post-tag">EMC</span><span class="coming-tag">Coming Soon</span></div>
       <h3 class="post-title">Common-Mode Filters: Why Most Engineers Install Them In The Wrong Place</h3>
-      <p class="post-excerpt">Placement is a physics constraint, not a preference. A filter in the wrong location can make emissions worse.</p>
+      <p class="post-excerpt">Placement is a physics constraint, not a preference. A filter in the wrong location can make emissions worse, not better.</p>
     </div>
 
     <div class="post-card coming-soon">
@@ -323,22 +222,30 @@
 
   </div>
 
+  <!-- CTA Banner -->
   <div class="cta-banner">
-    <div>
-      <h3>Ready to stop guessing and start passing?</h3>
-      <p>Work directly with Dario Fresu to audit your design before it hits the chamber — at the schematic and layout stage, not after a €15,000–40,000 test failure. 4,000+ engineers trained. 80,000+ in the community.</p>
+    <div class="cta-banner-top">
+      <div>
+        <h3>Ready to stop guessing and start passing?</h3>
+        <p>Work directly with Dario to audit your design before it hits the chamber — at the schematic and layout stage, not after a €15,000–40,000 test failure. 4,000+ engineers trained. 80,000+ in the community.</p>
+      </div>
+      <div class="cta-actions">
+        <a href="https://www.fresuelectronics.com/emc-audit" class="btn-primary" target="_blank">Book EMC Audit — €8,000 →</a>
+        <a href="https://www.fresuelectronics.com/emc-audit" class="btn-outline" target="_blank">EMC Architect System — €30,000</a>
+      </div>
     </div>
-    <div class="cta-actions">
-      <a href="https://www.fresuelectronics.com/emc-audit" class="btn-primary" target="_blank">Book EMC Audit — €8,000 →</a>
-      <a href="https://www.fresuelectronics.com/emc-audit" class="btn-outline" target="_blank">EMC Architect System — €30,000</a>
+    <div class="about-strip">
+      <img src="https://raw.githubusercontent.com/dariofresu/Fresu-Electronics-Blog/main/assets/dario-fresu.jpg" alt="Dario Fresu">
+      <p class="about-text"><strong>Dario Fresu</strong> is a fourth-generation electrical professional, IPC Certified Interconnect Designer, and former ETH Zurich lead hardware engineer. He has trained thousands of engineers worldwide and built one of the largest independent EMC education platforms in the industry.</p>
     </div>
   </div>
+
 </main>
 
 <footer>
   <div class="site-footer">
     <span>© 2026 Fresu Electronics SRL</span>
-    <span><a href="https://www.fresuelectronics.com">fresuelectronics.com</a> · <a href="https://tool.fresuelectronics.com">Free PCB Guide</a></span>
+    <span><a href="https://www.fresuelectronics.com">fresuelectronics.com</a> · <a href="https://www.fresuelectronics.com/free-tool-1">Free Stackup Tool</a></span>
   </div>
 </footer>
 
