@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>A Field-Centric View of Energy Transfer in Classical Electromagnetism — Fresu Electronics</title>
+  <meta name="description" content="Where does electrical energy actually flow? Not through the wire. The Poynting vector, Gauss's law inverted, and a field-first interpretation of classical ">
+  <meta property="og:title" content="A Field-Centric View of Energy Transfer in Classical Electromagnetism">
+  <meta property="og:url" content="https://blog.fresuelectronics.com/field-centric-charge-energy">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400;1,700&display=swap" rel="stylesheet">
+  <style>
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    :root{--bg:#0a0a0a;--surface:#111111;--surface-2:#181818;--border:#242424;--label:#a0aab8;--accent:#00FF94;--accent-dim:rgba(0,255,148,0.10);--accent-hover:#00e085;--wrong:#ff4d4d}
+    body{background:var(--bg);color:#fff;font-family:'Poppins',sans-serif;font-size:17px;line-height:1.75;overflow-x:hidden}
+    body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:1000;opacity:0.2;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E")}
+    header{border-bottom:1px solid var(--border)}
+    .site-header{max-width:1100px;margin:0 auto;padding:18px 40px;display:flex;align-items:center;justify-content:space-between}
+    .site-header img{height:44px;width:auto;display:block}
+    .header-nav{display:flex;align-items:center;gap:28px}
+    .header-nav a{font-size:11px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:#fff;text-decoration:none;opacity:0.6;transition:opacity 0.2s}
+    .header-nav a:hover{opacity:1}
+    .header-cta{opacity:1!important;background:var(--accent);color:#0a0a0a!important;padding:9px 20px;border-radius:3px;transition:background 0.2s}
+    .header-cta:hover{background:var(--accent-hover)!important}
+    .container{max-width:740px;margin:0 auto;padding:72px 32px 80px}
+    .kicker{display:inline-flex;align-items:center;gap:10px;font-size:11px;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;color:var(--accent);margin-bottom:28px;padding:6px 14px;border:1px solid var(--accent);border-radius:2px;background:var(--accent-dim)}
+    .kicker::before{content:'▶';font-size:8px}
+    h1{font-size:clamp(32px,5vw,52px);font-weight:800;line-height:1.1;letter-spacing:-0.02em;color:#fff;margin-bottom:24px}
+    h1 em{font-style:italic;color:var(--accent)}
+    .deck{font-size:18px;font-weight:400;color:#fff;line-height:1.7;margin-bottom:48px;padding-bottom:48px;border-bottom:1px solid var(--border)}
+    .author-row{display:flex;align-items:center;gap:16px;margin-bottom:48px;padding-bottom:48px;border-bottom:1px solid var(--border)}
+    .author-photo{width:52px;height:52px;border-radius:50%;object-fit:cover;flex-shrink:0;border:2px solid var(--accent)}
+    .author-name{font-size:15px;font-weight:600;color:#fff;display:block}
+    .author-title{font-size:12px;font-weight:400;color:var(--label);display:block;margin-top:2px}
+    h2{font-size:24px;font-weight:700;letter-spacing:-0.01em;color:#fff;margin:52px 0 16px}
+    h3{font-size:19px;font-weight:700;color:#fff;margin:32px 0 12px}
+    p{color:#fff;font-weight:400;margin-bottom:20px}
+    strong{color:#fff;font-weight:600}
+    em{font-style:italic}
+    .contrast-block{display:grid;grid-template-columns:1fr 1fr;gap:2px;margin:44px 0;border-radius:4px;overflow:hidden}
+    .contrast-col{padding:28px 24px}
+    .contrast-col.wrong{background:var(--surface);border:1px solid var(--border);border-right:none}
+    .contrast-col.right{background:rgba(0,255,148,0.06);border:1px solid rgba(0,255,148,0.2)}
+    .contrast-label{font-size:10px;font-weight:600;letter-spacing:0.15em;text-transform:uppercase;margin-bottom:16px;display:block}
+    .contrast-col.wrong .contrast-label{color:var(--label)}
+    .contrast-col.right .contrast-label{color:var(--accent)}
+    .contrast-list{list-style:none;font-size:14px}
+    .contrast-list li{padding:7px 0;border-bottom:1px solid var(--border);color:#fff;display:flex;align-items:flex-start;gap:10px;font-weight:400}
+    .contrast-list li:last-child{border-bottom:none}
+    .contrast-col.wrong .contrast-list li::before{content:'✕';color:var(--wrong);font-size:12px;margin-top:2px;flex-shrink:0}
+    .contrast-col.right .contrast-list li::before{content:'✓';color:var(--accent);font-size:12px;margin-top:2px;flex-shrink:0}
+    .pull-quote{margin:44px 0;padding:32px 36px;border-left:3px solid var(--accent);background:var(--accent-dim);border-radius:0 4px 4px 0;position:relative}
+    .pull-quote::before{content:'"';font-size:80px;color:var(--accent);opacity:0.2;position:absolute;top:-10px;left:24px;line-height:1;font-weight:800}
+    .pull-quote p{font-size:20px;font-weight:500;font-style:italic;line-height:1.55;color:#fff;margin:0;padding-top:8px}
+    .concept-grid{display:grid;gap:2px;margin:44px 0}
+    .concept-card{background:var(--surface);border:1px solid var(--border);padding:24px 28px;border-radius:4px;position:relative;overflow:hidden;transition:border-color 0.2s}
+    .concept-card:hover{border-color:var(--accent)}
+    .concept-card::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--accent)}
+    .concept-num{font-size:10px;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;color:var(--accent);margin-bottom:10px;display:block}
+    .concept-card h3{font-size:18px;font-weight:700;color:#fff;margin:0 0 10px 0}
+    .concept-card p{font-size:14px;margin:0;line-height:1.75}
+    .closing{margin-top:64px;padding-top:40px;border-top:1px solid var(--border)}
+    .closing-line{font-size:26px;font-weight:700;font-style:italic;color:#fff;line-height:1.45;margin-bottom:20px}
+    .closing-line span{color:var(--accent)}
+    .tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:32px}
+    .tag{font-size:11px;font-weight:500;letter-spacing:0.05em;padding:5px 12px;border:1px solid var(--border);border-radius:2px;color:var(--label);background:var(--surface)}
+    .cta-section{margin-top:80px;padding:56px 48px;background:var(--surface);border:1px solid var(--border);border-radius:6px;position:relative;overflow:hidden;text-align:center}
+    .cta-section::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 50% 0%,rgba(0,255,148,0.08) 0%,transparent 65%);pointer-events:none}
+    .cta-section::after{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--accent),transparent)}
+    .cta-eyebrow{font-size:11px;font-weight:600;letter-spacing:0.2em;text-transform:uppercase;color:var(--accent);margin-bottom:20px;display:block}
+    .cta-headline{font-size:clamp(24px,3.5vw,36px);font-weight:800;line-height:1.15;letter-spacing:-0.02em;color:#fff;margin-bottom:16px}
+    .cta-headline em{font-style:italic;color:var(--accent)}
+    .cta-sub{font-size:16px;font-weight:400;color:#fff;max-width:520px;margin:0 auto 36px;line-height:1.7}
+    .cta-buttons{display:flex;flex-wrap:wrap;gap:12px;justify-content:center;margin-bottom:32px}
+    .btn-primary{display:inline-flex;align-items:center;gap:8px;background:var(--accent);color:#0a0a0a;font-family:'Poppins',sans-serif;font-size:14px;font-weight:700;padding:14px 28px;border-radius:3px;text-decoration:none;transition:background 0.2s,transform 0.2s}
+    .btn-primary:hover{background:var(--accent-hover);transform:translateY(-1px)}
+    .btn-secondary{display:inline-flex;align-items:center;gap:8px;color:#fff;font-family:'Poppins',sans-serif;font-size:14px;font-weight:500;padding:14px 28px;border:1px solid var(--border);border-radius:3px;text-decoration:none;transition:border-color 0.2s,transform 0.2s,color 0.2s}
+    .btn-secondary:hover{border-color:var(--accent);color:var(--accent);transform:translateY(-1px)}
+    .cta-proof{display:flex;flex-wrap:wrap;gap:20px;justify-content:center;padding-top:28px;border-top:1px solid var(--border);margin-bottom:40px}
+    .proof-item{display:flex;align-items:center;gap:8px;font-size:13px;font-weight:500;color:#fff}
+    .proof-item::before{content:'✓';color:var(--accent);font-size:12px}
+    .products-strip{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:2px;text-align:left}
+    .product-card{background:var(--surface-2);border:1px solid var(--border);padding:22px;border-radius:4px;text-decoration:none;transition:border-color 0.2s,transform 0.15s;display:flex;flex-direction:column;gap:6px}
+    .product-card:hover{border-color:var(--accent);transform:translateY(-2px)}
+    .product-icon{font-size:22px;margin-bottom:4px}
+    .product-name{font-size:15px;font-weight:700;color:#fff}
+    .product-desc{font-size:13px;font-weight:400;color:#fff;line-height:1.6}
+    .product-link{font-size:11px;font-weight:600;letter-spacing:0.05em;color:var(--accent);margin-top:8px}
+    footer{border-top:1px solid var(--border)}
+    .site-footer{max-width:1100px;margin:0 auto;padding:28px 40px;display:flex;align-items:center;justify-content:space-between;font-size:11px;font-weight:400;color:#fff;opacity:0.5;flex-wrap:wrap;gap:12px}
+    .site-footer a{color:var(--accent);text-decoration:none}
+    @keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+    .container>*{animation:fadeUp 0.7s cubic-bezier(0.22,1,0.36,1) both}
+    .container>*:nth-child(1){animation-delay:0ms}.container>*:nth-child(2){animation-delay:60ms}.container>*:nth-child(3){animation-delay:120ms}.container>*:nth-child(4){animation-delay:180ms}
+    @media(max-width:560px){.contrast-block{grid-template-columns:1fr}.contrast-col.wrong{border-right:1px solid var(--border);border-bottom:none}.container{padding:48px 20px 80px}.cta-section{padding:40px 20px}.site-header{padding:16px 20px}.header-nav a:not(.header-cta){display:none}}
+  </style>
+</head>
+<body>
+<header>
+  <div class="site-header">
+    <a href="https://www.fresuelectronics.com"><img src="https://raw.githubusercontent.com/dariofresu/Fresu-Electronics-Blog/main/assets/logo.png" alt="Fresu Electronics"></a>
+    <nav class="header-nav">
+      <a href="https://blog.fresuelectronics.com">← All Posts</a>
+      <a href="https://www.fresuelectronics.com/trainings">Courses</a>
+      <a href="https://www.fresuelectronics.com/emc-audit" class="header-cta">Book EMC Audit</a>
+    </nav>
+  </div>
+</header>
+<div class="container">
+  <span class="kicker">Electromagnetism · Theory · Energy Transfer</span>
+  <h1>A Field-Centric View of Energy Transfer in Classical Electromagnetism</h1>
+  <p class="deck">Where does electrical energy actually flow? Not through the wire. The Poynting vector, Gauss's law inverted, and a field-first interpretation of classical electromagnetism — with practical consequences for how you design circuits.</p>
+  <div class="author-row">
+    <img class="author-photo" src="https://raw.githubusercontent.com/dariofresu/Fresu-Electronics-Blog/main/assets/dario-fresu.jpg" alt="Dario Fresu">
+    <div><span class="author-name">Dario Fresu</span><span class="author-title">Principal EMC Architect · Fresu Electronics</span></div>
+  </div>
+  
+  <p>Gauss's law is a cornerstone of classical electromagnetism: ∇·E = ρ/ε. In its conventional form, charge density ρ is the source — the electric field E arises from it. Flip the interpretation: the electric field is the fundamental quantity, and charge density is derived from the field's divergence. In this formulation, charge is not a thing. It is a description of how the field changes in space.</p>
+  <p>This paper-thin conceptual difference has surprisingly large practical consequences.</p>
+
+  <h2>The inverted Gauss formulation</h2>
+  <p>Conventionally: charge distribution → generates → electric field. In the field-centric view: electric field exists → charge density is defined as ρ = ε(∇·E). The total charge within a volume is then the flux of E through the enclosing surface — charge is quantified by the field, not the other way around.</p>
+  <p>This inverts the causal story. The field is not a response to charge. Charge is a characterisation of the field's spatial structure. Where field lines converge, we call it positive charge. Where they diverge from a region, we call it negative charge. The field is primary; the charge description is secondary.</p>
+
+  <div class="pull-quote"><p>Charge is not a thing that has a field. Charge is a description of what the field is doing at a point in space.</p></div>
+
+  <h2>Energy flow: the Poynting vector</h2>
+  <p>In a steady-state DC circuit — battery, wires, resistor — where does the energy flow? The answer from classical field theory is unambiguous and counterintuitive: the energy flows in the electromagnetic field in the space surrounding the conductors, not through the conductors themselves. The Poynting vector S = E × H points from the battery to the resistor through the surrounding space.</p>
+  <p>The conductors establish boundary conditions. The electric field inside an ideal conductor is zero — so no energy propagates through the metal. The energy is guided by the conductor geometry but propagates in the field outside it. This is not a quantum effect or a special case. It is a direct result of classical Maxwellian electrodynamics.</p>
+
+  <h2>Implications for circuit design</h2>
+  <p>If signal energy propagates in the electromagnetic field between conductors — not through them — then the geometry of the space between conductors is what determines signal integrity and EMC performance. The dielectric material, the spacing, the continuity of the return plane, the apertures in any surrounding structure — these are the parameters that control where energy goes and how much of it escapes into the environment.</p>
+
+  <div class="concept-grid">
+    <div class="concept-card"><span class="concept-num">Implication 1</span><h3>The dielectric is the transmission medium</h3><p>Signal energy propagates in the dielectric between trace and reference plane — not through the copper. The dielectric constant determines propagation velocity and characteristic impedance. Dielectric loss is signal loss. Changes in dielectric geometry create impedance discontinuities. The copper traces are boundary conditions that confine and guide the field propagating in the dielectric.</p></div>
+    <div class="concept-card"><span class="concept-num">Implication 2</span><h3>Return plane geometry shapes the field</h3><p>The return reference plane is the second boundary condition of the transmission line. Its proximity to the signal trace determines the field confinement — how tightly the energy is guided versus how much spreads. Voids, slots, and gaps in the return plane are discontinuities in the field boundary — they allow energy to escape the guided mode and propagate into the environment.</p></div>
+    <div class="concept-card"><span class="concept-num">Implication 3</span><h3>Connector apertures are field apertures</h3><p>Any opening in the boundary structure — connector cutouts, ventilation slots, seam gaps in an enclosure — is an aperture through which the guided electromagnetic field can escape into the external environment. The field doesn't distinguish between a deliberate antenna and an accidental slot. If the aperture is the right size at the right frequency, it radiates.</p></div>
+  </div>
+
+  <h2>A more coherent framework for EMC</h2>
+  <p>The field-centric perspective provides a unified framework for understanding EMC phenomena that the particle-based model struggles to accommodate. Radiated emissions are fields escaping containment structures through apertures. Conducted emissions are fields propagating along cable conductors that enter or exit the system boundary. Susceptibility failures occur when an external field couples enough energy into a sensitive circuit node to disrupt its operation. In every case, the field model provides a direct causal account; the electron model requires elaborate and often inconsistent auxiliary explanations.</p>
+  <p>Adopting this perspective does not require abandoning circuit theory. It requires extending it — recognising that the circuit equations are boundary condition constraints on the underlying field behaviour, not complete descriptions of where the energy goes.</p>
+  
+  <div class="closing">
+    <div class="tags"><span class="tag">#Electromagnetism</span> <span class="tag">#FieldTheory</span> <span class="tag">#EnergyTransfer</span> <span class="tag">#EMC</span> <span class="tag">#PhysicsOfCircuits</span></div>
+  </div>
+  <div class="cta-section">
+    <span class="cta-eyebrow">Work with Dario Fresu</span>
+    <h2 class="cta-headline" style="margin:0 0 16px;">First-principles thinking <em>for hardware teams.</em></h2>
+    <p class="cta-sub">Work directly with Dario to identify EMC risks at the design stage — before a €15,000–40,000 chamber session reveals issues that require a respin.</p>
+    <div class="cta-buttons">
+      <a href="https://www.fresuelectronics.com/emc-audit" class="btn-primary" target="_blank">Book EMC Audit — €8,000</a>
+      <a href="https://www.fresuelectronics.com/emc-audit" class="btn-secondary" target="_blank">EMC Architect System — €30,000 →</a>
+    </div>
+    <div class="cta-proof">
+      <span class="proof-item">80,000+ engineers in the community</span>
+      <span class="proof-item">4,000+ engineers trained</span>
+      <span class="proof-item">Report in 10 business days</span>
+      <span class="proof-item">IPC Certified · Former ETH Zurich</span>
+    </div>
+    <div class="products-strip">
+      <a href="https://www.fresuelectronics.com/emc-audit" class="product-card" target="_blank"><div class="product-icon">🔍</div><div class="product-name">EMC Design Audit</div><div class="product-desc">Full design review before the chamber. Return paths, apertures, field geometry.</div><div class="product-link">Apply — €8,000 →</div></a>
+      <a href="https://www.fresuelectronics.com/emc-audit" class="product-card" target="_blank"><div class="product-icon">🏛</div><div class="product-name">EMC Architect System</div><div class="product-desc">Embedded ongoing EMC partnership across your full development process.</div><div class="product-link">Learn more — €30,000 →</div></a>
+      <a href="https://www.fresuelectronics.com/free-tool-1" class="product-card" target="_blank"><div class="product-icon">📐</div><div class="product-name">Free Stackup Template</div><div class="product-desc">EMI-controlled stackup template. Free resource for your next board design.</div><div class="product-link">Get free resource →</div></a>
+    </div>
+  </div>
+</div>
+<footer>
+  <div class="site-footer">
+    <span>© 2026 Fresu Electronics SRL</span>
+    <span><a href="https://blog.fresuelectronics.com">blog.fresuelectronics.com</a> · <a href="https://www.fresuelectronics.com">fresuelectronics.com</a></span>
+  </div>
+</footer>
+</body>
+</html>
