@@ -10,146 +10,131 @@
   <meta property="og:url" content="https://blog.fresuelectronics.com/emc-mental-model">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400..900;1,9..144,400..900&family=DM+Sans:wght@400;500&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400;1,700&display=swap" rel="stylesheet">
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     :root {
       --bg: #0b0b0d; --surface: #111114; --surface-2: #18181d;
       --border: #252530; --fg: #ffffff; --label: #a0a0b0;
       --accent: #ff5c2b; --accent-dim: rgba(255,92,43,0.12);
-      --correct: #3dffa0; --correct-dim: rgba(61,255,160,0.08);
-      --wrong: #ff4444;
+      --correct: #3dffa0; --correct-dim: rgba(61,255,160,0.08); --wrong: #ff4444;
     }
     body {
       background: var(--bg); color: #ffffff;
-      font-family: 'DM Sans', sans-serif; font-size: 17px;
+      font-family: 'Poppins', sans-serif; font-size: 17px;
       line-height: 1.75; min-height: 100vh; overflow-x: hidden;
     }
     body::before {
-      content: ''; position: fixed; inset: 0; pointer-events: none; z-index: 1000; opacity: 0.35;
+      content: ''; position: fixed; inset: 0; pointer-events: none; z-index: 1000; opacity: 0.3;
       background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
     }
 
-    /* Header */
+    /* HEADER */
     header { border-bottom: 1px solid var(--border); }
-    .site-header { max-width: 1100px; margin: 0 auto; padding: 20px 40px; display: flex; align-items: center; justify-content: space-between; }
-    .site-header img { height: 38px; width: auto; display: block; }
+    .site-header { max-width: 1100px; margin: 0 auto; padding: 18px 40px; display: flex; align-items: center; justify-content: space-between; }
+    .site-header img { height: 44px; width: auto; display: block; }
     .header-nav { display: flex; align-items: center; gap: 28px; }
-    .header-nav a { font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: #ffffff; text-decoration: none; opacity: 0.65; transition: opacity 0.2s; }
+    .header-nav a { font-size: 11px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: #ffffff; text-decoration: none; opacity: 0.6; transition: opacity 0.2s; }
     .header-nav a:hover { opacity: 1; }
-    .header-cta { opacity: 1 !important; background: var(--accent); padding: 8px 18px; border-radius: 2px; }
+    .header-cta { opacity: 1 !important; background: var(--accent); color: #ffffff !important; padding: 9px 20px; border-radius: 3px; }
 
-    /* Content */
+    /* CONTENT */
     .container { max-width: 740px; margin: 0 auto; padding: 72px 32px 80px; }
 
     .kicker {
       display: inline-flex; align-items: center; gap: 10px;
-      font-family: 'JetBrains Mono', monospace; font-size: 11px;
-      letter-spacing: 0.12em; text-transform: uppercase;
-      color: var(--accent); margin-bottom: 28px; padding: 6px 12px;
+      font-size: 11px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase;
+      color: var(--accent); margin-bottom: 28px; padding: 6px 14px;
       border: 1px solid var(--accent); border-radius: 2px; background: var(--accent-dim);
     }
     .kicker::before { content: '▶'; font-size: 8px; }
 
-    h1 {
-      font-family: 'Fraunces', serif; font-size: clamp(36px, 6vw, 56px);
-      font-weight: 800; line-height: 1.08; letter-spacing: -0.02em;
-      color: #ffffff; margin-bottom: 24px;
-    }
+    h1 { font-size: clamp(34px, 5.5vw, 54px); font-weight: 800; line-height: 1.1; letter-spacing: -0.02em; color: #ffffff; margin-bottom: 24px; }
     h1 em { font-style: italic; color: var(--accent); }
 
-    .deck {
-      font-size: 19px; font-weight: 400; color: #ffffff;
-      line-height: 1.65; margin-bottom: 48px; padding-bottom: 48px;
-      border-bottom: 1px solid var(--border);
-    }
+    .deck { font-size: 18px; font-weight: 400; color: #ffffff; line-height: 1.7; margin-bottom: 48px; padding-bottom: 48px; border-bottom: 1px solid var(--border); }
 
-    .author-row {
-      display: flex; align-items: center; gap: 14px;
-      margin-bottom: 48px; padding-bottom: 48px;
-      border-bottom: 1px solid var(--border);
-    }
-    .author-avatar {
-      width: 44px; height: 44px; border-radius: 50%;
-      background: var(--accent-dim); border: 1px solid var(--accent);
-      display: flex; align-items: center; justify-content: center;
-      font-family: 'Fraunces', serif; font-size: 18px; font-weight: 700;
-      color: var(--accent); flex-shrink: 0;
-    }
-    .author-name { font-size: 15px; font-weight: 500; color: #ffffff; display: block; }
-    .author-title { font-size: 12px; color: var(--label); font-family: 'JetBrains Mono', monospace; display: block; margin-top: 2px; }
+    .author-row { display: flex; align-items: center; gap: 14px; margin-bottom: 48px; padding-bottom: 48px; border-bottom: 1px solid var(--border); }
+    .author-avatar { width: 44px; height: 44px; border-radius: 50%; background: var(--accent-dim); border: 1px solid var(--accent); display: flex; align-items: center; justify-content: center; font-size: 16px; font-weight: 700; color: var(--accent); flex-shrink: 0; }
+    .author-name  { font-size: 14px; font-weight: 600; color: #ffffff; display: block; }
+    .author-title { font-size: 12px; font-weight: 400; color: var(--label); display: block; margin-top: 2px; }
 
-    h2 { font-family: 'Fraunces', serif; font-size: 26px; font-weight: 700; letter-spacing: -0.01em; color: #ffffff; margin: 52px 0 16px; }
-    p { color: #ffffff; font-weight: 400; margin-bottom: 20px; }
+    h2 { font-size: 24px; font-weight: 700; letter-spacing: -0.01em; color: #ffffff; margin: 52px 0 16px; }
+    p  { color: #ffffff; font-weight: 400; margin-bottom: 20px; }
     strong { color: #ffffff; font-weight: 600; }
+    em { color: #ffffff; font-style: italic; }
 
-    /* Contrast block */
+    /* CONTRAST BLOCK */
     .contrast-block { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; margin: 44px 0; border-radius: 4px; overflow: hidden; }
     .contrast-col { padding: 28px 24px; }
     .contrast-col.wrong { background: var(--surface); border: 1px solid var(--border); border-right: none; }
     .contrast-col.right { background: var(--correct-dim); border: 1px solid rgba(61,255,160,0.2); }
-    .contrast-label { font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 16px; display: block; }
+    .contrast-label { font-size: 10px; font-weight: 600; letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 16px; display: block; }
     .contrast-col.wrong .contrast-label { color: var(--label); }
     .contrast-col.right .contrast-label { color: var(--correct); }
-    .contrast-list { list-style: none; font-size: 15px; }
-    .contrast-list li { padding: 7px 0; border-bottom: 1px solid var(--border); color: #ffffff; display: flex; align-items: flex-start; gap: 10px; }
+    .contrast-list { list-style: none; font-size: 14px; }
+    .contrast-list li { padding: 7px 0; border-bottom: 1px solid var(--border); color: #ffffff; display: flex; align-items: flex-start; gap: 10px; font-weight: 400; }
     .contrast-list li:last-child { border-bottom: none; }
     .contrast-col.wrong .contrast-list li::before { content: '✕'; color: var(--wrong); font-size: 12px; margin-top: 2px; flex-shrink: 0; }
     .contrast-col.right .contrast-list li::before { content: '✓'; color: var(--correct); font-size: 12px; margin-top: 2px; flex-shrink: 0; }
 
-    /* Pull quote */
+    /* PULL QUOTE */
     .pull-quote { margin: 44px 0; padding: 32px 36px; border-left: 3px solid var(--accent); background: var(--accent-dim); border-radius: 0 4px 4px 0; position: relative; }
-    .pull-quote::before { content: '"'; font-family: 'Fraunces', serif; font-size: 80px; color: var(--accent); opacity: 0.3; position: absolute; top: -10px; left: 24px; line-height: 1; }
-    .pull-quote p { font-family: 'Fraunces', serif; font-size: 22px; font-weight: 400; font-style: italic; line-height: 1.5; color: #ffffff; margin: 0; padding-top: 8px; }
+    .pull-quote::before { content: '"'; font-size: 80px; color: var(--accent); opacity: 0.25; position: absolute; top: -10px; left: 24px; line-height: 1; font-weight: 800; }
+    .pull-quote p { font-size: 20px; font-weight: 500; font-style: italic; line-height: 1.55; color: #ffffff; margin: 0; padding-top: 8px; }
 
-    /* Concept cards */
+    /* CONCEPT CARDS */
     .concept-grid { display: grid; gap: 2px; margin: 44px 0; }
     .concept-card { background: var(--surface); border: 1px solid var(--border); padding: 24px 28px; border-radius: 4px; position: relative; overflow: hidden; transition: border-color 0.2s; }
     .concept-card:hover { border-color: var(--accent); }
     .concept-card::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 3px; background: var(--accent); }
-    .concept-num { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--accent); letter-spacing: 0.1em; margin-bottom: 10px; display: block; }
-    .concept-card h3 { font-family: 'Fraunces', serif; font-size: 20px; font-weight: 700; color: #ffffff; margin-bottom: 10px; letter-spacing: -0.01em; }
-    .concept-card p { font-size: 15px; margin: 0; }
+    .concept-num { font-size: 10px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent); margin-bottom: 10px; display: block; }
+    .concept-card h3 { font-size: 18px; font-weight: 700; color: #ffffff; margin-bottom: 10px; }
+    .concept-card p  { font-size: 14px; margin: 0; line-height: 1.75; }
 
-    /* Closing */
+    /* CLOSING */
     .closing { margin-top: 64px; padding-top: 40px; border-top: 1px solid var(--border); }
-    .closing-line { font-family: 'Fraunces', serif; font-size: 28px; font-style: italic; font-weight: 400; color: #ffffff; line-height: 1.4; margin-bottom: 20px; }
+    .closing-line { font-size: 26px; font-weight: 700; font-style: italic; color: #ffffff; line-height: 1.45; margin-bottom: 20px; }
     .closing-line span { color: var(--accent); }
 
-    /* Tags */
+    /* TAGS */
     .tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 32px; }
-    .tag { font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.08em; padding: 5px 10px; border: 1px solid var(--border); border-radius: 2px; color: var(--label); background: var(--surface); }
+    .tag { font-size: 11px; font-weight: 500; letter-spacing: 0.05em; padding: 5px 12px; border: 1px solid var(--border); border-radius: 2px; color: var(--label); background: var(--surface); }
 
-    /* CTA section */
+    /* CTA SECTION */
     .cta-section { margin-top: 80px; padding: 56px 48px; background: var(--surface); border: 1px solid var(--border); border-radius: 6px; position: relative; overflow: hidden; text-align: center; }
-    .cta-section::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at 50% 0%, rgba(255,92,43,0.15) 0%, transparent 70%); pointer-events: none; }
-    .cta-section::after { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, transparent, var(--accent), transparent); }
-    .cta-eyebrow { font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--accent); margin-bottom: 20px; display: block; }
-    .cta-headline { font-family: 'Fraunces', serif; font-size: clamp(28px, 4vw, 40px); font-weight: 800; line-height: 1.15; letter-spacing: -0.02em; color: #ffffff; margin-bottom: 16px; }
+    .cta-section::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at 50% 0%, rgba(255,92,43,0.14) 0%, transparent 70%); pointer-events: none; }
+    .cta-section::after  { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, transparent, var(--accent), transparent); }
+
+    .cta-eyebrow { font-size: 11px; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent); margin-bottom: 20px; display: block; }
+    .cta-headline { font-size: clamp(26px, 4vw, 38px); font-weight: 800; line-height: 1.15; letter-spacing: -0.02em; color: #ffffff; margin-bottom: 16px; }
     .cta-headline em { font-style: italic; color: var(--accent); }
-    .cta-sub { font-size: 17px; font-weight: 400; color: #ffffff; max-width: 540px; margin: 0 auto 36px; line-height: 1.65; }
+    .cta-sub { font-size: 16px; font-weight: 400; color: #ffffff; max-width: 520px; margin: 0 auto 36px; line-height: 1.7; }
+
     .cta-buttons { display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; margin-bottom: 32px; }
-    .btn-primary { display: inline-flex; align-items: center; gap: 10px; background: var(--accent); color: #ffffff; font-family: 'DM Sans', sans-serif; font-size: 15px; font-weight: 500; padding: 14px 28px; border-radius: 3px; text-decoration: none; transition: opacity 0.2s, transform 0.2s; }
+    .btn-primary { display: inline-flex; align-items: center; gap: 8px; background: var(--accent); color: #ffffff; font-size: 14px; font-weight: 600; padding: 14px 28px; border-radius: 3px; text-decoration: none; transition: opacity 0.2s, transform 0.2s; }
     .btn-primary:hover { opacity: 0.9; transform: translateY(-1px); }
-    .btn-secondary { display: inline-flex; align-items: center; gap: 10px; background: transparent; color: #ffffff; font-family: 'DM Sans', sans-serif; font-size: 15px; font-weight: 400; padding: 14px 28px; border: 1px solid var(--border); border-radius: 3px; text-decoration: none; transition: border-color 0.2s, transform 0.2s; }
+    .btn-secondary { display: inline-flex; align-items: center; gap: 8px; background: transparent; color: #ffffff; font-size: 14px; font-weight: 500; padding: 14px 28px; border: 1px solid var(--border); border-radius: 3px; text-decoration: none; transition: border-color 0.2s, transform 0.2s; }
     .btn-secondary:hover { border-color: #ffffff; transform: translateY(-1px); }
-    .cta-proof { display: flex; flex-wrap: wrap; gap: 24px; justify-content: center; padding-top: 28px; border-top: 1px solid var(--border); }
-    .proof-item { display: flex; align-items: center; gap: 8px; font-size: 13px; color: #ffffff; font-family: 'JetBrains Mono', monospace; }
+
+    .cta-proof { display: flex; flex-wrap: wrap; gap: 20px; justify-content: center; padding-top: 28px; border-top: 1px solid var(--border); }
+    .proof-item { display: flex; align-items: center; gap: 8px; font-size: 13px; font-weight: 500; color: #ffffff; }
     .proof-item::before { content: '✓'; color: var(--correct); font-size: 12px; }
+
     .products-strip { margin-top: 48px; display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 2px; }
-    .product-card { background: var(--surface-2); border: 1px solid var(--border); padding: 20px 22px; border-radius: 4px; text-decoration: none; transition: border-color 0.2s, transform 0.15s; display: flex; flex-direction: column; gap: 6px; }
+    .product-card { background: var(--surface-2); border: 1px solid var(--border); padding: 22px; border-radius: 4px; text-decoration: none; transition: border-color 0.2s, transform 0.15s; display: flex; flex-direction: column; gap: 6px; text-align: left; }
     .product-card:hover { border-color: var(--accent); transform: translateY(-2px); }
     .product-icon { font-size: 22px; margin-bottom: 4px; }
-    .product-name { font-family: 'Fraunces', serif; font-size: 16px; font-weight: 700; color: #ffffff; }
-    .product-desc { font-size: 13px; color: #ffffff; line-height: 1.5; font-weight: 400; }
-    .product-link { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--accent); margin-top: 8px; letter-spacing: 0.05em; }
+    .product-name { font-size: 15px; font-weight: 700; color: #ffffff; }
+    .product-desc { font-size: 13px; font-weight: 400; color: #ffffff; line-height: 1.6; }
+    .product-link { font-size: 11px; font-weight: 600; letter-spacing: 0.05em; color: var(--accent); margin-top: 8px; }
 
-    /* Footer */
+    /* FOOTER */
     footer { border-top: 1px solid var(--border); }
-    .site-footer { max-width: 1100px; margin: 0 auto; padding: 28px 40px; display: flex; align-items: center; justify-content: space-between; font-family: 'JetBrains Mono', monospace; font-size: 11px; color: #ffffff; opacity: 0.6; flex-wrap: wrap; gap: 12px; }
+    .site-footer { max-width: 1100px; margin: 0 auto; padding: 28px 40px; display: flex; align-items: center; justify-content: space-between; font-size: 11px; font-weight: 400; color: #ffffff; opacity: 0.5; flex-wrap: wrap; gap: 12px; }
     .site-footer a { color: var(--accent); text-decoration: none; }
 
-    /* Animations */
+    /* ANIMATIONS */
     @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
     .container > * { animation: fadeUp 0.7s cubic-bezier(0.22,1,0.36,1) both; }
     .container > *:nth-child(1) { animation-delay: 0ms; }
@@ -172,7 +157,7 @@
 <header>
   <div class="site-header">
     <a href="https://www.fresuelectronics.com">
-      <img src="https://static.wixstatic.com/media/61d609_24dd372a248342e4973165de6a394901~mv2.png/v1/fill/w_205,h_65,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/New%20Logo.png" alt="Fresu Electronics">
+      <img src="https://raw.githubusercontent.com/dariofresu/Fresu-Electronics-Blog/main/assets/logo.png" alt="Fresu Electronics">
     </a>
     <nav class="header-nav">
       <a href="https://blog.fresuelectronics.com">← All Posts</a>
@@ -246,7 +231,7 @@
 
   <h2>Reference planes and potential stability</h2>
 
-  <p>Instead of "ground," think <strong>reference plane</strong>. A reference plane has a job: it is a low-impedance, low-inductance surface that all signals within a domain can reference without their reference potential moving. A ground plane that is stitched to chassis at one point per board doesn't do this job at 500 MHz — the inductance of that single bond wire makes the plane's potential bounce relative to chassis at exactly the frequencies where your radiated emissions are failing.</p>
+  <p>Instead of "ground," think <strong>reference plane</strong>. A reference plane has a job: it is a low-impedance, low-inductance surface that all signals within a domain can reference without their reference potential moving. A ground plane stitched to chassis at one point per board doesn't do this job at 500 MHz — the inductance of that single bond wire makes the plane's potential bounce relative to chassis at exactly the frequencies where your radiated emissions are failing.</p>
 
   <p>When you think in terms of reference plane quality — its continuity, its impedance at the frequencies you care about, how many times per wavelength it is bonded to chassis — you naturally design better. You place stitching vias at calculated intervals rather than randomly. You treat the bond between PCB GND and chassis as a transmission line termination problem, not an afterthought.</p>
 
@@ -256,24 +241,24 @@
 
   <div class="concept-grid">
     <div class="concept-card">
-      <span class="concept-num">01 — APERTURES</span>
+      <span class="concept-num">01 — Apertures</span>
       <h3>Every hole is an antenna</h3>
-      <p>Any aperture in a conductive enclosure that is larger than λ/20 at the frequency of concern will radiate. Ventilation holes, connector cutouts, cable entry points, seam gaps — all of them. The field escapes through the largest aperture, so your emissions floor is set by your worst aperture, not your average aperture. Divide apertures. Use wire mesh. Use conductive gaskets at seams. Understand the frequencies you're containing before you cut holes.</p>
+      <p>Any aperture in a conductive enclosure larger than λ/20 at the frequency of concern will radiate. Ventilation holes, connector cutouts, cable entry points, seam gaps — all of them. Your emissions floor is set by your worst aperture, not your average. Divide apertures. Use wire mesh. Use conductive gaskets at seams. Understand the frequencies you're containing before you cut holes.</p>
     </div>
     <div class="concept-card">
-      <span class="concept-num">02 — CHANNELING</span>
+      <span class="concept-num">02 — Channeling</span>
       <h3>Guide the field, don't just block it</h3>
-      <p>A cable entering a shielded enclosure is a field guide. It carries whatever field is on the conductor straight through your containment structure. A cable that is filtered at the wall — with a properly grounded bulkhead connector or a well-designed filter — breaks the field propagation at the boundary. Think of it as keeping the field inside the box where it belongs, not just "grounding the cable shield." The termination geometry and the bond impedance at the point of entry are everything.</p>
+      <p>A cable entering a shielded enclosure is a field guide — it carries whatever field is on the conductor straight through your containment structure. A cable filtered at the wall breaks the field propagation at the boundary. Think of it as keeping the field inside the box where it belongs. The termination geometry and the bond impedance at the point of entry are everything.</p>
     </div>
     <div class="concept-card">
-      <span class="concept-num">03 — COMMON-MODE</span>
+      <span class="concept-num">03 — Common-Mode</span>
       <h3>Differential pairs don't cancel for free</h3>
-      <p>Your differential pair is balanced in the schematic. It is not balanced in reality. PCB asymmetry, connector skew, and component tolerances produce a small differential imbalance that drives common-mode current. Common-mode current on a cable radiates like a monopole antenna driven by the full cable length. The fix is not more differential signalling — it's common-mode filtering, cable management geometry, and attention to where the common-mode return path flows.</p>
+      <p>Your differential pair is balanced in the schematic. It is not balanced in reality. PCB asymmetry, connector skew, and component tolerances produce a small imbalance that drives common-mode current. Common-mode current on a cable radiates like a monopole antenna driven by the full cable length. The fix is common-mode filtering, cable management geometry, and attention to where the common-mode return path flows.</p>
     </div>
     <div class="concept-card">
-      <span class="concept-num">04 — IMPEDANCE AT FREQUENCY</span>
+      <span class="concept-num">04 — Impedance at Frequency</span>
       <h3>Your bond strap has an inductance</h3>
-      <p>A flat copper strap bonding two chassis panels looks like a short circuit at DC. At 100 MHz it is an inductor. At 500 MHz it may be a significant impedance. The bonding strategy for your enclosure must be designed at the highest frequency you want to contain — which means multiple short, wide bonds distributed at sub-wavelength intervals, not one strap at a convenient location. Calculate it. Simulate it. Measure it.</p>
+      <p>A flat copper strap bonding two chassis panels looks like a short circuit at DC. At 100 MHz it is an inductor. At 500 MHz it may be a significant impedance. Your bonding strategy must be designed at the highest frequency you want to contain — multiple short, wide bonds at sub-wavelength intervals, not one strap at a convenient location. Calculate it. Simulate it. Measure it.</p>
     </div>
   </div>
 
@@ -285,11 +270,11 @@
 
   <h2>What to change</h2>
 
-  <p>Start at the design review stage. Ban the word "ground" as a verb. Make people say what they actually mean: "reduce return path inductance," "close the switching loop," "bond the chassis seam to below 10 mΩ at 200 MHz." Make people draw current return paths on the schematic and layout, not just signal paths. Make people identify every aperture on the enclosure and its largest linear dimension relative to λ at the clock frequency and its harmonics.</p>
+  <p>Start at the design review stage. Ban the word "ground" as a verb. Make people say what they actually mean: "reduce return path inductance," "close the switching loop," "bond the chassis seam to below 10 mΩ at 200 MHz." Make people draw current return paths on the schematic and layout — not just signal paths. Make people identify every aperture and its largest linear dimension relative to λ at the clock frequency and its harmonics.</p>
 
   <p>Invest in pre-compliance. Not to find out if you pass — to build the diagnostic reflex of connecting measured emissions to physical structures. Every bump in the scan is a current loop or an aperture. Find it before the chamber does.</p>
 
-  <p>And get the whole team — firmware, mechanical, EE — into the same mental model. EMC failures are almost always system failures. The firmware engineer who didn't think about spread spectrum clocking, the mechanical engineer who cut a beautiful slot in the panel for airflow, and the EE who didn't put a filter at the connector bulkhead are collectively responsible for the failure. The only way to align them is a shared, physics-based vocabulary.</p>
+  <p>And get the whole team — firmware, mechanical, EE — into the same mental model. EMC failures are almost always system failures. The firmware engineer who didn't think about spread spectrum clocking, the mechanical engineer who cut a slot in the panel for airflow, and the EE who didn't put a filter at the connector bulkhead are collectively responsible. The only way to align them is a shared, physics-based vocabulary.</p>
 
   <div class="closing">
     <p class="closing-line">Stop thinking about <span>grounding and shielding.</span><br>Start thinking about <span>current paths, field geometry,</span><br>and aperture control.</p>
@@ -304,28 +289,28 @@
   <div class="cta-section">
     <span class="cta-eyebrow">Work with Dario Fresu</span>
     <h2 class="cta-headline" style="margin:0 0 16px;">Your product deserves to<br>pass EMC <em>on the first try.</em></h2>
-    <p class="cta-sub">I work directly with hardware teams to audit designs before they hit the chamber — identifying return path problems, aperture risks, and common-mode failures at the schematic and layout stage, not after a €15,000–40,000 test failure.</p>
+    <p class="cta-sub">Work directly with Dario to identify return path problems, aperture risks, and common-mode failures before you book the chamber — not after a €15,000–40,000 test failure.</p>
     <div class="cta-buttons">
       <a href="https://www.fresuelectronics.com/emc-audit" class="btn-primary" target="_blank">Book EMC Audit — €8,000</a>
       <a href="https://www.fresuelectronics.com/emc-audit" class="btn-secondary" target="_blank">EMC Architect System — €30,000 →</a>
     </div>
     <div class="cta-proof">
-      <span class="proof-item">First-pass compliance strategy</span>
-      <span class="proof-item">Pre-layout EMC review</span>
+      <span class="proof-item">80,000+ engineers in the community</span>
+      <span class="proof-item">4,000+ engineers trained</span>
       <span class="proof-item">Report in 10 business days</span>
-      <span class="proof-item">Trusted by Boeing, ETH Zurich, Siemens</span>
+      <span class="proof-item">IPC Certified · Former ETH Zurich</span>
     </div>
     <div class="products-strip">
       <a href="https://www.fresuelectronics.com/emc-audit" class="product-card" target="_blank">
         <div class="product-icon">🔍</div>
         <div class="product-name">EMC Design Audit</div>
-        <div class="product-desc">Full design review. Return paths, apertures, field geometry — before the chamber. €8,000.</div>
+        <div class="product-desc">Full design review before the chamber. Return paths, apertures, field geometry. €8,000.</div>
         <div class="product-link">Apply now →</div>
       </a>
       <a href="https://www.fresuelectronics.com/emc-audit" class="product-card" target="_blank">
         <div class="product-icon">🏛</div>
         <div class="product-name">EMC Architect System</div>
-        <div class="product-desc">Embedded advisory. Ongoing EMC partnership across all your development programs. €30,000.</div>
+        <div class="product-desc">Ongoing EMC partnership embedded in your development process. €30,000.</div>
         <div class="product-link">Learn more →</div>
       </a>
       <a href="https://tool.fresuelectronics.com" class="product-card" target="_blank">
