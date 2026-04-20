@@ -11,10 +11,10 @@
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     :root {
-      --bg:          #071F2F;
-      --surface:     #0d2b3e;
-      --surface-2:   #102f45;
-      --border:      #1a3d52;
+      --bg:          #0a0a0a;
+      --surface:     #111111;
+      --surface-2:   #181818;
+      --border:      #242424;
       --fg:          #ffffff;
       --label:       #a0aab8;
       --accent:      #00FF94;
@@ -31,7 +31,7 @@
     .header-nav { display:flex; align-items:center; gap:28px; }
     .header-nav a { font-size:11px; font-weight:600; letter-spacing:0.08em; text-transform:uppercase; color:#ffffff; text-decoration:none; opacity:0.6; transition:opacity 0.2s; }
     .header-nav a:hover { opacity:1; }
-    .header-cta { opacity:1 !important; background:var(--accent); color:#071F2F !important; padding:9px 20px; border-radius:3px; transition:background 0.2s; }
+    .header-cta { opacity:1 !important; background:var(--accent); color:#0a0a0a !important; padding:9px 20px; border-radius:3px; transition:background 0.2s; }
     .header-cta:hover { background:var(--accent-hover) !important; }
 
     .hero { max-width:1100px; margin:0 auto; padding:80px 40px 64px; border-bottom:1px solid var(--border); }
@@ -77,7 +77,7 @@
     .about-strip p { font-size:14px; font-weight:400; color:#ffffff; line-height:1.65; }
     .about-strip strong { font-weight:600; }
 
-    .btn-primary { display:inline-flex; align-items:center; gap:8px; background:var(--accent); color:#071F2F; font-family:'Poppins',sans-serif; font-size:13px; font-weight:700; letter-spacing:0.02em; padding:13px 24px; border-radius:3px; text-decoration:none; white-space:nowrap; transition:background 0.2s; }
+    .btn-primary { display:inline-flex; align-items:center; gap:8px; background:var(--accent); color:#0a0a0a; font-family:'Poppins',sans-serif; font-size:13px; font-weight:700; letter-spacing:0.02em; padding:13px 24px; border-radius:3px; text-decoration:none; white-space:nowrap; transition:background 0.2s; }
     .btn-primary:hover { background:var(--accent-hover); }
     .btn-outline { display:inline-flex; align-items:center; justify-content:center; color:#ffffff; font-family:'Poppins',sans-serif; font-size:11px; font-weight:600; letter-spacing:0.08em; text-transform:uppercase; text-decoration:none; padding:11px 24px; border:1px solid var(--border); border-radius:3px; transition:border-color 0.2s; }
     .btn-outline:hover { border-color:var(--accent); color:var(--accent); }
@@ -141,11 +141,11 @@
           <rect x="30" y="30" width="240" height="160" rx="4" fill="none" stroke="#1a3d52" stroke-width="1.5"/>
           <rect x="40" y="105" width="220" height="75" rx="2" fill="rgba(0,255,148,0.05)" stroke="rgba(0,255,148,0.2)" stroke-width="1"/>
           <path d="M 60 72 L 185 72" stroke="#00FF94" stroke-width="2" fill="none" stroke-linecap="round"/>
-          <circle cx="60"  cy="72"  r="4" fill="#071F2F" stroke="#00FF94" stroke-width="1.5"/>
-          <circle cx="185" cy="72"  r="4" fill="#071F2F" stroke="#00FF94" stroke-width="1.5"/>
-          <circle cx="60"  cy="105" r="4" fill="#071F2F" stroke="rgba(0,255,148,0.4)" stroke-width="1.5"/>
-          <circle cx="185" cy="105" r="4" fill="#071F2F" stroke="rgba(0,255,148,0.4)" stroke-width="1.5"/>
-          <rect x="105" y="105" width="55" height="3" fill="#071F2F" stroke="#ff4d4d" stroke-width="0.5"/>
+          <circle cx="60"  cy="72"  r="4" fill="#0a0a0a" stroke="#00FF94" stroke-width="1.5"/>
+          <circle cx="185" cy="72"  r="4" fill="#0a0a0a" stroke="#00FF94" stroke-width="1.5"/>
+          <circle cx="60"  cy="105" r="4" fill="#0a0a0a" stroke="rgba(0,255,148,0.4)" stroke-width="1.5"/>
+          <circle cx="185" cy="105" r="4" fill="#0a0a0a" stroke="rgba(0,255,148,0.4)" stroke-width="1.5"/>
+          <rect x="105" y="105" width="55" height="3" fill="#0a0a0a" stroke="#ff4d4d" stroke-width="0.5"/>
           <text x="132" y="120" text-anchor="middle" fill="#ff4d4d" font-family="Poppins,sans-serif" font-size="8" opacity="0.9">slot cut</text>
           <path d="M 105 107 Q 82 135 105 152 Q 132 168 160 152 Q 183 135 160 107" fill="none" stroke="#ff4d4d" stroke-width="1.2" stroke-dasharray="3,2" opacity="0.7"/>
           <text x="55"  y="64"  font-family="Poppins,sans-serif" font-size="8" fill="#00FF94">signal</text>
