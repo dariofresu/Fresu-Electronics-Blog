@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fresu Electronics — Engineering Blog</title>
+  <meta name="description" content="EMC, PCB design, and hardware engineering insights by Dario Fresu — Principal EMC Architect at Fresu Electronics.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..900;1,9..144,300..900&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300;1,400&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #0d0d0f;
+      --surface: #141418;
+      --surface-2: #1c1c22;
+      --border: #2a2a33;
+      --fg: #e8e8ed;
+      --muted: #7a7a8c;
+      --accent: #ff5c2b;
+      --accent-dim: rgba(255, 92, 43, 0.10);
+      --green: #3dffa0;
+      --green-dim: rgba(61, 255, 160, 0.08);
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--fg);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 16px;
+      line-height: 1.7;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.035'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 1000;
+      opacity: 0.4;
+    }
+
+    /* Header */
+    .site-header {
+      padding: 24px 40px;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .site-logo {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 13px;
+      color: var(--accent);
+      letter-spacing: 0.05em;
+      text-decoration: none;
+    }
+
+    .site-logo span { color: var(--muted); }
+
+    .header-nav {
+      display: flex;
+      align-items: center;
+      gap: 28px;
+    }
+
+    .header-nav a {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .header-nav a:hover { color: var(--fg); }
+
+    .header-cta {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: #fff !important;
+      background: var(--accent);
+      padding: 8px 16px;
+      border-radius: 2px;
+      text-decoration: none;
+      transition: opacity 0.2s;
+    }
+
+    .header-cta:hover { opacity: 0.85; }
+
+    /* Hero */
+    .hero {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 80px 40px 64px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .hero-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 20px;
+      display: block;
+    }
+
+    .hero-title {
+      font-family: 'Fraunces', serif;
+      font-size: clamp(40px, 6vw, 72px);
+      font-weight: 800;
+      line-height: 1.04;
+      letter-spacing: -0.025em;
+      color: #fff;
+      margin-bottom: 20px;
+    }
+
+    .hero-title em { font-style: italic; color: var(--accent); }
+
+    .hero-sub {
+      font-size: 19px;
+      font-weight: 300;
+      color: var(--muted);
+      max-width: 560px;
+      line-height: 1.6;
+    }
+
+    /* Posts grid */
+    .posts-section {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 64px 40px 120px;
+    }
+
+    .section-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 32px;
+      padding-bottom: 16px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .posts-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 2px;
+    }
+
+    /* Featured post */
+    .post-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      padding: 32px 32px 28px;
+      border-radius: 4px;
+      text-decoration: none;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      position: relative;
+      overflow: hidden;
+      transition: border-color 0.2s, transform 0.2s;
+    }
+
+    .post-card:hover { border-color: var(--accent); transform: translateY(-2px); }
+
+    .post-card.featured {
+      grid-column: 1 / -1;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 48px;
+      align-items: start;
+      padding: 48px;
+    }
+
+    .post-card.featured::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, var(--accent), transparent);
+    }
+
+    .post-meta {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .post-tag {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--accent);
+      border: 1px solid var(--accent);
+      padding: 3px 8px;
+      border-radius: 2px;
+      background: var(--accent-dim);
+    }
+
+    .post-date {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      color: var(--muted);
+    }
+
+    .post-new {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--green);
+      border: 1px solid var(--green);
+      padding: 3px 8px;
+      border-radius: 2px;
+      background: var(--green-dim);
+    }
+
+    .post-title {
+      font-family: 'Fraunces', serif;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+      color: #fff;
+      line-height: 1.2;
+    }
+
+    .post-card.featured .post-title { font-size: 30px; }
+    .post-card:not(.featured) .post-title { font-size: 20px; }
+
+    .post-excerpt {
+      font-size: 15px;
+      font-weight: 300;
+      color: var(--muted);
+      line-height: 1.65;
+      flex-grow: 1;
+    }
+
+    .post-read-more {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 0.08em;
+      color: var(--accent);
+      margin-top: 8px;
+    }
+
+    .featured-visual {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      aspect-ratio: 4/3;
+      background: var(--surface-2);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* SVG field diagram decoration for featured post */
+    .featured-visual svg {
+      width: 90%;
+      height: 90%;
+    }
+
+    /* Coming soon card */
+    .post-card.coming-soon {
+      opacity: 0.45;
+      pointer-events: none;
+    }
+
+    .coming-soon-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+      border: 1px solid var(--border);
+      padding: 3px 8px;
+      border-radius: 2px;
+    }
+
+    /* CTA Banner */
+    .cta-banner {
+      margin-top: 64px;
+      padding: 48px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 40px;
+      align-items: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .cta-banner::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, var(--accent), transparent);
+    }
+
+    .cta-banner-text h3 {
+      font-family: 'Fraunces', serif;
+      font-size: 26px;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 10px;
+      letter-spacing: -0.01em;
+    }
+
+    .cta-banner-text p {
+      font-size: 15px;
+      color: var(--muted);
+      font-weight: 300;
+      margin: 0;
+    }
+
+    .cta-banner-action {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      flex-shrink: 0;
+    }
+
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--accent);
+      color: #fff;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 14px;
+      font-weight: 500;
+      padding: 12px 24px;
+      border-radius: 3px;
+      text-decoration: none;
+      white-space: nowrap;
+      transition: opacity 0.2s;
+    }
+
+    .btn-primary:hover { opacity: 0.88; }
+
+    .btn-ghost {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      color: var(--muted);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      text-decoration: none;
+      padding: 10px 24px;
+      border: 1px solid var(--border);
+      border-radius: 3px;
+      transition: border-color 0.2s, color 0.2s;
+    }
+
+    .btn-ghost:hover { border-color: var(--fg); color: var(--fg); }
+
+    /* Footer */
+    .site-footer {
+      padding: 32px 40px;
+      border-top: 1px solid var(--border);
+      max-width: 1100px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      color: var(--muted);
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .site-footer a { color: var(--accent); text-decoration: none; }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(16px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .hero, .posts-section { animation: fadeUp 0.7s cubic-bezier(0.22, 1, 0.36, 1) both; }
+    .posts-section { animation-delay: 100ms; }
+
+    @media (max-width: 720px) {
+      .site-header { padding: 16px 20px; }
+      .header-nav { display: none; }
+      .hero { padding: 48px 20px 40px; }
+      .posts-section { padding: 40px 20px 80px; }
+      .post-card.featured { grid-template-columns: 1fr; }
+      .featured-visual { display: none; }
+      .cta-banner { grid-template-columns: 1fr; padding: 32px 24px; }
+      .site-footer { padding: 24px 20px; }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="site-header">
+      <a href="https://blog.fresuelectronics.com" class="site-logo">FRESU<span>/</span>ELECTRONICS</a>
+      <nav class="header-nav">
+        <a href="https://www.fresuelectronics.com">Main Site</a>
+        <a href="https://tool.fresuelectronics.com">PCB Guide</a>
+        <a href="https://www.fresuelectronics.com/emc-audit" class="header-cta">Book EMC Audit</a>
+      </nav>
+    </div>
+  </header>
+
+  <section class="hero">
+    <span class="hero-label">Engineering Blog</span>
+    <h1 class="hero-title">The physics<br>behind <em>great</em><br>hardware.</h1>
+    <p class="hero-sub">EMC strategy, PCB design, and the thinking that separates hardware teams who pass on the first try from those who don't.</p>
+  </section>
+
+  <main class="posts-section">
+    <div class="section-label">Latest Posts</div>
+
+    <div class="posts-grid">
+
+      <!-- Post 1 — FEATURED (latest) -->
+      <a href="./emc-mental-model" class="post-card featured">
+        <div>
+          <div class="post-meta">
+            <span class="post-tag">EMC</span>
+            <span class="post-new">New</span>
+            <span class="post-date">April 2026</span>
+          </div>
+          <h2 class="post-title">Your team keeps failing EMC tests. The reason is conceptual.</h2>
+          <p class="post-excerpt">It's not a layout problem. It's not a component problem. It's a mental model problem — and until your team replaces "grounding and shielding" with "return paths and field containment," you'll keep losing weeks to the chamber.</p>
+          <span class="post-read-more">Read post →</span>
+        </div>
+        <div class="featured-visual">
+          <svg viewBox="0 0 300 220" xmlns="http://www.w3.org/2000/svg">
+            <!-- PCB board outline -->
+            <rect x="30" y="30" width="240" height="160" rx="4" fill="none" stroke="#2a2a33" stroke-width="1.5"/>
+            <!-- Ground plane -->
+            <rect x="40" y="100" width="220" height="80" rx="2" fill="rgba(61,255,160,0.06)" stroke="rgba(61,255,160,0.2)" stroke-width="1"/>
+            <!-- Signal trace -->
+            <path d="M 60 70 L 180 70" stroke="#ff5c2b" stroke-width="2" fill="none" stroke-linecap="round"/>
+            <!-- Current loop arrow (large — wrong) -->
+            <ellipse cx="200" cy="85" rx="55" ry="40" fill="none" stroke="#ff4444" stroke-width="1.2" stroke-dasharray="4,3" opacity="0.5"/>
+            <text x="200" y="88" text-anchor="middle" fill="#ff4444" font-family="JetBrains Mono" font-size="9" opacity="0.7">LARGE LOOP</text>
+            <!-- Via symbols -->
+            <circle cx="60" cy="70" r="4" fill="#0d0d0f" stroke="#ff5c2b" stroke-width="1.5"/>
+            <circle cx="60" cy="100" r="4" fill="#0d0d0f" stroke="rgba(61,255,160,0.5)" stroke-width="1.5"/>
+            <circle cx="180" cy="70" r="4" fill="#0d0d0f" stroke="#ff5c2b" stroke-width="1.5"/>
+            <circle cx="180" cy="100" r="4" fill="#0d0d0f" stroke="rgba(61,255,160,0.5)" stroke-width="1.5"/>
+            <!-- Slot cut — the problem -->
+            <rect x="100" y="100" width="60" height="3" fill="#0d0d0f" stroke="#ff4444" stroke-width="0.5"/>
+            <text x="130" y="115" text-anchor="middle" fill="#ff4444" font-family="JetBrains Mono" font-size="8" opacity="0.8">slot cut</text>
+            <!-- return current detour arrow -->
+            <path d="M 100 102 Q 80 130 100 150 Q 130 165 160 150 Q 180 130 160 102" fill="none" stroke="#ff4444" stroke-width="1" stroke-dasharray="3,2" opacity="0.6"/>
+            <!-- Labels -->
+            <text x="60" y="62" font-family="JetBrains Mono" font-size="8" fill="#ff5c2b" opacity="0.9">signal</text>
+            <text x="40" y="190" font-family="JetBrains Mono" font-size="8" fill="rgba(61,255,160,0.6)">reference plane</text>
+            <!-- Radiation squiggles -->
+            <path d="M 215 65 Q 225 55 235 65 Q 245 75 255 65" stroke="#ff4444" stroke-width="1.2" fill="none" opacity="0.6"/>
+            <path d="M 218 58 Q 228 48 238 58 Q 248 68 258 58" stroke="#ff4444" stroke-width="1" fill="none" opacity="0.4"/>
+            <text x="253" y="52" font-family="JetBrains Mono" font-size="7" fill="#ff4444" opacity="0.7">EMI</text>
+          </svg>
+        </div>
+      </a>
+
+      <!-- Post 2 -->
+      <a href="https://tool.fresuelectronics.com" class="post-card">
+        <div class="post-meta">
+          <span class="post-tag">PCB Design</span>
+          <span class="post-date">2025</span>
+        </div>
+        <h3 class="post-title">Top 10 PCB Design Mistakes for EMI Control</h3>
+        <p class="post-excerpt">Interactive guide covering the ten most costly PCB layout errors — stack-up, trace routing, loop area, filter placement, ground splitting — with quizzes and certification.</p>
+        <span class="post-read-more">Read post →</span>
+      </a>
+
+      <!-- Post 3 — coming soon -->
+      <div class="post-card coming-soon">
+        <div class="post-meta">
+          <span class="post-tag">EMC</span>
+          <span class="coming-soon-label">Coming Soon</span>
+        </div>
+        <h3 class="post-title">Why Your Stack-Up Decides Your EMC Fate Before You Route a Single Trace</h3>
+        <p class="post-excerpt">The layer sequence, dielectric thickness, and plane adjacency decisions you make in the first 20 minutes of a new board will determine 80% of your EMC outcome.</p>
+        <span class="post-read-more">Coming soon</span>
+      </div>
+
+      <!-- Post 4 — coming soon -->
+      <div class="post-card coming-soon">
+        <div class="post-meta">
+          <span class="post-tag">Signal Integrity</span>
+          <span class="coming-soon-label">Coming Soon</span>
+        </div>
+        <h3 class="post-title">The Pre-Compliance Mindset: How to Run Your Own EMC Scan Before You Book the Chamber</h3>
+        <p class="post-excerpt">Pre-compliance is not about finding out if you pass — it's about building the diagnostic reflex that connects measured emissions to physical structures.</p>
+        <span class="post-read-more">Coming soon</span>
+      </div>
+
+    </div>
+
+    <!-- CTA Banner -->
+    <div class="cta-banner">
+      <div class="cta-banner-text">
+        <h3>Ready to stop guessing and start passing?</h3>
+        <p>Work directly with Dario Fresu to audit your design before it hits the chamber. Trusted by Boeing, ETH Zurich, Tesla, Siemens, and ASML.</p>
+      </div>
+      <div class="cta-banner-action">
+        <a href="https://www.fresuelectronics.com/emc-audit" class="btn-primary" target="_blank">Book an EMC Audit →</a>
+        <a href="https://www.fresuelectronics.com" class="btn-ghost" target="_blank">All Services</a>
+      </div>
+    </div>
+
+  </main>
+
+  <footer class="site-footer">
+    <span>© 2026 <a href="https://www.fresuelectronics.com">Fresu Electronics SRL</a></span>
+    <span><a href="https://www.fresuelectronics.com">fresuelectronics.com</a> · <a href="https://tool.fresuelectronics.com">PCB Guide</a></span>
+  </footer>
+
+</body>
+</html>
