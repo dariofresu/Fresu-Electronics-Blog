@@ -11,19 +11,19 @@
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     :root {
-      --bg:         #071F2F;
-      --surface:    #0d2b3e;
-      --surface-2:  #102f45;
-      --border:     #1a3d52;
-      --fg:         #ffffff;
-      --label:      #a0aab8;
-      --accent:     #116DFF;
-      --accent-dim: rgba(17, 109, 255, 0.12);
-      --correct:    #3dffa0;
-      --correct-dim:rgba(61, 255, 160, 0.08);
+      --bg:          #071F2F;
+      --surface:     #0d2b3e;
+      --surface-2:   #102f45;
+      --border:      #1a3d52;
+      --fg:          #ffffff;
+      --label:       #a0aab8;
+      --accent:      #00FF94;
+      --accent-dim:  rgba(0, 255, 148, 0.10);
+      --accent-hover:#00e085;
+      --wrong:       #ff4d4d;
     }
     body { background: var(--bg); color: #ffffff; font-family: 'Poppins', sans-serif; font-size: 16px; line-height: 1.7; min-height: 100vh; overflow-x: hidden; }
-    body::before { content:''; position:fixed; inset:0; pointer-events:none; z-index:1000; opacity:0.25; background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E"); }
+    body::before { content:''; position:fixed; inset:0; pointer-events:none; z-index:1000; opacity:0.2; background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E"); }
 
     header { border-bottom: 1px solid var(--border); }
     .site-header { max-width:1100px; margin:0 auto; padding:18px 40px; display:flex; align-items:center; justify-content:space-between; }
@@ -31,7 +31,7 @@
     .header-nav { display:flex; align-items:center; gap:28px; }
     .header-nav a { font-size:11px; font-weight:600; letter-spacing:0.08em; text-transform:uppercase; color:#ffffff; text-decoration:none; opacity:0.6; transition:opacity 0.2s; }
     .header-nav a:hover { opacity:1; }
-    .header-cta { opacity:1 !important; background:var(--accent); color:#ffffff !important; padding:9px 20px; border-radius:3px; transition:background 0.2s; }
+    .header-cta { opacity:1 !important; background:var(--accent); color:#071F2F !important; padding:9px 20px; border-radius:3px; transition:background 0.2s; }
     .header-cta:hover { background:var(--accent-hover) !important; }
 
     .hero { max-width:1100px; margin:0 auto; padding:80px 40px 64px; border-bottom:1px solid var(--border); }
@@ -52,7 +52,7 @@
     .post-meta { display:flex; align-items:center; gap:10px; flex-wrap:wrap; }
     .post-tag { font-size:10px; font-weight:600; letter-spacing:0.12em; text-transform:uppercase; color:var(--accent); border:1px solid var(--accent); padding:3px 9px; border-radius:2px; background:var(--accent-dim); }
     .post-date { font-size:11px; font-weight:400; color:var(--label); }
-    .post-new { font-size:10px; font-weight:600; letter-spacing:0.1em; text-transform:uppercase; color:var(--correct); border:1px solid var(--correct); padding:3px 9px; border-radius:2px; background:var(--correct-dim); }
+    .post-new { font-size:10px; font-weight:600; letter-spacing:0.1em; text-transform:uppercase; color:var(--accent); border:1px solid var(--accent); padding:3px 9px; border-radius:2px; background:var(--accent-dim); }
     .post-title { font-weight:700; letter-spacing:-0.01em; color:#ffffff; line-height:1.25; }
     .post-card.featured .post-title { font-size:30px; }
     .post-card:not(.featured) .post-title { font-size:19px; }
@@ -77,10 +77,10 @@
     .about-strip p { font-size:14px; font-weight:400; color:#ffffff; line-height:1.65; }
     .about-strip strong { font-weight:600; }
 
-    .btn-primary { display:inline-flex; align-items:center; gap:8px; background:var(--accent); color:#ffffff; font-family:'Poppins',sans-serif; font-size:13px; font-weight:600; letter-spacing:0.02em; padding:13px 24px; border-radius:3px; text-decoration:none; white-space:nowrap; transition:background 0.2s; }
+    .btn-primary { display:inline-flex; align-items:center; gap:8px; background:var(--accent); color:#071F2F; font-family:'Poppins',sans-serif; font-size:13px; font-weight:700; letter-spacing:0.02em; padding:13px 24px; border-radius:3px; text-decoration:none; white-space:nowrap; transition:background 0.2s; }
     .btn-primary:hover { background:var(--accent-hover); }
     .btn-outline { display:inline-flex; align-items:center; justify-content:center; color:#ffffff; font-family:'Poppins',sans-serif; font-size:11px; font-weight:600; letter-spacing:0.08em; text-transform:uppercase; text-decoration:none; padding:11px 24px; border:1px solid var(--border); border-radius:3px; transition:border-color 0.2s; }
-    .btn-outline:hover { border-color:#ffffff; }
+    .btn-outline:hover { border-color:var(--accent); color:var(--accent); }
 
     footer { border-top:1px solid var(--border); }
     .site-footer { max-width:1100px; margin:0 auto; padding:28px 40px; display:flex; align-items:center; justify-content:space-between; font-size:11px; font-weight:400; color:#ffffff; opacity:0.5; flex-wrap:wrap; gap:12px; }
@@ -118,7 +118,7 @@
 <section class="hero">
   <span class="hero-label">Engineering Blog</span>
   <h1 class="hero-title">The physics behind<br><em>great hardware.</em></h1>
-  <p class="hero-sub">EMC strategy, PCB design, and the thinking that separates hardware teams who reduce EMC risk before the chamber from those who don't. By Dario Fresu, Principal EMC Architect.</p>
+  <p class="hero-sub">EMC strategy, PCB design, and the thinking that separates hardware teams who reduce EMC risk systematically from those who don't. By Dario Fresu, Principal EMC Architect.</p>
 </section>
 
 <main class="posts-section">
@@ -139,17 +139,17 @@
       <div class="featured-visual">
         <svg viewBox="0 0 300 220" xmlns="http://www.w3.org/2000/svg">
           <rect x="30" y="30" width="240" height="160" rx="4" fill="none" stroke="#1a3d52" stroke-width="1.5"/>
-          <rect x="40" y="105" width="220" height="75" rx="2" fill="rgba(61,255,160,0.05)" stroke="rgba(61,255,160,0.2)" stroke-width="1"/>
-          <path d="M 60 72 L 185 72" stroke="#116DFF" stroke-width="2" fill="none" stroke-linecap="round"/>
-          <circle cx="60"  cy="72"  r="4" fill="#071F2F" stroke="#116DFF" stroke-width="1.5"/>
-          <circle cx="185" cy="72"  r="4" fill="#071F2F" stroke="#116DFF" stroke-width="1.5"/>
-          <circle cx="60"  cy="105" r="4" fill="#071F2F" stroke="rgba(61,255,160,0.5)" stroke-width="1.5"/>
-          <circle cx="185" cy="105" r="4" fill="#071F2F" stroke="rgba(61,255,160,0.5)" stroke-width="1.5"/>
+          <rect x="40" y="105" width="220" height="75" rx="2" fill="rgba(0,255,148,0.05)" stroke="rgba(0,255,148,0.2)" stroke-width="1"/>
+          <path d="M 60 72 L 185 72" stroke="#00FF94" stroke-width="2" fill="none" stroke-linecap="round"/>
+          <circle cx="60"  cy="72"  r="4" fill="#071F2F" stroke="#00FF94" stroke-width="1.5"/>
+          <circle cx="185" cy="72"  r="4" fill="#071F2F" stroke="#00FF94" stroke-width="1.5"/>
+          <circle cx="60"  cy="105" r="4" fill="#071F2F" stroke="rgba(0,255,148,0.4)" stroke-width="1.5"/>
+          <circle cx="185" cy="105" r="4" fill="#071F2F" stroke="rgba(0,255,148,0.4)" stroke-width="1.5"/>
           <rect x="105" y="105" width="55" height="3" fill="#071F2F" stroke="#ff4d4d" stroke-width="0.5"/>
           <text x="132" y="120" text-anchor="middle" fill="#ff4d4d" font-family="Poppins,sans-serif" font-size="8" opacity="0.9">slot cut</text>
           <path d="M 105 107 Q 82 135 105 152 Q 132 168 160 152 Q 183 135 160 107" fill="none" stroke="#ff4d4d" stroke-width="1.2" stroke-dasharray="3,2" opacity="0.7"/>
-          <text x="55"  y="64"  font-family="Poppins,sans-serif" font-size="8" fill="#116DFF">signal</text>
-          <text x="40"  y="192" font-family="Poppins,sans-serif" font-size="8" fill="rgba(61,255,160,0.6)">reference plane</text>
+          <text x="55"  y="64"  font-family="Poppins,sans-serif" font-size="8" fill="#00FF94">signal</text>
+          <text x="40"  y="192" font-family="Poppins,sans-serif" font-size="8" fill="rgba(0,255,148,0.5)">reference plane</text>
           <path d="M 215 62 Q 225 52 235 62 Q 245 72 255 62" stroke="#ff4d4d" stroke-width="1.2" fill="none" opacity="0.7"/>
           <path d="M 218 55 Q 228 45 238 55 Q 248 65 258 55" stroke="#ff4d4d" stroke-width="1"   fill="none" opacity="0.4"/>
           <text x="252" y="50" font-family="Poppins,sans-serif" font-size="7" fill="#ff4d4d" opacity="0.8">EMI</text>
