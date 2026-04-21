@@ -155,103 +155,7 @@
 
     
   
-    .subscribe-input select, 
-
-    /* ── Compact Subscribe Bar ── */
-    .sub-bar { border-top: 1px solid var(--border); padding: 28px 0 0; margin-top: 40px; }
-    .sub-bar-label { font-size: 13px; color: var(--label); margin-bottom: 12px; }
-    .sub-bar-fields { display: grid; grid-template-columns: 1fr 1fr 1.4fr 1fr auto; gap: 8px; align-items: start; }
-    .sub-field { background: #111; border: 1px solid var(--border); border-radius: 3px; color: #fff; font-family: inherit; font-size: 13px; padding: 10px 12px; outline: none; transition: border-color 0.2s; width: 100%; }
-    .sub-field:focus { border-color: var(--accent); }
-    .sub-field::placeholder { color: #444; }
-    select.sub-field { cursor: pointer; appearance: none; -webkit-appearance: none; }
-    .sub-btn { background: var(--accent); border: none; border-radius: 3px; color: #0a0a0a; cursor: pointer; font-family: inherit; font-size: 13px; font-weight: 700; padding: 10px 18px; white-space: nowrap; transition: background 0.2s; width: 100%; }
-    .sub-btn:hover { background: var(--accent-hover); }
-    .sub-msg { font-size: 12px; margin-top: 8px; }
-    @media (max-width: 768px) { .sub-bar-fields { grid-template-columns: 1fr 1fr; } .sub-btn { grid-column: 1 / -1; } }
-    @media (max-width: 480px) { .sub-bar-fields { grid-template-columns: 1fr; } }
-  </style>
-</head>
-<body>
-<header>
-  <div class="site-header">
-    <a href="https://www.fresuelectronics.com"><img src="https://raw.githubusercontent.com/dariofresu/Fresu-Electronics-Blog/main/assets/logo.png" alt="Fresu Electronics"></a>
-    <nav class="header-nav">
-      <a href="https://blog.fresuelectronics.com">← All Posts</a>
-      <a href="https://www.fresuelectronics.com/trainings">Courses</a>
-      <a href="https://www.fresuelectronics.com/emc-audit" class="header-cta">Book EMC Audit</a>
-    </nav>
-  </div>
-</header>
-<div class="container">
-  <span class="kicker">EMC/EMI Design · Filtering</span>
-  <h1>EMC Filter Topologies: Choosing the Right Configuration for Your I/O</h1>
-  <p class="deck">Adding a filter to an I/O connector isn't the end of the story — it's the beginning of an impedance matching problem. The wrong topology in the wrong impedance environment won't just underperform. It can make emissions worse.</p>
-  <div class="author-row">
-    <img class="author-photo" src="https://raw.githubusercontent.com/dariofresu/Fresu-Electronics-Blog/main/assets/dario-fresu.jpg" alt="Dario Fresu">
-    <div><span class="author-name">Dario Fresu</span><span class="author-title">Principal EMC Architect · Fresu Electronics</span></div>
-  </div>
-  <img src="https://raw.githubusercontent.com/dariofresu/Fresu-Electronics-Blog/main/assets/images/emc-filter-topologies.png" alt="" style="width:100%;border-radius:4px;margin:0 0 48px;display:block;border:1px solid #242424;">
-
-  <p>EMC filters are the interface between your circuit and the outside world. At every connector where a cable leaves or enters the board, you have a choice: control the field propagation at that boundary, or let the cable carry whatever field energy exists on the conductor out into the environment — where it becomes a radiated emission or a conducted susceptibility path.</p>
-  <p>Most engineers understand that filters go at connectors. Fewer understand that the choice of filter topology is not arbitrary — it must be matched to the source and load impedances of the specific interface, or the filter will not achieve its rated insertion loss in practice.</p>
-
-  <h2>The insertion loss problem</h2>
-  <p>A filter's datasheet insertion loss is measured under standardised 50Ω source and load conditions. Your actual circuit is not 50Ω. The cable is not 50Ω. The impedance environment seen by the filter at your specific interface will differ from test conditions — sometimes dramatically. A filter that shows 40 dB insertion loss in a 50Ω/50Ω test setup may deliver 10 dB or less in the actual circuit. Choosing the right topology mitigates this mismatch.</p>
-
-  <div class="concept-grid">
-    <div class="concept-card"><span class="concept-num">01 — Single Component</span><h3>Series inductor or shunt capacitor</h3><p>The simplest approach: a series inductor increases impedance to high-frequency noise in the signal path, while a shunt capacitor diverts noise to the return plane. Works well when source and load impedances are well-defined and stable. In low-impedance environments, series inductors are more effective; in high-impedance environments, shunt capacitors work better. Do not use blindly — the impedance environment must be assessed first.</p></div>
-    <div class="concept-card"><span class="concept-num">02 — Shunt-Series (L-filter)</span><h3>Capacitor first, then inductor</h3><p>A shunt capacitor followed by a series inductor. This topology works best when the source impedance is low — it first diverts high-frequency noise to ground, then blocks what remains with the series inductor. Common at power input interfaces where the source is a low-impedance supply rail.</p></div>
-    <div class="concept-card"><span class="concept-num">03 — Series-Shunt (L-filter, reversed)</span><h3>Inductor first, then capacitor</h3><p>A series inductor followed by a shunt capacitor. Preferred when load impedance is low — the inductor blocks noise from reaching the load, and the capacitor diverts what passes through to ground. Useful at the output of switching regulators driving low-impedance loads.</p></div>
-    <div class="concept-card"><span class="concept-num">04 — π-Filter</span><h3>Shunt — Series — Shunt</h3><p>Two shunt capacitors with a series inductor between them. Provides higher insertion loss than L-filters and works well when both source and load impedances are high. The most effective topology for conducted emissions on high-impedance signal lines, but requires careful component selection to avoid resonance peaks that can amplify noise at specific frequencies.</p></div>
-    <div class="concept-card"><span class="concept-num">05 — T-Filter</span><h3>Series — Shunt — Series</h3><p>Two series inductors with a shunt capacitor between them. Optimised for low source and load impedances. Common in power line filtering where the supply and load are both low impedance. Like the π-filter, component tolerances and parasitic elements must be controlled to avoid undesirable resonance behaviour.</p></div>
-  </div>
-
-  <h2>Placement is as important as topology</h2>
-  <p>A filter in the wrong location does not filter. The fundamental rule: filters must be placed at the boundary between the inside and outside of the system — at the connector, not somewhere on the board interior. A filter placed 50mm from the connector with an unfiltered trace running to the connector shell is not filtering the cable. It is filtering the PCB trace between the filter and the connector, while the cable radiates freely.</p>
-
-  <div class="pull-quote"><p>A filter that isn't at the boundary isn't a filter. It's a component with a false sense of security around it.</p></div>
-
-  <h2>Common-mode vs differential-mode</h2>
-  <p>Most EMC failures involve common-mode current — noise that appears on all conductors of a cable simultaneously and returns through a parasitic path (typically chassis or earth). Standard LC filters address differential-mode noise well but provide limited common-mode attenuation. For common-mode filtering, you need common-mode chokes: inductors wound so that differential currents cancel in the core while common-mode currents see high impedance. In most practical designs, both filter types are needed — the π or T topology handles differential-mode, and a common-mode choke handles the antenna-mode current that drives radiated emissions.</p>
-  
-  <div class="closing">
-    <div class="tags"><span class="tag">#EMCFilters</span> <span class="tag">#EMCDesign</span> <span class="tag">#PCBDesign</span> <span class="tag">#EMI</span> <span class="tag">#HardwareEngineering</span></div>
-  </div>
-  <div class="share-strip">
-    <span class="share-label">Share</span>
-
-    <a href="https://www.linkedin.com/shareArticle?mini=true&url=https://blog.fresuelectronics.com/emc-filter-topologies&title=EMC Filter Topologies: Choosing the Right Configuration for Your I/O&summary=The wrong topology in the wrong impedance environment won't just underperform — it can make emissions worse." target="_blank" rel="noopener" class="share-btn linkedin">
-      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
-      LinkedIn
-    </a>
-
-    <a href="https://twitter.com/intent/tweet?url=https://blog.fresuelectronics.com/emc-filter-topologies&text=EMC Filter Topologies: Choosing the Right Configuration for Your I/O+by+%40dario_fresu&via=dario_fresu" target="_blank" rel="noopener" class="share-btn twitter">
-      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
-      X / Twitter
-    </a>
-
-    <button class="share-btn youtube" onclick="copyLink(this, 'https://blog.fresuelectronics.com/emc-filter-topologies')" title="Copy link to share in a YouTube Community post">
-      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
-      Copy for YouTube
-    </button>
-
-    <button class="share-btn copylink" id="copy-main" onclick="copyLink(this, 'https://blog.fresuelectronics.com/emc-filter-topologies')">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
-      Copy Link
-    </button>
-  </div>
-
-  <script>
-  function copyLink(btn, url) {
-    navigator.clipboard.writeText(url).then(function() {
-      var orig = btn.innerHTML;
-      btn.classList.add('copied');
-      btn.innerHTML = btn.innerHTML.replace(/(LinkedIn|Copy for YouTube|Copy Link)/, '✓ Copied!');
-      setTimeout(function() {
-        btn.classList.remove('copied');
-        btn.innerHTML = orig;
-      }, 2000);
+    , 2000);
     });
   }
   </script>
@@ -280,60 +184,7 @@
     </div>
   </div>
 </div>
-  <div class="sub-bar">
-    <p class="sub-bar-label">&#x1F4E7; Get the next article before it&#39;s published &mdash; free, no spam.</p>
-    <form class="sub-bar-form" id="postSubForm" onsubmit="handleSub(event,&#39;postSubForm&#39;)">
-      <input type="text" name="website" style="display:none" tabindex="-1" autocomplete="off">
-      <div class="sub-bar-fields">
-        <input class="sub-field" type="text" name="first_name" placeholder="First name *" required autocomplete="given-name">
-        <input class="sub-field" type="text" name="last_name" placeholder="Last name *" required autocomplete="family-name">
-        <input class="sub-field" type="email" name="email" placeholder="Work email *" required autocomplete="email">
-        <select class="sub-field" name="country" required>
-          <option value="">Country *</option>
-          <option value="US">United States</option>
-          <option value="GB">United Kingdom</option>
-          <option value="DE">Germany</option>
-          <option value="IT">Italy</option>
-          <option value="FR">France</option>
-          <option value="NL">Netherlands</option>
-          <option value="SE">Sweden</option>
-          <option value="CH">Switzerland</option>
-          <option value="CA">Canada</option>
-          <option value="AU">Australia</option>
-          <option value="IN">India</option>
-          <option value="JP">Japan</option>
-          <option value="KR">South Korea</option>
-          <option value="CN">China</option>
-          <option value="SG">Singapore</option>
-          <option value="IL">Israel</option>
-          <option value="FI">Finland</option>
-          <option value="DK">Denmark</option>
-          <option value="NO">Norway</option>
-          <option value="BE">Belgium</option>
-          <option value="AT">Austria</option>
-          <option value="ES">Spain</option>
-          <option value="PT">Portugal</option>
-          <option value="PL">Poland</option>
-          <option value="CZ">Czech Republic</option>
-          <option value="RO">Romania</option>
-          <option value="HU">Hungary</option>
-          <option value="TR">Turkey</option>
-          <option value="BR">Brazil</option>
-          <option value="MX">Mexico</option>
-          <option value="ZA">South Africa</option>
-          <option value="AE">UAE</option>
-          <option value="SA">Saudi Arabia</option>
-          <option value="TW">Taiwan</option>
-          <option value="UA">Ukraine</option>
-          <option value="RU">Russia</option>
-          <option value="OTHER">Other</option>
-        </select>
-        <button class="sub-btn" type="submit">
-          <span class="sub-btn-text">Subscribe</span>
-          <span class="sub-btn-load" style="display:none">&#x2026;</span>
-        </button>
-      </div>
-      <p class="sub-msg" style="display:none"></p>
+        <p class="sub-msg" style="display:none"></p>
     </form>
   </div>
 <footer>
@@ -346,5 +197,119 @@
 
 
 
+
+<!-- ═══ STICKY SUBSCRIBE WIDGET ═══ -->
+<div id="subWidget" class="sw-wrap" aria-label="Subscribe">
+  <button class="sw-tab" id="swTab" onclick="swToggle()" aria-expanded="false" aria-controls="swPanel">
+    <span class="sw-tab-icon">&#x2709;</span>
+    <span class="sw-tab-label">Subscribe</span>
+  </button>
+  <div class="sw-panel" id="swPanel" hidden>
+    <div class="sw-head">
+      <p class="sw-title">Get articles <em>before</em> they&#39;re published</p>
+      <button class="sw-close" onclick="swToggle()" aria-label="Close">&#x2715;</button>
+    </div>
+    <form class="sw-form" id="swForm" onsubmit="handleSub(event,'swForm')">
+      <input type="text" name="website" style="display:none" tabindex="-1" autocomplete="off">
+      <div class="sw-row">
+        <input class="sw-input" type="text" name="first_name" placeholder="First name *" required autocomplete="given-name">
+        <input class="sw-input" type="text" name="last_name" placeholder="Last name *" required autocomplete="family-name">
+      </div>
+      <input class="sw-input" type="email" name="email" placeholder="Work email *" required autocomplete="email">
+      <select class="sw-input" name="country" required>
+        <option value="">Country *</option>
+            <option value="US">United States</option>
+            <option value="GB">United Kingdom</option>
+            <option value="DE">Germany</option>
+            <option value="IT">Italy</option>
+            <option value="FR">France</option>
+            <option value="NL">Netherlands</option>
+            <option value="SE">Sweden</option>
+            <option value="CH">Switzerland</option>
+            <option value="CA">Canada</option>
+            <option value="AU">Australia</option>
+            <option value="IN">India</option>
+            <option value="JP">Japan</option>
+            <option value="KR">South Korea</option>
+            <option value="CN">China</option>
+            <option value="SG">Singapore</option>
+            <option value="IL">Israel</option>
+            <option value="FI">Finland</option>
+            <option value="DK">Denmark</option>
+            <option value="NO">Norway</option>
+            <option value="BE">Belgium</option>
+            <option value="AT">Austria</option>
+            <option value="ES">Spain</option>
+            <option value="PT">Portugal</option>
+            <option value="PL">Poland</option>
+            <option value="CZ">Czech Republic</option>
+            <option value="RO">Romania</option>
+            <option value="HU">Hungary</option>
+            <option value="TR">Turkey</option>
+            <option value="BR">Brazil</option>
+            <option value="MX">Mexico</option>
+            <option value="ZA">South Africa</option>
+            <option value="AE">UAE</option>
+            <option value="SA">Saudi Arabia</option>
+            <option value="TW">Taiwan</option>
+            <option value="UA">Ukraine</option>
+            <option value="RU">Russia</option>
+            <option value="OTHER">Other</option>
+      </select>
+      <button class="sw-submit" type="submit">
+        <span class="sw-btn-text">Subscribe free</span>
+        <span class="sw-btn-load" style="display:none">&#x2026;</span>
+      </button>
+      <p class="sw-note">Free &middot; No spam &middot; Unsubscribe anytime</p>
+      <p class="sw-msg" style="display:none"></p>
+    </form>
+  </div>
+</div>
+<!-- ═══ END STICKY SUBSCRIBE WIDGET ═══ -->
+<script>
+function swToggle() {
+  var panel = document.getElementById('swPanel');
+  var tab   = document.getElementById('swTab');
+  var open  = !panel.hidden;
+  panel.hidden = open;
+  tab.setAttribute('aria-expanded', String(!open));
+}
+function handleSub(e, formId) {
+  e.preventDefault();
+  var form = document.getElementById(formId);
+  if (!form) return;
+  var honey = form.querySelector('[name="website"]');
+  if (honey && honey.value) return;
+  var get = function(n) { var el = form.querySelector('[name="' + n + '"]'); return el ? el.value.trim() : ''; };
+  var btnText = form.querySelector('.sw-btn-text');
+  var btnLoad = form.querySelector('.sw-btn-load');
+  var msg     = form.querySelector('.sw-msg');
+  if (btnText) btnText.style.display = 'none';
+  if (btnLoad) btnLoad.style.display = 'inline';
+  if (msg) msg.style.display = 'none';
+  fetch('https://hook.eu2.make.com/irkkjw6s2ppe9awrgv71atgu8540g12v', {
+    method: 'POST',
+    headers: {'Content-Type': 'application/json'},
+    body: JSON.stringify({ email: get('email'), first_name: get('first_name'), last_name: get('last_name'), country: get('country') })
+  })
+  .then(function(r) {
+    if (btnText) btnText.style.display = 'inline';
+    if (btnLoad) btnLoad.style.display = 'none';
+    if (msg) { msg.style.display = 'block'; }
+    if (r.ok) {
+      if (msg) { msg.style.color = '#00FF94'; msg.textContent = 'You are in! Check your inbox.'; }
+      ['email','first_name','last_name'].forEach(function(n) { var el = form.querySelector('[name="' + n + '"]'); if (el) el.value = ''; });
+      var sel = form.querySelector('[name="country"]'); if (sel) sel.selectedIndex = 0;
+    } else {
+      if (msg) { msg.style.color = '#ff4d4d'; msg.textContent = 'Something went wrong - try again.'; }
+    }
+  })
+  .catch(function() {
+    if (btnText) btnText.style.display = 'inline';
+    if (btnLoad) btnLoad.style.display = 'none';
+    if (msg) { msg.style.display = 'block'; msg.style.color = '#ff4d4d'; msg.textContent = 'Something went wrong - try again.'; }
+  });
+}
+</script>
 </body>
 </html>
