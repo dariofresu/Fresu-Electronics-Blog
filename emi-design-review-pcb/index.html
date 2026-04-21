@@ -153,29 +153,23 @@
     }
 
 
-    /* ── Subscribe Block ── */
-    .subscribe-block { background: linear-gradient(135deg, #0f1f0f 0%, #0a140a 100%); border: 1px solid rgba(0,255,148,0.2); border-radius: 8px; padding: 56px 48px; margin: 64px 0; }
-    .subscribe-inner { display: flex; gap: 48px; align-items: center; }
-    .subscribe-left { flex: 1; }
-    .subscribe-right { flex: 0 0 360px; }
-    .subscribe-tag { display: inline-block; font-size: 10px; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: var(--accent); background: rgba(0,255,148,0.1); border: 1px solid rgba(0,255,148,0.2); padding: 4px 12px; border-radius: 2px; margin-bottom: 16px; }
-    .subscribe-headline { font-size: clamp(24px,3vw,36px); font-weight: 800; line-height: 1.15; letter-spacing: -0.02em; color: #fff; margin-bottom: 14px; }
-    .subscribe-headline em { font-style: italic; color: var(--accent); }
-    .subscribe-sub { font-size: 14px; color: var(--label); line-height: 1.65; }
-    .subscribe-form { display: flex; flex-direction: column; gap: 10px; }
-    .subscribe-input { background: #0a0a0a; border: 1px solid var(--border); border-radius: 4px; color: #fff; font-family: inherit; font-size: 14px; padding: 12px 16px; outline: none; transition: border-color 0.2s; width: 100%; }
-    .subscribe-input:focus { border-color: var(--accent); }
-    .subscribe-input::placeholder { color: #555; }
-    .subscribe-btn { background: var(--accent); border: none; border-radius: 4px; color: #0a0a0a; cursor: pointer; font-family: inherit; font-size: 14px; font-weight: 700; padding: 13px 20px; transition: background 0.2s; width: 100%; letter-spacing: 0.02em; }
-    .subscribe-btn:hover { background: var(--accent-hover); }
-    .subscribe-msg { font-size: 13px; margin-top: 4px; }
-    @media (max-width: 700px) { .subscribe-inner { flex-direction: column; gap: 32px; } .subscribe-block { padding: 36px 24px; } .subscribe-right { flex: 0 0 auto; width: 100%; } }
-
-    .subscribe-row { display: flex; gap: 10px; }
-    .subscribe-row .subscribe-input, .subscribe-row .subscribe-band-input { flex: 1; min-width: 0; }
-    @media (max-width: 480px) { .subscribe-row { flex-direction: column; } }
+    
   
-    .subscribe-input select, select.subscribe-input, select.subscribe-band-input { appearance: none; -webkit-appearance: none; cursor: pointer; }
+    .subscribe-input select, 
+
+    /* ── Compact Subscribe Bar ── */
+    .sub-bar { border-top: 1px solid var(--border); padding: 28px 0 0; margin-top: 40px; }
+    .sub-bar-label { font-size: 13px; color: var(--label); margin-bottom: 12px; }
+    .sub-bar-fields { display: grid; grid-template-columns: 1fr 1fr 1.4fr 1fr auto; gap: 8px; align-items: start; }
+    .sub-field { background: #111; border: 1px solid var(--border); border-radius: 3px; color: #fff; font-family: inherit; font-size: 13px; padding: 10px 12px; outline: none; transition: border-color 0.2s; width: 100%; }
+    .sub-field:focus { border-color: var(--accent); }
+    .sub-field::placeholder { color: #444; }
+    select.sub-field { cursor: pointer; appearance: none; -webkit-appearance: none; }
+    .sub-btn { background: var(--accent); border: none; border-radius: 3px; color: #0a0a0a; cursor: pointer; font-family: inherit; font-size: 13px; font-weight: 700; padding: 10px 18px; white-space: nowrap; transition: background 0.2s; width: 100%; }
+    .sub-btn:hover { background: var(--accent-hover); }
+    .sub-msg { font-size: 12px; margin-top: 8px; }
+    @media (max-width: 768px) { .sub-bar-fields { grid-template-columns: 1fr 1fr; } .sub-btn { grid-column: 1 / -1; } }
+    @media (max-width: 480px) { .sub-bar-fields { grid-template-columns: 1fr; } }
   </style>
 </head>
 <body>
@@ -262,85 +256,7 @@
   </script>
 
   
-  <div class="subscribe-block">
-    <div class="subscribe-inner">
-      <div class="subscribe-left">
-        <span class="subscribe-tag">Free &middot; No spam &middot; Unsubscribe anytime</span>
-        <h2 class="subscribe-headline">Get the next article<br><em>before it&#39;s published.</em></h2>
-        <p class="subscribe-sub">Join 80,000+ engineers who get field-physics-driven EMC insights delivered directly to their inbox &mdash; practical, no fluff.</p>
-      </div>
-      <div class="subscribe-right">
-        <form class="subscribe-form" id="postSubscribeForm" onsubmit="handleSubscribe(event,&#39;postSubscribeForm&#39;)">
-          <input type="text" name="website" style="display:none" tabindex="-1" autocomplete="off">
-          <div class="subscribe-row">
-            <input class="subscribe-input" type="text" name="first_name" placeholder="First name" autocomplete="given-name">
-            <input class="subscribe-input" type="text" name="last_name" placeholder="Last name" autocomplete="family-name">
-          </div>
-          <input class="subscribe-input" type="email" name="email" placeholder="Work email" required autocomplete="email">
-          <select class="subscribe-input" name="country" autocomplete="country">
-            <option value="">Country</option>
-            <option value="US">United States</option>
-            <option value="GB">United Kingdom</option>
-            <option value="DE">Germany</option>
-            <option value="IT">Italy</option>
-            <option value="FR">France</option>
-            <option value="NL">Netherlands</option>
-            <option value="SE">Sweden</option>
-            <option value="CH">Switzerland</option>
-            <option value="CA">Canada</option>
-            <option value="AU">Australia</option>
-            <option value="IN">India</option>
-            <option value="JP">Japan</option>
-            <option value="KR">South Korea</option>
-            <option value="CN">China</option>
-            <option value="SG">Singapore</option>
-            <option value="IL">Israel</option>
-            <option value="FI">Finland</option>
-            <option value="DK">Denmark</option>
-            <option value="NO">Norway</option>
-            <option value="BE">Belgium</option>
-            <option value="AT">Austria</option>
-            <option value="ES">Spain</option>
-            <option value="PT">Portugal</option>
-            <option value="PL">Poland</option>
-            <option value="CZ">Czech Republic</option>
-            <option value="RO">Romania</option>
-            <option value="HU">Hungary</option>
-            <option value="HR">Croatia</option>
-            <option value="TR">Turkey</option>
-            <option value="BR">Brazil</option>
-            <option value="MX">Mexico</option>
-            <option value="AR">Argentina</option>
-            <option value="ZA">South Africa</option>
-            <option value="NG">Nigeria</option>
-            <option value="EG">Egypt</option>
-            <option value="SA">Saudi Arabia</option>
-            <option value="AE">UAE</option>
-            <option value="IR">Iran</option>
-            <option value="PK">Pakistan</option>
-            <option value="TW">Taiwan</option>
-            <option value="TH">Thailand</option>
-            <option value="MY">Malaysia</option>
-            <option value="ID">Indonesia</option>
-            <option value="PH">Philippines</option>
-            <option value="VN">Vietnam</option>
-            <option value="NZ">New Zealand</option>
-            <option value="UA">Ukraine</option>
-            <option value="RU">Russia</option>
-            <option value="GR">Greece</option>
-            <option value="SK">Slovakia</option>
-            <option value="RS">Serbia</option>
-            <option value="OTHER">Other</option>
-          </select>
-          <button class="subscribe-btn" type="submit">
-            <span class="btn-text">Subscribe &mdash; It&#39;s Free</span>
-            <span class="btn-loading" style="display:none">Subscribing&hellip;</span>
-          </button>
-          <p class="subscribe-msg" style="display:none"></p>
-        </form>
-      </div>
-    </div>
-  </div>
+  
 
   <div class="cta-section">
     <span class="cta-eyebrow">Work with Dario Fresu</span>
@@ -363,6 +279,62 @@
     </div>
   </div>
 </div>
+  <div class="sub-bar">
+    <p class="sub-bar-label">&#x1F4E7; Get the next article before it&#39;s published &mdash; free, no spam.</p>
+    <form class="sub-bar-form" id="postSubForm" onsubmit="handleSub(event,&#39;postSubForm&#39;)">
+      <input type="text" name="website" style="display:none" tabindex="-1" autocomplete="off">
+      <div class="sub-bar-fields">
+        <input class="sub-field" type="text" name="first_name" placeholder="First name *" required autocomplete="given-name">
+        <input class="sub-field" type="text" name="last_name" placeholder="Last name *" required autocomplete="family-name">
+        <input class="sub-field" type="email" name="email" placeholder="Work email *" required autocomplete="email">
+        <select class="sub-field" name="country" required>
+          <option value="">Country *</option>
+          <option value="US">United States</option>
+          <option value="GB">United Kingdom</option>
+          <option value="DE">Germany</option>
+          <option value="IT">Italy</option>
+          <option value="FR">France</option>
+          <option value="NL">Netherlands</option>
+          <option value="SE">Sweden</option>
+          <option value="CH">Switzerland</option>
+          <option value="CA">Canada</option>
+          <option value="AU">Australia</option>
+          <option value="IN">India</option>
+          <option value="JP">Japan</option>
+          <option value="KR">South Korea</option>
+          <option value="CN">China</option>
+          <option value="SG">Singapore</option>
+          <option value="IL">Israel</option>
+          <option value="FI">Finland</option>
+          <option value="DK">Denmark</option>
+          <option value="NO">Norway</option>
+          <option value="BE">Belgium</option>
+          <option value="AT">Austria</option>
+          <option value="ES">Spain</option>
+          <option value="PT">Portugal</option>
+          <option value="PL">Poland</option>
+          <option value="CZ">Czech Republic</option>
+          <option value="RO">Romania</option>
+          <option value="HU">Hungary</option>
+          <option value="TR">Turkey</option>
+          <option value="BR">Brazil</option>
+          <option value="MX">Mexico</option>
+          <option value="ZA">South Africa</option>
+          <option value="AE">UAE</option>
+          <option value="SA">Saudi Arabia</option>
+          <option value="TW">Taiwan</option>
+          <option value="UA">Ukraine</option>
+          <option value="RU">Russia</option>
+          <option value="OTHER">Other</option>
+        </select>
+        <button class="sub-btn" type="submit">
+          <span class="sub-btn-text">Subscribe</span>
+          <span class="sub-btn-load" style="display:none">&#x2026;</span>
+        </button>
+      </div>
+      <p class="sub-msg" style="display:none"></p>
+    </form>
+  </div>
 <footer>
   <div class="site-footer">
     <span>© 2026 Fresu Electronics SRL</span>
@@ -372,57 +344,6 @@
 
 
 
-<script>
-function handleSubscribe(e, formId) {
-  e.preventDefault();
-  var form = document.getElementById(formId);
-  if (!form) return;
-  var honey = form.querySelector('[name="website"]');
-  if (honey && honey.value) return;
-  var emailEl   = form.querySelector('[name="email"]');
-  var firstEl   = form.querySelector('[name="first_name"]');
-  var lastEl    = form.querySelector('[name="last_name"]');
-  var countryEl = form.querySelector('[name="country"]');
-  var btnText   = form.querySelector('.btn-text');
-  var btnLoad   = form.querySelector('.btn-loading');
-  var msg       = form.querySelector('.subscribe-msg');
-  if (!emailEl || !emailEl.value) return;
-  btnText.style.display = 'none';
-  btnLoad.style.display = 'inline';
-  msg.style.display = 'none';
-  fetch('https://hook.eu2.make.com/irkkjw6s2ppe9awrgv71atgu8540g12v', {
-    method: 'POST',
-    headers: {'Content-Type': 'application/json'},
-    body: JSON.stringify({
-      email:      emailEl.value,
-      first_name: firstEl   ? firstEl.value   : '',
-      last_name:  lastEl    ? lastEl.value    : '',
-      country:    countryEl ? countryEl.value : ''
-    })
-  })
-  .then(function(r) {
-    btnText.style.display = 'inline';
-    btnLoad.style.display = 'none';
-    msg.style.display = 'block';
-    if (r.ok) {
-      msg.style.color = '#00FF94';
-      msg.textContent = 'You are in! Check your inbox for a confirmation.';
-      ['email','first_name','last_name','country'].forEach(function(n) {
-        var el = form.querySelector('[name="' + n + '"]'); if (el) el.value = '';
-      });
-    } else {
-      msg.style.color = '#ff4d4d';
-      msg.textContent = 'Something went wrong - please try again.';
-    }
-  })
-  .catch(function() {
-    btnText.style.display = 'inline';
-    btnLoad.style.display = 'none';
-    msg.style.display = 'block';
-    msg.style.color = '#ff4d4d';
-    msg.textContent = 'Something went wrong - please try again.';
-  });
-}
-</script>
+
 </body>
 </html>
