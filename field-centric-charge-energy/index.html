@@ -152,6 +152,24 @@
       display: flex; align-items: center; justify-content: center;
     }
 
+
+    /* ── Subscribe Block ── */
+    .subscribe-block { background: linear-gradient(135deg, #0f1f0f 0%, #0a140a 100%); border: 1px solid rgba(0,255,148,0.2); border-radius: 8px; padding: 56px 48px; margin: 64px 0; }
+    .subscribe-inner { display: flex; gap: 48px; align-items: center; }
+    .subscribe-left { flex: 1; }
+    .subscribe-right { flex: 0 0 360px; }
+    .subscribe-tag { display: inline-block; font-size: 10px; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: var(--accent); background: rgba(0,255,148,0.1); border: 1px solid rgba(0,255,148,0.2); padding: 4px 12px; border-radius: 2px; margin-bottom: 16px; }
+    .subscribe-headline { font-size: clamp(24px,3vw,36px); font-weight: 800; line-height: 1.15; letter-spacing: -0.02em; color: #fff; margin-bottom: 14px; }
+    .subscribe-headline em { font-style: italic; color: var(--accent); }
+    .subscribe-sub { font-size: 14px; color: var(--label); line-height: 1.65; }
+    .subscribe-form { display: flex; flex-direction: column; gap: 10px; }
+    .subscribe-input { background: #0a0a0a; border: 1px solid var(--border); border-radius: 4px; color: #fff; font-family: inherit; font-size: 14px; padding: 12px 16px; outline: none; transition: border-color 0.2s; width: 100%; }
+    .subscribe-input:focus { border-color: var(--accent); }
+    .subscribe-input::placeholder { color: #555; }
+    .subscribe-btn { background: var(--accent); border: none; border-radius: 4px; color: #0a0a0a; cursor: pointer; font-family: inherit; font-size: 14px; font-weight: 700; padding: 13px 20px; transition: background 0.2s; width: 100%; letter-spacing: 0.02em; }
+    .subscribe-btn:hover { background: var(--accent-hover); }
+    .subscribe-msg { font-size: 13px; margin-top: 4px; }
+    @media (max-width: 700px) { .subscribe-inner { flex-direction: column; gap: 32px; } .subscribe-block { padding: 36px 24px; } .subscribe-right { flex: 0 0 auto; width: 100%; } }
   </style>
 </head>
 <body>
@@ -269,5 +287,51 @@
     <span><a href="https://blog.fresuelectronics.com">blog.fresuelectronics.com</a> · <a href="https://www.fresuelectronics.com">fresuelectronics.com</a></span>
   </div>
 </footer>
+
+<script>
+function handleSubscribe(e, formId) {
+  e.preventDefault();
+  var form = document.getElementById(formId);
+  if (!form) return;
+  var honey = form.querySelector('[name="website"]');
+  if (honey && honey.value) return; // honeypot
+  var emailEl = form.querySelector('[name="email"]');
+  var nameEl  = form.querySelector('[name="first_name"]');
+  var btnText = form.querySelector('.btn-text');
+  var btnLoad = form.querySelector('.btn-loading');
+  var msg     = form.querySelector('.subscribe-msg');
+  if (!emailEl || !emailEl.value) return;
+  btnText.style.display = 'none';
+  btnLoad.style.display = 'inline';
+  msg.style.display = 'none';
+  fetch('https://hook.eu2.make.com/irkkjw6s2ppe9awrgv71atgu8540g12v', {
+    method: 'POST',
+    headers: {'Content-Type': 'application/json'},
+    body: JSON.stringify({ email: emailEl.value, first_name: nameEl ? nameEl.value : '' })
+  })
+  .then(function(r) {
+    btnText.style.display = 'inline';
+    btnLoad.style.display = 'none';
+    msg.style.display = 'block';
+    if (r.ok) {
+      msg.style.color = '#00FF94';
+      msg.textContent = '✓ You're in! Check your inbox for a confirmation.';
+      form.querySelector('[name="email"]').value = '';
+      if (nameEl) nameEl.value = '';
+    } else {
+      msg.style.color = '#ff4d4d';
+      msg.textContent = 'Something went wrong — please try again.';
+    }
+  })
+  .catch(function() {
+    btnText.style.display = 'inline';
+    btnLoad.style.display = 'none';
+    msg.style.display = 'block';
+    msg.style.color = '#ff4d4d';
+    msg.textContent = 'Something went wrong — please try again.';
+  });
+}
+</script>
+
 </body>
 </html>
