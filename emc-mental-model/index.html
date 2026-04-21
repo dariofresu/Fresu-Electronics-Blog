@@ -192,15 +192,189 @@
     }
 
 
-    
-  
-    , 2000);
+    /* ── Sticky Subscribe Widget ── */
+    .sw-wrap { position: fixed; right: 0; top: 50%; transform: translateY(-50%); z-index: 9000; display: flex; flex-direction: row-reverse; align-items: flex-start; }
+    .sw-tab { display: flex; flex-direction: column; align-items: center; gap: 6px; background: var(--accent); border: none; border-radius: 6px 0 0 6px; color: #0a0a0a; cursor: pointer; font-family: inherit; font-size: 11px; font-weight: 700; letter-spacing: 0.06em; padding: 14px 8px; writing-mode: vertical-rl; text-orientation: mixed; transform: rotate(180deg); line-height: 1; transition: background 0.2s; white-space: nowrap; box-shadow: -2px 0 12px rgba(0,0,0,0.4); }
+    .sw-tab:hover { background: var(--accent-hover); }
+    .sw-tab-icon { font-size: 14px; transform: rotate(180deg); display: inline-block; }
+    .sw-panel { background: #141414; border: 1px solid #2a2a2a; border-right: none; border-radius: 8px 0 0 8px; box-shadow: -4px 4px 24px rgba(0,0,0,0.6); padding: 20px; width: 280px; }
+    .sw-head { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 14px; }
+    .sw-title { font-size: 13px; font-weight: 600; color: #fff; line-height: 1.4; flex: 1; }
+    .sw-title em { color: var(--accent); font-style: italic; }
+    .sw-close { background: none; border: none; color: #666; cursor: pointer; font-size: 16px; line-height: 1; padding: 0 0 0 8px; transition: color 0.2s; flex-shrink: 0; }
+    .sw-close:hover { color: #fff; }
+    .sw-form { display: flex; flex-direction: column; gap: 8px; }
+    .sw-row { display: flex; gap: 8px; }
+    .sw-input { background: #0a0a0a; border: 1px solid #2a2a2a; border-radius: 3px; color: #fff; font-family: inherit; font-size: 12px; padding: 9px 10px; outline: none; transition: border-color 0.2s; width: 100%; }
+    .sw-input:focus { border-color: var(--accent); }
+    .sw-input::placeholder { color: #444; }
+    select.sw-input { cursor: pointer; appearance: none; -webkit-appearance: none; }
+    .sw-row .sw-input { flex: 1; min-width: 0; }
+    .sw-submit { background: var(--accent); border: none; border-radius: 3px; color: #0a0a0a; cursor: pointer; font-family: inherit; font-size: 12px; font-weight: 700; padding: 10px; transition: background 0.2s; width: 100%; margin-top: 2px; letter-spacing: 0.03em; }
+    .sw-submit:hover { background: var(--accent-hover); }
+    .sw-note { color: #444; font-size: 10px; text-align: center; }
+    .sw-msg { font-size: 11px; text-align: center; margin: 0; }
+    @media (max-width: 768px) {
+      .sw-wrap { position: fixed; right: 0; bottom: 0; top: auto; left: 0; transform: none; flex-direction: column-reverse; align-items: stretch; }
+      .sw-tab { flex-direction: row; writing-mode: horizontal-tb; transform: none; border-radius: 0; padding: 12px 20px; justify-content: center; gap: 8px; box-shadow: 0 -2px 12px rgba(0,0,0,0.4); }
+      .sw-tab-icon { transform: none; }
+      .sw-panel { border: none; border-top: 1px solid #2a2a2a; border-radius: 0; width: 100%; box-shadow: 0 -4px 24px rgba(0,0,0,0.6); max-height: 80vh; overflow-y: auto; }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="site-header">
+    <a href="https://www.fresuelectronics.com">
+      <img src="https://raw.githubusercontent.com/dariofresu/Fresu-Electronics-Blog/main/assets/logo.png" alt="Fresu Electronics">
+    </a>
+    <nav class="header-nav">
+      <a href="https://blog.fresuelectronics.com">← All Posts</a>
+      <a href="https://www.fresuelectronics.com/trainings">Courses</a>
+      <a href="https://www.fresuelectronics.com/emc-audit" class="header-cta">Book EMC Audit</a>
+    </nav>
+  </div>
+</header>
+
+<div class="container">
+
+  <span class="kicker">Hardware Engineering · EMC</span>
+
+  <h1>Your team keeps failing EMC tests.<br>The reason is <em>conceptual.</em></h1>
+
+  <p class="deck">It's not a layout problem. It's not a component problem. It's a mental model problem — and until you fix the vocabulary in your team's head, you'll keep losing weeks to the chamber.</p>
+
+  <div class="author-row">
+    <img class="author-photo" src="https://raw.githubusercontent.com/dariofresu/Fresu-Electronics-Blog/main/assets/dario-fresu.jpg" alt="Dario Fresu">
+    <div>
+      <span class="author-name">Dario Fresu</span>
+      <span class="author-title">Principal EMC Architect · Fresu Electronics</span>
+    </div>
+  </div>
+
+  <p>Every time a hardware team walks into an EMC pre-compliance session and fails, I see the same pattern. They spent weeks adding copper tape to seams, bolting chassis panels together more aggressively, adding ferrites on every cable, and tying every ground pour to chassis at every possible point. And they still fail radiated emissions. Or they still get crushed by ESD on a front-panel port.</p>
+  <p>The root cause isn't any of those things. The root cause is the words they're using to think.</p>
+
+  <h2>The vocabulary trap</h2>
+  <p><strong>"Grounding"</strong> is the most dangerous word in hardware engineering. Not because it's wrong — it's just dangerously vague. When you tell a junior engineer to "fix the grounding," you could mean: connect to chassis, reduce impedance on a return path, eliminate a ground loop, improve the reference potential stability, or bond two structures that are floating relative to each other. These are completely different interventions. Conflating them produces random, ritualistic behaviour at the bench.</p>
+  <p><strong>"Shielding"</strong> is the second trap. Shielding does not block fields — it redirects them, reflects them, and in the case of a good conductor, induces opposing currents that cancel incident fields. A shielding enclosure that is 98% closed and 2% open seam at the right frequency is not a shield. It's a slot antenna. Thinking of shielding as a binary ("we have a metal box, therefore we are shielded") is what produces teams that bolt a lid on a PCB and are genuinely shocked when it radiates worse than the bare board.</p>
+
+  <div class="contrast-block">
+    <div class="contrast-col wrong">
+      <span class="contrast-label">Outdated Mental Model</span>
+      <ul class="contrast-list">
+        <li>Add more ground vias</li>
+        <li>Wrap it in copper tape</li>
+        <li>Tie chassis to GND everywhere</li>
+        <li>Put ferrites on every cable</li>
+        <li>"We have a metal box"</li>
+        <li>Ground the shield at one end</li>
+      </ul>
+    </div>
+    <div class="contrast-col right">
+      <span class="contrast-label">Correct Mental Model</span>
+      <ul class="contrast-list">
+        <li>Close the high-frequency return loop</li>
+        <li>Seal the aperture below λ/20</li>
+        <li>Manage bonding impedance at frequency</li>
+        <li>Redirect common-mode current off cable</li>
+        <li>Define field containment geometry</li>
+        <li>Terminate the transmission line cleanly</li>
+      </ul>
+    </div>
+  </div>
+
+  <h2>Return paths, not grounds</h2>
+  <p>Every current that flows out of a source must return to that source. This is not negotiable — it is Kirchhoff's current law. The question is never <em>whether</em> the return current flows, it's <em>where</em> it flows and what area the loop it forms encloses. A large loop area is an antenna. A small loop area is a quiet circuit.</p>
+  <p>When you think "return path" instead of "ground," you immediately ask the right questions: <em>Where does this switching current return? What impedance does that return path have at 100 MHz? Is there a discontinuity — a slot, a removed pour, a connector gap — between the signal via and the return via?</em></p>
+
+  <div class="pull-quote">
+    <p>The field does not care about your ground symbol. It cares about the current loop area you have created, and it will radiate in exact proportion to that area times the current times the frequency squared.</p>
+  </div>
+
+  <p>This reframe also fixes a common DC-thinking error: teams who pour a solid ground plane and consider the problem solved. A DC ground plane and a high-frequency return path are not the same thing. A plane with a slot cut through it — even a small slot — forces return current to route around it, forming a large loop that may be orders of magnitude worse than no plane at all for that particular signal pair.</p>
+
+  <h2>Reference planes and potential stability</h2>
+  <p>Instead of "ground," think <strong>reference plane</strong>. A reference plane has a job: it is a low-impedance, low-inductance surface that all signals within a domain can reference without their reference potential moving. A ground plane stitched to chassis at one point per board doesn't do this job at 500 MHz — the inductance of that single bond wire makes the plane's potential bounce relative to chassis at exactly the frequencies where your radiated emissions are failing.</p>
+
+  <h2>Electromagnetic field containment, not "shielding"</h2>
+  <p>Fields want to propagate. Your job as a designer is to define the geometry of where they are allowed to propagate and where they are not, then construct the physical structures that enforce that geometry.</p>
+
+  <div class="concept-grid">
+    <div class="concept-card">
+      <span class="concept-num">01 — Apertures</span>
+      <h3>Every hole is an antenna</h3>
+      <p>Any aperture in a conductive enclosure larger than λ/20 at the frequency of concern will radiate. Ventilation holes, connector cutouts, cable entry points, seam gaps — all of them. Your emissions floor is set by your worst aperture, not your average. Divide apertures. Use wire mesh. Use conductive gaskets at seams.</p>
+    </div>
+    <div class="concept-card">
+      <span class="concept-num">02 — Channeling</span>
+      <h3>Guide the field, don't just block it</h3>
+      <p>A cable entering a shielded enclosure is a field guide — it carries whatever field is on the conductor straight through your containment structure. A cable filtered at the wall breaks the field propagation at the boundary. The termination geometry and bond impedance at the point of entry are everything.</p>
+    </div>
+    <div class="concept-card">
+      <span class="concept-num">03 — Common-Mode</span>
+      <h3>Differential pairs don't cancel for free</h3>
+      <p>Your differential pair is balanced in the schematic. It is not balanced in reality. PCB asymmetry, connector skew, and component tolerances produce a small imbalance that drives common-mode current — which radiates like a monopole antenna driven by the full cable length.</p>
+    </div>
+    <div class="concept-card">
+      <span class="concept-num">04 — Impedance at Frequency</span>
+      <h3>Your bond strap has an inductance</h3>
+      <p>A flat copper strap looks like a short circuit at DC. At 100 MHz it is an inductor. At 500 MHz it may be a significant impedance. Your bonding strategy must be designed at the highest frequency you want to contain — multiple short, wide bonds at sub-wavelength intervals. Calculate it. Simulate it. Measure it.</p>
+    </div>
+  </div>
+
+  <h2>What to change</h2>
+  <p>Start at the design review stage. Ban the word "ground" as a verb. Make people say what they actually mean: "reduce return path inductance," "close the switching loop," "bond the chassis seam to below 10 mΩ at 200 MHz." Make people draw current return paths on the schematic and layout — not just signal paths. Make people identify every aperture and its largest linear dimension relative to λ at the clock frequency and its harmonics.</p>
+  <p>And get the whole team — firmware, mechanical, EE — into the same mental model. EMC failures are almost always system failures. The only way to align everyone is a shared, physics-based vocabulary.</p>
+
+  <div class="closing">
+    <p class="closing-line">Stop thinking about <span>grounding and shielding.</span><br>Start thinking about <span>current paths, field geometry,</span><br>and aperture control.</p>
+    <p>The test chamber is just a measurement instrument. What it's measuring is how well you understood the physics before you laid out the board. Change the model, and the results follow.</p>
+    <div class="tags">
+      <span class="tag">#EMC</span><span class="tag">#HardwareEngineering</span>
+      <span class="tag">#PCBDesign</span><span class="tag">#ElectromagneticCompatibility</span>
+      <span class="tag">#EmbeddedSystems</span><span class="tag">#Electronics</span>
+    </div>
+  </div>
+
+  <div class="share-strip">
+    <span class="share-label">Share</span>
+
+    <a href="https://www.linkedin.com/shareArticle?mini=true&url=https://blog.fresuelectronics.com/emc-mental-model&title=Why Your Team Keeps Failing EMC Tests. The Reason is Conceptual.&summary=Stop thinking about grounding and shielding. Start thinking about return paths, field containment, and aperture control." target="_blank" rel="noopener" class="share-btn linkedin">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+      LinkedIn
+    </a>
+
+    <a href="https://twitter.com/intent/tweet?url=https://blog.fresuelectronics.com/emc-mental-model&text=Why Your Team Keeps Failing EMC Tests. The Reason is Conceptual.+by+%40dario_fresu&via=dario_fresu" target="_blank" rel="noopener" class="share-btn twitter">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+      X / Twitter
+    </a>
+
+    <button class="share-btn youtube" onclick="copyLink(this, 'https://blog.fresuelectronics.com/emc-mental-model')" title="Copy link to share in a YouTube Community post">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+      Copy for YouTube
+    </button>
+
+    <button class="share-btn copylink" id="copy-main" onclick="copyLink(this, 'https://blog.fresuelectronics.com/emc-mental-model')">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+      Copy Link
+    </button>
+  </div>
+
+  <script>
+  function copyLink(btn, url) {
+    navigator.clipboard.writeText(url).then(function() {
+      var orig = btn.innerHTML;
+      btn.classList.add('copied');
+      btn.innerHTML = btn.innerHTML.replace(/(LinkedIn|Copy for YouTube|Copy Link)/, '✓ Copied!');
+      setTimeout(function() {
+        btn.classList.remove('copied');
+        btn.innerHTML = orig;
+      }, 2000);
     });
   }
   </script>
-
-  
-  
 
   <div class="cta-section">
     <span class="cta-eyebrow">Work with Dario Fresu</span>
@@ -240,9 +414,6 @@
 
 </div>
 
-        <p class="sub-msg" style="display:none"></p>
-    </form>
-  </div>
 <footer>
   <div class="site-footer">
     <span>© 2026 Fresu Electronics SRL</span>
@@ -251,20 +422,16 @@
 </footer>
 
 
-
-
-
-
 <!-- ═══ STICKY SUBSCRIBE WIDGET ═══ -->
-<div id="subWidget" class="sw-wrap" aria-label="Subscribe">
-  <button class="sw-tab" id="swTab" onclick="swToggle()" aria-expanded="false" aria-controls="swPanel">
+<div id="subWidget" class="sw-wrap">
+  <button class="sw-tab" id="swTab" onclick="swToggle()">
     <span class="sw-tab-icon">&#x2709;</span>
     <span class="sw-tab-label">Subscribe</span>
   </button>
   <div class="sw-panel" id="swPanel" hidden>
     <div class="sw-head">
       <p class="sw-title">Get articles <em>before</em> they&#39;re published</p>
-      <button class="sw-close" onclick="swToggle()" aria-label="Close">&#x2715;</button>
+      <button class="sw-close" onclick="swToggle()">&#x2715;</button>
     </div>
     <form class="sw-form" id="swForm" onsubmit="handleSub(event,'swForm')">
       <input type="text" name="website" style="display:none" tabindex="-1" autocomplete="off">
@@ -275,43 +442,25 @@
       <input class="sw-input" type="email" name="email" placeholder="Work email *" required autocomplete="email">
       <select class="sw-input" name="country" required>
         <option value="">Country *</option>
-            <option value="US">United States</option>
-            <option value="GB">United Kingdom</option>
-            <option value="DE">Germany</option>
-            <option value="IT">Italy</option>
-            <option value="FR">France</option>
-            <option value="NL">Netherlands</option>
-            <option value="SE">Sweden</option>
-            <option value="CH">Switzerland</option>
-            <option value="CA">Canada</option>
-            <option value="AU">Australia</option>
-            <option value="IN">India</option>
-            <option value="JP">Japan</option>
-            <option value="KR">South Korea</option>
-            <option value="CN">China</option>
-            <option value="SG">Singapore</option>
-            <option value="IL">Israel</option>
-            <option value="FI">Finland</option>
-            <option value="DK">Denmark</option>
-            <option value="NO">Norway</option>
-            <option value="BE">Belgium</option>
-            <option value="AT">Austria</option>
-            <option value="ES">Spain</option>
-            <option value="PT">Portugal</option>
-            <option value="PL">Poland</option>
-            <option value="CZ">Czech Republic</option>
-            <option value="RO">Romania</option>
-            <option value="HU">Hungary</option>
-            <option value="TR">Turkey</option>
-            <option value="BR">Brazil</option>
-            <option value="MX">Mexico</option>
-            <option value="ZA">South Africa</option>
-            <option value="AE">UAE</option>
-            <option value="SA">Saudi Arabia</option>
-            <option value="TW">Taiwan</option>
-            <option value="UA">Ukraine</option>
-            <option value="RU">Russia</option>
-            <option value="OTHER">Other</option>
+        <option value="US">United States</option><option value="GB">United Kingdom</option>
+        <option value="DE">Germany</option><option value="IT">Italy</option>
+        <option value="FR">France</option><option value="NL">Netherlands</option>
+        <option value="SE">Sweden</option><option value="CH">Switzerland</option>
+        <option value="CA">Canada</option><option value="AU">Australia</option>
+        <option value="IN">India</option><option value="JP">Japan</option>
+        <option value="KR">South Korea</option><option value="CN">China</option>
+        <option value="SG">Singapore</option><option value="IL">Israel</option>
+        <option value="FI">Finland</option><option value="DK">Denmark</option>
+        <option value="NO">Norway</option><option value="BE">Belgium</option>
+        <option value="AT">Austria</option><option value="ES">Spain</option>
+        <option value="PT">Portugal</option><option value="PL">Poland</option>
+        <option value="CZ">Czech Republic</option><option value="RO">Romania</option>
+        <option value="HU">Hungary</option><option value="TR">Turkey</option>
+        <option value="BR">Brazil</option><option value="MX">Mexico</option>
+        <option value="ZA">South Africa</option><option value="AE">UAE</option>
+        <option value="SA">Saudi Arabia</option><option value="TW">Taiwan</option>
+        <option value="UA">Ukraine</option><option value="RU">Russia</option>
+        <option value="OTHER">Other</option>
       </select>
       <button class="sw-submit" type="submit">
         <span class="sw-btn-text">Subscribe free</span>
@@ -326,10 +475,8 @@
 <script>
 function swToggle() {
   var panel = document.getElementById('swPanel');
-  var tab   = document.getElementById('swTab');
-  var open  = !panel.hidden;
+  var open = !panel.hidden;
   panel.hidden = open;
-  tab.setAttribute('aria-expanded', String(!open));
 }
 function handleSub(e, formId) {
   e.preventDefault();
@@ -340,7 +487,7 @@ function handleSub(e, formId) {
   var get = function(n) { var el = form.querySelector('[name="' + n + '"]'); return el ? el.value.trim() : ''; };
   var btnText = form.querySelector('.sw-btn-text');
   var btnLoad = form.querySelector('.sw-btn-load');
-  var msg     = form.querySelector('.sw-msg');
+  var msg = form.querySelector('.sw-msg');
   if (btnText) btnText.style.display = 'none';
   if (btnLoad) btnLoad.style.display = 'inline';
   if (msg) msg.style.display = 'none';
@@ -352,7 +499,7 @@ function handleSub(e, formId) {
   .then(function(r) {
     if (btnText) btnText.style.display = 'inline';
     if (btnLoad) btnLoad.style.display = 'none';
-    if (msg) { msg.style.display = 'block'; }
+    if (msg) msg.style.display = 'block';
     if (r.ok) {
       if (msg) { msg.style.color = '#00FF94'; msg.textContent = 'You are in! Check your inbox.'; }
       ['email','first_name','last_name'].forEach(function(n) { var el = form.querySelector('[name="' + n + '"]'); if (el) el.value = ''; });
