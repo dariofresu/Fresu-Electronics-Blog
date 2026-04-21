@@ -170,6 +170,10 @@
     .subscribe-btn:hover { background: var(--accent-hover); }
     .subscribe-msg { font-size: 13px; margin-top: 4px; }
     @media (max-width: 700px) { .subscribe-inner { flex-direction: column; gap: 32px; } .subscribe-block { padding: 36px 24px; } .subscribe-right { flex: 0 0 auto; width: 100%; } }
+
+    .subscribe-row { display: flex; gap: 10px; }
+    .subscribe-row .subscribe-input, .subscribe-row .subscribe-band-input { flex: 1; min-width: 0; }
+    @media (max-width: 480px) { .subscribe-row { flex-direction: column; } }
   </style>
 </head>
 <body>
@@ -300,12 +304,14 @@ function handleSubscribe(e, formId) {
   var form = document.getElementById(formId);
   if (!form) return;
   var honey = form.querySelector('[name="website"]');
-  if (honey && honey.value) return; // honeypot
-  var emailEl = form.querySelector('[name="email"]');
-  var nameEl  = form.querySelector('[name="first_name"]');
-  var btnText = form.querySelector('.btn-text');
-  var btnLoad = form.querySelector('.btn-loading');
-  var msg     = form.querySelector('.subscribe-msg');
+  if (honey && honey.value) return;
+  var emailEl   = form.querySelector('[name="email"]');
+  var firstEl   = form.querySelector('[name="first_name"]');
+  var lastEl    = form.querySelector('[name="last_name"]');
+  var countryEl = form.querySelector('[name="country"]');
+  var btnText   = form.querySelector('.btn-text');
+  var btnLoad   = form.querySelector('.btn-loading');
+  var msg       = form.querySelector('.subscribe-msg');
   if (!emailEl || !emailEl.value) return;
   btnText.style.display = 'none';
   btnLoad.style.display = 'inline';
@@ -313,7 +319,12 @@ function handleSubscribe(e, formId) {
   fetch('https://hook.eu2.make.com/irkkjw6s2ppe9awrgv71atgu8540g12v', {
     method: 'POST',
     headers: {'Content-Type': 'application/json'},
-    body: JSON.stringify({ email: emailEl.value, first_name: nameEl ? nameEl.value : '' })
+    body: JSON.stringify({
+      email:      emailEl.value,
+      first_name: firstEl   ? firstEl.value   : '',
+      last_name:  lastEl    ? lastEl.value    : '',
+      country:    countryEl ? countryEl.value : ''
+    })
   })
   .then(function(r) {
     btnText.style.display = 'inline';
@@ -321,12 +332,13 @@ function handleSubscribe(e, formId) {
     msg.style.display = 'block';
     if (r.ok) {
       msg.style.color = '#00FF94';
-      msg.textContent = '✓ You're in! Check your inbox for a confirmation.';
-      form.querySelector('[name="email"]').value = '';
-      if (nameEl) nameEl.value = '';
+      msg.textContent = String.fromCharCode(10003) + ' You are in! Check your inbox for a confirmation.';
+      ['email','first_name','last_name','country'].forEach(function(n) {
+        var el = form.querySelector('[name="' + n + '"]'); if (el) el.value = '';
+      });
     } else {
       msg.style.color = '#ff4d4d';
-      msg.textContent = 'Something went wrong — please try again.';
+      msg.textContent = 'Something went wrong - please try again.';
     }
   })
   .catch(function() {
@@ -334,7 +346,7 @@ function handleSubscribe(e, formId) {
     btnLoad.style.display = 'none';
     msg.style.display = 'block';
     msg.style.color = '#ff4d4d';
-    msg.textContent = 'Something went wrong — please try again.';
+    msg.textContent = 'Something went wrong - please try again.';
   });
 }
 </script>
