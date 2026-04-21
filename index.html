@@ -98,6 +98,23 @@
       .cta-banner-top{grid-template-columns:1fr;padding:28px 20px 24px;}
       .about-strip{padding:24px 20px 28px;}
     }
+
+    /* ── Subscribe Band ── */
+    .subscribe-band { background: linear-gradient(135deg, #0f1f0f 0%, #0a140a 100%); border-top: 1px solid rgba(0,255,148,0.15); border-bottom: 1px solid rgba(0,255,148,0.15); padding: 64px 40px; margin: 0 0 0 0; }
+    .subscribe-band-inner { max-width: 1100px; margin: 0 auto; display: flex; gap: 64px; align-items: center; }
+    .subscribe-band-text { flex: 1; }
+    .subscribe-band-tag { display: inline-block; font-size: 10px; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: var(--accent); background: rgba(0,255,148,0.1); border: 1px solid rgba(0,255,148,0.2); padding: 4px 12px; border-radius: 2px; margin-bottom: 16px; }
+    .subscribe-band-headline { font-size: clamp(26px,3.5vw,42px); font-weight: 800; line-height: 1.1; letter-spacing: -0.025em; color: #fff; margin-bottom: 12px; }
+    .subscribe-band-headline em { font-style: italic; color: var(--accent); }
+    .subscribe-band-sub { font-size: 15px; color: var(--label); line-height: 1.6; max-width: 440px; }
+    .subscribe-band-form { flex: 0 0 380px; display: flex; flex-direction: column; gap: 10px; }
+    .subscribe-band-input { background: #0a0a0a; border: 1px solid var(--border); border-radius: 4px; color: #fff; font-family: inherit; font-size: 14px; padding: 13px 16px; outline: none; transition: border-color 0.2s; width: 100%; }
+    .subscribe-band-input:focus { border-color: var(--accent); }
+    .subscribe-band-input::placeholder { color: #555; }
+    .subscribe-band-btn { background: var(--accent); border: none; border-radius: 4px; color: #0a0a0a; cursor: pointer; font-family: inherit; font-size: 14px; font-weight: 700; padding: 14px 20px; transition: background 0.2s; width: 100%; letter-spacing: 0.02em; }
+    .subscribe-band-btn:hover { background: var(--accent-hover); }
+    .subscribe-msg { font-size: 13px; margin-top: 4px; }
+    @media (max-width: 768px) { .subscribe-band-inner { flex-direction: column; gap: 32px; } .subscribe-band { padding: 48px 24px; } .subscribe-band-form { flex: 0 0 auto; width: 100%; } }
   </style>
 </head>
 <body>
@@ -273,6 +290,52 @@
     <span><a href="https://www.fresuelectronics.com">fresuelectronics.com</a> · <a href="https://www.fresuelectronics.com/free-tool-1">Free Stackup Tool</a></span>
   </div>
 </footer>
+
+
+<script>
+function handleSubscribe(e, formId) {
+  e.preventDefault();
+  var form = document.getElementById(formId);
+  if (!form) return;
+  var honey = form.querySelector('[name="website"]');
+  if (honey && honey.value) return; // honeypot
+  var emailEl = form.querySelector('[name="email"]');
+  var nameEl  = form.querySelector('[name="first_name"]');
+  var btnText = form.querySelector('.btn-text');
+  var btnLoad = form.querySelector('.btn-loading');
+  var msg     = form.querySelector('.subscribe-msg');
+  if (!emailEl || !emailEl.value) return;
+  btnText.style.display = 'none';
+  btnLoad.style.display = 'inline';
+  msg.style.display = 'none';
+  fetch('https://hook.eu2.make.com/irkkjw6s2ppe9awrgv71atgu8540g12v', {
+    method: 'POST',
+    headers: {'Content-Type': 'application/json'},
+    body: JSON.stringify({ email: emailEl.value, first_name: nameEl ? nameEl.value : '' })
+  })
+  .then(function(r) {
+    btnText.style.display = 'inline';
+    btnLoad.style.display = 'none';
+    msg.style.display = 'block';
+    if (r.ok) {
+      msg.style.color = '#00FF94';
+      msg.textContent = '✓ You're in! Check your inbox for a confirmation.';
+      form.querySelector('[name="email"]').value = '';
+      if (nameEl) nameEl.value = '';
+    } else {
+      msg.style.color = '#ff4d4d';
+      msg.textContent = 'Something went wrong — please try again.';
+    }
+  })
+  .catch(function() {
+    btnText.style.display = 'inline';
+    btnLoad.style.display = 'none';
+    msg.style.display = 'block';
+    msg.style.color = '#ff4d4d';
+    msg.textContent = 'Something went wrong — please try again.';
+  });
+}
+</script>
 
 </body>
 </html>
