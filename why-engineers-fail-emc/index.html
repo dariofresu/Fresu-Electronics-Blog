@@ -6,24 +6,6 @@
   <title>Why Smart Engineers Fail EMC Tests — Fresu Electronics</title>
   <meta name="description" content="It's not intelligence. It's not experience. It's a mental model problem — and it traces back to the moment you were taught that electricity is electrons fl">
   <meta property="og:title" content="Why Smart Engineers Fail EMC Tests">
-  <meta property="og:description" content="It's not intelligence. It's not experience. It's a mental model problem — tracing back to how electricity was taught.">
-  <meta property="og:url" content="https://blog.fresuelectronics.com/why-engineers-fail-emc">
-  <meta property="og:image" content="https://static.wixstatic.com/media/61d609_ea76cc7f33dc4d95b3314b2835d9cb05~mv2.png/v1/fill/w_1200,h_630,fp_0.50_0.50,q_95,enc_avif,quality_auto/61d609_ea76cc7f33dc4d95b3314b2835d9cb05~mv2.png">
-  <meta property="og:image:width" content="1200">
-  <meta property="og:image:height" content="630">
-  <meta property="og:type" content="article">
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:site" content="@dario_fresu">
-  <meta name="twitter:image" content="https://static.wixstatic.com/media/61d609_ea76cc7f33dc4d95b3314b2835d9cb05~mv2.png/v1/fill/w_1200,h_630,fp_0.50_0.50,q_95,enc_avif,quality_auto/61d609_ea76cc7f33dc4d95b3314b2835d9cb05~mv2.png">
-  <meta property="og:image" content="https://static.wixstatic.com/media/61d609_ea76cc7f33dc4d95b3314b2835d9cb05~mv2.png/v1/fill/w_1200,h_630,fp_0.50_0.50,q_95,enc_avif,quality_auto/61d609_ea76cc7f33dc4d95b3314b2835d9cb05~mv2.png">
-  <meta property="og:image:width" content="1200">
-  <meta property="og:image:height" content="630">
-  <meta property="og:type" content="article">
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:site" content="@dario_fresu">
-  <meta name="twitter:image" content="https://static.wixstatic.com/media/61d609_ea76cc7f33dc4d95b3314b2835d9cb05~mv2.png/v1/fill/w_1200,h_630,fp_0.50_0.50,q_95,enc_avif,quality_auto/61d609_ea76cc7f33dc4d95b3314b2835d9cb05~mv2.png">
-  <!-- og:title already set above -->
-  <meta property="og:title" content="Why Smart Engineers Fail EMC Tests">
   <meta property="og:url" content="https://blog.fresuelectronics.com/why-engineers-fail-emc">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -113,56 +95,88 @@
     .container>*:nth-child(1){animation-delay:0ms}.container>*:nth-child(2){animation-delay:60ms}.container>*:nth-child(3){animation-delay:120ms}.container>*:nth-child(4){animation-delay:180ms}
     @media(max-width:560px){.contrast-block{grid-template-columns:1fr}.contrast-col.wrong{border-right:1px solid var(--border);border-bottom:none}.container{padding:48px 20px 80px}.cta-section{padding:40px 20px}.site-header{padding:16px 20px}.header-nav a:not(.header-cta){display:none}}
 
-    /* Share strip */
-    .share-strip {
-      display: flex; align-items: center; gap: 12px;
-      margin: 56px 0 0; padding-top: 32px;
-      border-top: 1px solid var(--border);
-      flex-wrap: wrap;
+    /* ── Sticky Subscribe Widget ── */
+    .sw-wrap { position: fixed; right: 0; top: 50%; transform: translateY(-50%); z-index: 9000; display: flex; flex-direction: row-reverse; align-items: flex-start; }
+    .sw-tab { display: flex; flex-direction: column; align-items: center; gap: 6px; background: var(--accent); border: none; border-radius: 6px 0 0 6px; color: #0a0a0a; cursor: pointer; font-family: inherit; font-size: 11px; font-weight: 700; letter-spacing: 0.06em; padding: 14px 8px; writing-mode: vertical-rl; text-orientation: mixed; transform: rotate(180deg); line-height: 1; transition: background 0.2s; white-space: nowrap; box-shadow: -2px 0 12px rgba(0,0,0,0.4); }
+    .sw-tab:hover { background: var(--accent-hover); }
+    .sw-tab-icon { font-size: 14px; transform: rotate(180deg); display: inline-block; }
+    .sw-panel { background: #141414; border: 1px solid #2a2a2a; border-right: none; border-radius: 8px 0 0 8px; box-shadow: -4px 4px 24px rgba(0,0,0,0.6); padding: 20px; width: 280px; }
+    .sw-head { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 14px; }
+    .sw-title { font-size: 13px; font-weight: 600; color: #fff; line-height: 1.4; flex: 1; }
+    .sw-title em { color: var(--accent); font-style: italic; }
+    .sw-close { background: none; border: none; color: #666; cursor: pointer; font-size: 16px; line-height: 1; padding: 0 0 0 8px; transition: color 0.2s; flex-shrink: 0; }
+    .sw-close:hover { color: #fff; }
+    .sw-form { display: flex; flex-direction: column; gap: 8px; }
+    .sw-row { display: flex; gap: 8px; }
+    .sw-input { background: #0a0a0a; border: 1px solid #2a2a2a; border-radius: 3px; color: #fff; font-family: inherit; font-size: 12px; padding: 9px 10px; outline: none; transition: border-color 0.2s; width: 100%; }
+    .sw-input:focus { border-color: var(--accent); }
+    .sw-input::placeholder { color: #444; }
+    select.sw-input { cursor: pointer; appearance: none; -webkit-appearance: none; }
+    .sw-row .sw-input { flex: 1; min-width: 0; }
+    .sw-submit { background: var(--accent); border: none; border-radius: 3px; color: #0a0a0a; cursor: pointer; font-family: inherit; font-size: 12px; font-weight: 700; padding: 10px; transition: background 0.2s; width: 100%; margin-top: 2px; letter-spacing: 0.03em; }
+    .sw-submit:hover { background: var(--accent-hover); }
+    .sw-note { color: #444; font-size: 10px; text-align: center; }
+    .sw-msg { font-size: 11px; text-align: center; margin: 0; }
+    @media (max-width: 768px) {
+      .sw-wrap { position: fixed; right: 0; bottom: 0; top: auto; left: 0; transform: none; flex-direction: column-reverse; align-items: stretch; }
+      .sw-tab { flex-direction: row; writing-mode: horizontal-tb; transform: none; border-radius: 0; padding: 12px 20px; justify-content: center; gap: 8px; box-shadow: 0 -2px 12px rgba(0,0,0,0.4); }
+      .sw-tab-icon { transform: none; }
+      .sw-panel { border: none; border-top: 1px solid #2a2a2a; border-radius: 0; width: 100%; box-shadow: 0 -4px 24px rgba(0,0,0,0.6); max-height: 80vh; overflow-y: auto; }
     }
-    .share-label {
-      font-size: 12px; font-weight: 600; letter-spacing: 0.1em;
-      text-transform: uppercase; color: var(--label); margin-right: 4px;
-    }
-    .share-btn {
-      display: inline-flex; align-items: center; gap: 8px;
-      font-family: 'Poppins', sans-serif; font-size: 13px; font-weight: 600;
-      padding: 9px 18px; border-radius: 3px; text-decoration: none;
-      border: none; cursor: pointer; transition: opacity 0.2s, transform 0.15s;
-      white-space: nowrap;
-    }
-    .share-btn:hover { opacity: 0.88; transform: translateY(-1px); }
-    .share-btn svg { width: 16px; height: 16px; flex-shrink: 0; }
-    .share-btn.linkedin { background: #0A66C2; color: #ffffff; }
-    .share-btn.twitter  { background: #000000; color: #ffffff; }
-    .share-btn.youtube  { background: #FF0000; color: #ffffff; }
-    .share-btn.copylink { background: var(--surface); color: var(--accent);
-                          border: 1px solid var(--accent); }
-    .share-btn.copylink.copied { color: var(--correct); border-color: var(--correct); }
-    /* Cover hero */
-    .post-cover {
-      width: 100%; border-radius: 6px; display: block;
-      margin-bottom: 44px; border: 1px solid var(--border);
-      aspect-ratio: 16/9; object-fit: cover;
-    }
-    .post-cover-svg {
-      width: 100%; border-radius: 6px; overflow: hidden;
-      margin-bottom: 44px; border: 1px solid var(--border);
-      background: var(--surface); aspect-ratio: 16/9;
-      display: flex; align-items: center; justify-content: center;
-    }
-
-
-    
+  </style>
+</head>
+<body>
+<header>
+  <div class="site-header">
+    <a href="https://www.fresuelectronics.com"><img src="https://raw.githubusercontent.com/dariofresu/Fresu-Electronics-Blog/main/assets/logo.png" alt="Fresu Electronics"></a>
+    <nav class="header-nav">
+      <a href="https://blog.fresuelectronics.com">← All Posts</a>
+      <a href="https://www.fresuelectronics.com/trainings">Courses</a>
+      <a href="https://www.fresuelectronics.com/emc-audit" class="header-cta">Book EMC Audit</a>
+    </nav>
+  </div>
+</header>
+<div class="container">
+  <span class="kicker">EMC · Mental Models</span>
+  <h1>Why Smart Engineers Fail EMC Tests</h1>
+  <p class="deck">It's not intelligence. It's not experience. It's a mental model problem — and it traces back to the moment you were taught that electricity is electrons flowing through wires.</p>
+  <div class="author-row">
+    <img class="author-photo" src="https://raw.githubusercontent.com/dariofresu/Fresu-Electronics-Blog/main/assets/dario-fresu.jpg" alt="Dario Fresu">
+    <div><span class="author-name">Dario Fresu</span><span class="author-title">Principal EMC Architect · Fresu Electronics</span></div>
+  </div>
   
-    , 2000);
-    });
-  }
-  </script>
+  <p>Picture the journey most engineers take. You start with an Arduino, an ESP32, breadboards and wires going everywhere. The circuits are chaotic — but they work. You progress to PCBs, your designs look polished and professional, and your confidence grows.</p>
+  <p>Then, at some point in your career, your product goes into EMC testing. And it fails. Not once — repeatedly. You add filters, swap components, adjust layouts. The emissions don't improve, or they get worse. Another board respin. Another chamber booking. The costs stack up fast: a single failed qualification campaign typically runs €15,000–40,000 in chamber time, engineering hours, and schedule delays before you count customer penalties.</p>
+  <p>The natural question is: why? These are capable engineers. They have degrees, experience, working designs. Why does EMC feel like black magic?</p>
 
-  
-  
+  <h2>The answer is in how you were taught electricity</h2>
+  <p>The mental model most engineers carry — electrons moving through wires like marbles through a pipe — is a useful simplification for DC circuits. It breaks down completely at high frequencies. And here is the tell: when we design, we think in terms of electron flow. When we test, we measure electromagnetic fields. This disconnect is not accidental. It is the root cause of the problem.</p>
+  <p>EMC failures are field phenomena. Emissions don't come from electrons accelerating — they come from time-varying electromagnetic fields propagating through space. If your mental model doesn't include fields as first-class citizens, you are designing for one physical reality and being tested against another.</p>
 
+  <div class="pull-quote"><p>You cannot solve a field problem with an electron model. The two are not the same physics.</p></div>
+
+  <h2>What the people who pass consistently do differently</h2>
+  <p>Over many years working on EMC across aerospace, automotive, and industrial systems, a pattern becomes clear. The engineers who consistently have clean scans don't know more rules. They think differently. They design with fields in mind rather than electrons. They ask: where is the electromagnetic field being generated? Where is it trying to propagate? What structure am I building that confines or guides it?</p>
+  <p>This shift changes every design decision. Stackup selection becomes about field containment between adjacent planes. Component placement becomes about minimizing the area of current loops. Cable management becomes about controlling where field propagation paths exist. These are not heuristics — they are physics applied at the design stage.</p>
+
+  <div class="contrast-block">
+    <div class="contrast-col wrong"><span class="contrast-label">Electron-Based Thinking</span>
+    <ul class="contrast-list"><li>Signals are electrons through traces</li><li>Ground is a return wire</li><li>Filters block current</li><li>EMC is about the circuit</li><li>Fields are a measurement artefact</li></ul></div>
+    <div class="contrast-col right"><span class="contrast-label">Field-Based Thinking</span>
+    <ul class="contrast-list"><li>Signals are propagating EM fields</li><li>Return path controls field geometry</li><li>Filters redirect field propagation</li><li>EMC is about field containment</li><li>Fields are the operating mechanism</li></ul></div>
+  </div>
+
+  <h2>Why the educational system doesn't fix this</h2>
+  <p>The simplification of electricity to electron flow is deliberate — it works well enough for low-frequency circuit analysis, and introducing field theory early would overwhelm most introductory curricula. The problem is that this simplified model becomes load-bearing. Engineers build their entire intuition on it. By the time they encounter EMC, they are trying to graft field explanations onto a fundamentally wrong base model, and it doesn't fit.</p>
+  <p>If you've been stuck at this point, it is not your fault. It is a predictable consequence of how engineering education is structured. But it does become your problem to resolve — because the chamber doesn't grade on a curve.</p>
+
+  <h2>The practical shift</h2>
+  <p>You don't need to abandon circuit theory. You need to augment it. Start treating every current loop as a potential antenna — because it is. Start treating every signal path as a transmission line with an associated field distribution — because it is. Start asking, for every design decision: where does the field go, and is that where I want it?</p>
+  <p>This reframe is not theoretical. It produces measurable results at pre-compliance. Designs built on field thinking tend to have cleaner scans, fewer margin problems, and when issues do appear, they are diagnosable — because the designer understands what physical structure corresponds to each emission peak.</p>
+  
+  <div class="closing">
+    <div class="tags"><span class="tag">#EMC</span> <span class="tag">#HardwareEngineering</span> <span class="tag">#PCBDesign</span> <span class="tag">#Electronics</span></div>
+  </div>
   <div class="cta-section">
     <span class="cta-eyebrow">Work with Dario Fresu</span>
     <h2 class="cta-headline" style="margin:0 0 16px;">Identify EMC risk <em>before the chamber does.</em></h2>
@@ -184,30 +198,22 @@
     </div>
   </div>
 </div>
-        <p class="sub-msg" style="display:none"></p>
-    </form>
-  </div>
 <footer>
   <div class="site-footer">
     <span>© 2026 Fresu Electronics SRL</span>
     <span><a href="https://blog.fresuelectronics.com">blog.fresuelectronics.com</a> · <a href="https://www.fresuelectronics.com">fresuelectronics.com</a></span>
   </div>
 </footer>
-
-
-
-
-
 <!-- ═══ STICKY SUBSCRIBE WIDGET ═══ -->
-<div id="subWidget" class="sw-wrap" aria-label="Subscribe">
-  <button class="sw-tab" id="swTab" onclick="swToggle()" aria-expanded="false" aria-controls="swPanel">
+<div id="subWidget" class="sw-wrap">
+  <button class="sw-tab" id="swTab" onclick="swToggle()">
     <span class="sw-tab-icon">&#x2709;</span>
     <span class="sw-tab-label">Subscribe</span>
   </button>
   <div class="sw-panel" id="swPanel" hidden>
     <div class="sw-head">
       <p class="sw-title">Get articles <em>before</em> they&#39;re published</p>
-      <button class="sw-close" onclick="swToggle()" aria-label="Close">&#x2715;</button>
+      <button class="sw-close" onclick="swToggle()">&#x2715;</button>
     </div>
     <form class="sw-form" id="swForm" onsubmit="handleSub(event,'swForm')">
       <input type="text" name="website" style="display:none" tabindex="-1" autocomplete="off">
@@ -218,43 +224,25 @@
       <input class="sw-input" type="email" name="email" placeholder="Work email *" required autocomplete="email">
       <select class="sw-input" name="country" required>
         <option value="">Country *</option>
-            <option value="US">United States</option>
-            <option value="GB">United Kingdom</option>
-            <option value="DE">Germany</option>
-            <option value="IT">Italy</option>
-            <option value="FR">France</option>
-            <option value="NL">Netherlands</option>
-            <option value="SE">Sweden</option>
-            <option value="CH">Switzerland</option>
-            <option value="CA">Canada</option>
-            <option value="AU">Australia</option>
-            <option value="IN">India</option>
-            <option value="JP">Japan</option>
-            <option value="KR">South Korea</option>
-            <option value="CN">China</option>
-            <option value="SG">Singapore</option>
-            <option value="IL">Israel</option>
-            <option value="FI">Finland</option>
-            <option value="DK">Denmark</option>
-            <option value="NO">Norway</option>
-            <option value="BE">Belgium</option>
-            <option value="AT">Austria</option>
-            <option value="ES">Spain</option>
-            <option value="PT">Portugal</option>
-            <option value="PL">Poland</option>
-            <option value="CZ">Czech Republic</option>
-            <option value="RO">Romania</option>
-            <option value="HU">Hungary</option>
-            <option value="TR">Turkey</option>
-            <option value="BR">Brazil</option>
-            <option value="MX">Mexico</option>
-            <option value="ZA">South Africa</option>
-            <option value="AE">UAE</option>
-            <option value="SA">Saudi Arabia</option>
-            <option value="TW">Taiwan</option>
-            <option value="UA">Ukraine</option>
-            <option value="RU">Russia</option>
-            <option value="OTHER">Other</option>
+        <option value="US">United States</option><option value="GB">United Kingdom</option>
+        <option value="DE">Germany</option><option value="IT">Italy</option>
+        <option value="FR">France</option><option value="NL">Netherlands</option>
+        <option value="SE">Sweden</option><option value="CH">Switzerland</option>
+        <option value="CA">Canada</option><option value="AU">Australia</option>
+        <option value="IN">India</option><option value="JP">Japan</option>
+        <option value="KR">South Korea</option><option value="CN">China</option>
+        <option value="SG">Singapore</option><option value="IL">Israel</option>
+        <option value="FI">Finland</option><option value="DK">Denmark</option>
+        <option value="NO">Norway</option><option value="BE">Belgium</option>
+        <option value="AT">Austria</option><option value="ES">Spain</option>
+        <option value="PT">Portugal</option><option value="PL">Poland</option>
+        <option value="CZ">Czech Republic</option><option value="RO">Romania</option>
+        <option value="HU">Hungary</option><option value="TR">Turkey</option>
+        <option value="BR">Brazil</option><option value="MX">Mexico</option>
+        <option value="ZA">South Africa</option><option value="AE">UAE</option>
+        <option value="SA">Saudi Arabia</option><option value="TW">Taiwan</option>
+        <option value="UA">Ukraine</option><option value="RU">Russia</option>
+        <option value="OTHER">Other</option>
       </select>
       <button class="sw-submit" type="submit">
         <span class="sw-btn-text">Subscribe free</span>
@@ -269,10 +257,7 @@
 <script>
 function swToggle() {
   var panel = document.getElementById('swPanel');
-  var tab   = document.getElementById('swTab');
-  var open  = !panel.hidden;
-  panel.hidden = open;
-  tab.setAttribute('aria-expanded', String(!open));
+  panel.hidden = !panel.hidden;
 }
 function handleSub(e, formId) {
   e.preventDefault();
@@ -283,31 +268,28 @@ function handleSub(e, formId) {
   var get = function(n) { var el = form.querySelector('[name="' + n + '"]'); return el ? el.value.trim() : ''; };
   var btnText = form.querySelector('.sw-btn-text');
   var btnLoad = form.querySelector('.sw-btn-load');
-  var msg     = form.querySelector('.sw-msg');
+  var msg = form.querySelector('.sw-msg');
   if (btnText) btnText.style.display = 'none';
   if (btnLoad) btnLoad.style.display = 'inline';
   if (msg) msg.style.display = 'none';
   fetch('https://hook.eu2.make.com/irkkjw6s2ppe9awrgv71atgu8540g12v', {
-    method: 'POST',
-    headers: {'Content-Type': 'application/json'},
+    method: 'POST', headers: {'Content-Type': 'application/json'},
     body: JSON.stringify({ email: get('email'), first_name: get('first_name'), last_name: get('last_name'), country: get('country') })
   })
   .then(function(r) {
     if (btnText) btnText.style.display = 'inline';
     if (btnLoad) btnLoad.style.display = 'none';
-    if (msg) { msg.style.display = 'block'; }
+    if (msg) msg.style.display = 'block';
     if (r.ok) {
       if (msg) { msg.style.color = '#00FF94'; msg.textContent = 'You are in! Check your inbox.'; }
-      ['email','first_name','last_name'].forEach(function(n) { var el = form.querySelector('[name="' + n + '"]'); if (el) el.value = ''; });
+      ['email','first_name','last_name'].forEach(function(n) { var el = form.querySelector('[name="'+n+'"]'); if(el) el.value=''; });
       var sel = form.querySelector('[name="country"]'); if (sel) sel.selectedIndex = 0;
-    } else {
-      if (msg) { msg.style.color = '#ff4d4d'; msg.textContent = 'Something went wrong - try again.'; }
-    }
+    } else { if (msg) { msg.style.color='#ff4d4d'; msg.textContent='Something went wrong - try again.'; } }
   })
   .catch(function() {
     if (btnText) btnText.style.display = 'inline';
     if (btnLoad) btnLoad.style.display = 'none';
-    if (msg) { msg.style.display = 'block'; msg.style.color = '#ff4d4d'; msg.textContent = 'Something went wrong - try again.'; }
+    if (msg) { msg.style.display='block'; msg.style.color='#ff4d4d'; msg.textContent='Something went wrong - try again.'; }
   });
 }
 </script>
