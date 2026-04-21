@@ -260,6 +260,33 @@
   }
   </script>
 
+  
+  <div class="subscribe-block">
+    <div class="subscribe-inner">
+      <div class="subscribe-left">
+        <span class="subscribe-tag">Free &middot; No spam &middot; Unsubscribe anytime</span>
+        <h2 class="subscribe-headline">Get the next article<br><em>before it&#39;s published.</em></h2>
+        <p class="subscribe-sub">Join 80,000+ engineers who get field-physics-driven EMC insights delivered directly to their inbox &mdash; practical, no fluff.</p>
+      </div>
+      <div class="subscribe-right">
+        <form class="subscribe-form" id="postSubscribeForm" onsubmit="handleSubscribe(event,&#39;postSubscribeForm&#39;)">
+          <input type="text" name="website" style="display:none" tabindex="-1" autocomplete="off">
+          <div class="subscribe-row">
+            <input class="subscribe-input" type="text" name="first_name" placeholder="First name" autocomplete="given-name">
+            <input class="subscribe-input" type="text" name="last_name" placeholder="Last name" autocomplete="family-name">
+          </div>
+          <input class="subscribe-input" type="email" name="email" placeholder="Work email" required autocomplete="email">
+          <input class="subscribe-input" type="text" name="country" placeholder="Country" autocomplete="country-name">
+          <button class="subscribe-btn" type="submit">
+            <span class="btn-text">Subscribe &mdash; It&#39;s Free</span>
+            <span class="btn-loading" style="display:none">Subscribing&hellip;</span>
+          </button>
+          <p class="subscribe-msg" style="display:none"></p>
+        </form>
+      </div>
+    </div>
+  </div>
+
   <div class="cta-section">
     <span class="cta-eyebrow">Work with Dario Fresu</span>
     <h2 class="cta-headline" style="margin:0 0 16px;">Is your filter topology matched <em>to your impedance environment?</em></h2>
@@ -287,6 +314,8 @@
     <span><a href="https://blog.fresuelectronics.com">blog.fresuelectronics.com</a> · <a href="https://www.fresuelectronics.com">fresuelectronics.com</a></span>
   </div>
 </footer>
+
+
 
 <script>
 function handleSubscribe(e, formId) {
@@ -322,7 +351,7 @@ function handleSubscribe(e, formId) {
     msg.style.display = 'block';
     if (r.ok) {
       msg.style.color = '#00FF94';
-      msg.textContent = String.fromCharCode(10003) + ' You are in! Check your inbox for a confirmation.';
+      msg.textContent = 'You are in! Check your inbox for a confirmation.';
       ['email','first_name','last_name','country'].forEach(function(n) {
         var el = form.querySelector('[name="' + n + '"]'); if (el) el.value = '';
       });
@@ -340,6 +369,5 @@ function handleSubscribe(e, formId) {
   });
 }
 </script>
-
 </body>
 </html>
