@@ -269,6 +269,31 @@
 
   </div>
 
+  
+  <div class="subscribe-band">
+    <div class="subscribe-band-inner">
+      <div class="subscribe-band-text">
+        <span class="subscribe-band-tag">Free &middot; No spam &middot; Unsubscribe anytime</span>
+        <h2 class="subscribe-band-headline">Get the next article <em>before it&#39;s published.</em></h2>
+        <p class="subscribe-band-sub">Join 80,000+ engineers who get field-physics-driven EMC insights &mdash; practical, no fluff.</p>
+      </div>
+      <form class="subscribe-band-form" id="indexSubscribeForm" onsubmit="handleSubscribe(event,&#39;indexSubscribeForm&#39;)">
+        <input type="text" name="website" style="display:none" tabindex="-1" autocomplete="off">
+        <div class="subscribe-row">
+          <input class="subscribe-band-input" type="text" name="first_name" placeholder="First name" autocomplete="given-name">
+          <input class="subscribe-band-input" type="text" name="last_name" placeholder="Last name" autocomplete="family-name">
+        </div>
+        <input class="subscribe-band-input" type="email" name="email" placeholder="Work email" required autocomplete="email">
+        <input class="subscribe-band-input" type="text" name="country" placeholder="Country" autocomplete="country-name">
+        <button class="subscribe-band-btn" type="submit">
+          <span class="btn-text">Subscribe Free</span>
+          <span class="btn-loading" style="display:none">Subscribing&hellip;</span>
+        </button>
+        <p class="subscribe-msg" style="display:none"></p>
+      </form>
+    </div>
+  </div>
+
   <div class="cta-banner">
     <div class="cta-banner-top">
       <div>
@@ -294,6 +319,8 @@
     <span><a href="https://www.fresuelectronics.com">fresuelectronics.com</a> · <a href="https://www.fresuelectronics.com/free-tool-1">Free Stackup Tool</a></span>
   </div>
 </footer>
+
+
 
 
 <script>
@@ -330,7 +357,7 @@ function handleSubscribe(e, formId) {
     msg.style.display = 'block';
     if (r.ok) {
       msg.style.color = '#00FF94';
-      msg.textContent = String.fromCharCode(10003) + ' You are in! Check your inbox for a confirmation.';
+      msg.textContent = 'You are in! Check your inbox for a confirmation.';
       ['email','first_name','last_name','country'].forEach(function(n) {
         var el = form.querySelector('[name="' + n + '"]'); if (el) el.value = '';
       });
@@ -348,6 +375,5 @@ function handleSubscribe(e, formId) {
   });
 }
 </script>
-
 </body>
 </html>
