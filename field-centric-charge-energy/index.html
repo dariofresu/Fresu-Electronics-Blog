@@ -5,24 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>A Field-Centric View of Energy Transfer in Classical Electromagnetism — Fresu Electronics</title>
   <meta name="description" content="Where does electrical energy actually flow? Not through the wire. The Poynting vector, Gauss's law inverted, and a field-first interpretation of classical ">
-  <meta property="og:title" content="A Field-Centric View of Energy Transfer in Electromagnetism">
-  <meta property="og:description" content="Where does electrical energy actually flow? Not through the wire.">
-  <meta property="og:url" content="https://blog.fresuelectronics.com/field-centric-charge-energy">
-  <meta property="og:image" content="https://static.wixstatic.com/media/61d609_62fc881e7d644687aedf59c514940a4b~mv2.png/v1/fill/w_1200,h_630,fp_0.50_0.50,q_95,enc_avif,quality_auto/61d609_62fc881e7d644687aedf59c514940a4b~mv2.png">
-  <meta property="og:image:width" content="1200">
-  <meta property="og:image:height" content="630">
-  <meta property="og:type" content="article">
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:site" content="@dario_fresu">
-  <meta name="twitter:image" content="https://static.wixstatic.com/media/61d609_62fc881e7d644687aedf59c514940a4b~mv2.png/v1/fill/w_1200,h_630,fp_0.50_0.50,q_95,enc_avif,quality_auto/61d609_62fc881e7d644687aedf59c514940a4b~mv2.png">
-  <meta property="og:image" content="https://static.wixstatic.com/media/61d609_62fc881e7d644687aedf59c514940a4b~mv2.png/v1/fill/w_1200,h_630,fp_0.50_0.50,q_95,enc_avif,quality_auto/61d609_62fc881e7d644687aedf59c514940a4b~mv2.png">
-  <meta property="og:image:width" content="1200">
-  <meta property="og:image:height" content="630">
-  <meta property="og:type" content="article">
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:site" content="@dario_fresu">
-  <meta name="twitter:image" content="https://static.wixstatic.com/media/61d609_62fc881e7d644687aedf59c514940a4b~mv2.png/v1/fill/w_1200,h_630,fp_0.50_0.50,q_95,enc_avif,quality_auto/61d609_62fc881e7d644687aedf59c514940a4b~mv2.png">
-  <!-- og:title already set above -->
   <meta property="og:title" content="A Field-Centric View of Energy Transfer in Classical Electromagnetism">
   <meta property="og:url" content="https://blog.fresuelectronics.com/field-centric-charge-energy">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -113,56 +95,86 @@
     .container>*:nth-child(1){animation-delay:0ms}.container>*:nth-child(2){animation-delay:60ms}.container>*:nth-child(3){animation-delay:120ms}.container>*:nth-child(4){animation-delay:180ms}
     @media(max-width:560px){.contrast-block{grid-template-columns:1fr}.contrast-col.wrong{border-right:1px solid var(--border);border-bottom:none}.container{padding:48px 20px 80px}.cta-section{padding:40px 20px}.site-header{padding:16px 20px}.header-nav a:not(.header-cta){display:none}}
 
-    /* Share strip */
-    .share-strip {
-      display: flex; align-items: center; gap: 12px;
-      margin: 56px 0 0; padding-top: 32px;
-      border-top: 1px solid var(--border);
-      flex-wrap: wrap;
+    /* ── Sticky Subscribe Widget ── */
+    .sw-wrap { position: fixed; right: 0; top: 50%; transform: translateY(-50%); z-index: 9000; display: flex; flex-direction: row-reverse; align-items: flex-start; }
+    .sw-tab { display: flex; flex-direction: column; align-items: center; gap: 6px; background: var(--accent); border: none; border-radius: 6px 0 0 6px; color: #0a0a0a; cursor: pointer; font-family: inherit; font-size: 11px; font-weight: 700; letter-spacing: 0.06em; padding: 14px 8px; writing-mode: vertical-rl; text-orientation: mixed; transform: rotate(180deg); line-height: 1; transition: background 0.2s; white-space: nowrap; box-shadow: -2px 0 12px rgba(0,0,0,0.4); }
+    .sw-tab:hover { background: var(--accent-hover); }
+    .sw-tab-icon { font-size: 14px; transform: rotate(180deg); display: inline-block; }
+    .sw-panel { background: #141414; border: 1px solid #2a2a2a; border-right: none; border-radius: 8px 0 0 8px; box-shadow: -4px 4px 24px rgba(0,0,0,0.6); padding: 20px; width: 280px; }
+    .sw-head { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 14px; }
+    .sw-title { font-size: 13px; font-weight: 600; color: #fff; line-height: 1.4; flex: 1; }
+    .sw-title em { color: var(--accent); font-style: italic; }
+    .sw-close { background: none; border: none; color: #666; cursor: pointer; font-size: 16px; line-height: 1; padding: 0 0 0 8px; transition: color 0.2s; flex-shrink: 0; }
+    .sw-close:hover { color: #fff; }
+    .sw-form { display: flex; flex-direction: column; gap: 8px; }
+    .sw-row { display: flex; gap: 8px; }
+    .sw-input { background: #0a0a0a; border: 1px solid #2a2a2a; border-radius: 3px; color: #fff; font-family: inherit; font-size: 12px; padding: 9px 10px; outline: none; transition: border-color 0.2s; width: 100%; }
+    .sw-input:focus { border-color: var(--accent); }
+    .sw-input::placeholder { color: #444; }
+    select.sw-input { cursor: pointer; appearance: none; -webkit-appearance: none; }
+    .sw-row .sw-input { flex: 1; min-width: 0; }
+    .sw-submit { background: var(--accent); border: none; border-radius: 3px; color: #0a0a0a; cursor: pointer; font-family: inherit; font-size: 12px; font-weight: 700; padding: 10px; transition: background 0.2s; width: 100%; margin-top: 2px; letter-spacing: 0.03em; }
+    .sw-submit:hover { background: var(--accent-hover); }
+    .sw-note { color: #444; font-size: 10px; text-align: center; }
+    .sw-msg { font-size: 11px; text-align: center; margin: 0; }
+    @media (max-width: 768px) {
+      .sw-wrap { position: fixed; right: 0; bottom: 0; top: auto; left: 0; transform: none; flex-direction: column-reverse; align-items: stretch; }
+      .sw-tab { flex-direction: row; writing-mode: horizontal-tb; transform: none; border-radius: 0; padding: 12px 20px; justify-content: center; gap: 8px; box-shadow: 0 -2px 12px rgba(0,0,0,0.4); }
+      .sw-tab-icon { transform: none; }
+      .sw-panel { border: none; border-top: 1px solid #2a2a2a; border-radius: 0; width: 100%; box-shadow: 0 -4px 24px rgba(0,0,0,0.6); max-height: 80vh; overflow-y: auto; }
     }
-    .share-label {
-      font-size: 12px; font-weight: 600; letter-spacing: 0.1em;
-      text-transform: uppercase; color: var(--label); margin-right: 4px;
-    }
-    .share-btn {
-      display: inline-flex; align-items: center; gap: 8px;
-      font-family: 'Poppins', sans-serif; font-size: 13px; font-weight: 600;
-      padding: 9px 18px; border-radius: 3px; text-decoration: none;
-      border: none; cursor: pointer; transition: opacity 0.2s, transform 0.15s;
-      white-space: nowrap;
-    }
-    .share-btn:hover { opacity: 0.88; transform: translateY(-1px); }
-    .share-btn svg { width: 16px; height: 16px; flex-shrink: 0; }
-    .share-btn.linkedin { background: #0A66C2; color: #ffffff; }
-    .share-btn.twitter  { background: #000000; color: #ffffff; }
-    .share-btn.youtube  { background: #FF0000; color: #ffffff; }
-    .share-btn.copylink { background: var(--surface); color: var(--accent);
-                          border: 1px solid var(--accent); }
-    .share-btn.copylink.copied { color: var(--correct); border-color: var(--correct); }
-    /* Cover hero */
-    .post-cover {
-      width: 100%; border-radius: 6px; display: block;
-      margin-bottom: 44px; border: 1px solid var(--border);
-      aspect-ratio: 16/9; object-fit: cover;
-    }
-    .post-cover-svg {
-      width: 100%; border-radius: 6px; overflow: hidden;
-      margin-bottom: 44px; border: 1px solid var(--border);
-      background: var(--surface); aspect-ratio: 16/9;
-      display: flex; align-items: center; justify-content: center;
-    }
+  </style>
+</head>
+<body>
+<header>
+  <div class="site-header">
+    <a href="https://www.fresuelectronics.com"><img src="https://raw.githubusercontent.com/dariofresu/Fresu-Electronics-Blog/main/assets/logo.png" alt="Fresu Electronics"></a>
+    <nav class="header-nav">
+      <a href="https://blog.fresuelectronics.com">← All Posts</a>
+      <a href="https://www.fresuelectronics.com/trainings">Courses</a>
+      <a href="https://www.fresuelectronics.com/emc-audit" class="header-cta">Book EMC Audit</a>
+    </nav>
+  </div>
+</header>
+<div class="container">
+  <span class="kicker">Electromagnetism · Theory · Energy Transfer</span>
+  <h1>A Field-Centric View of Energy Transfer in Classical Electromagnetism</h1>
+  <p class="deck">Where does electrical energy actually flow? Not through the wire. The Poynting vector, Gauss's law inverted, and a field-first interpretation of classical electromagnetism — with practical consequences for how you design circuits.</p>
+  <div class="author-row">
+    <img class="author-photo" src="https://raw.githubusercontent.com/dariofresu/Fresu-Electronics-Blog/main/assets/dario-fresu.jpg" alt="Dario Fresu">
+    <div><span class="author-name">Dario Fresu</span><span class="author-title">Principal EMC Architect · Fresu Electronics</span></div>
+  </div>
+  <img src="https://raw.githubusercontent.com/dariofresu/Fresu-Electronics-Blog/main/assets/images/field-centric-charge.png" alt="" style="width:100%;border-radius:4px;margin:0 0 48px;display:block;border:1px solid #242424;">
 
+  <p>Gauss's law is a cornerstone of classical electromagnetism: ∇·E = ρ/ε. In its conventional form, charge density ρ is the source — the electric field E arises from it. Flip the interpretation: the electric field is the fundamental quantity, and charge density is derived from the field's divergence. In this formulation, charge is not a thing. It is a description of how the field changes in space.</p>
+  <p>This paper-thin conceptual difference has surprisingly large practical consequences.</p>
 
-    
+  <h2>The inverted Gauss formulation</h2>
+  <p>Conventionally: charge distribution → generates → electric field. In the field-centric view: electric field exists → charge density is defined as ρ = ε(∇·E). The total charge within a volume is then the flux of E through the enclosing surface — charge is quantified by the field, not the other way around.</p>
+  <p>This inverts the causal story. The field is not a response to charge. Charge is a characterisation of the field's spatial structure. Where field lines converge, we call it positive charge. Where they diverge from a region, we call it negative charge. The field is primary; the charge description is secondary.</p>
+
+  <div class="pull-quote"><p>Charge is not a thing that has a field. Charge is a description of what the field is doing at a point in space.</p></div>
+
+  <h2>Energy flow: the Poynting vector</h2>
+  <p>In a steady-state DC circuit — battery, wires, resistor — where does the energy flow? The answer from classical field theory is unambiguous and counterintuitive: the energy flows in the electromagnetic field in the space surrounding the conductors, not through the conductors themselves. The Poynting vector S = E × H points from the battery to the resistor through the surrounding space.</p>
+  <p>The conductors establish boundary conditions. The electric field inside an ideal conductor is zero — so no energy propagates through the metal. The energy is guided by the conductor geometry but propagates in the field outside it. This is not a quantum effect or a special case. It is a direct result of classical Maxwellian electrodynamics.</p>
+
+  <h2>Implications for circuit design</h2>
+  <p>If signal energy propagates in the electromagnetic field between conductors — not through them — then the geometry of the space between conductors is what determines signal integrity and EMC performance. The dielectric material, the spacing, the continuity of the return plane, the apertures in any surrounding structure — these are the parameters that control where energy goes and how much of it escapes into the environment.</p>
+
+  <div class="concept-grid">
+    <div class="concept-card"><span class="concept-num">Implication 1</span><h3>The dielectric is the transmission medium</h3><p>Signal energy propagates in the dielectric between trace and reference plane — not through the copper. The dielectric constant determines propagation velocity and characteristic impedance. Dielectric loss is signal loss. Changes in dielectric geometry create impedance discontinuities. The copper traces are boundary conditions that confine and guide the field propagating in the dielectric.</p></div>
+    <div class="concept-card"><span class="concept-num">Implication 2</span><h3>Return plane geometry shapes the field</h3><p>The return reference plane is the second boundary condition of the transmission line. Its proximity to the signal trace determines the field confinement — how tightly the energy is guided versus how much spreads. Voids, slots, and gaps in the return plane are discontinuities in the field boundary — they allow energy to escape the guided mode and propagate into the environment.</p></div>
+    <div class="concept-card"><span class="concept-num">Implication 3</span><h3>Connector apertures are field apertures</h3><p>Any opening in the boundary structure — connector cutouts, ventilation slots, seam gaps in an enclosure — is an aperture through which the guided electromagnetic field can escape into the external environment. The field doesn't distinguish between a deliberate antenna and an accidental slot. If the aperture is the right size at the right frequency, it radiates.</p></div>
+  </div>
+
+  <h2>A more coherent framework for EMC</h2>
+  <p>The field-centric perspective provides a unified framework for understanding EMC phenomena that the particle-based model struggles to accommodate. Radiated emissions are fields escaping containment structures through apertures. Conducted emissions are fields propagating along cable conductors that enter or exit the system boundary. Susceptibility failures occur when an external field couples enough energy into a sensitive circuit node to disrupt its operation. In every case, the field model provides a direct causal account; the electron model requires elaborate and often inconsistent auxiliary explanations.</p>
+  <p>Adopting this perspective does not require abandoning circuit theory. It requires extending it — recognising that the circuit equations are boundary condition constraints on the underlying field behaviour, not complete descriptions of where the energy goes.</p>
   
-    , 2000);
-    });
-  }
-  </script>
-
-  
-  
-
+  <div class="closing">
+    <div class="tags"><span class="tag">#Electromagnetism</span> <span class="tag">#FieldTheory</span> <span class="tag">#EnergyTransfer</span> <span class="tag">#EMC</span> <span class="tag">#PhysicsOfCircuits</span></div>
+  </div>
   <div class="cta-section">
     <span class="cta-eyebrow">Work with Dario Fresu</span>
     <h2 class="cta-headline" style="margin:0 0 16px;">First-principles thinking <em>for hardware teams.</em></h2>
@@ -184,30 +196,22 @@
     </div>
   </div>
 </div>
-        <p class="sub-msg" style="display:none"></p>
-    </form>
-  </div>
 <footer>
   <div class="site-footer">
     <span>© 2026 Fresu Electronics SRL</span>
     <span><a href="https://blog.fresuelectronics.com">blog.fresuelectronics.com</a> · <a href="https://www.fresuelectronics.com">fresuelectronics.com</a></span>
   </div>
 </footer>
-
-
-
-
-
 <!-- ═══ STICKY SUBSCRIBE WIDGET ═══ -->
-<div id="subWidget" class="sw-wrap" aria-label="Subscribe">
-  <button class="sw-tab" id="swTab" onclick="swToggle()" aria-expanded="false" aria-controls="swPanel">
+<div id="subWidget" class="sw-wrap">
+  <button class="sw-tab" id="swTab" onclick="swToggle()">
     <span class="sw-tab-icon">&#x2709;</span>
     <span class="sw-tab-label">Subscribe</span>
   </button>
   <div class="sw-panel" id="swPanel" hidden>
     <div class="sw-head">
       <p class="sw-title">Get articles <em>before</em> they&#39;re published</p>
-      <button class="sw-close" onclick="swToggle()" aria-label="Close">&#x2715;</button>
+      <button class="sw-close" onclick="swToggle()">&#x2715;</button>
     </div>
     <form class="sw-form" id="swForm" onsubmit="handleSub(event,'swForm')">
       <input type="text" name="website" style="display:none" tabindex="-1" autocomplete="off">
@@ -218,43 +222,25 @@
       <input class="sw-input" type="email" name="email" placeholder="Work email *" required autocomplete="email">
       <select class="sw-input" name="country" required>
         <option value="">Country *</option>
-            <option value="US">United States</option>
-            <option value="GB">United Kingdom</option>
-            <option value="DE">Germany</option>
-            <option value="IT">Italy</option>
-            <option value="FR">France</option>
-            <option value="NL">Netherlands</option>
-            <option value="SE">Sweden</option>
-            <option value="CH">Switzerland</option>
-            <option value="CA">Canada</option>
-            <option value="AU">Australia</option>
-            <option value="IN">India</option>
-            <option value="JP">Japan</option>
-            <option value="KR">South Korea</option>
-            <option value="CN">China</option>
-            <option value="SG">Singapore</option>
-            <option value="IL">Israel</option>
-            <option value="FI">Finland</option>
-            <option value="DK">Denmark</option>
-            <option value="NO">Norway</option>
-            <option value="BE">Belgium</option>
-            <option value="AT">Austria</option>
-            <option value="ES">Spain</option>
-            <option value="PT">Portugal</option>
-            <option value="PL">Poland</option>
-            <option value="CZ">Czech Republic</option>
-            <option value="RO">Romania</option>
-            <option value="HU">Hungary</option>
-            <option value="TR">Turkey</option>
-            <option value="BR">Brazil</option>
-            <option value="MX">Mexico</option>
-            <option value="ZA">South Africa</option>
-            <option value="AE">UAE</option>
-            <option value="SA">Saudi Arabia</option>
-            <option value="TW">Taiwan</option>
-            <option value="UA">Ukraine</option>
-            <option value="RU">Russia</option>
-            <option value="OTHER">Other</option>
+        <option value="US">United States</option><option value="GB">United Kingdom</option>
+        <option value="DE">Germany</option><option value="IT">Italy</option>
+        <option value="FR">France</option><option value="NL">Netherlands</option>
+        <option value="SE">Sweden</option><option value="CH">Switzerland</option>
+        <option value="CA">Canada</option><option value="AU">Australia</option>
+        <option value="IN">India</option><option value="JP">Japan</option>
+        <option value="KR">South Korea</option><option value="CN">China</option>
+        <option value="SG">Singapore</option><option value="IL">Israel</option>
+        <option value="FI">Finland</option><option value="DK">Denmark</option>
+        <option value="NO">Norway</option><option value="BE">Belgium</option>
+        <option value="AT">Austria</option><option value="ES">Spain</option>
+        <option value="PT">Portugal</option><option value="PL">Poland</option>
+        <option value="CZ">Czech Republic</option><option value="RO">Romania</option>
+        <option value="HU">Hungary</option><option value="TR">Turkey</option>
+        <option value="BR">Brazil</option><option value="MX">Mexico</option>
+        <option value="ZA">South Africa</option><option value="AE">UAE</option>
+        <option value="SA">Saudi Arabia</option><option value="TW">Taiwan</option>
+        <option value="UA">Ukraine</option><option value="RU">Russia</option>
+        <option value="OTHER">Other</option>
       </select>
       <button class="sw-submit" type="submit">
         <span class="sw-btn-text">Subscribe free</span>
@@ -269,10 +255,7 @@
 <script>
 function swToggle() {
   var panel = document.getElementById('swPanel');
-  var tab   = document.getElementById('swTab');
-  var open  = !panel.hidden;
-  panel.hidden = open;
-  tab.setAttribute('aria-expanded', String(!open));
+  panel.hidden = !panel.hidden;
 }
 function handleSub(e, formId) {
   e.preventDefault();
@@ -283,31 +266,28 @@ function handleSub(e, formId) {
   var get = function(n) { var el = form.querySelector('[name="' + n + '"]'); return el ? el.value.trim() : ''; };
   var btnText = form.querySelector('.sw-btn-text');
   var btnLoad = form.querySelector('.sw-btn-load');
-  var msg     = form.querySelector('.sw-msg');
+  var msg = form.querySelector('.sw-msg');
   if (btnText) btnText.style.display = 'none';
   if (btnLoad) btnLoad.style.display = 'inline';
   if (msg) msg.style.display = 'none';
   fetch('https://hook.eu2.make.com/irkkjw6s2ppe9awrgv71atgu8540g12v', {
-    method: 'POST',
-    headers: {'Content-Type': 'application/json'},
+    method: 'POST', headers: {'Content-Type': 'application/json'},
     body: JSON.stringify({ email: get('email'), first_name: get('first_name'), last_name: get('last_name'), country: get('country') })
   })
   .then(function(r) {
     if (btnText) btnText.style.display = 'inline';
     if (btnLoad) btnLoad.style.display = 'none';
-    if (msg) { msg.style.display = 'block'; }
+    if (msg) msg.style.display = 'block';
     if (r.ok) {
       if (msg) { msg.style.color = '#00FF94'; msg.textContent = 'You are in! Check your inbox.'; }
-      ['email','first_name','last_name'].forEach(function(n) { var el = form.querySelector('[name="' + n + '"]'); if (el) el.value = ''; });
+      ['email','first_name','last_name'].forEach(function(n) { var el = form.querySelector('[name="'+n+'"]'); if(el) el.value=''; });
       var sel = form.querySelector('[name="country"]'); if (sel) sel.selectedIndex = 0;
-    } else {
-      if (msg) { msg.style.color = '#ff4d4d'; msg.textContent = 'Something went wrong - try again.'; }
-    }
+    } else { if (msg) { msg.style.color='#ff4d4d'; msg.textContent='Something went wrong - try again.'; } }
   })
   .catch(function() {
     if (btnText) btnText.style.display = 'inline';
     if (btnLoad) btnLoad.style.display = 'none';
-    if (msg) { msg.style.display = 'block'; msg.style.color = '#ff4d4d'; msg.textContent = 'Something went wrong - try again.'; }
+    if (msg) { msg.style.display='block'; msg.style.color='#ff4d4d'; msg.textContent='Something went wrong - try again.'; }
   });
 }
 </script>
