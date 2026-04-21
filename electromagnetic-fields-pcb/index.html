@@ -155,108 +155,7 @@
 
     
   
-    .subscribe-input select, 
-
-    /* ── Compact Subscribe Bar ── */
-    .sub-bar { border-top: 1px solid var(--border); padding: 28px 0 0; margin-top: 40px; }
-    .sub-bar-label { font-size: 13px; color: var(--label); margin-bottom: 12px; }
-    .sub-bar-fields { display: grid; grid-template-columns: 1fr 1fr 1.4fr 1fr auto; gap: 8px; align-items: start; }
-    .sub-field { background: #111; border: 1px solid var(--border); border-radius: 3px; color: #fff; font-family: inherit; font-size: 13px; padding: 10px 12px; outline: none; transition: border-color 0.2s; width: 100%; }
-    .sub-field:focus { border-color: var(--accent); }
-    .sub-field::placeholder { color: #444; }
-    select.sub-field { cursor: pointer; appearance: none; -webkit-appearance: none; }
-    .sub-btn { background: var(--accent); border: none; border-radius: 3px; color: #0a0a0a; cursor: pointer; font-family: inherit; font-size: 13px; font-weight: 700; padding: 10px 18px; white-space: nowrap; transition: background 0.2s; width: 100%; }
-    .sub-btn:hover { background: var(--accent-hover); }
-    .sub-msg { font-size: 12px; margin-top: 8px; }
-    @media (max-width: 768px) { .sub-bar-fields { grid-template-columns: 1fr 1fr; } .sub-btn { grid-column: 1 / -1; } }
-    @media (max-width: 480px) { .sub-bar-fields { grid-template-columns: 1fr; } }
-  </style>
-</head>
-<body>
-<header>
-  <div class="site-header">
-    <a href="https://www.fresuelectronics.com"><img src="https://raw.githubusercontent.com/dariofresu/Fresu-Electronics-Blog/main/assets/logo.png" alt="Fresu Electronics"></a>
-    <nav class="header-nav">
-      <a href="https://blog.fresuelectronics.com">← All Posts</a>
-      <a href="https://www.fresuelectronics.com/trainings">Courses</a>
-      <a href="https://www.fresuelectronics.com/emc-audit" class="header-cta">Book EMC Audit</a>
-    </nav>
-  </div>
-</header>
-<div class="container">
-  <span class="kicker">Electromagnetism · PCB Design · Fundamentals</span>
-  <h1>Electromagnetic Fields in a PCB: The Concept Every Designer Must Understand</h1>
-  <p class="deck">A PCB does not conduct electricity. It guides electromagnetic fields. Until you internalise this distinction, you will keep designing for the wrong physics — and EMC testing will keep exposing the gap.</p>
-  <div class="author-row">
-    <img class="author-photo" src="https://raw.githubusercontent.com/dariofresu/Fresu-Electronics-Blog/main/assets/dario-fresu.jpg" alt="Dario Fresu">
-    <div><span class="author-name">Dario Fresu</span><span class="author-title">Principal EMC Architect · Fresu Electronics</span></div>
-  </div>
-  <img src="https://raw.githubusercontent.com/dariofresu/Fresu-Electronics-Blog/main/assets/images/electromagnetic-fields-pcb.png" alt="" style="width:100%;border-radius:4px;margin:0 0 48px;display:block;border:1px solid #242424;">
-
-  <p>The standard mental model of a PCB trace is a conductor that carries current from point A to point B. This model works for DC and low-frequency circuits. It breaks down at the frequencies where EMC problems live — and understanding why is the foundation of designing for low EMI.</p>
-  <p>At high frequencies, a PCB trace and its return path together form a transmission line. The signal energy is not stored in the conductor — it propagates in the electromagnetic field in the dielectric between the trace and the reference plane. The conductors guide the field. They do not carry the energy.</p>
-
-  <h2>The single conductor: a field that spreads</h2>
-  <p>Imagine a single conductor carrying current, viewed in cross-section. Surrounding it are two fields: the magnetic field (lines of force encircling the conductor, represented by Φ) and the electric field (lines of force radiating outward from the conductor, represented by Ψ). Together they form the electromagnetic field associated with this current.</p>
-  <p>With only one conductor, the electric field lines radiate outward to infinity. The field is unconstrained. This is an efficient radiator. This is what you want to avoid on a PCB.</p>
-
-  <h2>The two-conductor system: field containment</h2>
-  <p>When a return conductor is introduced — a reference plane beneath the trace — the field geometry changes fundamentally. The electric field lines, instead of radiating to infinity, terminate on the return conductor. The magnetic field lines are similarly constrained by the presence of the return path. The result is a field that is largely contained in the dielectric between the trace and the plane.</p>
-  <p>This is the operating principle of a controlled-impedance transmission line. The closer the trace is to the reference plane, the more tightly the field is confined. A tightly confined field radiates less. This is why adjacent ground planes are not a preference — they are a field containment requirement.</p>
-
-  <div class="pull-quote"><p>The reference plane is not a ground connection. It is the second conductor of a transmission line, and its proximity determines how well you contain the electromagnetic field.</p></div>
-
-  <div class="contrast-block">
-    <div class="contrast-col wrong"><span class="contrast-label">Wrong Model</span>
-    <ul class="contrast-list"><li>Trace carries current; ground plane is a return wire</li><li>Field is a side effect of current flow</li><li>Distance to ground plane is a layout preference</li><li>Splits in the ground plane are routing convenience</li><li>EMI is about current levels</li></ul></div>
-    <div class="contrast-col right"><span class="contrast-label">Correct Model</span>
-    <ul class="contrast-list"><li>Trace + plane form a field waveguide</li><li>Field is the operating mechanism; current is boundary condition</li><li>Distance to ground plane determines field containment</li><li>Splits in the plane destroy field containment</li><li>EMI is about field geometry and propagation</li></ul></div>
-  </div>
-
-  <h2>What this means for every design decision</h2>
-  <p>Once you adopt the field model, design decisions that previously seemed arbitrary become physically motivated. Stack-up selection is about how tightly adjacent planes contain the field. Component placement is about minimising the area over which fields must propagate between source and load. Filter placement at connectors is about intercepting field propagation at the system boundary. Connector bonding to chassis is about preventing fields from propagating out of the enclosure through the connector aperture.</p>
-  <p>EMC compliance is not achieved by following a checklist. It is achieved by understanding where the electromagnetic field is generated, where it propagates, and what structures you are building to contain or redirect it. Every non-compliance can be traced to a field propagation path that was not accounted for in the design.</p>
-
-  <h2>A practical starting point</h2>
-  <p>Begin looking at your designs not as collections of components and traces, but as three-dimensional field structures. Ask: where is the field strongest? Where does it propagate? What is the boundary between inside and outside my system, and how do fields cross that boundary? The answers will tell you where your EMC risks are — before you book the chamber.</p>
-  
-  <div class="closing">
-    <div class="tags"><span class="tag">#Electromagnetism</span> <span class="tag">#PCBDesign</span> <span class="tag">#EMC</span> <span class="tag">#EMI</span> <span class="tag">#FieldTheory</span></div>
-  </div>
-  <div class="share-strip">
-    <span class="share-label">Share</span>
-
-    <a href="https://www.linkedin.com/shareArticle?mini=true&url=https://blog.fresuelectronics.com/electromagnetic-fields-pcb&title=Electromagnetic Fields in a PCB: The Concept Every Designer Must Understand&summary=A PCB does not conduct electricity. It guides electromagnetic fields." target="_blank" rel="noopener" class="share-btn linkedin">
-      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
-      LinkedIn
-    </a>
-
-    <a href="https://twitter.com/intent/tweet?url=https://blog.fresuelectronics.com/electromagnetic-fields-pcb&text=Electromagnetic Fields in a PCB: The Concept Every Designer Must Understand+by+%40dario_fresu&via=dario_fresu" target="_blank" rel="noopener" class="share-btn twitter">
-      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
-      X / Twitter
-    </a>
-
-    <button class="share-btn youtube" onclick="copyLink(this, 'https://blog.fresuelectronics.com/electromagnetic-fields-pcb')" title="Copy link to share in a YouTube Community post">
-      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
-      Copy for YouTube
-    </button>
-
-    <button class="share-btn copylink" id="copy-main" onclick="copyLink(this, 'https://blog.fresuelectronics.com/electromagnetic-fields-pcb')">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
-      Copy Link
-    </button>
-  </div>
-
-  <script>
-  function copyLink(btn, url) {
-    navigator.clipboard.writeText(url).then(function() {
-      var orig = btn.innerHTML;
-      btn.classList.add('copied');
-      btn.innerHTML = btn.innerHTML.replace(/(LinkedIn|Copy for YouTube|Copy Link)/, '✓ Copied!');
-      setTimeout(function() {
-        btn.classList.remove('copied');
-        btn.innerHTML = orig;
-      }, 2000);
+    , 2000);
     });
   }
   </script>
@@ -285,60 +184,7 @@
     </div>
   </div>
 </div>
-  <div class="sub-bar">
-    <p class="sub-bar-label">&#x1F4E7; Get the next article before it&#39;s published &mdash; free, no spam.</p>
-    <form class="sub-bar-form" id="postSubForm" onsubmit="handleSub(event,&#39;postSubForm&#39;)">
-      <input type="text" name="website" style="display:none" tabindex="-1" autocomplete="off">
-      <div class="sub-bar-fields">
-        <input class="sub-field" type="text" name="first_name" placeholder="First name *" required autocomplete="given-name">
-        <input class="sub-field" type="text" name="last_name" placeholder="Last name *" required autocomplete="family-name">
-        <input class="sub-field" type="email" name="email" placeholder="Work email *" required autocomplete="email">
-        <select class="sub-field" name="country" required>
-          <option value="">Country *</option>
-          <option value="US">United States</option>
-          <option value="GB">United Kingdom</option>
-          <option value="DE">Germany</option>
-          <option value="IT">Italy</option>
-          <option value="FR">France</option>
-          <option value="NL">Netherlands</option>
-          <option value="SE">Sweden</option>
-          <option value="CH">Switzerland</option>
-          <option value="CA">Canada</option>
-          <option value="AU">Australia</option>
-          <option value="IN">India</option>
-          <option value="JP">Japan</option>
-          <option value="KR">South Korea</option>
-          <option value="CN">China</option>
-          <option value="SG">Singapore</option>
-          <option value="IL">Israel</option>
-          <option value="FI">Finland</option>
-          <option value="DK">Denmark</option>
-          <option value="NO">Norway</option>
-          <option value="BE">Belgium</option>
-          <option value="AT">Austria</option>
-          <option value="ES">Spain</option>
-          <option value="PT">Portugal</option>
-          <option value="PL">Poland</option>
-          <option value="CZ">Czech Republic</option>
-          <option value="RO">Romania</option>
-          <option value="HU">Hungary</option>
-          <option value="TR">Turkey</option>
-          <option value="BR">Brazil</option>
-          <option value="MX">Mexico</option>
-          <option value="ZA">South Africa</option>
-          <option value="AE">UAE</option>
-          <option value="SA">Saudi Arabia</option>
-          <option value="TW">Taiwan</option>
-          <option value="UA">Ukraine</option>
-          <option value="RU">Russia</option>
-          <option value="OTHER">Other</option>
-        </select>
-        <button class="sub-btn" type="submit">
-          <span class="sub-btn-text">Subscribe</span>
-          <span class="sub-btn-load" style="display:none">&#x2026;</span>
-        </button>
-      </div>
-      <p class="sub-msg" style="display:none"></p>
+        <p class="sub-msg" style="display:none"></p>
     </form>
   </div>
 <footer>
@@ -351,5 +197,119 @@
 
 
 
+
+<!-- ═══ STICKY SUBSCRIBE WIDGET ═══ -->
+<div id="subWidget" class="sw-wrap" aria-label="Subscribe">
+  <button class="sw-tab" id="swTab" onclick="swToggle()" aria-expanded="false" aria-controls="swPanel">
+    <span class="sw-tab-icon">&#x2709;</span>
+    <span class="sw-tab-label">Subscribe</span>
+  </button>
+  <div class="sw-panel" id="swPanel" hidden>
+    <div class="sw-head">
+      <p class="sw-title">Get articles <em>before</em> they&#39;re published</p>
+      <button class="sw-close" onclick="swToggle()" aria-label="Close">&#x2715;</button>
+    </div>
+    <form class="sw-form" id="swForm" onsubmit="handleSub(event,'swForm')">
+      <input type="text" name="website" style="display:none" tabindex="-1" autocomplete="off">
+      <div class="sw-row">
+        <input class="sw-input" type="text" name="first_name" placeholder="First name *" required autocomplete="given-name">
+        <input class="sw-input" type="text" name="last_name" placeholder="Last name *" required autocomplete="family-name">
+      </div>
+      <input class="sw-input" type="email" name="email" placeholder="Work email *" required autocomplete="email">
+      <select class="sw-input" name="country" required>
+        <option value="">Country *</option>
+            <option value="US">United States</option>
+            <option value="GB">United Kingdom</option>
+            <option value="DE">Germany</option>
+            <option value="IT">Italy</option>
+            <option value="FR">France</option>
+            <option value="NL">Netherlands</option>
+            <option value="SE">Sweden</option>
+            <option value="CH">Switzerland</option>
+            <option value="CA">Canada</option>
+            <option value="AU">Australia</option>
+            <option value="IN">India</option>
+            <option value="JP">Japan</option>
+            <option value="KR">South Korea</option>
+            <option value="CN">China</option>
+            <option value="SG">Singapore</option>
+            <option value="IL">Israel</option>
+            <option value="FI">Finland</option>
+            <option value="DK">Denmark</option>
+            <option value="NO">Norway</option>
+            <option value="BE">Belgium</option>
+            <option value="AT">Austria</option>
+            <option value="ES">Spain</option>
+            <option value="PT">Portugal</option>
+            <option value="PL">Poland</option>
+            <option value="CZ">Czech Republic</option>
+            <option value="RO">Romania</option>
+            <option value="HU">Hungary</option>
+            <option value="TR">Turkey</option>
+            <option value="BR">Brazil</option>
+            <option value="MX">Mexico</option>
+            <option value="ZA">South Africa</option>
+            <option value="AE">UAE</option>
+            <option value="SA">Saudi Arabia</option>
+            <option value="TW">Taiwan</option>
+            <option value="UA">Ukraine</option>
+            <option value="RU">Russia</option>
+            <option value="OTHER">Other</option>
+      </select>
+      <button class="sw-submit" type="submit">
+        <span class="sw-btn-text">Subscribe free</span>
+        <span class="sw-btn-load" style="display:none">&#x2026;</span>
+      </button>
+      <p class="sw-note">Free &middot; No spam &middot; Unsubscribe anytime</p>
+      <p class="sw-msg" style="display:none"></p>
+    </form>
+  </div>
+</div>
+<!-- ═══ END STICKY SUBSCRIBE WIDGET ═══ -->
+<script>
+function swToggle() {
+  var panel = document.getElementById('swPanel');
+  var tab   = document.getElementById('swTab');
+  var open  = !panel.hidden;
+  panel.hidden = open;
+  tab.setAttribute('aria-expanded', String(!open));
+}
+function handleSub(e, formId) {
+  e.preventDefault();
+  var form = document.getElementById(formId);
+  if (!form) return;
+  var honey = form.querySelector('[name="website"]');
+  if (honey && honey.value) return;
+  var get = function(n) { var el = form.querySelector('[name="' + n + '"]'); return el ? el.value.trim() : ''; };
+  var btnText = form.querySelector('.sw-btn-text');
+  var btnLoad = form.querySelector('.sw-btn-load');
+  var msg     = form.querySelector('.sw-msg');
+  if (btnText) btnText.style.display = 'none';
+  if (btnLoad) btnLoad.style.display = 'inline';
+  if (msg) msg.style.display = 'none';
+  fetch('https://hook.eu2.make.com/irkkjw6s2ppe9awrgv71atgu8540g12v', {
+    method: 'POST',
+    headers: {'Content-Type': 'application/json'},
+    body: JSON.stringify({ email: get('email'), first_name: get('first_name'), last_name: get('last_name'), country: get('country') })
+  })
+  .then(function(r) {
+    if (btnText) btnText.style.display = 'inline';
+    if (btnLoad) btnLoad.style.display = 'none';
+    if (msg) { msg.style.display = 'block'; }
+    if (r.ok) {
+      if (msg) { msg.style.color = '#00FF94'; msg.textContent = 'You are in! Check your inbox.'; }
+      ['email','first_name','last_name'].forEach(function(n) { var el = form.querySelector('[name="' + n + '"]'); if (el) el.value = ''; });
+      var sel = form.querySelector('[name="country"]'); if (sel) sel.selectedIndex = 0;
+    } else {
+      if (msg) { msg.style.color = '#ff4d4d'; msg.textContent = 'Something went wrong - try again.'; }
+    }
+  })
+  .catch(function() {
+    if (btnText) btnText.style.display = 'inline';
+    if (btnLoad) btnLoad.style.display = 'none';
+    if (msg) { msg.style.display = 'block'; msg.style.color = '#ff4d4d'; msg.textContent = 'Something went wrong - try again.'; }
+  });
+}
+</script>
 </body>
 </html>
