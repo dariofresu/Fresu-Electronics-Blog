@@ -103,19 +103,37 @@
   
     .subscribe-input select, 
 
-    /* ── Compact Subscribe Bar ── */
-    .sub-bar { border-top: 1px solid var(--border); padding: 28px 0 0; margin-top: 40px; }
-    .sub-bar-label { font-size: 13px; color: var(--label); margin-bottom: 12px; }
-    .sub-bar-fields { display: grid; grid-template-columns: 1fr 1fr 1.4fr 1fr auto; gap: 8px; align-items: start; }
-    .sub-field { background: #111; border: 1px solid var(--border); border-radius: 3px; color: #fff; font-family: inherit; font-size: 13px; padding: 10px 12px; outline: none; transition: border-color 0.2s; width: 100%; }
-    .sub-field:focus { border-color: var(--accent); }
-    .sub-field::placeholder { color: #444; }
-    select.sub-field { cursor: pointer; appearance: none; -webkit-appearance: none; }
-    .sub-btn { background: var(--accent); border: none; border-radius: 3px; color: #0a0a0a; cursor: pointer; font-family: inherit; font-size: 13px; font-weight: 700; padding: 10px 18px; white-space: nowrap; transition: background 0.2s; width: 100%; }
-    .sub-btn:hover { background: var(--accent-hover); }
-    .sub-msg { font-size: 12px; margin-top: 8px; }
-    @media (max-width: 768px) { .sub-bar-fields { grid-template-columns: 1fr 1fr; } .sub-btn { grid-column: 1 / -1; } }
-    @media (max-width: 480px) { .sub-bar-fields { grid-template-columns: 1fr; } }
+  
+    /* ── Sticky Subscribe Widget ── */
+    .sw-wrap { position: fixed; right: 0; top: 50%; transform: translateY(-50%); z-index: 9000; display: flex; flex-direction: row-reverse; align-items: flex-start; }
+    .sw-tab { display: flex; flex-direction: column; align-items: center; gap: 6px; background: var(--accent); border: none; border-radius: 6px 0 0 6px; color: #0a0a0a; cursor: pointer; font-family: inherit; font-size: 11px; font-weight: 700; letter-spacing: 0.06em; padding: 14px 8px; writing-mode: vertical-rl; text-orientation: mixed; transform: rotate(180deg); line-height: 1; transition: background 0.2s, padding 0.2s; white-space: nowrap; box-shadow: -2px 0 12px rgba(0,0,0,0.4); }
+    .sw-tab:hover { background: var(--accent-hover); }
+    .sw-tab-icon { font-size: 14px; transform: rotate(180deg); display: inline-block; }
+    .sw-tab-label { transform: rotate(0deg); }
+    .sw-panel { background: #141414; border: 1px solid #2a2a2a; border-right: none; border-radius: 8px 0 0 8px; box-shadow: -4px 4px 24px rgba(0,0,0,0.6); padding: 20px; width: 280px; }
+    .sw-head { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 14px; }
+    .sw-title { font-size: 13px; font-weight: 600; color: #fff; line-height: 1.4; flex: 1; }
+    .sw-title em { color: var(--accent); font-style: italic; }
+    .sw-close { background: none; border: none; color: #666; cursor: pointer; font-size: 16px; line-height: 1; padding: 0 0 0 8px; transition: color 0.2s; flex-shrink: 0; }
+    .sw-close:hover { color: #fff; }
+    .sw-form { display: flex; flex-direction: column; gap: 8px; }
+    .sw-row { display: flex; gap: 8px; }
+    .sw-input { background: #0a0a0a; border: 1px solid #2a2a2a; border-radius: 3px; color: #fff; font-family: inherit; font-size: 12px; padding: 9px 10px; outline: none; transition: border-color 0.2s; width: 100%; }
+    .sw-input:focus { border-color: var(--accent); }
+    .sw-input::placeholder { color: #444; }
+    select.sw-input { cursor: pointer; appearance: none; -webkit-appearance: none; }
+    .sw-row .sw-input { flex: 1; min-width: 0; }
+    .sw-submit { background: var(--accent); border: none; border-radius: 3px; color: #0a0a0a; cursor: pointer; font-family: inherit; font-size: 12px; font-weight: 700; padding: 10px; transition: background 0.2s; width: 100%; margin-top: 2px; letter-spacing: 0.03em; }
+    .sw-submit:hover { background: var(--accent-hover); }
+    .sw-note { color: #444; font-size: 10px; text-align: center; }
+    .sw-msg { font-size: 11px; text-align: center; margin: 0; }
+    /* Mobile: bottom bar */
+    @media (max-width: 768px) {
+      .sw-wrap { position: fixed; right: 0; bottom: 0; top: auto; left: 0; transform: none; flex-direction: column-reverse; align-items: stretch; }
+      .sw-tab { flex-direction: row; writing-mode: horizontal-tb; transform: none; border-radius: 0; padding: 12px 20px; justify-content: center; gap: 8px; box-shadow: 0 -2px 12px rgba(0,0,0,0.4); }
+      .sw-tab-icon { transform: none; font-size: 14px; }
+      .sw-panel { border: none; border-top: 1px solid #2a2a2a; border-radius: 0; width: 100%; box-shadow: 0 -4px 24px rgba(0,0,0,0.6); max-height: 80vh; overflow-y: auto; }
+    }
   </style>
 </head>
 <body>
@@ -267,84 +285,6 @@
   </div>
 
   
-  <div class="subscribe-band">
-    <div class="subscribe-band-inner">
-      <div class="subscribe-band-text">
-        <span class="subscribe-band-tag">Free &middot; No spam &middot; Unsubscribe anytime</span>
-        <h2 class="subscribe-band-headline">Get the next article <em>before it&#39;s published.</em></h2>
-        <p class="subscribe-band-sub">Join 80,000+ engineers who get field-physics-driven EMC insights &mdash; practical, no fluff.</p>
-      </div>
-      <form class="subscribe-band-form" id="indexSubscribeForm" onsubmit="handleSubscribe(event,&#39;indexSubscribeForm&#39;)">
-        <input type="text" name="website" style="display:none" tabindex="-1" autocomplete="off">
-        <div class="subscribe-row">
-          <input class="subscribe-band-input" type="text" name="first_name" placeholder="First name" autocomplete="given-name">
-          <input class="subscribe-band-input" type="text" name="last_name" placeholder="Last name" autocomplete="family-name">
-        </div>
-        <input class="subscribe-band-input" type="email" name="email" placeholder="Work email" required autocomplete="email">
-        <select class="subscribe-band-input" name="country" autocomplete="country">
-        <option value="">Country</option>
-        <option value="US">United States</option>
-        <option value="GB">United Kingdom</option>
-        <option value="DE">Germany</option>
-        <option value="IT">Italy</option>
-        <option value="FR">France</option>
-        <option value="NL">Netherlands</option>
-        <option value="SE">Sweden</option>
-        <option value="CH">Switzerland</option>
-        <option value="CA">Canada</option>
-        <option value="AU">Australia</option>
-        <option value="IN">India</option>
-        <option value="JP">Japan</option>
-        <option value="KR">South Korea</option>
-        <option value="CN">China</option>
-        <option value="SG">Singapore</option>
-        <option value="IL">Israel</option>
-        <option value="FI">Finland</option>
-        <option value="DK">Denmark</option>
-        <option value="NO">Norway</option>
-        <option value="BE">Belgium</option>
-        <option value="AT">Austria</option>
-        <option value="ES">Spain</option>
-        <option value="PT">Portugal</option>
-        <option value="PL">Poland</option>
-        <option value="CZ">Czech Republic</option>
-        <option value="RO">Romania</option>
-        <option value="HU">Hungary</option>
-        <option value="HR">Croatia</option>
-        <option value="TR">Turkey</option>
-        <option value="BR">Brazil</option>
-        <option value="MX">Mexico</option>
-        <option value="AR">Argentina</option>
-        <option value="ZA">South Africa</option>
-        <option value="NG">Nigeria</option>
-        <option value="EG">Egypt</option>
-        <option value="SA">Saudi Arabia</option>
-        <option value="AE">UAE</option>
-        <option value="IR">Iran</option>
-        <option value="PK">Pakistan</option>
-        <option value="TW">Taiwan</option>
-        <option value="TH">Thailand</option>
-        <option value="MY">Malaysia</option>
-        <option value="ID">Indonesia</option>
-        <option value="PH">Philippines</option>
-        <option value="VN">Vietnam</option>
-        <option value="NZ">New Zealand</option>
-        <option value="UA">Ukraine</option>
-        <option value="RU">Russia</option>
-        <option value="GR">Greece</option>
-        <option value="SK">Slovakia</option>
-        <option value="RS">Serbia</option>
-        <option value="OTHER">Other</option>
-          </select>
-        <button class="subscribe-band-btn" type="submit">
-          <span class="btn-text">Subscribe Free</span>
-          <span class="btn-loading" style="display:none">Subscribing&hellip;</span>
-        </button>
-        <p class="subscribe-msg" style="display:none"></p>
-      </form>
-    </div>
-  </div>
-
   <div class="cta-banner">
     <div class="cta-banner-top">
       <div>
@@ -362,60 +302,7 @@
     </div>
   </div>
 
-  <div class="sub-bar">
-    <p class="sub-bar-label">&#x1F4E7; Get the next article before it&#39;s published &mdash; free, no spam.</p>
-    <form class="sub-bar-form" id="indexSubForm" onsubmit="handleSub(event,&#39;indexSubForm&#39;)">
-      <input type="text" name="website" style="display:none" tabindex="-1" autocomplete="off">
-      <div class="sub-bar-fields">
-        <input class="sub-field" type="text" name="first_name" placeholder="First name *" required autocomplete="given-name">
-        <input class="sub-field" type="text" name="last_name" placeholder="Last name *" required autocomplete="family-name">
-        <input class="sub-field" type="email" name="email" placeholder="Work email *" required autocomplete="email">
-        <select class="sub-field" name="country" required>
-          <option value="">Country *</option>
-          <option value="US">United States</option>
-          <option value="GB">United Kingdom</option>
-          <option value="DE">Germany</option>
-          <option value="IT">Italy</option>
-          <option value="FR">France</option>
-          <option value="NL">Netherlands</option>
-          <option value="SE">Sweden</option>
-          <option value="CH">Switzerland</option>
-          <option value="CA">Canada</option>
-          <option value="AU">Australia</option>
-          <option value="IN">India</option>
-          <option value="JP">Japan</option>
-          <option value="KR">South Korea</option>
-          <option value="CN">China</option>
-          <option value="SG">Singapore</option>
-          <option value="IL">Israel</option>
-          <option value="FI">Finland</option>
-          <option value="DK">Denmark</option>
-          <option value="NO">Norway</option>
-          <option value="BE">Belgium</option>
-          <option value="AT">Austria</option>
-          <option value="ES">Spain</option>
-          <option value="PT">Portugal</option>
-          <option value="PL">Poland</option>
-          <option value="CZ">Czech Republic</option>
-          <option value="RO">Romania</option>
-          <option value="HU">Hungary</option>
-          <option value="TR">Turkey</option>
-          <option value="BR">Brazil</option>
-          <option value="MX">Mexico</option>
-          <option value="ZA">South Africa</option>
-          <option value="AE">UAE</option>
-          <option value="SA">Saudi Arabia</option>
-          <option value="TW">Taiwan</option>
-          <option value="UA">Ukraine</option>
-          <option value="RU">Russia</option>
-          <option value="OTHER">Other</option>
-        </select>
-        <button class="sub-btn" type="submit">
-          <span class="sub-btn-text">Subscribe</span>
-          <span class="sub-btn-load" style="display:none">&#x2026;</span>
-        </button>
-      </div>
-      <p class="sub-msg" style="display:none"></p>
+        <p class="sub-msg" style="display:none"></p>
     </form>
   </div>
 </main>
@@ -431,5 +318,119 @@
 
 
 
+
+<!-- ═══ STICKY SUBSCRIBE WIDGET ═══ -->
+<div id="subWidget" class="sw-wrap" aria-label="Subscribe">
+  <button class="sw-tab" id="swTab" onclick="swToggle()" aria-expanded="false" aria-controls="swPanel">
+    <span class="sw-tab-icon">&#x2709;</span>
+    <span class="sw-tab-label">Subscribe</span>
+  </button>
+  <div class="sw-panel" id="swPanel" hidden>
+    <div class="sw-head">
+      <p class="sw-title">Get articles <em>before</em> they&#39;re published</p>
+      <button class="sw-close" onclick="swToggle()" aria-label="Close">&#x2715;</button>
+    </div>
+    <form class="sw-form" id="swForm" onsubmit="handleSub(event,'swForm')">
+      <input type="text" name="website" style="display:none" tabindex="-1" autocomplete="off">
+      <div class="sw-row">
+        <input class="sw-input" type="text" name="first_name" placeholder="First name *" required autocomplete="given-name">
+        <input class="sw-input" type="text" name="last_name" placeholder="Last name *" required autocomplete="family-name">
+      </div>
+      <input class="sw-input" type="email" name="email" placeholder="Work email *" required autocomplete="email">
+      <select class="sw-input" name="country" required>
+        <option value="">Country *</option>
+            <option value="US">United States</option>
+            <option value="GB">United Kingdom</option>
+            <option value="DE">Germany</option>
+            <option value="IT">Italy</option>
+            <option value="FR">France</option>
+            <option value="NL">Netherlands</option>
+            <option value="SE">Sweden</option>
+            <option value="CH">Switzerland</option>
+            <option value="CA">Canada</option>
+            <option value="AU">Australia</option>
+            <option value="IN">India</option>
+            <option value="JP">Japan</option>
+            <option value="KR">South Korea</option>
+            <option value="CN">China</option>
+            <option value="SG">Singapore</option>
+            <option value="IL">Israel</option>
+            <option value="FI">Finland</option>
+            <option value="DK">Denmark</option>
+            <option value="NO">Norway</option>
+            <option value="BE">Belgium</option>
+            <option value="AT">Austria</option>
+            <option value="ES">Spain</option>
+            <option value="PT">Portugal</option>
+            <option value="PL">Poland</option>
+            <option value="CZ">Czech Republic</option>
+            <option value="RO">Romania</option>
+            <option value="HU">Hungary</option>
+            <option value="TR">Turkey</option>
+            <option value="BR">Brazil</option>
+            <option value="MX">Mexico</option>
+            <option value="ZA">South Africa</option>
+            <option value="AE">UAE</option>
+            <option value="SA">Saudi Arabia</option>
+            <option value="TW">Taiwan</option>
+            <option value="UA">Ukraine</option>
+            <option value="RU">Russia</option>
+            <option value="OTHER">Other</option>
+      </select>
+      <button class="sw-submit" type="submit">
+        <span class="sw-btn-text">Subscribe free</span>
+        <span class="sw-btn-load" style="display:none">&#x2026;</span>
+      </button>
+      <p class="sw-note">Free &middot; No spam &middot; Unsubscribe anytime</p>
+      <p class="sw-msg" style="display:none"></p>
+    </form>
+  </div>
+</div>
+<!-- ═══ END STICKY SUBSCRIBE WIDGET ═══ -->
+<script>
+function swToggle() {
+  var panel = document.getElementById('swPanel');
+  var tab   = document.getElementById('swTab');
+  var open  = !panel.hidden;
+  panel.hidden = open;
+  tab.setAttribute('aria-expanded', String(!open));
+}
+function handleSub(e, formId) {
+  e.preventDefault();
+  var form = document.getElementById(formId);
+  if (!form) return;
+  var honey = form.querySelector('[name="website"]');
+  if (honey && honey.value) return;
+  var get = function(n) { var el = form.querySelector('[name="' + n + '"]'); return el ? el.value.trim() : ''; };
+  var btnText = form.querySelector('.sw-btn-text');
+  var btnLoad = form.querySelector('.sw-btn-load');
+  var msg     = form.querySelector('.sw-msg');
+  if (btnText) btnText.style.display = 'none';
+  if (btnLoad) btnLoad.style.display = 'inline';
+  if (msg) msg.style.display = 'none';
+  fetch('https://hook.eu2.make.com/irkkjw6s2ppe9awrgv71atgu8540g12v', {
+    method: 'POST',
+    headers: {'Content-Type': 'application/json'},
+    body: JSON.stringify({ email: get('email'), first_name: get('first_name'), last_name: get('last_name'), country: get('country') })
+  })
+  .then(function(r) {
+    if (btnText) btnText.style.display = 'inline';
+    if (btnLoad) btnLoad.style.display = 'none';
+    if (msg) { msg.style.display = 'block'; }
+    if (r.ok) {
+      if (msg) { msg.style.color = '#00FF94'; msg.textContent = 'You are in! Check your inbox.'; }
+      ['email','first_name','last_name'].forEach(function(n) { var el = form.querySelector('[name="' + n + '"]'); if (el) el.value = ''; });
+      var sel = form.querySelector('[name="country"]'); if (sel) sel.selectedIndex = 0;
+    } else {
+      if (msg) { msg.style.color = '#ff4d4d'; msg.textContent = 'Something went wrong - try again.'; }
+    }
+  })
+  .catch(function() {
+    if (btnText) btnText.style.display = 'inline';
+    if (btnLoad) btnLoad.style.display = 'none';
+    if (msg) { msg.style.display = 'block'; msg.style.color = '#ff4d4d'; msg.textContent = 'Something went wrong - try again.'; }
+  });
+}
+</script>
 </body>
 </html>
