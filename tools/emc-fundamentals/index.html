@@ -1,0 +1,1731 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PCB EMC Fundamentals — Fresu Electronics</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg:        #0a0a0a;
+  --surface:   #111111;
+  --surface-2: #161616;
+  --border:    #242424;
+  --fg:        #ffffff;
+  --fg-2:      #e2e8f0;   /* secondary text — still very readable */
+  --meta:      #94a3b8;   /* ONLY for figure captions and footnotes */
+  --accent:    #00FF94;
+  --a-dim:     rgba(0,255,148,0.08);
+  --a-mid:     rgba(0,255,148,0.18);
+  --red:       #ff4d4d;
+  --r-dim:     rgba(255,77,77,0.08);
+  --amber:     #f5a623;
+  --am-dim:    rgba(245,166,35,0.08);
+  --sidebar-w: 220px;
+  --hdr-h:     60px;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  background: var(--bg);
+  color: var(--fg);
+  font-family: 'Poppins', sans-serif;
+  font-size: 15px;
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+  min-height: 100vh;
+}
+
+/* ══════════════════════════
+   HEADER
+══════════════════════════ */
+.hdr {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  height: var(--hdr-h);
+  background: rgba(10,10,10,0.97);
+  border-bottom: 1px solid var(--border);
+  backdrop-filter: blur(20px);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 28px;
+  z-index: 200;
+}
+.hdr-logo img { height: 32px; display: block; }
+.hdr-badge {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--accent);
+  border: 1px solid rgba(0,255,148,0.3);
+  padding: 5px 12px;
+  border-radius: 2px;
+}
+
+/* ══════════════════════════
+   LAYOUT SHELL
+══════════════════════════ */
+.shell {
+  display: flex;
+  padding-top: var(--hdr-h);
+  min-height: 100vh;
+}
+
+/* ══════════════════════════
+   SIDEBAR
+══════════════════════════ */
+.sidebar {
+  width: var(--sidebar-w);
+  flex-shrink: 0;
+  position: fixed;
+  top: var(--hdr-h);
+  left: 0;
+  bottom: 0;
+  background: var(--surface);
+  border-right: 1px solid var(--border);
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  z-index: 100;
+}
+.sidebar::-webkit-scrollbar { width: 4px; }
+.sidebar::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
+
+.sb-section-lbl {
+  padding: 24px 20px 10px;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--meta);
+}
+.sb-nav { flex: 1; }
+.sb-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 11px 20px;
+  cursor: pointer;
+  border: none;
+  background: none;
+  width: 100%;
+  text-align: left;
+  font-family: 'Poppins', sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--fg-2);
+  border-left: 3px solid transparent;
+  transition: all 160ms;
+  line-height: 1.35;
+}
+.sb-item:hover {
+  background: var(--surface-2);
+  color: var(--fg);
+}
+.sb-item.active {
+  background: var(--a-dim);
+  color: var(--accent);
+  border-left-color: var(--accent);
+  font-weight: 600;
+}
+.sb-num {
+  font-size: 10px;
+  font-weight: 700;
+  color: var(--meta);
+  width: 18px;
+  flex-shrink: 0;
+  font-family: 'JetBrains Mono', monospace;
+}
+.sb-item.active .sb-num { color: var(--accent); }
+
+.sb-divider { height: 1px; background: var(--border); margin: 8px 0; }
+
+.sb-footer {
+  padding: 16px 20px;
+  border-top: 1px solid var(--border);
+}
+.sb-footer a {
+  display: block;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--fg-2);
+  text-decoration: none;
+  padding: 5px 0;
+  letter-spacing: 0.02em;
+  transition: color 150ms;
+}
+.sb-footer a:hover { color: var(--accent); }
+
+/* ══════════════════════════
+   MAIN CONTENT
+══════════════════════════ */
+.main {
+  margin-left: var(--sidebar-w);
+  flex: 1;
+  min-width: 0;
+}
+
+/* ══════════════════════════
+   HERO
+══════════════════════════ */
+.hero {
+  padding: 52px 52px 40px;
+  border-bottom: 1px solid var(--border);
+  background: linear-gradient(160deg, #0f0f0f 0%, var(--bg) 100%);
+}
+.hero-kicker {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 14px;
+}
+.hero h1 {
+  font-size: clamp(28px, 3vw, 42px);
+  font-weight: 800;
+  line-height: 1.15;
+  color: var(--fg);
+  margin-bottom: 14px;
+}
+.hero h1 em { color: var(--accent); font-style: normal; }
+.hero-desc {
+  font-size: 15px;
+  color: var(--fg-2);
+  max-width: 520px;
+  line-height: 1.7;
+  margin-bottom: 28px;
+}
+.chips { display: flex; gap: 10px; flex-wrap: wrap; }
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 14px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 2px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--fg);
+}
+.chip-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--accent); flex-shrink: 0; }
+
+/* ══════════════════════════
+   PANELS
+══════════════════════════ */
+.panel { display: none; padding: 48px 52px 72px; max-width: 860px; }
+.panel.active {
+  display: block;
+  animation: fadeUp 260ms cubic-bezier(0.22,1,0.36,1);
+}
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ══════════════════════════
+   TYPOGRAPHY
+══════════════════════════ */
+.s-title { font-size: 22px; font-weight: 700; color: var(--fg); margin-bottom: 6px; }
+.s-sub   { font-size: 14px; color: var(--fg-2); margin-bottom: 32px; }
+.s-head  { margin-bottom: 28px; }
+
+h3 { font-size: 14px; font-weight: 700; color: var(--fg); margin-bottom: 8px; }
+
+/* ══════════════════════════
+   CALLOUTS
+══════════════════════════ */
+.callout {
+  background: var(--surface);
+  border-left: 3px solid var(--accent);
+  padding: 16px 20px;
+  border-radius: 0 3px 3px 0;
+  margin: 24px 0;
+}
+.callout.warn   { border-left-color: var(--amber); }
+.callout.danger { border-left-color: var(--red); }
+.c-lbl {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 6px;
+}
+.callout.warn   .c-lbl { color: var(--amber); }
+.callout.danger .c-lbl { color: var(--red); }
+.callout p { font-size: 14px; color: var(--fg); line-height: 1.7; }
+.callout p strong { color: var(--fg); font-weight: 700; }
+
+/* ══════════════════════════
+   FORMULA
+══════════════════════════ */
+.formula {
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: 3px;
+  padding: 14px 20px;
+  margin: 20px 0;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 13.5px;
+  color: var(--accent);
+  text-align: center;
+}
+
+/* ══════════════════════════
+   DIVIDER
+══════════════════════════ */
+.div { height: 1px; background: var(--border); margin: 36px 0; }
+
+/* ══════════════════════════
+   CARDS
+══════════════════════════ */
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 14px;
+  margin: 24px 0;
+}
+@media (max-width: 620px) { .card-grid { grid-template-columns: 1fr; } }
+.card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 3px;
+  padding: 20px;
+  transition: border-color 160ms;
+}
+.card:hover { border-color: #333; }
+.card-tag {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 8px;
+}
+.card h3 { font-size: 14px; margin-bottom: 8px; }
+.card p  { font-size: 13.5px; color: var(--fg-2); line-height: 1.65; }
+
+/* ══════════════════════════
+   TABLE
+══════════════════════════ */
+.tbl-wrap { overflow-x: auto; margin: 24px 0; -webkit-overflow-scrolling: touch; }
+.tbl {
+  width: 100%;
+  min-width: 500px;
+  border-collapse: collapse;
+  font-size: 13.5px;
+  font-variant-numeric: tabular-nums;
+}
+.tbl thead th {
+  text-align: left;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--fg);
+  padding: 10px 14px;
+  border-bottom: 1px solid var(--border);
+  white-space: nowrap;
+  background: var(--surface);
+}
+.tbl tbody td {
+  padding: 10px 14px;
+  border-bottom: 1px solid var(--border);
+  color: var(--fg-2);
+}
+.tbl tbody tr:last-child td { border-bottom: none; }
+.tbl tbody td:first-child { color: var(--fg); font-weight: 600; }
+.tbl tbody tr:hover td { background: var(--surface); }
+.ok  { color: var(--accent); font-weight: 700; }
+.bad { color: var(--red);    font-weight: 700; }
+.mid { color: var(--amber);  font-weight: 700; }
+
+/* ══════════════════════════
+   DIAGRAM
+══════════════════════════ */
+.diagram {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 3px;
+  padding: 24px 24px 18px;
+  margin: 24px 0;
+}
+.diagram svg { display: block; width: 100%; }
+.fig-cap {
+  font-size: 12px;
+  color: var(--meta);
+  margin-top: 12px;
+  line-height: 1.55;
+  text-align: center;
+}
+
+/* ══════════════════════════
+   CALCULATORS
+══════════════════════════ */
+.calc-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+  margin: 24px 0;
+}
+@media (max-width: 680px) { .calc-grid { grid-template-columns: 1fr; } }
+.calc-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 3px;
+  padding: 22px;
+  display: flex;
+  flex-direction: column;
+}
+.calc-card h3 { font-size: 14px; margin-bottom: 4px; }
+.calc-desc { font-size: 13px; color: var(--fg-2); margin-bottom: 20px; line-height: 1.55; }
+
+.field { margin-bottom: 14px; }
+.field label {
+  display: block;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--fg);
+  margin-bottom: 6px;
+}
+.field input, .field select {
+  width: 100%;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 2px;
+  padding: 9px 12px;
+  color: var(--fg);
+  font-family: 'Poppins', sans-serif;
+  font-size: 14px;
+  outline: none;
+  transition: border-color 160ms;
+  -webkit-appearance: none;
+}
+.field input::placeholder { color: #444; }
+.field input:focus, .field select:focus { border-color: rgba(0,255,148,0.5); }
+.field select option { background: var(--surface-2); }
+.btn-primary {
+  width: 100%;
+  background: var(--accent);
+  color: #0a0a0a;
+  border: none;
+  border-radius: 2px;
+  padding: 11px;
+  font-family: 'Poppins', sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  cursor: pointer;
+  margin-top: auto;
+  padding-top: 11px;
+  transition: opacity 160ms;
+}
+.btn-primary:hover { opacity: 0.88; }
+.err-msg {
+  font-size: 12px;
+  color: var(--red);
+  margin-top: 7px;
+  display: none;
+  font-weight: 600;
+}
+.err-msg.show { display: block; }
+.result-box {
+  margin-top: 14px;
+  background: var(--a-dim);
+  border: 1px solid rgba(0,255,148,0.2);
+  border-radius: 2px;
+  padding: 14px;
+  display: none;
+}
+.result-box.show { display: block; }
+.r-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  padding: 4px 0;
+  border-bottom: 1px solid rgba(0,255,148,0.07);
+}
+.r-row:last-child { border-bottom: none; padding-bottom: 0; }
+.r-lbl { font-size: 12px; color: var(--fg-2); font-weight: 500; }
+.r-val { font-family: 'JetBrains Mono', monospace; font-size: 14px; font-weight: 600; color: var(--accent); }
+
+/* ══════════════════════════
+   SKIN SLIDER
+══════════════════════════ */
+.slider-wrap { margin-bottom: 20px; }
+.slider-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+.slider-lbl { font-size: 12px; font-weight: 700; color: var(--fg); text-transform: uppercase; letter-spacing: 0.08em; }
+.slider-val { font-family: 'JetBrains Mono', monospace; font-size: 14px; font-weight: 600; color: var(--accent); }
+input[type=range] { width: 100%; accent-color: var(--accent); cursor: pointer; }
+.slider-ticks { display: flex; justify-content: space-between; font-size: 11px; color: var(--fg-2); margin-top: 6px; font-weight: 500; }
+
+/* ══════════════════════════
+   RETURN CURRENT TOGGLE
+══════════════════════════ */
+.toggle-row {
+  display: inline-flex;
+  border: 1px solid var(--border);
+  border-radius: 3px;
+  overflow: hidden;
+  margin-bottom: 24px;
+}
+.tog-btn {
+  padding: 9px 24px;
+  background: none;
+  border: none;
+  color: var(--fg-2);
+  font-family: 'Poppins', sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 160ms;
+}
+.tog-btn + .tog-btn { border-left: 1px solid var(--border); }
+.tog-btn.active { background: var(--accent); color: #0a0a0a; }
+
+/* ══════════════════════════
+   PLANE GRID
+══════════════════════════ */
+.plane-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 14px;
+  margin: 24px 0;
+}
+@media (max-width: 600px) { .plane-grid { grid-template-columns: 1fr; } }
+.plane-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 3px;
+  padding: 20px;
+}
+.plane-head {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 14px;
+}
+.p-badge {
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 3px 8px;
+  border-radius: 2px;
+  flex-shrink: 0;
+}
+.pb-1 { background: var(--a-mid);               color: var(--accent); }
+.pb-2 { background: rgba(245,166,35,0.18);       color: var(--amber); }
+.pb-3 { background: rgba(255,77,77,0.14);        color: var(--red); }
+.pb-4 { background: rgba(255,77,77,0.20);        color: var(--red); }
+.plane-name { font-size: 14px; font-weight: 700; color: var(--fg); }
+.plane-card p { font-size: 13px; color: var(--fg-2); line-height: 1.65; }
+.plane-card p strong { color: var(--fg); font-weight: 700; }
+
+/* ══════════════════════════
+   QUIZ
+══════════════════════════ */
+.prog-wrap { display: flex; align-items: center; gap: 14px; margin-bottom: 28px; }
+.prog-track { flex: 1; height: 2px; background: var(--border); border-radius: 2px; overflow: hidden; }
+.prog-fill { height: 100%; background: var(--accent); border-radius: 2px; transition: width 340ms cubic-bezier(0.22,1,0.36,1); }
+.prog-txt { font-size: 12px; color: var(--fg-2); white-space: nowrap; font-weight: 600; }
+
+.q-block {
+  border: 1px solid var(--border);
+  border-radius: 3px;
+  padding: 22px;
+  margin-bottom: 12px;
+  background: var(--surface);
+  transition: border-color 200ms, background 200ms;
+}
+.q-block.q-correct { border-color: rgba(0,255,148,0.4); background: var(--a-dim); }
+.q-block.q-wrong   { border-color: rgba(255,77,77,0.4);  background: var(--r-dim); }
+.q-num { font-size: 10px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--fg-2); margin-bottom: 8px; }
+.q-text { font-size: 14px; font-weight: 600; color: var(--fg); margin-bottom: 16px; line-height: 1.55; }
+.q-opts { display: flex; flex-direction: column; gap: 8px; }
+.q-opt {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 10px 14px;
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: 2px;
+  cursor: pointer;
+  font-family: 'Poppins', sans-serif;
+  font-size: 13.5px;
+  color: var(--fg-2);
+  text-align: left;
+  width: 100%;
+  line-height: 1.5;
+  transition: all 140ms;
+}
+.q-opt:hover { border-color: #333; color: var(--fg); }
+.q-opt.sel      { border-color: rgba(0,255,148,0.4); color: var(--fg); }
+.q-opt.opt-ok   { border-color: var(--accent); background: var(--a-mid); color: var(--fg); }
+.q-opt.opt-bad  { border-color: var(--red);    background: var(--r-dim); color: var(--fg); }
+.q-dot {
+  width: 14px; height: 14px;
+  border-radius: 50%;
+  border: 1.5px solid var(--border);
+  flex-shrink: 0;
+  margin-top: 3px;
+  transition: all 140ms;
+}
+.sel .q-dot, .opt-ok .q-dot  { background: var(--accent); border-color: var(--accent); }
+.opt-bad .q-dot               { background: var(--red);    border-color: var(--red); }
+.q-fb {
+  font-size: 13px;
+  padding: 10px 14px;
+  border-radius: 2px;
+  margin-top: 12px;
+  line-height: 1.65;
+  display: none;
+  color: var(--fg);
+}
+.q-fb.show { display: block; }
+.q-fb.ok  { background: var(--a-dim); border-left: 2px solid var(--accent); }
+.q-fb.no  { background: var(--r-dim); border-left: 2px solid var(--red); }
+
+.quiz-btns { display: flex; gap: 12px; margin-top: 24px; flex-wrap: wrap; }
+.btn-sec {
+  padding: 11px 24px;
+  background: transparent;
+  color: var(--fg-2);
+  border: 1px solid var(--border);
+  border-radius: 2px;
+  font-family: 'Poppins', sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 160ms;
+}
+.btn-sec:hover { color: var(--fg); border-color: #444; }
+.score-card {
+  margin-top: 28px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 3px;
+  padding: 32px;
+  text-align: center;
+  display: none;
+}
+.score-card.show { display: block; }
+.score-n    { font-size: 56px; font-weight: 800; color: var(--accent); line-height: 1; }
+.score-den  { font-size: 28px; color: var(--fg-2); font-weight: 400; }
+.score-sub  { font-size: 12px; color: var(--fg-2); margin-top: 4px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; }
+.score-msg  { font-size: 14px; color: var(--fg-2); margin-top: 20px; line-height: 1.7; max-width: 460px; margin-left: auto; margin-right: auto; }
+
+/* ══════════════════════════
+   AUTHOR ROW
+══════════════════════════ */
+.author-row {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-top: 28px;
+  padding-top: 24px;
+  border-top: 1px solid var(--border);
+}
+.author-row img {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  object-fit: cover;
+  flex-shrink: 0;
+  border: 2px solid var(--accent);
+}
+.author-info { display: flex; flex-direction: column; gap: 2px; }
+.author-name {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--fg);
+  line-height: 1.3;
+}
+.author-title {
+  font-size: 12px;
+  color: var(--fg-2);
+  font-weight: 500;
+  line-height: 1.3;
+}
+.author-creds {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-top: 5px;
+}
+.author-cred {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--accent);
+  background: var(--a-dim);
+  border: 1px solid rgba(0,255,148,0.2);
+  padding: 2px 8px;
+  border-radius: 2px;
+}
+
+/* ══════════════════════════
+   FOOTER
+══════════════════════════ */
+.footer {
+  margin-left: var(--sidebar-w);
+  border-top: 1px solid var(--border);
+  padding: 20px 52px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+.footer-brand { font-size: 12px; font-weight: 700; color: var(--accent); letter-spacing: 0.04em; }
+.footer-links { display: flex; gap: 20px; }
+.footer-links a { font-size: 12px; color: var(--fg-2); text-decoration: none; font-weight: 500; transition: color 140ms; }
+.footer-links a:hover { color: var(--fg); }
+
+/* ══════════════════════════
+   MOBILE TOGGLE BUTTON
+══════════════════════════ */
+.mob-nav-toggle {
+  display: none;
+  align-items: center;
+  gap: 8px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 2px;
+  color: var(--fg);
+  font-family: 'Poppins', sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  padding: 0 14px;
+  height: 36px;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* ══════════════════════════
+   SIDEBAR OVERLAY (mobile)
+══════════════════════════ */
+.sidebar-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.65);
+  z-index: 140;
+  backdrop-filter: blur(2px);
+  -webkit-backdrop-filter: blur(2px);
+}
+.sidebar-overlay.show { display: block; }
+
+/* ══════════════════════════
+   RESPONSIVE — TABLET / MOBILE
+══════════════════════════ */
+@media (max-width: 768px) {
+
+  /* Header */
+  .mob-nav-toggle  { display: flex; }
+  .hdr-badge       { display: none; }
+  .hdr             { padding: 0 16px; }
+
+  /* Sidebar — off-canvas */
+  .sidebar {
+    transform: translateX(-100%);
+    transition: transform 260ms cubic-bezier(0.22,1,0.36,1);
+    z-index: 150;
+    width: min(280px, 85vw);
+  }
+  .sidebar.open { transform: translateX(0); }
+
+  /* Sidebar touch targets — minimum 44px */
+  .sb-item { padding: 14px 20px; font-size: 14px; }
+  .sb-section-lbl { padding-top: 20px; }
+
+  /* Layout */
+  .main   { margin-left: 0; }
+  .footer { margin-left: 0; padding: 16px 20px; flex-direction: column; align-items: flex-start; gap: 12px; }
+  .footer-links { gap: 16px; }
+
+  /* Hero */
+  .hero { padding: 32px 20px 28px; }
+  .hero h1 { font-size: clamp(24px, 7vw, 34px); }
+  .hero-desc { font-size: 14px; }
+  .chips { gap: 8px; }
+  .chip { font-size: 11px; padding: 5px 10px; }
+
+  /* Author row — stack on very small */
+  .author-row { gap: 12px; margin-top: 20px; padding-top: 20px; }
+  .author-row img { width: 42px; height: 42px; }
+  .author-name { font-size: 13px; }
+  .author-title { font-size: 11px; }
+
+  /* Panels */
+  .panel { padding: 28px 20px 48px; }
+  .s-title { font-size: 19px; }
+  .s-sub   { font-size: 13px; margin-bottom: 20px; }
+
+  /* Callouts */
+  .callout { padding: 14px 16px; }
+  .callout p { font-size: 13.5px; }
+
+  /* Formula — prevent clipping */
+  .formula { font-size: 12px; overflow-x: auto; white-space: nowrap; padding: 12px 16px; text-align: left; }
+
+  /* Cards */
+  .card-grid  { grid-template-columns: 1fr; gap: 12px; }
+  .calc-grid  { grid-template-columns: 1fr; gap: 12px; }
+  .plane-grid { grid-template-columns: 1fr; gap: 12px; }
+  .card { padding: 16px; }
+  .card p { font-size: 13px; }
+
+  /* Tables */
+  .tbl { font-size: 12.5px; }
+  .tbl thead th { font-size: 9px; padding: 8px 10px; }
+  .tbl tbody td { padding: 9px 10px; }
+
+  /* Calculators */
+  .calc-card { padding: 18px; }
+  .field input, .field select { font-size: 16px; /* prevent iOS zoom on focus */ padding: 11px 12px; }
+  .btn-primary { padding: 13px; font-size: 13px; min-height: 44px; }
+
+  /* Toggle buttons — full width on mobile */
+  .toggle-row { display: flex; width: 100%; }
+  .tog-btn { flex: 1; text-align: center; padding: 11px 12px; min-height: 44px; font-size: 11px; }
+
+  /* Diagrams */
+  .diagram { padding: 16px 12px 14px; }
+  .fig-cap { font-size: 11px; }
+
+  /* Slider */
+  .slider-ticks { font-size: 10px; }
+  input[type=range] { height: 20px; /* larger touch area */ }
+
+  /* Plane cards */
+  .plane-card { padding: 16px; }
+  .plane-name { font-size: 13px; }
+  .plane-card p { font-size: 12.5px; }
+
+  /* Quiz */
+  .prog-wrap { gap: 10px; }
+  .prog-txt  { font-size: 11px; }
+  .q-block   { padding: 16px; }
+  .q-text    { font-size: 13.5px; }
+  .q-opt     { padding: 11px 12px; font-size: 13px; min-height: 44px; }
+  .q-fb      { font-size: 12.5px; }
+  .quiz-btns { gap: 10px; }
+  .btn-sec   { padding: 11px 18px; min-height: 44px; font-size: 11px; }
+  .score-n   { font-size: 44px; }
+  .score-msg { font-size: 13.5px; }
+
+  /* Divider spacing */
+  .div { margin: 24px 0; }
+}
+
+@media (max-width: 390px) {
+  .hero h1 { font-size: 22px; }
+  .sb-item { font-size: 13px; }
+  .chip    { font-size: 10px; padding: 4px 9px; }
+}
+
+/* ── Safe area (notched iPhones) ── */
+@supports (padding-bottom: env(safe-area-inset-bottom)) {
+  .footer { padding-bottom: calc(16px + env(safe-area-inset-bottom)); }
+  .sidebar { padding-bottom: env(safe-area-inset-bottom); }
+}
+</style>
+</head>
+<body>
+
+<!-- SIDEBAR OVERLAY (mobile) -->
+<div class="sidebar-overlay" id="sidebarOverlay" onclick="closeSidebar()"></div>
+
+<!-- HEADER -->
+<header class="hdr">
+  <a href="https://www.fresuelectronics.com">
+    <img src="https://raw.githubusercontent.com/dariofresu/Fresu-Electronics-Blog/main/assets/logo.png" alt="Fresu Electronics" style="height:32px">
+  </a>
+  <button class="mob-nav-toggle" onclick="toggleSidebar()">☰ Menu</button>
+  <span class="hdr-badge">EMC Reference Guide</span>
+</header>
+
+<div class="shell">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sb-section-lbl">Modules</div>
+    <nav class="sb-nav">
+      <button class="sb-item active" onclick="showPanel('lumped', this)">
+        <span class="sb-num">01</span>Lumped vs Distributed
+      </button>
+      <button class="sb-item" onclick="showPanel('calc', this)">
+        <span class="sb-num">02</span>Calculators
+      </button>
+      <button class="sb-item" onclick="showPanel('fields', this)">
+        <span class="sb-num">03</span>Energy &amp; Fields
+      </button>
+      <button class="sb-item" onclick="showPanel('return', this)">
+        <span class="sb-num">04</span>Return Current
+      </button>
+      <button class="sb-item" onclick="showPanel('planes', this)">
+        <span class="sb-num">05</span>Reference Planes
+      </button>
+      <div class="sb-divider"></div>
+      <button class="sb-item" onclick="showPanel('quiz', this)">
+        <span class="sb-num">—</span>Self-Assessment
+      </button>
+    </nav>
+    <div class="sb-footer">
+      <a href="https://www.fresuelectronics.com/emc-audit">EMC Audit →</a>
+      <a href="https://blog.fresuelectronics.com">Engineering Blog</a>
+      <a href="https://www.youtube.com/@dario_fresu">YouTube</a>
+    </div>
+  </aside>
+
+  <!-- MAIN -->
+  <div class="main">
+
+    <!-- HERO -->
+    <section class="hero">
+      <div class="hero-kicker">Fresu Electronics — Knowledge Base</div>
+      <h1>PCB EMC <em>Fundamentals</em></h1>
+      <p class="hero-desc">Six modules covering the physics behind EMC — signal propagation, field energy, return currents, reference plane design, and live calculators.</p>
+      <div class="chips">
+        <div class="chip"><span class="chip-dot"></span>6 Modules</div>
+        <div class="chip"><span class="chip-dot"></span>4 Calculators</div>
+        <div class="chip"><span class="chip-dot"></span>10-Q Quiz</div>
+      </div>
+
+      <div class="author-row">
+        <img
+          src="https://raw.githubusercontent.com/dariofresu/Fresu-Electronics-Blog/main/assets/dario-fresu.jpg"
+          alt="Dario Fresu">
+        <div class="author-info">
+          <span class="author-name">Dario Fresu</span>
+          <span class="author-title">Principal EMC Architect · Fresu Electronics SRL</span>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ── PANEL 1: LUMPED VS DISTRIBUTED ── -->
+    <div class="panel active" id="panel-lumped">
+      <div class="s-head">
+        <div class="s-title">Lumped vs. Distributed Elements</div>
+        <div class="s-sub">Why rise time — not clock frequency — governs PCB signal behaviour</div>
+      </div>
+
+      <div class="callout">
+        <div class="c-lbl">Core Principle</div>
+        <p>A trace transitions from a <strong>lumped element</strong> to a <strong>distributed element</strong> when its propagation time exceeds one quarter of the signal rise time. This single threshold is the root cause of reflections, ringing, crosstalk, and EMI — independent of clock frequency.</p>
+      </div>
+
+      <div class="diagram">
+        <svg viewBox="0 0 740 230" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <marker id="mGr" markerWidth="7" markerHeight="7" refX="5" refY="3.5" orient="auto"><polygon points="0,0 7,3.5 0,7" fill="#7a8699"/></marker>
+            <marker id="mGn" markerWidth="7" markerHeight="7" refX="5" refY="3.5" orient="auto"><polygon points="0,0 7,3.5 0,7" fill="#00FF94"/></marker>
+            <marker id="mRd" markerWidth="7" markerHeight="7" refX="5" refY="3.5" orient="auto"><polygon points="0,0 7,3.5 0,7" fill="#ff4d4d"/></marker>
+          </defs>
+          <!-- LUMPED -->
+          <text x="180" y="16" text-anchor="middle" fill="#00FF94" font-family="Poppins" font-size="10" font-weight="700" letter-spacing="2">LUMPED — Safe</text>
+          <rect x="18" y="26" width="324" height="110" rx="3" fill="#111" stroke="#242424" stroke-width="1"/>
+          <line x1="38" y1="116" x2="324" y2="116" stroke="#242424" stroke-width="1" stroke-dasharray="3,3"/>
+          <line x1="38" y1="46"  x2="324" y2="46"  stroke="#242424" stroke-width="1" stroke-dasharray="3,3"/>
+          <polyline points="38,116 62,116 188,46 324,46" fill="none" stroke="#00FF94" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+          <!-- Prop arrow -->
+          <line x1="62" y1="150" x2="134" y2="150" stroke="#7a8699" stroke-width="1.5" marker-start="url(#mGr)" marker-end="url(#mGr)"/>
+          <text x="98" y="163" text-anchor="middle" fill="#e2e8f0" font-family="Poppins" font-size="10" font-weight="500">Prop time</text>
+          <!-- Rise time arrow -->
+          <line x1="62" y1="182" x2="324" y2="182" stroke="#00FF94" stroke-width="1.5" marker-start="url(#mGn)" marker-end="url(#mGn)"/>
+          <text x="193" y="195" text-anchor="middle" fill="#00FF94" font-family="Poppins" font-size="10" font-weight="500">Rise time (long)</text>
+          <text x="180" y="216" text-anchor="middle" fill="#94a3b8" font-family="Poppins" font-size="10">t_prop ≪ t_rise → no reflections</text>
+
+          <!-- DISTRIBUTED -->
+          <text x="558" y="16" text-anchor="middle" fill="#ff4d4d" font-family="Poppins" font-size="10" font-weight="700" letter-spacing="2">DISTRIBUTED — Problematic</text>
+          <rect x="380" y="26" width="342" height="110" rx="3" fill="#111" stroke="#242424" stroke-width="1"/>
+          <line x1="400" y1="116" x2="704" y2="116" stroke="#242424" stroke-width="1" stroke-dasharray="3,3"/>
+          <line x1="400" y1="46"  x2="704" y2="46"  stroke="#242424" stroke-width="1" stroke-dasharray="3,3"/>
+          <!-- Fast edge -->
+          <polyline points="400,116 416,116 436,46 458,46" fill="none" stroke="#ff4d4d" stroke-width="2.5" stroke-linecap="round"/>
+          <!-- Ringing -->
+          <polyline points="458,46 476,72 494,38 512,62 530,50 548,55 620,51 704,51" fill="none" stroke="#ff4d4d" stroke-width="1.5" stroke-dasharray="4,2" stroke-linecap="round" opacity="0.7"/>
+          <!-- Prop arrow (long) -->
+          <line x1="416" y1="150" x2="704" y2="150" stroke="#7a8699" stroke-width="1.5" marker-start="url(#mGr)" marker-end="url(#mGr)"/>
+          <text x="560" y="163" text-anchor="middle" fill="#e2e8f0" font-family="Poppins" font-size="10" font-weight="500">Prop time (long)</text>
+          <!-- Rise time (short) -->
+          <line x1="416" y1="182" x2="458" y2="182" stroke="#ff4d4d" stroke-width="1.5" marker-start="url(#mRd)" marker-end="url(#mRd)"/>
+          <text x="437" y="195" text-anchor="middle" fill="#ff4d4d" font-family="Poppins" font-size="10" font-weight="500">Rise</text>
+          <text x="558" y="216" text-anchor="middle" fill="#94a3b8" font-family="Poppins" font-size="10">t_prop &gt; ¼ t_rise → reflections &amp; EMI</text>
+        </svg>
+        <div class="fig-cap">Fig 1 — Left: slow rise time keeps the line in a lumped regime — energy distributes uniformly, no reflections. Right: fast rise time creates a travelling wave; each impedance discontinuity generates a reflection.</div>
+      </div>
+
+      <div class="formula">L_crit = 0.25 × t_rise × v_prop &nbsp;&nbsp;|&nbsp;&nbsp; v_prop = c / √εr</div>
+
+      <div class="callout warn">
+        <div class="c-lbl">Common Misconception</div>
+        <p><strong>Clock frequency does not determine EMI risk — edge rate does.</strong> A 500 kHz board with fast-edge ICs can fail EMI testing. A 100 MHz board with controlled edge rates may pass cleanly. All EMI, all reflections, and all crosstalk occur during the rising and falling edge — nothing happens between transitions.</p>
+      </div>
+
+      <div class="div"></div>
+      <h3 style="margin-bottom:6px">Critical Length by Rise Time</h3>
+      <p style="font-size:14px;color:var(--fg-2);margin-bottom:20px">Threshold above which controlled routing is required — FR4, εr ≈ 4.0</p>
+
+      <div class="tbl-wrap">
+        <table class="tbl">
+          <thead>
+            <tr><th>Rise Time</th><th>Typical Technology</th><th>Inner Layer Max</th><th>Outer Layer Max</th><th>Risk</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>100 ns</td><td>1970s logic</td><td>8.5 in / 216 mm</td><td>9.8 in / 249 mm</td><td class="ok">Negligible</td></tr>
+            <tr><td>10 ns</td><td>CMOS/TTL mid-80s</td><td>850 mil / 21.6 mm</td><td>980 mil / 24.9 mm</td><td class="ok">Manageable</td></tr>
+            <tr><td>5 ns</td><td>Late 80s – early 90s</td><td>425 mil / 10.8 mm</td><td>490 mil / 12.5 mm</td><td class="mid">Caution</td></tr>
+            <tr><td>2 ns</td><td>Microcontrollers</td><td>170 mil / 4.3 mm</td><td>195 mil / 5.0 mm</td><td class="bad">Design carefully</td></tr>
+            <tr><td>500 ps</td><td>FPGAs, processors</td><td>43 mil / 1.1 mm</td><td>49 mil / 1.2 mm</td><td class="bad">Critical</td></tr>
+            <tr><td>250 ps</td><td>High-speed memory</td><td>21 mil / 0.5 mm</td><td>24 mil / 0.6 mm</td><td class="bad">Extreme care</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p style="font-size:12px;color:var(--meta);margin-top:8px">Outer layer values use effective εr ≈ 3.3 (partial air propagation).</p>
+
+      <div class="div"></div>
+      <div class="card-grid">
+        <div class="card">
+          <div class="card-tag">Rule 01</div>
+          <h3>Find Rise Time Before Designing</h3>
+          <p>Rise and fall time are not in IC datasheets — they are in IBIS and SPICE models. Open the ASCII file, find dV/dt (slew rate), and derive t_rise. You cannot design correctly without knowing this value.</p>
+        </div>
+        <div class="card">
+          <div class="card-tag">Rule 02</div>
+          <h3>Match Propagation Time, Not Length</h3>
+          <p>Outer layer traces propagate ~15% faster than inner layers. When timing-matching a bus, outer traces must be longer to reach the same propagation time. Match time — not physical length.</p>
+        </div>
+        <div class="card">
+          <div class="card-tag">Rule 03</div>
+          <h3>Audit Die Shrink Replacements</h3>
+          <p>Pin-compatible replacement ICs often have faster edge rates. A board that passed EMI testing can fail after a component re-qualification with a faster part at the exact same clock frequency.</p>
+        </div>
+        <div class="card">
+          <div class="card-tag">Rule 04</div>
+          <h3>Design for Termination Readiness</h3>
+          <p>Even without controlled-impedance boards, route traces so termination resistors can be added at the correct locations without a board respin. This is EMC insurance.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── PANEL 2: CALCULATORS ── -->
+    <div class="panel" id="panel-calc">
+      <div class="s-head">
+        <div class="s-title">EMC Design Calculators</div>
+        <div class="s-sub">First-principles formulas — FR4 defaults, fully overridable</div>
+      </div>
+      <div class="calc-grid">
+
+        <div class="calc-card">
+          <h3>Critical Trace Length</h3>
+          <div class="calc-desc">Maximum trace length before a line becomes a distributed element requiring controlled routing.</div>
+          <div class="field"><label>Rise Time Value</label><input type="number" id="c1v" placeholder="500" min="0.001" step="any"></div>
+          <div class="field"><label>Unit</label><select id="c1u"><option value="1e-12" selected>ps — picoseconds</option><option value="1e-9">ns — nanoseconds</option></select></div>
+          <div class="field"><label>Dielectric Constant εr</label><input type="number" id="c1er" value="4.0" min="1" max="20" step="0.1"></div>
+          <div style="margin-top:auto;padding-top:12px"><button class="btn-primary" onclick="calcLen()">Calculate</button></div>
+          <div class="err-msg" id="c1e">Please enter a valid rise time.</div>
+          <div class="result-box" id="c1r">
+            <div class="r-row"><span class="r-lbl">Inner layer (stripline)</span><span class="r-val" id="c1ri"></span></div>
+            <div class="r-row"><span class="r-lbl">Outer layer (microstrip)</span><span class="r-val" id="c1ro"></span></div>
+            <div class="r-row"><span class="r-lbl">Max EMI frequency</span><span class="r-val" id="c1rf"></span></div>
+          </div>
+        </div>
+
+        <div class="calc-card">
+          <h3>Propagation Velocity</h3>
+          <div class="calc-desc">Signal propagation speed and per-unit delay for timing-matched bus design.</div>
+          <div class="field"><label>Dielectric Constant εr</label><input type="number" id="c2er" value="4.2" min="1" max="20" step="0.1"></div>
+          <div class="field"><label>Layer Type</label><select id="c2l"><option value="inner">Stripline — inner layer</option><option value="outer">Microstrip — outer layer</option></select></div>
+          <div style="margin-top:auto;padding-top:12px"><button class="btn-primary" onclick="calcVel()">Calculate</button></div>
+          <div class="result-box" id="c2r">
+            <div class="r-row"><span class="r-lbl">Velocity</span><span class="r-val" id="c2v"></span></div>
+            <div class="r-row"><span class="r-lbl">Delay per inch</span><span class="r-val" id="c2di"></span></div>
+            <div class="r-row"><span class="r-lbl">Delay per mm</span><span class="r-val" id="c2dm"></span></div>
+          </div>
+        </div>
+
+        <div class="calc-card">
+          <h3>Analog Critical Length</h3>
+          <div class="calc-desc">Maximum trace length for analog signals based on frequency — 1/12 wavelength rule in dielectric.</div>
+          <div class="field"><label>Signal Frequency</label><input type="number" id="c3f" placeholder="1000" min="0.001" step="any"></div>
+          <div class="field"><label>Unit</label><select id="c3fu"><option value="1e6" selected>MHz</option><option value="1e9">GHz</option><option value="1e3">kHz</option></select></div>
+          <div class="field"><label>Dielectric Constant εr</label><input type="number" id="c3er" value="4.0" min="1" max="20" step="0.1"></div>
+          <div style="margin-top:auto;padding-top:12px"><button class="btn-primary" onclick="calcAnalog()">Calculate</button></div>
+          <div class="err-msg" id="c3e">Please enter a valid frequency.</div>
+          <div class="result-box" id="c3r">
+            <div class="r-row"><span class="r-lbl">Inner layer max</span><span class="r-val" id="c3ri"></span></div>
+            <div class="r-row"><span class="r-lbl">Outer layer max</span><span class="r-val" id="c3ro"></span></div>
+            <div class="r-row"><span class="r-lbl">Free-space wavelength</span><span class="r-val" id="c3w"></span></div>
+          </div>
+        </div>
+
+        <div class="calc-card">
+          <h3>PDN Target Bandwidth</h3>
+          <div class="calc-desc">The frequency range your power distribution network must maintain low impedance across.</div>
+          <div class="field"><label>Clock Frequency</label><input type="number" id="c4c" placeholder="100" min="0.001" step="any"></div>
+          <div class="field"><label>Unit</label><select id="c4cu"><option value="1e6" selected>MHz</option><option value="1e9">GHz</option><option value="1e3">kHz</option></select></div>
+          <div class="field"><label>Rise Time (ps)</label><input type="number" id="c4r" placeholder="500" min="0.001" step="any"></div>
+          <div style="margin-top:auto;padding-top:12px"><button class="btn-primary" onclick="calcPDN()">Calculate</button></div>
+          <div class="err-msg" id="c4e">Please enter both clock frequency and rise time.</div>
+          <div class="result-box" id="c4r2">
+            <div class="r-row"><span class="r-lbl">PDN low end</span><span class="r-val" id="c4lo"></span></div>
+            <div class="r-row"><span class="r-lbl">PDN high end</span><span class="r-val" id="c4hi"></span></div>
+            <div class="r-row"><span class="r-lbl">Design target span</span><span class="r-val" id="c4sp"></span></div>
+          </div>
+        </div>
+
+      </div>
+      <div class="callout">
+        <div class="c-lbl">Workflow</div>
+        <p>Run <strong>Critical Trace Length</strong> first for every new design. Enter your IC's rise time from its IBIS model. Any trace longer than the result requires controlled impedance routing, a continuous reference plane, and termination planning before layout begins.</p>
+      </div>
+    </div>
+
+    <!-- ── PANEL 3: ENERGY & FIELDS ── -->
+    <div class="panel" id="panel-fields">
+      <div class="s-head">
+        <div class="s-title">Energy &amp; Fields</div>
+        <div class="s-sub">Where electromagnetic energy actually travels in a PCB — and why it determines everything in EMC</div>
+      </div>
+
+      <div class="callout">
+        <div class="c-lbl">The Fundamental Reality</div>
+        <p>All electromagnetic energy in a PCB transmission event travels in the <strong>dielectric material between conductors</strong> — not through the copper. The copper acts as a waveguide: the lowest-impedance boundary that steers the fields from source to load. Voltage is the integral of the E-field over distance. What we call current is the boundary condition response of the conductor surface to the electromagnetic field — not electrons being pushed through the copper from one end to the other.</p>
+      </div>
+
+      <div class="diagram">
+        <svg viewBox="0 0 680 160" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <marker id="ef" markerWidth="6" markerHeight="6" refX="3" refY="3" orient="auto">
+              <polygon points="0,0 6,3 0,6" fill="#00FF94" opacity="0.7"/>
+            </marker>
+          </defs>
+          <text x="340" y="14" text-anchor="middle" fill="#00FF94" font-family="Poppins" font-size="10" font-weight="700" letter-spacing="1.5">Energy propagates in this direction →</text>
+          <!-- Trace -->
+          <rect x="190" y="24" width="300" height="15" rx="2" fill="#b87333"/>
+          <text x="340" y="35" text-anchor="middle" fill="#0a0a0a" font-family="Poppins" font-size="8" font-weight="700">Signal Trace</text>
+          <!-- Dielectric -->
+          <rect x="50" y="41" width="580" height="58" fill="#181818" stroke="#242424" stroke-width="1" rx="1"/>
+          <text x="340" y="57" text-anchor="middle" fill="#2e2e2e" font-family="Poppins" font-size="10" font-weight="600">FR4 Dielectric</text>
+          <!-- E-field lines -->
+          <line x1="340" y1="41" x2="340" y2="99" stroke="#00FF94" stroke-width="2" opacity="0.95" marker-end="url(#ef)"/>
+          <line x1="308" y1="41" x2="308" y2="99" stroke="#00FF94" stroke-width="1.8" opacity="0.8" marker-end="url(#ef)"/>
+          <line x1="372" y1="41" x2="372" y2="99" stroke="#00FF94" stroke-width="1.8" opacity="0.8" marker-end="url(#ef)"/>
+          <line x1="275" y1="41" x2="275" y2="99" stroke="#00FF94" stroke-width="1.3" opacity="0.55" marker-end="url(#ef)"/>
+          <line x1="405" y1="41" x2="405" y2="99" stroke="#00FF94" stroke-width="1.3" opacity="0.55" marker-end="url(#ef)"/>
+          <line x1="242" y1="44" x2="242" y2="99" stroke="#00FF94" stroke-width="0.9" opacity="0.3" marker-end="url(#ef)"/>
+          <line x1="438" y1="44" x2="438" y2="99" stroke="#00FF94" stroke-width="0.9" opacity="0.3" marker-end="url(#ef)"/>
+          <line x1="195" y1="50" x2="195" y2="99" stroke="#00FF94" stroke-width="0.6" opacity="0.15" marker-end="url(#ef)"/>
+          <line x1="485" y1="50" x2="485" y2="99" stroke="#00FF94" stroke-width="0.6" opacity="0.15" marker-end="url(#ef)"/>
+          <!-- Reference Plane -->
+          <rect x="50" y="99" width="580" height="15" fill="#555" rx="1" opacity="0.85"/>
+          <text x="340" y="110" text-anchor="middle" fill="#ddd" font-family="Poppins" font-size="8" font-weight="700">Reference Plane — Return Current Flows Here</text>
+          <!-- Side annotation -->
+          <text x="130" y="80" text-anchor="middle" fill="#e2e8f0" font-family="Poppins" font-size="10">E-field density</text>
+          <text x="130" y="92" text-anchor="middle" fill="#e2e8f0" font-family="Poppins" font-size="10">falls laterally</text>
+          <line x1="167" y1="80" x2="182" y2="74" stroke="#94a3b8" stroke-width="0.8"/>
+          <!-- Energy label -->
+          <text x="340" y="148" text-anchor="middle" fill="#e2e8f0" font-family="Poppins" font-size="11">All energy travels in the FR4 dielectric — copper conducts return current, does not carry the energy</text>
+        </svg>
+        <div class="fig-cap">Fig 2 — Microstrip cross-section. E-field lines propagate entirely within the FR4 dielectric between trace and reference plane. Field density peaks at the trace centreline and falls off laterally. Return current flows in the surface of the reference plane — induced by the moving field.</div>
+      </div>
+
+      <div class="card-grid">
+        <div class="card">
+          <div class="card-tag">Principle 01</div>
+          <h3>Energy Lives in the Fields</h3>
+          <p>There is no energy in voltage or current — both are measurable effects of the electromagnetic field. The field in the dielectric carries all energy. This single fact explains every EMC design decision.</p>
+        </div>
+        <div class="card">
+          <div class="card-tag">Principle 02</div>
+          <h3>Copper Steers — It Does Not Carry</h3>
+          <p>Trace and reference plane form a waveguide. Energy attaches to copper because it is the lowest-impedance boundary. Remove the reference plane and fields spread in all directions until they find a return conductor.</p>
+        </div>
+        <div class="card">
+          <div class="card-tag">Principle 03</div>
+          <h3>Path of Least Impedance — Always</h3>
+          <p>Energy always takes the path of lowest impedance — 100% of the time, no exceptions. Understanding where that path is at your operating frequency is the entire discipline of EMC engineering.</p>
+        </div>
+        <div class="card">
+          <div class="card-tag">Principle 04</div>
+          <h3>You Route Half a Transmission Line</h3>
+          <p>Every trace is one conductor of a two-conductor transmission line. The return path is the other conductor. Neglect it and the fields will find their own return path — almost never the one you intended.</p>
+        </div>
+      </div>
+
+      <div class="div"></div>
+      <h3 style="margin-bottom:6px">Skin Effect &amp; Loss Tangent</h3>
+      <p style="font-size:14px;color:var(--fg-2);margin-bottom:20px">Two frequency-dependent loss mechanisms that constrain high-speed design</p>
+
+      <div class="diagram">
+        <div class="slider-wrap">
+          <div class="slider-row">
+            <span class="slider-lbl">Frequency</span>
+            <span class="slider-val" id="skinLbl">100 MHz</span>
+          </div>
+          <input type="range" id="skinSlider" min="1" max="10" value="3" oninput="updateSkin(this.value)">
+          <div class="slider-ticks">
+            <span>1 MHz</span><span>100 MHz</span><span>1 GHz</span><span>5 GHz</span><span>10 GHz</span>
+          </div>
+        </div>
+        <svg viewBox="0 0 600 100" xmlns="http://www.w3.org/2000/svg" id="skinSvg">
+          <text x="300" y="13" text-anchor="middle" fill="#e2e8f0" font-family="Poppins" font-size="10">Copper cross-section — active current-carrying region (orange)</text>
+          <rect x="60" y="20" width="480" height="46" rx="3" fill="none" stroke="#b87333" stroke-width="1.5" opacity="0.4"/>
+          <rect x="60" y="20" width="480" height="46" rx="3" fill="#b87333" opacity="0.06" id="skinBg"/>
+          <rect x="60" y="20" width="480" rx="2" fill="#b87333" opacity="0.8" id="skinTop"/>
+          <rect x="60"       width="480" rx="2" fill="#b87333" opacity="0.8" id="skinBot"/>
+          <text x="300" y="82" text-anchor="middle" fill="#e2e8f0" font-family="Poppins" font-size="10" id="skinInfo">Skin depth ≈ 1.87 μm at 100 MHz</text>
+          <text x="300" y="96" text-anchor="middle" fill="#00FF94" font-family="Poppins" font-size="10" id="skinPct">~100% of copper cross-section active</text>
+        </svg>
+      </div>
+
+      <div class="tbl-wrap">
+        <table class="tbl">
+          <thead><tr><th>Mechanism</th><th>Onset</th><th>Effect</th><th>Mitigation</th></tr></thead>
+          <tbody>
+            <tr><td>Skin Effect</td><td>~100 MHz (1 oz Cu)</td><td>Current confined to surface — E-field works harder, energy lost to heat</td><td>Smooth copper (RA grade), wider traces</td></tr>
+            <tr><td>Loss Tangent</td><td>All frequencies</td><td>Energy absorbed by dielectric — FR4 is among the lossiest common materials</td><td>Low-loss laminates above ~5 GHz</td></tr>
+            <tr><td>Outer layer trade-off</td><td>Any</td><td>Partial air propagation reduces loss tangent but increases skin effect losses</td><td>Route critical HF signals on inner layers</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- ── PANEL 4: RETURN CURRENT ── -->
+    <div class="panel" id="panel-return">
+      <div class="s-head">
+        <div class="s-title">Return Current Behaviour</div>
+        <div class="s-sub">How return current distribution changes with frequency — and why it defines your EMC performance</div>
+      </div>
+
+      <div class="toggle-row">
+        <button class="tog-btn active" id="tbDC" onclick="showRC('dc')">DC / Low Frequency</button>
+        <button class="tog-btn"        id="tbHF" onclick="showRC('hf')">High Frequency</button>
+      </div>
+
+      <div id="rc-dc">
+        <div class="diagram">
+          <svg viewBox="0 0 640 160" xmlns="http://www.w3.org/2000/svg">
+            <defs><marker id="mAmb" markerWidth="7" markerHeight="7" refX="5" refY="3.5" orient="auto"><polygon points="0,0 7,3.5 0,7" fill="#f5a623"/></marker></defs>
+            <rect x="40" y="112" width="560" height="20" rx="2" fill="#333" opacity="0.85"/>
+            <text x="320" y="125" text-anchor="middle" fill="#ccc" font-family="Poppins" font-size="9" font-weight="700">Reference Plane</text>
+            <rect x="200" y="52" width="240" height="14" rx="2" fill="#b87333" opacity="0.85"/>
+            <text x="320" y="62" text-anchor="middle" fill="#0a0a0a" font-family="Poppins" font-size="9" font-weight="700">Signal Trace</text>
+            <!-- Spread arrows -->
+            <line x1="95"  y1="98" x2="95"  y2="112" stroke="#f5a623" stroke-width="1.5" opacity="0.25" marker-end="url(#mAmb)"/>
+            <line x1="145" y1="93" x2="145" y2="112" stroke="#f5a623" stroke-width="1.5" opacity="0.40" marker-end="url(#mAmb)"/>
+            <line x1="205" y1="88" x2="205" y2="112" stroke="#f5a623" stroke-width="2"   opacity="0.60" marker-end="url(#mAmb)"/>
+            <line x1="255" y1="84" x2="255" y2="112" stroke="#f5a623" stroke-width="2"   opacity="0.75" marker-end="url(#mAmb)"/>
+            <line x1="305" y1="82" x2="305" y2="112" stroke="#f5a623" stroke-width="2.5" opacity="0.90" marker-end="url(#mAmb)"/>
+            <line x1="320" y1="81" x2="320" y2="112" stroke="#f5a623" stroke-width="3"   opacity="1"    marker-end="url(#mAmb)"/>
+            <line x1="335" y1="82" x2="335" y2="112" stroke="#f5a623" stroke-width="2.5" opacity="0.90" marker-end="url(#mAmb)"/>
+            <line x1="385" y1="84" x2="385" y2="112" stroke="#f5a623" stroke-width="2"   opacity="0.75" marker-end="url(#mAmb)"/>
+            <line x1="435" y1="88" x2="435" y2="112" stroke="#f5a623" stroke-width="2"   opacity="0.60" marker-end="url(#mAmb)"/>
+            <line x1="495" y1="93" x2="495" y2="112" stroke="#f5a623" stroke-width="1.5" opacity="0.40" marker-end="url(#mAmb)"/>
+            <line x1="545" y1="98" x2="545" y2="112" stroke="#f5a623" stroke-width="1.5" opacity="0.25" marker-end="url(#mAmb)"/>
+            <text x="320" y="152" text-anchor="middle" fill="#f5a623" font-family="Poppins" font-size="11" font-weight="600">Return current spreads broadly — path of lowest resistance (R dominates at DC)</text>
+          </svg>
+          <div class="fig-cap">At DC and very low frequencies, return current distributes broadly across the reference plane, taking the path of lowest DC resistance — the shortest direct path.</div>
+        </div>
+        <div class="callout warn">
+          <div class="c-lbl">Two-Layer Board Rule</div>
+          <p>On two-layer boards without a ground plane, low-frequency traces use each other as return paths. To channel return current, route a <strong>dedicated return trace at least 3× the signal trace width, directly adjacent, from source to load</strong>. This constrains field spread and reduces coupling between adjacent circuits.</p>
+        </div>
+      </div>
+
+      <div id="rc-hf" style="display:none">
+        <div class="diagram">
+          <svg viewBox="0 0 640 160" xmlns="http://www.w3.org/2000/svg">
+            <defs><marker id="mGrn" markerWidth="7" markerHeight="7" refX="5" refY="3.5" orient="auto"><polygon points="0,0 7,3.5 0,7" fill="#00FF94"/></marker></defs>
+            <rect x="40" y="112" width="560" height="20" rx="2" fill="#333" opacity="0.85"/>
+            <text x="320" y="125" text-anchor="middle" fill="#ccc" font-family="Poppins" font-size="9" font-weight="700">Reference Plane</text>
+            <rect x="200" y="52" width="240" height="14" rx="2" fill="#b87333" opacity="0.85"/>
+            <text x="320" y="62" text-anchor="middle" fill="#0a0a0a" font-family="Poppins" font-size="9" font-weight="700">Signal Trace</text>
+            <!-- Tight arrows, only under trace -->
+            <line x1="228" y1="91" x2="228" y2="112" stroke="#00FF94" stroke-width="1.5" opacity="0.5" marker-end="url(#mGrn)"/>
+            <line x1="260" y1="86" x2="260" y2="112" stroke="#00FF94" stroke-width="2"   opacity="0.75" marker-end="url(#mGrn)"/>
+            <line x1="295" y1="82" x2="295" y2="112" stroke="#00FF94" stroke-width="2.5" opacity="0.9" marker-end="url(#mGrn)"/>
+            <line x1="320" y1="80" x2="320" y2="112" stroke="#00FF94" stroke-width="3"   opacity="1"   marker-end="url(#mGrn)"/>
+            <line x1="345" y1="82" x2="345" y2="112" stroke="#00FF94" stroke-width="2.5" opacity="0.9" marker-end="url(#mGrn)"/>
+            <line x1="380" y1="86" x2="380" y2="112" stroke="#00FF94" stroke-width="2"   opacity="0.75" marker-end="url(#mGrn)"/>
+            <line x1="412" y1="91" x2="412" y2="112" stroke="#00FF94" stroke-width="1.5" opacity="0.5" marker-end="url(#mGrn)"/>
+            <!-- Highlight box -->
+            <rect x="198" y="68" width="244" height="44" fill="rgba(0,255,148,0.04)" stroke="rgba(0,255,148,0.15)" stroke-width="1" stroke-dasharray="4,3" rx="2"/>
+            <text x="320" y="152" text-anchor="middle" fill="#00FF94" font-family="Poppins" font-size="11" font-weight="600">Return current concentrates directly under trace — path of lowest impedance √(L/C)</text>
+          </svg>
+          <div class="fig-cap">Above audio frequencies, return current concentrates in the reference plane directly under the signal trace — the path of minimum inductance and maximum capacitance simultaneously.</div>
+        </div>
+        <div class="callout">
+          <div class="c-lbl">Why Directly Below?</div>
+          <p>The path directly under the trace simultaneously minimises loop inductance (smallest magnetic field volume) and maximises capacitance (densest E-field). Both effects combined make it the absolute lowest-impedance path. Any <strong>plane split, void, or anti-pad forces this current to detour</strong> — dramatically increasing loop area and turning the loop into a radiating antenna.</p>
+        </div>
+      </div>
+
+      <div class="div"></div>
+      <div class="tbl-wrap">
+        <table class="tbl">
+          <thead><tr><th>Frequency Range</th><th>Return Path Location</th><th>Dominant Term</th><th>Design Priority</th></tr></thead>
+          <tbody>
+            <tr><td>DC</td><td>Shortest path (lowest R)</td><td>Resistance</td><td>Low concern</td></tr>
+            <tr><td>&lt; 1 kHz (typical board)</td><td>Gradual concentration forming</td><td>R → L transition</td><td>Low for most applications</td></tr>
+            <tr><td>1 kHz – 1 MHz</td><td>Directly under trace (forming)</td><td>√(L/C)</td><td>Plane continuity important</td></tr>
+            <tr><td>&gt; 1 MHz digital</td><td>Directly under trace</td><td>√(L/C)</td><td class="bad">Plane splits cause EMI failure</td></tr>
+            <tr><td>GHz range</td><td>Under trace — skin depth limited</td><td>√(L/C) + losses</td><td class="bad">Every discontinuity radiates</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="callout danger">
+        <div class="c-lbl">Ground Plane Splits — Critical</div>
+        <p>Splitting a reference plane under a high-frequency signal forces return current around the gap, creating a large current loop — an efficient radiating antenna. <strong>Any application note recommending split ground planes around mixed-signal devices should be treated as incorrect until verified against first-principles measurements.</strong> The correct solution is a solid plane with deliberate component placement — not a split.</p>
+      </div>
+    </div>
+
+    <!-- ── PANEL 5: REFERENCE PLANES ── -->
+    <div class="panel" id="panel-planes">
+      <div class="s-head">
+        <div class="s-title">Return Reference Planes (RRP)</div>
+        <div class="s-sub">The term, the physics, and why most engineers get this wrong</div>
+      </div>
+
+      <div class="callout">
+        <div class="c-lbl">Terminology — RRP</div>
+        <p>The correct term is <strong>Return Reference Plane (RRP)</strong> — not simply "ground plane." The name captures the two distinct roles the plane must perform simultaneously: it provides the <strong>return path</strong> for signal current, and it establishes the <strong>voltage reference</strong> for the signal. A plane that does not perform both roles correctly is not a proper RRP — it is a source of EMI.</p>
+      </div>
+
+      <p style="font-size:14px;color:var(--fg-2);margin-bottom:24px;line-height:1.7">The same signal trace above four different plane configurations produces four different EMI signatures. The configuration determines how tightly return current is channelled, how well fields are contained, and what impedance the return path presents at frequency.</p>
+
+      <div class="plane-grid">
+        <div class="plane-card">
+          <div class="plane-head">
+            <span class="p-badge pb-1">Best</span>
+            <span class="plane-name">Solid RRP — Adjacent to Signal</span>
+          </div>
+          <svg viewBox="0 0 260 70" xmlns="http://www.w3.org/2000/svg" style="width:100%">
+            <defs><marker id="pa" markerWidth="6" markerHeight="6" refX="3" refY="3" orient="auto"><polygon points="0,0 6,3 0,6" fill="#00FF94" opacity="0.75"/></marker></defs>
+            <rect x="80" y="4" width="100" height="12" rx="2" fill="#b87333" opacity="0.85"/>
+            <text x="130" y="13.5" text-anchor="middle" fill="#0a0a0a" font-family="Poppins" font-size="8" font-weight="700">Trace</text>
+            <rect x="20" y="18" width="220" height="28" fill="#181818" stroke="#242424" stroke-width="1" rx="1"/>
+            <line x1="110" y1="18" x2="110" y2="46" stroke="#00FF94" stroke-width="1.5" opacity="0.9" marker-end="url(#pa)"/>
+            <line x1="124" y1="18" x2="124" y2="46" stroke="#00FF94" stroke-width="1.5" opacity="0.9" marker-end="url(#pa)"/>
+            <line x1="138" y1="18" x2="138" y2="46" stroke="#00FF94" stroke-width="1.5" opacity="0.9" marker-end="url(#pa)"/>
+            <line x1="152" y1="18" x2="152" y2="46" stroke="#00FF94" stroke-width="1.2" opacity="0.65" marker-end="url(#pa)"/>
+            <line x1="96"  y1="18" x2="96"  y2="46" stroke="#00FF94" stroke-width="1.2" opacity="0.65" marker-end="url(#pa)"/>
+            <line x1="168" y1="20" x2="168" y2="46" stroke="#00FF94" stroke-width="0.8" opacity="0.3" marker-end="url(#pa)"/>
+            <line x1="80"  y1="20" x2="80"  y2="46" stroke="#00FF94" stroke-width="0.8" opacity="0.3" marker-end="url(#pa)"/>
+            <rect x="20" y="48" width="220" height="14" rx="1" fill="#00FF94" opacity="0.15" stroke="#00FF94" stroke-width="1"/>
+            <text x="130" y="58" text-anchor="middle" fill="#00FF94" font-family="Poppins" font-size="8" font-weight="700">Solid RRP — No Splits</text>
+          </svg>
+          <p>Solid, uninterrupted plane directly adjacent to the signal layer. Return current flows directly under the trace. Fields are maximally contained. This is the only configuration that correctly performs both RRP roles. <strong>Always the target.</strong></p>
+        </div>
+
+        <div class="plane-card">
+          <div class="plane-head">
+            <span class="p-badge pb-2">Conditional</span>
+            <span class="plane-name">Power Plane as RRP</span>
+          </div>
+          <svg viewBox="0 0 260 70" xmlns="http://www.w3.org/2000/svg" style="width:100%">
+            <defs><marker id="pb" markerWidth="6" markerHeight="6" refX="3" refY="3" orient="auto"><polygon points="0,0 6,3 0,6" fill="#f5a623" opacity="0.75"/></marker></defs>
+            <rect x="80" y="4" width="100" height="12" rx="2" fill="#b87333" opacity="0.85"/>
+            <text x="130" y="13.5" text-anchor="middle" fill="#0a0a0a" font-family="Poppins" font-size="8" font-weight="700">Trace</text>
+            <rect x="20" y="18" width="220" height="28" fill="#181818" stroke="#242424" stroke-width="1" rx="1"/>
+            <line x1="130" y1="18" x2="130" y2="46" stroke="#f5a623" stroke-width="1.8" opacity="0.85" marker-end="url(#pb)"/>
+            <line x1="110" y1="18" x2="110" y2="46" stroke="#f5a623" stroke-width="1.2" opacity="0.6" marker-end="url(#pb)"/>
+            <line x1="150" y1="18" x2="150" y2="46" stroke="#f5a623" stroke-width="1.2" opacity="0.6" marker-end="url(#pb)"/>
+            <!-- Displacement current arrows going further down -->
+            <line x1="130" y1="48" x2="130" y2="62" stroke="#f5a623" stroke-width="1" opacity="0.5" stroke-dasharray="2,2" marker-end="url(#pb)"/>
+            <rect x="20" y="48" width="220" height="10" rx="1" fill="#f5a623" opacity="0.12" stroke="#f5a623" stroke-width="0.8"/>
+            <text x="130" y="56" text-anchor="middle" fill="#f5a623" font-family="Poppins" font-size="7.5" font-weight="700">Power Plane (3.3V / 5V)</text>
+            <text x="130" y="67" text-anchor="middle" fill="#f5a623" font-family="Poppins" font-size="7">↕ displacement current via interplane capacitance</text>
+          </svg>
+          <p>Common in 4-layer stackups. The power plane is DC-disconnected from ground — return current must couple through <strong>displacement current</strong> via interplane capacitance (C = εr × ε0 × A / d). Higher impedance than a ground RRP, particularly above the MHz range. Works only when power and ground planes are adjacent and the dielectric is thin.</p>
+        </div>
+
+        <div class="plane-card">
+          <div class="plane-head">
+            <span class="p-badge pb-3">Poor</span>
+            <span class="plane-name">Split RRP</span>
+          </div>
+          <svg viewBox="0 0 260 70" xmlns="http://www.w3.org/2000/svg" style="width:100%">
+            <defs><marker id="pc" markerWidth="6" markerHeight="6" refX="3" refY="3" orient="auto"><polygon points="0,0 6,3 0,6" fill="#ff4d4d"/></marker></defs>
+            <rect x="80" y="4" width="100" height="12" rx="2" fill="#b87333" opacity="0.85"/>
+            <text x="130" y="13.5" text-anchor="middle" fill="#0a0a0a" font-family="Poppins" font-size="8" font-weight="700">Trace crosses split</text>
+            <rect x="20" y="18" width="220" height="28" fill="#181818" stroke="#242424" stroke-width="1" rx="1"/>
+            <path d="M 130,46 Q 130,12 160,12 Q 190,12 190,46" fill="none" stroke="#ff4d4d" stroke-width="1.5" stroke-dasharray="3,2" opacity="0.8" marker-end="url(#pc)"/>
+            <text x="168" y="29" fill="#ff4d4d" font-family="Poppins" font-size="7.5" font-weight="600">detour</text>
+            <rect x="20" y="48" width="100" height="14" rx="1" fill="#444" opacity="0.8"/>
+            <rect x="140" y="48" width="100" height="14" rx="1" fill="#444" opacity="0.8"/>
+            <line x1="122" y1="44" x2="122" y2="64" stroke="#ff4d4d" stroke-width="2" stroke-dasharray="3,2" opacity="0.8"/>
+            <text x="55" y="59" text-anchor="middle" fill="#aaa" font-family="Poppins" font-size="8">Plane A</text>
+            <text x="195" y="59" text-anchor="middle" fill="#aaa" font-family="Poppins" font-size="8">Plane B</text>
+          </svg>
+          <p>A split creates a voltage difference between two metal areas — forming an antenna-like structure. Return current detours around the gap, creating a large radiating loop. <strong>Never route signals across a plane split.</strong> Splitting a plane to separate domains does not improve EMI — it causes it.</p>
+        </div>
+
+        <div class="plane-card">
+          <div class="plane-head">
+            <span class="p-badge pb-4">Dangerous</span>
+            <span class="plane-name">Copper Pour ≠ RRP</span>
+          </div>
+          <svg viewBox="0 0 260 70" xmlns="http://www.w3.org/2000/svg" style="width:100%">
+            <defs><marker id="pd" markerWidth="6" markerHeight="6" refX="3" refY="3" orient="auto"><polygon points="0,0 6,3 0,6" fill="#ff4d4d" opacity="0.45"/></marker></defs>
+            <rect x="80" y="8" width="100" height="12" rx="2" fill="#b87333" opacity="0.85"/>
+            <text x="130" y="17.5" text-anchor="middle" fill="#0a0a0a" font-family="Poppins" font-size="8" font-weight="700">Trace</text>
+            <!-- Irregular copper pour patches -->
+            <rect x="20" y="44" width="60" height="12" rx="1" fill="#333" opacity="0.8"/>
+            <rect x="90" y="48" width="40" height="10" rx="1" fill="#333" opacity="0.8"/>
+            <rect x="145" y="44" width="55" height="12" rx="1" fill="#333" opacity="0.8"/>
+            <rect x="210" y="50" width="30" height="8" rx="1" fill="#333" opacity="0.6"/>
+            <line x1="130" y1="22" x2="50"  y2="60" stroke="#ff4d4d" stroke-width="1" opacity="0.35" marker-end="url(#pd)"/>
+            <line x1="130" y1="22" x2="130" y2="58" stroke="#ff4d4d" stroke-width="1" opacity="0.45" marker-end="url(#pd)"/>
+            <line x1="130" y1="22" x2="200" y2="58" stroke="#ff4d4d" stroke-width="1" opacity="0.35" marker-end="url(#pd)"/>
+            <text x="130" y="72" text-anchor="middle" fill="#ff4d4d" font-family="Poppins" font-size="8">Fragmented — antenna structures, not containment</text>
+          </svg>
+          <p>Adding copper pour is not the same as a proper RRP. Fragmented, unconnected copper patches create antenna-like structures that introduce additional common-mode noise rather than containing it. <strong>A copper pour must be solid, continuous, and properly stitched to act as an RRP.</strong></p>
+        </div>
+      </div>
+
+      <div class="div"></div>
+
+      <div class="callout danger">
+        <div class="c-lbl">Via Layer Transitions — RRP Continuity</div>
+        <p>It is not enough to ensure a signal trace sits over a continuous RRP on one layer. When a signal transitions between layers through a via, <strong>the RRP must remain continuous throughout that transition</strong>. A missing return reference at a via creates a field leakage point — an open door for radiated emissions. Stitching vias placed adjacent to signal vias close this loop and restore RRP continuity through the layer transition.</p>
+      </div>
+
+      <div class="div"></div>
+      <h3 style="margin-bottom:8px">Inductance, Proximity &amp; Stack-up Rules</h3>
+
+      <div class="callout">
+        <div class="c-lbl">The Proximity Rule</div>
+        <p><strong>Proximity — not conductor size — is the primary determinant of inductance.</strong> To halve inductance by widening a trace alone, you would need to increase width by 50×. Moving the conductors 2× closer achieves the same reduction with no width change. Every stack-up decision about plane-to-signal spacing is a direct inductance control decision.</p>
+      </div>
+
+      <div class="card-grid">
+        <div class="card">
+          <div class="card-tag">Stack-up</div>
+          <h3>Signal Layers Adjacent to RRP</h3>
+          <p>Route critical distributed-length signals on layers directly adjacent to a solid RRP. Thinner dielectric means tighter coupling, lower inductance, better field containment, and less voltage drop in the return path.</p>
+        </div>
+        <div class="card">
+          <div class="card-tag">Decoupling</div>
+          <h3>Side-by-Side Via Placement</h3>
+          <p>Place decoupling cap vias side-by-side — not at opposite pad ends. Closer spacing means smaller current loop and lower inductance. Route as close to the IC supply pin as geometry allows.</p>
+        </div>
+        <div class="card">
+          <div class="card-tag">Layer Transitions</div>
+          <h3>Stitching Vias at Every Layer Change</h3>
+          <p>Every time a signal changes layers, place return stitching vias immediately adjacent to the signal via. This restores the RRP path and prevents field leakage at the transition point — one of the most common EMC failure modes.</p>
+        </div>
+        <div class="card">
+          <div class="card-tag">App Notes</div>
+          <h3>Verify Before Implementing</h3>
+          <p>IC application note layouts should be assumed incorrect until verified against first principles. They understand circuit theory — not always PCB layout physics. Always check every recommendation against return current behaviour and RRP continuity.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── PANEL 6: QUIZ ── -->
+    <div class="panel" id="panel-quiz">
+      <div class="s-head">
+        <div class="s-title">Self-Assessment</div>
+        <div class="s-sub">10 questions across all modules — answer all, then check results</div>
+      </div>
+
+      <div class="prog-wrap">
+        <div class="prog-track"><div class="prog-fill" id="qProg" style="width:0%"></div></div>
+        <div class="prog-txt" id="qProgTxt">0 / 10 answered</div>
+      </div>
+
+      <div id="qContainer"></div>
+
+      <div class="quiz-btns">
+        <button class="btn-primary" style="width:auto;padding:11px 28px" onclick="submitQuiz()">Check Answers</button>
+        <button class="btn-sec" onclick="resetQuiz()">Reset</button>
+      </div>
+
+      <div class="score-card" id="scoreCard">
+        <div>
+          <span class="score-n" id="scoreN">—</span><span class="score-den">/10</span>
+        </div>
+        <div class="score-sub">Questions Correct</div>
+        <div class="score-msg" id="scoreMsg"></div>
+      </div>
+    </div>
+
+  </div><!-- /main -->
+</div><!-- /shell -->
+
+<footer class="footer">
+  <span class="footer-brand">Fresu Electronics</span>
+  <div class="footer-links">
+    <a href="https://www.fresuelectronics.com">Website</a>
+    <a href="https://blog.fresuelectronics.com">Blog</a>
+    <a href="https://www.fresuelectronics.com/emc-audit">EMC Audit</a>
+    <a href="https://www.youtube.com/@dario_fresu">YouTube</a>
+  </div>
+</footer>
+
+<script>
+// ── SIDEBAR (mobile) ──
+function toggleSidebar() {
+  const sb  = document.getElementById('sidebar');
+  const ov  = document.getElementById('sidebarOverlay');
+  const open = sb.classList.toggle('open');
+  ov.classList.toggle('show', open);
+  document.body.style.overflow = open ? 'hidden' : '';
+}
+function closeSidebar() {
+  document.getElementById('sidebar').classList.remove('open');
+  document.getElementById('sidebarOverlay').classList.remove('show');
+  document.body.style.overflow = '';
+}
+
+// ── PANEL SWITCHING ──
+function showPanel(id, btn) {
+  document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.sb-item').forEach(b => b.classList.remove('active'));
+  document.getElementById('panel-' + id).classList.add('active');
+  btn.classList.add('active');
+  // close mobile sidebar after selection
+  closeSidebar();
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+// ── RETURN CURRENT TOGGLE ──
+function showRC(t) {
+  document.getElementById('rc-dc').style.display = t === 'dc' ? '' : 'none';
+  document.getElementById('rc-hf').style.display = t === 'hf' ? '' : 'none';
+  document.getElementById('tbDC').classList.toggle('active', t === 'dc');
+  document.getElementById('tbHF').classList.toggle('active', t === 'hf');
+}
+
+// ── FORMAT HELPERS ──
+const C = 11.8; // in/ns
+function fLen(inches) {
+  if (inches >= 1) return `${inches.toFixed(2)} in (${(inches*25.4).toFixed(0)} mm)`;
+  return `${(inches*1000).toFixed(0)} mil (${(inches*25.4).toFixed(1)} mm)`;
+}
+function fHz(hz) {
+  if (hz >= 1e9) return `${(hz/1e9).toFixed(2)} GHz`;
+  if (hz >= 1e6) return `${(hz/1e6).toFixed(1)} MHz`;
+  if (hz >= 1e3) return `${(hz/1e3).toFixed(1)} kHz`;
+  return `${hz.toFixed(0)} Hz`;
+}
+function showE(id, v) { document.getElementById(id).classList.toggle('show', v); }
+function showR(id, v) { document.getElementById(id).classList.toggle('show', v); }
+
+// ── CALCULATORS ──
+function calcLen() {
+  const v  = parseFloat(document.getElementById('c1v').value);
+  const u  = parseFloat(document.getElementById('c1u').value);
+  const er = parseFloat(document.getElementById('c1er').value) || 4.0;
+  if (!v || v <= 0) { showE('c1e',true); showR('c1r',false); return; }
+  showE('c1e',false);
+  const tNs = v * u * 1e9;
+  const vI  = C / Math.sqrt(er);
+  const erO = 1 + (er-1)*0.5;
+  const vO  = C / Math.sqrt(erO);
+  document.getElementById('c1ri').textContent = fLen(0.25 * tNs * vI);
+  document.getElementById('c1ro').textContent = fLen(0.25 * tNs * vO);
+  document.getElementById('c1rf').textContent = fHz(0.5 / (v * u));
+  showR('c1r', true);
+}
+function calcVel() {
+  const er = parseFloat(document.getElementById('c2er').value) || 4.2;
+  const ly = document.getElementById('c2l').value;
+  const erE = ly === 'outer' ? 1 + (er-1)*0.5 : er;
+  const vel = C / Math.sqrt(erE);
+  document.getElementById('c2v').textContent  = `${vel.toFixed(2)} in/ns`;
+  document.getElementById('c2di').textContent = `${((1/vel)*1000).toFixed(0)} ps/in`;
+  document.getElementById('c2dm').textContent = `${((1/vel)*1000/25.4).toFixed(1)} ps/mm`;
+  showR('c2r', true);
+}
+function calcAnalog() {
+  const fv = parseFloat(document.getElementById('c3f').value);
+  const fu = parseFloat(document.getElementById('c3fu').value);
+  const er = parseFloat(document.getElementById('c3er').value) || 4.0;
+  if (!fv || fv <= 0) { showE('c3e',true); showR('c3r',false); return; }
+  showE('c3e',false);
+  const fHz2 = fv * fu;
+  const erO  = 1 + (er-1)*0.5;
+  const vI   = C / Math.sqrt(er);
+  const vO   = C / Math.sqrt(erO);
+  document.getElementById('c3ri').textContent = fLen((vI * 1e9 / fHz2) / 12);
+  document.getElementById('c3ro').textContent = fLen((vO * 1e9 / fHz2) / 12);
+  document.getElementById('c3w').textContent  = fLen(C * 1e9 / fHz2) + ' (free space)';
+  showR('c3r', true);
+}
+function calcPDN() {
+  const cv = parseFloat(document.getElementById('c4c').value);
+  const cu = parseFloat(document.getElementById('c4cu').value);
+  const rp = parseFloat(document.getElementById('c4r').value);
+  if (!cv || !rp || cv <= 0 || rp <= 0) { showE('c4e',true); showR('c4r2',false); return; }
+  showE('c4e',false);
+  const cHz = cv * cu;
+  const fHi = 0.5 / (rp * 1e-12);
+  document.getElementById('c4lo').textContent = fHz(cHz);
+  document.getElementById('c4hi').textContent = fHz(fHi);
+  document.getElementById('c4sp').textContent = `${fHz(cHz)} → ${fHz(fHi)}`;
+  showR('c4r2', true);
+}
+
+// ── SKIN EFFECT ──
+const SFREQS = ['1 MHz','10 MHz','100 MHz','300 MHz','1 GHz','2 GHz','3 GHz','5 GHz','7 GHz','10 GHz'];
+const SDEPTHS = [18.7,5.9,1.87,1.08,0.59,0.42,0.34,0.26,0.22,0.19];
+const TRACE_Y=20, TRACE_H=46;
+function updateSkin(val) {
+  const i   = parseInt(val)-1;
+  const sd  = SDEPTHS[i];
+  const norm = Math.min(1, sd/18.7);
+  const px   = Math.max(2, norm * (TRACE_H/2));
+  document.getElementById('skinLbl').textContent = SFREQS[i];
+  const top = document.getElementById('skinTop');
+  top.setAttribute('y', TRACE_Y);
+  top.setAttribute('height', px.toFixed(1));
+  const bot = document.getElementById('skinBot');
+  bot.setAttribute('y', (TRACE_Y + TRACE_H - px).toFixed(1));
+  bot.setAttribute('height', px.toFixed(1));
+  document.getElementById('skinInfo').textContent = `Skin depth ≈ ${sd.toFixed(2)} μm at ${SFREQS[i]}`;
+  document.getElementById('skinPct').textContent = i<2
+    ? '~100% of copper cross-section active'
+    : `~${Math.round(norm*100)}% of copper cross-section carrying current`;
+}
+
+// ── QUIZ ──
+const QS = [
+  // Q1: correct → index 3
+  {q:"What is the primary factor determining whether a trace behaves as a lumped or distributed element?",
+   o:["Clock frequency","Trace width","Supply voltage","Signal rise time (edge rate)"],
+   a:3,fb:"Rise time — not clock frequency — determines lumped vs. distributed behaviour. A 500 kHz clock with fast-edge ICs can cause EMI failures; a 100 MHz board with controlled edges may pass cleanly."},
+  // Q2: correct → index 0
+  {q:"At what propagation-time-to-rise-time ratio do reflections and EMI problems begin?",
+   o:["t_prop > ¼ t_rise","t_prop > t_rise","t_prop > ⅛ t_rise","t_prop > ½ t_rise"],
+   a:0,fb:"Problems begin when propagation time exceeds ¼ of the rise time. Beyond this, energy travels as a wave and creates reflections at every impedance discontinuity."},
+  // Q3: correct → index 1
+  {q:"Where does electromagnetic energy travel in a PCB microstrip transmission line?",
+   o:["Through the copper trace","In the dielectric between trace and plane","On the surface of the copper only","Through the reference plane copper"],
+   a:1,fb:"All energy travels in the dielectric (FR4) between trace and reference plane. Copper acts as a waveguide boundary. What we measure as current is the boundary condition response of the conductor surface to the field — not electrons being pushed through the copper."},
+  // Q4: correct → index 3
+  {q:"At high frequencies, where does return current flow on a solid Return Reference Plane (RRP)?",
+   o:["Across the shortest physical path on the plane","Along the nearest ground via","Uniformly across the entire plane","Directly under the signal trace"],
+   a:3,fb:"Above audio frequencies, return current concentrates directly under the trace — simultaneously the path of minimum inductance and maximum capacitance, making it the lowest-impedance path."},
+  // Q5: correct → index 2
+  {q:"Outer layer (microstrip) traces in FR4 propagate approximately how much faster than inner layer (stripline) traces?",
+   o:["Identical — only trace width matters","Faster on inner layers due to field confinement","~15% faster — outer traces must be longer when time-matching","~15% slower — outer traces must be shorter when time-matching"],
+   a:2,fb:"Outer layer traces propagate ~15% faster because part of the field travels through air (lower εr). For timing-matched buses, outer traces must be ~15% longer than inner traces to achieve equal propagation time."},
+  // Q6: correct → index 0
+  {q:"What is the most effective way to reduce inductance of a decoupling capacitor via pair?",
+   o:["Place vias side-by-side as close as possible, near the IC pin","Use larger diameter vias","Space vias evenly at the four pad corners","Place vias at the ends of the cap pads"],
+   a:0,fb:"Inductance is dominated by proximity. The closer the forward and return conductors, the smaller the magnetic field volume and the lower the inductance. Side-by-side vias near the IC pin minimise loop area."},
+  // Q7: correct → index 3
+  {q:"A split in a Return Reference Plane (RRP) under a high-frequency signal trace will:",
+   o:["Have no effect below 1 GHz","Reduce crosstalk to adjacent signals","Improve EMI by separating analog and digital domains","Force return current around the split, creating a large radiating loop"],
+   a:3,fb:"Any gap forces high-frequency return current to route around it, dramatically increasing loop area. A large current loop is an efficient antenna. Splitting a plane to separate domains does not improve EMI — it causes it."},
+  // Q8: correct → index 2
+  {q:"The maximum frequency content of a digital signal for EMI purposes is:",
+   o:["10 × clock frequency","1 / (π × rise_time)","0.5 / rise_time","clock_frequency × rise_time"],
+   a:2,fb:"f_max = 0.5 / t_rise defines the upper frequency boundary of significant harmonic energy. The PDN must maintain low impedance from the fundamental clock frequency up to this value."},
+  // Q9: correct → index 3
+  {q:"Why does increasing trace width have limited effect on inductance compared to reducing conductor separation?",
+   o:["Trace width only affects capacitance","Wider traces have higher resistance that dominates","Wider traces alter the board dielectric constant","Inductance is dominated by magnetic field volume, which depends on proximity not conductor size"],
+   a:3,fb:"Inductance depends on the volume of the magnetic field. Moving conductors closer together shrinks the field volume dramatically. To halve inductance by width alone would require a 50× increase in trace width."},
+  // Q10: correct → index 1
+  {q:"A 200 kHz product begins failing EMI after a pin-compatible IC replacement. The most likely root cause is:",
+   o:["Higher supply current draw","Faster rise times — previously lumped traces are now distributed","Incompatible package stackup","Higher operating voltage"],
+   a:1,fb:"Classic die-shrink scenario. A pin-compatible replacement may have faster edge rates. Traces that were lumped-elements become distributed elements with the new part — causing reflections and EMI at the same clock frequency."}
+];
+
+let answered = new Array(QS.length).fill(null);
+
+function buildQuiz() {
+  const c = document.getElementById('qContainer');
+  c.innerHTML = '';
+  QS.forEach((q,i) => {
+    const d = document.createElement('div');
+    d.className = 'q-block'; d.id='qb'+i;
+    d.innerHTML = `
+      <div class="q-num">Question ${i+1} of ${QS.length}</div>
+      <div class="q-text">${q.q}</div>
+      <div class="q-opts">${q.o.map((o,j)=>`
+        <button class="q-opt" id="qo${i}_${j}" onclick="pick(${i},${j})">
+          <span class="q-dot"></span><span>${o}</span>
+        </button>`).join('')}
+      </div>
+      <div class="q-fb" id="qf${i}"></div>`;
+    c.appendChild(d);
+  });
+}
+
+function pick(qi,oi) {
+  if (answered[qi]!==null) return;
+  answered[qi]=oi;
+  document.getElementById(`qo${qi}_${oi}`).classList.add('sel');
+  const done=answered.filter(a=>a!==null).length;
+  document.getElementById('qProg').style.width=(done/QS.length*100)+'%';
+  document.getElementById('qProgTxt').textContent=`${done} / ${QS.length} answered`;
+}
+
+function submitQuiz() {
+  let score=0;
+  QS.forEach((q,i)=>{
+    const sel=answered[i];
+    if(sel===null) return;
+    const bl=document.getElementById('qb'+i);
+    document.getElementById(`qo${i}_${q.a}`).classList.add('opt-ok');
+    if(sel===q.a){score++;bl.classList.add('q-correct');}
+    else{document.getElementById(`qo${i}_${sel}`).classList.add('opt-bad');bl.classList.add('q-wrong');}
+    const fb=document.getElementById('qf'+i);
+    fb.textContent=q.fb; fb.className='q-fb show '+(sel===q.a?'ok':'no');
+  });
+  const card=document.getElementById('scoreCard');
+  document.getElementById('scoreN').textContent=score;
+  card.classList.add('show');
+  const p=score/QS.length;
+  const msgs=[
+    [0,0.4,"Focus on the Lumped vs Distributed and Return Current modules — these are the foundations everything else builds on."],
+    [0.4,0.7,"Good foundation. Revisit Energy & Fields and Reference Planes to strengthen the areas you missed."],
+    [0.7,0.9,"Strong grasp of EMC fundamentals. Review the questions you missed before your next design review."],
+    [0.9,1.1,"Excellent command of PCB EMC fundamentals. Apply these principles consistently — they compound in every design."]
+  ];
+  const m=msgs.find(m=>p>=m[0]&&p<m[1]);
+  document.getElementById('scoreMsg').textContent=m?m[2]:'';
+  card.scrollIntoView({behavior:'smooth',block:'nearest'});
+}
+
+function resetQuiz() {
+  answered=new Array(QS.length).fill(null);
+  buildQuiz();
+  document.getElementById('scoreCard').classList.remove('show');
+  document.getElementById('qProg').style.width='0%';
+  document.getElementById('qProgTxt').textContent='0 / 10 answered';
+}
+
+buildQuiz();
+updateSkin(3);
+</script>
+</body>
+</html>
