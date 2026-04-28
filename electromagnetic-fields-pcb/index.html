@@ -559,83 +559,82 @@ h3{font-size:14px;font-weight:700;color:var(--fg);margin-bottom:8px}
           <stop offset="0%" stop-color="#d4935a"/>
           <stop offset="100%" stop-color="#b87333"/>
         </radialGradient>
-        <clipPath id="clipLeft">
-          <rect x="0" y="0" width="305" height="310"/>
-        </clipPath>
-        <clipPath id="clipRight">
-          <rect x="315" y="0" width="305" height="310"/>
-        </clipPath>
+        <clipPath id="clipLeft"><rect x="0" y="0" width="308" height="310"/></clipPath>
+        <clipPath id="clipRight"><rect x="312" y="0" width="308" height="310"/></clipPath>
       </defs>
       <rect width="620" height="310" fill="#111111"/>
+      <line x1="310" y1="18" x2="310" y2="292" stroke="#2e2e2e" stroke-width="1.5"/>
 
-      <!-- Divider -->
-      <line x1="310" y1="20" x2="310" y2="290" stroke="#242424" stroke-width="1.5"/>
-
-      <!-- ══ LEFT: SINGLE CONDUCTOR — fields expand ══ -->
+      <!-- ══ LEFT: SINGLE CONDUCTOR ══ -->
       <g clip-path="url(#clipLeft)">
-        <text x="152" y="22" text-anchor="middle" fill="#ff4d4d" font-family="Poppins" font-size="11" font-weight="700">SINGLE CONDUCTOR PCB</text>
-        <text x="152" y="35" text-anchor="middle" fill="#94a3b8" font-family="Poppins" font-size="9">Electric field</text>
-        <text x="82"  y="35" text-anchor="middle" fill="#94a3b8" font-family="Poppins" font-size="9">Magnetic field</text>
-        <!-- Magnetic rings around trace — full circles, expand outward -->
-        <circle id="pL1" cx="152" cy="120" rx="40" ry="28" fill="none" stroke="#00FF94" stroke-width="1.5" opacity="0.9"/>
-        <circle id="pL2" cx="152" cy="120" rx="72" ry="52" fill="none" stroke="#00FF94" stroke-width="1.1" opacity="0.65"/>
-        <circle id="pL3" cx="152" cy="120" rx="108" ry="82" fill="none" stroke="#00FF94" stroke-width="0.8" opacity="0.38"/>
-        <!-- Electric field spokes radiating in all directions -->
-        <line id="pLE0" x1="152" y1="98"  x2="152" y2="30"  stroke="#f5a623" stroke-width="1.1" opacity="0.75" stroke-dasharray="5 4"/>
-        <line id="pLE1" x1="166" y1="100" x2="220" y2="50"  stroke="#f5a623" stroke-width="1.0" opacity="0.60" stroke-dasharray="5 4"/>
-        <line id="pLE2" x1="173" y1="110" x2="278" y2="80"  stroke="#f5a623" stroke-width="1.0" opacity="0.60" stroke-dasharray="5 4"/>
-        <line id="pLE3" x1="176" y1="120" x2="295" y2="120" stroke="#f5a623" stroke-width="1.1" opacity="0.75" stroke-dasharray="5 4"/>
-        <line id="pLE4" x1="173" y1="130" x2="278" y2="160" stroke="#f5a623" stroke-width="1.0" opacity="0.60" stroke-dasharray="5 4"/>
-        <line id="pLE5" x1="166" y1="140" x2="220" y2="190" stroke="#f5a623" stroke-width="1.0" opacity="0.60" stroke-dasharray="5 4"/>
-        <line id="pLE6" x1="152" y1="142" x2="152" y2="210" stroke="#f5a623" stroke-width="1.1" opacity="0.75" stroke-dasharray="5 4"/>
-        <line id="pLE7" x1="138" y1="140" x2="84"  y2="190" stroke="#f5a623" stroke-width="1.0" opacity="0.60" stroke-dasharray="5 4"/>
-        <line id="pLE8" x1="131" y1="130" x2="26"  y2="160" stroke="#f5a623" stroke-width="1.0" opacity="0.60" stroke-dasharray="5 4"/>
-        <line id="pLE9" x1="128" y1="120" x2="9"   y2="120" stroke="#f5a623" stroke-width="1.1" opacity="0.75" stroke-dasharray="5 4"/>
+        <text x="154" y="20" text-anchor="middle" fill="#ff4d4d" font-family="Poppins" font-size="10.5" font-weight="700">SINGLE CONDUCTOR PCB</text>
         <!-- Signal trace -->
-        <rect x="124" y="110" width="56" height="19" rx="3" fill="url(#pcbCondGrad)" stroke="#d4935a" stroke-width="1"/>
-        <text x="152" y="122" text-anchor="middle" fill="#0a0a0a" font-family="Poppins" font-size="8" font-weight="700">SIGNAL TRACE</text>
-        <!-- EM FIELDS EXPAND label -->
-        <text x="152" y="250" text-anchor="middle" fill="#ff4d4d" font-family="Poppins" font-size="11" font-weight="700">EM FIELDS EXPAND</text>
-        <text x="152" y="265" text-anchor="middle" fill="#ff4d4d" font-family="Poppins" font-size="18">✗</text>
+        <rect x="126" y="113" width="56" height="15" rx="2" fill="url(#pcbCondGrad)" stroke="#d4935a" stroke-width="1"/>
+        <text x="154" y="123.5" text-anchor="middle" fill="#0a0a0a" font-family="Poppins" font-size="7" font-weight="700">SIGNAL TRACE</text>
+        <!-- MAGNETIC GROUP (left) -->
+        <g id="pcbLeftMag">
+          <text x="54" y="36" text-anchor="middle" fill="#00FF94" font-family="Poppins" font-size="8.5" opacity="0.85">Φ magnetic</text>
+          <!-- Proper ellipses (not circles with rx/ry) -->
+          <ellipse id="pL1" cx="154" cy="121" rx="38" ry="22" fill="none" stroke="#00FF94" stroke-width="1.8" opacity="0.9"/>
+          <ellipse id="pL2" cx="154" cy="121" rx="68" ry="44" fill="none" stroke="#00FF94" stroke-width="1.3" opacity="0.65"/>
+          <ellipse id="pL3" cx="154" cy="121" rx="104" ry="72" fill="none" stroke="#00FF94" stroke-width="0.9" opacity="0.35"/>
+        </g>
+        <!-- ELECTRIC GROUP (left) -->
+        <g id="pcbLeftElec">
+          <text x="248" y="36" text-anchor="middle" fill="#f5a623" font-family="Poppins" font-size="8.5" opacity="0.85">Ψ electric</text>
+          <!-- 8 symmetric radial spokes from trace edge outward -->
+          <line id="pLE0" x1="154" y1="101" x2="154" y2="28"  stroke="#f5a623" stroke-width="1.4" opacity="0.9" stroke-dasharray="6 5"/>
+          <line id="pLE1" x1="170" y1="105" x2="232" y2="50"  stroke="#f5a623" stroke-width="1.2" opacity="0.75" stroke-dasharray="6 5"/>
+          <line id="pLE2" x1="182" y1="121" x2="294" y2="121" stroke="#f5a623" stroke-width="1.4" opacity="0.9" stroke-dasharray="6 5"/>
+          <line id="pLE3" x1="170" y1="137" x2="232" y2="192" stroke="#f5a623" stroke-width="1.2" opacity="0.75" stroke-dasharray="6 5"/>
+          <line id="pLE4" x1="154" y1="141" x2="154" y2="214" stroke="#f5a623" stroke-width="1.4" opacity="0.9" stroke-dasharray="6 5"/>
+          <line id="pLE5" x1="138" y1="137" x2="76"  y2="192" stroke="#f5a623" stroke-width="1.2" opacity="0.75" stroke-dasharray="6 5"/>
+          <line id="pLE6" x1="126" y1="121" x2="14"  y2="121" stroke="#f5a623" stroke-width="1.4" opacity="0.9" stroke-dasharray="6 5"/>
+          <line id="pLE7" x1="138" y1="105" x2="76"  y2="50"  stroke="#f5a623" stroke-width="1.2" opacity="0.75" stroke-dasharray="6 5"/>
+        </g>
+        <text x="154" y="254" text-anchor="middle" fill="#ff4d4d" font-family="Poppins" font-size="11" font-weight="700">EM FIELDS EXPAND</text>
+        <text x="154" y="271" text-anchor="middle" fill="#ff4d4d" font-family="Poppins" font-size="17">✗</text>
       </g>
 
-      <!-- ══ RIGHT: TWO CONDUCTORS — fields contained ══ -->
+      <!-- ══ RIGHT: TWO CONDUCTORS ══ -->
       <g clip-path="url(#clipRight)">
-        <text x="467" y="22" text-anchor="middle" fill="#00FF94" font-family="Poppins" font-size="11" font-weight="700">TWO CONDUCTORS PCB</text>
-        <text x="395" y="35" text-anchor="middle" fill="#94a3b8" font-family="Poppins" font-size="9">Magnetic field</text>
-        <text x="530" y="35" text-anchor="middle" fill="#94a3b8" font-family="Poppins" font-size="9">Electric field</text>
-        <!-- Dielectric region between trace and RRP -->
-        <rect x="330" y="129" width="274" height="55" fill="#161618" stroke="#2e2e2e" stroke-width="0.5" rx="1"/>
-        <text x="467" y="160" text-anchor="middle" fill="#2e2e2e" font-family="Poppins" font-size="9" font-weight="700">Dielectric</text>
-        <!-- Magnetic rings — ellipses, contained between trace + RRP -->
-        <ellipse id="pR1" cx="467" cy="156" rx="50" ry="20" fill="none" stroke="#00FF94" stroke-width="1.6" opacity="0.95"/>
-        <ellipse id="pR2" cx="467" cy="156" rx="85" ry="32" fill="none" stroke="#00FF94" stroke-width="1.2" opacity="0.70"/>
-        <ellipse id="pR3" cx="467" cy="156" rx="122" ry="45" fill="none" stroke="#00FF94" stroke-width="0.9" opacity="0.40"/>
-        <!-- Electric field lines — downward only, trace to RRP -->
-        <line id="pRE0" x1="467" y1="130" x2="467" y2="182" stroke="#f5a623" stroke-width="1.8" opacity="1.0"  stroke-dasharray="5 4"/>
-        <line id="pRE1" x1="450" y1="130" x2="449" y2="182" stroke="#f5a623" stroke-width="1.4" opacity="0.82" stroke-dasharray="5 4"/>
-        <line id="pRE2" x1="484" y1="130" x2="485" y2="182" stroke="#f5a623" stroke-width="1.4" opacity="0.82" stroke-dasharray="5 4"/>
-        <line id="pRE3" x1="432" y1="131" x2="430" y2="182" stroke="#f5a623" stroke-width="1.0" opacity="0.58" stroke-dasharray="5 4"/>
-        <line id="pRE4" x1="502" y1="131" x2="504" y2="182" stroke="#f5a623" stroke-width="1.0" opacity="0.58" stroke-dasharray="5 4"/>
+        <text x="466" y="20" text-anchor="middle" fill="#00FF94" font-family="Poppins" font-size="10.5" font-weight="700">TWO CONDUCTORS PCB</text>
+        <!-- Dielectric -->
+        <rect x="330" y="130" width="272" height="54" fill="#13181e" stroke="#1e2a3a" stroke-width="0.8" rx="1"/>
+        <text x="466" y="160" text-anchor="middle" fill="#222e3a" font-family="Poppins" font-size="9" font-weight="700">Dielectric (FR4)</text>
         <!-- Signal trace -->
-        <rect x="399" y="110" width="136" height="19" rx="3" fill="url(#pcbCondGrad)" stroke="#d4935a" stroke-width="1"/>
-        <text x="467" y="122" text-anchor="middle" fill="#0a0a0a" font-family="Poppins" font-size="8" font-weight="700">SIGNAL TRACE</text>
+        <rect x="396" y="113" width="140" height="15" rx="2" fill="url(#pcbCondGrad)" stroke="#d4935a" stroke-width="1"/>
+        <text x="466" y="123.5" text-anchor="middle" fill="#0a0a0a" font-family="Poppins" font-size="7" font-weight="700">SIGNAL TRACE</text>
         <!-- Return Reference Plane -->
-        <rect x="330" y="184" width="274" height="18" rx="2" fill="#3a7bd5" opacity="0.85"/>
-        <text x="467" y="196" text-anchor="middle" fill="#fff" font-family="Poppins" font-size="8" font-weight="700">RETURN REFERENCE PLANE</text>
-        <!-- Return current arrow -->
-        <line id="pRetI" x1="570" y1="193" x2="510" y2="193" stroke="#00ddff" stroke-width="1.8" opacity="0.7" stroke-dasharray="8 5"/>
-        <text x="578" y="197" fill="#00ddff" font-family="Poppins" font-size="8">I ret</text>
-        <!-- Contained label -->
-        <text x="467" y="250" text-anchor="middle" fill="#00FF94" font-family="Poppins" font-size="10" font-weight="700">EM FIELDS CONCENTRATE</text>
-        <text x="467" y="263" text-anchor="middle" fill="#94a3b8" font-family="Poppins" font-size="9">between trace and RRP</text>
-        <text x="467" y="282" text-anchor="middle" fill="#00FF94" font-family="Poppins" font-size="18">✓</text>
+        <rect x="330" y="186" width="272" height="16" rx="2" fill="#2a5fa8" opacity="0.9"/>
+        <text x="466" y="197" text-anchor="middle" fill="#fff" font-family="Poppins" font-size="7.5" font-weight="700">RETURN REFERENCE PLANE</text>
+        <!-- MAGNETIC GROUP (right) -->
+        <g id="pcbRightMag">
+          <text x="380" y="36" text-anchor="middle" fill="#00FF94" font-family="Poppins" font-size="8.5" opacity="0.85">Φ magnetic</text>
+          <ellipse id="pR1" cx="466" cy="157" rx="52"  ry="18" fill="none" stroke="#00FF94" stroke-width="1.8" opacity="0.95"/>
+          <ellipse id="pR2" cx="466" cy="157" rx="90"  ry="30" fill="none" stroke="#00FF94" stroke-width="1.3" opacity="0.65"/>
+          <ellipse id="pR3" cx="466" cy="157" rx="126" ry="42" fill="none" stroke="#00FF94" stroke-width="0.9" opacity="0.35"/>
+        </g>
+        <!-- ELECTRIC GROUP (right) -->
+        <g id="pcbRightElec">
+          <text x="553" y="36" text-anchor="middle" fill="#f5a623" font-family="Poppins" font-size="8.5" opacity="0.85">Ψ electric</text>
+          <line id="pRE0" x1="466" y1="130" x2="466" y2="184" stroke="#f5a623" stroke-width="2.1" opacity="1.0"  stroke-dasharray="6 5"/>
+          <line id="pRE1" x1="447" y1="130" x2="446" y2="184" stroke="#f5a623" stroke-width="1.6" opacity="0.84" stroke-dasharray="6 5"/>
+          <line id="pRE2" x1="485" y1="130" x2="486" y2="184" stroke="#f5a623" stroke-width="1.6" opacity="0.84" stroke-dasharray="6 5"/>
+          <line id="pRE3" x1="426" y1="131" x2="424" y2="184" stroke="#f5a623" stroke-width="1.2" opacity="0.60" stroke-dasharray="6 5"/>
+          <line id="pRE4" x1="506" y1="131" x2="508" y2="184" stroke="#f5a623" stroke-width="1.2" opacity="0.60" stroke-dasharray="6 5"/>
+          <!-- Return current on RRP (marches leftward) -->
+          <line id="pRetI" x1="570" y1="194" x2="510" y2="194" stroke="#00ddff" stroke-width="2.2" opacity="0.85" stroke-dasharray="8 5"/>
+          <text x="595" y="198" text-anchor="middle" fill="#00ddff" font-family="Poppins" font-size="7.5">I ret</text>
+        </g>
+        <text x="466" y="250" text-anchor="middle" fill="#00FF94" font-family="Poppins" font-size="10" font-weight="700">EM FIELDS CONCENTRATE</text>
+        <text x="466" y="264" text-anchor="middle" fill="#94a3b8" font-family="Poppins" font-size="9">between trace and RRP</text>
+        <text x="466" y="282" text-anchor="middle" fill="#00FF94" font-family="Poppins" font-size="17">✓</text>
       </g>
 
-      <!-- Mode label -->
-      <text x="310" y="305" text-anchor="middle" fill="#94a3b8" font-family="Poppins" font-size="10" id="pcbModeLabel">Showing: Electric Field (E-field)</text>
+      <text x="310" y="305" text-anchor="middle" fill="#94a3b8" font-family="Poppins" font-size="10" id="pcbModeLabel">Showing: Both Fields</text>
     </svg>
-    <div class="viz-cap">Fig 3 — PCB cross-section comparison. Left: single conductor trace — fields expand in all directions, PCB is a radiating antenna. Right: trace + solid RRP — fields are concentrated in the dielectric between them. Energy travels in the dielectric, not in the copper.</div>
+    <div class="viz-cap">Fig 3 — Left: single conductor trace — fields expand in all directions (radiating antenna). Right: trace + solid RRP — fields are concentrated in the dielectric between them. Energy travels in the dielectric, not the copper.</div>
   </div>
 
   <div class="key-point">
@@ -672,80 +671,98 @@ h3{font-size:14px;font-weight:700;color:var(--fg);margin-bottom:8px}
 
   <div class="viz">
     <div class="viz-title" id="modelTitle">The Electron Flow Model — What We Were Taught</div>
-    <svg id="svgModel" viewBox="0 0 600 300" xmlns="http://www.w3.org/2000/svg">
-      <rect width="600" height="300" fill="#111111"/>
+    <svg id="svgModel" viewBox="0 0 600 290" xmlns="http://www.w3.org/2000/svg">
+      <rect width="600" height="290" fill="#111111"/>
 
-      <!-- ══ WRONG MODEL: electrons inside conductors ══ -->
+      <!-- ══ WRONG MODEL ══ -->
       <g id="wrongModel">
-        <!-- outer loop frame -->
-        <rect x="50" y="80" width="500" height="160" rx="6" fill="none" stroke="#ff4d4d" stroke-width="1.5" opacity="0.4"/>
-        <!-- Signal conductor top -->
-        <rect x="90"  y="80"  width="420" height="28" rx="3" fill="#b87333" opacity="0.75"/>
-        <text x="300" y="97"  text-anchor="middle" fill="#0a0a0a" font-family="Poppins" font-size="9" font-weight="700">Signal Conductor</text>
-        <!-- Return conductor bottom -->
-        <rect x="90"  y="212" width="420" height="28" rx="3" fill="#555" opacity="0.80"/>
-        <text x="300" y="229" text-anchor="middle" fill="#e2e8f0" font-family="Poppins" font-size="9" font-weight="700">Return Conductor</text>
-        <!-- Source left -->
-        <rect x="50"  y="80"  width="40"  height="160" rx="3" fill="#1a1a1a" stroke="#ff4d4d" stroke-width="1.5"/>
-        <text x="70"  y="158" text-anchor="middle" fill="#ff4d4d" font-family="Poppins" font-size="9" font-weight="700">S</text>
-        <text x="70"  y="170" text-anchor="middle" fill="#ff4d4d" font-family="Poppins" font-size="9">RC</text>
-        <!-- Load right -->
-        <rect x="510" y="80"  width="40"  height="160" rx="3" fill="#1a1a1a" stroke="#ff4d4d" stroke-width="1.5"/>
-        <text x="530" y="165" text-anchor="middle" fill="#ff4d4d" font-family="Poppins" font-size="10" font-weight="700">R</text>
-        <!-- Electron dots inside top conductor, flow right -->
-        <circle id="eA1" cx="140" cy="94" r="7" fill="#ff4d4d" opacity="0.9"/>
-        <circle id="eA2" cx="200" cy="94" r="7" fill="#ff4d4d" opacity="0.9"/>
-        <circle id="eA3" cx="260" cy="94" r="7" fill="#ff4d4d" opacity="0.9"/>
-        <circle id="eA4" cx="320" cy="94" r="7" fill="#ff4d4d" opacity="0.9"/>
-        <circle id="eA5" cx="380" cy="94" r="7" fill="#ff4d4d" opacity="0.9"/>
-        <circle id="eA6" cx="440" cy="94" r="7" fill="#ff4d4d" opacity="0.9"/>
-        <!-- Arrow inside top: right -->
-        <text x="300" y="110" text-anchor="middle" fill="#ff4d4d" font-family="Poppins" font-size="9" opacity="0.7">electrons →</text>
-        <!-- Electron dots inside bottom conductor, flow left -->
-        <circle id="eB1" cx="440" cy="226" r="7" fill="#ff4d4d" opacity="0.9"/>
-        <circle id="eB2" cx="380" cy="226" r="7" fill="#ff4d4d" opacity="0.9"/>
-        <circle id="eB3" cx="320" cy="226" r="7" fill="#ff4d4d" opacity="0.9"/>
-        <circle id="eB4" cx="260" cy="226" r="7" fill="#ff4d4d" opacity="0.9"/>
-        <circle id="eB5" cx="200" cy="226" r="7" fill="#ff4d4d" opacity="0.9"/>
-        <circle id="eB6" cx="140" cy="226" r="7" fill="#ff4d4d" opacity="0.9"/>
-        <!-- Arrow inside bottom: left -->
-        <text x="300" y="210" text-anchor="middle" fill="#ff4d4d" font-family="Poppins" font-size="9" opacity="0.7">← electrons</text>
+        <!-- Outer frame -->
+        <rect x="42" y="68" width="516" height="156" rx="5" fill="none" stroke="#ff4d4d" stroke-width="1.2" opacity="0.35"/>
+        <!-- Source box -->
+        <rect x="42" y="68" width="50" height="156" rx="4" fill="#1e0a0a" stroke="#ff4d4d" stroke-width="1.5"/>
+        <text x="67" y="140" text-anchor="middle" fill="#ff4d4d" font-family="Poppins" font-size="11" font-weight="700">~</text>
+        <text x="67" y="155" text-anchor="middle" fill="#ff4d4d" font-family="Poppins" font-size="7">SOURCE</text>
+        <!-- Load box -->
+        <rect x="508" y="68" width="50" height="156" rx="4" fill="#1e0a0a" stroke="#ff4d4d" stroke-width="1.5"/>
+        <text x="533" y="136" text-anchor="middle" fill="#ff4d4d" font-family="Poppins" font-size="11" font-weight="700">▭</text>
+        <text x="533" y="151" text-anchor="middle" fill="#ff4d4d" font-family="Poppins" font-size="7">LOAD</text>
+        <!-- Signal conductor (top) -->
+        <rect x="94" y="68" width="414" height="26" rx="2" fill="#b87333" opacity="0.8"/>
+        <text x="301" y="84" text-anchor="middle" fill="#0a0a0a" font-family="Poppins" font-size="8.5" font-weight="700">Signal Conductor (copper)</text>
+        <!-- Return conductor (bottom) -->
+        <rect x="94" y="198" width="414" height="26" rx="2" fill="#555" opacity="0.85"/>
+        <text x="301" y="214" text-anchor="middle" fill="#e2e8f0" font-family="Poppins" font-size="8.5" font-weight="700">Return Conductor (copper)</text>
+        <!-- Electron dots in top conductor — spaced evenly, march right -->
+        <circle id="eA1" cx="130" cy="81" r="6.5" fill="#ff4d4d" opacity="0.95"/>
+        <circle id="eA2" cx="200" cy="81" r="6.5" fill="#ff4d4d" opacity="0.95"/>
+        <circle id="eA3" cx="270" cy="81" r="6.5" fill="#ff4d4d" opacity="0.95"/>
+        <circle id="eA4" cx="340" cy="81" r="6.5" fill="#ff4d4d" opacity="0.95"/>
+        <circle id="eA5" cx="410" cy="81" r="6.5" fill="#ff4d4d" opacity="0.95"/>
+        <circle id="eA6" cx="480" cy="81" r="6.5" fill="#ff4d4d" opacity="0.95"/>
+        <!-- "−" charge labels on top electrons -->
+        <text x="130" y="84" text-anchor="middle" fill="#0a0a0a" font-family="Poppins" font-size="9" font-weight="700">−</text>
+        <text x="200" y="84" text-anchor="middle" fill="#0a0a0a" font-family="Poppins" font-size="9" font-weight="700">−</text>
+        <text x="270" y="84" text-anchor="middle" fill="#0a0a0a" font-family="Poppins" font-size="9" font-weight="700">−</text>
+        <text x="340" y="84" text-anchor="middle" fill="#0a0a0a" font-family="Poppins" font-size="9" font-weight="700">−</text>
+        <text x="410" y="84" text-anchor="middle" fill="#0a0a0a" font-family="Poppins" font-size="9" font-weight="700">−</text>
+        <text x="480" y="84" text-anchor="middle" fill="#0a0a0a" font-family="Poppins" font-size="9" font-weight="700">−</text>
+        <!-- Direction label top -->
+        <text x="301" y="107" text-anchor="middle" fill="#ff4d4d" font-family="Poppins" font-size="9" opacity="0.8">→ electrons flow inside conductor →</text>
+        <!-- Electron dots in bottom conductor — march left -->
+        <circle id="eB1" cx="480" cy="211" r="6.5" fill="#ff4d4d" opacity="0.95"/>
+        <circle id="eB2" cx="410" cy="211" r="6.5" fill="#ff4d4d" opacity="0.95"/>
+        <circle id="eB3" cx="340" cy="211" r="6.5" fill="#ff4d4d" opacity="0.95"/>
+        <circle id="eB4" cx="270" cy="211" r="6.5" fill="#ff4d4d" opacity="0.95"/>
+        <circle id="eB5" cx="200" cy="211" r="6.5" fill="#ff4d4d" opacity="0.95"/>
+        <circle id="eB6" cx="130" cy="211" r="6.5" fill="#ff4d4d" opacity="0.95"/>
+        <text x="480" y="214" text-anchor="middle" fill="#e2e8f0" font-family="Poppins" font-size="9" font-weight="700">−</text>
+        <text x="410" y="214" text-anchor="middle" fill="#e2e8f0" font-family="Poppins" font-size="9" font-weight="700">−</text>
+        <text x="340" y="214" text-anchor="middle" fill="#e2e8f0" font-family="Poppins" font-size="9" font-weight="700">−</text>
+        <text x="270" y="214" text-anchor="middle" fill="#e2e8f0" font-family="Poppins" font-size="9" font-weight="700">−</text>
+        <text x="200" y="214" text-anchor="middle" fill="#e2e8f0" font-family="Poppins" font-size="9" font-weight="700">−</text>
+        <text x="130" y="214" text-anchor="middle" fill="#e2e8f0" font-family="Poppins" font-size="9" font-weight="700">−</text>
+        <!-- Direction label bottom -->
+        <text x="301" y="182" text-anchor="middle" fill="#ff4d4d" font-family="Poppins" font-size="9" opacity="0.8">← electrons return through ground ←</text>
         <!-- Wrong label -->
-        <rect x="50" y="258" width="500" height="36" rx="3" fill="rgba(255,77,77,0.07)" stroke="rgba(255,77,77,0.25)" stroke-width="1"/>
-        <text x="300" y="275" text-anchor="middle" fill="#ff4d4d" font-family="Poppins" font-size="11" font-weight="700">✗ WRONG — Energy is inside the conductor</text>
-        <text x="300" y="289" text-anchor="middle" fill="#94a3b8" font-family="Poppins" font-size="10">Cannot explain EMI, radiation, or why signals travel at ~½ speed of light</text>
+        <rect x="42" y="238" width="516" height="44" rx="3" fill="rgba(255,77,77,0.06)" stroke="rgba(255,77,77,0.25)" stroke-width="1"/>
+        <text x="300" y="256" text-anchor="middle" fill="#ff4d4d" font-family="Poppins" font-size="11" font-weight="700">✗ WRONG — Energy described as electrons inside conductors</text>
+        <text x="300" y="272" text-anchor="middle" fill="#94a3b8" font-family="Poppins" font-size="10">Cannot explain EMI, radiation, or why signals travel at ~½ the speed of light</text>
       </g>
 
-      <!-- ══ CORRECT MODEL: EM field in space between conductors ══ -->
+      <!-- ══ CORRECT MODEL ══ -->
       <g id="rightModel" style="display:none">
-        <!-- Signal conductor top (thin — it's a boundary) -->
-        <rect x="90"  y="80"  width="420" height="16" rx="2" fill="#b87333" opacity="0.85"/>
-        <text x="300" y="92"  text-anchor="middle" fill="#0a0a0a" font-family="Poppins" font-size="8" font-weight="700">Signal Conductor</text>
-        <!-- Return conductor bottom -->
-        <rect x="90"  y="224" width="420" height="16" rx="2" fill="#555" opacity="0.85"/>
-        <text x="300" y="235" text-anchor="middle" fill="#e2e8f0" font-family="Poppins" font-size="8" font-weight="700">Return Conductor</text>
-        <!-- EM field region (the space between conductors) -->
-        <rect x="90"  y="96"  width="420" height="128" rx="2" fill="rgba(0,60,180,0.18)" stroke="#3a7bd5" stroke-width="1" opacity="0.9"/>
-        <text x="300" y="160" text-anchor="middle" fill="#3a7bd5" font-family="Poppins" font-size="11" font-weight="700" opacity="0.6">ELECTROMAGNETIC (EM) FIELDS</text>
-        <!-- Poynting vector (horizontal energy arrow) -->
-        <line id="poyLine" x1="110" y1="158" x2="490" y2="158" stroke="#00FF94" stroke-width="3" opacity="0.9" stroke-dasharray="14 7"/>
-        <text x="300" y="148" text-anchor="middle" fill="#00FF94" font-family="Poppins" font-size="10" font-weight="700">S — Poynting vector (energy flow direction)</text>
-        <!-- E-field verticals between conductors -->
-        <line id="rE1" x1="160" y1="100" x2="160" y2="222" stroke="#f5a623" stroke-width="1.2" opacity="0.7" stroke-dasharray="5 4"/>
-        <line id="rE2" x1="230" y1="100" x2="230" y2="222" stroke="#f5a623" stroke-width="1.2" opacity="0.7" stroke-dasharray="5 4"/>
-        <line id="rE3" x1="300" y1="100" x2="300" y2="222" stroke="#f5a623" stroke-width="1.2" opacity="0.7" stroke-dasharray="5 4"/>
-        <line id="rE4" x1="370" y1="100" x2="370" y2="222" stroke="#f5a623" stroke-width="1.2" opacity="0.7" stroke-dasharray="5 4"/>
-        <line id="rE5" x1="440" y1="100" x2="440" y2="222" stroke="#f5a623" stroke-width="1.2" opacity="0.7" stroke-dasharray="5 4"/>
-        <!-- Source left -->
-        <rect x="50"  y="80"  width="40"  height="160" rx="3" fill="#1a1a1a" stroke="#00FF94" stroke-width="1.5"/>
-        <text x="70"  y="163" text-anchor="middle" fill="#00FF94" font-family="Poppins" font-size="9" font-weight="700">SRC</text>
-        <!-- Load right -->
-        <rect x="510" y="80"  width="40"  height="160" rx="3" fill="#1a1a1a" stroke="#00FF94" stroke-width="1.5"/>
-        <text x="530" y="163" text-anchor="middle" fill="#00FF94" font-family="Poppins" font-size="9" font-weight="700">LOAD</text>
+        <!-- Signal conductor (top boundary) -->
+        <rect x="94" y="68" width="414" height="18" rx="2" fill="#b87333" opacity="0.9"/>
+        <text x="301" y="80" text-anchor="middle" fill="#0a0a0a" font-family="Poppins" font-size="8" font-weight="700">Signal Conductor</text>
+        <!-- Return conductor (bottom boundary) -->
+        <rect x="94" y="204" width="414" height="18" rx="2" fill="#555" opacity="0.9"/>
+        <text x="301" y="216" text-anchor="middle" fill="#e2e8f0" font-family="Poppins" font-size="8" font-weight="700">Return Conductor</text>
+        <!-- EM Field space between conductors -->
+        <rect x="94" y="88" width="414" height="116" rx="2" fill="rgba(20,60,180,0.16)" stroke="rgba(58,123,213,0.5)" stroke-width="1.2"/>
+        <!-- Source box -->
+        <rect x="42" y="68" width="52" height="154" rx="4" fill="#0d1a2e" stroke="#00FF94" stroke-width="1.8"/>
+        <text x="68" y="138" text-anchor="middle" fill="#00FF94" font-family="Poppins" font-size="11" font-weight="700">~</text>
+        <text x="68" y="152" text-anchor="middle" fill="#00FF94" font-family="Poppins" font-size="7">SOURCE</text>
+        <!-- Load box -->
+        <rect x="506" y="68" width="52" height="154" rx="4" fill="#0d1a2e" stroke="#00FF94" stroke-width="1.8"/>
+        <text x="532" y="138" text-anchor="middle" fill="#00FF94" font-family="Poppins" font-size="11" font-weight="700">▭</text>
+        <text x="532" y="152" text-anchor="middle" fill="#00FF94" font-family="Poppins" font-size="7">LOAD</text>
+        <!-- E-field verticals (downward through dielectric) -->
+        <line id="rE1" x1="155" y1="90" x2="155" y2="202" stroke="#f5a623" stroke-width="1.3" opacity="0.75" stroke-dasharray="6 5"/>
+        <line id="rE2" x1="220" y1="90" x2="220" y2="202" stroke="#f5a623" stroke-width="1.3" opacity="0.75" stroke-dasharray="6 5"/>
+        <line id="rE3" x1="301" y1="90" x2="301" y2="202" stroke="#f5a623" stroke-width="1.3" opacity="0.75" stroke-dasharray="6 5"/>
+        <line id="rE4" x1="382" y1="90" x2="382" y2="202" stroke="#f5a623" stroke-width="1.3" opacity="0.75" stroke-dasharray="6 5"/>
+        <line id="rE5" x1="447" y1="90" x2="447" y2="202" stroke="#f5a623" stroke-width="1.3" opacity="0.75" stroke-dasharray="6 5"/>
+        <!-- Poynting vector — dominant horizontal arrow marching rightward -->
+        <line id="poyLine" x1="110" y1="146" x2="488" y2="146" stroke="#00FF94" stroke-width="3.5" opacity="0.95" stroke-dasharray="16 7"/>
+        <!-- S label -->
+        <text x="301" y="134" text-anchor="middle" fill="#00FF94" font-family="Poppins" font-size="10" font-weight="700">S = E × H — Poynting vector (energy flow →)</text>
+        <!-- EM label -->
+        <text x="301" y="175" text-anchor="middle" fill="#3a7bd5" font-family="Poppins" font-size="10" font-weight="700" opacity="0.7">ELECTROMAGNETIC FIELDS</text>
         <!-- Correct label -->
-        <rect x="50" y="258" width="500" height="36" rx="3" fill="rgba(0,255,148,0.05)" stroke="rgba(0,255,148,0.2)" stroke-width="1"/>
-        <text x="300" y="275" text-anchor="middle" fill="#00FF94" font-family="Poppins" font-size="11" font-weight="700">✓ CORRECT — Energy flows in the space between conductors</text>
-        <text x="300" y="289" text-anchor="middle" fill="#94a3b8" font-family="Poppins" font-size="10">Conductors guide the fields — they are the riverbanks, not the river</text>
+        <rect x="42" y="238" width="516" height="44" rx="3" fill="rgba(0,255,148,0.05)" stroke="rgba(0,255,148,0.22)" stroke-width="1"/>
+        <text x="300" y="256" text-anchor="middle" fill="#00FF94" font-family="Poppins" font-size="11" font-weight="700">✓ CORRECT — Energy flows in the space between conductors</text>
+        <text x="300" y="272" text-anchor="middle" fill="#94a3b8" font-family="Poppins" font-size="10">Conductors guide the fields — they are the riverbanks, not the river</text>
       </g>
     </svg>
     <div class="viz-cap" id="modelCap">The conventional circuit model — taught in most university courses. Explains DC behaviour but fails completely to explain EMI, radiation, or why signals travel near the speed of light.</div>
@@ -935,77 +952,167 @@ h3{font-size:14px;font-weight:700;color:var(--fg);margin-bottom:8px}
 
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
 <script>
+// ─────────────────────────────────────────────
+// Animation registry + helpers
+// ─────────────────────────────────────────────
 const REDUCED = window.matchMedia('(prefers-reduced-motion:reduce)').matches;
 const ANIMS = {};
 
 function kill(key){ if(ANIMS[key]){ ANIMS[key].kill(); delete ANIMS[key]; } }
 function killAll(){ Object.keys(ANIMS).forEach(kill); }
 
-// March dashes along a selector of lines/paths
-function marchDash(key, selector, len, speed, delay0){
+/**
+ * marchLines — correct infinite marching-dash animation.
+ * Animates ONE period of strokeDashoffset so it works regardless of element length.
+ * dir: 1 = dashes march toward end of stroke, -1 = toward start
+ */
+function marchLines(key, selector, opts){
   kill(key);
   if(REDUCED) return;
-  const els = [...document.querySelectorAll(selector)].filter(e=>e.closest('[style*="display:none"]')===null);
+  const cfg = Object.assign({dash:7,gap:5,speed:1.2,stagger:0.1,dir:1}, opts||{});
+  const period = cfg.dash + cfg.gap;
+  const els = [...document.querySelectorAll(selector)];
   if(!els.length) return;
-  const d = Math.round(len*0.14), g = Math.round(len*0.09);
-  const tl = gsap.timeline();
   els.forEach((el,i)=>{
-    el.setAttribute('stroke-dasharray',`${d} ${g}`);
-    tl.fromTo(el,{strokeDashoffset:len},{strokeDashoffset:0,
-      duration:speed,ease:'none',repeat:-1,delay:(delay0||0)+i*0.15},0);
+    gsap.set(el, {strokeDasharray:`${cfg.dash} ${cfg.gap}`, strokeDashoffset:0});
+    gsap.to(el, {
+      strokeDashoffset: cfg.dir * -period,
+      duration: cfg.speed,
+      ease: 'none',
+      repeat: -1,
+      delay: i * cfg.stagger,
+      overwrite: true
+    });
   });
-  ANIMS[key] = tl;
+  ANIMS[key] = {kill:()=>gsap.killTweensOf(els)};
 }
 
-// Pulse concentric rings — scale up and fade
-function pulseRings(key, ids, cx, cy){
+/**
+ * pulseEllipses — expand ellipses and fade, staggered
+ * Uses proper rx/ry attributes (works on <ellipse> elements)
+ */
+function pulseEllipses(key, ids, durationBase){
   kill(key);
   if(REDUCED) return;
-  const tl = gsap.timeline({repeat:-1});
+  const tweens = [];
   ids.forEach((id,i)=>{
     const el = document.getElementById(id);
     if(!el) return;
-    const r0 = parseFloat(el.getAttribute('r')||el.getAttribute('rx')||20);
-    tl.fromTo(el,
-      {attr:{r:r0*0.72}, opacity:0.95},
-      {attr:{r:r0*1.22}, opacity:0, duration:2.2, ease:'power2.out',
-       delay:i*0.6, repeat:-1, repeatDelay:0.1},
-      0);
+    const rx0 = parseFloat(el.getAttribute('rx')||el.getAttribute('r')||20);
+    const ry0 = parseFloat(el.getAttribute('ry')||el.getAttribute('r')||rx0);
+    const t = gsap.fromTo(el,
+      {attr:{rx:rx0*0.75, ry:ry0*0.75}, opacity:0.95},
+      {attr:{rx:rx0*1.3,  ry:ry0*1.3},  opacity:0,
+       duration:(durationBase||2)+i*0.5,  ease:'power2.out',
+       repeat:-1, delay:i*0.7}
+    );
+    tweens.push(t);
   });
-  ANIMS[key] = tl;
+  ANIMS[key] = {kill:()=>{ tweens.forEach(t=>t.kill()); }};
 }
 
-// Expanding radiation rings (created dynamically)
-function radiateRings(key, svgId, cx, cy){
+/**
+ * pulseEllipsesClamped — pulse in a yoyo (contained rings don't expand to infinity)
+ */
+function pulseEllipsesClamped(key, ids, durationBase){
   kill(key);
-  const old = ANIMS[key+'_els'];
-  if(old){ old.forEach(e=>e.parentNode&&e.parentNode.removeChild(e)); delete ANIMS[key+'_els']; }
   if(REDUCED) return;
-  const svg = document.getElementById(svgId);
-  if(!svg) return;
-  const rings = [1,2,3].map(()=>{
-    const c = document.createElementNS('http://www.w3.org/2000/svg','circle');
-    c.setAttribute('cx',cx); c.setAttribute('cy',cy);
-    c.setAttribute('r','30'); c.setAttribute('fill','none');
-    c.setAttribute('stroke','#ff4d4d'); c.setAttribute('stroke-width','1.4');
-    c.style.opacity='0'; svg.insertBefore(c, svg.children[1]);
-    return c;
+  const tweens = [];
+  ids.forEach((id,i)=>{
+    const el = document.getElementById(id);
+    if(!el) return;
+    const rx0 = parseFloat(el.getAttribute('rx')||el.getAttribute('r')||20);
+    const ry0 = parseFloat(el.getAttribute('ry')||el.getAttribute('r')||rx0);
+    const t = gsap.fromTo(el,
+      {attr:{rx:rx0*0.82, ry:ry0*0.82}, opacity:0.95},
+      {attr:{rx:rx0*1.18, ry:ry0*1.18}, opacity:0.18,
+       duration:(durationBase||1.6)+i*0.35, ease:'power2.inOut',
+       repeat:-1, yoyo:true, delay:i*0.5}
+    );
+    tweens.push(t);
   });
-  ANIMS[key+'_els'] = rings;
-  const tl = gsap.timeline({repeat:-1});
-  rings.forEach((r,i)=>{
-    tl.fromTo(r,{attr:{r:30},opacity:0.85},{attr:{r:210},opacity:0,
-      duration:2.6,ease:'power2.out',delay:i*0.87,repeat:-1},0);
-  });
-  ANIMS[key] = tl;
-}
-function clearRadiate(key){
-  kill(key);
-  const els = ANIMS[key+'_els'];
-  if(els){ els.forEach(e=>e.parentNode&&e.parentNode.removeChild(e)); delete ANIMS[key+'_els']; }
+  ANIMS[key] = {kill:()=>{ tweens.forEach(t=>t.kill()); }};
 }
 
-// Stagger-in panel content
+/**
+ * radiateCircles — animate expanding + fading circle rings
+ * Uses static SVG circle elements (pass their IDs)
+ */
+function radiateCircles(key, ids, rStart, rEnd, durationBase){
+  kill(key);
+  if(REDUCED) return;
+  const tweens = [];
+  ids.forEach((id,i)=>{
+    const el = document.getElementById(id);
+    if(!el) return;
+    const t = gsap.fromTo(el,
+      {attr:{r:rStart}, opacity:0.9},
+      {attr:{r:rEnd}, opacity:0, duration:(durationBase||2.4)+i*0.1,
+       ease:'power2.out', repeat:-1, delay:i*0.8}
+    );
+    tweens.push(t);
+  });
+  ANIMS[key] = {kill:()=>{ tweens.forEach(t=>t.kill()); }};
+}
+
+/**
+ * marchElectrons — electrons continuously move along conductor (wrap around)
+ * dir: 1=right, -1=left  range=pixels to travel
+ */
+function marchElectrons(keyA, selectorA, keyB, selectorB, range){
+  kill(keyA); kill(keyB);
+  if(REDUCED) return;
+
+  function setupGroup(key, selector, dir){
+    const els = [...document.querySelectorAll(selector)];
+    if(!els.length) return;
+    els.forEach((el,i)=>{
+      const x0 = parseFloat(el.getAttribute('cx'));
+      // Use modifiers to wrap the position seamlessly
+      gsap.set(el, {x:0});
+      gsap.to(el, {
+        x: dir * range,
+        duration: 1.5,
+        ease: 'none',
+        repeat: -1,
+        delay: i * 0.25,
+        modifiers: {
+          x: x => {
+            let val = parseFloat(x) % (dir * range);
+            return val + 'px';
+          }
+        }
+      });
+    });
+    ANIMS[key] = {kill:()=>gsap.killTweensOf(selector)};
+  }
+
+  setupGroup(keyA, selectorA, 1);
+  setupGroup(keyB, selectorB, -1);
+}
+
+/**
+ * translateGroup — animate SVG group/polyline elements translating + fading (wavefront)
+ */
+function wavefrontChevrons(key, ids, distance, speed){
+  kill(key);
+  if(REDUCED) return;
+  const tweens = [];
+  ids.forEach((id,i)=>{
+    const el = document.getElementById(id);
+    if(!el) return;
+    gsap.set(el, {x:0, opacity:1});
+    const t = gsap.fromTo(el,
+      {x:0, opacity:0.9},
+      {x:distance, opacity:0, duration:speed,
+       ease:'power1.out', repeat:-1, delay:i*(speed/ids.length)}
+    );
+    tweens.push(t);
+  });
+  ANIMS[key] = {kill:()=>{ tweens.forEach(t=>t.kill()); }};
+}
+
+// Stagger-in panel content on enter
 function staggerIn(panelId){
   if(REDUCED) return;
   const p = document.getElementById('panel-'+panelId);
@@ -1029,7 +1136,7 @@ function closeSb(){
 
 // ── PANELS ──
 function showPanel(id,btn){
-  clearRadiate('rrp_rad'); killAll();
+  killAll();
   document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
   document.querySelectorAll('.sb-item').forEach(b=>b.classList.remove('active'));
   document.getElementById('panel-'+id).classList.add('active');
@@ -1039,37 +1146,30 @@ function showPanel(id,btn){
 }
 
 function launchDefault(id){
-  if(id==='single') { setSingleField('both',true); }
-  if(id==='two')    { setTwoConf('single',true); }
-  if(id==='pcb')    { launchPCBAnims(); }
-  if(id==='models') { setModel('wrong',true); }
-  if(id==='rrp')    { setRRP('with',true); }
+  if(id==='single') setSingleField('both',true);
+  if(id==='two')    setTwoConf('single',true);
+  if(id==='pcb')    setPCB('both',true);
+  if(id==='models') setModel('wrong',true);
+  if(id==='rrp')    setRRP('with',true);
 }
 
-// ── PANEL 1: SINGLE FIELD ──
-function setSingleField(mode, _init){
+// ── PANEL 1: SINGLE CONDUCTOR ──
+function setSingleField(mode,_i){
   killAll();
   const mag=document.getElementById('magGroup');
   const elec=document.getElementById('elecGroup');
   document.querySelectorAll('#panel-single .ctrl-btn').forEach(b=>b.classList.remove('active'));
-  if(mode==='magnetic'){
-    mag.style.opacity='1'; elec.style.opacity='0';
-    document.getElementById('btnMag').classList.add('active');
-    pulseRings('mag1',['mR1','mR2','mR3','mR4','mR5','mR6'],250,180);
-  } else if(mode==='electric'){
-    mag.style.opacity='0'; elec.style.opacity='1';
-    document.getElementById('btnElec').classList.add('active');
-    marchDash('elec1','#elecGroup line',160,2.0);
-  } else {
-    mag.style.opacity='1'; elec.style.opacity='1';
-    document.getElementById('btnBoth').classList.add('active');
-    pulseRings('mag1',['mR1','mR2','mR3','mR4','mR5','mR6'],250,180);
-    marchDash('elec1','#elecGroup line',160,2.0);
-  }
+  const showMag  = mode!=='electric';
+  const showElec = mode!=='magnetic';
+  mag.style.opacity  = showMag  ? '1' : '0';
+  elec.style.opacity = showElec ? '1' : '0';
+  document.getElementById(mode==='magnetic'?'btnMag':mode==='electric'?'btnElec':'btnBoth').classList.add('active');
+  if(showMag)  pulseEllipses('mag1',['mR1','mR2','mR3','mR4','mR5','mR6'],1.8);
+  if(showElec) marchLines('elec1','#elecGroup line',{dash:7,gap:5,speed:1.5,stagger:0.1});
 }
 
 // ── PANEL 2: TWO CONDUCTORS ──
-function setTwoConf(mode, _init){
+function setTwoConf(mode,_i){
   killAll();
   const sm=document.getElementById('twoSingleMode');
   const tm=document.getElementById('twoMode');
@@ -1079,107 +1179,104 @@ function setTwoConf(mode, _init){
     sm.style.display=''; tm.style.display='none';
     cap.textContent='Fig 2a — Single conductor: both fields spread freely in all directions.';
     document.getElementById('btnSingleConf').classList.add('active');
-    pulseRings('ts_mag',['tsR1','tsR2','tsR3','tsR4','tsR5'],250,175);
-    marchDash('ts_e','#twoSingleMode line',165,2.0);
+    pulseEllipses('ts_mag',['tsR1','tsR2','tsR3','tsR4','tsR5'],1.8);
+    marchLines('ts_e','#twoSingleMode line',{dash:7,gap:5,speed:1.5,stagger:0.1});
   } else {
     sm.style.display='none'; tm.style.display='';
     cap.textContent='Fig 2b — Two conductor system: electric field terminates at the return conductor. Magnetic field concentrates between them.';
     document.getElementById('btnTwoConf').classList.add('active');
-    // Pulse the elliptical mag loops
-    if(!REDUCED){
-      ['ttM1','ttM2','ttM3','ttM4'].forEach((id,i)=>{
-        const el=document.getElementById(id);
-        if(!el) return;
-        const rx0=parseFloat(el.getAttribute('rx'));
-        gsap.fromTo(el,{attr:{rx:rx0*0.8},opacity:0.95},
-          {attr:{rx:rx0*1.2},opacity:0.2,duration:1.8+i*0.3,
-           ease:'power2.inOut',repeat:-1,yoyo:true,delay:i*0.4});
-      });
-      ANIMS['tt_mag']={kill:()=>gsap.killTweensOf('#twoMode ellipse')};
-    }
-    // March the arc E-field paths
-    marchDash('tt_e','#twoMode path',220,1.8);
-    marchDash('tt_eline','#twoMode line',140,1.6);
+    pulseEllipsesClamped('tt_mag',['ttM1','ttM2','ttM3','ttM4'],1.8);
+    marchLines('tt_e','#twoMode path',{dash:8,gap:6,speed:1.8,stagger:0.12});
+    marchLines('tt_eline','#twoMode line',{dash:7,gap:5,speed:1.6,stagger:0.1});
   }
 }
 
-// ── PANEL 3: PCB ──
-function launchPCBAnims(){
-  // Left side: expanding rings
-  pulseRings('pcb_lmag',['pL1','pL2','pL3'],152,120);
-  // Left side: radial spokes march
-  marchDash('pcb_le','#svgPCB [id^="pLE"]',160,2.2);
-  // Right side: downward E-fields march
-  marchDash('pcb_re','#svgPCB [id^="pRE"]',70,1.2);
-  // Right side: mag ellipses pulse
-  if(!REDUCED){
-    ['pR1','pR2','pR3'].forEach((id,i)=>{
-      const el=document.getElementById(id);
-      if(!el) return;
-      const rx0=parseFloat(el.getAttribute('rx'));
-      gsap.fromTo(el,{attr:{rx:rx0*0.82},opacity:0.95},
-        {attr:{rx:rx0*1.18},opacity:0.2,duration:1.6+i*0.3,
-         ease:'power2.inOut',repeat:-1,yoyo:true,delay:i*0.5});
-    });
-    ANIMS['pcb_rmag']={kill:()=>gsap.killTweensOf('[id^="pR"]')};
-  }
-  // Return current
-  marchDash('pcb_ret','#pRetI',80,1.0);
-}
-
-function setPCB(mode){
-  // Panel 3 now shows both sides always — toggle is informational
+// ── PANEL 3: PCB — with real toggle ──
+function setPCB(mode,_i){
   killAll();
   document.querySelectorAll('#panel-pcb .ctrl-btn').forEach(b=>b.classList.remove('active'));
-  document.getElementById('pcbModeLabel').textContent='Showing: '+
-    (mode==='electric'?'Electric Field (E-field)':mode==='magnetic'?'Magnetic Field (B-field)':'Both Fields');
+
+  // Toggle field group visibility
+  const lMag  = document.getElementById('pcbLeftMag');
+  const lElec = document.getElementById('pcbLeftElec');
+  const rMag  = document.getElementById('pcbRightMag');
+  const rElec = document.getElementById('pcbRightElec');
+
+  const showMag  = mode !== 'electric';
+  const showElec = mode !== 'magnetic';
+
+  lMag.style.display  = showMag  ? '' : 'none';
+  rMag.style.display  = showMag  ? '' : 'none';
+  lElec.style.display = showElec ? '' : 'none';
+  rElec.style.display = showElec ? '' : 'none';
+
+  document.getElementById('pcbModeLabel').textContent =
+    'Showing: '+(mode==='electric'?'Electric Field (E-field)':mode==='magnetic'?'Magnetic Field (B-field)':'Both Fields');
   document.getElementById(mode==='electric'?'pcbE':mode==='magnetic'?'pcbM':'pcbB').classList.add('active');
-  launchPCBAnims();
+
+  // Launch animations only for visible field types
+  if(showMag){
+    // Left: expanding rings burst outward
+    pulseEllipses('pcb_lmag',['pL1','pL2','pL3'],1.8);
+    // Right: clamped pulse (fields contained between trace+RRP)
+    pulseEllipsesClamped('pcb_rmag',['pR1','pR2','pR3'],1.5);
+  }
+  if(showElec){
+    // Left: radial spokes march outward
+    marchLines('pcb_le','#pcbLeftElec [id^="pLE"]',{dash:7,gap:5,speed:1.5,stagger:0.1});
+    // Right: downward lines march into RRP
+    marchLines('pcb_re','#pcbRightElec [id^="pRE"]',{dash:6,gap:4,speed:0.9,stagger:0.08});
+    // Return current on RRP (marches leftward)
+    marchLines('pcb_ret','#pRetI',{dash:8,gap:5,speed:0.85,dir:-1});
+  }
 }
 
-// ── PANEL 4: MODELS ──
-function setModel(mode, _init){
+// ── PANEL 4: TWO MODELS ──
+function setModel(mode,_i){
   killAll();
   const w=document.getElementById('wrongModel');
   const r=document.getElementById('rightModel');
   const t=document.getElementById('modelTitle');
   const c=document.getElementById('modelCap');
   document.querySelectorAll('#panel-models .ctrl-btn').forEach(b=>b.classList.remove('active'));
+
   if(mode==='wrong'){
     w.style.display=''; r.style.display='none';
     t.textContent='The Electron Flow Model — What We Were Taught';
     c.textContent='The conventional circuit model — taught in most university courses. Cannot explain EMI, radiation, or why signals travel near the speed of light.';
     document.getElementById('modWrong').classList.add('active');
+    // Electrons flow continuously (no yoyo — wrap around one direction)
     if(!REDUCED){
-      // electrons A march right
-      const eAs=[...document.querySelectorAll('[id^="eA"]')];
+      const eAs = [...document.querySelectorAll('[id^="eA"]')];
+      const eBs = [...document.querySelectorAll('[id^="eB"]')];
+      const RANGE = 70;  // pixels per step
+      // Top: march right
       eAs.forEach((el,i)=>{
-        const x0=parseFloat(el.getAttribute('cx'));
-        gsap.to(el,{attr:{cx:x0+55},duration:1.0,ease:'power1.inOut',
-          repeat:-1,yoyo:true,delay:i*0.18});
+        gsap.set(el, {x:0});
+        gsap.to(el, {x:RANGE, duration:1.4, ease:'none', repeat:-1, delay:i*0.23});
       });
-      // electrons B march left
-      const eBs=[...document.querySelectorAll('[id^="eB"]')];
+      // Bottom: march left
       eBs.forEach((el,i)=>{
-        const x0=parseFloat(el.getAttribute('cx'));
-        gsap.to(el,{attr:{cx:x0-55},duration:1.0,ease:'power1.inOut',
-          repeat:-1,yoyo:true,delay:i*0.18});
+        gsap.set(el, {x:0});
+        gsap.to(el, {x:-RANGE, duration:1.4, ease:'none', repeat:-1, delay:i*0.23});
       });
       ANIMS['mod_e']={kill:()=>{gsap.killTweensOf('[id^="eA"]');gsap.killTweensOf('[id^="eB"]');}};
     }
   } else {
     w.style.display='none'; r.style.display='';
     t.textContent='The Field-Based Model — What Actually Happens';
-    c.textContent='Energy propagates as EM fields in the space between conductors. The Poynting vector shows the direction of energy flow — along the trace, not through the copper.';
+    c.textContent='Energy propagates as EM fields in the space between conductors. The Poynting vector shows direction of energy flow — along the trace, not through the copper.';
     document.getElementById('modRight').classList.add('active');
-    marchDash('mod_poy','#poyLine',380,1.4);
-    marchDash('mod_e','#rightModel [id^="rE"]',122,1.2);
+    // Poynting vector marches rightward (bigger dashes for visibility)
+    marchLines('mod_poy','#poyLine',{dash:14,gap:6,speed:1.1,dir:1});
+    // E-field verticals march downward
+    marchLines('mod_ef','#rightModel [id^="rE"]',{dash:6,gap:4,speed:0.85,stagger:0.12});
   }
 }
 
-// ── PANEL 5: RRP ──
-function setRRP(mode, _init){
-  clearRadiate('rrp_rad'); killAll();
+// ── PANEL 5: RRP & CONTAINMENT ──
+function setRRP(mode,_i){
+  killAll();
   document.getElementById('rrpWithState').style.display='none';
   document.getElementById('rrpWithoutState').style.display='none';
   document.getElementById('rrpSplitState').style.display='none';
@@ -1191,33 +1288,37 @@ function setRRP(mode, _init){
     document.getElementById('rrpWithState').style.display='';
     document.getElementById('rrpWith').classList.add('active');
     title.textContent='Scenario: With Solid RRP — Fields Contained';
-    cap.textContent='With a solid RRP, return current flows directly beneath the trace. Loop area is minimised — low inductance, low radiation.';
-    // March forward current arrows right
-    marchDash('rrp_fc','#rrpWithState [id^="fC"]',50,0.9);
-    // March return current arrows left
-    marchDash('rrp_rc','#rrpWithState [id^="rC"]',50,0.9);
-    // March wavefront
-    marchDash('rrp_wf','#rrpWithState [id^="wf"]',80,0.8);
-    // Displacement current
-    marchDash('rrp_dc','#rrpWithState [id^="dC"]',65,1.0);
+    cap.textContent='With a solid RRP, return current flows directly beneath the trace. Forward and return currents are tightly coupled — minimum loop area, minimum radiation.';
+    // Forward current arrows march rightward
+    marchLines('rrp_fc','#rrpWithState [id^="fC"]',{dash:10,gap:6,speed:0.7,stagger:0.06,dir:1});
+    // Return current arrows march leftward
+    marchLines('rrp_rc','#rrpWithState [id^="rC"]',{dash:10,gap:6,speed:0.7,stagger:0.06,dir:-1});
+    // Wavefront chevrons translate rightward and fade
+    wavefrontChevrons('rrp_wf',['wf1','wf2','wf3'],90,1.6);
+    // Displacement current (vertical, downward)
+    marchLines('rrp_dc','#rrpWithState [id^="dC"]',{dash:4,gap:4,speed:1.0,stagger:0.08});
   } else if(mode==='without'){
     document.getElementById('rrpWithoutState').style.display='';
     document.getElementById('rrpWithout').classList.add('active');
     title.textContent='Scenario: Without RRP — Fields Radiate Freely';
     cap.textContent='Without a reference plane, fields expand in all directions. The PCB becomes a radiating antenna. Common-mode currents form along the enormous loop area.';
-    marchDash('rrp_wl','#rrpWithoutState [id^="wL"]',200,2.0);
-    radiateRings('rrp_rad','svgRRP',300,96);
+    // Spreading field lines march outward
+    marchLines('rrp_wl','#rrpWithoutState [id^="wL"]',{dash:7,gap:5,speed:1.8,stagger:0.14,dir:1});
+    // Expanding radiation rings from trace
+    radiateCircles('rrp_rad',['radR1','radR2','radR3'],28,220,2.2);
   } else {
     document.getElementById('rrpSplitState').style.display='';
     document.getElementById('rrpSplit').classList.add('active');
     title.textContent='Scenario: Split RRP — Return Current Forced to Detour';
-    cap.textContent='A gap forces return current to route around it, creating a large radiating loop. Splitting planes to separate analog and digital does not help EMI — it causes it.';
-    marchDash('rrp_sle','#rrpSplitState [id^="sLE"]',78,1.2);
-    marchDash('rrp_det','#detourPath',190,1.5);
+    cap.textContent='A gap forces return current to route around it, creating a large radiating loop. Splitting planes to separate analog/digital does NOT help EMI — it causes it.';
+    // E-fields left of gap
+    marchLines('rrp_sle','#rrpSplitState [id^="sLE"]',{dash:6,gap:4,speed:0.9,stagger:0.1});
+    // Detour path — dashes march along the curved path
+    marchLines('rrp_det','#detourPath',{dash:9,gap:6,speed:1.3,dir:1});
   }
 }
 
-// Boot
+// Boot: launch default panel on load
 window.addEventListener('DOMContentLoaded',()=>{
   setTimeout(()=>{ staggerIn('single'); setSingleField('both',true); },100);
 });
