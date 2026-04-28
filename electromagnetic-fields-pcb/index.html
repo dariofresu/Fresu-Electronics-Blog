@@ -128,14 +128,7 @@ body{
 
 /* ── PANELS ── */
 .panel{display:none;padding:48px 52px 72px;max-width:900px}
-.panel.active{
-  display:block;
-  animation:fadeUp 260ms cubic-bezier(0.22,1,0.36,1)
-}
-@keyframes fadeUp{
-  from{opacity:0;transform:translateY(8px)}
-  to{opacity:1;transform:translateY(0)}
-}
+.panel.active{display:block;animation:fadeUp 260ms cubic-bezier(0.22,1,0.36,1)}
 
 /* ── TYPOGRAPHY ── */
 .s-title{font-size:22px;font-weight:700;color:var(--fg);margin-bottom:6px}
@@ -237,140 +230,17 @@ h3{font-size:14px;font-weight:700;color:var(--fg);margin-bottom:8px}
   font-weight:500;transition:color 140ms}
 .footer-links a:hover{color:var(--fg)}
 
-/* ── EASING ── */
-:root{
-  --ease-out-expo: cubic-bezier(0.16,1,0.3,1);
-  --ease-out-quart: cubic-bezier(0.22,1,0.36,1);
-  --ease-spring: cubic-bezier(0.34,1.56,0.64,1);
-}
-
 /* ── ANIMATIONS ── */
+/* Magnetic rings keep CSS spin — GSAP handles E-fields, Poynting, radiation */
 @keyframes spin-cw{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
 @keyframes spin-ccw{from{transform:rotate(0deg)}to{transform:rotate(-360deg)}}
-@keyframes pulse-out{
-  0%{opacity:0.8;r:18}50%{opacity:0.3;r:38}100%{opacity:0;r:58}
-}
-@keyframes flow-down{
-  0%{stroke-dashoffset:100}100%{stroke-dashoffset:0}
-}
-@keyframes fade-in{from{opacity:0}to{opacity:1}}
-
-/* Electric field flow — dashes march outward along radial lines */
-@keyframes efield-flow{
-  0%{stroke-dashoffset:160}
-  100%{stroke-dashoffset:0}
-}
-/* PCB E-field — dashes flow downward through dielectric */
-@keyframes efield-down{
-  0%{stroke-dashoffset:200}
-  100%{stroke-dashoffset:0}
-}
-/* Poynting vector — marching energy pulse rightward */
-@keyframes poynting-march{
-  0%{stroke-dashoffset:400}
-  100%{stroke-dashoffset:0}
-}
-/* Radiation ring — expands and fades, loop for "without RRP" */
-@keyframes radiate-ring{
-  0%{r:28;opacity:0.75;stroke-width:1.5}
-  100%{r:240;opacity:0;stroke-width:0.3}
-}
-/* Return current detour — dashes animate along path */
-@keyframes detour-flow{
-  0%{stroke-dashoffset:280}
-  100%{stroke-dashoffset:0}
-}
-/* Return current on RRP — dashes flow leftward */
-@keyframes return-flow{
-  0%{stroke-dashoffset:100}
-  100%{stroke-dashoffset:0}
-}
-/* Magnetic ring pulse — subtle opacity breathe */
-@keyframes mag-breathe{
-  0%,100%{opacity:0.9}
-  50%{opacity:0.55}
-}
-/* Panel content stagger entrance */
-@keyframes rise-in{
-  from{opacity:0;transform:translateY(10px)}
-  to{opacity:1;transform:translateY(0)}
-}
+@keyframes fadeUp{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
 
 .spin-cw{animation:spin-cw 4s linear infinite;transform-origin:center}
 .spin-ccw{animation:spin-ccw 6s linear infinite;transform-origin:center}
 
-/* E-field radial animation class */
-.efield-anim{
-  stroke-dasharray:18 8;
-  animation:efield-flow 1.8s linear infinite;
-}
-.efield-anim.d2{animation-delay:0.3s}
-.efield-anim.d3{animation-delay:0.6s}
-.efield-anim.d4{animation-delay:0.9s}
-.efield-anim.d5{animation-delay:1.2s}
-.efield-anim.d6{animation-delay:1.5s}
-.efield-anim.d7{animation-delay:1.8s}
-.efield-anim.d8{animation-delay:2.1s}
-
-/* PCB downward E-field animation */
-.edown-anim{
-  stroke-dasharray:16 8;
-  animation:efield-down 1.4s linear infinite;
-}
-.edown-anim.d2{animation-delay:0.2s}
-.edown-anim.d3{animation-delay:0.4s}
-.edown-anim.d4{animation-delay:0.6s}
-.edown-anim.d5{animation-delay:0.8s}
-.edown-anim.d6{animation-delay:1.0s}
-.edown-anim.d7{animation-delay:1.2s}
-
-/* Poynting vector marching */
-.poynting-anim{
-  stroke-dasharray:22 10;
-  animation:poynting-march 1.6s linear infinite;
-}
-
-/* Return current flow */
-.return-anim{
-  stroke-dasharray:16 8;
-  animation:return-flow 1.2s linear infinite;
-}
-
-/* Detour path animation */
-.detour-anim{
-  stroke-dasharray:8 5;
-  animation:detour-flow 1.5s linear infinite;
-}
-
-/* Radiation rings */
-.radiate-ring{
-  fill:none;stroke:#ff4d4d;
-  animation:radiate-ring 2.4s var(--ease-out-expo) infinite;
-}
-.radiate-ring.r2{animation-delay:0.8s}
-.radiate-ring.r3{animation-delay:1.6s}
-
-/* Mag breathe on innermost ring */
-.mag-breathe{animation:mag-breathe 2.5s ease-in-out infinite}
-
-/* Stagger entrance for panel sections */
-.stagger > *{
-  opacity:0;
-  animation:rise-in 500ms var(--ease-out-quart) forwards;
-}
-.stagger > *:nth-child(1){animation-delay:40ms}
-.stagger > *:nth-child(2){animation-delay:100ms}
-.stagger > *:nth-child(3){animation-delay:160ms}
-.stagger > *:nth-child(4){animation-delay:220ms}
-.stagger > *:nth-child(5){animation-delay:280ms}
-
-/* Reduced motion — keep spin, kill everything else */
 @media(prefers-reduced-motion:reduce){
-  .efield-anim,.edown-anim,.poynting-anim,.return-anim,.detour-anim{
-    animation:none;stroke-dasharray:none
-  }
-  .radiate-ring{animation:none;opacity:0}
-  .stagger > *{animation:none;opacity:1}
+  .spin-cw,.spin-ccw{animation:none}
 }
 
 /* ── RESPONSIVE ── */
@@ -499,10 +369,10 @@ h3{font-size:14px;font-weight:700;color:var(--fg);margin-bottom:8px}
       <rect width="500" height="340" fill="#111111"/>
       <text x="250" y="22" text-anchor="middle" fill="#94a3b8" font-family="Poppins" font-size="10">Free space — no return conductor</text>
 
-      <!-- MAGNETIC FIELD RINGS (animated, rotating + breathe on inner) -->
+      <!-- MAGNETIC FIELD RINGS (animated, rotating) -->
       <g id="magGroup" opacity="1">
         <g style="transform-origin:250px 170px">
-          <circle cx="250" cy="170" r="48" fill="none" stroke="#00FF94" stroke-width="1.5" opacity="0.9" stroke-dasharray="6 3" class="spin-cw mag-breathe"/>
+          <circle cx="250" cy="170" r="48" fill="none" stroke="#00FF94" stroke-width="1.5" opacity="0.9" stroke-dasharray="6 3" class="spin-cw"/>
         </g>
         <g style="transform-origin:250px 170px">
           <circle cx="250" cy="170" r="72" fill="none" stroke="#00FF94" stroke-width="1.2" opacity="0.7" stroke-dasharray="8 4" class="spin-cw" style="animation-duration:5s"/>
@@ -521,24 +391,25 @@ h3{font-size:14px;font-weight:700;color:var(--fg);margin-bottom:8px}
         <text x="326" y="132" fill="#00FF94" font-family="Poppins" font-size="9">mag</text>
       </g>
 
-      <!-- ELECTRIC FIELD RADIAL LINES — animated dashes flow outward -->
+      <!-- ELECTRIC FIELD RADIAL LINES -->
       <g id="elecGroup" opacity="1">
+        <!-- 8 radial electric field lines at 45-degree intervals -->
         <!-- Right -->
-        <line x1="278" y1="170" x2="420" y2="170" stroke="#f5a623" stroke-width="1.2" opacity="0.75" marker-end="url(#arrowE)" class="efield-anim"/>
+        <line x1="278" y1="170" x2="420" y2="170" stroke="#f5a623" stroke-width="1.2" opacity="0.75" marker-end="url(#arrowE)"/>
         <!-- Left -->
-        <line x1="222" y1="170" x2="80" y2="170" stroke="#f5a623" stroke-width="1.2" opacity="0.75" marker-end="url(#arrowE)" class="efield-anim d2"/>
+        <line x1="222" y1="170" x2="80" y2="170" stroke="#f5a623" stroke-width="1.2" opacity="0.75" marker-end="url(#arrowE)"/>
         <!-- Down -->
-        <line x1="250" y1="198" x2="250" y2="315" stroke="#f5a623" stroke-width="1.2" opacity="0.75" marker-end="url(#arrowE)" class="efield-anim d3"/>
+        <line x1="250" y1="198" x2="250" y2="315" stroke="#f5a623" stroke-width="1.2" opacity="0.75" marker-end="url(#arrowE)"/>
         <!-- Up -->
-        <line x1="250" y1="142" x2="250" y2="25" stroke="#f5a623" stroke-width="1.2" opacity="0.75" marker-end="url(#arrowE)" class="efield-anim d4"/>
+        <line x1="250" y1="142" x2="250" y2="25" stroke="#f5a623" stroke-width="1.2" opacity="0.75" marker-end="url(#arrowE)"/>
         <!-- Diagonal NE -->
-        <line x1="270" y1="150" x2="380" y2="62" stroke="#f5a623" stroke-width="1" opacity="0.55" marker-end="url(#arrowE)" class="efield-anim d5"/>
+        <line x1="270" y1="150" x2="380" y2="62" stroke="#f5a623" stroke-width="1" opacity="0.55" marker-end="url(#arrowE)"/>
         <!-- Diagonal NW -->
-        <line x1="230" y1="150" x2="120" y2="62" stroke="#f5a623" stroke-width="1" opacity="0.55" marker-end="url(#arrowE)" class="efield-anim d6"/>
+        <line x1="230" y1="150" x2="120" y2="62" stroke="#f5a623" stroke-width="1" opacity="0.55" marker-end="url(#arrowE)"/>
         <!-- Diagonal SE -->
-        <line x1="270" y1="190" x2="380" y2="278" stroke="#f5a623" stroke-width="1" opacity="0.55" marker-end="url(#arrowE)" class="efield-anim d7"/>
+        <line x1="270" y1="190" x2="380" y2="278" stroke="#f5a623" stroke-width="1" opacity="0.55" marker-end="url(#arrowE)"/>
         <!-- Diagonal SW -->
-        <line x1="230" y1="190" x2="120" y2="278" stroke="#f5a623" stroke-width="1" opacity="0.55" marker-end="url(#arrowE)" class="efield-anim d8"/>
+        <line x1="230" y1="190" x2="120" y2="278" stroke="#f5a623" stroke-width="1" opacity="0.55" marker-end="url(#arrowE)"/>
         <!-- Psi label -->
         <text x="390" y="167" fill="#f5a623" font-family="Poppins" font-size="13" font-weight="700" opacity="0.9">Ψ</text>
         <text x="398" y="167" fill="#f5a623" font-family="Poppins" font-size="9">elec</text>
@@ -751,16 +622,16 @@ h3{font-size:14px;font-weight:700;color:var(--fg);margin-bottom:8px}
       <text x="310" y="75" text-anchor="middle" fill="#242424" font-family="Poppins" font-size="13" font-weight="700">FR4 Dielectric</text>
       <text x="310" y="92" text-anchor="middle" fill="#2e2e2e" font-family="Poppins" font-size="10">Energy propagates here — not in the copper</text>
 
-      <!-- ELECTRIC FIELD LINES in dielectric — animated downward flow -->
+      <!-- ELECTRIC FIELD LINES in dielectric -->
       <g id="pcbElec">
         <!-- Strongest at centre -->
-        <line x1="310" y1="50" x2="310" y2="180" stroke="#f5a623" stroke-width="2" opacity="1" marker-end="url(#arrowPCB)" class="edown-anim"/>
-        <line x1="285" y1="50" x2="284" y2="180" stroke="#f5a623" stroke-width="1.6" opacity="0.85" marker-end="url(#arrowPCB)" class="edown-anim d2"/>
-        <line x1="335" y1="50" x2="336" y2="180" stroke="#f5a623" stroke-width="1.6" opacity="0.85" marker-end="url(#arrowPCB)" class="edown-anim d3"/>
-        <line x1="258" y1="52" x2="255" y2="180" stroke="#f5a623" stroke-width="1.2" opacity="0.65" marker-end="url(#arrowPCB)" class="edown-anim d4"/>
-        <line x1="362" y1="52" x2="365" y2="180" stroke="#f5a623" stroke-width="1.2" opacity="0.65" marker-end="url(#arrowPCB)" class="edown-anim d5"/>
-        <line x1="232" y1="56" x2="226" y2="180" stroke="#f5a623" stroke-width="0.9" opacity="0.42" marker-end="url(#arrowPCB)" class="edown-anim d6"/>
-        <line x1="388" y1="56" x2="394" y2="180" stroke="#f5a623" stroke-width="0.9" opacity="0.42" marker-end="url(#arrowPCB)" class="edown-anim d7"/>
+        <line x1="310" y1="50" x2="310" y2="180" stroke="#f5a623" stroke-width="2" opacity="1" marker-end="url(#arrowPCB)"/>
+        <line x1="285" y1="50" x2="284" y2="180" stroke="#f5a623" stroke-width="1.6" opacity="0.85" marker-end="url(#arrowPCB)"/>
+        <line x1="335" y1="50" x2="336" y2="180" stroke="#f5a623" stroke-width="1.6" opacity="0.85" marker-end="url(#arrowPCB)"/>
+        <line x1="258" y1="52" x2="255" y2="180" stroke="#f5a623" stroke-width="1.2" opacity="0.65" marker-end="url(#arrowPCB)"/>
+        <line x1="362" y1="52" x2="365" y2="180" stroke="#f5a623" stroke-width="1.2" opacity="0.65" marker-end="url(#arrowPCB)"/>
+        <line x1="232" y1="56" x2="226" y2="180" stroke="#f5a623" stroke-width="0.9" opacity="0.42" marker-end="url(#arrowPCB)"/>
+        <line x1="388" y1="56" x2="394" y2="180" stroke="#f5a623" stroke-width="0.9" opacity="0.42" marker-end="url(#arrowPCB)"/>
         <!-- Field bending back under plane — fringe fields -->
         <path d="M 180,60 Q 155,130 168,180" fill="none" stroke="#f5a623" stroke-width="0.7" opacity="0.25" marker-end="url(#arrowPCB)"/>
         <path d="M 440,60 Q 465,130 452,180" fill="none" stroke="#f5a623" stroke-width="0.7" opacity="0.25" marker-end="url(#arrowPCB)"/>
@@ -788,8 +659,8 @@ h3{font-size:14px;font-weight:700;color:var(--fg);margin-bottom:8px}
       <text x="32" y="120" fill="#94a3b8" font-family="Poppins" font-size="9" text-anchor="end">FR4</text>
       <text x="32" y="194" fill="#888" font-family="Poppins" font-size="9" font-weight="700" text-anchor="end">RRP</text>
 
-      <!-- Return current arrow on plane surface — animated flow leftward -->
-      <line x1="500" y1="190" x2="420" y2="190" stroke="#fff" stroke-width="1.5" opacity="0.5" marker-end="url(#arrowPCBm)" class="return-anim"/>
+      <!-- Return current arrow on plane surface -->
+      <line class="return-line" x1="500" y1="190" x2="420" y2="190" stroke="#fff" stroke-width="1.5" opacity="0.4" marker-end="url(#arrowPCBm)"/>
       <text x="510" y="194" fill="#94a3b8" font-family="Poppins" font-size="9">Return I</text>
 
       <!-- Legend -->
@@ -897,14 +768,14 @@ h3{font-size:14px;font-weight:700;color:var(--fg);margin-bottom:8px}
 
         <!-- Fields between conductors -->
         <rect x="82" y="108" width="330" height="50" fill="rgba(0,255,148,0.03)" stroke="none"/>
-        <!-- Poynting vector arrow — marching energy flow rightward -->
-        <line x1="100" y1="132" x2="395" y2="132" stroke="#00FF94" stroke-width="2.5" opacity="0.9" marker-end="url(#arrowRight)" class="poynting-anim"/>
+        <!-- Poynting vector arrow -->
+        <line x1="100" y1="132" x2="395" y2="132" stroke="#00FF94" stroke-width="2.5" opacity="0.9" marker-end="url(#arrowRight)"/>
         <text x="248" y="126" text-anchor="middle" fill="#00FF94" font-family="Poppins" font-size="10" font-weight="700">S (Poynting vector) — energy direction</text>
-        <!-- E-field vertical lines between conductors — animated downward -->
-        <line x1="160" y1="109" x2="160" y2="157" stroke="#f5a623" stroke-width="1.2" opacity="0.7" marker-end="url(#arrowElRight)" class="edown-anim"/>
-        <line x1="220" y1="109" x2="220" y2="157" stroke="#f5a623" stroke-width="1.2" opacity="0.7" marker-end="url(#arrowElRight)" class="edown-anim d3"/>
-        <line x1="280" y1="109" x2="280" y2="157" stroke="#f5a623" stroke-width="1.2" opacity="0.7" marker-end="url(#arrowElRight)" class="edown-anim d5"/>
-        <line x1="340" y1="109" x2="340" y2="157" stroke="#f5a623" stroke-width="1.2" opacity="0.7" marker-end="url(#arrowElRight)" class="edown-anim d7"/>
+        <!-- E-field vertical lines between conductors -->
+        <line class="ef-anim" x1="160" y1="109" x2="160" y2="157" stroke="#f5a623" stroke-width="1.2" opacity="0.7" marker-end="url(#arrowElRight)"/>
+        <line class="ef-anim" x1="220" y1="109" x2="220" y2="157" stroke="#f5a623" stroke-width="1.2" opacity="0.7" marker-end="url(#arrowElRight)"/>
+        <line class="ef-anim" x1="280" y1="109" x2="280" y2="157" stroke="#f5a623" stroke-width="1.2" opacity="0.7" marker-end="url(#arrowElRight)"/>
+        <line class="ef-anim" x1="340" y1="109" x2="340" y2="157" stroke="#f5a623" stroke-width="1.2" opacity="0.7" marker-end="url(#arrowElRight)"/>
 
         <!-- Return/reference conductor -->
         <rect x="82" y="158" width="330" height="10" rx="2" fill="#555" opacity="0.8"/>
@@ -995,18 +866,14 @@ h3{font-size:14px;font-weight:700;color:var(--fg);margin-bottom:8px}
       <g id="rrpWithoutState" style="display:none">
         <!-- No dielectric container, fields spread everywhere -->
         <text x="310" y="72" text-anchor="middle" fill="#ff4d4d" font-family="Poppins" font-size="10" opacity="0.6">No reference plane — fields search for a return path</text>
-        <!-- Expanding radiation rings from trace -->
-        <circle id="radRing1" cx="310" cy="39" class="radiate-ring"/>
-        <circle id="radRing2" cx="310" cy="39" class="radiate-ring r2"/>
-        <circle id="radRing3" cx="310" cy="39" class="radiate-ring r3"/>
         <!-- Spreading fields in all directions -->
-        <line x1="310" y1="50" x2="310" y2="240" stroke="#f5a623" stroke-width="1.2" opacity="0.6" marker-end="url(#arrowRRP)" class="edown-anim"/>
-        <line x1="300" y1="50" x2="260" y2="240" stroke="#f5a623" stroke-width="1" opacity="0.5" marker-end="url(#arrowRRP)" class="edown-anim d2"/>
-        <line x1="320" y1="50" x2="360" y2="240" stroke="#f5a623" stroke-width="1" opacity="0.5" marker-end="url(#arrowRRP)" class="edown-anim d3"/>
-        <line x1="285" y1="50" x2="185" y2="240" stroke="#f5a623" stroke-width="0.9" opacity="0.38" marker-end="url(#arrowRRP)" class="edown-anim d4"/>
-        <line x1="335" y1="50" x2="435" y2="240" stroke="#f5a623" stroke-width="0.9" opacity="0.38" marker-end="url(#arrowRRP)" class="edown-anim d5"/>
-        <line x1="265" y1="52" x2="110" y2="240" stroke="#f5a623" stroke-width="0.7" opacity="0.25" marker-end="url(#arrowRRP)" class="edown-anim d6"/>
-        <line x1="355" y1="52" x2="510" y2="240" stroke="#f5a623" stroke-width="0.7" opacity="0.25" marker-end="url(#arrowRRP)" class="edown-anim d7"/>
+        <line x1="310" y1="50" x2="310" y2="240" stroke="#f5a623" stroke-width="1.2" opacity="0.6" marker-end="url(#arrowRRP)"/>
+        <line x1="300" y1="50" x2="260" y2="240" stroke="#f5a623" stroke-width="1" opacity="0.5" marker-end="url(#arrowRRP)"/>
+        <line x1="320" y1="50" x2="360" y2="240" stroke="#f5a623" stroke-width="1" opacity="0.5" marker-end="url(#arrowRRP)"/>
+        <line x1="285" y1="50" x2="185" y2="240" stroke="#f5a623" stroke-width="0.9" opacity="0.38" marker-end="url(#arrowRRP)"/>
+        <line x1="335" y1="50" x2="435" y2="240" stroke="#f5a623" stroke-width="0.9" opacity="0.38" marker-end="url(#arrowRRP)"/>
+        <line x1="265" y1="52" x2="110" y2="240" stroke="#f5a623" stroke-width="0.7" opacity="0.25" marker-end="url(#arrowRRP)"/>
+        <line x1="355" y1="52" x2="510" y2="240" stroke="#f5a623" stroke-width="0.7" opacity="0.25" marker-end="url(#arrowRRP)"/>
         <line x1="240" y1="55" x2="60" y2="210" stroke="#f5a623" stroke-width="0.5" opacity="0.18" marker-end="url(#arrowRRP)"/>
         <line x1="380" y1="55" x2="560" y2="210" stroke="#f5a623" stroke-width="0.5" opacity="0.18" marker-end="url(#arrowRRP)"/>
         <!-- Earth ground at bottom -->
@@ -1022,8 +889,8 @@ h3{font-size:14px;font-weight:700;color:var(--fg);margin-bottom:8px}
         <!-- Fields to left of split — ok -->
         <line x1="285" y1="50" x2="284" y2="178" stroke="#f5a623" stroke-width="1.5" opacity="0.75" marker-end="url(#arrowRRP)"/>
         <line x1="258" y1="52" x2="255" y2="178" stroke="#f5a623" stroke-width="1.2" opacity="0.55" marker-end="url(#arrowRRP)"/>
-        <!-- Return current detour path — animated dashes show current routing around gap -->
-        <path id="detourPath" d="M 310,178 Q 310,130 380,110 Q 450,90 450,50" fill="none" stroke="#ff4d4d" stroke-width="2" opacity="0.9" marker-end="url(#arrowRRP)" class="detour-anim"/>
+        <!-- Return current detour path -->
+        <path d="M 310,178 Q 310,130 380,110 Q 450,90 450,50" fill="none" stroke="#ff4d4d" stroke-width="2" stroke-dasharray="5,3" opacity="0.9" marker-end="url(#arrowRRP)"/>
         <text x="420" y="100" fill="#ff4d4d" font-family="Poppins" font-size="10" font-weight="700">Return current detour</text>
         <text x="420" y="113" fill="#ff4d4d" font-family="Poppins" font-size="10">= large loop = antenna</text>
         <!-- Split plane -->
@@ -1080,7 +947,127 @@ h3{font-size:14px;font-weight:700;color:var(--fg);margin-bottom:8px}
   </div>
 </footer>
 
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
 <script>
+// ─────────────────────────────────────────────
+// GSAP animation controller — Hyperframes style
+// One timeline per interactive state, stored in
+// the registry so switching kills the old one.
+// ─────────────────────────────────────────────
+const ANIMS = {};   // registry: key → GSAP timeline
+const REDUCED = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+function killAnim(key){
+  if(ANIMS[key]){ ANIMS[key].kill(); delete ANIMS[key]; }
+}
+function killAll(){ Object.keys(ANIMS).forEach(killAnim); }
+
+// ── E-FIELD: marching dashes along a set of SVG lines ──
+// targets  : CSS selector or NodeList of <line>/<path> elements
+// totalLen : approximate stroke length in px
+// speed    : full-dash-cycle duration in seconds (default 1.6)
+function animEField(key, targets, totalLen, speed=1.6){
+  killAnim(key);
+  if(REDUCED) return;
+  const els = [...document.querySelectorAll(targets)];
+  if(!els.length) return;
+  const dash = Math.round(totalLen * 0.14);
+  const gap  = Math.round(totalLen * 0.09);
+  const tl = gsap.timeline({repeat:-1});
+  els.forEach((el,i)=>{
+    el.setAttribute('stroke-dasharray', `${dash} ${gap}`);
+    tl.fromTo(el,
+      {strokeDashoffset: totalLen},
+      {strokeDashoffset: 0, duration: speed, ease:'none',
+       delay: i * 0.18, repeat:-1, repeatDelay:0},
+      0  // all start at tl position 0
+    );
+  });
+  ANIMS[key] = tl;
+}
+
+// ── RADIATION RINGS: expanding circles for "no RRP" ──
+function animRadiationRings(key, svgId, cx, cy, col='#ff4d4d'){
+  killAnim(key);
+  if(REDUCED) return;
+  const svg = document.getElementById(svgId);
+  if(!svg) return;
+  const rings = [];
+  for(let i=0;i<3;i++){
+    const c = document.createElementNS('http://www.w3.org/2000/svg','circle');
+    c.setAttribute('cx', cx); c.setAttribute('cy', cy);
+    c.setAttribute('r', 28); c.setAttribute('fill','none');
+    c.setAttribute('stroke', col); c.setAttribute('stroke-width','1.5');
+    c.style.opacity = '0';
+    svg.insertBefore(c, svg.firstChild.nextSibling);
+    rings.push(c);
+  }
+  const tl = gsap.timeline({repeat:-1});
+  rings.forEach((r,i)=>{
+    tl.fromTo(r,
+      {attr:{r:28}, opacity:0.8},
+      {attr:{r:220}, opacity:0, duration:2.4,
+       ease:'power2.out', delay: i * 0.8, repeat:-1, repeatDelay:0},
+      0
+    );
+  });
+  ANIMS[key] = tl;
+  ANIMS[key+'_rings'] = rings; // save refs to remove on kill
+}
+function clearRadiationRings(key, svgId){
+  killAnim(key);
+  const rings = ANIMS[key+'_rings'];
+  if(rings){ rings.forEach(r=>r.parentNode&&r.parentNode.removeChild(r)); delete ANIMS[key+'_rings']; }
+}
+
+// ── FLOWING PATH: marching dashes along a <path> or <line> ──
+function animPath(key, selector, pathLen, speed=1.5){
+  killAnim(key);
+  if(REDUCED) return;
+  const el = document.querySelector(selector);
+  if(!el) return;
+  const dash = Math.round(pathLen * 0.15);
+  const gap  = Math.round(pathLen * 0.10);
+  el.setAttribute('stroke-dasharray', `${dash} ${gap}`);
+  ANIMS[key] = gsap.fromTo(el,
+    {strokeDashoffset: pathLen},
+    {strokeDashoffset: 0, duration: speed, ease:'none', repeat:-1, repeatDelay:0}
+  );
+}
+
+// ── POYNTING VECTOR: single marching arrow ──
+function animPoynting(key, selector, len){
+  killAnim(key);
+  if(REDUCED) return;
+  const el = document.querySelector(selector);
+  if(!el) return;
+  const dash = Math.round(len * 0.12);
+  const gap  = Math.round(len * 0.08);
+  el.setAttribute('stroke-dasharray', `${dash} ${gap}`);
+  ANIMS[key] = gsap.fromTo(el,
+    {strokeDashoffset: len * 1.5},
+    {strokeDashoffset: 0, duration: 1.4, ease:'none', repeat:-1, repeatDelay:0}
+  );
+}
+
+// ── SECTION STAGGER: entrance for panel cards/callouts ──
+function staggerIn(panelId){
+  if(REDUCED) return;
+  const panel = document.getElementById('panel-'+panelId);
+  if(!panel) return;
+  const els = panel.querySelectorAll('.callout,.key-point,.card,.cmp-card,.viz');
+  gsap.fromTo(els,
+    {opacity:0, y:10},
+    {opacity:1, y:0, duration:0.5, ease:'power2.out',
+     stagger:{each:0.07, from:'start'}}
+  );
+}
+
+// ═══════════════════════════════════════════
+//  PANEL & TOGGLE LOGIC  (unchanged in intent,
+//  now calls GSAP launchers on every switch)
+// ═══════════════════════════════════════════
+
 // ── SIDEBAR ──
 function toggleSb(){
   const sb=document.getElementById('sidebar'),ov=document.getElementById('sbOverlay');
@@ -1096,28 +1083,35 @@ function closeSb(){
 
 // ── PANELS ──
 function showPanel(id,btn){
+  killAll();
   document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
   document.querySelectorAll('.sb-item').forEach(b=>b.classList.remove('active'));
   document.getElementById('panel-'+id).classList.add('active');
   btn.classList.add('active');
   closeSb();
   window.scrollTo({top:0,behavior:'smooth'});
-  // Restart CSS animations on entering panel (force reflow)
-  restartAnims(document.getElementById('panel-'+id));
+  // Launch animations for the active panel's default state
+  setTimeout(()=>{
+    staggerIn(id);
+    if(id==='single')  launchSingleBoth();
+    if(id==='two')     launchTwoSingle();
+    if(id==='pcb')     launchPCBElec();
+    if(id==='models')  launchModelWrong();
+    if(id==='rrp')     launchRRPWith();
+  }, 80);
 }
 
-// Force-restart all animations within an element by toggling style
-function restartAnims(el){
-  const anims=el.querySelectorAll('[class*="-anim"],[class*="radiate-ring"],[class*="mag-breathe"]');
-  anims.forEach(a=>{
-    a.style.animation='none';
-    void a.offsetWidth; // reflow
-    a.style.animation='';
-  });
+// ── PANEL 1: SINGLE FIELD TOGGLE ──
+function launchSingleBoth(){
+  animEField('s_e','#elecGroup line', 160);
+}
+function launchSingleMag(){} // rings already spin via CSS; no extra anim needed
+function launchSingleElec(){
+  animEField('s_e','#elecGroup line', 160);
 }
 
-// ── MODULE 1: SINGLE FIELD TOGGLE ──
 function setSingleField(mode){
+  killAll();
   const mag=document.getElementById('magGroup');
   const elec=document.getElementById('elecGroup');
   document.querySelectorAll('#panel-single .ctrl-btn').forEach(b=>b.classList.remove('active'));
@@ -1127,14 +1121,24 @@ function setSingleField(mode){
   } else if(mode==='electric'){
     mag.style.opacity='0'; elec.style.opacity='1';
     document.getElementById('btnElec').classList.add('active');
+    launchSingleElec();
   } else {
     mag.style.opacity='1'; elec.style.opacity='1';
     document.getElementById('btnBoth').classList.add('active');
+    launchSingleBoth();
   }
 }
 
-// ── MODULE 2: TWO CONDUCTOR TOGGLE ──
+// ── PANEL 2: TWO CONDUCTOR TOGGLE ──
+function launchTwoSingle(){
+  animEField('t_e','#twoSingleMode line', 170);
+}
+function launchTwoTwo(){
+  animEField('t_e2','#twoMode line, #twoMode path', 130);
+}
+
 function setTwoConf(mode){
+  killAll();
   const sm=document.getElementById('twoSingleMode');
   const tm=document.getElementById('twoMode');
   const cap=document.getElementById('twoCaption');
@@ -1143,15 +1147,27 @@ function setTwoConf(mode){
     sm.style.display=''; tm.style.display='none';
     cap.textContent='Fig 2a — Single conductor: both fields spread freely in all directions.';
     document.getElementById('btnSingleConf').classList.add('active');
+    launchTwoSingle();
   } else {
     sm.style.display='none'; tm.style.display='';
     cap.textContent='Fig 2b — Two conductor system: electric field lines now terminate at the return conductor. Magnetic field concentrates between them.';
     document.getElementById('btnTwoConf').classList.add('active');
+    launchTwoTwo();
   }
 }
 
-// ── MODULE 3: PCB FIELD TOGGLE ──
+// ── PANEL 3: PCB FIELD TOGGLE ──
+function launchPCBElec(){
+  animEField('pcb_e','#pcbElec line', 140, 1.4);
+  animPath('pcb_ret','#svgPCB .return-line', 90, 1.1);
+}
+function launchPCBMag(){} // CSS spin handles it
+function launchPCBBoth(){
+  launchPCBElec();
+}
+
 function setPCB(mode){
+  killAll();
   const e=document.getElementById('pcbElec');
   const m=document.getElementById('pcbMag');
   const lbl=document.getElementById('pcbModeLabel');
@@ -1160,19 +1176,45 @@ function setPCB(mode){
     e.style.display=''; m.style.display='none';
     lbl.textContent='Showing: Electric Field (E-field)';
     document.getElementById('pcbE').classList.add('active');
+    launchPCBElec();
   } else if(mode==='magnetic'){
     e.style.display='none'; m.style.display='';
     lbl.textContent='Showing: Magnetic Field (B-field)';
     document.getElementById('pcbM').classList.add('active');
+    launchPCBMag();
   } else {
     e.style.display=''; m.style.display='';
     lbl.textContent='Showing: Both Fields';
     document.getElementById('pcbB').classList.add('active');
+    launchPCBBoth();
   }
 }
 
-// ── MODULE 4: MODEL TOGGLE ──
+// ── PANEL 4: MODEL TOGGLE ──
+function launchModelWrong(){
+  // Animate the electron circles moving right along top conductor
+  if(REDUCED) return;
+  const electrons = [...document.querySelectorAll('#wrongModel circle')];
+  electrons.forEach((el,i)=>{
+    const startX = parseFloat(el.getAttribute('cx'));
+    gsap.to(el,{
+      attr:{cx: startX + 40},
+      duration:1.2, ease:'power1.inOut',
+      repeat:-1, yoyo:true,
+      delay: i * 0.22
+    });
+  });
+  ANIMS['mod_e'] = {kill:()=>gsap.killTweensOf('#wrongModel circle')};
+}
+function launchModelRight(){
+  // Animate Poynting vector
+  animPoynting('mod_p','#rightModel line:first-of-type', 295);
+  // Animate E-field verticals
+  animEField('mod_ef','#rightModel line.ef-anim', 48, 1.0);
+}
+
 function setModel(mode){
+  killAll();
   const w=document.getElementById('wrongModel');
   const r=document.getElementById('rightModel');
   const t=document.getElementById('modelTitle');
@@ -1184,44 +1226,67 @@ function setModel(mode){
     t.textContent='The Electron Flow Model — What We Were Taught';
     c.textContent='The conventional circuit model — taught in most university courses. Explains DC behaviour but fails completely to explain EMI, radiation, or why signals travel near the speed of light.';
     document.getElementById('modWrong').classList.add('active');
+    launchModelWrong();
   } else {
     w.style.display='none';
     r.style.display=''; r.style.opacity='1';
     t.textContent='The Field-Based Model — What Actually Happens';
     c.textContent='Energy propagates as electromagnetic fields in the dielectric space between conductors. The Poynting vector shows the direction of energy flow — along the trace, not through the copper.';
     document.getElementById('modRight').classList.add('active');
+    launchModelRight();
   }
 }
 
-// ── MODULE 5: RRP TOGGLE ──
+// ── PANEL 5: RRP TOGGLE ──
+function launchRRPWith(){
+  animEField('rrp_e','#rrpWithState line', 140, 1.4);
+}
+function launchRRPWithout(){
+  animEField('rrp_ew','#rrpWithoutState line', 200, 1.8);
+  animRadiationRings('rrp_rad','svgRRP', 310, 39);
+}
+function launchRRPSplit(){
+  animEField('rrp_es','#rrpSplitState line', 140, 1.4);
+  animPath('rrp_det','#rrpSplitState path', 190, 1.5);
+}
+
 function setRRP(mode){
+  clearRadiationRings('rrp_rad','svgRRP');
+  killAll();
   document.getElementById('rrpWithState').style.display='none';
   document.getElementById('rrpWithoutState').style.display='none';
   document.getElementById('rrpSplitState').style.display='none';
   document.querySelectorAll('#panel-rrp .ctrl-btn').forEach(b=>b.classList.remove('active'));
   const title=document.getElementById('rrpVizTitle');
   const cap=document.getElementById('rrpCap');
-  let stateEl;
   if(mode==='with'){
-    stateEl=document.getElementById('rrpWithState');
+    document.getElementById('rrpWithState').style.display='';
     document.getElementById('rrpWith').classList.add('active');
     title.textContent='Scenario: With Solid RRP — Fields Contained';
     cap.textContent='With a solid, continuous RRP adjacent to the signal trace, fields are confined to the dielectric and return current flows directly under the trace — minimising loop area and radiation.';
+    launchRRPWith();
   } else if(mode==='without'){
-    stateEl=document.getElementById('rrpWithoutState');
+    document.getElementById('rrpWithoutState').style.display='';
     document.getElementById('rrpWithout').classList.add('active');
     title.textContent='Scenario: Without RRP — Fields Radiate Freely';
     cap.textContent='Without a reference plane, fields expand in all directions until reaching the earth ground. The PCB becomes a radiating antenna. Common mode currents form along the enormous loop area.';
+    launchRRPWithout();
   } else {
-    stateEl=document.getElementById('rrpSplitState');
+    document.getElementById('rrpSplitState').style.display='';
     document.getElementById('rrpSplit').classList.add('active');
     title.textContent='Scenario: Split RRP — Return Current Forced to Detour';
     cap.textContent='A gap in the reference plane forces return current to route around it, creating a large radiating current loop. Splitting planes to separate analog and digital does not improve EMI — it causes it.';
+    launchRRPSplit();
   }
-  stateEl.style.display='';
-  // Restart animations in the newly shown state
-  restartAnims(stateEl);
 }
+
+// ── BOOT: launch default panel on load ──
+window.addEventListener('DOMContentLoaded', ()=>{
+  setTimeout(()=>{
+    staggerIn('single');
+    launchSingleBoth();
+  }, 120);
+});
 </script>
 </body>
 </html>
