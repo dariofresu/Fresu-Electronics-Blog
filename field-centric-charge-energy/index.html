@@ -1,295 +1,1050 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>A Field-Centric View of Energy Transfer in Classical Electromagnetism — Fresu Electronics</title>
-  <meta name="description" content="Where does electrical energy actually flow? Not through the wire. The Poynting vector, Gauss's law inverted, and a field-first interpretation of classical ">
-  <meta property="og:title" content="A Field-Centric View of Energy Transfer in Classical Electromagnetism">
-  <meta property="og:url" content="https://blog.fresuelectronics.com/field-centric-charge-energy">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400;1,700&display=swap" rel="stylesheet">
-  <style>
-    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-    :root{--bg:#0a0a0a;--surface:#111111;--surface-2:#181818;--border:#242424;--label:#a0aab8;--accent:#00FF94;--accent-dim:rgba(0,255,148,0.10);--accent-hover:#00e085;--wrong:#ff4d4d}
-    body{background:var(--bg);color:#fff;font-family:'Poppins',sans-serif;font-size:17px;line-height:1.75;overflow-x:hidden}
-    body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:1000;opacity:0.2;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E")}
-    header{border-bottom:1px solid var(--border)}
-    .site-header{max-width:1100px;margin:0 auto;padding:18px 40px;display:flex;align-items:center;justify-content:space-between}
-    .site-header img{height:44px;width:auto;display:block}
-    .header-nav{display:flex;align-items:center;gap:28px}
-    .header-nav a{font-size:11px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:#fff;text-decoration:none;opacity:0.6;transition:opacity 0.2s}
-    .header-nav a:hover{opacity:1}
-    .header-cta{opacity:1!important;background:var(--accent);color:#0a0a0a!important;padding:9px 20px;border-radius:3px;transition:background 0.2s}
-    .header-cta:hover{background:var(--accent-hover)!important}
-    .container{max-width:740px;margin:0 auto;padding:72px 32px 80px}
-    .kicker{display:inline-flex;align-items:center;gap:10px;font-size:11px;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;color:var(--accent);margin-bottom:28px;padding:6px 14px;border:1px solid var(--accent);border-radius:2px;background:var(--accent-dim)}
-    .kicker::before{content:'▶';font-size:8px}
-    h1{font-size:clamp(32px,5vw,52px);font-weight:800;line-height:1.1;letter-spacing:-0.02em;color:#fff;margin-bottom:24px}
-    h1 em{font-style:italic;color:var(--accent)}
-    .deck{font-size:18px;font-weight:400;color:#fff;line-height:1.7;margin-bottom:48px;padding-bottom:48px;border-bottom:1px solid var(--border)}
-    .author-row{display:flex;align-items:center;gap:16px;margin-bottom:48px;padding-bottom:48px;border-bottom:1px solid var(--border)}
-    .author-photo{width:52px;height:52px;border-radius:50%;object-fit:cover;flex-shrink:0;border:2px solid var(--accent)}
-    .author-name{font-size:15px;font-weight:600;color:#fff;display:block}
-    .author-title{font-size:12px;font-weight:400;color:var(--label);display:block;margin-top:2px}
-    h2{font-size:24px;font-weight:700;letter-spacing:-0.01em;color:#fff;margin:52px 0 16px}
-    h3{font-size:19px;font-weight:700;color:#fff;margin:32px 0 12px}
-    p{color:#fff;font-weight:400;margin-bottom:20px}
-    strong{color:#fff;font-weight:600}
-    em{font-style:italic}
-    .contrast-block{display:grid;grid-template-columns:1fr 1fr;gap:2px;margin:44px 0;border-radius:4px;overflow:hidden}
-    .contrast-col{padding:28px 24px}
-    .contrast-col.wrong{background:var(--surface);border:1px solid var(--border);border-right:none}
-    .contrast-col.right{background:rgba(0,255,148,0.06);border:1px solid rgba(0,255,148,0.2)}
-    .contrast-label{font-size:10px;font-weight:600;letter-spacing:0.15em;text-transform:uppercase;margin-bottom:16px;display:block}
-    .contrast-col.wrong .contrast-label{color:var(--label)}
-    .contrast-col.right .contrast-label{color:var(--accent)}
-    .contrast-list{list-style:none;font-size:14px}
-    .contrast-list li{padding:7px 0;border-bottom:1px solid var(--border);color:#fff;display:flex;align-items:flex-start;gap:10px;font-weight:400}
-    .contrast-list li:last-child{border-bottom:none}
-    .contrast-col.wrong .contrast-list li::before{content:'✕';color:var(--wrong);font-size:12px;margin-top:2px;flex-shrink:0}
-    .contrast-col.right .contrast-list li::before{content:'✓';color:var(--accent);font-size:12px;margin-top:2px;flex-shrink:0}
-    .pull-quote{margin:44px 0;padding:32px 36px;border-left:3px solid var(--accent);background:var(--accent-dim);border-radius:0 4px 4px 0;position:relative}
-    .pull-quote::before{content:'"';font-size:80px;color:var(--accent);opacity:0.2;position:absolute;top:-10px;left:24px;line-height:1;font-weight:800}
-    .pull-quote p{font-size:20px;font-weight:500;font-style:italic;line-height:1.55;color:#fff;margin:0;padding-top:8px}
-    .concept-grid{display:grid;gap:2px;margin:44px 0}
-    .concept-card{background:var(--surface);border:1px solid var(--border);padding:24px 28px;border-radius:4px;position:relative;overflow:hidden;transition:border-color 0.2s}
-    .concept-card:hover{border-color:var(--accent)}
-    .concept-card::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--accent)}
-    .concept-num{font-size:10px;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;color:var(--accent);margin-bottom:10px;display:block}
-    .concept-card h3{font-size:18px;font-weight:700;color:#fff;margin:0 0 10px 0}
-    .concept-card p{font-size:14px;margin:0;line-height:1.75}
-    .closing{margin-top:64px;padding-top:40px;border-top:1px solid var(--border)}
-    .closing-line{font-size:26px;font-weight:700;font-style:italic;color:#fff;line-height:1.45;margin-bottom:20px}
-    .closing-line span{color:var(--accent)}
-    .tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:32px}
-    .tag{font-size:11px;font-weight:500;letter-spacing:0.05em;padding:5px 12px;border:1px solid var(--border);border-radius:2px;color:var(--label);background:var(--surface)}
-    .cta-section{margin-top:80px;padding:56px 48px;background:var(--surface);border:1px solid var(--border);border-radius:6px;position:relative;overflow:hidden;text-align:center}
-    .cta-section::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 50% 0%,rgba(0,255,148,0.08) 0%,transparent 65%);pointer-events:none}
-    .cta-section::after{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--accent),transparent)}
-    .cta-eyebrow{font-size:11px;font-weight:600;letter-spacing:0.2em;text-transform:uppercase;color:var(--accent);margin-bottom:20px;display:block}
-    .cta-headline{font-size:clamp(24px,3.5vw,36px);font-weight:800;line-height:1.15;letter-spacing:-0.02em;color:#fff;margin-bottom:16px}
-    .cta-headline em{font-style:italic;color:var(--accent)}
-    .cta-sub{font-size:16px;font-weight:400;color:#fff;max-width:520px;margin:0 auto 36px;line-height:1.7}
-    .cta-buttons{display:flex;flex-wrap:wrap;gap:12px;justify-content:center;margin-bottom:32px}
-    .btn-primary{display:inline-flex;align-items:center;gap:8px;background:var(--accent);color:#0a0a0a;font-family:'Poppins',sans-serif;font-size:14px;font-weight:700;padding:14px 28px;border-radius:3px;text-decoration:none;transition:background 0.2s,transform 0.2s}
-    .btn-primary:hover{background:var(--accent-hover);transform:translateY(-1px)}
-    .btn-secondary{display:inline-flex;align-items:center;gap:8px;color:#fff;font-family:'Poppins',sans-serif;font-size:14px;font-weight:500;padding:14px 28px;border:1px solid var(--border);border-radius:3px;text-decoration:none;transition:border-color 0.2s,transform 0.2s,color 0.2s}
-    .btn-secondary:hover{border-color:var(--accent);color:var(--accent);transform:translateY(-1px)}
-    .cta-proof{display:flex;flex-wrap:wrap;gap:20px;justify-content:center;padding-top:28px;border-top:1px solid var(--border);margin-bottom:40px}
-    .proof-item{display:flex;align-items:center;gap:8px;font-size:13px;font-weight:500;color:#fff}
-    .proof-item::before{content:'✓';color:var(--accent);font-size:12px}
-    .products-strip{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:2px;text-align:left}
-    .product-card{background:var(--surface-2);border:1px solid var(--border);padding:22px;border-radius:4px;text-decoration:none;transition:border-color 0.2s,transform 0.15s;display:flex;flex-direction:column;gap:6px}
-    .product-card:hover{border-color:var(--accent);transform:translateY(-2px)}
-    .product-icon{font-size:22px;margin-bottom:4px}
-    .product-name{font-size:15px;font-weight:700;color:#fff}
-    .product-desc{font-size:13px;font-weight:400;color:#fff;line-height:1.6}
-    .product-link{font-size:11px;font-weight:600;letter-spacing:0.05em;color:var(--accent);margin-top:8px}
-    footer{border-top:1px solid var(--border)}
-    .site-footer{max-width:1100px;margin:0 auto;padding:28px 40px;display:flex;align-items:center;justify-content:space-between;font-size:11px;font-weight:400;color:#fff;opacity:0.5;flex-wrap:wrap;gap:12px}
-    .site-footer a{color:var(--accent);text-decoration:none}
-    @keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
-    .container>*{animation:fadeUp 0.7s cubic-bezier(0.22,1,0.36,1) both}
-    .container>*:nth-child(1){animation-delay:0ms}.container>*:nth-child(2){animation-delay:60ms}.container>*:nth-child(3){animation-delay:120ms}.container>*:nth-child(4){animation-delay:180ms}
-    @media(max-width:560px){.contrast-block{grid-template-columns:1fr}.contrast-col.wrong{border-right:1px solid var(--border);border-bottom:none}.container{padding:48px 20px 80px}.cta-section{padding:40px 20px}.site-header{padding:16px 20px}.header-nav a:not(.header-cta){display:none}}
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Field-Centric Electromagnetism — Fresu Electronics</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+  window.MathJax = {
+    tex: { inlineMath: [['$','$'],['\\(','\\)']] },
+    svg: { fontCache: 'global' },
+    startup: { typeset: false }
+  };
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-svg.min.js"></script>
+<style>
+  :root {
+    --bg:           #0a0a0a;
+    --surface:      #111111;
+    --surface-2:    #181818;
+    --border:       #242424;
+    --border-light: #1a1a1a;
+    --fg:           #ffffff;
+    --fg-secondary: #e8edf5;
+    --label:        #a0aab8;
+    --label-dim:    #6b7d8f;
+    --accent:       #00FF94;
+    --accent-dim:   rgba(0,255,148,0.08);
+    --accent-glow:  rgba(0,255,148,0.25);
+    --wrong:        #ff4d4d;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: var(--bg);
+    color: var(--fg);
+    font-family: 'Poppins', 'Helvetica Neue', Arial, sans-serif;
+    line-height: 1.65;
+    overflow-x: hidden;
+  }
+  .noise-overlay {
+    position: fixed; inset: 0; pointer-events: none; z-index: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+    opacity: 0.3;
+  }
 
-    /* ── Sticky Subscribe Widget ── */
-    .sw-wrap { position: fixed; right: 0; top: 50%; transform: translateY(-50%); z-index: 9000; display: flex; flex-direction: row-reverse; align-items: flex-start; }
-    .sw-tab { display: flex; flex-direction: column; align-items: center; gap: 6px; background: var(--accent); border: none; border-radius: 6px 0 0 6px; color: #0a0a0a; cursor: pointer; font-family: inherit; font-size: 11px; font-weight: 700; letter-spacing: 0.06em; padding: 14px 8px; writing-mode: vertical-rl; text-orientation: mixed; transform: rotate(180deg); line-height: 1; transition: background 0.2s; white-space: nowrap; box-shadow: -2px 0 12px rgba(0,0,0,0.4); }
-    .sw-tab:hover { background: var(--accent-hover); }
-    .sw-tab-icon { font-size: 14px; transform: rotate(180deg); display: inline-block; }
-    .sw-panel { background: #141414; border: 1px solid #2a2a2a; border-right: none; border-radius: 8px 0 0 8px; box-shadow: -4px 4px 24px rgba(0,0,0,0.6); padding: 20px; width: 280px; }
-    .sw-head { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 14px; }
-    .sw-title { font-size: 13px; font-weight: 600; color: #fff; line-height: 1.4; flex: 1; }
-    .sw-title em { color: var(--accent); font-style: italic; }
-    .sw-close { background: none; border: none; color: #666; cursor: pointer; font-size: 16px; line-height: 1; padding: 0 0 0 8px; transition: color 0.2s; flex-shrink: 0; }
-    .sw-close:hover { color: #fff; }
-    .sw-form { display: flex; flex-direction: column; gap: 8px; }
-    .sw-row { display: flex; gap: 8px; }
-    .sw-input { background: #0a0a0a; border: 1px solid #2a2a2a; border-radius: 3px; color: #fff; font-family: inherit; font-size: 12px; padding: 9px 10px; outline: none; transition: border-color 0.2s; width: 100%; }
-    .sw-input:focus { border-color: var(--accent); }
-    .sw-input::placeholder { color: #444; }
-    select.sw-input { cursor: pointer; appearance: none; -webkit-appearance: none; }
-    .sw-row .sw-input { flex: 1; min-width: 0; }
-    .sw-submit { background: var(--accent); border: none; border-radius: 3px; color: #0a0a0a; cursor: pointer; font-family: inherit; font-size: 12px; font-weight: 700; padding: 10px; transition: background 0.2s; width: 100%; margin-top: 2px; letter-spacing: 0.03em; }
-    .sw-submit:hover { background: var(--accent-hover); }
-    .sw-note { color: #444; font-size: 10px; text-align: center; }
-    .sw-msg { font-size: 11px; text-align: center; margin: 0; }
-    @media (max-width: 768px) {
-      .sw-wrap { position: fixed; right: 0; bottom: 0; top: auto; left: 0; transform: none; flex-direction: column-reverse; align-items: stretch; }
-      .sw-tab { flex-direction: row; writing-mode: horizontal-tb; transform: none; border-radius: 0; padding: 12px 20px; justify-content: center; gap: 8px; box-shadow: 0 -2px 12px rgba(0,0,0,0.4); }
-      .sw-tab-icon { transform: none; }
-      .sw-panel { border: none; border-top: 1px solid #2a2a2a; border-radius: 0; width: 100%; box-shadow: 0 -4px 24px rgba(0,0,0,0.6); max-height: 80vh; overflow-y: auto; }
-    }
-  </style>
+  /* HERO */
+  .hero {
+    position: relative;
+    padding: 80px 48px 72px;
+    border-bottom: 1px solid var(--border);
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -120px; right: -80px;
+    width: 520px; height: 520px;
+    background: radial-gradient(circle, rgba(0,255,148,0.12) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .hero-eyebrow {
+    display: inline-flex; align-items: center; gap: 8px;
+    font-size: 11px; font-weight: 600; letter-spacing: 0.12em;
+    text-transform: uppercase; color: var(--accent);
+    margin-bottom: 24px;
+  }
+  .hero-eyebrow span { width: 24px; height: 1px; background: var(--accent); display: inline-block; }
+  .hero h1 {
+    font-size: clamp(28px, 4vw, 44px);
+    font-weight: 800;
+    line-height: 1.15;
+    max-width: 700px;
+    margin-bottom: 20px;
+  }
+  .hero h1 em {
+    font-style: normal;
+    color: var(--accent);
+    position: relative;
+  }
+  .hero-desc {
+    font-size: 15px;
+    color: var(--fg-secondary);
+    max-width: 580px;
+    font-weight: 400;
+    margin-bottom: 32px;
+  }
+  .tag-row { display: flex; flex-wrap: wrap; gap: 8px; }
+  .tag {
+    font-size: 11px; font-weight: 600; letter-spacing: 0.06em;
+    text-transform: uppercase; padding: 4px 12px;
+    border: 1px solid var(--border);
+    color: var(--label);
+    border-radius: 2px;
+  }
+
+  /* LAYOUT */
+  .content { max-width: 900px; margin: 0 auto; padding: 0 32px; }
+  .section {
+    padding: 64px 0 48px;
+    border-bottom: 1px solid var(--border-light);
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+  .section.visible { opacity: 1; transform: translateY(0); }
+  .section-label {
+    font-size: 11px; font-weight: 700; letter-spacing: 0.14em;
+    text-transform: uppercase; color: var(--accent);
+    margin-bottom: 12px;
+  }
+  .section-title {
+    font-size: 22px; font-weight: 700; margin-bottom: 16px; line-height: 1.3;
+  }
+  .section-body { font-size: 14px; color: var(--fg-secondary); max-width: 660px; }
+  .section-body p { margin-bottom: 14px; }
+
+  /* PARADIGM FLIP */
+  .paradigm-grid {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    gap: 0;
+    margin-top: 32px;
+    align-items: stretch;
+  }
+  .paradigm-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    padding: 28px 24px;
+    border-radius: 2px;
+  }
+  .paradigm-card.new {
+    border-color: var(--accent);
+    box-shadow: 0 0 32px rgba(0,255,148,0.06);
+  }
+  .p-card-label {
+    font-size: 10px; font-weight: 700; letter-spacing: 0.14em;
+    text-transform: uppercase; margin-bottom: 12px;
+  }
+  .p-card-label.old { color: var(--wrong); }
+  .p-card-label.new { color: var(--accent); }
+  .p-card-title { font-size: 16px; font-weight: 700; margin-bottom: 8px; }
+  .p-card-eq {
+    background: var(--surface-2);
+    border: 1px solid var(--border);
+    border-radius: 2px;
+    padding: 12px 16px;
+    font-size: 15px;
+    margin: 16px 0;
+    text-align: center;
+    min-height: 48px;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .p-card-desc { font-size: 12px; color: var(--label); line-height: 1.6; }
+  .paradigm-arrow {
+    display: flex; align-items: center; justify-content: center;
+    padding: 0 16px;
+    font-size: 28px; color: var(--accent); font-weight: 300;
+  }
+
+  /* CALLOUT */
+  .callout {
+    background: var(--accent-dim);
+    border-left: 3px solid var(--accent);
+    border-radius: 0 2px 2px 0;
+    padding: 16px 20px;
+    margin: 24px 0;
+    font-size: 13px;
+    color: var(--fg-secondary);
+  }
+  .callout strong { color: var(--fg); }
+
+  /* CANVAS SECTION */
+  .canvas-wrap {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 2px;
+    padding: 0;
+    margin-top: 28px;
+    overflow: hidden;
+    position: relative;
+  }
+  .canvas-header {
+    padding: 14px 20px;
+    border-bottom: 1px solid var(--border);
+    font-size: 12px; color: var(--label);
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  .canvas-header span { font-weight: 600; color: var(--fg-secondary); }
+  canvas { display: block; width: 100%; }
+  .canvas-legend {
+    padding: 12px 20px;
+    border-top: 1px solid var(--border);
+    display: flex; gap: 24px; flex-wrap: wrap;
+  }
+  .legend-item {
+    display: flex; align-items: center; gap: 8px;
+    font-size: 11px; color: var(--label);
+  }
+  .legend-dot {
+    width: 10px; height: 10px; border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  /* CHARGE CARDS */
+  .charge-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 24px; }
+  .charge-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 2px;
+    padding: 20px;
+  }
+  .charge-badge {
+    display: inline-block;
+    font-size: 11px; font-weight: 700; letter-spacing: 0.1em;
+    text-transform: uppercase; padding: 3px 10px; border-radius: 2px;
+    margin-bottom: 10px;
+  }
+  .charge-badge.pos { background: rgba(0,255,148,0.1); color: var(--accent); }
+  .charge-badge.neg { background: rgba(255,77,77,0.1); color: var(--wrong); }
+  .charge-card p { font-size: 13px; color: var(--fg-secondary); margin-top: 6px; }
+
+  /* POYNTING CONTROLS */
+  .ctrl-row {
+    display: flex; align-items: center; gap: 16px;
+    flex-wrap: wrap;
+  }
+  .ctrl-btn {
+    background: transparent;
+    border: 1px solid var(--border);
+    color: var(--fg);
+    font-family: inherit; font-size: 12px; font-weight: 600;
+    padding: 8px 20px; cursor: pointer; border-radius: 2px;
+    transition: all 0.2s ease;
+    letter-spacing: 0.04em;
+  }
+  .ctrl-btn:hover { border-color: var(--accent); color: var(--accent); }
+  .ctrl-btn.active { background: var(--accent); color: #0a0a0a; border-color: var(--accent); }
+  .ctrl-label { font-size: 11px; color: var(--label); }
+
+  /* EQUATION BLOCKS */
+  .eq-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; margin-top: 24px; }
+  .eq-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 2px;
+    padding: 20px 18px;
+  }
+  .eq-card-label { font-size: 10px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); margin-bottom: 10px; }
+  .eq-card-eq {
+    font-size: 16px; text-align: center;
+    padding: 12px 0; min-height: 50px;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .eq-card-desc { font-size: 12px; color: var(--label); margin-top: 10px; line-height: 1.6; }
+
+  /* DERIVATION RAIL */
+  .deriv-rail {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 2px;
+    margin-top: 28px;
+    overflow: hidden;
+  }
+  .deriv-rail-header {
+    padding: 12px 20px;
+    border-bottom: 1px solid var(--border);
+    font-size: 10px; font-weight: 700; letter-spacing: 0.14em;
+    text-transform: uppercase; color: var(--accent);
+    display: flex; align-items: center; gap: 10px;
+  }
+  .deriv-rail-header::before {
+    content: '';
+    display: inline-block;
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--accent);
+    flex-shrink: 0;
+  }
+  .deriv-step {
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    gap: 0;
+    border-bottom: 1px solid var(--border-light);
+    min-height: 64px;
+  }
+  .deriv-step:last-child { border-bottom: none; }
+  .deriv-step-label {
+    padding: 16px 20px;
+    border-right: 1px solid var(--border);
+    font-size: 11px; font-weight: 600; color: var(--label);
+    line-height: 1.5;
+    display: flex; align-items: center;
+  }
+  .deriv-step-eq {
+    padding: 14px 24px;
+    font-size: 15px;
+    display: flex; align-items: center;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+  .deriv-step-note {
+    font-size: 11px; color: var(--label-dim);
+    border-left: 1px solid var(--border-light);
+    padding-left: 14px;
+    line-height: 1.6;
+    flex: 1;
+    min-width: 120px;
+  }
+  .deriv-result {
+    background: var(--accent-dim);
+    border-top: 1px solid var(--accent);
+  }
+  .deriv-result .deriv-step-label { color: var(--accent); }
+  @media (max-width: 600px) {
+    .deriv-step { grid-template-columns: 1fr; }
+    .deriv-step-label { border-right: none; border-bottom: 1px solid var(--border-light); padding: 10px 16px; }
+    .deriv-step-eq { padding: 12px 16px; }
+  }
+
+  /* VELOCITY HIGHLIGHT */
+  .velocity-block {
+    background: var(--surface);
+    border: 1px solid var(--accent);
+    border-radius: 2px;
+    padding: 28px 32px;
+    margin-top: 28px;
+    text-align: center;
+    box-shadow: 0 0 60px rgba(0,255,148,0.05);
+    position: relative; overflow: hidden;
+  }
+  .velocity-block::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: radial-gradient(circle at 50% 100%, rgba(0,255,148,0.07), transparent 60%);
+    pointer-events: none;
+  }
+  .velocity-label { font-size: 11px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent); margin-bottom: 12px; }
+  .velocity-eq { font-size: 20px; margin-bottom: 12px; }
+  .velocity-note { font-size: 13px; color: var(--label); }
+
+  /* FOOTER */
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 32px 48px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+  .footer-brand { font-size: 13px; font-weight: 700; letter-spacing: 0.04em; }
+  .footer-brand span { color: var(--accent); }
+  .footer-label { font-size: 11px; color: var(--label-dim); }
+  .footer-link {
+    font-size: 11px; color: var(--accent); text-decoration: none;
+    font-weight: 600; letter-spacing: 0.06em;
+    text-transform: uppercase;
+    transition: opacity 0.2s;
+  }
+  .footer-link:hover { opacity: 0.7; }
+
+  /* SCROLLBAR */
+  ::-webkit-scrollbar { width: 6px; }
+  ::-webkit-scrollbar-track { background: var(--bg); }
+  ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+
+  @media (max-width: 640px) {
+    .hero { padding: 48px 24px 56px; }
+    .content { padding: 0 20px; }
+    .paradigm-grid { grid-template-columns: 1fr; }
+    .paradigm-arrow { transform: rotate(90deg); padding: 12px 0; }
+    .charge-grid { grid-template-columns: 1fr; }
+    footer { padding: 24px; }
+  }
+</style>
 </head>
 <body>
-<header>
-  <div class="site-header">
-    <a href="https://www.fresuelectronics.com"><img src="https://raw.githubusercontent.com/dariofresu/Fresu-Electronics-Blog/main/assets/logo.png" alt="Fresu Electronics"></a>
-    <nav class="header-nav">
-      <a href="https://blog.fresuelectronics.com">← All Posts</a>
-      <a href="https://www.fresuelectronics.com/trainings">Courses</a>
-      <a href="https://www.fresuelectronics.com/emc-audit" class="header-cta">Book EMC Audit</a>
-    </nav>
-  </div>
-</header>
-<div class="container">
-  <span class="kicker">Electromagnetism · Theory · Energy Transfer</span>
-  <h1>A Field-Centric View of Energy Transfer in Classical Electromagnetism</h1>
-  <p class="deck">Where does electrical energy actually flow? Not through the wire. The Poynting vector, Gauss's law inverted, and a field-first interpretation of classical electromagnetism — with practical consequences for how you design circuits.</p>
-  <div class="author-row">
-    <img class="author-photo" src="https://raw.githubusercontent.com/dariofresu/Fresu-Electronics-Blog/main/assets/dario-fresu.jpg" alt="Dario Fresu">
-    <div><span class="author-name">Dario Fresu</span><span class="author-title">Principal EMC Architect · Fresu Electronics</span></div>
-  </div>
-  <img src="https://raw.githubusercontent.com/dariofresu/Fresu-Electronics-Blog/main/assets/images/field-centric-charge.png" alt="" style="width:100%;border-radius:4px;margin:0 0 48px;display:block;border:1px solid #242424;">
 
-  <p>Gauss's law is a cornerstone of classical electromagnetism: ∇·E = ρ/ε. In its conventional form, charge density ρ is the source — the electric field E arises from it. Flip the interpretation: the electric field is the fundamental quantity, and charge density is derived from the field's divergence. In this formulation, charge is not a thing. It is a description of how the field changes in space.</p>
-  <p>This paper-thin conceptual difference has surprisingly large practical consequences.</p>
+<div class="noise-overlay"></div>
 
-  <h2>The inverted Gauss formulation</h2>
-  <p>Conventionally: charge distribution → generates → electric field. In the field-centric view: electric field exists → charge density is defined as ρ = ε(∇·E). The total charge within a volume is then the flux of E through the enclosing surface — charge is quantified by the field, not the other way around.</p>
-  <p>This inverts the causal story. The field is not a response to charge. Charge is a characterisation of the field's spatial structure. Where field lines converge, we call it positive charge. Where they diverge from a region, we call it negative charge. The field is primary; the charge description is secondary.</p>
-
-  <div class="pull-quote"><p>Charge is not a thing that has a field. Charge is a description of what the field is doing at a point in space.</p></div>
-
-  <h2>Energy flow: the Poynting vector</h2>
-  <p>In a steady-state DC circuit — battery, wires, resistor — where does the energy flow? The answer from classical field theory is unambiguous and counterintuitive: the energy flows in the electromagnetic field in the space surrounding the conductors, not through the conductors themselves. The Poynting vector S = E × H points from the battery to the resistor through the surrounding space.</p>
-  <p>The conductors establish boundary conditions. The electric field inside an ideal conductor is zero — so no energy propagates through the metal. The energy is guided by the conductor geometry but propagates in the field outside it. This is not a quantum effect or a special case. It is a direct result of classical Maxwellian electrodynamics.</p>
-
-  <h2>Implications for circuit design</h2>
-  <p>If signal energy propagates in the electromagnetic field between conductors — not through them — then the geometry of the space between conductors is what determines signal integrity and EMC performance. The dielectric material, the spacing, the continuity of the return plane, the apertures in any surrounding structure — these are the parameters that control where energy goes and how much of it escapes into the environment.</p>
-
-  <div class="concept-grid">
-    <div class="concept-card"><span class="concept-num">Implication 1</span><h3>The dielectric is the transmission medium</h3><p>Signal energy propagates in the dielectric between trace and reference plane — not through the copper. The dielectric constant determines propagation velocity and characteristic impedance. Dielectric loss is signal loss. Changes in dielectric geometry create impedance discontinuities. The copper traces are boundary conditions that confine and guide the field propagating in the dielectric.</p></div>
-    <div class="concept-card"><span class="concept-num">Implication 2</span><h3>Return plane geometry shapes the field</h3><p>The return reference plane is the second boundary condition of the transmission line. Its proximity to the signal trace determines the field confinement — how tightly the energy is guided versus how much spreads. Voids, slots, and gaps in the return plane are discontinuities in the field boundary — they allow energy to escape the guided mode and propagate into the environment.</p></div>
-    <div class="concept-card"><span class="concept-num">Implication 3</span><h3>Connector apertures are field apertures</h3><p>Any opening in the boundary structure — connector cutouts, ventilation slots, seam gaps in an enclosure — is an aperture through which the guided electromagnetic field can escape into the external environment. The field doesn't distinguish between a deliberate antenna and an accidental slot. If the aperture is the right size at the right frequency, it radiates.</p></div>
-  </div>
-
-  <h2>A more coherent framework for EMC</h2>
-  <p>The field-centric perspective provides a unified framework for understanding EMC phenomena that the particle-based model struggles to accommodate. Radiated emissions are fields escaping containment structures through apertures. Conducted emissions are fields propagating along cable conductors that enter or exit the system boundary. Susceptibility failures occur when an external field couples enough energy into a sensitive circuit node to disrupt its operation. In every case, the field model provides a direct causal account; the electron model requires elaborate and often inconsistent auxiliary explanations.</p>
-  <p>Adopting this perspective does not require abandoning circuit theory. It requires extending it — recognising that the circuit equations are boundary condition constraints on the underlying field behaviour, not complete descriptions of where the energy goes.</p>
-  
-  <div class="closing">
-    <div class="tags"><span class="tag">#Electromagnetism</span> <span class="tag">#FieldTheory</span> <span class="tag">#EnergyTransfer</span> <span class="tag">#EMC</span> <span class="tag">#PhysicsOfCircuits</span></div>
-  </div>
-  <div class="cta-section">
-    <span class="cta-eyebrow">Work with Dario Fresu</span>
-    <h2 class="cta-headline" style="margin:0 0 16px;">First-principles thinking <em>for hardware teams.</em></h2>
-    <p class="cta-sub">Work directly with Dario to identify EMC risks at the design stage — before a €15,000–40,000 chamber session reveals issues that require a respin.</p>
-    <div class="cta-buttons">
-      <a href="https://www.fresuelectronics.com/emc-audit" class="btn-primary" target="_blank">Book EMC Audit — €8,000</a>
-      <a href="https://www.fresuelectronics.com/emc-audit" class="btn-secondary" target="_blank">EMC Architect System — €30,000 →</a>
+<!-- HERO -->
+<section class="hero">
+  <div style="max-width:900px; margin:0 auto; position:relative; z-index:1;">
+    <div class="hero-eyebrow">
+      <span></span>
+      Fresu Electronics · Electromagnetism Series
     </div>
-    <div class="cta-proof">
-      <span class="proof-item">60,000+ engineers on LinkedIn &amp; YouTube</span>
-      <span class="proof-item">4,000+ engineers trained</span>
-      <span class="proof-item">Report in 10 business days</span>
-      <span class="proof-item">IPC Certified · Former ETH Zurich</span>
-    </div>
-    <div class="products-strip">
-      <a href="https://www.fresuelectronics.com/emc-audit" class="product-card" target="_blank"><div class="product-icon">🔍</div><div class="product-name">EMC Design Audit</div><div class="product-desc">Full design review before the chamber. Return paths, apertures, field geometry.</div><div class="product-link">Apply — €8,000 →</div></a>
-      <a href="https://www.fresuelectronics.com/emc-audit" class="product-card" target="_blank"><div class="product-icon">🏛</div><div class="product-name">EMC Architect System</div><div class="product-desc">Embedded ongoing EMC partnership across your full development process.</div><div class="product-link">Learn more — €30,000 →</div></a>
-      <a href="https://www.fresuelectronics.com/free-tool-1" class="product-card" target="_blank"><div class="product-icon">📐</div><div class="product-name">Free Stackup Template</div><div class="product-desc">EMI-controlled stackup template. Free resource for your next board design.</div><div class="product-link">Get free resource →</div></a>
+    <h1>The Field is <em>Primary</em>.<br>Charge is What Follows.</h1>
+    <p class="hero-desc">
+      A field-centric reinterpretation of Gauss's law — where the electric field is the fundamental entity, charge emerges from its divergence, and energy flows at the speed of light even in DC circuits.
+    </p>
+    <div class="tag-row">
+      <div class="tag">Classical EM</div>
+      <div class="tag">Gauss's Law</div>
+      <div class="tag">Poynting Vector</div>
+      <div class="tag">Field Theory</div>
+      <div class="tag">EMC/EMI Insight</div>
     </div>
   </div>
-</div>
+</section>
+
+<!-- MAIN CONTENT -->
+<div class="content">
+
+  <!-- SECTION 1: THE INVERSION -->
+  <div class="section" id="s1">
+    <div class="section-label">01 — The Paradigm Shift</div>
+    <h2 class="section-title">Inverting Gauss's Law: From Source to Consequence</h2>
+    <div class="section-body">
+      <p>Classical electromagnetism is taught charge-first: charges create fields. But the mathematics of Gauss's law are completely symmetric — and inverting the causal direction opens a more unified way of thinking about electromagnetic reality.</p>
+    </div>
+
+    <div class="paradigm-grid">
+      <div class="paradigm-card">
+        <div class="p-card-label old">Traditional View</div>
+        <div class="p-card-title">Charge drives the field</div>
+        <div class="p-card-eq" id="eq-trad">$$\nabla \cdot \vec{E} = \frac{\rho}{\varepsilon}$$</div>
+        <div class="p-card-desc">Charge density ρ is the <strong>primary, independent</strong> quantity. The electric field <strong>E</strong> arises from it. Remove the charge, and the field disappears.</div>
+      </div>
+      <div class="paradigm-arrow">→</div>
+      <div class="paradigm-card new">
+        <div class="p-card-label new">Field-Centric View</div>
+        <div class="p-card-title">The field defines charge</div>
+        <div class="p-card-eq" id="eq-inv">$$\rho = \varepsilon \, \nabla \cdot \vec{E}$$</div>
+        <div class="p-card-desc">The electric field <strong>E</strong> is the <strong>fundamental entity</strong>. Charge density ρ is a derived measurement — a description of how the field diverges in space.</div>
+      </div>
+    </div>
+
+    <div class="callout" style="margin-top:24px;">
+      <strong>Key insight:</strong> Both equations are mathematically identical — no prediction changes. What changes is the <em>ontological status</em> of each quantity: which one is real, and which is measured.
+    </div>
+  </div>
+
+  <!-- SECTION 2: FIELD DIVERGENCE VIZ -->
+  <div class="section" id="s2">
+    <div class="section-label">02 — Visualising Divergence</div>
+    <h2 class="section-title">∇·E &gt; 0 doesn't create charge — it <em>is</em> charge</h2>
+    <div class="section-body">
+      <p>In the field-centric model, what we call a "positive charge" is simply a region of space where the electric field diverges outward. What we call a "negative charge" is where field lines converge. The charge is a reading of the field's geometry.</p>
+    </div>
+
+    <div class="canvas-wrap">
+      <div class="canvas-header">
+        <span>Electric Field — Divergence Visualisation</span>
+        <span style="color:var(--label); font-size:11px;">∇·<strong style="color:var(--fg)">E</strong> = ρ / ε</span>
+      </div>
+      <canvas id="fieldCanvas" height="320"></canvas>
+      <div class="canvas-legend">
+        <div class="legend-item"><div class="legend-dot" style="background:var(--accent);"></div>Positive divergence (∇·E &gt; 0) — "positive charge"</div>
+        <div class="legend-item"><div class="legend-dot" style="background:var(--wrong);"></div>Negative divergence (∇·E &lt; 0) — "negative charge"</div>
+        <div class="legend-item"><div class="legend-dot" style="background:#4a9eff;"></div>Field line direction</div>
+      </div>
+    </div>
+
+    <div class="charge-grid">
+      <div class="charge-card">
+        <div class="charge-badge pos">∇·E &gt; 0</div>
+        <div class="p-card-eq" style="font-size:13px; padding:8px 0; min-height:auto;">$$\rho = \varepsilon \, \nabla \cdot \vec{E} > 0$$</div>
+        <p>Field lines spread outward. The spatial rate of change of <strong>E</strong> is positive — we observe this as positive charge. The divergence <em>is</em> the charge.</p>
+      </div>
+      <div class="charge-card">
+        <div class="charge-badge neg">∇·E &lt; 0</div>
+        <div class="p-card-eq" style="font-size:13px; padding:8px 0; min-height:auto;">$$\rho = \varepsilon \, \nabla \cdot \vec{E} < 0$$</div>
+        <p>Field lines converge inward. Negative divergence produces what we measure as negative charge — a "sink" in the field structure, not an intrinsic material property.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 3: CHARGE TOTAL -->
+  <div class="section" id="s3">
+    <div class="section-label">03 — Total Charge from Field Flux</div>
+    <h2 class="section-title">Gauss's Theorem: Charge Becomes Surface Integral</h2>
+    <div class="section-body">
+      <p>Applying the divergence theorem, total charge is no longer a property you need to know in advance — it's computed entirely from the field flux through any closed surface surrounding the region.</p>
+    </div>
+
+    <div class="eq-grid">
+      <div class="eq-card">
+        <div class="eq-card-label">Charge from Volume</div>
+        <div class="eq-card-eq" id="eq-vol">$$q = \int_V \varepsilon\,\nabla \cdot \vec{E}\; dV$$</div>
+        <div class="eq-card-desc">Total charge q as a volume integral of the field's divergence scaled by permittivity ε.</div>
+      </div>
+      <div class="eq-card">
+        <div class="eq-card-label">Via Divergence Theorem</div>
+        <div class="eq-card-eq" id="eq-surf">$$q = \oint_S \varepsilon\,\vec{E} \cdot d\vec{A}$$</div>
+        <div class="eq-card-desc">Equivalent surface form — charge is the flux of E through any closed surface. No interior knowledge needed.</div>
+      </div>
+      <div class="eq-card">
+        <div class="eq-card-label">Empty Space</div>
+        <div class="eq-card-eq" id="eq-empty">$$\nabla \cdot \vec{E} = 0 \;\Rightarrow\; \rho = 0$$</div>
+        <div class="eq-card-desc">A curl-free, divergence-free field is a region of zero charge — the field itself defines the absence of charge.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 4: POYNTING VECTOR -->
+  <div class="section" id="s4">
+    <div class="section-label">04 — Energy Transfer in DC Circuits</div>
+    <h2 class="section-title">Power Doesn't Flow Through Wires. It Flows Around Them.</h2>
+    <div class="section-body">
+      <p>The field-centric view makes the Poynting vector's role in DC circuits immediately obvious. In a simple resistive circuit, energy is not carried by the electrons — it flows through the surrounding electromagnetic field, directed by the Poynting vector <strong>S = E × H</strong> radially inward toward the conductor.</p>
+    </div>
+
+    <div class="canvas-wrap">
+      <div class="canvas-header">
+        <span>DC Wire Cross-Section — Poynting Vector Energy Flow</span>
+        <div class="ctrl-row">
+          <button class="ctrl-btn active" id="btnPlay" onclick="togglePoynting()">⏸ Pause</button>
+          <span class="ctrl-label" id="poyLabel">Energy flowing inward</span>
+        </div>
+      </div>
+      <canvas id="poyntingCanvas" height="320"></canvas>
+      <div class="canvas-legend">
+        <div class="legend-item"><div class="legend-dot" style="background:var(--accent);"></div><strong style="color:var(--fg-secondary)">E</strong> — Electric field (axial, along wire)</div>
+        <div class="legend-item"><div class="legend-dot" style="background:#c792ff;"></div><strong style="color:var(--fg-secondary)">H</strong> — Magnetic field (azimuthal, around wire)</div>
+        <div class="legend-item"><div class="legend-dot" style="background:#ffd700;"></div><strong style="color:var(--fg-secondary)">S = E × H</strong> — Poynting vector (radially inward)</div>
+      </div>
+    </div>
+
+    <div class="eq-grid" style="margin-top:28px;">
+      <div class="eq-card">
+        <div class="eq-card-label">Poynting Vector</div>
+        <div class="eq-card-eq" id="eq-poy">$$\vec{S} = \vec{E} \times \vec{H}$$</div>
+        <div class="eq-card-desc">Energy flux density in W/m². Both E and H are primary in the field-centric model, making S a direct statement about field-driven energy flow.</div>
+      </div>
+      <div class="eq-card">
+        <div class="eq-card-label">Energy Density</div>
+        <div class="eq-card-eq" id="eq-dens">$$u = \tfrac{1}{2}(\varepsilon E^2 + \mu H^2)$$</div>
+        <div class="eq-card-desc">Electromagnetic energy density in J/m³ — stored in both the electric and magnetic fields simultaneously.</div>
+      </div>
+      <div class="eq-card">
+        <div class="eq-card-label">Current Density</div>
+        <div class="eq-card-eq" id="eq-cur">$$\vec{J} = \sigma \vec{E}$$</div>
+        <div class="eq-card-desc">In conductors, current density derives from the field — another instance of J as a consequence of E, not independent of it.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 5: ENERGY DISSIPATION -->
+  <div class="section" id="s5">
+    <div class="section-label">05 — Energy Conversion in a Resistive Load</div>
+    <h2 class="section-title">Heat Is Not Generated by Current. It Is Generated by the Field.</h2>
+    <div class="section-body">
+      <p>In the standard account, a resistor dissipates power because current flows through it and collides with the lattice. This picture is practically convenient — but ontologically it gets things backwards. In the field-centric view, the account runs differently.</p>
+      <p>A sustained electric field <strong>E</strong> penetrates the resistive material. That penetrating field induces a local response: a current density <strong>J = σE</strong>, where σ is the conductivity of the material. This is not an independent transport of charge — it is the material's dissipative reaction to the field that envelops it. The resistor does not produce heat because charges collide; it produces heat because the local field configuration continuously performs work on the charge carriers of the medium at every interior point.</p>
+    </div>
+
+    <div class="callout">
+      <strong>Ohmic dissipation, field-first:</strong> The power dissipated per unit volume is the dot product of the field and the response it induces — <strong>p = E · J</strong>. Both quantities are local. Both are determined by the field. No global current transport is required to state this law.
+    </div>
+
+    <div class="eq-grid" style="margin-top:28px;">
+      <div class="eq-card">
+        <div class="eq-card-label">Field-Induced Response</div>
+        <div class="eq-card-eq" id="eq-cur">$$\vec{J} = \sigma \vec{E}$$</div>
+        <div class="eq-card-desc">Current density is a secondary, local response of matter to the penetrating electric field. It is derived — not primary.</div>
+      </div>
+      <div class="eq-card">
+        <div class="eq-card-label">Local Power Density</div>
+        <div class="eq-card-eq" id="eq-pdiss">$$p = \vec{E} \cdot \vec{J} = \sigma E^2$$</div>
+        <div class="eq-card-desc">Power dissipated per unit volume at each point in the material — a purely local, field-driven quantity in W/m³.</div>
+      </div>
+      <div class="eq-card">
+        <div class="eq-card-label">Energy Flux In</div>
+        <div class="eq-card-eq" id="eq-poy2">$$\vec{S} = \vec{E} \times \vec{H}$$</div>
+        <div class="eq-card-desc">The Poynting vector delivers energy radially inward through the surrounding field — exactly accounting for the power dissipated inside.</div>
+      </div>
+    </div>
+
+    <div class="section-body" style="margin-top:28px;">
+      <p>The energy budget closes without invoking any interior current transport. The Poynting vector — computed entirely from the external fields — integrates to the same power that appears as heat inside the resistor. The fields deliver; the matter converts.</p>
+      <p>What, then, is the role of the wire connecting the resistor to the source? The conductor shapes and guides the electromagnetic field configuration around the circuit. It is not a pipe for energy. It is a boundary condition that sculpts the field — and the field does the work.</p>
+    </div>
+
+    <!-- Derivation chain -->
+    <div class="deriv-rail">
+      <div class="deriv-rail-header">Derivation — Propagation Speed from Field Quantities Alone</div>
+
+      <div class="deriv-step">
+        <div class="deriv-step-label">Start: Poynting magnitude in steady state (E ⊥ H)</div>
+        <div class="deriv-step-eq">
+          <span id="eq-d1">$$|\vec{S}| = |\vec{E} \times \vec{H}| = E \cdot H$$</span>
+          <div class="deriv-step-note">E and H are orthogonal in the surrounding dielectric. No circuit quantities appear.</div>
+        </div>
+      </div>
+
+      <div class="deriv-step">
+        <div class="deriv-step-label">Substitute medium impedance Z = √(μ/ε)</div>
+        <div class="deriv-step-eq">
+          <span id="eq-d2">$$H = \frac{E}{Z} \;\Rightarrow\; |\vec{S}| = \frac{E^2}{Z}$$</span>
+          <div class="deriv-step-note">Z is a property of the dielectric medium — not of the conductor or the circuit. Energy flux is set entirely by the field and the medium.</div>
+        </div>
+      </div>
+
+      <div class="deriv-step">
+        <div class="deriv-step-label">Total EM energy density u stored in both fields</div>
+        <div class="deriv-step-eq">
+          <span id="eq-d3">$$u = \tfrac{1}{2}\!\left(\varepsilon E^2 + \mu H^2\right) = \tfrac{1}{2}\!\left(\varepsilon E^2 + \frac{\mu E^2}{Z^2}\right)$$</span>
+          <div class="deriv-step-note">Substituting H = E/Z and Z² = μ/ε gives μ/Z² = ε.</div>
+        </div>
+      </div>
+
+      <div class="deriv-step">
+        <div class="deriv-step-label">Simplify: equal electric and magnetic contributions</div>
+        <div class="deriv-step-eq">
+          <span id="eq-d4">$$u = \tfrac{1}{2}(\varepsilon E^2 + \varepsilon E^2) = \varepsilon E^2$$</span>
+          <div class="deriv-step-note">In steady state, electric and magnetic energy densities are equal — a direct consequence of E ⊥ H and H = E/Z.</div>
+        </div>
+      </div>
+
+      <div class="deriv-step">
+        <div class="deriv-step-label">Treat S = u · v and solve for v</div>
+        <div class="deriv-step-eq">
+          <span id="eq-d5">$$v = \frac{|\vec{S}|}{u} = \frac{E^2/Z}{\varepsilon E^2} = \frac{1}{\varepsilon Z} = \frac{1}{\varepsilon \sqrt{\mu/\varepsilon}}$$</span>
+          <div class="deriv-step-note">E² cancels. The propagation speed depends only on the medium's constitutive parameters — not on any source quantity.</div>
+        </div>
+      </div>
+
+      <div class="deriv-step deriv-result">
+        <div class="deriv-step-label">Result</div>
+        <div class="deriv-step-eq">
+          <span id="eq-d6">$$v = \frac{1}{\sqrt{\mu\,\varepsilon}}$$</span>
+          <div class="deriv-step-note">The same expression as the EM wave speed in the medium. No reference to charge, current, voltage, or electron drift velocity appears anywhere in this derivation.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="velocity-block" style="margin-top:28px;">
+      <div class="velocity-label">The Speed at Which the Field Configuration Is Established</div>
+      <div class="velocity-eq" id="eq-bridge">$$v_\text{field} = \frac{1}{\sqrt{\mu\,\varepsilon_r\,\varepsilon_0}}$$</div>
+      <div class="velocity-note">When a circuit is switched on, the surrounding field pattern establishes and modifies itself at this speed — a property of the dielectric medium, not the conductor. In a PCB substrate with ε<sub>r</sub> ≈ 4, that is approximately half the vacuum speed of light. The electrons' drift velocity (~mm/s) plays no role in how quickly energy redistribution propagates. This is not a coincidence with EM wave propagation — it is the same phenomenon.</div>
+    </div>
+
+    <div class="callout" style="margin-top:24px;">
+      <strong>EMC/EMI implication:</strong> Return path geometry, dielectric selection, and trace spacing control the field configuration — and therefore where energy flows, where it dissipates, and what radiates. Thinking in current loops is an engineering shorthand. Thinking in fields is the physics.
+    </div>
+  </div>
+
+  <!-- SECTION 6: MATTER AND MASS -->
+  <div class="section" id="s6">
+    <div class="section-label">06 — Beyond Charge: What Then Is Matter and Mass?</div>
+    <h2 class="section-title">Matter Is Not a Separate Substance. It Is a Field Configuration.</h2>
+    <div class="section-body">
+      <p>The logic of the field-centric inversion does not stop at charge. If we follow it consistently, it reshapes our understanding of matter and mass as well — and the picture that emerges is more coherent than the one it replaces.</p>
+      <p>The conventional view places matter as the starting point: solid, discrete particles that happen to carry charge and generate fields. The field-centric view inverts this at every level. What we call a particle — an electron, a proton, any stable constituent of matter — is not a discrete object sitting inside a field. It is a localized, stable configuration of the field itself: a region where the field is structured, self-sustaining, and resistant to dispersal.</p>
+      <p>In quantum field theory, this is not metaphor. Electrons are excitations of the electron field; photons are excitations of the electromagnetic field. No field excitation, no particle. The field is primary. The particle is what the field is doing in a particular region of space.</p>
+    </div>
+
+    <div class="callout">
+      <strong>The parallel to charge:</strong> Just as ρ = ε∇·E — charge is not a primitive but a description of how the field diverges — a particle is not a primitive but a description of how the field concentrates and stabilizes. The ontological move is the same; the scale is different.
+    </div>
+
+    <div class="section-body" style="margin-top:28px;">
+      <p>Mass follows from the same principle. In the field-centric framework, inertial mass is not an intrinsic property of stuff. It is a measure of how much field energy is confined to a localized region — bound rather than freely propagating.</p>
+    </div>
+
+    <div class="eq-grid" style="margin-top:16px;">
+      <div class="eq-card">
+        <div class="eq-card-label">Mass as Confined Field Energy</div>
+        <div class="eq-card-eq" id="eq-emc2">$$E_\text{confined} = mc^2$$</div>
+        <div class="eq-card-desc">Mass is the Lorentz-invariant measure of total bound field energy. It quantifies confinement, not substance.</div>
+      </div>
+      <div class="eq-card">
+        <div class="eq-card-label">EM Field Energy Density</div>
+        <div class="eq-card-eq" id="eq-ufield">$$u = \tfrac{1}{2}(\varepsilon E^2 + \mu H^2)$$</div>
+        <div class="eq-card-desc">Where this energy is localized and self-sustaining, rather than propagating freely, it manifests as inertia — as mass.</div>
+      </div>
+      <div class="eq-card">
+        <div class="eq-card-label">Propagating vs. Confined</div>
+        <div class="eq-card-eq" id="eq-prop">$$v_\text{free} = \frac{1}{\sqrt{\mu\varepsilon}} \quad v_\text{bound} = 0$$</div>
+        <div class="eq-card-desc">Free field energy propagates at the medium's wave speed. Bound field energy does not propagate — and that non-propagation is what mass is.</div>
+      </div>
+    </div>
+
+    <div class="section-body" style="margin-top:28px;">
+      <p>It is worth noting where most of the mass in everyday matter actually comes from. The proton, for instance, has a rest mass nearly 1836 times that of the electron. Yet its three constituent quarks account for only a few percent of that mass by their own rest energies. The overwhelming bulk — roughly 99% — arises from the confined kinetic and binding energy of the strong interaction field (described by quantum chromodynamics) that holds the quarks together. The mass of matter is, in this precise sense, mostly field energy. Substance is a secondary description of field confinement.</p>
+    </div>
+
+    <!-- Conceptual hierarchy table -->
+    <div style="display:grid; grid-template-columns: 1fr 1fr; gap:1px; background:var(--border); border:1px solid var(--border); border-radius:2px; margin-top:28px; overflow:hidden;">
+      <div style="background:var(--surface); padding:20px 24px;">
+        <div style="font-size:10px; font-weight:700; letter-spacing:0.12em; text-transform:uppercase; color:var(--accent); margin-bottom:8px;">Charge Density ρ</div>
+        <p style="font-size:13px; color:var(--fg-secondary);">Not primary. Derived from the field's divergence: <strong>ρ = ε∇·E</strong>. A local descriptor of how E varies in space.</p>
+      </div>
+      <div style="background:var(--surface); padding:20px 24px;">
+        <div style="font-size:10px; font-weight:700; letter-spacing:0.12em; text-transform:uppercase; color:var(--accent); margin-bottom:8px;">Current Density J</div>
+        <p style="font-size:13px; color:var(--fg-secondary);">Not primary. A dissipative material response to E: <strong>J = σE</strong>. The field drives; the matter responds.</p>
+      </div>
+      <div style="background:var(--surface); padding:20px 24px; border-top:1px solid var(--border);">
+        <div style="font-size:10px; font-weight:700; letter-spacing:0.12em; text-transform:uppercase; color:var(--accent); margin-bottom:8px;">Matter</div>
+        <p style="font-size:13px; color:var(--fg-secondary);">Not primary. Stable, localized field configurations — excitations of quantum fields that persist and interact.</p>
+      </div>
+      <div style="background:var(--surface); padding:20px 24px; border-top:1px solid var(--border);">
+        <div style="font-size:10px; font-weight:700; letter-spacing:0.12em; text-transform:uppercase; color:var(--accent); margin-bottom:8px;">Mass</div>
+        <p style="font-size:13px; color:var(--fg-secondary);">Not primary. The measure of confined, non-propagating field energy — bound by interaction, not intrinsic to substance.</p>
+      </div>
+    </div>
+
+    <!-- Closing statement -->
+    <div class="velocity-block" style="margin-top:36px; text-align:left; padding:32px 36px;">
+      <div class="velocity-label" style="margin-bottom:16px;">Conclusion — The Field is All There Is</div>
+      <p style="font-size:14px; color:var(--fg-secondary); line-height:1.8; margin-bottom:16px;">What this framework proposes — at the level of classical electromagnetism, and pointing toward what modern physics already accepts — is a strict ontological hierarchy. Fields are the primitive reality. Everything else is a description of how fields are configured.</p>
+      <p style="font-size:14px; color:var(--fg-secondary); line-height:1.8; margin-bottom:16px;">Charge is where the field diverges. Current is how matter responds to the field locally. Energy moves where the Poynting vector points, at the speed set by the surrounding medium. Matter is where the field is bound and stable. Mass is the measure of that confinement.</p>
+      <p style="font-size:14px; color:var(--fg); line-height:1.8; font-weight:500;">The field does not arise from matter. Matter arises from the field. Inverting Gauss's law was not the starting point of this conclusion — it was the first legible sign of it.</p>
+    </div>
+  </div>
+
+</div><!-- /content -->
+
+<!-- FOOTER -->
 <footer>
-  <div class="site-footer">
-    <span>© 2026 Fresu Electronics SRL</span>
-    <span><a href="https://blog.fresuelectronics.com">blog.fresuelectronics.com</a> · <a href="https://www.fresuelectronics.com">fresuelectronics.com</a></span>
+  <div>
+    <div class="footer-brand">FRESU <span>ELECTRONICS</span></div>
+    <div class="footer-label" style="margin-top:4px;">Field-Centric Electromagnetism Series</div>
+  </div>
+  <div style="text-align:right;">
+    <a href="https://www.fresuelectronics.com/post/a-field-centric-perspective-on-charge-and-energy-transfer-in-classical-electromagnetism" class="footer-link" target="_blank">Read Full Paper →</a>
+    <div class="footer-label" style="margin-top:4px;">fresuelectronics.com</div>
   </div>
 </footer>
-<!-- ═══ STICKY SUBSCRIBE WIDGET ═══ -->
-<div id="subWidget" class="sw-wrap">
-  <button class="sw-tab" id="swTab" onclick="swToggle()">
-    <span class="sw-tab-icon">&#x2709;</span>
-    <span class="sw-tab-label">Subscribe</span>
-  </button>
-  <div class="sw-panel" id="swPanel" hidden>
-    <div class="sw-head">
-      <p class="sw-title">Get articles <em>before</em> they&#39;re published</p>
-      <button class="sw-close" onclick="swToggle()">&#x2715;</button>
-    </div>
-    <form class="sw-form" id="swForm" onsubmit="handleSub(event,'swForm')">
-      <input type="text" name="website" style="display:none" tabindex="-1" autocomplete="off">
-      <div class="sw-row">
-        <input class="sw-input" type="text" name="first_name" placeholder="First name *" required autocomplete="given-name">
-        <input class="sw-input" type="text" name="last_name" placeholder="Last name *" required autocomplete="family-name">
-      </div>
-      <input class="sw-input" type="email" name="email" placeholder="Work email *" required autocomplete="email">
-      <select class="sw-input" name="country" required>
-        <option value="">Country *</option>
-        <option value="US">United States</option><option value="GB">United Kingdom</option>
-        <option value="DE">Germany</option><option value="IT">Italy</option>
-        <option value="FR">France</option><option value="NL">Netherlands</option>
-        <option value="SE">Sweden</option><option value="CH">Switzerland</option>
-        <option value="CA">Canada</option><option value="AU">Australia</option>
-        <option value="IN">India</option><option value="JP">Japan</option>
-        <option value="KR">South Korea</option><option value="CN">China</option>
-        <option value="SG">Singapore</option><option value="IL">Israel</option>
-        <option value="FI">Finland</option><option value="DK">Denmark</option>
-        <option value="NO">Norway</option><option value="BE">Belgium</option>
-        <option value="AT">Austria</option><option value="ES">Spain</option>
-        <option value="PT">Portugal</option><option value="PL">Poland</option>
-        <option value="CZ">Czech Republic</option><option value="RO">Romania</option>
-        <option value="HU">Hungary</option><option value="TR">Turkey</option>
-        <option value="BR">Brazil</option><option value="MX">Mexico</option>
-        <option value="ZA">South Africa</option><option value="AE">UAE</option>
-        <option value="SA">Saudi Arabia</option><option value="TW">Taiwan</option>
-        <option value="UA">Ukraine</option><option value="RU">Russia</option>
-        <option value="OTHER">Other</option>
-      </select>
-      <button class="sw-submit" type="submit">
-        <span class="sw-btn-text">Subscribe free</span>
-        <span class="sw-btn-load" style="display:none">&#x2026;</span>
-      </button>
-      <p class="sw-note">Free &middot; No spam &middot; Unsubscribe anytime</p>
-      <p class="sw-msg" style="display:none"></p>
-    </form>
-  </div>
-</div>
-<!-- ═══ END STICKY SUBSCRIBE WIDGET ═══ -->
+
 <script>
-function swToggle() {
-  var panel = document.getElementById('swPanel');
-  panel.hidden = !panel.hidden;
+// ─── INTERSECTION OBSERVER FOR SCROLL REVEALS ───────────────────────────────
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.1 });
+document.querySelectorAll('.section').forEach(s => observer.observe(s));
+
+// ─── FIELD DIVERGENCE CANVAS ─────────────────────────────────────────────────
+const fc = document.getElementById('fieldCanvas');
+const fctx = fc.getContext('2d');
+
+function resizeFieldCanvas() {
+  fc.width = fc.offsetWidth * window.devicePixelRatio;
+  fc.height = 320 * window.devicePixelRatio;
+  fctx.scale(window.devicePixelRatio, window.devicePixelRatio);
+  drawFieldCanvas();
 }
-function handleSub(e, formId) {
-  e.preventDefault();
-  var form = document.getElementById(formId);
-  if (!form) return;
-  var honey = form.querySelector('[name="website"]');
-  if (honey && honey.value) return;
-  var get = function(n) { var el = form.querySelector('[name="' + n + '"]'); return el ? el.value.trim() : ''; };
-  var btnText = form.querySelector('.sw-btn-text');
-  var btnLoad = form.querySelector('.sw-btn-load');
-  var msg = form.querySelector('.sw-msg');
-  if (btnText) btnText.style.display = 'none';
-  if (btnLoad) btnLoad.style.display = 'inline';
-  if (msg) msg.style.display = 'none';
-  fetch('https://hook.eu2.make.com/irkkjw6s2ppe9awrgv71atgu8540g12v', {
-    method: 'POST', headers: {'Content-Type': 'application/json'},
-    body: JSON.stringify({ email: get('email'), first_name: get('first_name'), last_name: get('last_name'), country: get('country') })
-  })
-  .then(function(r) {
-    if (btnText) btnText.style.display = 'inline';
-    if (btnLoad) btnLoad.style.display = 'none';
-    if (msg) msg.style.display = 'block';
-    if (r.ok) {
-      if (msg) { msg.style.color = '#00FF94'; msg.textContent = 'You are in! Check your inbox.'; }
-      ['email','first_name','last_name'].forEach(function(n) { var el = form.querySelector('[name="'+n+'"]'); if(el) el.value=''; });
-      var sel = form.querySelector('[name="country"]'); if (sel) sel.selectedIndex = 0;
-    } else { if (msg) { msg.style.color='#ff4d4d'; msg.textContent='Something went wrong - try again.'; } }
-  })
-  .catch(function() {
-    if (btnText) btnText.style.display = 'inline';
-    if (btnLoad) btnLoad.style.display = 'none';
-    if (msg) { msg.style.display='block'; msg.style.color='#ff4d4d'; msg.textContent='Something went wrong - try again.'; }
+
+function drawFieldCanvas() {
+  const W = fc.offsetWidth, H = 320;
+  fctx.clearRect(0, 0, W, H);
+
+  // Background gradient
+  const bg = fctx.createLinearGradient(0, 0, W, H);
+  bg.addColorStop(0, '#0e0e0e');
+  bg.addColorStop(1, '#0a0a0a');
+  fctx.fillStyle = bg;
+  fctx.fillRect(0, 0, W, H);
+
+  const charges = [
+    { x: W * 0.3, y: H * 0.5, q: 1 },   // positive
+    { x: W * 0.7, y: H * 0.5, q: -1 },  // negative
+  ];
+
+  const LINES = 18;
+
+  charges.forEach(c => {
+    for (let i = 0; i < LINES; i++) {
+      const angle = (2 * Math.PI * i) / LINES;
+      let px = c.x, py = c.y;
+      const points = [{ x: px, y: py }];
+
+      for (let step = 0; step < 300; step++) {
+        let ex = 0, ey = 0;
+        charges.forEach(ch => {
+          const dx = px - ch.x, dy = py - ch.y;
+          const r2 = dx * dx + dy * dy;
+          if (r2 < 4) return;
+          const r = Math.sqrt(r2);
+          const E = ch.q / r2;
+          ex += E * dx / r;
+          ey += E * dy / r;
+        });
+        const mag = Math.sqrt(ex * ex + ey * ey);
+        if (mag < 0.0001) break;
+        const ds = 4;
+        px += (ex / mag) * ds * c.q;
+        py += (ey / mag) * ds * c.q;
+
+        if (px < 0 || px > W || py < 0 || py > H) break;
+        const nearNeg = charges.some(ch => ch.q < 0 && Math.hypot(px - ch.x, py - ch.y) < 12);
+        points.push({ x: px, y: py });
+        if (nearNeg) break;
+      }
+
+      if (points.length < 3) continue;
+
+      // Color: starts green at positive, blue in middle
+      const grad = fctx.createLinearGradient(
+        points[0].x, points[0].y,
+        points[points.length-1].x, points[points.length-1].y
+      );
+      if (c.q > 0) {
+        grad.addColorStop(0, 'rgba(0,255,148,0.7)');
+        grad.addColorStop(0.5, 'rgba(74,158,255,0.5)');
+        grad.addColorStop(1, 'rgba(255,77,77,0.1)');
+      } else {
+        grad.addColorStop(0, 'rgba(74,158,255,0.2)');
+        grad.addColorStop(1, 'rgba(255,77,77,0.0)');
+      }
+
+      fctx.beginPath();
+      fctx.moveTo(points[0].x, points[0].y);
+      for (let j = 1; j < points.length; j++) {
+        fctx.lineTo(points[j].x, points[j].y);
+      }
+      fctx.strokeStyle = grad;
+      fctx.lineWidth = 1.2;
+      fctx.stroke();
+
+      // Arrow at midpoint
+      if (points.length > 4) {
+        const mi = Math.floor(points.length * 0.45);
+        const p1 = points[mi], p2 = points[mi + 1];
+        if (p2) {
+          const ang = Math.atan2(p2.y - p1.y, p2.x - p1.x);
+          fctx.save();
+          fctx.translate(p1.x, p1.y);
+          fctx.rotate(ang);
+          fctx.beginPath();
+          fctx.moveTo(0, 0);
+          fctx.lineTo(-7, -3.5);
+          fctx.lineTo(-7, 3.5);
+          fctx.closePath();
+          fctx.fillStyle = c.q > 0 ? 'rgba(74,158,255,0.7)' : 'rgba(74,158,255,0.4)';
+          fctx.fill();
+          fctx.restore();
+        }
+      }
+    }
+
+    // Charge node glow
+    const color = c.q > 0 ? '#00FF94' : '#ff4d4d';
+    const glow = fctx.createRadialGradient(c.x, c.y, 0, c.x, c.y, 28);
+    glow.addColorStop(0, color.replace(')', ', 0.25)').replace('#', 'rgba(').replace('00FF94', '0,255,148').replace('ff4d4d', '255,77,77'));
+    glow.addColorStop(1, 'transparent');
+    fctx.beginPath();
+    fctx.arc(c.x, c.y, 28, 0, Math.PI * 2);
+    fctx.fillStyle = c.q > 0 ? 'rgba(0,255,148,0.15)' : 'rgba(255,77,77,0.15)';
+    fctx.fill();
+
+    fctx.beginPath();
+    fctx.arc(c.x, c.y, 10, 0, Math.PI * 2);
+    fctx.fillStyle = color;
+    fctx.shadowColor = color;
+    fctx.shadowBlur = 16;
+    fctx.fill();
+    fctx.shadowBlur = 0;
+
+    // Label
+    fctx.font = '600 11px Poppins, sans-serif';
+    fctx.fillStyle = '#0a0a0a';
+    fctx.textAlign = 'center';
+    fctx.textBaseline = 'middle';
+    fctx.fillText(c.q > 0 ? '+' : '−', c.x, c.y);
+
+    // Annotation
+    fctx.font = '500 10px Poppins, sans-serif';
+    fctx.fillStyle = c.q > 0 ? 'rgba(0,255,148,0.7)' : 'rgba(255,77,77,0.7)';
+    fctx.textAlign = 'center';
+    fctx.textBaseline = 'top';
+    fctx.fillText(c.q > 0 ? '∇·E > 0' : '∇·E < 0', c.x, c.y + 18);
   });
 }
+
+// ─── POYNTING CANVAS ──────────────────────────────────────────────────────────
+const pc = document.getElementById('poyntingCanvas');
+const pctx = pc.getContext('2d');
+let poyRunning = true, poyT = 0;
+
+function togglePoynting() {
+  poyRunning = !poyRunning;
+  document.getElementById('btnPlay').textContent = poyRunning ? '⏸ Pause' : '▶ Play';
+  document.getElementById('btnPlay').classList.toggle('active', poyRunning);
+  document.getElementById('poyLabel').textContent = poyRunning ? 'Energy flowing inward' : 'Paused';
+}
+
+function drawPoynting() {
+  const W = pc.offsetWidth, H = 320;
+  if (pc.width !== pc.offsetWidth * window.devicePixelRatio) {
+    pc.width = pc.offsetWidth * window.devicePixelRatio;
+    pc.height = 320 * window.devicePixelRatio;
+    pctx.scale(window.devicePixelRatio, window.devicePixelRatio);
+  }
+  pctx.clearRect(0, 0, W, H);
+
+  // BG
+  pctx.fillStyle = '#0a0a0a';
+  pctx.fillRect(0, 0, W, H);
+
+  const cx = W / 2, cy = H / 2;
+  const wireR = 22;
+
+  // Wire glow
+  const wGlow = pctx.createRadialGradient(cx, cy, wireR, cx, cy, wireR + 40);
+  wGlow.addColorStop(0, 'rgba(0,255,148,0.08)');
+  wGlow.addColorStop(1, 'transparent');
+  pctx.beginPath();
+  pctx.arc(cx, cy, wireR + 40, 0, Math.PI * 2);
+  pctx.fillStyle = wGlow;
+  pctx.fill();
+
+  // H-field rings (purple, azimuthal)
+  for (let r = wireR + 20; r < Math.min(W, H) * 0.46; r += 28) {
+    const alpha = 0.55 * (1 - (r - wireR) / (Math.min(W, H) * 0.46 - wireR));
+    pctx.beginPath();
+    pctx.arc(cx, cy, r, 0, Math.PI * 2);
+    pctx.strokeStyle = `rgba(199,146,255,${alpha})`;
+    pctx.lineWidth = 1.2;
+    pctx.setLineDash([4, 6]);
+    pctx.stroke();
+    pctx.setLineDash([]);
+
+    // Arrow on H ring
+    const arrowAngle = (Math.PI * 0.35);
+    const ax = cx + r * Math.cos(arrowAngle), ay = cy + r * Math.sin(arrowAngle);
+    const tang = arrowAngle + Math.PI / 2;
+    pctx.save();
+    pctx.translate(ax, ay);
+    pctx.rotate(tang);
+    pctx.beginPath();
+    pctx.moveTo(0, 0); pctx.lineTo(-5, -2.5); pctx.lineTo(-5, 2.5); pctx.closePath();
+    pctx.fillStyle = `rgba(199,146,255,${alpha * 1.5})`;
+    pctx.fill();
+    pctx.restore();
+  }
+
+  // Animated Poynting (S) arrows — radially inward, pulsing
+  const NUM_S = 12;
+  for (let i = 0; i < NUM_S; i++) {
+    const angle = (2 * Math.PI * i) / NUM_S;
+    const outerR = Math.min(W, H) * 0.4;
+    const phase = (poyT * 0.6 + i / NUM_S) % 1;
+    const r = outerR - phase * (outerR - wireR - 4);
+    const sx = cx + r * Math.cos(angle), sy = cy + r * Math.sin(angle);
+    const alpha = Math.sin(phase * Math.PI) * 0.85;
+
+    pctx.save();
+    pctx.translate(sx, sy);
+    pctx.rotate(angle + Math.PI); // pointing inward
+    pctx.beginPath();
+    pctx.moveTo(0, 0); pctx.lineTo(-8, -3.5); pctx.lineTo(-8, 3.5); pctx.closePath();
+    pctx.fillStyle = `rgba(255,215,0,${alpha})`;
+    pctx.shadowColor = 'rgba(255,215,0,0.5)';
+    pctx.shadowBlur = 8;
+    pctx.fill();
+    pctx.restore();
+
+    // Trail
+    pctx.beginPath();
+    pctx.moveTo(sx, sy);
+    const trailR = r + 20;
+    pctx.lineTo(cx + trailR * Math.cos(angle), cy + trailR * Math.sin(angle));
+    pctx.strokeStyle = `rgba(255,215,0,${alpha * 0.3})`;
+    pctx.lineWidth = 1.5;
+    pctx.stroke();
+  }
+
+  // E-field arrow (vertical, into/out of page — shown as double-headed)
+  const eY1 = cy - wireR - 4, eY2 = cy + wireR + 4;
+  pctx.save();
+  pctx.strokeStyle = 'rgba(0,255,148,0.9)';
+  pctx.fillStyle = 'rgba(0,255,148,0.9)';
+  pctx.lineWidth = 2.5;
+  pctx.shadowColor = '#00FF94';
+  pctx.shadowBlur = 12;
+  // Up arrow
+  pctx.beginPath();
+  pctx.moveTo(cx, eY1 + 14); pctx.lineTo(cx, cy - 6);
+  pctx.stroke();
+  pctx.beginPath();
+  pctx.moveTo(cx, eY1 + 14); pctx.lineTo(cx - 5, eY1 + 24); pctx.lineTo(cx + 5, eY1 + 24); pctx.closePath();
+  pctx.fill();
+  pctx.shadowBlur = 0;
+  pctx.restore();
+
+  // E label
+  pctx.font = 'bold 13px Poppins, sans-serif';
+  pctx.fillStyle = 'rgba(0,255,148,0.9)';
+  pctx.textAlign = 'center';
+  pctx.fillText('E', cx + 16, eY1 + 10);
+
+  // H label
+  pctx.font = 'bold 13px Poppins, sans-serif';
+  pctx.fillStyle = 'rgba(199,146,255,0.85)';
+  pctx.textAlign = 'left';
+  pctx.fillText('H', cx + wireR + 24, cy - wireR + 10);
+
+  // S label
+  pctx.font = 'bold 12px Poppins, sans-serif';
+  pctx.fillStyle = 'rgba(255,215,0,0.85)';
+  pctx.textAlign = 'right';
+  pctx.fillText('S = E × H', cx - wireR - 12, cy - 16);
+
+  // Wire body
+  const wireGrad = pctx.createRadialGradient(cx, cy, 0, cx, cy, wireR);
+  wireGrad.addColorStop(0, '#2a2a2a');
+  wireGrad.addColorStop(1, '#1a1a1a');
+  pctx.beginPath();
+  pctx.arc(cx, cy, wireR, 0, Math.PI * 2);
+  pctx.fillStyle = wireGrad;
+  pctx.fill();
+  pctx.strokeStyle = '#00FF94';
+  pctx.lineWidth = 1.5;
+  pctx.stroke();
+
+  // Conductor label
+  pctx.font = '600 10px Poppins, sans-serif';
+  pctx.fillStyle = 'rgba(0,255,148,0.6)';
+  pctx.textAlign = 'center';
+  pctx.textBaseline = 'middle';
+  pctx.fillText('CONDUCTOR', cx, cy);
+
+  // Cross-section label
+  pctx.font = '500 10px Poppins, sans-serif';
+  pctx.fillStyle = 'var(--label-dim)';
+  pctx.textAlign = 'left';
+  pctx.textBaseline = 'bottom';
+  pctx.fillStyle = 'rgba(107,125,143,0.7)';
+  pctx.fillText('Cross-section view', 12, H - 10);
+}
+
+function animPoynting() {
+  if (poyRunning) poyT += 0.012;
+  drawPoynting();
+  requestAnimationFrame(animPoynting);
+}
+
+// ─── RESIZE + INIT ────────────────────────────────────────────────────────────
+window.addEventListener('resize', () => {
+  resizeFieldCanvas();
+});
+
+window.addEventListener('load', () => {
+  resizeFieldCanvas();
+  animPoynting();
+  // Trigger MathJax typeset after a short delay
+  setTimeout(() => {
+    if (window.MathJax && MathJax.typesetPromise) {
+      MathJax.typesetPromise();
+    }
+  }, 600);
+});
 </script>
 </body>
 </html>
