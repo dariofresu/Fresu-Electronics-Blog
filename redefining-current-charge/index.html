@@ -3,292 +3,583 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Redefining Current and Charge: A Field-Based Perspective — Fresu Electronics</title>
-  <meta name="description" content="Classical electromagnetism teaches that current is the flow of charge and charge is the fundamental quantity. A field-centric perspective inverts this — an">
-  <meta property="og:title" content="Redefining Current and Charge: A Field-Based Perspective">
-  <meta property="og:url" content="https://blog.fresuelectronics.com/redefining-current-charge">
+  <title>Redefining Current and Charge: A Field-Based Perspective on Electromagnetism — Fresu Electronics</title>
+  <meta name="description" content="Classical electromagnetism defines current as electron flow. But electrons move at 73 µm/s — billions of times slower than the signals they supposedly carry. A field-based reframing resolves the contradiction.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400;1,700&display=swap" rel="stylesheet">
-  <style>
-    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-    :root{--bg:#0a0a0a;--surface:#111111;--surface-2:#181818;--border:#242424;--label:#a0aab8;--accent:#00FF94;--accent-dim:rgba(0,255,148,0.10);--accent-hover:#00e085;--wrong:#ff4d4d}
-    body{background:var(--bg);color:#fff;font-family:'Poppins',sans-serif;font-size:17px;line-height:1.75;overflow-x:hidden}
-    body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:1000;opacity:0.2;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E")}
-    header{border-bottom:1px solid var(--border)}
-    .site-header{max-width:1100px;margin:0 auto;padding:18px 40px;display:flex;align-items:center;justify-content:space-between}
-    .site-header img{height:44px;width:auto;display:block}
-    .header-nav{display:flex;align-items:center;gap:28px}
-    .header-nav a{font-size:11px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:#fff;text-decoration:none;opacity:0.6;transition:opacity 0.2s}
-    .header-nav a:hover{opacity:1}
-    .header-cta{opacity:1!important;background:var(--accent);color:#0a0a0a!important;padding:9px 20px;border-radius:3px;transition:background 0.2s}
-    .header-cta:hover{background:var(--accent-hover)!important}
-    .container{max-width:740px;margin:0 auto;padding:72px 32px 80px}
-    .kicker{display:inline-flex;align-items:center;gap:10px;font-size:11px;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;color:var(--accent);margin-bottom:28px;padding:6px 14px;border:1px solid var(--accent);border-radius:2px;background:var(--accent-dim)}
-    .kicker::before{content:'▶';font-size:8px}
-    h1{font-size:clamp(32px,5vw,52px);font-weight:800;line-height:1.1;letter-spacing:-0.02em;color:#fff;margin-bottom:24px}
-    h1 em{font-style:italic;color:var(--accent)}
-    .deck{font-size:18px;font-weight:400;color:#fff;line-height:1.7;margin-bottom:48px;padding-bottom:48px;border-bottom:1px solid var(--border)}
-    .author-row{display:flex;align-items:center;gap:16px;margin-bottom:48px;padding-bottom:48px;border-bottom:1px solid var(--border)}
-    .author-photo{width:52px;height:52px;border-radius:50%;object-fit:cover;flex-shrink:0;border:2px solid var(--accent)}
-    .author-name{font-size:15px;font-weight:600;color:#fff;display:block}
-    .author-title{font-size:12px;font-weight:400;color:var(--label);display:block;margin-top:2px}
-    h2{font-size:24px;font-weight:700;letter-spacing:-0.01em;color:#fff;margin:52px 0 16px}
-    h3{font-size:19px;font-weight:700;color:#fff;margin:32px 0 12px}
-    p{color:#fff;font-weight:400;margin-bottom:20px}
-    strong{color:#fff;font-weight:600}
-    em{font-style:italic}
-    .contrast-block{display:grid;grid-template-columns:1fr 1fr;gap:2px;margin:44px 0;border-radius:4px;overflow:hidden}
-    .contrast-col{padding:28px 24px}
-    .contrast-col.wrong{background:var(--surface);border:1px solid var(--border);border-right:none}
-    .contrast-col.right{background:rgba(0,255,148,0.06);border:1px solid rgba(0,255,148,0.2)}
-    .contrast-label{font-size:10px;font-weight:600;letter-spacing:0.15em;text-transform:uppercase;margin-bottom:16px;display:block}
-    .contrast-col.wrong .contrast-label{color:var(--label)}
-    .contrast-col.right .contrast-label{color:var(--accent)}
-    .contrast-list{list-style:none;font-size:14px}
-    .contrast-list li{padding:7px 0;border-bottom:1px solid var(--border);color:#fff;display:flex;align-items:flex-start;gap:10px;font-weight:400}
-    .contrast-list li:last-child{border-bottom:none}
-    .contrast-col.wrong .contrast-list li::before{content:'✕';color:var(--wrong);font-size:12px;margin-top:2px;flex-shrink:0}
-    .contrast-col.right .contrast-list li::before{content:'✓';color:var(--accent);font-size:12px;margin-top:2px;flex-shrink:0}
-    .pull-quote{margin:44px 0;padding:32px 36px;border-left:3px solid var(--accent);background:var(--accent-dim);border-radius:0 4px 4px 0;position:relative}
-    .pull-quote::before{content:'"';font-size:80px;color:var(--accent);opacity:0.2;position:absolute;top:-10px;left:24px;line-height:1;font-weight:800}
-    .pull-quote p{font-size:20px;font-weight:500;font-style:italic;line-height:1.55;color:#fff;margin:0;padding-top:8px}
-    .concept-grid{display:grid;gap:2px;margin:44px 0}
-    .concept-card{background:var(--surface);border:1px solid var(--border);padding:24px 28px;border-radius:4px;position:relative;overflow:hidden;transition:border-color 0.2s}
-    .concept-card:hover{border-color:var(--accent)}
-    .concept-card::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--accent)}
-    .concept-num{font-size:10px;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;color:var(--accent);margin-bottom:10px;display:block}
-    .concept-card h3{font-size:18px;font-weight:700;color:#fff;margin:0 0 10px 0}
-    .concept-card p{font-size:14px;margin:0;line-height:1.75}
-    .closing{margin-top:64px;padding-top:40px;border-top:1px solid var(--border)}
-    .closing-line{font-size:26px;font-weight:700;font-style:italic;color:#fff;line-height:1.45;margin-bottom:20px}
-    .closing-line span{color:var(--accent)}
-    .tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:32px}
-    .tag{font-size:11px;font-weight:500;letter-spacing:0.05em;padding:5px 12px;border:1px solid var(--border);border-radius:2px;color:var(--label);background:var(--surface)}
-    .cta-section{margin-top:80px;padding:56px 48px;background:var(--surface);border:1px solid var(--border);border-radius:6px;position:relative;overflow:hidden;text-align:center}
-    .cta-section::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 50% 0%,rgba(0,255,148,0.08) 0%,transparent 65%);pointer-events:none}
-    .cta-section::after{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--accent),transparent)}
-    .cta-eyebrow{font-size:11px;font-weight:600;letter-spacing:0.2em;text-transform:uppercase;color:var(--accent);margin-bottom:20px;display:block}
-    .cta-headline{font-size:clamp(24px,3.5vw,36px);font-weight:800;line-height:1.15;letter-spacing:-0.02em;color:#fff;margin-bottom:16px}
-    .cta-headline em{font-style:italic;color:var(--accent)}
-    .cta-sub{font-size:16px;font-weight:400;color:#fff;max-width:520px;margin:0 auto 36px;line-height:1.7}
-    .cta-buttons{display:flex;flex-wrap:wrap;gap:12px;justify-content:center;margin-bottom:32px}
-    .btn-primary{display:inline-flex;align-items:center;gap:8px;background:var(--accent);color:#0a0a0a;font-family:'Poppins',sans-serif;font-size:14px;font-weight:700;padding:14px 28px;border-radius:3px;text-decoration:none;transition:background 0.2s,transform 0.2s}
-    .btn-primary:hover{background:var(--accent-hover);transform:translateY(-1px)}
-    .btn-secondary{display:inline-flex;align-items:center;gap:8px;color:#fff;font-family:'Poppins',sans-serif;font-size:14px;font-weight:500;padding:14px 28px;border:1px solid var(--border);border-radius:3px;text-decoration:none;transition:border-color 0.2s,transform 0.2s,color 0.2s}
-    .btn-secondary:hover{border-color:var(--accent);color:var(--accent);transform:translateY(-1px)}
-    .cta-proof{display:flex;flex-wrap:wrap;gap:20px;justify-content:center;padding-top:28px;border-top:1px solid var(--border);margin-bottom:40px}
-    .proof-item{display:flex;align-items:center;gap:8px;font-size:13px;font-weight:500;color:#fff}
-    .proof-item::before{content:'✓';color:var(--accent);font-size:12px}
-    .products-strip{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:2px;text-align:left}
-    .product-card{background:var(--surface-2);border:1px solid var(--border);padding:22px;border-radius:4px;text-decoration:none;transition:border-color 0.2s,transform 0.15s;display:flex;flex-direction:column;gap:6px}
-    .product-card:hover{border-color:var(--accent);transform:translateY(-2px)}
-    .product-icon{font-size:22px;margin-bottom:4px}
-    .product-name{font-size:15px;font-weight:700;color:#fff}
-    .product-desc{font-size:13px;font-weight:400;color:#fff;line-height:1.6}
-    .product-link{font-size:11px;font-weight:600;letter-spacing:0.05em;color:var(--accent);margin-top:8px}
-    footer{border-top:1px solid var(--border)}
-    .site-footer{max-width:1100px;margin:0 auto;padding:28px 40px;display:flex;align-items:center;justify-content:space-between;font-size:11px;font-weight:400;color:#fff;opacity:0.5;flex-wrap:wrap;gap:12px}
-    .site-footer a{color:var(--accent);text-decoration:none}
-    @keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
-    .container>*{animation:fadeUp 0.7s cubic-bezier(0.22,1,0.36,1) both}
-    .container>*:nth-child(1){animation-delay:0ms}.container>*:nth-child(2){animation-delay:60ms}.container>*:nth-child(3){animation-delay:120ms}.container>*:nth-child(4){animation-delay:180ms}
-    @media(max-width:560px){.contrast-block{grid-template-columns:1fr}.contrast-col.wrong{border-right:1px solid var(--border);border-bottom:none}.container{padding:48px 20px 80px}.cta-section{padding:40px 20px}.site-header{padding:16px 20px}.header-nav a:not(.header-cta){display:none}}
 
-    /* ── Sticky Subscribe Widget ── */
-    .sw-wrap { position: fixed; right: 0; top: 50%; transform: translateY(-50%); z-index: 9000; display: flex; flex-direction: row-reverse; align-items: flex-start; }
-    .sw-tab { display: flex; flex-direction: column; align-items: center; gap: 6px; background: var(--accent); border: none; border-radius: 6px 0 0 6px; color: #0a0a0a; cursor: pointer; font-family: inherit; font-size: 11px; font-weight: 700; letter-spacing: 0.06em; padding: 14px 8px; writing-mode: vertical-rl; text-orientation: mixed; transform: rotate(180deg); line-height: 1; transition: background 0.2s; white-space: nowrap; box-shadow: -2px 0 12px rgba(0,0,0,0.4); }
-    .sw-tab:hover { background: var(--accent-hover); }
-    .sw-tab-icon { font-size: 14px; transform: rotate(180deg); display: inline-block; }
-    .sw-panel { background: #141414; border: 1px solid #2a2a2a; border-right: none; border-radius: 8px 0 0 8px; box-shadow: -4px 4px 24px rgba(0,0,0,0.6); padding: 20px; width: 280px; }
-    .sw-head { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 14px; }
-    .sw-title { font-size: 13px; font-weight: 600; color: #fff; line-height: 1.4; flex: 1; }
-    .sw-title em { color: var(--accent); font-style: italic; }
-    .sw-close { background: none; border: none; color: #666; cursor: pointer; font-size: 16px; line-height: 1; padding: 0 0 0 8px; transition: color 0.2s; flex-shrink: 0; }
-    .sw-close:hover { color: #fff; }
-    .sw-form { display: flex; flex-direction: column; gap: 8px; }
-    .sw-row { display: flex; gap: 8px; }
-    .sw-input { background: #0a0a0a; border: 1px solid #2a2a2a; border-radius: 3px; color: #fff; font-family: inherit; font-size: 12px; padding: 9px 10px; outline: none; transition: border-color 0.2s; width: 100%; }
-    .sw-input:focus { border-color: var(--accent); }
-    .sw-input::placeholder { color: #444; }
-    select.sw-input { cursor: pointer; appearance: none; -webkit-appearance: none; }
-    .sw-row .sw-input { flex: 1; min-width: 0; }
-    .sw-submit { background: var(--accent); border: none; border-radius: 3px; color: #0a0a0a; cursor: pointer; font-family: inherit; font-size: 12px; font-weight: 700; padding: 10px; transition: background 0.2s; width: 100%; margin-top: 2px; letter-spacing: 0.03em; }
-    .sw-submit:hover { background: var(--accent-hover); }
-    .sw-note { color: #444; font-size: 10px; text-align: center; }
-    .sw-msg { font-size: 11px; text-align: center; margin: 0; }
+  <meta property="og:title" content="Redefining Current and Charge: A Field-Based Perspective on Electromagnetism">
+  <meta property="og:description" content="Classical electromagnetism defines current as electron flow. But electrons move at 73 µm/s — billions of times slower than the signals they supposedly carry.">
+  <meta property="og:url" content="https://blog.fresuelectronics.com/redefining-current-charge">
+  <meta property="og:image" content="https://raw.githubusercontent.com/dariofresu/Fresu-Electronics-Blog/main/assets/images/redefining-current-charge_cover.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:type" content="article">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:site" content="@dario_fresu">
+  <meta name="twitter:image" content="https://raw.githubusercontent.com/dariofresu/Fresu-Electronics-Blog/main/assets/images/redefining-current-charge_cover.png">
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:          #0a0a0a;
+      --surface:     #111111;
+      --surface-2:   #181818;
+      --border:      #242424;
+      --fg:          #ffffff;
+      --label:       #a0aab8;
+      --accent:      #00FF94;
+      --accent-dim:  rgba(0, 255, 148, 0.10);
+      --accent-hover:#00e085;
+      --wrong:       #ff4d4d;
+      --wrong-dim:   rgba(255, 77, 77, 0.08);
+    }
+
+    body {
+      background: var(--bg);
+      color: #ffffff;
+      font-family: 'Poppins', sans-serif;
+      font-size: 17px;
+      line-height: 1.75;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* ── Header ── */
+    header { border-bottom: 1px solid var(--border); }
+    .site-header {
+      max-width: 1100px; margin: 0 auto;
+      padding: 18px 40px;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .site-header img { height: 44px; width: auto; display: block; }
+    .header-nav { display: flex; align-items: center; gap: 28px; }
+    .header-nav a {
+      font-size: 11px; font-weight: 600; letter-spacing: 0.08em;
+      text-transform: uppercase; color: #ffffff; text-decoration: none;
+      opacity: 0.6; transition: opacity 0.2s;
+    }
+    .header-nav a:hover { opacity: 1; }
+    .header-cta {
+      opacity: 1 !important; background: var(--accent);
+      color: #0a0a0a !important; padding: 9px 20px;
+      border-radius: 999px; transition: background 0.2s;
+    }
+    .header-cta:hover { background: var(--accent-hover) !important; }
+
+    /* ── Post layout ── */
+    .container { max-width: 740px; margin: 0 auto; padding: 72px 40px 100px; }
+
+    .post-cover {
+      width: 100%; border-radius: 6px; display: block;
+      margin-bottom: 44px; border: 1px solid var(--border);
+      aspect-ratio: 16/9; object-fit: cover;
+    }
+
+    .kicker {
+      display: inline-block; font-size: 10px; font-weight: 600;
+      letter-spacing: 0.18em; text-transform: uppercase;
+      color: var(--accent); border: 1px solid var(--accent);
+      background: var(--accent-dim); padding: 4px 12px;
+      border-radius: 2px; margin-bottom: 24px;
+    }
+
+    h1 {
+      font-size: clamp(28px, 5vw, 46px); font-weight: 800;
+      line-height: 1.08; letter-spacing: -0.025em;
+      color: #ffffff; margin-bottom: 20px;
+    }
+    h1 em { font-style: italic; color: var(--accent); }
+
+    .deck {
+      font-size: 18px; font-weight: 400; color: #ffffff;
+      line-height: 1.7; margin-bottom: 36px;
+    }
+
+    .author-row {
+      display: flex; align-items: center; gap: 14px;
+      padding: 20px 0;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 48px;
+    }
+    .author-row img {
+      width: 52px; height: 52px; border-radius: 50%;
+      object-fit: cover; flex-shrink: 0;
+      border: 2px solid var(--accent);
+    }
+    .author-name  { display: block; font-size: 14px; font-weight: 600; color: #ffffff; line-height: 1.3; }
+    .author-title { display: block; font-size: 12px; font-weight: 400; color: var(--label); line-height: 1.3; }
+    .author-date  { display: block; font-size: 11px; color: var(--label); margin-top: 4px; }
+
+    p { color: #ffffff; font-weight: 400; margin-bottom: 22px; }
+    strong { color: #ffffff; font-weight: 600; }
+
+    h2 {
+      font-size: 22px; font-weight: 700; color: #ffffff;
+      margin: 52px 0 16px; letter-spacing: -0.015em;
+    }
+    h2::before {
+      content: ''; display: block; width: 32px; height: 3px;
+      background: var(--accent); margin-bottom: 12px; border-radius: 2px;
+    }
+
+    h3 { font-size: 17px; font-weight: 600; color: #ffffff; margin: 36px 0 12px; }
+
+    /* Images */
+    .post-img {
+      width: 100%; border-radius: 4px; display: block;
+      margin: 32px 0; border: 1px solid var(--border);
+    }
+    .post-img-sm {
+      max-width: 520px; border-radius: 4px; display: block;
+      margin: 28px auto; border: 1px solid var(--border);
+    }
+    .img-caption {
+      text-align: center; font-size: 12px; color: var(--label);
+      margin-top: -20px; margin-bottom: 32px; font-style: italic;
+    }
+    .formula {
+      display: block; margin: 20px auto;
+      background: var(--surface); padding: 16px 24px;
+      border-radius: 4px; border: 1px solid var(--border);
+      max-width: 400px;
+    }
+
+    /* Concept blocks */
+    .callout {
+      background: var(--surface); border-left: 3px solid var(--accent);
+      padding: 20px 24px; border-radius: 0 4px 4px 0; margin: 32px 0;
+    }
+    .callout p { margin-bottom: 0; }
+
+    .wrong-block {
+      background: var(--wrong-dim); border-left: 3px solid var(--wrong);
+      padding: 20px 24px; border-radius: 0 4px 4px 0; margin: 32px 0;
+    }
+    .wrong-block .block-label { color: var(--wrong); }
+    .wrong-block p { margin-bottom: 0; }
+
+    .block-label {
+      font-size: 10px; font-weight: 600; letter-spacing: 0.14em;
+      text-transform: uppercase; color: var(--accent);
+      display: block; margin-bottom: 8px;
+    }
+
+    /* Comparison grid */
+    .compare-grid {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 16px; margin: 28px 0;
+    }
+    .compare-card {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 4px; padding: 20px;
+    }
+    .compare-card.wrong  { border-top: 2px solid var(--wrong); }
+    .compare-card.right  { border-top: 2px solid var(--accent); }
+    .compare-card h4 {
+      font-size: 11px; font-weight: 700; letter-spacing: 0.1em;
+      text-transform: uppercase; margin-bottom: 10px;
+    }
+    .compare-card.wrong h4 { color: var(--wrong); }
+    .compare-card.right h4 { color: var(--accent); }
+    .compare-card p { font-size: 14px; margin-bottom: 0; }
+
+    /* Var list */
+    .var-list {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 4px; padding: 18px 22px; margin: 16px 0 24px;
+    }
+    .var-list p { font-size: 15px; margin-bottom: 8px; }
+    .var-list p:last-child { margin-bottom: 0; }
+
+    /* Numbered mechanism list */
+    .mechanisms { margin: 24px 0; }
+    .mechanism { margin-bottom: 28px; padding-left: 20px; border-left: 2px solid var(--border); }
+    .mechanism-num {
+      font-size: 10px; font-weight: 700; letter-spacing: 0.12em;
+      text-transform: uppercase; color: var(--accent); display: block; margin-bottom: 6px;
+    }
+    .mechanism h4 { font-size: 15px; font-weight: 600; color: #ffffff; margin-bottom: 8px; }
+    .mechanism p { font-size: 15px; margin-bottom: 0; }
+
+    /* Tags */
+    .tags { display: flex; flex-wrap: wrap; gap: 8px; margin: 48px 0 0; }
+    .tag {
+      font-size: 10px; font-weight: 600; letter-spacing: 0.1em;
+      text-transform: uppercase; color: var(--accent);
+      border: 1px solid var(--accent); background: var(--accent-dim);
+      padding: 4px 12px; border-radius: 2px;
+    }
+
+    /* Share */
+    .share-strip {
+      display: flex; align-items: center; gap: 12px;
+      margin: 56px 0 0; padding-top: 32px;
+      border-top: 1px solid var(--border); flex-wrap: wrap;
+    }
+    .share-label { font-size: 12px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--label); }
+    .share-btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-family: 'Poppins', sans-serif; font-size: 13px; font-weight: 600;
+      padding: 9px 18px; border-radius: 999px;
+      text-decoration: none; border: none; cursor: pointer;
+      transition: opacity 0.2s, transform 0.15s; white-space: nowrap;
+    }
+    .share-btn:hover { opacity: 0.88; transform: translateY(-1px); }
+    .share-btn.linkedin { background: #0A66C2; color: #ffffff; }
+    .share-btn.twitter  { background: #000000; color: #ffffff; }
+    .share-btn.copylink { background: var(--surface); color: var(--accent); border: 1px solid var(--accent); }
+
+    /* CTA */
+    .cta-section {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 4px; overflow: hidden; position: relative; margin-top: 72px;
+    }
+    .cta-section::after {
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+      background: linear-gradient(90deg, var(--accent), transparent);
+    }
+    .cta-inner { padding: 48px 48px 40px; }
+    .cta-kicker {
+      font-size: 10px; font-weight: 600; letter-spacing: 0.18em;
+      text-transform: uppercase; color: var(--accent);
+      margin-bottom: 14px; display: block;
+    }
+    .cta-section h3 { font-size: 24px; font-weight: 700; color: #ffffff; margin-bottom: 12px; letter-spacing: -0.01em; }
+    .cta-section p  { font-size: 15px; color: #ffffff; line-height: 1.7; margin-bottom: 28px; }
+    .cta-actions { display: flex; gap: 12px; flex-wrap: wrap; }
+    .btn-primary {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: var(--accent); color: #0a0a0a;
+      font-family: 'Poppins', sans-serif; font-size: 13px; font-weight: 700;
+      padding: 13px 26px; border-radius: 999px; text-decoration: none; transition: background 0.2s;
+    }
+    .btn-primary:hover { background: var(--accent-hover); }
+    .btn-outline {
+      display: inline-flex; align-items: center; color: #ffffff;
+      font-family: 'Poppins', sans-serif; font-size: 13px; font-weight: 600;
+      text-decoration: none; padding: 12px 26px; border-radius: 999px;
+      border: 1px solid var(--border); transition: border-color 0.2s;
+    }
+    .btn-outline:hover { border-color: var(--accent); color: var(--accent); }
+    .proof-row {
+      display: flex; flex-wrap: wrap; gap: 8px 20px;
+      padding: 20px 48px; border-top: 1px solid var(--border);
+    }
+    .proof-item {
+      font-size: 12px; font-weight: 400; color: var(--label);
+      display: flex; align-items: center; gap: 6px;
+    }
+    .proof-item::before { content: '✓'; color: var(--accent); font-weight: 700; }
+
+    /* Footer */
+    footer { border-top: 1px solid var(--border); }
+    .site-footer {
+      max-width: 1100px; margin: 0 auto; padding: 28px 40px;
+      display: flex; align-items: center; justify-content: space-between;
+      font-size: 11px; color: #ffffff; opacity: 0.5; flex-wrap: wrap; gap: 12px;
+    }
+    .site-footer a { color: var(--accent); text-decoration: none; }
+
+    /* Mobile */
     @media (max-width: 768px) {
-      .sw-wrap { position: fixed; right: 0; bottom: 0; top: auto; left: 0; transform: none; flex-direction: column-reverse; align-items: stretch; }
-      .sw-tab { flex-direction: row; writing-mode: horizontal-tb; transform: none; border-radius: 0; padding: 12px 20px; justify-content: center; gap: 8px; box-shadow: 0 -2px 12px rgba(0,0,0,0.4); }
-      .sw-tab-icon { transform: none; }
-      .sw-panel { border: none; border-top: 1px solid #2a2a2a; border-radius: 0; width: 100%; box-shadow: 0 -4px 24px rgba(0,0,0,0.6); max-height: 80vh; overflow-y: auto; }
+      .site-header, .container, .site-footer { padding-left: 20px; padding-right: 20px; }
+      .container { padding-top: 48px; padding-bottom: 72px; }
+      .header-nav a:not(.header-cta) { display: none; }
+      h1 { font-size: clamp(24px, 7vw, 36px); }
+      .compare-grid { grid-template-columns: 1fr; }
+      .cta-inner { padding: 32px 24px 28px; }
+      .proof-row { padding: 16px 24px; }
     }
   </style>
 </head>
 <body>
+
 <header>
   <div class="site-header">
-    <a href="https://www.fresuelectronics.com"><img src="https://raw.githubusercontent.com/dariofresu/Fresu-Electronics-Blog/main/assets/logo.png" alt="Fresu Electronics"></a>
+    <a href="https://www.fresuelectronics.com">
+      <img src="https://raw.githubusercontent.com/dariofresu/Fresu-Electronics-Blog/main/assets/logo.png" alt="Fresu Electronics" style="height:44px;width:auto;" />
+    </a>
     <nav class="header-nav">
-      <a href="https://blog.fresuelectronics.com">← All Posts</a>
       <a href="https://www.fresuelectronics.com/trainings">Courses</a>
+      <a href="https://blog.fresuelectronics.com">Blog</a>
       <a href="https://www.fresuelectronics.com/emc-audit" class="header-cta">Book EMC Audit</a>
     </nav>
   </div>
 </header>
+
 <div class="container">
-  <span class="kicker">Electromagnetism · Theory · Fundamentals</span>
-  <h1>Redefining Current and Charge: A Field-Based Perspective</h1>
-  <p class="deck">Classical electromagnetism teaches that current is the flow of charge and charge is the fundamental quantity. A field-centric perspective inverts this — and the inversion is more than philosophical. It changes how you diagnose and fix real circuit behaviour.</p>
+
+  <img
+    src="https://raw.githubusercontent.com/dariofresu/Fresu-Electronics-Blog/main/assets/images/redefining-current-charge_cover.png"
+    alt="Redefining Current and Charge — field-based perspective on electromagnetism"
+    class="post-cover">
+
+  <span class="kicker">Electromagnetism · Foundations</span>
+
+  <h1>Redefining Current and Charge: A <em>Field-Based Perspective</em> on Electromagnetism</h1>
+
+  <p class="deck">Classical electromagnetism defines current as the flow of charge through a conductor — carried by electrons drifting at roughly 73 µm/s. But signals propagate through a PCB at 150 million m/s. Something doesn't add up. A field-based reframing resolves the contradiction.</p>
+
   <div class="author-row">
-    <img class="author-photo" src="https://raw.githubusercontent.com/dariofresu/Fresu-Electronics-Blog/main/assets/dario-fresu.jpg" alt="Dario Fresu">
-    <div><span class="author-name">Dario Fresu</span><span class="author-title">Principal EMC Architect · Fresu Electronics</span></div>
-  </div>
-  <img src="https://raw.githubusercontent.com/dariofresu/Fresu-Electronics-Blog/main/assets/images/redefining-current-charge.png" alt="" style="width:100%;border-radius:4px;margin:0 0 48px;display:block;border:1px solid #242424;">
-
-  <p>The conventional definition: current is the rate of flow of electric charge, expressed as I = dQ/dt. Charge is an intrinsic property of particles — electrons carry it, protons carry it, and it is the source of electric fields. This is the model taught in every introductory physics and engineering course.</p>
-  <p>It is also the model that creates the disconnect between circuit design and EMC. Here is why.</p>
-
-  <h2>The drift velocity problem</h2>
-  <p>In a copper conductor carrying 1A of current through a 1mm² cross-section, the drift velocity of the electrons — how fast they actually move — is approximately 73 micrometres per second. The speed of a snail. Yet electrical signals propagate at a significant fraction of the speed of light — typically 0.5–0.7c in PCB dielectrics.</p>
-  <p>If electrical signals are carried by electrons, how do they propagate at near-light speed when the electrons themselves move at 73 μm/s? The answer: they don't. The electrons are not carrying the signal. The electromagnetic field is.</p>
-
-  <div class="pull-quote"><p>The energy in an electrical circuit propagates in the electromagnetic field in the space between the conductors — not through the conductors themselves. The conductors are boundary conditions, not carriers.</p></div>
-
-  <h2>The field-centric inversion</h2>
-  <p>Rather than treating charge as the fundamental quantity from which fields arise, consider the inversion: the electromagnetic field is the fundamental quantity, and what we call "charge" is a property of the field — specifically, the divergence of the electric field scaled by the permittivity of the medium.</p>
-  <p>Gauss's law states: ∇·E = ρ/ε. Conventionally, ρ (charge density) is the cause and E (electric field) is the effect. In the inverted formulation, E is the cause and ρ is derived from it. Charge is not a thing that fields surround — it is a mathematical description of where field lines converge or diverge.</p>
-
-  <h2>Why this matters for practical engineering</h2>
-  <p>This is not just philosophical. The field-centric model changes what you look for when diagnosing circuits. In the conventional model, a PCB trace is a wire with current flowing through it. In the field model, a PCB trace and its reference plane together form a waveguide confining a propagating electromagnetic field. The signal energy is in the dielectric, not the metal.</p>
-
-  <div class="contrast-block">
-    <div class="contrast-col wrong"><span class="contrast-label">Conventional Model</span>
-    <ul class="contrast-list"><li>Charge is the fundamental quantity</li><li>Fields arise from charge distributions</li><li>Current is electron flow through conductors</li><li>Signal energy is in the conductor</li><li>Ground is a return wire for electrons</li></ul></div>
-    <div class="contrast-col right"><span class="contrast-label">Field-Centric Model</span>
-    <ul class="contrast-list"><li>Electromagnetic field is fundamental</li><li>Charge is derived from field divergence</li><li>Current is a boundary condition on the field</li><li>Signal energy propagates in the dielectric</li><li>Ground plane shapes and contains the field</li></ul></div>
-  </div>
-
-  <h2>The Poynting vector: where energy actually flows</h2>
-  <p>The Poynting vector S = E × H describes the direction and magnitude of electromagnetic energy flow. In a DC circuit — a battery connected to a resistor by two wires — the energy does not flow through the wires. It flows in the electromagnetic field in the space between the wires, from the battery to the resistor. The wires establish boundary conditions that shape where the field exists and how it flows. This is counterintuitive but experimentally confirmed.</p>
-  <p>For PCB designers, the implication is direct: the return reference plane beneath a trace is not a return wire. It is the second conductor of a field waveguide. Its proximity, continuity, and impedance determine how well the field is confined and guided — which determines how much of that field escapes into the environment as EMI.</p>
-  
-  <div class="closing">
-    <div class="tags"><span class="tag">#Electromagnetism</span> <span class="tag">#FieldTheory</span> <span class="tag">#EMC</span> <span class="tag">#Electronics</span> <span class="tag">#PhysicsOfCircuits</span></div>
-  </div>
-  <div class="cta-section">
-    <span class="cta-eyebrow">Work with Dario Fresu</span>
-    <h2 class="cta-headline" style="margin:0 0 16px;">Design with <em>first-principles clarity.</em></h2>
-    <p class="cta-sub">Work directly with Dario to identify EMC risks at the design stage — before a €15,000–40,000 chamber session reveals issues that require a respin.</p>
-    <div class="cta-buttons">
-      <a href="https://www.fresuelectronics.com/emc-audit" class="btn-primary" target="_blank">Book EMC Audit — €8,000</a>
-      <a href="https://www.fresuelectronics.com/emc-audit" class="btn-secondary" target="_blank">EMC Architect System — €30,000 →</a>
+    <img src="https://raw.githubusercontent.com/dariofresu/Fresu-Electronics-Blog/main/assets/dario-fresu.jpg" alt="Dario Fresu" />
+    <div>
+      <span class="author-name">Dario Fresu</span>
+      <span class="author-title">Principal EMC Architect · Fresu Electronics</span>
+      <span class="author-date">April 20, 2025 · 11 min read</span>
     </div>
-    <div class="cta-proof">
-      <span class="proof-item">60,000+ engineers on LinkedIn &amp; YouTube</span>
+  </div>
+
+  <!-- ── Intro ── -->
+  <p>Classical electromagnetism defines current and charge as foundational concepts. Current represents the flow of electric charge, typically carried by electrons in conductors, while charge is an intrinsic property of particles such as electrons and protons, serving as the source of electromagnetic fields.</p>
+
+  <p>However, this conventional understanding reveals significant limitations — particularly when you look at the speed at which electromagnetic effects propagate compared to how slowly charge carriers actually move. This article introduces a perspective that reframes the classical definitions, emphasising the primacy of electromagnetic fields over particle motion. Not new equations. Not alternative physics. A conceptual shift that makes circuits easier to reason about.</p>
+
+  <img
+    src="https://raw.githubusercontent.com/dariofresu/Fresu-Electronics-Blog/main/assets/images/redefining-current-charge_img01.png"
+    alt="Traditional electron-flow view vs. electromagnetic field theory view of a circuit"
+    class="post-img">
+  <p class="img-caption">Left: conventional view — electricity as electrons moving inside conductors. Right: the corrected view — electricity as electromagnetic fields propagating in the space between conductors.</p>
+
+  <!-- ── Section 1 ── -->
+  <h2>The Classical View: Current and Charge</h2>
+
+  <p>In classical electromagnetism, current is defined as the rate of flow of electric charge:</p>
+
+  <img src="https://raw.githubusercontent.com/dariofresu/Fresu-Electronics-Blog/main/assets/images/redefining-current-charge_img02.png" alt="I = dQ/dt" class="formula">
+
+  <div class="var-list">
+    <p><strong>I</strong> — current (A)</p>
+    <p><strong>Q</strong> — charge (C)</p>
+    <p><strong>t</strong> — time (s)</p>
+  </div>
+
+  <p>Within a conductor such as a copper wire, current is understood as the motion of electrons driven by an electric field. The average speed at which electrons move — the drift velocity — is:</p>
+
+  <img src="https://raw.githubusercontent.com/dariofresu/Fresu-Electronics-Blog/main/assets/images/redefining-current-charge_img03.jpg" alt="Drift velocity formula" class="formula">
+
+  <div class="var-list">
+    <p><strong>v<sub>d</sub></strong> — drift velocity (m/s)</p>
+    <p><strong>I</strong> — current (A)</p>
+    <p><strong>n</strong> — electron density (m⁻³)</p>
+    <p><strong>e</strong> — electron charge (C)</p>
+    <p><strong>A</strong> — cross-sectional area (m²)</p>
+  </div>
+
+  <p>For a copper wire with a 1 mm² cross-section carrying 1 A, with an electron density of approximately 8.5×10²⁸ m⁻³, the drift velocity works out to roughly <strong>73.4 µm/s</strong> — comparable to the speed of a snail.</p>
+
+  <h3>Charge as a Fundamental Property</h3>
+
+  <p>Classically, charge is an inherent characteristic of particles: electrons carry −1.602×10⁻¹⁹ C, protons +1.602×10⁻¹⁹ C. Charges generate electric fields as described by Gauss's law, and moving charges produce magnetic fields as described by Ampère's law. This framework positions charges as the primary sources of fields, with their motion driving electromagnetic phenomena.</p>
+
+  <h3>Where the Classical View Breaks Down</h3>
+
+  <div class="wrong-block">
+    <span class="block-label">Speed discrepancy</span>
+    <p>Electrons drift at ~10 µm/s. Yet a light turns on in 6.67 ns across a 1-metre circuit. The electromagnetic wave propagates through the dielectric between conductors at <strong>1/√(µ₀ ε₀ ε<sub>r</sub>)</strong> — approximately 150 million m/s for typical PCB materials (ε<sub>r</sub> ≈ 4). Signal propagation is billions of times faster than electron drift. If electrons were carrying the energy, this would be impossible.</p>
+  </div>
+
+  <img
+    src="https://raw.githubusercontent.com/dariofresu/Fresu-Electronics-Blog/main/assets/images/redefining-current-charge_img04.gif"
+    alt="Signal propagation in a PCB — animated"
+    class="post-img">
+  <p class="img-caption">Signal propagation in a PCB. The electromagnetic wave travels through the dielectric at a fraction of the speed of light — far faster than electrons can move.</p>
+
+  <div class="wrong-block">
+    <span class="block-label">Energy propagation</span>
+    <p>The traditional view says electrons carry energy along the wire. But energy actually propagates in the space surrounding the conductor, as described by the Poynting vector <strong>S = E × H</strong>. In a PCB trace or coaxial cable, the electric field is perpendicular to the conductors; the Poynting vector points along the direction of signal travel — in the dielectric, not inside the copper.</p>
+  </div>
+
+  <img
+    src="https://raw.githubusercontent.com/dariofresu/Fresu-Electronics-Blog/main/assets/images/redefining-current-charge_img05.png"
+    alt="Electromagnetic fields around transmission lines — E, H, and S directions"
+    class="post-img">
+  <p class="img-caption">Electromagnetic fields around a transmission line. The electric field (E) is perpendicular to the conductors; the magnetic field (H) forms circles around them; the Poynting vector (S) points in the direction of propagation — in the space between conductors, not inside them.</p>
+
+  <!-- ── Section 2 ── -->
+  <h2>A Field-Based Perspective</h2>
+
+  <p>To address these limitations, a reframing centres on the primacy of electromagnetic fields.</p>
+
+  <div class="callout">
+    <span class="block-label">New definition — current</span>
+    <p>Current is the manifestation of electromagnetic field energy flux in a conductor — a measurable flow of charge resulting from the response of charge carriers to the induced electric field. The primary driver is the propagation of electromagnetic fields in the space around the conductor, delivering energy via the Poynting vector and inducing currents through local field interactions.</p>
+  </div>
+
+  <h3>Key Mechanisms</h3>
+
+  <div class="mechanisms">
+    <div class="mechanism">
+      <span class="mechanism-num">Mechanism 01</span>
+      <h4>Field Energy Propagation</h4>
+      <p>In a circuit with two conductors — signal line and return path — the electromagnetic wave propagates in the dielectric between them. The Poynting vector magnitude quantifies this energy flux:</p>
+      <img src="https://raw.githubusercontent.com/dariofresu/Fresu-Electronics-Blog/main/assets/images/redefining-current-charge_img06.png" alt="Poynting vector formula: S = Y₀ · E²" class="formula">
+      <p style="margin-top:12px;">Where Y₀ ≈ 0.00265 S (admittance of free space = 1/Z₀, with Z₀ ≈ 376.7 Ω).</p>
+    </div>
+    <div class="mechanism">
+      <span class="mechanism-num">Mechanism 02</span>
+      <h4>Induced Electric Fields Drive Current</h4>
+      <p>The wave propagating in the dielectric induces electric fields at the conductor surfaces, which drive charge carriers. The current density J is proportional to the field strength, scaled by the material's conductivity σ: <strong>J = σE</strong>. In the signal conductor, the field drives current in the direction of wave propagation; in the return conductor, the field is oriented oppositely, producing a return current of equal magnitude.</p>
+    </div>
+    <div class="mechanism">
+      <span class="mechanism-num">Mechanism 03</span>
+      <h4>Displacement Current Closes the Loop</h4>
+      <p>Displacement current in the dielectric between conductors closes the current loop at the propagating wavefront:</p>
+      <img src="https://raw.githubusercontent.com/dariofresu/Fresu-Electronics-Blog/main/assets/images/redefining-current-charge_img07.png" alt="Displacement current density formula" class="formula">
+      <p style="margin-top:12px;">This closure occurs at wave speed, ensuring equal and opposite currents in the signal and return conductors as the wavefront advances.</p>
+    </div>
+    <div class="mechanism">
+      <span class="mechanism-num">Mechanism 04</span>
+      <h4>Charge Motion is Secondary</h4>
+      <p>Electrons respond to the induced electric field, but their slow drift velocity (~10 µm/s) does not drive the rapid effects seen in circuits. The fields, propagating at the speed determined by the medium, are the primary mechanism.</p>
+    </div>
+  </div>
+
+  <!-- ── Section 3 ── -->
+  <h2>Redefining Charge: Beyond Particles</h2>
+
+  <p>If current is a field-induced effect, and electrons are not the primary entities establishing fields, then the nature of charge itself needs reconsidering.</p>
+
+  <p>The classical view runs into two problems. First, electromagnetic waves propagate in a vacuum without local charges — fields can exist independently. Second, if charges create fields and fields act on charges, what is the ultimate source? A field-based view of current suggests fields may be more fundamental.</p>
+
+  <p>There is also a deeper tension in the classical framework: free space is defined as a vacuum — an emptiness devoid of any substance — yet it has permittivity (ε₀) and permeability (µ₀) that enable electromagnetic propagation. How can complete emptiness possess properties? This contradiction suggests free space is not truly empty, but a medium with intrinsic dynamics that supports field propagation.</p>
+
+  <div class="callout">
+    <span class="block-label">New definition — charge</span>
+    <p>Charge is a localized distortion or concentration of electromagnetic field energy within the free space medium, sustained by the medium's permittivity and permeability. What is conventionally called "charge" — an electron's −1.602×10⁻¹⁹ C — is an emergent phenomenon: a stable, resonant pattern of electric and magnetic fields, not an intrinsic property of a particle.</p>
+  </div>
+
+  <h3>Key Concepts</h3>
+
+  <p><strong>Fields as fundamental.</strong> Charge density is a measure of field divergence, as described by Gauss's law:</p>
+
+  <img src="https://raw.githubusercontent.com/dariofresu/Fresu-Electronics-Blog/main/assets/images/redefining-current-charge_img08.png" alt="Gauss's law: div E = ρ/ε₀" class="formula">
+  <p>Rearranging to isolate charge density:</p>
+  <img src="https://raw.githubusercontent.com/dariofresu/Fresu-Electronics-Blog/main/assets/images/redefining-current-charge_img09.png" alt="ρ = ε₀ · div E" class="formula">
+
+  <p>This shows ρ is directly proportional to the divergence of the electric field. An electron, in this view, might be a region where the electric field diverges — a stable oscillation in the field, rather than a particle carrying an intrinsic charge value.</p>
+
+  <p><strong>Free space as a medium.</strong> The medium's properties (ε₀ ≈ 8.854×10⁻¹² F/m, µ₀ = 4π×10⁻⁷ H/m) define its ability to sustain field dynamics. Charges are distortions in this medium — akin to solitons or resonant patterns.</p>
+
+  <p><strong>Electrons as field patterns.</strong> In a circuit, the electromagnetic wave induces fields, and these field patterns respond, creating current as a secondary effect. The Coulomb reflects a system's ability to influence electromagnetic field dynamics — not an intrinsic particle property.</p>
+
+  <!-- ── Section 4 ── -->
+  <h2>Implications for Classical Electromagnetism</h2>
+
+  <p>Ampère's law as modified by Maxwell states:</p>
+
+  <img src="https://raw.githubusercontent.com/dariofresu/Fresu-Electronics-Blog/main/assets/images/redefining-current-charge_img10.png" alt="Ampère-Maxwell law" class="formula">
+
+  <div class="var-list">
+    <p><strong>B</strong> — magnetic field (T)</p>
+    <p><strong>J</strong> — current density (A/m²)</p>
+    <p><strong>E</strong> — electric field (V/m)</p>
+    <p><strong>µ₀</strong> — permeability of free space (H/m)</p>
+    <p><strong>ε₀</strong> — permittivity of free space (F/m)</p>
+  </div>
+
+  <p>The classical and field-based views interpret this equation differently:</p>
+
+  <div class="compare-grid">
+    <div class="compare-card wrong">
+      <h4>Classical causality</h4>
+      <p>Alternating current generates a changing magnetic field — charge motion drives the field. Current → changing B → EM wave propagation.</p>
+    </div>
+    <div class="compare-card right">
+      <h4>Field-based causality</h4>
+      <p>The electromagnetic wave propagates first, inducing the alternating current in the conductor as a response. EM wave → induced current. The current term in Ampère's law is a consequence, not a cause.</p>
+    </div>
+  </div>
+
+  <p>Solving Ampère's law for J:</p>
+
+  <img src="https://raw.githubusercontent.com/dariofresu/Fresu-Electronics-Blog/main/assets/images/redefining-current-charge_img11.png" alt="J rearranged from Ampère-Maxwell" class="formula">
+
+  <p>This shift places field dynamics at the centre of the causal chain, with charge motion as a downstream consequence.</p>
+
+  <h3>Circuit Dynamics</h3>
+
+  <img
+    src="https://raw.githubusercontent.com/dariofresu/Fresu-Electronics-Blog/main/assets/images/redefining-current-charge_img12.jpg"
+    alt="Displacement current closing the loop in a signal-return conductor pair"
+    class="post-img-sm">
+  <p class="img-caption">Displacement current closes the current loop at the wavefront as the signal propagates — establishing opposite currents in the signal and return paths at wave speed.</p>
+
+  <p>In a circuit with a signal line and return path, the electromagnetic wave propagates in the dielectric between the conductors. The electric field, perpendicular to the conductors, induces longitudinal fields inside them that drive currents in opposite directions. Displacement current closes the loop at the wavefront — not through electron drift, but through field dynamics propagating at a fraction of the speed of light.</p>
+
+  <!-- ── Conclusion ── -->
+  <h2>Conclusion</h2>
+
+  <p>Reinterpreting current and charge through a field-based framework offers a more internally consistent understanding of electromagnetism. Current becomes a field-induced effect — driven by energy flux — with electron motion as a secondary response. Charge becomes a localized distortion of field energy within the free space medium, not an intrinsic particle property.</p>
+
+  <p>This resolves the long-standing inconsistency between the slow drift of electrons and the near-light-speed propagation of signals. More importantly, it reframes the mental model: fields are the primary actors. Conductors guide them. Currents are their response.</p>
+
+  <p>For PCB and hardware engineers, this is not just theoretical — it changes how you think about return paths, signal integrity, and EMI. The field exists in the dielectric. The return current mirrors the signal current because the wave requires it. That's not intuition. That's the physics.</p>
+
+  <p style="margin-top:48px; font-style:italic; font-weight:600; font-size:17px; color:#ffffff;">
+    Stop designing for electron flow. <em style="color:var(--accent);">Design for the field.</em>
+  </p>
+
+  <!-- Tags -->
+  <div class="tags">
+    <span class="tag">Electromagnetism</span>
+    <span class="tag">EMC</span>
+    <span class="tag">Signal Integrity</span>
+    <span class="tag">Foundations</span>
+    <span class="tag">Field Theory</span>
+  </div>
+
+  <!-- Share -->
+  <div class="share-strip">
+    <span class="share-label">Share</span>
+    <a href="https://www.linkedin.com/shareArticle?mini=true&url=https://blog.fresuelectronics.com/redefining-current-charge&title=Redefining%20Current%20and%20Charge%3A%20A%20Field-Based%20Perspective%20on%20Electromagnetism"
+       target="_blank" class="share-btn linkedin">LinkedIn</a>
+    <a href="https://twitter.com/intent/tweet?url=https://blog.fresuelectronics.com/redefining-current-charge&text=Redefining%20Current%20and%20Charge%3A%20A%20Field-Based%20Perspective%20on%20Electromagnetism&via=dario_fresu"
+       target="_blank" class="share-btn twitter">X / Twitter</a>
+    <button class="share-btn copylink" onclick="copyLink(this,'https://blog.fresuelectronics.com/redefining-current-charge')">Copy Link</button>
+  </div>
+
+  <!-- CTA -->
+  <div class="cta-section">
+    <div class="cta-inner">
+      <span class="cta-kicker">Work with Fresu Electronics</span>
+      <h3>EMC problems are field problems. We solve them at the source.</h3>
+      <p>An EMC Design Audit reviews your schematic and PCB layout before fabrication — identifying return path gaps, field containment failures, and layout decisions that become compliance failures. Report delivered in 10 business days.</p>
+      <div class="cta-actions">
+        <a href="https://www.fresuelectronics.com/emc-audit" class="btn-primary">Book an EMC Audit — €8,000 →</a>
+        <a href="https://www.fresuelectronics.com/trainings" class="btn-outline">Browse Courses</a>
+      </div>
+    </div>
+    <div class="proof-row">
+      <span class="proof-item">80,000+ engineers reached</span>
       <span class="proof-item">4,000+ engineers trained</span>
       <span class="proof-item">Report in 10 business days</span>
       <span class="proof-item">IPC Certified · Former ETH Zurich</span>
     </div>
-    <div class="products-strip">
-      <a href="https://www.fresuelectronics.com/emc-audit" class="product-card" target="_blank"><div class="product-icon">🔍</div><div class="product-name">EMC Design Audit</div><div class="product-desc">Full design review before the chamber. Return paths, apertures, field geometry.</div><div class="product-link">Apply — €8,000 →</div></a>
-      <a href="https://www.fresuelectronics.com/emc-audit" class="product-card" target="_blank"><div class="product-icon">🏛</div><div class="product-name">EMC Architect System</div><div class="product-desc">Embedded ongoing EMC partnership across your full development process.</div><div class="product-link">Learn more — €30,000 →</div></a>
-      <a href="https://www.fresuelectronics.com/free-tool-1" class="product-card" target="_blank"><div class="product-icon">📐</div><div class="product-name">Free Stackup Template</div><div class="product-desc">EMI-controlled stackup template. Free resource for your next board design.</div><div class="product-link">Get free resource →</div></a>
-    </div>
   </div>
-</div>
+
+</div><!-- /.container -->
+
 <footer>
   <div class="site-footer">
-    <span>© 2026 Fresu Electronics SRL</span>
-    <span><a href="https://blog.fresuelectronics.com">blog.fresuelectronics.com</a> · <a href="https://www.fresuelectronics.com">fresuelectronics.com</a></span>
+    <span>© 2025 Fresu Electronics SRL — Sardinia, Italy</span>
+    <span>
+      <a href="https://www.fresuelectronics.com/terms-of-services">Terms</a> ·
+      <a href="https://www.freeprivacypolicy.com/live/2e894867-7c2b-4014-aa0c-db0f62e59cb8">Privacy</a> ·
+      <a href="https://blog.fresuelectronics.com">Blog</a>
+    </span>
   </div>
 </footer>
-<!-- ═══ STICKY SUBSCRIBE WIDGET ═══ -->
-<div id="subWidget" class="sw-wrap">
-  <button class="sw-tab" id="swTab" onclick="swToggle()">
-    <span class="sw-tab-icon">&#x2709;</span>
-    <span class="sw-tab-label">Subscribe</span>
-  </button>
-  <div class="sw-panel" id="swPanel" hidden>
-    <div class="sw-head">
-      <p class="sw-title">Get articles <em>before</em> they&#39;re published</p>
-      <button class="sw-close" onclick="swToggle()">&#x2715;</button>
-    </div>
-    <form class="sw-form" id="swForm" onsubmit="handleSub(event,'swForm')">
-      <input type="text" name="website" style="display:none" tabindex="-1" autocomplete="off">
-      <div class="sw-row">
-        <input class="sw-input" type="text" name="first_name" placeholder="First name *" required autocomplete="given-name">
-        <input class="sw-input" type="text" name="last_name" placeholder="Last name *" required autocomplete="family-name">
-      </div>
-      <input class="sw-input" type="email" name="email" placeholder="Work email *" required autocomplete="email">
-      <select class="sw-input" name="country" required>
-        <option value="">Country *</option>
-        <option value="US">United States</option><option value="GB">United Kingdom</option>
-        <option value="DE">Germany</option><option value="IT">Italy</option>
-        <option value="FR">France</option><option value="NL">Netherlands</option>
-        <option value="SE">Sweden</option><option value="CH">Switzerland</option>
-        <option value="CA">Canada</option><option value="AU">Australia</option>
-        <option value="IN">India</option><option value="JP">Japan</option>
-        <option value="KR">South Korea</option><option value="CN">China</option>
-        <option value="SG">Singapore</option><option value="IL">Israel</option>
-        <option value="FI">Finland</option><option value="DK">Denmark</option>
-        <option value="NO">Norway</option><option value="BE">Belgium</option>
-        <option value="AT">Austria</option><option value="ES">Spain</option>
-        <option value="PT">Portugal</option><option value="PL">Poland</option>
-        <option value="CZ">Czech Republic</option><option value="RO">Romania</option>
-        <option value="HU">Hungary</option><option value="TR">Turkey</option>
-        <option value="BR">Brazil</option><option value="MX">Mexico</option>
-        <option value="ZA">South Africa</option><option value="AE">UAE</option>
-        <option value="SA">Saudi Arabia</option><option value="TW">Taiwan</option>
-        <option value="UA">Ukraine</option><option value="RU">Russia</option>
-        <option value="OTHER">Other</option>
-      </select>
-      <button class="sw-submit" type="submit">
-        <span class="sw-btn-text">Subscribe free</span>
-        <span class="sw-btn-load" style="display:none">&#x2026;</span>
-      </button>
-      <p class="sw-note">Free &middot; No spam &middot; Unsubscribe anytime</p>
-      <p class="sw-msg" style="display:none"></p>
-    </form>
-  </div>
-</div>
-<!-- ═══ END STICKY SUBSCRIBE WIDGET ═══ -->
+
 <script>
-function swToggle() {
-  var panel = document.getElementById('swPanel');
-  panel.hidden = !panel.hidden;
-}
-function handleSub(e, formId) {
-  e.preventDefault();
-  var form = document.getElementById(formId);
-  if (!form) return;
-  var honey = form.querySelector('[name="website"]');
-  if (honey && honey.value) return;
-  var get = function(n) { var el = form.querySelector('[name="' + n + '"]'); return el ? el.value.trim() : ''; };
-  var btnText = form.querySelector('.sw-btn-text');
-  var btnLoad = form.querySelector('.sw-btn-load');
-  var msg = form.querySelector('.sw-msg');
-  if (btnText) btnText.style.display = 'none';
-  if (btnLoad) btnLoad.style.display = 'inline';
-  if (msg) msg.style.display = 'none';
-  fetch('https://hook.eu2.make.com/irkkjw6s2ppe9awrgv71atgu8540g12v', {
-    method: 'POST', headers: {'Content-Type': 'application/json'},
-    body: JSON.stringify({ email: get('email'), first_name: get('first_name'), last_name: get('last_name'), country: get('country') })
-  })
-  .then(function(r) {
-    if (btnText) btnText.style.display = 'inline';
-    if (btnLoad) btnLoad.style.display = 'none';
-    if (msg) msg.style.display = 'block';
-    if (r.ok) {
-      if (msg) { msg.style.color = '#00FF94'; msg.textContent = 'You are in! Check your inbox.'; }
-      ['email','first_name','last_name'].forEach(function(n) { var el = form.querySelector('[name="'+n+'"]'); if(el) el.value=''; });
-      var sel = form.querySelector('[name="country"]'); if (sel) sel.selectedIndex = 0;
-    } else { if (msg) { msg.style.color='#ff4d4d'; msg.textContent='Something went wrong - try again.'; } }
-  })
-  .catch(function() {
-    if (btnText) btnText.style.display = 'inline';
-    if (btnLoad) btnLoad.style.display = 'none';
-    if (msg) { msg.style.display='block'; msg.style.color='#ff4d4d'; msg.textContent='Something went wrong - try again.'; }
+function copyLink(btn, url) {
+  navigator.clipboard.writeText(url).then(function() {
+    var o = btn.innerHTML;
+    btn.innerHTML = '✓ Copied!';
+    setTimeout(function() { btn.innerHTML = o; }, 2000);
   });
 }
 </script>
