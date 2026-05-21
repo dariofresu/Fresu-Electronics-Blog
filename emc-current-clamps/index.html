@@ -1,0 +1,719 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Radiated Emissions Testing and the Role of EMC Current Clamps — Fresu Electronics</title>
+  <meta name="description" content="Discover how EMC current clamps help estimate radiated emissions during pre-compliance testing. Covers differential and common mode currents, transfer impedance, and practical measurement setup.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400;1,700&display=swap" rel="stylesheet">
+
+  <!-- OG / Social -->
+  <meta property="og:title" content="Radiated Emissions Testing and the Role of EMC Current Clamps">
+  <meta property="og:description" content="Discover how EMC current clamps help estimate radiated emissions during pre-compliance testing.">
+  <meta property="og:url" content="https://blog.fresuelectronics.com/emc-current-clamps">
+  <meta property="og:image" content="https://raw.githubusercontent.com/dariofresu/Fresu-Electronics-Blog/main/assets/images/emc-current-clamps_cover.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:type" content="article">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:site" content="@dario_fresu">
+  <meta name="twitter:image" content="https://raw.githubusercontent.com/dariofresu/Fresu-Electronics-Blog/main/assets/images/emc-current-clamps_cover.png">
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:          #0a0a0a;
+      --surface:     #111111;
+      --surface-2:   #181818;
+      --border:      #242424;
+      --fg:          #ffffff;
+      --label:       #a0aab8;
+      --accent:      #00FF94;
+      --accent-dim:  rgba(0, 255, 148, 0.10);
+      --accent-hover:#00e085;
+      --wrong:       #ff4d4d;
+    }
+
+    body {
+      background: var(--bg);
+      color: #ffffff;
+      font-family: 'Poppins', sans-serif;
+      font-size: 17px;
+      line-height: 1.75;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* ── Header ── */
+    header { border-bottom: 1px solid var(--border); }
+    .site-header {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 18px 40px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .site-header img { height: 44px; width: auto; display: block; }
+    .header-nav { display: flex; align-items: center; gap: 28px; }
+    .header-nav a {
+      font-size: 11px; font-weight: 600;
+      letter-spacing: 0.08em; text-transform: uppercase;
+      color: #ffffff; text-decoration: none; opacity: 0.6;
+      transition: opacity 0.2s;
+    }
+    .header-nav a:hover { opacity: 1; }
+    .header-cta {
+      opacity: 1 !important;
+      background: var(--accent);
+      color: #0a0a0a !important;
+      padding: 9px 20px;
+      border-radius: 999px;
+      transition: background 0.2s;
+    }
+    .header-cta:hover { background: var(--accent-hover) !important; }
+
+    /* ── Post layout ── */
+    .container {
+      max-width: 740px;
+      margin: 0 auto;
+      padding: 72px 40px 100px;
+    }
+
+    /* Cover */
+    .post-cover {
+      width: 100%;
+      border-radius: 6px;
+      display: block;
+      margin-bottom: 44px;
+      border: 1px solid var(--border);
+      aspect-ratio: 16/9;
+      object-fit: cover;
+    }
+
+    /* Kicker */
+    .kicker {
+      display: inline-block;
+      font-size: 10px; font-weight: 600;
+      letter-spacing: 0.18em; text-transform: uppercase;
+      color: var(--accent);
+      border: 1px solid var(--accent);
+      background: var(--accent-dim);
+      padding: 4px 12px;
+      border-radius: 2px;
+      margin-bottom: 24px;
+    }
+
+    /* Title */
+    h1 {
+      font-size: clamp(28px, 5vw, 44px);
+      font-weight: 800;
+      line-height: 1.1;
+      letter-spacing: -0.025em;
+      color: #ffffff;
+      margin-bottom: 20px;
+    }
+    h1 em { font-style: italic; color: var(--accent); }
+
+    /* Deck */
+    .deck {
+      font-size: 18px;
+      font-weight: 400;
+      color: #ffffff;
+      line-height: 1.7;
+      margin-bottom: 36px;
+    }
+
+    /* Author row */
+    .author-row {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 20px 0;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 48px;
+    }
+    .author-row img {
+      width: 52px; height: 52px;
+      border-radius: 50%;
+      object-fit: cover;
+      flex-shrink: 0;
+      border: 2px solid var(--accent);
+    }
+    .author-name {
+      display: block;
+      font-size: 14px; font-weight: 600; color: #ffffff;
+      line-height: 1.3;
+    }
+    .author-title {
+      display: block;
+      font-size: 12px; font-weight: 400; color: var(--label);
+      line-height: 1.3;
+    }
+    .author-date {
+      display: block;
+      font-size: 11px; color: var(--label); margin-top: 4px;
+    }
+
+    /* Body typography */
+    p { color: #ffffff; font-weight: 400; margin-bottom: 22px; }
+    strong { color: #ffffff; font-weight: 600; }
+    em { font-style: italic; }
+
+    h2 {
+      font-size: 22px; font-weight: 700;
+      color: #ffffff;
+      margin: 52px 0 16px;
+      letter-spacing: -0.015em;
+    }
+    h2::before {
+      content: '';
+      display: block;
+      width: 32px; height: 3px;
+      background: var(--accent);
+      margin-bottom: 12px;
+      border-radius: 2px;
+    }
+
+    h3 {
+      font-size: 17px; font-weight: 600;
+      color: #ffffff;
+      margin: 36px 0 12px;
+    }
+
+    /* Inline images */
+    .post-img {
+      width: 100%;
+      border-radius: 4px;
+      display: block;
+      margin: 32px 0;
+      border: 1px solid var(--border);
+    }
+    .post-img-sm {
+      max-width: 480px;
+      border-radius: 4px;
+      display: block;
+      margin: 24px auto;
+      border: 1px solid var(--border);
+    }
+    .img-caption {
+      text-align: center;
+      font-size: 12px;
+      color: var(--label);
+      margin-top: -20px;
+      margin-bottom: 32px;
+      font-style: italic;
+    }
+
+    /* Formula images — formula math is small, center them */
+    .formula {
+      display: block;
+      margin: 20px auto;
+      max-width: 360px;
+      background: var(--surface);
+      padding: 16px 20px;
+      border-radius: 4px;
+      border: 1px solid var(--border);
+    }
+
+    /* Callout / highlight block */
+    .callout {
+      background: var(--surface);
+      border-left: 3px solid var(--accent);
+      padding: 20px 24px;
+      border-radius: 0 4px 4px 0;
+      margin: 32px 0;
+    }
+    .callout p { margin-bottom: 0; }
+
+    /* Key variable list */
+    .var-list {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 20px 24px;
+      margin: 24px 0;
+    }
+    .var-list p { margin-bottom: 8px; font-size: 15px; }
+    .var-list p:last-child { margin-bottom: 0; }
+
+    /* Compliance table */
+    .compliance-block {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 24px;
+      margin: 28px 0;
+    }
+    .compliance-block p { margin-bottom: 10px; font-size: 15px; }
+    .compliance-block p:last-child { margin-bottom: 0; }
+    .compliance-label {
+      font-size: 10px; font-weight: 600;
+      letter-spacing: 0.14em; text-transform: uppercase;
+      color: var(--accent); margin-bottom: 12px; display: block;
+    }
+
+    /* Numbered steps */
+    .steps { margin: 28px 0; counter-reset: step; }
+    .step {
+      display: flex; gap: 18px; margin-bottom: 20px;
+    }
+    .step-num {
+      flex-shrink: 0;
+      width: 28px; height: 28px;
+      background: var(--accent-dim);
+      border: 1px solid var(--accent);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 12px; font-weight: 700; color: var(--accent);
+      margin-top: 3px;
+    }
+    .step p { margin-bottom: 0; font-size: 15px; }
+
+    /* References */
+    .references {
+      margin-top: 48px;
+      padding-top: 28px;
+      border-top: 1px solid var(--border);
+    }
+    .references h3 { margin-top: 0; }
+    .references ul { padding-left: 20px; }
+    .references li { color: #ffffff; font-size: 14px; margin-bottom: 8px; }
+    .references a { color: var(--accent); text-decoration: none; }
+    .references a:hover { text-decoration: underline; }
+
+    /* Tags */
+    .tags { display: flex; flex-wrap: wrap; gap: 8px; margin: 48px 0 0; }
+    .tag {
+      font-size: 10px; font-weight: 600;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--accent);
+      border: 1px solid var(--accent);
+      background: var(--accent-dim);
+      padding: 4px 12px; border-radius: 2px;
+    }
+
+    /* Share strip */
+    .share-strip {
+      display: flex; align-items: center; gap: 12px;
+      margin: 56px 0 0;
+      padding-top: 32px;
+      border-top: 1px solid var(--border);
+      flex-wrap: wrap;
+    }
+    .share-label {
+      font-size: 12px; font-weight: 600;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--label);
+    }
+    .share-btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-family: 'Poppins', sans-serif;
+      font-size: 13px; font-weight: 600;
+      padding: 9px 18px; border-radius: 999px;
+      text-decoration: none; border: none; cursor: pointer;
+      transition: opacity 0.2s, transform 0.15s;
+      white-space: nowrap;
+    }
+    .share-btn:hover { opacity: 0.88; transform: translateY(-1px); }
+    .share-btn.linkedin { background: #0A66C2; color: #ffffff; }
+    .share-btn.twitter  { background: #000000; color: #ffffff; }
+    .share-btn.copylink {
+      background: var(--surface); color: var(--accent);
+      border: 1px solid var(--accent);
+    }
+    .share-btn.copylink.copied { color: var(--accent); border-color: var(--accent); }
+
+    /* CTA section */
+    .cta-section {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      overflow: hidden;
+      position: relative;
+      margin-top: 72px;
+    }
+    .cta-section::after {
+      content: '';
+      position: absolute; top: 0; left: 0; right: 0; height: 2px;
+      background: linear-gradient(90deg, var(--accent), transparent);
+    }
+    .cta-inner { padding: 48px 48px 40px; }
+    .cta-kicker {
+      font-size: 10px; font-weight: 600;
+      letter-spacing: 0.18em; text-transform: uppercase;
+      color: var(--accent); margin-bottom: 14px; display: block;
+    }
+    .cta-section h3 {
+      font-size: 24px; font-weight: 700;
+      color: #ffffff; margin-bottom: 12px;
+      letter-spacing: -0.01em;
+    }
+    .cta-section p {
+      font-size: 15px; color: #ffffff; line-height: 1.7;
+      margin-bottom: 28px;
+    }
+    .cta-actions { display: flex; gap: 12px; flex-wrap: wrap; }
+    .btn-primary {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: var(--accent); color: #0a0a0a;
+      font-family: 'Poppins', sans-serif;
+      font-size: 13px; font-weight: 700;
+      letter-spacing: 0.02em;
+      padding: 13px 26px; border-radius: 999px;
+      text-decoration: none;
+      transition: background 0.2s;
+    }
+    .btn-primary:hover { background: var(--accent-hover); }
+    .btn-outline {
+      display: inline-flex; align-items: center;
+      color: #ffffff;
+      font-family: 'Poppins', sans-serif;
+      font-size: 13px; font-weight: 600;
+      text-decoration: none;
+      padding: 12px 26px;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      transition: border-color 0.2s;
+    }
+    .btn-outline:hover { border-color: var(--accent); color: var(--accent); }
+
+    /* Proof row */
+    .proof-row {
+      display: flex; flex-wrap: wrap; gap: 8px 20px;
+      padding: 20px 48px;
+      border-top: 1px solid var(--border);
+    }
+    .proof-item {
+      font-size: 12px; font-weight: 400; color: var(--label);
+      display: flex; align-items: center; gap: 6px;
+    }
+    .proof-item::before { content: '✓'; color: var(--accent); font-weight: 700; }
+
+    /* Footer */
+    footer { border-top: 1px solid var(--border); }
+    .site-footer {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 28px 40px;
+      display: flex; align-items: center; justify-content: space-between;
+      font-size: 11px; font-weight: 400;
+      color: #ffffff; opacity: 0.5;
+      flex-wrap: wrap; gap: 12px;
+    }
+    .site-footer a { color: var(--accent); text-decoration: none; }
+
+    /* ── Mobile ── */
+    @media (max-width: 768px) {
+      .site-header, .container, .site-footer {
+        padding-left: 20px; padding-right: 20px;
+      }
+      .container { padding-top: 48px; padding-bottom: 72px; }
+      .header-nav a:not(.header-cta) { display: none; }
+      h1 { font-size: clamp(24px, 7vw, 36px); }
+      .cta-inner { padding: 32px 24px 28px; }
+      .proof-row { padding: 16px 24px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ── Header ── -->
+<header>
+  <div class="site-header">
+    <a href="https://www.fresuelectronics.com">
+      <img
+        src="https://raw.githubusercontent.com/dariofresu/Fresu-Electronics-Blog/main/assets/logo.png"
+        alt="Fresu Electronics" style="height:44px;width:auto;" />
+    </a>
+    <nav class="header-nav">
+      <a href="https://www.fresuelectronics.com/trainings">Courses</a>
+      <a href="https://blog.fresuelectronics.com">Blog</a>
+      <a href="https://www.fresuelectronics.com/emc-audit" class="header-cta">Book EMC Audit</a>
+    </nav>
+  </div>
+</header>
+
+<!-- ── Post ── -->
+<div class="container">
+
+  <!-- Cover -->
+  <img
+    src="https://raw.githubusercontent.com/dariofresu/Fresu-Electronics-Blog/main/assets/images/emc-current-clamps_cover.png"
+    alt="RF current probe fitted around a cable for radiated emissions measurement"
+    class="post-cover">
+
+  <!-- Kicker -->
+  <span class="kicker">Electromagnetism · Pre-compliance Testing</span>
+
+  <!-- Title -->
+  <h1>Radiated Emissions Testing and the Role of <em>EMC Current Clamps</em></h1>
+
+  <!-- Deck -->
+  <p class="deck">A practical alternative to full-chamber testing — how current clamps capture differential and common mode currents, translate them into estimated field strength, and help engineers identify emission sources before they reach the lab.</p>
+
+  <!-- Author row -->
+  <div class="author-row">
+    <img
+      src="https://raw.githubusercontent.com/dariofresu/Fresu-Electronics-Blog/main/assets/dario-fresu.jpg"
+      alt="Dario Fresu" />
+    <div>
+      <span class="author-name">Dario Fresu</span>
+      <span class="author-title">Principal EMC Architect · Fresu Electronics</span>
+      <span class="author-date">April 14, 2025 · 7 min read</span>
+    </div>
+  </div>
+
+  <!-- ── Body ── -->
+
+  <p>Radiated emissions testing is essential for achieving electromagnetic compatibility compliance. This testing ensures electronic devices don't interfere with one another by emitting excessive electromagnetic energy. Traditionally, specialized EMC chambers are used for this — employing antennas to measure radiated fields. However, an <strong>EMC current clamp</strong> provides a practical alternative, allowing engineers to estimate radiated emissions without the need for a full chamber setup.</p>
+
+  <p>This tool is particularly valuable during the design and pre-compliance phases, where you need rapid debugging without committing to chamber time. This article covers the principles of the EMC current clamp, its operational mechanism, and the methodology for estimating radiated emissions from measured currents.</p>
+
+  <!-- ── Section 1 ── -->
+  <h2>What is an EMC Current Clamp?</h2>
+
+  <p>An EMC current clamp is a diagnostic tool used to measure the current flowing through a cable — and that current correlates directly to radiated emissions. It resembles a hinged ring with a magnetic core and a pickup coil wound around it. A connector links the clamp to a spectrum analyzer.</p>
+
+  <img
+    src="https://raw.githubusercontent.com/dariofresu/Fresu-Electronics-Blog/main/assets/images/emc-current-clamps_img01.png"
+    alt="Basic operation of a current transformer"
+    class="post-img-sm">
+  <p class="img-caption">Basic operation of a current transformer — By Biezl, CC BY 3.0</p>
+
+  <p>The clamp encircles the cable from the device under test (DUT), capturing electromagnetic currents without interrupting the circuit. This non-invasive technique is well suited to troubleshooting and pre-compliance evaluations.</p>
+
+  <!-- ── Section 2 ── -->
+  <h2>The Principle of Operation</h2>
+
+  <p>The clamp operates on electromagnetic induction. As current flows through the cable, it generates a magnetic field that induces a voltage in the pickup coil. That voltage is transmitted to the spectrum analyzer, which displays it relative to the probe's transfer impedance.</p>
+
+  <p>The resulting signal provides insight into the current's magnitude and frequency content — the foundation for estimating radiated emissions. Unlike direct field measurement in a chamber, the current clamp measures conducted currents, giving you an indirect but effective way to predict radiation before you're standing in front of an antenna.</p>
+
+  <!-- ── Section 3 ── -->
+  <h2>Understanding Differential and Common Mode Currents</h2>
+
+  <p>To estimate radiated emissions accurately, you need to understand how differential and common mode currents behave in a cable — because they contribute very differently to electromagnetic radiation.</p>
+
+  <p>In a two-wire system, <strong>differential mode current</strong> flows out through one conductor and returns through the other. Ideally, with perfect cable coupling, these currents cancel each other — net current is zero. In practice, imperfections such as poor shielding or physical separation between the wires prevent full cancellation, leaving a residual current that may radiate.</p>
+
+  <p><strong>Common mode current</strong> flows in the same direction through all conductors, returning via an unintended path such as a chassis or earth ground plane. In a three-wire system, common mode current may loop through the DUT and return via the chassis. This current does not cancel within the cable and is a primary source of radiated emissions — it creates a large, uncontrolled radiating loop.</p>
+
+  <div class="callout">
+    <p>When the clamp encircles all conductors, it measures the <strong>net current</strong> — the portion that does not cancel. This uncanceled current, whether from differential mode leakage or common mode flow, is what drives radiated emissions. That's what makes the clamp such a powerful diagnostic tool.</p>
+  </div>
+
+  <!-- ── Section 4 ── -->
+  <h2>Estimating Radiated Emissions</h2>
+
+  <p>Converting clamp measurements into an electric field estimate relies on a well-established equation that mirrors what an antenna would detect in a test chamber. The commonly used formula is:</p>
+
+  <img
+    src="https://raw.githubusercontent.com/dariofresu/Fresu-Electronics-Blog/main/assets/images/emc-current-clamps_img02.jpg"
+    alt="Radiated emissions estimation formula"
+    class="formula">
+
+  <div class="var-list">
+    <p><strong>E</strong> — Electric field strength (V/m)</p>
+    <p><strong>K</strong> — Constant (≈ 1.257 × 10⁻⁶ for simplified free-space calculations)</p>
+    <p><strong>I<sub>cm</sub></strong> — Common mode current (A) — the uncanceled current measured by the clamp</p>
+    <p><strong>f</strong> — Frequency of the current (Hz)</p>
+    <p><strong>L</strong> — Length of the cable (m)</p>
+    <p><strong>d</strong> — Distance from the cable to the measurement antenna (m)</p>
+  </div>
+
+  <p>The equation assumes the cable behaves as a radiating antenna. Field strength is proportional to current, frequency, and cable length — and inversely proportional to the distance from the measurement antenna.</p>
+
+  <img
+    src="https://raw.githubusercontent.com/dariofresu/Fresu-Electronics-Blog/main/assets/images/emc-current-clamps_img03.png"
+    alt="Example RF current probe for measuring radio frequency currents"
+    class="post-img">
+  <p class="img-caption">An RF current probe designed for efficient measurement and analysis of radio frequency currents.</p>
+
+  <p>As a concrete example: a 1-meter power cable with a clamp-measured current of 10 µA at 40 MHz, with the antenna 3 meters away, yields <strong>E = 167.6 µV/m</strong>. That result can be compared directly against applicable EMC limits to assess compliance risk.</p>
+
+  <p>The frequency dependence is worth noting — higher frequencies amplify emissions, and longer cables increase the radiating loop size. Both are critical factors when choosing where to focus EMC design effort.</p>
+
+  <!-- ── Section 5 ── -->
+  <h2>Transfer Impedance of the RF Current Probe</h2>
+
+  <p>Accurate current measurement requires understanding the probe's <strong>transfer impedance</strong> — a critical parameter provided by the manufacturer. It represents the voltage output of the probe relative to the current flowing through the cable, expressed in ohms (Ω):</p>
+
+  <img
+    src="https://raw.githubusercontent.com/dariofresu/Fresu-Electronics-Blog/main/assets/images/emc-current-clamps_img05.png"
+    alt="Transfer impedance formula"
+    class="formula">
+
+  <p>To calculate the actual current in the cable from the measured voltage:</p>
+
+  <img
+    src="https://raw.githubusercontent.com/dariofresu/Fresu-Electronics-Blog/main/assets/images/emc-current-clamps_img06.png"
+    alt="Current calculation formula from probe voltage"
+    class="formula">
+
+  <p>Transfer impedance varies with frequency and is typically given as a chart or table in the probe's datasheet.</p>
+
+  <img
+    src="https://raw.githubusercontent.com/dariofresu/Fresu-Electronics-Blog/main/assets/images/emc-current-clamps_img04.png"
+    alt="Fischer F-33-1 Current Monitoring Probe datasheet — Transfer Impedance Characteristic"
+    class="post-img">
+  <p class="img-caption">Fischer F-33-1 Current Monitoring Probe datasheet — Transfer Impedance vs. Frequency.</p>
+
+  <p>For instance, if a probe has a transfer impedance of 5 Ω at 40 MHz, and the spectrum analyzer measures 100 µV:</p>
+
+  <img
+    src="https://raw.githubusercontent.com/dariofresu/Fresu-Electronics-Blog/main/assets/images/emc-current-clamps_img07.jpg"
+    alt="Formula: calculating I_cable from measured voltage and transfer impedance"
+    class="formula">
+
+  <p>This current can then be fed into the radiated emissions equation to estimate field strength. Always refer to the probe's transfer impedance chart — the formula only gives you accurate results when you're using the correct Z<sub>t</sub> at the relevant frequency.</p>
+
+  <!-- ── Section 6 ── -->
+  <h2>Measurement Setup and Procedure</h2>
+
+  <p>An effective measurement setup for a two-wire system follows this sequence:</p>
+
+  <div class="steps">
+    <div class="step">
+      <div class="step-num">1</div>
+      <p><strong>Connect the DUT to a power source.</strong> A direct power connection is sufficient — the clamp measures cable currents independently of the power line's impedance.</p>
+    </div>
+    <div class="step">
+      <div class="step-num">2</div>
+      <p><strong>Encircle the power cable.</strong> Ensure the clamp surrounds all relevant conductors. For a two-wire system, include both wires to measure the net current. Confirm the clamp is fully closed and seated to maximize magnetic coupling.</p>
+    </div>
+    <div class="step">
+      <div class="step-num">3</div>
+      <p><strong>Connect to the spectrum analyzer</strong> via coaxial cable. The analyzer's input should match the clamp's design — typically no additional termination is required.</p>
+    </div>
+    <div class="step">
+      <div class="step-num">4</div>
+      <p><strong>Monitor the display as the DUT runs.</strong> Observe voltage peaks at varying frequencies. Measure each peak and convert voltage to current using the probe's transfer impedance at that frequency.</p>
+    </div>
+  </div>
+
+  <p>For example, if the spectrum analyzer records V = 100 µV at 40 MHz with Z<sub>t</sub> = 5 Ω:</p>
+
+  <img
+    src="https://raw.githubusercontent.com/dariofresu/Fresu-Electronics-Blog/main/assets/images/emc-current-clamps_img08.jpg"
+    alt="Calculating current with the RF current probe method"
+    class="formula">
+
+  <p>Then apply that current in the radiated emissions equation. With I<sub>cable</sub> = 20 µA at 40 MHz, 1 m cable, 3 m distance:</p>
+
+  <img
+    src="https://raw.githubusercontent.com/dariofresu/Fresu-Electronics-Blog/main/assets/images/emc-current-clamps_img09.jpg"
+    alt="Radiated electric field calculation"
+    class="formula">
+
+  <img
+    src="https://raw.githubusercontent.com/dariofresu/Fresu-Electronics-Blog/main/assets/images/emc-current-clamps_img10.jpg"
+    alt="Result: E = 335.2 µV/m"
+    class="formula">
+
+  <p>The calculated field strength of <strong>335.2 µV/m</strong> at 3 meters exceeds the limits of every major standard:</p>
+
+  <div class="compliance-block">
+    <span class="compliance-label">Standard limits comparison</span>
+    <p><strong>FCC Class B:</strong> Limit is 100 µV/m at 3 m — calculated value is 335.2 µV/m. Exceeds by ~10 dB.</p>
+    <p><strong>FCC Class A:</strong> Limit is 90 µV/m at 10 m — adjusted value is 100.56 µV/m. Exceeds.</p>
+    <p><strong>MIL-STD 461:</strong> Limit is 16 µV/m at 1 m — adjusted value is 1005.6 µV/m. Exceeds significantly.</p>
+  </div>
+
+  <p>To improve harmonic detection, reposition the clamp along the cable while monitoring the analyzer. This reveals current peaks caused by standing waves at specific frequencies. For example, at 40 MHz (λ ≈ 7.5 m), peaks may appear every 1.875 m. Identify the most prominent harmonic frequencies, calculate the current at each using the transfer impedance chart, and trace emission sources in the DUT — unfiltered circuits, inadequate return paths, poorly routed cables.</p>
+
+  <div class="callout">
+    <p>Small currents can generate significant radiated emissions. High-frequency currents as low as 5–8 µA at 30–100 MHz can approach or exceed FCC Part 15 and CISPR 32 Class B limits (~40 dBµV/m at 3 m), depending on cable length and geometry. Calculate the radiated field for each measured current and compare it with the relevant standard limit directly.</p>
+  </div>
+
+  <!-- ── Section 7 ── -->
+  <h2>Practical Applications and Limitations</h2>
+
+  <p>The current clamp is most valuable during the pre-compliance phase — when you're still iterating on the design. By clamping different cables or sections of the DUT, you can identify where emissions are originating: a noisy power line, an unshielded signal cable, or a poorly constrained return path. That narrows the design fix before you commit to chamber time.</p>
+
+  <p>However, the method has real limitations. The equation assumes simplified geometry — straight cables in free space. Real setups involve complex geometries, nearby conductors, and environmental factors that influence radiation patterns. The clamp measures conducted current, not the radiated field directly, so the estimate is an approximation. For formal certification, chamber testing remains the standard. The clamp gives you a reliable starting point.</p>
+
+  <!-- ── Closing ── -->
+  <p style="margin-top:48px; font-style:italic; font-weight:600; color:#ffffff; font-size:17px;">
+    The EMC current clamp connects conducted current measurements to radiated field estimates through straightforward physics. Used correctly, it lets you catch emission problems at the bench — <em style="color:var(--accent);">before they find you in the chamber.</em>
+  </p>
+
+  <!-- Tags -->
+  <div class="tags">
+    <span class="tag">EMC / EMI</span>
+    <span class="tag">Radiated Emissions</span>
+    <span class="tag">Pre-Compliance Testing</span>
+    <span class="tag">Current Probe</span>
+    <span class="tag">Common Mode</span>
+  </div>
+
+  <!-- References -->
+  <div class="references">
+    <h3>Further Reading</h3>
+    <ul>
+      <li><a href="https://interferencetechnology.com/the-hf-current-probe-theory-and-application/" target="_blank">Kenneth Wyatt — The HF Current Probe: Theory and Application</a></li>
+      <li>Henry Ott — <em>Electromagnetic Compatibility Engineering</em></li>
+      <li>Clayton Paul — <em>Introduction to Electromagnetic Compatibility</em></li>
+    </ul>
+  </div>
+
+  <!-- Share strip -->
+  <div class="share-strip">
+    <span class="share-label">Share</span>
+    <a href="https://www.linkedin.com/shareArticle?mini=true&url=https://blog.fresuelectronics.com/emc-current-clamps&title=Radiated%20Emissions%20Testing%20and%20the%20Role%20of%20EMC%20Current%20Clamps&summary=How%20current%20clamps%20help%20estimate%20radiated%20emissions%20before%20the%20chamber."
+       target="_blank" class="share-btn linkedin">LinkedIn</a>
+    <a href="https://twitter.com/intent/tweet?url=https://blog.fresuelectronics.com/emc-current-clamps&text=Radiated%20Emissions%20Testing%20and%20the%20Role%20of%20EMC%20Current%20Clamps&via=dario_fresu"
+       target="_blank" class="share-btn twitter">X / Twitter</a>
+    <button class="share-btn copylink" onclick="copyLink(this,'https://blog.fresuelectronics.com/emc-current-clamps')">Copy Link</button>
+  </div>
+
+  <!-- CTA -->
+  <div class="cta-section">
+    <div class="cta-inner">
+      <span class="cta-kicker">Work with Fresu Electronics</span>
+      <h3>Stop finding EMC problems in the chamber.</h3>
+      <p>An EMC Design Audit reviews your schematic and PCB layout before fabrication — identifying return path gaps, filter placement errors, and stackup decisions that turn into failures at the test house. Report delivered in 10 business days.</p>
+      <div class="cta-actions">
+        <a href="https://www.fresuelectronics.com/emc-audit" class="btn-primary">Book an EMC Audit — €8,000 →</a>
+        <a href="https://www.fresuelectronics.com/trainings" class="btn-outline">Browse Courses</a>
+      </div>
+    </div>
+    <div class="proof-row">
+      <span class="proof-item">80,000+ engineers reached</span>
+      <span class="proof-item">4,000+ engineers trained</span>
+      <span class="proof-item">Report in 10 business days</span>
+      <span class="proof-item">IPC Certified · Former ETH Zurich</span>
+    </div>
+  </div>
+
+</div><!-- /.container -->
+
+<!-- ── Footer ── -->
+<footer>
+  <div class="site-footer">
+    <span>© 2025 Fresu Electronics SRL — Sardinia, Italy</span>
+    <span>
+      <a href="https://www.fresuelectronics.com/terms-of-services">Terms</a> ·
+      <a href="https://www.freeprivacypolicy.com/live/2e894867-7c2b-4014-aa0c-db0f62e59cb8">Privacy</a> ·
+      <a href="https://blog.fresuelectronics.com">Blog</a>
+    </span>
+  </div>
+</footer>
+
+<script>
+function copyLink(btn, url) {
+  navigator.clipboard.writeText(url).then(function() {
+    var o = btn.innerHTML;
+    btn.classList.add('copied');
+    btn.innerHTML = '✓ Copied!';
+    setTimeout(function() { btn.classList.remove('copied'); btn.innerHTML = o; }, 2000);
+  });
+}
+</script>
+
+</body>
+</html>
