@@ -4,293 +4,88 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Redefining Current and Charge: A Field-Based Perspective on Electromagnetism — Fresu Electronics</title>
-  <meta name="description" content="Classical electromagnetism defines current as electron flow. But electrons move at 73 µm/s — billions of times slower than the signals they supposedly carry. A field-based reframing resolves the contradiction.">
+  <meta name="description" content="Explore a fresh perspective on Electromagnetism in our blog. Discover how Electromagnetism redefines current and charge through field dynamics.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400;1,700&display=swap" rel="stylesheet">
-
   <meta property="og:title" content="Redefining Current and Charge: A Field-Based Perspective on Electromagnetism">
-  <meta property="og:description" content="Classical electromagnetism defines current as electron flow. But electrons move at 73 µm/s — billions of times slower than the signals they supposedly carry.">
+  <meta property="og:description" content="Explore a fresh perspective on Electromagnetism in our blog. Discover how Electromagnetism redefines current and charge through field dynamics.">
   <meta property="og:url" content="https://blog.fresuelectronics.com/redefining-current-charge">
-  <meta property="og:image" content="https://raw.githubusercontent.com/dariofresu/Fresu-Electronics-Blog/main/assets/images/redefining-current-charge_cover.png">
+  <meta property="og:image" content="https://static.wixstatic.com/media/61d609_7d2eb2f54051412f8c2aeb0807b87cd9~mv2.png/v1/fill/w_1200,h_630,fp_0.50_0.50,q_95/61d609_7d2eb2f54051412f8c2aeb0807b87cd9~mv2.png">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
   <meta property="og:type" content="article">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:site" content="@dario_fresu">
-  <meta name="twitter:image" content="https://raw.githubusercontent.com/dariofresu/Fresu-Electronics-Blog/main/assets/images/redefining-current-charge_cover.png">
-
+  <meta name="twitter:image" content="https://static.wixstatic.com/media/61d609_7d2eb2f54051412f8c2aeb0807b87cd9~mv2.png/v1/fill/w_1200,h_630,fp_0.50_0.50,q_95/61d609_7d2eb2f54051412f8c2aeb0807b87cd9~mv2.png">
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
     :root {
-      --bg:          #0a0a0a;
-      --surface:     #111111;
-      --surface-2:   #181818;
-      --border:      #242424;
-      --fg:          #ffffff;
-      --label:       #a0aab8;
-      --accent:      #00FF94;
-      --accent-dim:  rgba(0, 255, 148, 0.10);
-      --accent-hover:#00e085;
-      --wrong:       #ff4d4d;
-      --wrong-dim:   rgba(255, 77, 77, 0.08);
+      --bg: #0a0a0a; --surface: #111111; --surface-2: #181818;
+      --border: #242424; --fg: #ffffff; --label: #a0aab8;
+      --accent: #00FF94; --accent-dim: rgba(0,255,148,0.10);
+      --accent-hover: #00e085; --wrong: #ff4d4d;
     }
-
-    body {
-      background: var(--bg);
-      color: #ffffff;
-      font-family: 'Poppins', sans-serif;
-      font-size: 17px;
-      line-height: 1.75;
-      min-height: 100vh;
-      overflow-x: hidden;
-    }
-
-    /* ── Header ── */
+    body { background: var(--bg); color: #ffffff; font-family: 'Poppins', sans-serif; font-size: 17px; line-height: 1.75; min-height: 100vh; overflow-x: hidden; }
     header { border-bottom: 1px solid var(--border); }
-    .site-header {
-      max-width: 1100px; margin: 0 auto;
-      padding: 18px 40px;
-      display: flex; align-items: center; justify-content: space-between;
-    }
+    .site-header { max-width: 1100px; margin: 0 auto; padding: 18px 40px; display: flex; align-items: center; justify-content: space-between; }
     .site-header img { height: 44px; width: auto; display: block; }
     .header-nav { display: flex; align-items: center; gap: 28px; }
-    .header-nav a {
-      font-size: 11px; font-weight: 600; letter-spacing: 0.08em;
-      text-transform: uppercase; color: #ffffff; text-decoration: none;
-      opacity: 0.6; transition: opacity 0.2s;
-    }
+    .header-nav a { font-size: 11px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: #ffffff; text-decoration: none; opacity: 0.6; transition: opacity 0.2s; }
     .header-nav a:hover { opacity: 1; }
-    .header-cta {
-      opacity: 1 !important; background: var(--accent);
-      color: #0a0a0a !important; padding: 9px 20px;
-      border-radius: 999px; transition: background 0.2s;
-    }
+    .header-cta { opacity: 1 !important; background: var(--accent); color: #0a0a0a !important; padding: 9px 20px; border-radius: 999px; transition: background 0.2s; }
     .header-cta:hover { background: var(--accent-hover) !important; }
-
-    /* ── Post layout ── */
     .container { max-width: 740px; margin: 0 auto; padding: 72px 40px 100px; }
-
-    .post-cover {
-      width: 100%; border-radius: 6px; display: block;
-      margin-bottom: 44px; border: 1px solid var(--border);
-      aspect-ratio: 16/9; object-fit: cover;
-    }
-
-    .kicker {
-      display: inline-block; font-size: 10px; font-weight: 600;
-      letter-spacing: 0.18em; text-transform: uppercase;
-      color: var(--accent); border: 1px solid var(--accent);
-      background: var(--accent-dim); padding: 4px 12px;
-      border-radius: 2px; margin-bottom: 24px;
-    }
-
-    h1 {
-      font-size: clamp(28px, 5vw, 46px); font-weight: 800;
-      line-height: 1.08; letter-spacing: -0.025em;
-      color: #ffffff; margin-bottom: 20px;
-    }
-    h1 em { font-style: italic; color: var(--accent); }
-
-    .deck {
-      font-size: 18px; font-weight: 400; color: #ffffff;
-      line-height: 1.7; margin-bottom: 36px;
-    }
-
-    .author-row {
-      display: flex; align-items: center; gap: 14px;
-      padding: 20px 0;
-      border-top: 1px solid var(--border);
-      border-bottom: 1px solid var(--border);
-      margin-bottom: 48px;
-    }
-    .author-row img {
-      width: 52px; height: 52px; border-radius: 50%;
-      object-fit: cover; flex-shrink: 0;
-      border: 2px solid var(--accent);
-    }
+    .kicker { display: inline-block; font-size: 10px; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase; color: var(--accent); border: 1px solid var(--accent); background: var(--accent-dim); padding: 4px 12px; border-radius: 2px; margin-bottom: 24px; }
+    h1 { font-size: clamp(28px,5vw,46px); font-weight: 800; line-height: 1.08; letter-spacing: -0.025em; color: #ffffff; margin-bottom: 20px; }
+    .author-row { display: flex; align-items: center; gap: 14px; padding: 20px 0; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); margin-bottom: 48px; }
+    .author-row img { width: 52px; height: 52px; border-radius: 50%; object-fit: cover; flex-shrink: 0; border: 2px solid var(--accent); }
     .author-name  { display: block; font-size: 14px; font-weight: 600; color: #ffffff; line-height: 1.3; }
-    .author-title { display: block; font-size: 12px; font-weight: 400; color: var(--label); line-height: 1.3; }
+    .author-title { display: block; font-size: 12px; color: var(--label); line-height: 1.3; }
     .author-date  { display: block; font-size: 11px; color: var(--label); margin-top: 4px; }
-
-    p { color: #ffffff; font-weight: 400; margin-bottom: 22px; }
+    p { color: #ffffff; margin-bottom: 22px; }
     strong { color: #ffffff; font-weight: 600; }
-
-    h2 {
-      font-size: 22px; font-weight: 700; color: #ffffff;
-      margin: 52px 0 16px; letter-spacing: -0.015em;
-    }
-    h2::before {
-      content: ''; display: block; width: 32px; height: 3px;
-      background: var(--accent); margin-bottom: 12px; border-radius: 2px;
-    }
-
-    h3 { font-size: 17px; font-weight: 600; color: #ffffff; margin: 36px 0 12px; }
-
-    /* Images */
-    .post-img {
-      width: 100%; border-radius: 4px; display: block;
-      margin: 32px 0; border: 1px solid var(--border);
-    }
-    .post-img-sm {
-      max-width: 520px; border-radius: 4px; display: block;
-      margin: 28px auto; border: 1px solid var(--border);
-    }
-    .img-caption {
-      text-align: center; font-size: 12px; color: var(--label);
-      margin-top: -20px; margin-bottom: 32px; font-style: italic;
-    }
-    .formula {
-      display: block; margin: 20px auto;
-      background: var(--surface); padding: 16px 24px;
-      border-radius: 4px; border: 1px solid var(--border);
-      max-width: 400px;
-    }
-
-    /* Concept blocks */
-    .callout {
-      background: var(--surface); border-left: 3px solid var(--accent);
-      padding: 20px 24px; border-radius: 0 4px 4px 0; margin: 32px 0;
-    }
-    .callout p { margin-bottom: 0; }
-
-    .wrong-block {
-      background: var(--wrong-dim); border-left: 3px solid var(--wrong);
-      padding: 20px 24px; border-radius: 0 4px 4px 0; margin: 32px 0;
-    }
-    .wrong-block .block-label { color: var(--wrong); }
-    .wrong-block p { margin-bottom: 0; }
-
-    .block-label {
-      font-size: 10px; font-weight: 600; letter-spacing: 0.14em;
-      text-transform: uppercase; color: var(--accent);
-      display: block; margin-bottom: 8px;
-    }
-
-    /* Comparison grid */
-    .compare-grid {
-      display: grid; grid-template-columns: 1fr 1fr;
-      gap: 16px; margin: 28px 0;
-    }
-    .compare-card {
-      background: var(--surface); border: 1px solid var(--border);
-      border-radius: 4px; padding: 20px;
-    }
-    .compare-card.wrong  { border-top: 2px solid var(--wrong); }
-    .compare-card.right  { border-top: 2px solid var(--accent); }
-    .compare-card h4 {
-      font-size: 11px; font-weight: 700; letter-spacing: 0.1em;
-      text-transform: uppercase; margin-bottom: 10px;
-    }
-    .compare-card.wrong h4 { color: var(--wrong); }
-    .compare-card.right h4 { color: var(--accent); }
-    .compare-card p { font-size: 14px; margin-bottom: 0; }
-
-    /* Var list */
-    .var-list {
-      background: var(--surface); border: 1px solid var(--border);
-      border-radius: 4px; padding: 18px 22px; margin: 16px 0 24px;
-    }
-    .var-list p { font-size: 15px; margin-bottom: 8px; }
-    .var-list p:last-child { margin-bottom: 0; }
-
-    /* Numbered mechanism list */
-    .mechanisms { margin: 24px 0; }
-    .mechanism { margin-bottom: 28px; padding-left: 20px; border-left: 2px solid var(--border); }
-    .mechanism-num {
-      font-size: 10px; font-weight: 700; letter-spacing: 0.12em;
-      text-transform: uppercase; color: var(--accent); display: block; margin-bottom: 6px;
-    }
-    .mechanism h4 { font-size: 15px; font-weight: 600; color: #ffffff; margin-bottom: 8px; }
-    .mechanism p { font-size: 15px; margin-bottom: 0; }
-
-    /* Tags */
+    h2 { font-size: 22px; font-weight: 700; color: #ffffff; margin: 52px 0 16px; letter-spacing: -0.015em; }
+    h2::before { content: ''; display: block; width: 32px; height: 3px; background: var(--accent); margin-bottom: 12px; border-radius: 2px; }
+    h3 { font-size: 18px; font-weight: 700; color: #ffffff; margin: 36px 0 12px; }
+    h4 { font-size: 16px; font-weight: 600; color: #ffffff; margin: 28px 0 10px; }
+    .post-img { width: 100%; border-radius: 4px; display: block; margin: 32px 0; border: 1px solid var(--border); }
+    .post-img-sm { max-width: 520px; border-radius: 4px; display: block; margin: 28px auto; border: 1px solid var(--border); }
+    .img-caption { text-align: center; font-size: 12px; color: var(--label); margin-top: -20px; margin-bottom: 32px; font-style: italic; }
+    .formula { display: block; margin: 20px auto; background: var(--surface); padding: 16px 24px; border-radius: 4px; border: 1px solid var(--border); max-width: 400px; }
+    ul, ol { padding-left: 24px; margin-bottom: 22px; }
+    li { color: #ffffff; margin-bottom: 8px; }
     .tags { display: flex; flex-wrap: wrap; gap: 8px; margin: 48px 0 0; }
-    .tag {
-      font-size: 10px; font-weight: 600; letter-spacing: 0.1em;
-      text-transform: uppercase; color: var(--accent);
-      border: 1px solid var(--accent); background: var(--accent-dim);
-      padding: 4px 12px; border-radius: 2px;
-    }
-
-    /* Share */
-    .share-strip {
-      display: flex; align-items: center; gap: 12px;
-      margin: 56px 0 0; padding-top: 32px;
-      border-top: 1px solid var(--border); flex-wrap: wrap;
-    }
+    .tag { font-size: 10px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent); border: 1px solid var(--accent); background: var(--accent-dim); padding: 4px 12px; border-radius: 2px; }
+    .share-strip { display: flex; align-items: center; gap: 12px; margin: 56px 0 0; padding-top: 32px; border-top: 1px solid var(--border); flex-wrap: wrap; }
     .share-label { font-size: 12px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--label); }
-    .share-btn {
-      display: inline-flex; align-items: center; gap: 8px;
-      font-family: 'Poppins', sans-serif; font-size: 13px; font-weight: 600;
-      padding: 9px 18px; border-radius: 999px;
-      text-decoration: none; border: none; cursor: pointer;
-      transition: opacity 0.2s, transform 0.15s; white-space: nowrap;
-    }
+    .share-btn { display: inline-flex; align-items: center; font-family: 'Poppins',sans-serif; font-size: 13px; font-weight: 600; padding: 9px 18px; border-radius: 999px; text-decoration: none; border: none; cursor: pointer; transition: opacity 0.2s, transform 0.15s; white-space: nowrap; }
     .share-btn:hover { opacity: 0.88; transform: translateY(-1px); }
     .share-btn.linkedin { background: #0A66C2; color: #ffffff; }
     .share-btn.twitter  { background: #000000; color: #ffffff; }
     .share-btn.copylink { background: var(--surface); color: var(--accent); border: 1px solid var(--accent); }
-
-    /* CTA */
-    .cta-section {
-      background: var(--surface); border: 1px solid var(--border);
-      border-radius: 4px; overflow: hidden; position: relative; margin-top: 72px;
-    }
-    .cta-section::after {
-      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
-      background: linear-gradient(90deg, var(--accent), transparent);
-    }
+    .cta-section { background: var(--surface); border: 1px solid var(--border); border-radius: 4px; overflow: hidden; position: relative; margin-top: 72px; }
+    .cta-section::after { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: linear-gradient(90deg,var(--accent),transparent); }
     .cta-inner { padding: 48px 48px 40px; }
-    .cta-kicker {
-      font-size: 10px; font-weight: 600; letter-spacing: 0.18em;
-      text-transform: uppercase; color: var(--accent);
-      margin-bottom: 14px; display: block;
-    }
-    .cta-section h3 { font-size: 24px; font-weight: 700; color: #ffffff; margin-bottom: 12px; letter-spacing: -0.01em; }
-    .cta-section p  { font-size: 15px; color: #ffffff; line-height: 1.7; margin-bottom: 28px; }
+    .cta-kicker { font-size: 10px; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase; color: var(--accent); margin-bottom: 14px; display: block; }
+    .cta-h3 { font-size: 24px; font-weight: 700; color: #ffffff; margin-bottom: 12px; }
+    .cta-p { font-size: 15px; color: #ffffff; line-height: 1.7; margin-bottom: 28px; }
     .cta-actions { display: flex; gap: 12px; flex-wrap: wrap; }
-    .btn-primary {
-      display: inline-flex; align-items: center; gap: 8px;
-      background: var(--accent); color: #0a0a0a;
-      font-family: 'Poppins', sans-serif; font-size: 13px; font-weight: 700;
-      padding: 13px 26px; border-radius: 999px; text-decoration: none; transition: background 0.2s;
-    }
+    .btn-primary { display: inline-flex; align-items: center; gap: 8px; background: var(--accent); color: #0a0a0a; font-family: 'Poppins',sans-serif; font-size: 13px; font-weight: 700; padding: 13px 26px; border-radius: 999px; text-decoration: none; transition: background 0.2s; }
     .btn-primary:hover { background: var(--accent-hover); }
-    .btn-outline {
-      display: inline-flex; align-items: center; color: #ffffff;
-      font-family: 'Poppins', sans-serif; font-size: 13px; font-weight: 600;
-      text-decoration: none; padding: 12px 26px; border-radius: 999px;
-      border: 1px solid var(--border); transition: border-color 0.2s;
-    }
+    .btn-outline { display: inline-flex; align-items: center; color: #ffffff; font-family: 'Poppins',sans-serif; font-size: 13px; font-weight: 600; text-decoration: none; padding: 12px 26px; border-radius: 999px; border: 1px solid var(--border); transition: border-color 0.2s; }
     .btn-outline:hover { border-color: var(--accent); color: var(--accent); }
-    .proof-row {
-      display: flex; flex-wrap: wrap; gap: 8px 20px;
-      padding: 20px 48px; border-top: 1px solid var(--border);
-    }
-    .proof-item {
-      font-size: 12px; font-weight: 400; color: var(--label);
-      display: flex; align-items: center; gap: 6px;
-    }
+    .proof-row { display: flex; flex-wrap: wrap; gap: 8px 20px; padding: 20px 48px; border-top: 1px solid var(--border); }
+    .proof-item { font-size: 12px; color: var(--label); display: flex; align-items: center; gap: 6px; }
     .proof-item::before { content: '✓'; color: var(--accent); font-weight: 700; }
-
-    /* Footer */
     footer { border-top: 1px solid var(--border); }
-    .site-footer {
-      max-width: 1100px; margin: 0 auto; padding: 28px 40px;
-      display: flex; align-items: center; justify-content: space-between;
-      font-size: 11px; color: #ffffff; opacity: 0.5; flex-wrap: wrap; gap: 12px;
-    }
+    .site-footer { max-width: 1100px; margin: 0 auto; padding: 28px 40px; display: flex; align-items: center; justify-content: space-between; font-size: 11px; color: #ffffff; opacity: 0.5; flex-wrap: wrap; gap: 12px; }
     .site-footer a { color: var(--accent); text-decoration: none; }
-
-    /* Mobile */
     @media (max-width: 768px) {
       .site-header, .container, .site-footer { padding-left: 20px; padding-right: 20px; }
       .container { padding-top: 48px; padding-bottom: 72px; }
       .header-nav a:not(.header-cta) { display: none; }
-      h1 { font-size: clamp(24px, 7vw, 36px); }
-      .compare-grid { grid-template-columns: 1fr; }
+      h1 { font-size: clamp(24px,7vw,36px); }
       .cta-inner { padding: 32px 24px 28px; }
       .proof-row { padding: 16px 24px; }
     }
@@ -313,241 +108,267 @@
 
 <div class="container">
 
-  <img
-    src="https://raw.githubusercontent.com/dariofresu/Fresu-Electronics-Blog/main/assets/images/redefining-current-charge_cover.png"
-    alt="Redefining Current and Charge — field-based perspective on electromagnetism"
-    class="post-cover">
+  <span class="kicker">Electromagnetism</span>
 
-  <span class="kicker">Electromagnetism · Foundations</span>
-
-  <h1>Redefining Current and Charge: A <em>Field-Based Perspective</em> on Electromagnetism</h1>
-
-  <p class="deck">Classical electromagnetism defines current as the flow of charge through a conductor — carried by electrons drifting at roughly 73 µm/s. But signals propagate through a PCB at 150 million m/s. Something doesn't add up. A field-based reframing resolves the contradiction.</p>
+  <h1>Redefining Current and Charge: A Field-Based Perspective on Electromagnetism</h1>
 
   <div class="author-row">
     <img src="https://raw.githubusercontent.com/dariofresu/Fresu-Electronics-Blog/main/assets/dario-fresu.jpg" alt="Dario Fresu" />
     <div>
       <span class="author-name">Dario Fresu</span>
       <span class="author-title">Principal EMC Architect · Fresu Electronics</span>
-      <span class="author-date">April 20, 2025 · 11 min read</span>
+      <span class="author-date">Apr 20, 2025 · 11 min read</span>
     </div>
   </div>
 
-  <!-- ── Intro ── -->
-  <p>Classical electromagnetism defines current and charge as foundational concepts. Current represents the flow of electric charge, typically carried by electrons in conductors, while charge is an intrinsic property of particles such as electrons and protons, serving as the source of electromagnetic fields.</p>
+  <p>Classical electromagnetism defines current and charge as foundational concepts. Current represents the flow of electric charge, typically carried by electrons in conductors, while charge is considered an intrinsic property of particles such as electrons and protons, serving as the source of electromagnetic fields. However, this conventional understanding reveals significant limitations, particularly when examining the rapid propagation of electromagnetic effects in contrast to the slow motion of charge carriers. This article introduces a new perspective that reframes the classical definitions of current and charge, emphasizing the primacy of electromagnetic fields over particle motion. Rather than proposing new equations or alternative physics, this conceptual shift highlights field dynamics to provide a more coherent understanding of circuits and electromagnetic phenomena, challenging traditional assumptions and offering fresh insights for the scientific community.</p>
 
-  <p>However, this conventional understanding reveals significant limitations — particularly when you look at the speed at which electromagnetic effects propagate compared to how slowly charge carriers actually move. This article introduces a perspective that reframes the classical definitions, emphasising the primacy of electromagnetic fields over particle motion. Not new equations. Not alternative physics. A conceptual shift that makes circuits easier to reason about.</p>
+  <img src="https://raw.githubusercontent.com/dariofresu/Fresu-Electronics-Blog/main/assets/images/redefining-current-charge_img01.png" alt="Comparison of Traditional vs. Electromagnetic Field Theory" class="post-img">
+  <p class="img-caption">Comparison of Traditional vs. Electromagnetic Field Theory: The left side illustrates the conventional view of electricity as a flow of electrons inside conductors. The right side corrects this by showing electricity as the movement of electromagnetic fields in the space between conductors.</p>
 
-  <img
-    src="https://raw.githubusercontent.com/dariofresu/Fresu-Electronics-Blog/main/assets/images/redefining-current-charge_img01.png"
-    alt="Traditional electron-flow view vs. electromagnetic field theory view of a circuit"
-    class="post-img">
-  <p class="img-caption">Left: conventional view — electricity as electrons moving inside conductors. Right: the corrected view — electricity as electromagnetic fields propagating in the space between conductors.</p>
-
-  <!-- ── Section 1 ── -->
   <h2>The Classical View: Current and Charge</h2>
 
-  <p>In classical electromagnetism, current is defined as the rate of flow of electric charge:</p>
+  <p>In classical electromagnetism, current is defined as the rate of flow of electric charge, expressed by the equation:</p>
 
-  <img src="https://raw.githubusercontent.com/dariofresu/Fresu-Electronics-Blog/main/assets/images/redefining-current-charge_img02.png" alt="I = dQ/dt" class="formula">
+  <img src="https://raw.githubusercontent.com/dariofresu/Fresu-Electronics-Blog/main/assets/images/redefining-current-charge_img02.png" alt="Flow of electric charge formula" class="formula">
 
-  <div class="var-list">
-    <p><strong>I</strong> — current (A)</p>
-    <p><strong>Q</strong> — charge (C)</p>
-    <p><strong>t</strong> — time (s)</p>
-  </div>
+  <ul>
+    <li>I = current, A</li>
+    <li>Q = charge, C</li>
+    <li>t = time, s</li>
+  </ul>
 
-  <p>Within a conductor such as a copper wire, current is understood as the motion of electrons driven by an electric field. The average speed at which electrons move — the drift velocity — is:</p>
+  <p>This equation indicates that current, measured in A, represents the change in charge, measured in C, over time, measured in s. Within a conductor such as a copper wire, current is traditionally understood as the motion of electrons, driven by an electric field. The current density, which quantifies current per unit area, is related to this electric field through the material's conductivity.</p>
+
+  <p>The average speed at which electrons move, known as the drift velocity, can be calculated using the formula:</p>
 
   <img src="https://raw.githubusercontent.com/dariofresu/Fresu-Electronics-Blog/main/assets/images/redefining-current-charge_img03.jpg" alt="Drift velocity formula" class="formula">
 
-  <div class="var-list">
-    <p><strong>v<sub>d</sub></strong> — drift velocity (m/s)</p>
-    <p><strong>I</strong> — current (A)</p>
-    <p><strong>n</strong> — electron density (m⁻³)</p>
-    <p><strong>e</strong> — electron charge (C)</p>
-    <p><strong>A</strong> — cross-sectional area (m²)</p>
-  </div>
+  <ul>
+    <li><em>vd</em> = drift velocity, m/s</li>
+    <li>I = current, A</li>
+    <li>n = electron density, m⁻³</li>
+    <li>e = electron charge, C</li>
+    <li>A = cross-sectional area, m²</li>
+  </ul>
 
-  <p>For a copper wire with a 1 mm² cross-section carrying 1 A, with an electron density of approximately 8.5×10²⁸ m⁻³, the drift velocity works out to roughly <strong>73.4 µm/s</strong> — comparable to the speed of a snail.</p>
+  <p>For a copper wire with a cross-sectional area of 1 mm², a current of 1 A, an electron density of approximately 8.5×10²⁸ per m⁻³, and an electron charge of 1.602×10⁻¹⁹ C, the drift velocity is approximately 73.4 μm/s—a pace comparable to that of a snail.</p>
 
   <h3>Charge as a Fundamental Property</h3>
 
-  <p>Classically, charge is an inherent characteristic of particles: electrons carry −1.602×10⁻¹⁹ C, protons +1.602×10⁻¹⁹ C. Charges generate electric fields as described by Gauss's law, and moving charges produce magnetic fields as described by Ampère's law. This framework positions charges as the primary sources of fields, with their motion driving electromagnetic phenomena.</p>
+  <p>Charge is traditionally viewed as an inherent characteristic of particles, with electrons possessing a charge of -1.602×10⁻¹⁹ C and protons having a charge of +1.602×10⁻¹⁹ C. Charges are responsible for generating electric fields, as described by Gauss's law, and moving charges, or currents, also produce magnetic fields, as outlined by Ampère's law, which incorporates a term for changing electric fields to account for wave propagation.</p>
 
-  <h3>Where the Classical View Breaks Down</h3>
+  <p>This classical framework positions charges as the primary sources of fields, with their motion driving electromagnetic phenomena such as current in circuits.</p>
 
-  <div class="wrong-block">
-    <span class="block-label">Speed discrepancy</span>
-    <p>Electrons drift at ~10 µm/s. Yet a light turns on in 6.67 ns across a 1-metre circuit. The electromagnetic wave propagates through the dielectric between conductors at <strong>1/√(µ₀ ε₀ ε<sub>r</sub>)</strong> — approximately 150 million m/s for typical PCB materials (ε<sub>r</sub> ≈ 4). Signal propagation is billions of times faster than electron drift. If electrons were carrying the energy, this would be impossible.</p>
-  </div>
+  <h3>Limitations of the Classical View</h3>
 
-  <img
-    src="https://raw.githubusercontent.com/dariofresu/Fresu-Electronics-Blog/main/assets/images/redefining-current-charge_img04.gif"
-    alt="Signal propagation in a PCB — animated"
-    class="post-img">
-  <p class="img-caption">Signal propagation in a PCB. The electromagnetic wave travels through the dielectric at a fraction of the speed of light — far faster than electrons can move.</p>
+  <h4>Speed Discrepancy:</h4>
 
-  <div class="wrong-block">
-    <span class="block-label">Energy propagation</span>
-    <p>The traditional view says electrons carry energy along the wire. But energy actually propagates in the space surrounding the conductor, as described by the Poynting vector <strong>S = E × H</strong>. In a PCB trace or coaxial cable, the electric field is perpendicular to the conductors; the Poynting vector points along the direction of signal travel — in the dielectric, not inside the copper.</p>
-  </div>
+  <p>The drift velocity of electrons, approximately 10 μm/s, is far too slow to explain the rapid effects of current—such as a light turning on within 6.67 ns in a 1-meter circuit. In reality, the electromagnetic wave propagates through the space between conductors at a much higher speed, determined by the medium's dielectric constant. This speed is given by: 1/√(μ₀ ε₀ εr​), where ​μ₀ is the permeability of free space (H/m), ε₀ is the permittivity of free space (F/m), and εr is the relative permittivity of the medium (about 4 for typical PCB materials). This results in a propagation speed of approximately 150 million m/s—fast enough to explain the near-instantaneous response in practical circuits.</p>
 
-  <img
-    src="https://raw.githubusercontent.com/dariofresu/Fresu-Electronics-Blog/main/assets/images/redefining-current-charge_img05.png"
-    alt="Electromagnetic fields around transmission lines — E, H, and S directions"
-    class="post-img">
-  <p class="img-caption">Electromagnetic fields around a transmission line. The electric field (E) is perpendicular to the conductors; the magnetic field (H) forms circles around them; the Poynting vector (S) points in the direction of propagation — in the space between conductors, not inside them.</p>
+  <img src="https://raw.githubusercontent.com/dariofresu/Fresu-Electronics-Blog/main/assets/images/redefining-current-charge_img04.gif" alt="Signal Propagation in a PCB" class="post-img-sm">
+  <p class="img-caption">Signal Propagation in a PCB</p>
 
-  <!-- ── Section 2 ── -->
+  <p>This stark contrast, where signal propagation occurs billions of times faster than electron drift, highlights a key flaw in the classical view that electrons primarily carry energy along the wire, prompting a reevaluation of current as a field-driven phenomenon.</p>
+
+  <h4>Energy Propagation:</h4>
+
+  <p>The traditional narrative suggests that electrons carry energy along the wire, yet energy actually propagates in the space surrounding the conductor, as demonstrated by the Poynting vector <strong>S = E × H</strong>, which shows energy flowing into the conductor from the surrounding fields. In signal-carrying conductors, such as PCB traces, coaxial cables, or differential pairs, the majority of the electric field is perpendicular to the conductors, and the Poynting vector indicates that energy propagates in the dielectric space between them, guided by the structure but not flowing inside the conductors themselves. For example, in a parallel conductor setup like a two-wire transmission line, the electric field is perpendicular to the conductors, pointing from the positive conductor to the return and reference conductor. The magnetic field forms circles around each conductor, following the <strong>Biot–Savart law</strong> (right-hand rule).</p>
+
+  <img src="https://raw.githubusercontent.com/dariofresu/Fresu-Electronics-Blog/main/assets/images/redefining-current-charge_img05.png" alt="Illustration depicting electromagnetic fields around transmission lines" class="post-img">
+  <p class="img-caption">Illustration depicting electromagnetic fields around transmission lines, showing both side and cross-section views. The diagram highlights the directions of electric (E), magnetic (H), and Poynting vector (S) in relation to the conductors, providing a visual understanding of EM field interactions.</p>
+
+  <p>Consequently, the Poynting vector, defined as the cross product of the electric and magnetic fields, points along the direction of signal propagation, parallel to the conductors, confirming that the energy resides in the space between the wires, not inside them. While this energy primarily propagates in the dielectric, some energy does flow into the conductors to drive the current by inducing an internal electric field, though the primary propagation path remains outside the conductors.</p>
+
+  <h4>Field Dynamics Overlooked:</h4>
+
+  <p>The emphasis on charge motion overlooks the primary role of fields, which propagate energy, at a fraction of the speed of light depending on the medium's properties, and drive current effects far more rapidly than electrons can move.</p>
+
   <h2>A Field-Based Perspective</h2>
 
-  <p>To address these limitations, a reframing centres on the primacy of electromagnetic fields.</p>
+  <p>To address these limitations, a reframing of the classical definition of current is proposed, one that centers on the primacy of electromagnetic fields.</p>
 
-  <div class="callout">
-    <span class="block-label">New definition — current</span>
-    <p>Current is the manifestation of electromagnetic field energy flux in a conductor — a measurable flow of charge resulting from the response of charge carriers to the induced electric field. The primary driver is the propagation of electromagnetic fields in the space around the conductor, delivering energy via the Poynting vector and inducing currents through local field interactions.</p>
-  </div>
+  <h3>Current as a Field-Induced Effect</h3>
 
-  <h3>Key Mechanisms</h3>
+  <p><strong>New Definition</strong>: Current is the manifestation of electromagnetic field energy flux in a conductor, resulting in a measurable flow of charge, known as current, due to the response of charge carriers to the induced electric field, denoted as E. The primary driver is the propagation of electromagnetic fields in the space around the conductor, which deliver energy via the Poynting vector, inducing currents through local field interactions.</p>
 
-  <div class="mechanisms">
-    <div class="mechanism">
-      <span class="mechanism-num">Mechanism 01</span>
-      <h4>Field Energy Propagation</h4>
-      <p>In a circuit with two conductors — signal line and return path — the electromagnetic wave propagates in the dielectric between them. The Poynting vector magnitude quantifies this energy flux:</p>
-      <img src="https://raw.githubusercontent.com/dariofresu/Fresu-Electronics-Blog/main/assets/images/redefining-current-charge_img06.png" alt="Poynting vector formula: S = Y₀ · E²" class="formula">
-      <p style="margin-top:12px;">Where Y₀ ≈ 0.00265 S (admittance of free space = 1/Z₀, with Z₀ ≈ 376.7 Ω).</p>
-    </div>
-    <div class="mechanism">
-      <span class="mechanism-num">Mechanism 02</span>
-      <h4>Induced Electric Fields Drive Current</h4>
-      <p>The wave propagating in the dielectric induces electric fields at the conductor surfaces, which drive charge carriers. The current density J is proportional to the field strength, scaled by the material's conductivity σ: <strong>J = σE</strong>. In the signal conductor, the field drives current in the direction of wave propagation; in the return conductor, the field is oriented oppositely, producing a return current of equal magnitude.</p>
-    </div>
-    <div class="mechanism">
-      <span class="mechanism-num">Mechanism 03</span>
-      <h4>Displacement Current Closes the Loop</h4>
-      <p>Displacement current in the dielectric between conductors closes the current loop at the propagating wavefront:</p>
+  <h4>Key Mechanisms</h4>
+
+  <ol>
+    <li>
+      <strong>Field Energy Propagation</strong>:
+      <ul>
+        <li>In a circuit with two conductors, such as a signal line and return path in a printed circuit board, the electromagnetic wave propagates in the dielectric between them at a speed determined by 1/√(μ₀ε₀) adjusted by the dielectric constant εr of the medium, which is approximately 4.</li>
+        <li>The magnitude of the Poynting vector quantifies this energy flux through the equation:</li>
+      </ul>
+      <img src="https://raw.githubusercontent.com/dariofresu/Fresu-Electronics-Blog/main/assets/images/redefining-current-charge_img06.png" alt="Poynting vector formula" class="formula">
+      <ul>
+        <li>S = energy flux magnitude, W/m²</li>
+        <li><strong>Y₀</strong> = admittance of free space, S</li>
+        <li><strong>E</strong> = electric field, V/m</li>
+      </ul>
+      <p>In this equation, Y₀ is approximately 0.00265 S, where Y₀ = 1 / Z₀, and Z₀ = √(μ₀ / ε₀) is the impedance of free space, approximately 376.7 Ω.</p>
+    </li>
+    <li>
+      <strong>Induced Electric Fields</strong>:
+      <ul>
+        <li>The electromagnetic wave propagating in the dielectric between the conductors induces electric fields at the conductor surfaces. These fields extend slightly into the conductor (depending on conductivity and frequency), driving charge carriers and resulting in measurable current. In the signal conductor, the field drives current in the direction of wave propagation, while in the return conductor, the field is oriented oppositely, producing a return current of equal magnitude and opposite direction.</li>
+        <li>The current density J is proportional to the electric field E, scaled by the material's conductivity σ, as given by the relation J = σE, where J is the current density in A/m², σ is the conductivity in S/m, and E is the electric field in V/m. This relationship indicates that the electric field within the conductor drives the motion of charge carriers, resulting in a current density proportional to the field strength. The measurable current I is then obtained by integrating the current density over the conductor's cross-sectional area, expressed as I = ∫ J • dA, where I is the current in A, J is the current density in A/m², and dA is the differential area element in m², oriented perpendicular to the current flow. This integral sums the contributions of the current density across the conductor's cross-section to yield the total current.</li>
+      </ul>
+    </li>
+    <li>
+      <strong>Displacement Current</strong>:
+      <ul>
+        <li>Displacement current in the dielectric between the conductors is calculated as</li>
+      </ul>
       <img src="https://raw.githubusercontent.com/dariofresu/Fresu-Electronics-Blog/main/assets/images/redefining-current-charge_img07.png" alt="Displacement current density formula" class="formula">
-      <p style="margin-top:12px;">This closure occurs at wave speed, ensuring equal and opposite currents in the signal and return conductors as the wavefront advances.</p>
-    </div>
-    <div class="mechanism">
-      <span class="mechanism-num">Mechanism 04</span>
-      <h4>Charge Motion is Secondary</h4>
-      <p>Electrons respond to the induced electric field, but their slow drift velocity (~10 µm/s) does not drive the rapid effects seen in circuits. The fields, propagating at the speed determined by the medium, are the primary mechanism.</p>
-    </div>
-  </div>
+      <p>where J_disp is the displacement current density in A/m², ε₀ is the permittivity of the dielectric in F/m, <strong>E</strong> is the electric field in V/m, and ∂E/∂t is its time derivative. This displacement current closes the current loop at the propagating wavefront, establishing equal and opposite currents in the signal and return conductors as the wave travels.</p>
+    </li>
+    <li>
+      <strong>Charge Motion as Secondary</strong>:
+      <ul>
+        <li>Electrons respond to the induced electric field, but their slow drift velocity, around 10 μm/s, does not drive the rapid effects. The fields, propagating at the speed determined by the medium, serve as the primary mechanism.</li>
+      </ul>
+    </li>
+  </ol>
 
-  <!-- ── Section 3 ── -->
+  <h4>Why This Redefinition?</h4>
+
+  <ul>
+    <li><strong>Speed Resolution</strong>: The field-based definition explains the rapid propagation of current effects, occurring in ns via electromagnetic waves, rather than the slow motion of electrons, which would take minutes to travel 1 m.</li>
+    <li><strong>Field Primacy</strong>: It aligns with the physical reality that energy flows in the space around the conductor, as shown by the Poynting vector, which delivers power to drive currents.</li>
+    <li><strong>Circuit Dynamics</strong>: It incorporates displacement current, ensuring the current loop is closed, and explains how currents flow in opposite directions in signal and return paths.</li>
+  </ul>
+
   <h2>Redefining Charge: Beyond Particles</h2>
 
-  <p>If current is a field-induced effect, and electrons are not the primary entities establishing fields, then the nature of charge itself needs reconsidering.</p>
+  <p>If current is a field-induced effect, and electrons are not the primary entities establishing fields, the nature of charge itself must be reconsidered.</p>
 
-  <p>The classical view runs into two problems. First, electromagnetic waves propagate in a vacuum without local charges — fields can exist independently. Second, if charges create fields and fields act on charges, what is the ultimate source? A field-based view of current suggests fields may be more fundamental.</p>
+  <h3>Classical Charge and Its Challenges</h3>
 
-  <p>There is also a deeper tension in the classical framework: free space is defined as a vacuum — an emptiness devoid of any substance — yet it has permittivity (ε₀) and permeability (µ₀) that enable electromagnetic propagation. How can complete emptiness possess properties? This contradiction suggests free space is not truly empty, but a medium with intrinsic dynamics that supports field propagation.</p>
+  <p>Classically, charge is regarded as an intrinsic property of particles, serving as the source of fields through Gauss's law. However:</p>
 
-  <div class="callout">
-    <span class="block-label">New definition — charge</span>
-    <p>Charge is a localized distortion or concentration of electromagnetic field energy within the free space medium, sustained by the medium's permittivity and permeability. What is conventionally called "charge" — an electron's −1.602×10⁻¹⁹ C — is an emergent phenomenon: a stable, resonant pattern of electric and magnetic fields, not an intrinsic property of a particle.</p>
-  </div>
+  <ul>
+    <li><strong>Field Propagation Without Charges</strong>: Electromagnetic waves propagate in a vacuum without local charges, suggesting that fields can exist independently.</li>
+    <li><strong>Circular Dependency</strong>: If charges create fields, and fields act on charges, what is the ultimate source? A field-based view of current suggests that fields might be more fundamental.</li>
+    <li><strong>Free Space Properties</strong>: The classical view assumes a vacuum is an empty void—an absolute nothingness devoid of any substance or properties. Yet, this so-called vacuum is characterized by permittivity (ε₀) and permeability (μ₀), which enable electromagnetic field propagation, indicating that free space functions as a medium with intrinsic dynamics. This presents a fundamental contradiction: how can complete emptiness, the very definition of nothingness, possess properties like permittivity and permeability? This paradox challenges the classical notion of a truly empty vacuum, suggesting instead that free space, while devoid of matter, is not a void but a matter-less medium with inherent properties that support the propagation and interaction of electromagnetic fields. These properties, such as <strong>ε₀ ≈ 8.854×10⁻¹² F/m</strong> and <strong>μ₀ = 4π×10⁻⁷ H/m</strong>, define the medium's ability to sustain field dynamics, enabling phenomena like wave propagation and energy transfer, which are central to our field-based understanding of charge and current.</li>
+  </ul>
 
-  <h3>Key Concepts</h3>
+  <h3>Charge as a Field Phenomenon</h3>
 
-  <p><strong>Fields as fundamental.</strong> Charge density is a measure of field divergence, as described by Gauss's law:</p>
+  <p><strong>New Definition</strong>: Charge is a localized distortion or concentration of electromagnetic field energy within the free space medium, sustained by the medium's properties, such as its permittivity and permeability. What is commonly referred to as "charge" (e.g., an electron's charge of -1.602×10⁻¹⁹ C) is an emergent phenomenon—a stable, resonant pattern of electric and magnetic fields—rather than an intrinsic property of a particle.</p>
 
-  <img src="https://raw.githubusercontent.com/dariofresu/Fresu-Electronics-Blog/main/assets/images/redefining-current-charge_img08.png" alt="Gauss's law: div E = ρ/ε₀" class="formula">
-  <p>Rearranging to isolate charge density:</p>
-  <img src="https://raw.githubusercontent.com/dariofresu/Fresu-Electronics-Blog/main/assets/images/redefining-current-charge_img09.png" alt="ρ = ε₀ · div E" class="formula">
+  <p>In this novel perspective, the electric charge is not an inherent source of energy but rather a measure of a particle's response to energy, applied through electromagnetic fields. By applying a known electromagnetic field and observing the resulting behavior (such as deflection, force, or energy storage) we can quantify charge as the interaction's outcome. This view suggests that charge reflects a particle's capacity to manifest energy within its volume under the influence of an external field.</p>
 
-  <p>This shows ρ is directly proportional to the divergence of the electric field. An electron, in this view, might be a region where the electric field diverges — a stable oscillation in the field, rather than a particle carrying an intrinsic charge value.</p>
+  <p>This approach underscores the experimental essence of charge measurement, where the energy input drives the interaction, and the observed response directly informs the charge's magnitude, offering a fresh lens for understanding this fundamental property.</p>
 
-  <p><strong>Free space as a medium.</strong> The medium's properties (ε₀ ≈ 8.854×10⁻¹² F/m, µ₀ = 4π×10⁻⁷ H/m) define its ability to sustain field dynamics. Charges are distortions in this medium — akin to solitons or resonant patterns.</p>
+  <h4>Key Concepts</h4>
 
-  <p><strong>Electrons as field patterns.</strong> In a circuit, the electromagnetic wave induces fields, and these field patterns respond, creating current as a secondary effect. The Coulomb reflects a system's ability to influence electromagnetic field dynamics — not an intrinsic particle property.</p>
+  <ol>
+    <li>
+      <strong>Fields as Fundamental</strong>:
+      <ul>
+        <li>Fields are the primary entities, supported by the free space medium. Charges are emergent patterns within this medium, where field energy is localized.</li>
+        <li>Mathematically, charge density is a measure of field divergence, scaled by the permittivity of free space, as described by <strong>Gauss's</strong> law in its differential form:</li>
+      </ul>
+      <img src="https://raw.githubusercontent.com/dariofresu/Fresu-Electronics-Blog/main/assets/images/redefining-current-charge_img08.png" alt="Gauss's law formula" class="formula">
+      <p>Here, <strong>div E</strong> represents the divergence of the electric field in V/m², ρ is the charge density in C/m³, and ε₀ is the permittivity of free space in F/m. Rearranging this equation, we isolate charge density as:</p>
+      <img src="https://raw.githubusercontent.com/dariofresu/Fresu-Electronics-Blog/main/assets/images/redefining-current-charge_img09.png" alt="Gauss's law formula rearranged" class="formula">
+      <p>showing that ρ is directly proportional to the divergence of the electric field, scaled by the permittivity of free space. This relationship indicates that a non-zero charge density corresponds to a region where the electric field diverges, meaning field lines either originate or terminate. An electron, in this view, might be a region where the electric field diverges, representing a stable oscillation in the field, consistent with its characterization as a localized field distortion rather than a particle with intrinsic charge.</p>
+    </li>
+    <li>
+      <strong>Free Space as a Medium</strong>:
+      <ul>
+        <li>The free space medium's properties enable field propagation, suggesting it is a medium with intrinsic dynamics. Charges are distortions in this medium, akin to solitons or resonances.</li>
+      </ul>
+    </li>
+    <li>
+      <strong>Charge-Free Framework</strong>:
+      <ul>
+        <li>The coulomb, while traditionally defined as a unit of charge, can be interpreted as a marker of a system's ability to influence electromagnetic field dynamics. Rather than an intrinsic particle property, an electron's "charge" reflects the strength of its field distortion, quantified by its measurable effects on other fields, as described by Coulomb's law.</li>
+      </ul>
+    </li>
+  </ol>
 
-  <!-- ── Section 4 ── -->
+  <h4>Implications</h4>
+
+  <ul>
+    <li><strong>Fields Without Charges</strong>: Fields exist independently of local charges, sustained by the free space medium. Charges are emergent effects of field dynamics.</li>
+    <li><strong>Electrons as Field Patterns</strong>: Electrons are not particles with intrinsic charge but stable field configurations. In a circuit, the electromagnetic wave induces fields, and these "electrons" (field patterns) respond, creating current as a secondary effect.</li>
+    <li><strong>Circularity Resolved</strong>: By prioritizing fields, the classical circularity is broken: fields create charges, which interact with fields, but the free space medium is the ultimate source.</li>
+  </ul>
+
   <h2>Implications for Classical Electromagnetism</h2>
 
-  <p>Ampère's law as modified by Maxwell states:</p>
+  <p>Ampère's law, as modified by Maxwell, states:</p>
 
-  <img src="https://raw.githubusercontent.com/dariofresu/Fresu-Electronics-Blog/main/assets/images/redefining-current-charge_img10.png" alt="Ampère-Maxwell law" class="formula">
+  <img src="https://raw.githubusercontent.com/dariofresu/Fresu-Electronics-Blog/main/assets/images/redefining-current-charge_img10.png" alt="Ampere's Law Formula" class="formula">
 
-  <div class="var-list">
-    <p><strong>B</strong> — magnetic field (T)</p>
-    <p><strong>J</strong> — current density (A/m²)</p>
-    <p><strong>E</strong> — electric field (V/m)</p>
-    <p><strong>µ₀</strong> — permeability of free space (H/m)</p>
-    <p><strong>ε₀</strong> — permittivity of free space (F/m)</p>
-  </div>
+  <ul>
+    <li><strong>B</strong> = magnetic field, T</li>
+    <li><strong>J</strong> = current density, A/m²</li>
+    <li><strong>E</strong> = electric field, V/m</li>
+    <li>μ₀ = permeability of free space, H/m</li>
+    <li>ε₀ = permittivity of free space, F/m</li>
+    <li>t = time, s</li>
+  </ul>
 
-  <p>The classical and field-based views interpret this equation differently:</p>
+  <p>In the classical interpretation, an alternating current (represented as J) generates a changing magnetic field (represented as B) around a conductor, which in turn induces a changing electric field (E), enabling electromagnetic wave propagation. The field-based redefinition of current reinterprets this causality:</p>
 
-  <div class="compare-grid">
-    <div class="compare-card wrong">
-      <h4>Classical causality</h4>
-      <p>Alternating current generates a changing magnetic field — charge motion drives the field. Current → changing B → EM wave propagation.</p>
-    </div>
-    <div class="compare-card right">
-      <h4>Field-based causality</h4>
-      <p>The electromagnetic wave propagates first, inducing the alternating current in the conductor as a response. EM wave → induced current. The current term in Ampère's law is a consequence, not a cause.</p>
-    </div>
-  </div>
+  <ul>
+    <li><strong>Classical Causality</strong>: Alternating current generates a changing magnetic field, implying that charge motion drives the field: alternating current leads to a changing magnetic field.</li>
+    <li><strong>Field-Based Causality</strong>: The electromagnetic wave, with oscillating electric and magnetic fields, propagates first, inducing the alternating current in the conductor as a response: the electromagnetic wave leads to an induced current.</li>
+    <li><strong>Reinterpretation</strong>: The changing magnetic field is part of the electromagnetic wave's structure, not solely a result of the current. The current term in Ampère's law becomes a consequence of the field dynamics, while the displacement current term plays a key role in wave propagation. Solving for J:</li>
+  </ul>
 
-  <p>Solving Ampère's law for J:</p>
+  <img src="https://raw.githubusercontent.com/dariofresu/Fresu-Electronics-Blog/main/assets/images/redefining-current-charge_img11.png" alt="Ampere-Maxwell's law rearranged" class="formula">
 
-  <img src="https://raw.githubusercontent.com/dariofresu/Fresu-Electronics-Blog/main/assets/images/redefining-current-charge_img11.png" alt="J rearranged from Ampère-Maxwell" class="formula">
-
-  <p>This shift places field dynamics at the centre of the causal chain, with charge motion as a downstream consequence.</p>
+  <p>This shift emphasizes field dynamics over charge motion, aligning with the redefined view of current.</p>
 
   <h3>Circuit Dynamics</h3>
 
-  <img
-    src="https://raw.githubusercontent.com/dariofresu/Fresu-Electronics-Blog/main/assets/images/redefining-current-charge_img12.jpg"
-    alt="Displacement current closing the loop in a signal-return conductor pair"
-    class="post-img-sm">
-  <p class="img-caption">Displacement current closes the current loop at the wavefront as the signal propagates — establishing opposite currents in the signal and return paths at wave speed.</p>
+  <p>In a circuit with a signal line and return path:</p>
 
-  <p>In a circuit with a signal line and return path, the electromagnetic wave propagates in the dielectric between the conductors. The electric field, perpendicular to the conductors, induces longitudinal fields inside them that drive currents in opposite directions. Displacement current closes the loop at the wavefront — not through electron drift, but through field dynamics propagating at a fraction of the speed of light.</p>
+  <img src="https://raw.githubusercontent.com/dariofresu/Fresu-Electronics-Blog/main/assets/images/redefining-current-charge_img12.jpg" alt="Displacement current diagram" class="post-img-sm">
 
-  <!-- ── Conclusion ── -->
+  <ul>
+    <li>The electromagnetic wave propagates in the dielectric between the conductors, establishing an electric field perpendicular to the conductors from the high potential to the low potential conductor, which induces longitudinal electric fields inside the conductors to drive currents in opposite directions.</li>
+    <li>Displacement current in the dielectric between the conductors closes the current loop at the wavefront as the signal propagates, ensuring currents flow in opposite directions (signal: left to right; return: right to left). This closure occurs at the wave speed.</li>
+    <li>The rapid propagation of the electromagnetic wave, at a speed determined by the dielectric properties, explains the establishment of currents as the wavefront advances, not due to the slow motion of electrons.</li>
+  </ul>
+
+  <h3>Broader Impact</h3>
+
+  <ul>
+    <li><strong>Educational Shift</strong>: Reframing electromagnetism to focus on fields rather than particle motion can improve how the subject is taught. This approach helps students avoid common misconceptions, such as the idea that signal propagation is caused by fast-moving electrons, by highlighting that signals actually travel through the propagation of electromagnetic fields in space, not the bulk movement of charge carriers.</li>
+    <li><strong>Theoretical Insight</strong>: Viewing charge as an emergent field phenomenon aligns with advanced theoretical frameworks, including quantum field theory and geometric field models. This perspective may open the door to new ways of understanding electromagnetic interactions. If supported by experimental evidence, it could also lead to innovative technologies built on alternative interpretations of fundamental concepts.</li>
+  </ul>
+
   <h2>Conclusion</h2>
 
-  <p>Reinterpreting current and charge through a field-based framework offers a more internally consistent understanding of electromagnetism. Current becomes a field-induced effect — driven by energy flux — with electron motion as a secondary response. Charge becomes a localized distortion of field energy within the free space medium, not an intrinsic particle property.</p>
+  <p>By reinterpreting current and charge through a field-based framework, this perspective offers a more intuitive and unified understanding of electromagnetism, fundamentally shifting the focus from particles to fields. Current is revealed as a field-induced effect, driven by the energy flux of electromagnetic fields, with electron motion as a secondary response, while charge emerges as a localized distortion of field energy within the free space medium.</p>
 
-  <p>This resolves the long-standing inconsistency between the slow drift of electrons and the near-light-speed propagation of signals. More importantly, it reframes the mental model: fields are the primary actors. Conductors guide them. Currents are their response.</p>
+  <p>This approach resolves long-standing classical inconsistencies, such as the disparity between the slow drift of electrons and the near-light-speed propagation of electromagnetic signals, providing a cohesive explanation for electromagnetic phenomena in circuits. More than a reinterpretation, this field-centric view challenges traditional particle-based narratives, paving the way for enhanced educational approaches, novel theoretical frameworks—potentially bridging classical and quantum field theories—and the exploration of innovative technologies grounded in field dynamics.</p>
 
-  <p>For PCB and hardware engineers, this is not just theoretical — it changes how you think about return paths, signal integrity, and EMI. The field exists in the dielectric. The return current mirrors the signal current because the wave requires it. That's not intuition. That's the physics.</p>
+  <p>At Fresu Electronics, we are dedicated to helping engineers grasp and implement best design practices from the outset. If you're interested in enhancing your skills, we invite you to explore our <a href="https://www.fresuelectronics.com/trainings" style="color:var(--accent);">Online Courses</a> and EMI control guides.</p>
 
-  <p style="margin-top:48px; font-style:italic; font-weight:600; font-size:17px; color:#ffffff;">
-    Stop designing for electron flow. <em style="color:var(--accent);">Design for the field.</em>
-  </p>
-
-  <!-- Tags -->
   <div class="tags">
-    <span class="tag">Electromagnetism</span>
     <span class="tag">EMC</span>
-    <span class="tag">Signal Integrity</span>
-    <span class="tag">Foundations</span>
-    <span class="tag">Field Theory</span>
+    <span class="tag">Electromagnetism</span>
   </div>
 
-  <!-- Share -->
   <div class="share-strip">
     <span class="share-label">Share</span>
-    <a href="https://www.linkedin.com/shareArticle?mini=true&url=https://blog.fresuelectronics.com/redefining-current-charge&title=Redefining%20Current%20and%20Charge%3A%20A%20Field-Based%20Perspective%20on%20Electromagnetism"
-       target="_blank" class="share-btn linkedin">LinkedIn</a>
-    <a href="https://twitter.com/intent/tweet?url=https://blog.fresuelectronics.com/redefining-current-charge&text=Redefining%20Current%20and%20Charge%3A%20A%20Field-Based%20Perspective%20on%20Electromagnetism&via=dario_fresu"
-       target="_blank" class="share-btn twitter">X / Twitter</a>
+    <a href="https://www.linkedin.com/shareArticle?mini=true&url=https://blog.fresuelectronics.com/redefining-current-charge&title=Redefining%20Current%20and%20Charge%3A%20A%20Field-Based%20Perspective%20on%20Electromagnetism" target="_blank" class="share-btn linkedin">LinkedIn</a>
+    <a href="https://twitter.com/intent/tweet?url=https://blog.fresuelectronics.com/redefining-current-charge&text=Redefining%20Current%20and%20Charge%3A%20A%20Field-Based%20Perspective%20on%20Electromagnetism&via=dario_fresu" target="_blank" class="share-btn twitter">X / Twitter</a>
     <button class="share-btn copylink" onclick="copyLink(this,'https://blog.fresuelectronics.com/redefining-current-charge')">Copy Link</button>
   </div>
 
-  <!-- CTA -->
   <div class="cta-section">
     <div class="cta-inner">
       <span class="cta-kicker">Work with Fresu Electronics</span>
-      <h3>EMC problems are field problems. We solve them at the source.</h3>
-      <p>An EMC Design Audit reviews your schematic and PCB layout before fabrication — identifying return path gaps, field containment failures, and layout decisions that become compliance failures. Report delivered in 10 business days.</p>
+      <p class="cta-h3" style="font-size:24px;font-weight:700;color:#ffffff;margin-bottom:12px;">Stop finding EMC problems in the chamber.</p>
+      <p class="cta-p">An EMC Design Audit reviews your schematic and PCB layout before fabrication — identifying return path gaps, filter placement errors, and stackup decisions that turn into failures at the test house. Report delivered in 10 business days.</p>
       <div class="cta-actions">
         <a href="https://www.fresuelectronics.com/emc-audit" class="btn-primary">Book an EMC Audit — €8,000 →</a>
         <a href="https://www.fresuelectronics.com/trainings" class="btn-outline">Browse Courses</a>
@@ -561,7 +382,7 @@
     </div>
   </div>
 
-</div><!-- /.container -->
+</div>
 
 <footer>
   <div class="site-footer">
@@ -577,8 +398,7 @@
 <script>
 function copyLink(btn, url) {
   navigator.clipboard.writeText(url).then(function() {
-    var o = btn.innerHTML;
-    btn.innerHTML = '✓ Copied!';
+    var o = btn.innerHTML; btn.innerHTML = '✓ Copied!';
     setTimeout(function() { btn.innerHTML = o; }, 2000);
   });
 }
