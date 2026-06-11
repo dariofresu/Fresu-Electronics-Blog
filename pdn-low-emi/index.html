@@ -1,0 +1,800 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Power Delivery Network (PDN) for Low EMI — Fresu Electronics</title>
+  <meta name="description" content="In this article, we will explore the intricacies of building a power delivery network (PDN) for low EMI.">
+  <link rel="canonical" href="https://blog.fresuelectronics.com/pdn-low-emi/">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400;1,700&display=swap" rel="stylesheet">
+
+  <meta property="og:title" content="Power Delivery Network (PDN) for Low EMI">
+  <meta property="og:description" content="In this article, we will explore the intricacies of building a power delivery network (PDN) for low EMI.">
+  <meta property="og:url" content="https://blog.fresuelectronics.com/pdn-low-emi/">
+  <meta property="og:image" content="https://raw.githubusercontent.com/dariofresu/Fresu-Electronics-Blog/main/assets/images/pdn-low-emi_img01.png">
+  <meta property="og:type" content="article">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:site" content="@dario_fresu">
+  <meta name="twitter:image" content="https://raw.githubusercontent.com/dariofresu/Fresu-Electronics-Blog/main/assets/images/pdn-low-emi_img01.png">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "headline": "Power Delivery Network (PDN) for Low EMI",
+    "description": "In this article, we will explore the intricacies of building a power delivery network (PDN) for low EMI.",
+    "datePublished": "2024-11-18",
+    "url": "https://blog.fresuelectronics.com/pdn-low-emi/",
+    "author": { "@type": "Person", "name": "Dario Fresu", "jobTitle": "Principal EMC Architect", "url": "https://www.fresuelectronics.com/about" },
+    "publisher": { "@type": "Organization", "name": "Fresu Electronics", "url": "https://www.fresuelectronics.com" },
+    "image": "https://raw.githubusercontent.com/dariofresu/Fresu-Electronics-Blog/main/assets/images/pdn-low-emi_img01.png"
+  }
+  </script>
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:          #0a0a0a;
+      --surface:     #111111;
+      --surface-2:   #181818;
+      --border:      #242424;
+      --fg:          #ffffff;
+      --label:       #a0aab8;
+      --accent:      #00FF94;
+      --accent-dim:  rgba(0, 255, 148, 0.10);
+      --accent-hover:#00e085;
+      --wrong:       #ff4d4d;
+    }
+
+    body {
+      background: var(--bg);
+      color: #ffffff;
+      font-family: 'Poppins', sans-serif;
+      font-size: 17px;
+      line-height: 1.75;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* ── Reading progress ── */
+    .progress-track { position: fixed; top: 0; left: 0; right: 0; height: 3px; z-index: 1100; background: transparent; }
+    .progress-bar { height: 100%; width: 0; background: var(--accent); transition: width 80ms linear; }
+
+    /* ── Header ── */
+    header { border-bottom: 1px solid var(--border); }
+    .site-header {
+      max-width: 1100px; margin: 0 auto;
+      padding: 18px 40px;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .site-header img { height: 44px; width: auto; display: block; }
+    .header-nav { display: flex; align-items: center; gap: 28px; }
+    .header-nav a {
+      font-size: 11px; font-weight: 600;
+      letter-spacing: 0.08em; text-transform: uppercase;
+      color: #ffffff; text-decoration: none; opacity: 0.6;
+      transition: opacity 0.2s;
+    }
+    .header-nav a:hover { opacity: 1; }
+    .header-cta {
+      opacity: 1 !important;
+      background: var(--accent); color: #0a0a0a !important;
+      padding: 9px 20px; border-radius: 999px;
+      transition: background 0.2s;
+    }
+    .header-cta:hover { background: var(--accent-hover) !important; }
+
+    /* ── Layout: TOC rail + article ── */
+    .post-layout { max-width: 1100px; margin: 0 auto; padding: 0 40px; display: grid; grid-template-columns: minmax(0, 740px); justify-content: center; }
+    .toc-rail { display: none; }
+    @media (min-width: 1200px) {
+      .post-layout { grid-template-columns: 240px minmax(0, 740px); gap: 56px; justify-content: center; }
+      .toc-rail { display: block; position: sticky; top: 36px; align-self: start; padding-top: 76px; }
+    }
+    .toc-rail nav { border-left: 1px solid var(--border); padding-left: 18px; }
+    .toc-label { font-size: 10px; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase; color: var(--label); margin-bottom: 14px; display: block; }
+    .toc-rail ul { list-style: none; }
+    .toc-rail li { margin-bottom: 10px; }
+    .toc-rail a { font-size: 12.5px; color: var(--label); text-decoration: none; line-height: 1.45; display: block; transition: color 0.15s; }
+    .toc-rail a:hover { color: #ffffff; }
+    .toc-rail a.active { color: var(--accent); }
+
+    /* Inline TOC for narrow screens */
+    .toc-inline { margin: 0 0 40px; border: 1px solid var(--border); border-radius: 4px; background: var(--surface); }
+    .toc-inline summary { cursor: pointer; padding: 14px 20px; font-size: 12px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--label); list-style: none; }
+    .toc-inline summary::before { content: '☰  '; color: var(--accent); }
+    .toc-inline ul { list-style: none; padding: 0 20px 16px; }
+    .toc-inline li { margin-bottom: 8px; }
+    .toc-inline a { font-size: 14px; color: #ffffff; opacity: 0.85; text-decoration: none; }
+    .toc-inline a:hover { color: var(--accent); opacity: 1; }
+    @media (min-width: 1200px) { .toc-inline { display: none; } }
+
+    /* ── Container ── */
+    .container { padding: 72px 0 100px; min-width: 0; }
+
+    /* ── Breadcrumb ── */
+    .breadcrumb { display: inline-block; font-size: 12px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--label); text-decoration: none; margin-bottom: 28px; transition: color 0.15s; }
+    .breadcrumb:hover { color: var(--accent); }
+
+    /* ── Cover image ── */
+    .post-cover {
+      width: 100%; border-radius: 6px; display: block;
+      margin-bottom: 44px;
+      border: 1px solid var(--border);
+      aspect-ratio: 16/9; object-fit: cover;
+    }
+
+    /* ── Kicker ── */
+    .kicker {
+      display: inline-block;
+      font-size: 10px; font-weight: 600;
+      letter-spacing: 0.18em; text-transform: uppercase;
+      color: var(--accent);
+      border: 1px solid var(--accent);
+      background: var(--accent-dim);
+      padding: 4px 12px; border-radius: 2px;
+      margin-bottom: 24px;
+    }
+
+    /* ── Title ── */
+    h1 {
+      font-size: clamp(28px, 5vw, 44px);
+      font-weight: 800; line-height: 1.1;
+      letter-spacing: -0.025em; color: #ffffff;
+      margin-bottom: 20px;
+    }
+    h1 em { font-style: italic; color: var(--accent); }
+
+    /* ── Deck ── */
+    .deck {
+      font-size: 18px; font-weight: 400;
+      color: #ffffff; line-height: 1.7;
+      margin-bottom: 36px;
+    }
+
+    /* ── Author row ── */
+    .author-row {
+      display: flex; align-items: center; gap: 14px;
+      padding: 20px 0;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 56px;
+    }
+    .author-row img {
+      width: 52px; height: 52px; border-radius: 50%;
+      object-fit: cover; flex-shrink: 0;
+      border: 2px solid var(--accent);
+    }
+    .author-name  { display: block; font-size: 14px; font-weight: 600; color: #ffffff; line-height: 1.3; }
+    .author-title { display: block; font-size: 12px; font-weight: 400; color: var(--label); line-height: 1.3; }
+    .author-date  { display: block; font-size: 11px; color: var(--label); margin-top: 4px; }
+
+    /* ── Body typography ── */
+    p { color: #ffffff; font-weight: 400; margin-bottom: 22px; }
+    strong { color: #ffffff; font-weight: 600; }
+    em { font-style: italic; }
+    .post-body ul, .post-body ol { margin: 0 0 22px 24px; }
+    .post-body li { margin-bottom: 8px; }
+
+    h2 {
+      font-size: 22px; font-weight: 700; color: #ffffff;
+      margin: 56px 0 18px; letter-spacing: -0.015em;
+      scroll-margin-top: 32px;
+    }
+    h2::before {
+      content: ''; display: block;
+      width: 32px; height: 3px;
+      background: var(--accent); margin-bottom: 14px; border-radius: 2px;
+    }
+    h3 {
+      font-size: 17px; font-weight: 600; color: #ffffff;
+      margin: 36px 0 12px;
+      scroll-margin-top: 32px;
+    }
+
+    /* ── Post images ── */
+    .post-img {
+      width: 100%; border-radius: 4px; display: block;
+      margin: 36px 0 10px;
+      border: 1px solid var(--border);
+      cursor: zoom-in;
+    }
+    .post-img-center {
+      display: block; margin: 36px auto 10px;
+      border-radius: 4px;
+      border: 1px solid var(--border);
+      max-width: 100%;
+      cursor: zoom-in;
+    }
+    .img-caption {
+      text-align: center; font-size: 12px;
+      color: var(--label); margin-bottom: 32px;
+      font-style: italic; line-height: 1.5;
+    }
+
+    /* ── Lightbox ── */
+    .lightbox { position: fixed; inset: 0; z-index: 1200; background: rgba(5,5,5,0.93); display: none; align-items: center; justify-content: center; padding: 32px; cursor: zoom-out; }
+    .lightbox.open { display: flex; }
+    .lightbox img { max-width: 96%; max-height: 92vh; border-radius: 4px; }
+    .lightbox-close { position: absolute; top: 18px; right: 24px; background: none; border: none; color: #ffffff; font-size: 26px; cursor: pointer; opacity: 0.7; }
+    .lightbox-close:hover { opacity: 1; }
+
+    /* ── Formula images ── */
+    .formula-wrap { display: flex; justify-content: center; margin: 24px 0 28px; }
+    .formula-wrap img {
+      display: block; background: #ffffff;
+      padding: 14px 20px; border-radius: 4px; max-width: 100%;
+    }
+
+    /* ── Callout block ── */
+    .callout {
+      background: var(--surface);
+      border-left: 3px solid var(--accent);
+      padding: 20px 24px;
+      border-radius: 0 4px 4px 0;
+      margin: 32px 0;
+    }
+    .callout p { margin-bottom: 0; }
+    .callout-label { font-size: 10px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent); margin-bottom: 8px; display: block; }
+
+    /* ── Variable list ── */
+    .var-list {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 20px 24px; margin: 24px 0;
+    }
+    .var-list p { margin-bottom: 10px; font-size: 15px; }
+    .var-list p:last-child { margin-bottom: 0; }
+
+    /* ── Compliance / standard reference block ── */
+    .compliance-block {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 24px; margin: 28px 0;
+    }
+    .compliance-block p { margin-bottom: 10px; font-size: 15px; }
+    .compliance-block p:last-child { margin-bottom: 0; }
+    .compliance-label {
+      font-size: 10px; font-weight: 600;
+      letter-spacing: 0.14em; text-transform: uppercase;
+      color: var(--accent); margin-bottom: 14px; display: block;
+    }
+
+    /* ── Numbered steps ── */
+    .steps { margin: 28px 0; }
+    .step { display: flex; gap: 18px; margin-bottom: 20px; }
+    .step-num {
+      flex-shrink: 0;
+      width: 28px; height: 28px;
+      background: var(--accent-dim);
+      border: 1px solid var(--accent);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 12px; font-weight: 700; color: var(--accent);
+      margin-top: 3px;
+    }
+    .step p { margin-bottom: 0; font-size: 15px; }
+
+    /* ── Tags ── */
+    .tags { display: flex; flex-wrap: wrap; gap: 8px; margin: 48px 0 0; }
+    .tag {
+      font-size: 10px; font-weight: 600;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--accent);
+      border: 1px solid var(--accent);
+      background: var(--accent-dim);
+      padding: 4px 12px; border-radius: 2px;
+    }
+
+    /* ── References ── */
+    .references { margin-top: 48px; padding-top: 28px; border-top: 1px solid var(--border); }
+    .references h3 { margin-top: 0; }
+    .references ul { padding-left: 20px; }
+    .references li { color: #ffffff; font-size: 14px; margin-bottom: 8px; }
+    .references a { color: var(--accent); text-decoration: none; }
+    .references a:hover { text-decoration: underline; }
+
+    /* ── Share strip ── */
+    .share-strip {
+      display: flex; align-items: center; gap: 12px;
+      margin: 56px 0 0; padding-top: 32px;
+      border-top: 1px solid var(--border); flex-wrap: wrap;
+    }
+    .share-label {
+      font-size: 12px; font-weight: 600;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--label);
+    }
+    .share-btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-family: 'Poppins', sans-serif;
+      font-size: 13px; font-weight: 600;
+      padding: 9px 18px; border-radius: 999px;
+      text-decoration: none; border: none; cursor: pointer;
+      transition: opacity 0.2s, transform 0.15s; white-space: nowrap;
+    }
+    .share-btn:hover { opacity: 0.88; transform: translateY(-1px); }
+    .share-btn.linkedin { background: #0A66C2; color: #ffffff; }
+    .share-btn.twitter  { background: #000000; color: #ffffff; }
+    .share-btn.copylink { background: var(--surface); color: var(--accent); border: 1px solid var(--accent); }
+
+    /* ── CTA section ── */
+    .cta-section {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 4px; overflow: hidden;
+      position: relative; margin-top: 72px;
+    }
+    .cta-section::after {
+      content: ''; position: absolute;
+      top: 0; left: 0; right: 0; height: 2px;
+      background: linear-gradient(90deg, var(--accent), transparent);
+    }
+    .cta-inner { padding: 48px 48px 40px; }
+    .cta-kicker {
+      font-size: 10px; font-weight: 600;
+      letter-spacing: 0.18em; text-transform: uppercase;
+      color: var(--accent); margin-bottom: 14px; display: block;
+    }
+    .cta-section h3 {
+      font-size: 24px; font-weight: 700; color: #ffffff;
+      margin: 0 0 12px; letter-spacing: -0.01em;
+    }
+    .cta-section p {
+      font-size: 15px; color: #ffffff; line-height: 1.7; margin-bottom: 28px;
+    }
+    .cta-actions { display: flex; gap: 12px; flex-wrap: wrap; }
+    .btn-primary {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: var(--accent); color: #0a0a0a;
+      font-family: 'Poppins', sans-serif;
+      font-size: 13px; font-weight: 700;
+      padding: 13px 26px; border-radius: 999px;
+      text-decoration: none; transition: background 0.2s;
+    }
+    .btn-primary:hover { background: var(--accent-hover); }
+    .btn-outline {
+      display: inline-flex; align-items: center;
+      color: #ffffff;
+      font-family: 'Poppins', sans-serif;
+      font-size: 13px; font-weight: 600;
+      text-decoration: none;
+      padding: 12px 26px; border-radius: 999px;
+      border: 1px solid var(--border);
+      transition: border-color 0.2s;
+    }
+    .btn-outline:hover { border-color: var(--accent); color: var(--accent); }
+    .proof-row {
+      display: flex; flex-wrap: wrap; gap: 8px 20px;
+      padding: 20px 48px;
+      border-top: 1px solid var(--border);
+    }
+    .proof-item {
+      font-size: 12px; font-weight: 400; color: var(--label);
+      display: flex; align-items: center; gap: 6px;
+    }
+    .proof-item::before { content: '✓'; color: var(--accent); font-weight: 700; }
+
+    /* ── Closing callout ── */
+    .closing {
+      margin-top: 52px;
+      font-style: italic; font-weight: 600;
+      color: #ffffff; font-size: 17px; line-height: 1.7;
+      border-left: 3px solid var(--accent);
+      padding: 18px 24px;
+      background: var(--surface);
+      border-radius: 0 4px 4px 0;
+    }
+    .closing em { color: var(--accent); }
+
+    /* ── Footer ── */
+    footer { border-top: 1px solid var(--border); }
+    .site-footer {
+      max-width: 1100px; margin: 0 auto;
+      padding: 28px 40px;
+      display: flex; align-items: center; justify-content: space-between;
+      font-size: 11px; color: #ffffff; opacity: 0.5;
+      flex-wrap: wrap; gap: 12px;
+    }
+    .site-footer a { color: var(--accent); text-decoration: none; }
+
+    :focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation: none !important; transition: none !important; }
+    }
+
+    /* ── Mobile ── */
+    @media (max-width: 768px) {
+      .site-header, .site-footer { padding-left: 20px; padding-right: 20px; }
+      .post-layout { padding: 0 20px; }
+      .container { padding-top: 48px; padding-bottom: 72px; }
+      .header-nav a:not(.header-cta) { display: none; }
+      h1 { font-size: clamp(24px, 7vw, 36px); }
+      .cta-inner { padding: 28px 20px 24px; }
+      .proof-row { padding: 16px 20px; }
+      .formula-wrap img { padding: 10px 14px; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="progress-track" aria-hidden="true"><div class="progress-bar" id="progressBar"></div></div>
+
+<!-- Header -->
+<header>
+  <div class="site-header">
+    <a href="https://www.fresuelectronics.com">
+      <img src="https://raw.githubusercontent.com/dariofresu/Fresu-Electronics-Blog/main/assets/logo.png" alt="Fresu Electronics">
+    </a>
+    <nav class="header-nav">
+      <a href="https://blog.fresuelectronics.com">Blog</a>
+      <a href="https://blog.fresuelectronics.com/tools/">Tools</a>
+      <a href="https://www.fresuelectronics.com/trainings">Courses</a>
+      <a href="https://www.fresuelectronics.com/emc-audit" class="header-cta">Book EMC Audit</a>
+    </nav>
+  </div>
+</header>
+
+<div class="post-layout">
+
+  <!-- Desktop TOC rail -->
+  <aside class="toc-rail" aria-label="Table of contents">
+    <nav>
+      <span class="toc-label">On this page</span>
+      <ul id="tocList">
+        <li><a href="#calculations">Calculations</a></li>
+        <li><a href="#decoupling-capacitors-misconceptions">Decoupling Capacitors Misconceptions</a></li>
+        <li><a href="#understanding-inductance-in-pdns">Understanding Inductance in Power Delivery Networks</a></li>
+        <li><a href="#decoupling-capacitors-placement">Decoupling capacitors placement</a></li>
+        <li><a href="#optimizing-pdn-strategy">Optimizing Power Delivery Network Strategy</a></li>
+        <li><a href="#calculating-the-number-of-capacitors">Calculating the Number of Capacitors for Target Impedance</a></li>
+        <li><a href="#conclusions">Conclusions</a></li>
+      </ul>
+    </nav>
+  </aside>
+
+  <div class="container">
+
+    <a href="https://blog.fresuelectronics.com" class="breadcrumb">← All posts</a>
+
+    <article>
+      <span class="kicker">Filtering &amp; PDN</span>
+      <h1>Power Delivery Network (PDN) for Low EMI</h1>
+      <p class="deck">In this article, we will explore the intricacies of building a power delivery network (PDN) for low EMI.</p>
+
+      <div class="author-row">
+        <img src="https://raw.githubusercontent.com/dariofresu/Fresu-Electronics-Blog/main/assets/dario-fresu.jpg" alt="Dario Fresu">
+        <div>
+          <span class="author-name">Dario Fresu</span>
+          <span class="author-title">Principal EMC Architect — Fresu Electronics</span>
+          <span class="author-date">November 2024 · 17 min read</span>
+        </div>
+      </div>
+
+      <!-- Mobile/tablet TOC -->
+      <details class="toc-inline">
+        <summary>On this page</summary>
+        <ul>
+          <li><a href="#calculations">Calculations</a></li>
+        <li><a href="#decoupling-capacitors-misconceptions">Decoupling Capacitors Misconceptions</a></li>
+        <li><a href="#understanding-inductance-in-pdns">Understanding Inductance in Power Delivery Networks</a></li>
+        <li><a href="#decoupling-capacitors-placement">Decoupling capacitors placement</a></li>
+        <li><a href="#optimizing-pdn-strategy">Optimizing Power Delivery Network Strategy</a></li>
+        <li><a href="#calculating-the-number-of-capacitors">Calculating the Number of Capacitors for Target Impedance</a></li>
+        <li><a href="#conclusions">Conclusions</a></li>
+        </ul>
+      </details>
+
+      <div class="post-body">
+        <img src="https://raw.githubusercontent.com/dariofresu/Fresu-Electronics-Blog/main/assets/images/pdn-low-emi_img01.png" alt="" class="post-img" loading="lazy" width="1920" height="1080">
+
+        <h3>Action list:</h3>
+        <h5><u><a href="https://www.fresuelectronics.com/product-page/emi-quick-fixes-guide"><strong>1. Get the New EMI Quick Fixes Guide - 2025</strong></a></u></h5>
+        <p><a href="https://www.fresuelectronics.com/product-page/emi-quick-fixes-guide">EMI Quick Fixes Guide</a></p>
+
+        <hr>
+
+        <p>In this lesson, we will explore the intricacies of building a power delivery network (PDN), with a specific focus on maintaining electromagnetic interference (EMI) integrity for the digital circuits we design. Before diving into the construction of a power delivery network, it is essential to first understand the key requirements of such a system. </p>
+        <p>Defining the requirements upfront is crucial, as it ensures that the network will function properly once implemented. Much like any other system, specifying what is needed at the outset guides the entire process, ensuring that the final product performs as expected.</p>
+        <p>The primary requirement of a power delivery network is to <strong>provide a constant and uninterrupted DC voltage source to the load.</strong> This stability is critical for ensuring smooth operation of the components within the system, particularly for processors or microcontrollers that must function without interruption. </p>
+        <p>The PDN must supply a consistent voltage source to the load, which in most cases are integrated circuits (ICs). If the voltage supply fluctuates or is interrupted, the performance of these ICs may degrade, leading to potential failures in the system.</p>
+        <p>Another important requirement is <strong>the minimization of any AC noise within the power delivery network.</strong> AC noise, if not controlled, can propagate through the entire network, leading to signal integrity issues that affect other ICs or components within the system.</p>
+        <p>Beyond internal signal interference, this noise can also generate EMI problems, either by coupling with cables or by radiating outward and impacting the performance of nearby electronics. Properly managing this noise is essential to ensuring the reliability and stability of the entire PDN.</p>
+        <p>The next requirement we must consider is <strong>the goal of achieving zero ohms AC impedance between the power source and the return reference plane.</strong> This is essential for maintaining the integrity of the power delivery network. One key method to meet this requirement is by <strong>selecting the right decoupling strategy. </strong></p>
+        <p>But what exactly do we mean by decoupling? </p>
+        <p>In this context, decoupling involves using capacitors strategically to ensure that the power delivery network functions smoothly under varying conditions.</p>
+        <p>Decoupling capacitors serve several important functions. One of the primary purposes is to minimize the dependency between different integrated circuits (ICs) in the system. This is critical because ICs often have different power requirements, and ensuring they don’t interfere with each other is vital for stable operation.</p>
+        <p>To illustrate, imagine two processors in a system, one demanding high transient currents from the power delivery network while the other also requires transient currents at the same time. If the network cannot meet these simultaneous demands, voltage dips occur, leading to disruptions in the operation of the processors. </p>
+        <p>In some cases, these processors may shut down or experience momentary failures, which is something we want to avoid. By selecting an effective decoupling strategy, we reduce this dependency between ICs, allowing each one to operate independently without affecting the other.</p>
+        <p>Choosing the right decoupling capacitors helps in two ways. First, <strong>it isolates one IC from another, minimizing cross-dependency. </strong>Second, it <strong>reduces the impedance between the power source and the return reference plane. </strong>This is especially important for digital circuits, which are composed of logic gates. </p>
+        <p>These logic gates need to switch rapidly in order to generate the required digital signals, and such fast switching events demand transient current from the power delivery network. Whenever these logic gates switch, the ICs require transient current to power the switching process. </p>
+        <p>This current flows through the power delivery network and encounters impedance along the way. The greater the distance from the power source, the higher the impedance, which can cause voltage drops that hinder performance. To maintain the required voltage levels, we must work to reduce this impedance as much as possible. Reducing impedance also reduces the voltage drop caused by the current flowing through the network, ensuring more stable power delivery.</p>
+        <p>It’s important to <strong>think beyond just the resistance of the copper traces in the power network. </strong>While resistance is certainly a factor, the more significant issues often arise from inductance and capacitance within the system. Inductance, in particular, plays a critical role in determining how much impedance exists between the power source and the load. Managing inductance effectively is key to maintaining the performance of the power delivery network.</p>
+        <p>This is important because transient currents generated during the switching of logic gates are tied to specific frequencies. The inductance within the power delivery network (PDN) is frequency-dependent, meaning that at higher frequencies, the inductive effects become more pronounced. </p>
+        <p>Consequently, the voltage drops caused by these transient currents can become problematic not just for a single IC, but for all ICs connected to the same power delivery network. If one IC experiences a voltage drop, the others in the network may be impacted as well, leading to potential system instability.</p>
+        <p>Another key issue related to transient currents is the formation of current loops between the power source, the load, and the return reference plane. These loops can act as highly effective antennas, radiating electromagnetic interference (EMI) throughout the system.</p>
+        <p>To reduce the voltage noise generated by transient currents, we have two primary options. The first is to reduce the magnitude of the transient current itself, but doing so would negatively affect the system’s timing and overall efficiency, which is not an ideal solution. The second, and more practical approach, is to minimize the impedance of the power delivery network, with a specific focus on reducing the inductance. <strong>As designers, we have the greatest influence on the PDN's performance by reducing its inductance. </strong></p>
+        <p>While we cannot fundamentally alter the transient current requirements of the system, we can optimize the power delivery path by designing it with the lowest possible inductance and resistance. One effective strategy is to implement return reference planes and carefully engineer the power path to minimize impedance.</p>
+        <p>One of the most efficient methods to improve PDN performance is by reducing the size of the current loops created between the power source and the load. By shortening these loops, we minimize inductive losses and improve overall power delivery efficiency. To achieve this, we need to bring the power source as close to the load as possible. This is where decoupling capacitors play a critical role.</p>
+        <p>Using decoupling capacitors strategically allows us to position a localized source of energy near the IC. By placing these capacitors close to the IC, we effectively reduce the inductance between the capacitors and the IC, minimizing the impedance of the traces. This, in turn, ensures that transient currents can be delivered quickly and efficiently, reducing the likelihood of voltage drops and improving the stability of the entire power delivery network.</p>
+
+        <hr>
+
+        <p><em>💡 By the way, If you would like to master EMC/EMI design, we have a new training program here:</em></p>
+        <p><a href="https://www.fresuelectronics.com/mentoring" target="_blank" class="btn-primary">Get Personalized Training</a></p>
+        <p><em>There, you’ll find details on how to apply for one of our exclusive programs designed to help you achieve that goal. </em></p>
+
+        <hr>
+
+        <p>We’ve established that transient currents are generated by the switching of logic gates as they move from a low state to a high state or vice versa. This switching is a fundamental aspect of digital circuit operation, meaning that any attempt to alter the timing of these transitions would compromise the performance of the logic gates. Instead of modifying the timing, our goal is to create an optimal environment within the power delivery network (PDN) to ensure that transient currents are available exactly when they are needed.</p>
+        <p>It’s essential to recognize that there are two main sources of these transient currents, each contributing to the overall power demand of the system. Understanding these sources allows us to better manage the PDN and ensure that it can handle the required loads efficiently.</p>
+
+        <img src="https://raw.githubusercontent.com/dariofresu/Fresu-Electronics-Blog/main/assets/images/pdn-low-emi_img02.jpg" alt="Logic Gates Currents" class="post-img" loading="lazy" width="1920" height="910">
+        <p class="img-caption">Figure 1 - Logic Gates Currents</p>
+
+        <p>The first source of transient current is the <strong>shoot-through current</strong>, which occurs when both the pull-up and pull-down transistors (typically FETs) in a logic gate are momentarily switched on at the same time. </p>
+        <p>This condition happens during the transition between logic states and results in a brief but significant current surge. Shoot-through current is especially prevalent in circuits where many logic gates are switching simultaneously, such as in processors, field-programmable gate arrays (FPGAs), and microcontrollers. These devices contain large numbers of logic gates that contribute to substantial shoot-through currents during operation.</p>
+        <p>The second source is the<strong> transient load current</strong>, which arises when the complementary metal-oxide-semiconductor (CMOS) logic gates switch and charge the load capacitance. This current depends on the specific load that the logic gates are driving, and it becomes particularly prominent in integrated circuits (ICs) with a large number of input/output pins that are connected to external loads. </p>
+        <p>For example, in systems where many pins are used for communication with external devices, the transient load current can become the dominant factor. The magnitude of each type of current is largely determined by the type of IC and the specific application in which it is used. In processors, FPGAs, and other ICs with dense logic operations, shoot-through current typically takes precedence. </p>
+        <p>Conversely, in systems with significant external connectivity, such as ICs with many I/O pins, the transient load current may play a larger role. Recognizing this distinction helps in tailoring the PDN design to the specific requirements of the circuit, ensuring both currents are managed effectively to maintain system stability and performance.</p>
+        <p>If you're interested in exploring these topics further, you can reference works by <u><a href="https://amzn.to/3Vl9EhT"><strong>Archambault </strong></a></u>and <u><a href="https://amzn.to/3p0C84l"><strong>Ott</strong></a></u>, who provide in-depth analysis on power delivery networks and related subjects. </p>
+
+        <hr>
+
+        <h2 id="calculations">Calculations</h2>
+        <p>Now, let's focus on how we can actually calculate these transient currents.</p>
+        <p>To estimate the transient load current, we can use a straightforward formula: </p>
+
+        <div class="formula-wrap"><img src="https://raw.githubusercontent.com/dariofresu/Fresu-Electronics-Blog/main/assets/images/pdn-low-emi_img03.png" alt="" loading="lazy" width="225" height="63"></div>
+
+        <ul>
+          <li><strong>IL​</strong>: Transient load current, which is the current that charges the load capacitance when the CMOS gates switch.</li>
+          <li><strong>n</strong>: Number of logic gates or the effective capacitance factors depending on how many gates are switching.</li>
+          <li><strong>CL​</strong>: Load capacitance that the logic gates are driving.</li>
+          <li><strong>VCC</strong>: Supply voltage applied to the CMOS circuit.</li>
+          <li><strong>tr​</strong>: Rise time, which is the time it takes for the output to transition from low to high.</li>
+        </ul>
+
+        <p>This gives us a baseline current for a single logic gate. To scale this for an entire integrated circuit (IC), we then multiply this value by the total number of logic gates (n) inside the IC. This calculation gives us a reasonable estimate of the transient load current that the PDN must handle during switching events.</p>
+        <p>When it comes to calculating the shoot-through current, the process is slightly more complex because this information is often not readily available in the IC datasheet. </p>
+        <p>One approach is to use the equivalent power dissipation capacitance, which is typically provided. This value can be understood as the capacitance per gate, and manufacturers sometimes supply this data in terms of shoot-through current as a function of frequency (e.g., amps per megahertz).</p>
+        <p>Once we have this parameter, the calculation becomes straightforward. To determine the shoot-through current, we simply multiply the current per megahertz by the operating frequency of the system. </p>
+
+        <div class="formula-wrap"><img src="https://raw.githubusercontent.com/dariofresu/Fresu-Electronics-Blog/main/assets/images/pdn-low-emi_img04.png" alt="" loading="lazy" width="185" height="66"></div>
+
+        <ul>
+          <li><strong>IST​</strong>: Shoot-through current, which can occur in CMOS circuits when both the NMOS and PMOS transistors conduct simultaneously, leading to a direct path from VCC​ to ground.</li>
+          <li><strong>tr​</strong>: Rise time, which is the time it takes for the output to transition from low to high.</li>
+          <li><strong>F0: </strong>operating frequency of the system in MHz. </li>
+          <li><strong>Iccd: </strong>Shoot-through current A per MHz.</li>
+        </ul>
+
+        <p>Another method is to use the power dissipation capacitance directly. We can multiply this value by VCC and divide it by the transient time of the shoot-through current. Just like with the transient load current, we also multiply by the total number of logic gates inside the IC.</p>
+
+        <div class="formula-wrap"><img src="https://raw.githubusercontent.com/dariofresu/Fresu-Electronics-Blog/main/assets/images/pdn-low-emi_img05.png" alt="" loading="lazy" width="247" height="70"></div>
+
+        <ul>
+          <li><strong>IST​</strong>: Shoot-through current, which can occur in CMOS circuits when both the NMOS and PMOS transistors conduct simultaneously, leading to a direct path from VCC​ to ground.</li>
+          <li><strong>CPD​</strong>: Equivalent power dissipation capacitance, which accounts for the capacitance contributing to power loss in the circuit during switching.</li>
+          <li><strong>VCC</strong>: Supply voltage applied to the CMOS circuit.</li>
+          <li><strong>tr​</strong>: Rise time, which is the time it takes for the output to transition from low to high.</li>
+          <li><strong>n</strong>: Number of logic gates or the effective capacitance factors depending on how many gates are switching. </li>
+        </ul>
+
+        <p>Both methods of calculating shoot-through current are fairly similar in that they involve scaling capacitance values by the number of gates and the operating frequency. For transient load current, we focus on load capacitance, while for shoot-through current, we use power dissipation capacitance provided in the datasheet. Additionally, these calculations require dividing by the transient time, which typically corresponds to the rise and fall times of the logic gates—information that is often included in the IC datasheet.</p>
+
+        <hr>
+
+        <h2 id="decoupling-capacitors-misconceptions">Decoupling Capacitors Misconceptions</h2>
+        <p>Before we move forward, it's important to address some common misconceptions about decoupling capacitors, which are frequently discussed within the printed circuit board (PCB) design community. One widespread belief is that selecting different capacitance values can automatically improve the performance of the PDN. </p>
+        <p>However, this is not necessarily true, and there’s a deeper issue to consider. As I’ve explained in a previous video, the concept of <strong>anti-resonant frequency</strong>, or crossing impedances of capacitors, plays a critical role here. This phenomenon can actually counteract the expected benefits of using capacitors with varying values.</p>
+
+        <img src="https://raw.githubusercontent.com/dariofresu/Fresu-Electronics-Blog/main/assets/images/pdn-low-emi_img06.jpg" alt="Antiresonance effect in parallel capacitors" class="post-img" loading="lazy" width="1080" height="804">
+        <p class="img-caption">Figure 2 - Antiresonance effect in parallel capacitors</p>
+
+        <p>Understanding the nuances of how different capacitances interact with the PDN is key to effective decoupling design. Simply adding capacitors of different values does not guarantee improved performance, and can sometimes introduce new issues, particularly when it comes to managing resonance and impedance mismatches in the system.</p>
+        <p>We know that capacitors have a specific impedance profile, behaving capacitively up to a certain point known as the resonance frequency. At this resonance frequency, the behavior of the capacitor changes, and it starts to act inductively due to parasitic effects. </p>
+        <p>So, while capacitors function as intended up to a certain frequency, once that frequency is exceeded, their inductive properties dominate. This shift from capacitive to inductive behavior is a critical factor to consider when designing a power delivery network (PDN).</p>
+        <p>If different types of capacitors, with varying capacitance values, are used in an overlapping manner, <strong>their impedance profiles will cross over one another. </strong>This crossing of impedance profiles can result in a significant impedance peak within the PDN, which is highly undesirable. </p>
+        <p>These impedance peaks can lead to several issues, including increased electromagnetic interference (EMI) and compromised signal integrity. Therefore, selecting capacitors with varied capacitance values does not necessarily improve the PDN and may even introduce serious problems.</p>
+        <p>Instead of choosing capacitors of different values to attempt to "improve" the network, it is much more effective to select capacitors with a specific value that matches the requirements of the package. By doing so, we can calculate how many capacitors are needed to create the desired impedance profile. This method ensures a more stable PDN by preventing impedance peaks and maintaining a smooth impedance curve across a range of frequencies.</p>
+        <p>It’s also important to remember that every time a capacitor is placed, it’s not just a simple component being added, what we are introducing is an LC network. This means that we are also introducing <strong>resonant frequencies</strong>, as seen in any LC circuit. We need to be mindful of this phenomenon because it can influence the behavior of the PDN at various frequencies.</p>
+        <p>Now, let’s focus on where the inductance in these circuits comes from. The inductance arises from several sources, the first being the package itself, the physical form of the capacitor. This is why the type of capacitor package (whether it's a through-hole component or a surface-mounted device, or <strong>SMD</strong>) is significant. The inductance of the package can greatly impact the performance of the PDN.</p>
+        <p>Inductance is also introduced by the traces that connect the capacitors to the pins they are feeding. The routing of these traces is critical, as the inductance depends on their length, geometry, and proximity to other components. Additionally, the pins themselves contribute to the inductance, although this is something designers have little control over.</p>
+        <p>As designers, we have control over two main factors when it comes to reducing inductance:</p>
+        <ol>
+          <li>The first is the <strong>inductance of the capacitor package</strong>, which we can minimize by selecting an appropriate package for our design. </li>
+          <li>The second is the <strong>inductance of the traces</strong>, which we can control through careful PCB layout design. </li>
+        </ol>
+        <p>By optimizing trace design, through shortening their length and adjusting their geometry, we can minimize the inductance, improving both the EMI and signal integrity performance of the PDN.</p>
+        <p><strong>This highlights a</strong> <strong>clear connection between the layout of the PCB and the overall performance of the system, especially in terms of EMI and signal integrity.</strong> The way capacitors are placed and connected on the board plays a major role in how well the PDN can manage high-frequency currents without introducing noise or voltage dips.</p>
+        <p>Given that inductance plays such a critical role in defining the performance of the PDN, we must account for how it affects the resonant frequency of the capacitors. The inductance from the package, traces, and pins will all influence the capacitor's resonant frequency, and this needs to be considered when selecting capacitors for high-frequency applications. The resonant frequency can be calculated using the standard formula for LC circuits:</p>
+
+        <div class="formula-wrap"><img src="https://raw.githubusercontent.com/dariofresu/Fresu-Electronics-Blog/main/assets/images/pdn-low-emi_img07.png" alt="" loading="lazy" width="235" height="64"></div>
+
+        <p>Where L is the inductance and C is the capacitance. By knowing these values, we can determine the resonant frequency, which tells us the point at which the capacitor will shift from capacitive to inductive behavior. This information is very important when designing for high-frequency environments, as it shows that the actual capacitance value may be less important than ensuring the capacitor operates effectively at the required frequency range.</p>
+
+        <hr>
+
+        <h2 id="understanding-inductance-in-pdns">Understanding Inductance in Power Delivery Networks</h2>
+        <p>To begin with, let's take a closer look at the inductances associated with the capacitor package itself. For example, consider using a 0.1 microfarad capacitor. When we calculate the combined inductance from the package, traces, and the pins, we typically find that it amounts to about 15 nanohenries. <br><br>If we take this information and calculate the resonant frequency of the capacitor using the total package inductance, plus the trace inductance, plus the inductance from the IC leads, we find that the capacitor will be effective only up to a frequency of 4MHz.</p>
+        <p>This means that, up to4MHz, we can expect a nice capacitive filtering behavior from the capacitor. However, frequencies above 4MHz. ill shift the capacitor’s behavior into the inductive realm. Therefore, <strong>to design an effective power delivery network, it’s important to select both the package and capacitance value wisely</strong>. By doing this, we can achieve the desired effect of parallel capacitance.</p>
+        <p>When we think about using multiple capacitors of the same value in parallel, we can see that the current gets distributed evenly across these capacitors. Each capacitor will handle the same amount of current, but the overall capacitance increases with the number of capacitors used in parallel. Additionally, this configuration helps to reduce the overall inductance because we are effectively combining them in parallel. This is exactly the kind of effect we want to achieve, especially if our goal is to obtain low impedance.</p>
+
+        <hr>
+
+        <h2 id="decoupling-capacitors-placement">Decoupling capacitors placement</h2>
+        <p>Next, let's examine how selecting the right strategy for decoupling capacitors, along with their proper placement, can influence radiated emissions. The primary concern arises from the inductive loop that is formed during operation. For instance, if we consider the power pin and the ground pin of the circuit, the loop we create from the power pin to the capacitor and then back through the return path is critical. The return path goes through a via that connects to the return reference plane (RRP), before returning to the ground pin through another via.</p>
+
+        <img src="https://raw.githubusercontent.com/dariofresu/Fresu-Electronics-Blog/main/assets/images/pdn-low-emi_img08.png" alt="Figure 3 - Example of a current loop" class="post-img" loading="lazy" width="970" height="825">
+        <p class="img-caption">Figure 3 - Example of a current loop in a PCB</p>
+
+        <p>It’s important to note that if you place the decoupling capacitor far away from the power pin, the loop created becomes much larger. This larger loop will carry transient currents. Since a <strong>changing current generates an induced magnetic field</strong>, the size of this loop becomes significant. The induced magnetic field can couple with other traces and cables, leading to propagation and potential radiation of noise.</p>
+        <p>Moreover, the issue of radiated emissions escalates when transient currents flow through these loops. The impedance associated with the return reference plane also plays a role in this context. When considering the current flow, it is essential to recognize where that current is moving. The larger the loop becomes, the greater the voltage drop that occurs. This voltage drop can couple with other traces and cables, leading to radiation problems.</p>
+        <p>Additionally, if the decoupling capacitors are placed farther away from the ICs, this distance introduces another factor to consider. The connection path may also couple noise from other traces routed nearby. This noise can then affect the power delivery network, allowing it to propagate through to other ICs. The coupling of noise may not only impact the performance of these ICs but could also affect the cables connected to them, causing these cables to radiate certain frequencies.</p>
+
+        <hr>
+
+        <h2 id="optimizing-pdn-strategy">Optimizing Power Delivery Network Strategy</h2>
+        <p>Now, let’s delve into the strategies we can adopt to optimize the power delivery network (PDN). A key aspect of this optimization process involves calculating the <strong>target impedance</strong> of the system and determining the allowable impedance for our setup. To establish the target impedance we desire in the power delivery network, we start by assessing the maximum voltage drop permissible for the integrated circuit (IC) we are using.</p>
+        <p>From this voltage allowance, we can then divide it by the transient current calculated earlier in our analysis. The formula is straightforward: the voltage drop permitted in the IC is divided by the total transient current derived from the two main sources we identified—shoot-through current and transient load current. This simple calculation will yield the target impedance we need for the board.</p>
+        <p>Once we have this target impedance, it can be used to inform how many capacitors are necessary and what total capacitance is required to achieve this target impedance at low frequencies. It's important to note that while we focus on low frequencies for this part of the design, at higher frequencies, our approach shifts. To mitigate inductive effects at high frequencies, we must use multiple capacitors connected in parallel.</p>
+        <p>Observing the impedance behavior of the capacitors, we note that their impedance rises at a rate of approximately 20 dB per decade. This means that from one frequency point to another, the inductive component of the impedance increases steadily. However, the reason we don’t need to be overly concerned about this increase in impedance at higher frequencies is that the signal itself, as described by the <strong>Fourier transform</strong>, typically decreases at a rate of 40 dB per decade after reaching a certain harmonic level.</p>
+        <p>To clarify this point, I will refer to insights from an article published in <u><a href="https://incompliancemag.com/spectra-of-digital-clock-signals/"><strong>InCompliance Magazine by Bogdan Adamczyk</strong></a></u>, which outlines this phenomenon effectively. The focus here is to distill this information into actionable insights for designers. Essentially, when we have a trapezoidal-shaped pulse, representative of the transient currents demanded by the IC during logic gate switching, we can analyze the Fourier spectrum of these signals. The result is a boundary of harmonic frequencies encapsulated within this spectrum.</p>
+
+        <img src="https://raw.githubusercontent.com/dariofresu/Fresu-Electronics-Blog/main/assets/images/pdn-low-emi_img09.jpg" alt="Frequency spectrum of a trapezoidal-shaped current pulse." class="post-img" loading="lazy" width="1920" height="1080">
+        <p class="img-caption">Figure 4  - Frequency spectrum of a trapezoidal-shaped current pulse.</p>
+
+        <p>This analysis reveals that the signal's spectrum will start to diminish at a specific point, defined as 1/πτ and 1/πτr​, where τr​ represents the switching time of the trapezoidal pulse. By determining the rate at which this spectrum declines at -40 dB per decade, we can then compare it to the response of the PDN. </p>
+        <p>The response of the PDN typically grows at +20 dB per decade. This comparison indicates that the signal will ultimately decrease at a net rate of -20 dB per decade after reaching this specific point in the frequency spectrum.</p>
+        <p>This analysis suggests that at high frequencies, the amplification of the noise does not pose as significant an issue. The harmonics that extend beyond this frequency threshold will gradually diminish at a rate of -40 dB per decade. Consequently, the power they carry will not be a significant concern for us anymore, as the amplitudes of these higher frequencies will become increasingly negligible.</p>
+
+        <hr>
+
+        <h2 id="calculating-the-number-of-capacitors">Calculating the Number of Capacitors for Target Impedance</h2>
+        <p>Now, the pressing question is how we can determine the number of capacitors required in our circuits to ensure that we meet the target impedance?</p>
+        <p>To begin, we first need to establish the target impedance permissible in our system. This understanding is vital, as it forms the foundation for the subsequent calculations. Once we have defined the target impedance, we can easily calculate the necessary number of capacitors using a straightforward formula: </p>
+
+        <div class="formula-wrap"><img src="https://raw.githubusercontent.com/dariofresu/Fresu-Electronics-Blog/main/assets/images/pdn-low-emi_img10.png" alt="" loading="lazy" width="164" height="68"></div>
+
+        <p>where:</p>
+        <ul>
+          <li><strong>n</strong>: Number of capacitors.</li>
+          <li><strong>L</strong>: Series inductance of the selected capacitor.</li>
+          <li><strong>Zt​</strong>: Target impedance.</li>
+          <li><strong>tr​</strong>: Time required for the transient current needed by the integrated circuit (IC).</li>
+        </ul>
+        <p>By applying this formula, we can determine how many capacitors we will need to achieve the desired target impedance effectively. While calculating this target impedance, it's important to incorporate adjusting factors that account for noise, temperature variations, parasitic elements, and manufacturing tolerances. Including these factors ensures that the target impedance aligns more closely with the real-world performance requirements of our design.</p>
+
+        <hr>
+
+        <h2 id="conclusions">Conclusions</h2>
+        <p>So, what is the optimal solution we can implement in our design? </p>
+        <p>The first step is to calculate the target impedance accurately. Following that, we need to choose the appropriate surface-mount technology (<strong>SMT</strong>) capacitor package size. Once we have determined the package size, it’s advisable to select the largest capacitance value available within that size.</p>
+        <p>Another crucial point to consider is <strong>inter-plane capacitance</strong>. Utilizing this capacitance can provide significant benefits at lower frequencies, allowing us to leverage the capacitance between power and return planes to further decrease our target impedance.</p>
+        <p>However, we must also be aware of the trade-offs involved, as the power and return reference planes will exhibit certain resonances. These resonant frequencies will consequently influence the impedance profile of the power delivery network.</p>
+        <p>One reason to incorporate capacitors with <strong>higher equivalent series resistance (ESR)</strong> is that we can utilize this ESR to dampen the resonant frequencies introduced by the inter-plane capacitance. </p>
+        <p>Thus, these capacitors are not only responsible for providing the energy required by the IC but also play a role throughout the entire board. Their strategic placement is essential, not only must they help achieve the target impedance, but they must also effectively dampen any resonances that arise in the power and return reference planes.</p>
+        <p>In practice, this means we will be using a combination of low ESR capacitors situated as close as possible to the IC, supplemented by capacitors with slightly higher ESR distributed around the board. This approach ensures that we can meet our target impedance while also managing the resonant frequencies inherent to the design.</p>
+        <p>If you would like to master EMC/EMI design, we have a new training program here:</p>
+        <p><a href="https://www.fresuelectronics.com/mentoring" target="_blank" class="btn-primary">Get Personalized Training</a></p>
+        <p>There, you’ll find details on how to apply for one of our exclusive programs designed to help you achieve that goal. </p>
+      </div>
+
+      <div class="tags">
+        <span class="tag">PDN</span><span class="tag">Decoupling</span><span class="tag">EMI</span><span class="tag">PCB Design</span>
+      </div>
+    </article>
+
+    <!-- Share -->
+    <div class="share-strip">
+      <span class="share-label">Share</span>
+      <a href="https://www.linkedin.com/shareArticle?mini=true&url=https%3A%2F%2Fblog.fresuelectronics.com%2Fpdn-low-emi&title=Power%20Delivery%20Network%20%28PDN%29%20for%20Low%20EMI"
+         target="_blank" class="share-btn linkedin">LinkedIn</a>
+      <a href="https://twitter.com/intent/tweet?url=https%3A%2F%2Fblog.fresuelectronics.com%2Fpdn-low-emi&text=Power%20Delivery%20Network%20%28PDN%29%20for%20Low%20EMI&via=dario_fresu"
+         target="_blank" class="share-btn twitter">X / Twitter</a>
+      <button class="share-btn copylink"
+              onclick="copyLink(this,'https://blog.fresuelectronics.com/pdn-low-emi')">Copy Link</button>
+    </div>
+
+    <!-- CTA -->
+    <div class="cta-section">
+      <div class="cta-inner">
+        <span class="cta-kicker">Work with Fresu Electronics</span>
+        <h3>Stop finding EMC problems in the chamber.</h3>
+        <p>An EMC Design Audit reviews your schematic and PCB layout before fabrication — identifying return path gaps, filter placement errors, and stackup decisions that turn into failures at the test house. Report delivered in 10 business days.</p>
+        <div class="cta-actions">
+          <a href="https://www.fresuelectronics.com/emc-audit" class="btn-primary">Book an EMC Audit — €8,000 →</a>
+          <a href="https://www.fresuelectronics.com/trainings" class="btn-outline">Browse Courses</a>
+        </div>
+      </div>
+      <div class="proof-row">
+        <span class="proof-item">80,000+ engineers reached</span>
+        <span class="proof-item">4,000+ engineers trained</span>
+        <span class="proof-item">Report in 10 business days</span>
+        <span class="proof-item">IPC Certified · Former ETH Zurich</span>
+      </div>
+    </div>
+
+  </div><!-- /.container -->
+</div><!-- /.post-layout -->
+
+<!-- Lightbox -->
+<div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Image viewer">
+  <button class="lightbox-close" aria-label="Close" onclick="lbClose()">✕</button>
+  <img id="lightboxImg" src="" alt="">
+</div>
+
+<!-- Footer -->
+<footer>
+  <div class="site-footer">
+    <span>© 2026 Fresu Electronics SRL — Sardinia, Italy</span>
+    <span>
+      <a href="https://www.fresuelectronics.com/terms-of-services">Terms</a> ·
+      <a href="https://www.freeprivacypolicy.com/live/2e894867-7c2b-4014-aa0c-db0f62e59cb8">Privacy</a> ·
+      <a href="https://blog.fresuelectronics.com">Blog</a>
+    </span>
+  </div>
+</footer>
+
+<script>
+function copyLink(btn, url) {
+  navigator.clipboard.writeText(url).then(function() {
+    var o = btn.innerHTML;
+    btn.innerHTML = '✓ Copied!';
+    setTimeout(function() { btn.innerHTML = o; }, 2000);
+  });
+}
+
+/* Reading progress */
+(function() {
+  var bar = document.getElementById('progressBar');
+  function update() {
+    var h = document.documentElement;
+    var max = h.scrollHeight - h.clientHeight;
+    bar.style.width = (max > 0 ? (h.scrollTop / max) * 100 : 0) + '%';
+  }
+  document.addEventListener('scroll', update, { passive: true });
+  update();
+})();
+
+/* TOC scrollspy */
+(function() {
+  var links = document.querySelectorAll('.toc-rail a');
+  if (!links.length || !('IntersectionObserver' in window)) return;
+  var map = {};
+  links.forEach(function(a) { map[a.getAttribute('href').slice(1)] = a; });
+  var current = null;
+  var obs = new IntersectionObserver(function(entries) {
+    entries.forEach(function(e) {
+      if (e.isIntersecting) {
+        if (current) current.classList.remove('active');
+        current = map[e.target.id];
+        if (current) current.classList.add('active');
+      }
+    });
+  }, { rootMargin: '0px 0px -75% 0px' });
+  document.querySelectorAll('.post-body h2[id]').forEach(function(h) { obs.observe(h); });
+})();
+
+/* Lightbox */
+var lb = document.getElementById('lightbox');
+var lbImg = document.getElementById('lightboxImg');
+function lbClose() { lb.classList.remove('open'); lbImg.src = ''; }
+document.querySelectorAll('.post-img, .post-img-center').forEach(function(img) {
+  img.addEventListener('click', function() {
+    lbImg.src = img.src; lbImg.alt = img.alt || '';
+    lb.classList.add('open');
+  });
+});
+lb.addEventListener('click', function(e) { if (e.target === lb || e.target === lbImg) lbClose(); });
+document.addEventListener('keydown', function(e) { if (e.key === 'Escape') lbClose(); });
+</script>
+
+</body>
+</html>
