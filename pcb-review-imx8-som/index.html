@@ -1,0 +1,937 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>i.MX8 SOM - EMI Design Layout Review — Fresu Electronics</title>
+  <meta name="description" content="In this lesson we dive deep into the review of the iMX8 processor PCB, focusing on Electromagnetic Compatibility (EMC) and signal integrity.">
+  <link rel="canonical" href="https://blog.fresuelectronics.com/pcb-review-imx8-som/">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400;1,700&display=swap" rel="stylesheet">
+
+  <meta property="og:title" content="i.MX8 SOM - EMI Design Layout Review">
+  <meta property="og:description" content="In this lesson we dive deep into the review of the iMX8 processor PCB, focusing on Electromagnetic Compatibility (EMC) and signal integrity.">
+  <meta property="og:url" content="https://blog.fresuelectronics.com/pcb-review-imx8-som/">
+  <meta property="og:image" content="https://raw.githubusercontent.com/dariofresu/Fresu-Electronics-Blog/main/assets/images/pcb-review-imx8-som_img01.jpg">
+  <meta property="og:type" content="article">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:site" content="@dario_fresu">
+  <meta name="twitter:image" content="https://raw.githubusercontent.com/dariofresu/Fresu-Electronics-Blog/main/assets/images/pcb-review-imx8-som_img01.jpg">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "headline": "i.MX8 SOM - EMI Design Layout Review",
+    "description": "In this lesson we dive deep into the review of the iMX8 processor PCB, focusing on Electromagnetic Compatibility (EMC) and signal integrity.",
+    "datePublished": "2024-11-17",
+    "url": "https://blog.fresuelectronics.com/pcb-review-imx8-som/",
+    "author": { "@type": "Person", "name": "Dario Fresu", "jobTitle": "Principal EMC Architect", "url": "https://www.fresuelectronics.com/about" },
+    "publisher": { "@type": "Organization", "name": "Fresu Electronics", "url": "https://www.fresuelectronics.com" },
+    "image": "https://raw.githubusercontent.com/dariofresu/Fresu-Electronics-Blog/main/assets/images/pcb-review-imx8-som_img01.jpg"
+  }
+  </script>
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:          #0a0a0a;
+      --surface:     #111111;
+      --surface-2:   #181818;
+      --border:      #242424;
+      --fg:          #ffffff;
+      --label:       #a0aab8;
+      --accent:      #00FF94;
+      --accent-dim:  rgba(0, 255, 148, 0.10);
+      --accent-hover:#00e085;
+      --wrong:       #ff4d4d;
+    }
+
+    body {
+      background: var(--bg);
+      color: #ffffff;
+      font-family: 'Poppins', sans-serif;
+      font-size: 17px;
+      line-height: 1.75;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* ── Reading progress ── */
+    .progress-track { position: fixed; top: 0; left: 0; right: 0; height: 3px; z-index: 1100; background: transparent; }
+    .progress-bar { height: 100%; width: 0; background: var(--accent); transition: width 80ms linear; }
+
+    /* ── Header ── */
+    header { border-bottom: 1px solid var(--border); }
+    .site-header {
+      max-width: 1100px; margin: 0 auto;
+      padding: 18px 40px;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .site-header img { height: 44px; width: auto; display: block; }
+    .header-nav { display: flex; align-items: center; gap: 28px; }
+    .header-nav a {
+      font-size: 11px; font-weight: 600;
+      letter-spacing: 0.08em; text-transform: uppercase;
+      color: #ffffff; text-decoration: none; opacity: 0.6;
+      transition: opacity 0.2s;
+    }
+    .header-nav a:hover { opacity: 1; }
+    .header-cta {
+      opacity: 1 !important;
+      background: var(--accent); color: #0a0a0a !important;
+      padding: 9px 20px; border-radius: 999px;
+      transition: background 0.2s;
+    }
+    .header-cta:hover { background: var(--accent-hover) !important; }
+
+    /* ── Layout: TOC rail + article ── */
+    .post-layout { max-width: 1100px; margin: 0 auto; padding: 0 40px; display: grid; grid-template-columns: minmax(0, 740px); justify-content: center; }
+    .toc-rail { display: none; }
+    @media (min-width: 1200px) {
+      .post-layout { grid-template-columns: 240px minmax(0, 740px); gap: 56px; justify-content: center; }
+      .toc-rail { display: block; position: sticky; top: 36px; align-self: start; padding-top: 76px; }
+    }
+    .toc-rail nav { border-left: 1px solid var(--border); padding-left: 18px; }
+    .toc-label { font-size: 10px; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase; color: var(--label); margin-bottom: 14px; display: block; }
+    .toc-rail ul { list-style: none; }
+    .toc-rail li { margin-bottom: 10px; }
+    .toc-rail a { font-size: 12.5px; color: var(--label); text-decoration: none; line-height: 1.45; display: block; transition: color 0.15s; }
+    .toc-rail a:hover { color: #ffffff; }
+    .toc-rail a.active { color: var(--accent); }
+
+    /* Inline TOC for narrow screens */
+    .toc-inline { margin: 0 0 40px; border: 1px solid var(--border); border-radius: 4px; background: var(--surface); }
+    .toc-inline summary { cursor: pointer; padding: 14px 20px; font-size: 12px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--label); list-style: none; }
+    .toc-inline summary::before { content: '☰  '; color: var(--accent); }
+    .toc-inline ul { list-style: none; padding: 0 20px 16px; }
+    .toc-inline li { margin-bottom: 8px; }
+    .toc-inline a { font-size: 14px; color: #ffffff; opacity: 0.85; text-decoration: none; }
+    .toc-inline a:hover { color: var(--accent); opacity: 1; }
+    @media (min-width: 1200px) { .toc-inline { display: none; } }
+
+    /* ── Container ── */
+    .container { padding: 72px 0 100px; min-width: 0; }
+
+    /* ── Breadcrumb ── */
+    .breadcrumb { display: inline-block; font-size: 12px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--label); text-decoration: none; margin-bottom: 28px; transition: color 0.15s; }
+    .breadcrumb:hover { color: var(--accent); }
+
+    /* ── Kicker ── */
+    .kicker {
+      display: inline-block;
+      font-size: 10px; font-weight: 600;
+      letter-spacing: 0.18em; text-transform: uppercase;
+      color: var(--accent);
+      border: 1px solid var(--accent);
+      background: var(--accent-dim);
+      padding: 4px 12px; border-radius: 2px;
+      margin-bottom: 24px;
+    }
+
+    /* ── Title ── */
+    h1 {
+      font-size: clamp(28px, 5vw, 44px);
+      font-weight: 800; line-height: 1.1;
+      letter-spacing: -0.025em; color: #ffffff;
+      margin-bottom: 20px;
+    }
+    h1 em { font-style: italic; color: var(--accent); }
+
+    /* ── Deck ── */
+    .deck {
+      font-size: 18px; font-weight: 400;
+      color: #ffffff; line-height: 1.7;
+      margin-bottom: 36px;
+    }
+
+    /* ── Author row ── */
+    .author-row {
+      display: flex; align-items: center; gap: 14px;
+      padding: 20px 0;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 56px;
+    }
+    .author-row img {
+      width: 52px; height: 52px; border-radius: 50%;
+      object-fit: cover; flex-shrink: 0;
+      border: 2px solid var(--accent);
+    }
+    .author-name  { display: block; font-size: 14px; font-weight: 600; color: #ffffff; line-height: 1.3; }
+    .author-title { display: block; font-size: 12px; font-weight: 400; color: var(--label); line-height: 1.3; }
+    .author-date  { display: block; font-size: 11px; color: var(--label); margin-top: 4px; }
+
+    /* ── Body typography ── */
+    p { color: #ffffff; font-weight: 400; margin-bottom: 22px; }
+    strong { color: #ffffff; font-weight: 600; }
+    em { font-style: italic; }
+    .post-body ul, .post-body ol { margin: 0 0 22px 24px; }
+    .post-body li { margin-bottom: 8px; }
+    .post-body a { color: var(--accent); }
+
+    h2 {
+      font-size: 22px; font-weight: 700; color: #ffffff;
+      margin: 56px 0 18px; letter-spacing: -0.015em;
+      scroll-margin-top: 32px;
+    }
+    h2::before {
+      content: ''; display: block;
+      width: 32px; height: 3px;
+      background: var(--accent); margin-bottom: 14px; border-radius: 2px;
+    }
+    h3 {
+      font-size: 17px; font-weight: 600; color: #ffffff;
+      margin: 36px 0 12px;
+      scroll-margin-top: 32px;
+    }
+
+    /* ── Post images ── */
+    .post-img {
+      width: 100%; border-radius: 4px; display: block;
+      margin: 36px 0 10px;
+      border: 1px solid var(--border);
+      cursor: zoom-in;
+    }
+    .post-img-center {
+      display: block; margin: 36px auto 10px;
+      border-radius: 4px;
+      border: 1px solid var(--border);
+      max-width: 100%;
+      cursor: zoom-in;
+    }
+    .img-caption {
+      text-align: center; font-size: 12px;
+      color: var(--label); margin-bottom: 32px;
+      font-style: italic; line-height: 1.5;
+    }
+
+    /* ── Lightbox ── */
+    .lightbox { position: fixed; inset: 0; z-index: 1200; background: rgba(5,5,5,0.93); display: none; align-items: center; justify-content: center; padding: 32px; cursor: zoom-out; }
+    .lightbox.open { display: flex; }
+    .lightbox img { max-width: 96%; max-height: 92vh; border-radius: 4px; }
+    .lightbox-close { position: absolute; top: 18px; right: 24px; background: none; border: none; color: #ffffff; font-size: 26px; cursor: pointer; opacity: 0.7; }
+    .lightbox-close:hover { opacity: 1; }
+
+    /* ── Formula images ── */
+    .formula-wrap { display: flex; justify-content: center; margin: 24px 0 28px; }
+    .formula-wrap img {
+      display: block; background: #ffffff;
+      padding: 14px 20px; border-radius: 4px; max-width: 100%;
+    }
+
+    /* ── Callout block ── */
+    .callout {
+      background: var(--surface);
+      border-left: 3px solid var(--accent);
+      padding: 20px 24px;
+      border-radius: 0 4px 4px 0;
+      margin: 32px 0;
+    }
+    .callout p { margin-bottom: 0; }
+    .callout-label { font-size: 10px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent); margin-bottom: 8px; display: block; }
+
+    /* ── Variable list ── */
+    .var-list {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 20px 24px; margin: 24px 0;
+    }
+    .var-list p { margin-bottom: 10px; font-size: 15px; }
+    .var-list p:last-child { margin-bottom: 0; }
+
+    /* ── Compliance / standard reference block ── */
+    .compliance-block {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 24px; margin: 28px 0;
+    }
+    .compliance-block p { margin-bottom: 10px; font-size: 15px; }
+    .compliance-block p:last-child { margin-bottom: 0; }
+    .compliance-label {
+      font-size: 10px; font-weight: 600;
+      letter-spacing: 0.14em; text-transform: uppercase;
+      color: var(--accent); margin-bottom: 14px; display: block;
+    }
+
+    /* ── Numbered steps ── */
+    .steps { margin: 28px 0; }
+    .step { display: flex; gap: 18px; margin-bottom: 20px; }
+    .step-num {
+      flex-shrink: 0;
+      width: 28px; height: 28px;
+      background: var(--accent-dim);
+      border: 1px solid var(--accent);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 12px; font-weight: 700; color: var(--accent);
+      margin-top: 3px;
+    }
+    .step p { margin-bottom: 0; font-size: 15px; }
+
+    /* ── Tags ── */
+    .tags { display: flex; flex-wrap: wrap; gap: 8px; margin: 48px 0 0; }
+    .tag {
+      font-size: 10px; font-weight: 600;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--accent);
+      border: 1px solid var(--accent);
+      background: var(--accent-dim);
+      padding: 4px 12px; border-radius: 2px;
+    }
+
+    /* ── References ── */
+    .references { margin-top: 48px; padding-top: 28px; border-top: 1px solid var(--border); }
+    .references h3 { margin-top: 0; }
+    .references ul { padding-left: 20px; }
+    .references li { color: #ffffff; font-size: 14px; margin-bottom: 8px; }
+    .references a { color: var(--accent); text-decoration: none; }
+    .references a:hover { text-decoration: underline; }
+
+    /* ── Share strip ── */
+    .share-strip {
+      display: flex; align-items: center; gap: 12px;
+      margin: 56px 0 0; padding-top: 32px;
+      border-top: 1px solid var(--border); flex-wrap: wrap;
+    }
+    .share-label {
+      font-size: 12px; font-weight: 600;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--label);
+    }
+    .share-btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-family: 'Poppins', sans-serif;
+      font-size: 13px; font-weight: 600;
+      padding: 9px 18px; border-radius: 999px;
+      text-decoration: none; border: none; cursor: pointer;
+      transition: opacity 0.2s, transform 0.15s; white-space: nowrap;
+    }
+    .share-btn:hover { opacity: 0.88; transform: translateY(-1px); }
+    .share-btn.linkedin { background: #0A66C2; color: #ffffff; }
+    .share-btn.twitter  { background: #000000; color: #ffffff; }
+    .share-btn.copylink { background: var(--surface); color: var(--accent); border: 1px solid var(--accent); }
+
+    /* ── CTA section ── */
+    .cta-section {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 4px; overflow: hidden;
+      position: relative; margin-top: 72px;
+    }
+    .cta-section::after {
+      content: ''; position: absolute;
+      top: 0; left: 0; right: 0; height: 2px;
+      background: linear-gradient(90deg, var(--accent), transparent);
+    }
+    .cta-inner { padding: 48px 48px 40px; }
+    .cta-kicker {
+      font-size: 10px; font-weight: 600;
+      letter-spacing: 0.18em; text-transform: uppercase;
+      color: var(--accent); margin-bottom: 14px; display: block;
+    }
+    .cta-section h3 {
+      font-size: 24px; font-weight: 700; color: #ffffff;
+      margin: 0 0 12px; letter-spacing: -0.01em;
+    }
+    .cta-section p {
+      font-size: 15px; color: #ffffff; line-height: 1.7; margin-bottom: 28px;
+    }
+    .cta-actions { display: flex; gap: 12px; flex-wrap: wrap; }
+    .btn-primary {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: var(--accent); color: #0a0a0a;
+      font-family: 'Poppins', sans-serif;
+      font-size: 13px; font-weight: 700;
+      padding: 13px 26px; border-radius: 999px;
+      text-decoration: none; transition: background 0.2s;
+    }
+    .btn-primary:hover { background: var(--accent-hover); }
+    .btn-outline {
+      display: inline-flex; align-items: center;
+      color: #ffffff;
+      font-family: 'Poppins', sans-serif;
+      font-size: 13px; font-weight: 600;
+      text-decoration: none;
+      padding: 12px 26px; border-radius: 999px;
+      border: 1px solid var(--border);
+      transition: border-color 0.2s;
+    }
+    .btn-outline:hover { border-color: var(--accent); color: var(--accent); }
+    .proof-row {
+      display: flex; flex-wrap: wrap; gap: 8px 20px;
+      padding: 20px 48px;
+      border-top: 1px solid var(--border);
+    }
+    .proof-item {
+      font-size: 12px; font-weight: 400; color: var(--label);
+      display: flex; align-items: center; gap: 6px;
+    }
+    .proof-item::before { content: '✓'; color: var(--accent); font-weight: 700; }
+
+    /* ── Closing callout ── */
+    .closing {
+      margin-top: 52px;
+      font-style: italic; font-weight: 600;
+      color: #ffffff; font-size: 17px; line-height: 1.7;
+      border-left: 3px solid var(--accent);
+      padding: 18px 24px;
+      background: var(--surface);
+      border-radius: 0 4px 4px 0;
+    }
+    .closing em { color: var(--accent); }
+
+    /* ── Footer ── */
+    footer { border-top: 1px solid var(--border); }
+    .site-footer {
+      max-width: 1100px; margin: 0 auto;
+      padding: 28px 40px;
+      display: flex; align-items: center; justify-content: space-between;
+      font-size: 11px; color: #ffffff; opacity: 0.5;
+      flex-wrap: wrap; gap: 12px;
+    }
+    .site-footer a { color: var(--accent); text-decoration: none; }
+
+    :focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation: none !important; transition: none !important; }
+    }
+
+    /* ── Mobile ── */
+    @media (max-width: 768px) {
+      .site-header, .site-footer { padding-left: 20px; padding-right: 20px; }
+      .post-layout { padding: 0 20px; }
+      .container { padding-top: 48px; padding-bottom: 72px; }
+      .header-nav a:not(.header-cta) { display: none; }
+      h1 { font-size: clamp(24px, 7vw, 36px); }
+      .cta-inner { padding: 28px 20px 24px; }
+      .proof-row { padding: 16px 20px; }
+      .formula-wrap img { padding: 10px 14px; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="progress-track" aria-hidden="true"><div class="progress-bar" id="progressBar"></div></div>
+
+<!-- Header -->
+<header>
+  <div class="site-header">
+    <a href="https://www.fresuelectronics.com">
+      <img src="https://raw.githubusercontent.com/dariofresu/Fresu-Electronics-Blog/main/assets/logo.png" alt="Fresu Electronics">
+    </a>
+    <nav class="header-nav">
+      <a href="https://blog.fresuelectronics.com">Blog</a>
+      <a href="https://blog.fresuelectronics.com/tools/">Tools</a>
+      <a href="https://www.fresuelectronics.com/trainings">Courses</a>
+      <a href="https://www.fresuelectronics.com/emc-audit" class="header-cta">Book EMC Audit</a>
+    </nav>
+  </div>
+</header>
+
+<div class="post-layout">
+
+  <!-- Desktop TOC rail -->
+  <aside class="toc-rail" aria-label="Table of contents">
+    <nav>
+      <span class="toc-label">On this page</span>
+      <ul id="tocList">
+        <li><a href="#stackup-analysis">Stackup analysis</a></li>
+        <li><a href="#layer-1">Layer 1</a></li>
+        <li><a href="#layer-2">Layer 2</a></li>
+        <li><a href="#layer-3">Layer 3</a></li>
+        <li><a href="#layer-4">Layer 4</a></li>
+        <li><a href="#layer-5">Layer 5</a></li>
+        <li><a href="#layer-6">Layer 6</a></li>
+        <li><a href="#conclusions">Conclusions</a></li>
+      </ul>
+    </nav>
+  </aside>
+
+  <div class="container">
+
+    <a href="https://blog.fresuelectronics.com" class="breadcrumb">← All posts</a>
+
+    <article>
+      <span class="kicker">Design Review</span>
+      <h1>i.MX8 SOM - EMI Design Layout Review</h1>
+      <p class="deck">In this lesson we dive deep into the review of the iMX8 processor PCB, focusing on Electromagnetic Compatibility (EMC) and signal integrity.</p>
+
+      <div class="author-row">
+        <img src="https://raw.githubusercontent.com/dariofresu/Fresu-Electronics-Blog/main/assets/dario-fresu.jpg" alt="Dario Fresu">
+        <div>
+          <span class="author-name">Dario Fresu</span>
+          <span class="author-title">Principal EMC Architect — Fresu Electronics</span>
+          <span class="author-date">November 2024 · 20 min read</span>
+        </div>
+      </div>
+
+      <!-- Mobile/tablet TOC -->
+      <details class="toc-inline">
+        <summary>On this page</summary>
+        <ul>
+          <li><a href="#stackup-analysis">Stackup analysis</a></li>
+          <li><a href="#layer-1">Layer 1</a></li>
+          <li><a href="#layer-2">Layer 2</a></li>
+          <li><a href="#layer-3">Layer 3</a></li>
+          <li><a href="#layer-4">Layer 4</a></li>
+          <li><a href="#layer-5">Layer 5</a></li>
+          <li><a href="#layer-6">Layer 6</a></li>
+          <li><a href="#conclusions">Conclusions</a></li>
+        </ul>
+      </details>
+
+      <div class="post-body">
+
+        <!-- img01 (Wix node 0 — first body image, no alt/caption in source) -->
+        <img src="https://raw.githubusercontent.com/dariofresu/Fresu-Electronics-Blog/main/assets/images/pcb-review-imx8-som_img01.jpg" alt="" class="post-img" loading="lazy" width="1920" height="1080">
+
+        <h3><strong>Action list:</strong></h3>
+        <h5><a href="https://www.fresuelectronics.com/product-page/emi-quick-fixes-guide"><u><strong>1. Get the New EMI Quick Fixes Guide - 2025</strong></u></a></h5>
+
+        <!-- Wix PRODUCT app-embed: EMI Quick Fixes Guide -->
+        <div class="callout">
+          <span class="callout-label">Resource</span>
+          <p><a href="https://www.fresuelectronics.com/product-page/emi-quick-fixes-guide" target="_blank">EMI Quick Fixes Guide</a></p>
+        </div>
+
+        <p>In this lesson we dive deep into the review of the iMX8 processor PCB, focusing on Electromagnetic Compatibility (EMC) and signal integrity. </p>
+
+        <p>We start by analyzing the stack-up of the board, identifying potential issues with mixed signal layers, power planes, and return reference planes.  Throughout the lesson, we will highlight specific problem areas, and provides recommendations to enhance board design for better EMC compliance and signal integrity. </p>
+
+        <h2 id="stackup-analysis">Stackup analysis</h2>
+
+        <p>The first aspect to examine is the board's stack-up. Understanding the stack-up is essential to evaluate how the fields will behave in this system on module. Analyzing the stack-up reveals several key details, starting with the fact that it consists of the following layers:</p>
+
+        <ul>
+          <li>Layer 1 - Mixed Signals</li>
+          <li>Layer 2 - Power Plane</li>
+          <li>Layer 3 - Power Plane</li>
+          <li>Layer 4 - Signals</li>
+          <li>Layer 5 - Signals</li>
+          <li>Layer 6 - Mixed Signals</li>
+        </ul>
+
+        <!-- img02 (Wix node 17) -->
+        <img src="https://raw.githubusercontent.com/dariofresu/Fresu-Electronics-Blog/main/assets/images/pcb-review-imx8-som_img02.png" alt="Figure 1 - Stackup of the board" class="post-img" loading="lazy" width="1907" height="1027">
+        <p class="img-caption">Figure 1 - Stackup of the board.</p>
+
+        <p>At first glance, there could be potential issues.  A mixed signal layer means that both signals and power are integrated on the same layer. Directly beneath it is a power plane, which ideally should be a return reference plane (<strong>RRP</strong>). However, what catches the attention is the additional plane on layer three. This plane could potentially be another power plane, but there’s uncertainty around its exact role. </p>
+
+        <div class="callout">
+          <p><strong>🔓 Ideally, we want to ensure that each signal and power layers are paired with their respective return reference plane (RRP). </strong></p>
+        </div>
+
+        <p>This principle is crucial for maintaining signal integrity and preventing electromagnetic interference (EMI). Replacing a return reference plane with another signal layer to reduce costs might seem appealing, but this approach often backfires. While it may appear to save money by eliminating a layer, the actual costs become evident during EMC tests or signal integrity checks. </p>
+
+        <div class="callout">
+          <p><strong>🔓 It is important to remember that a signal voltage is defined by two potentials: the signal's active potential and its reference potential.</strong></p>
+        </div>
+
+        <p>If one of these potentials is removed, we’re left with only one potential, which means there’s no longer a voltage difference to define the signal.</p>
+
+        <!-- img03 (Wix node 29) -->
+        <img src="https://raw.githubusercontent.com/dariofresu/Fresu-Electronics-Blog/main/assets/images/pcb-review-imx8-som_img03.jpg" alt="Figure 2- Electromagnetic Fields in a two-layer PCB" class="post-img" loading="lazy" width="1827" height="1370">
+        <p class="img-caption">Figure 2- Electromagnetic Fields in a two-layer PCB.</p>
+
+        <p>Without both potentials, a usable signal may not exist, or any signal present will likely rely on <strong>parasitic elements</strong>. These parasitics can provide a return path to close the current loop, but this compromises signal quality.  When selecting a stack-up, it is essential to think in terms of pairs. </p>
+
+        <div class="callout">
+          <p><strong>🔓 Signal (and power) layers should always be paired with their corresponding return reference planes. </strong></p>
+        </div>
+
+        <p>This pairing forms the foundation of effective stack-up design and helps prevent issues with signal integrity and electromagnetic compatibility.</p>
+
+        <p>Digital signal layers should always be placed adjacent to a return or reference plane. Without a reference plane, a single signal layer effectively functions like an RF board, promoting signal emission rather than supporting digital or mixed-signal designs. This approach can lead to significant electromagnetic compatibility issues and should be avoided. When a return reference plane is absent next to the signal, significant radiation can be emitted. This concept is explained in greater detail in the <em><strong>'Radiated Emissions'</strong></em> lesson available in the courses and blog.</p>
+
+        <p>From a manufacturing perspective, the stack-up should be designed as a mirror image, with one side of the board reflecting the other. For a six-layer board, as in this case, if a return reference plane is placed on the second layer, another return reference plane should be placed on the fifth layer. This principle of symmetry applies to other layers as well. Such symmetry is essential to ensure consistent and predictable electrical and mechanical behavior of the board.</p>
+
+        <p>A symmetrical stack-up is particularly important for the board's thermal behavior. An asymmetrical stack-up can cause uneven heating, leading to warping. This warping may place stress on solder joints, potentially causing components to detach from the board. Such mechanical failures could be easily avoided with a well-designed stack-up.</p>
+
+        <p>To prevent these issues, it is essential to aim for a symmetrical stack-up. Pair each signal layer with a return reference plane and strive to make the overall stack-up as balanced as possible. <strong>A symmetrical design</strong> enhances not only electrical performance but also the mechanical integrity of the board, ensuring greater reliability and robustness over time.</p>
+
+        <p>Proceeding with the analysis, the layers and their arrangement should now be examined more closely to better understand the setup. The first pair of layers consists of the first signal layer and the second layer, which serves as the reference plane for the first layer. The third layer, at first glance from the sstakcup manager, appears to be a power plane. However, upon closer inspection, it seems to function more as a signal layer with some copper pours integrated into it.</p>
+
+        <!-- img04 (Wix node 46) -->
+        <img src="https://raw.githubusercontent.com/dariofresu/Fresu-Electronics-Blog/main/assets/images/pcb-review-imx8-som_img04.png" alt="Figure 3 - Layer 3 of the PCB" class="post-img" loading="lazy" width="1489" height="859">
+        <p class="img-caption">Figure 3 - Layer 3 of the PCB.</p>
+
+        <p>This third layer is positioned at the same distance from the second signal layer as the first signal layer. With this type of stack-up, it becomes clear that the third layer, which acts as a signal layer, should be paired with a return reference plane, which will help ensure proper signal return current and voltage reference.</p>
+
+        <p>In this case, maintaining an appropriate distance between layers is even more important. The signal on the third layer must not interfere with the signal on the fourth layer. If the distance is too small, there is a risk that signals on one layer will start interfering with signals on other layers, leading to unwanted coupling and noise. Therefore, it is recommended to reduce the distance between the second and third signal layers to create strong coupling between the signal and its return reference plane.</p>
+
+        <p>By optimizing this distance, we can achieve a situation where the return current, and the voltage reference for each signal is confined to its designated area, reducing the potential for <strong>crosstalk</strong> with signals on layer four. </p>
+
+        <p>The use of the second layer as a return and reference plane for both the first signal layer and the third layer, is made possible by the skin effect, which ensures that the return current will flow along the portion of the plane directly beneath each signal. For example, the signal on the first layer will create a return current in a localized region of the return reference plane on the second layer, and the same will happen for the third signal layer.</p>
+
+        <!-- img05 (Wix node 55) -->
+        <img src="https://raw.githubusercontent.com/dariofresu/Fresu-Electronics-Blog/main/assets/images/pcb-review-imx8-som_img05.jpg" alt="Figure 4 - Example of skin effect when a return reference layer is used in a PCB stackup" class="post-img" loading="lazy" width="1080" height="517">
+        <p class="img-caption">Figure 4 - Example of skin effect when a return reference layer is used in a PCB stackup.</p>
+
+        <p>To further reduce the risk of interference between signals, if needed, we can also adjust the stackup to ensure that the spacing between the signal layer and the return reference plane, ensuring optimal coupling. The goal is to reduce the distance as much as possible without causing unwanted interference between adjacent signals.</p>
+
+        <p>Moving to the next layer, layer four, it is similar to layer three in that it is also composed of digital signals, but it also features some planes, likely power or ground planes. Since layer four also carries digital signals, the next step is to place another return reference plane on layer five, similar to the one on layer two. This will help ensure proper coupling for the signals on layer four.</p>
+
+        <!-- img06 (Wix node 60) -->
+        <img src="https://raw.githubusercontent.com/dariofresu/Fresu-Electronics-Blog/main/assets/images/pcb-review-imx8-som_img06.png" alt="Figure 5 - Layer 4 of the PCB" class="post-img" loading="lazy" width="1598" height="863">
+        <p class="img-caption">Figure 5 - Layer 4 of the PCB.</p>
+
+        <p>Upon closer inspection of layer five, we see that while it contains some planes, they may not be sufficient to effectively serve as the return reference plane for the signals on the layer four and on layer six. In fact, there are some potential issues with the planes here that could cause problems, and these will become clearer once we analyze the setup in more detail. </p>
+
+        <!-- img07 (Wix node 63) -->
+        <img src="https://raw.githubusercontent.com/dariofresu/Fresu-Electronics-Blog/main/assets/images/pcb-review-imx8-som_img07.png" alt="Figure 6 - Layer 5 of the PCB" class="post-img" loading="lazy" width="1600" height="850">
+        <p class="img-caption">Figure 6 - Layer 5 of the PCB.</p>
+
+        <p>The primary concern arises with the signal layers on layers four and six, which rely on a stable return reference plane for proper operation. However, the planes on layer five may not provide the optimal reference for these layers, and this mismatch could lead to EMI and signal integrity issues.</p>
+
+        <!-- img08 (Wix node 66) -->
+        <img src="https://raw.githubusercontent.com/dariofresu/Fresu-Electronics-Blog/main/assets/images/pcb-review-imx8-som_img08.png" alt="Figure 7 - Layer 6 of the PCB" class="post-img" loading="lazy" width="1605" height="859">
+        <p class="img-caption">Figure 7 - Layer 6 of the PCB.</p>
+
+        <p>Now that we have an overview of the stack-up and its associated potential issues, we can proceed to analyze each layer in greater detail. By breaking down the design, layer by layer, we can better understand the specific challenges and opportunities for improvement within the board.</p>
+
+        <p><em>💡 By the way, If you would like to master EMC/EMI design, we have a new training program here:</em></p>
+
+        <p style="text-align:center;"><a href="https://www.fresuelectronics.com/mentoring" target="_blank" class="btn-primary">Get Personalized Training</a></p>
+
+        <p><em>There, you’ll find details on how to apply for one of our exclusive programs designed to help you achieve that goal. </em></p>
+
+        <h2 id="layer-1">Layer 1</h2>
+
+        <p>Let's start by examining the top layer more closely. The first issue that stands out is the presence of copper pours, which can potentially lead to problems. In this design, the goal seems to be to use stitching vias to connect the planes, especially the return and reference plane (RRP) located on the second layer. </p>
+
+        <!-- img09 (Wix node 79) -->
+        <img src="https://raw.githubusercontent.com/dariofresu/Fresu-Electronics-Blog/main/assets/images/pcb-review-imx8-som_img09.png" alt="Figure 8 - Layer 1 of the PCB" class="post-img" loading="lazy" width="1597" height="854">
+        <p class="img-caption">Figure 8 - Layer 1 of the PCB.</p>
+
+        <p>While this is a common technique, it does introduce some risks, especially regarding the formation of certain geometries that may create unintended antenna patterns. For example, consider the section shown in Figure #. The design includes only a single stitching via, and a segment of the copper pour is present that can act as an antenna. </p>
+
+        <p>Another area where a similar issue arises is where a part of the copper pour, with just one stitching via, extends out and forms a potential antenna pattern. This type of geometry is concerning, as it can lead to performance issues, particularly in high-frequency designs, where <strong>antenna-like</strong> behavior can cause significant problems.</p>
+
+        <!-- img10 (Wix node 84) -->
+        <img src="https://raw.githubusercontent.com/dariofresu/Fresu-Electronics-Blog/main/assets/images/pcb-review-imx8-som_img10.png" alt="Figure 8 - Example of antenna-like structure." class="post-img" loading="lazy" width="1618" height="858">
+        <p class="img-caption">Figure 9 - Example of antenna-like structure.</p>
+
+        <p>Another problem here is related to manufacturing. Some of these copper features are quite thin, which raises the possibility that they might not be manufactured correctly. This thinness could lead to reliability issues or, worse, cause the design to fail during production. Beyond the manufacturing concerns, the main issue lies in how these geometries can behave electrically. With just a single stitching via, there is no effective path for the return current to flow properly. This can result in these sections of the copper pour acting like an antenna, which is problematic.</p>
+
+        <div class="callout">
+          <p><strong>🔓 Without a complete return path, the geometry becomes a potential source of noise and interference.</strong></p>
+        </div>
+
+        <p>The recommendation here is to remove these problematic sections from the design. For instance, the portion highlighted in <em>Figure #</em>, with only one stitching via, should definitely be reworked. These geometries can create voltage drops between the points where they are connected to the return reference plane and where they extend out. This difference in impedance between the two points can lead to significant issues and the creation of common-mode voltage sources.</p>
+
+        <p>The voltage drop that occurs due to the impedance mismatch introduces noise into the system. This noise then couples to the return reference plane, creating common mode currents that can affect the performance of the circuit and the failure of EMC tests.</p>
+
+        <!-- img11 (Wix node 94) -->
+        <img src="https://raw.githubusercontent.com/dariofresu/Fresu-Electronics-Blog/main/assets/images/pcb-review-imx8-som_img11.png" alt="Figure 10 - Another example of antenna-like structure" class="post-img" loading="lazy" width="1920" height="1080">
+        <p class="img-caption">Figure 10 - Another example of antenna-like structure.</p>
+
+        <p>Furthermore, when a cable is connected to the return and reference plane, and when noise couples to it, this cable can act as an extension of the board itself, effectively turning it into an antenna. This leads to radiated emissions that can interfere with other nearby electronic devices, which is something we definitely want to avoid.</p>
+
+        <p>The presence of such antenna-like patterns in the design can also increase the risk of electromagnetic interference (EMI), especially as frequencies rise. Therefore, it is essential to eliminate these types of features at all costs. In this case where copper pours are used, the intention seems to be to maintain copper balance across the board. </p>
+
+        <p>However, given the high density of traces in this area, the board is unlikely to experience warpage or similar mechanical problems, and copper balance is not likely to pose a significant issue in this design. The greater threat in this design is posed by the antenna patterns, which represent a clear risk to the design’s performance and should be addressed immediately to ensure the system functions as intended.</p>
+
+        <p>Another aspect that should get our attention is the variation in trace width on one of the signal traces. On one side of the trace, we have a width of 0.08 millimeters, while on the other side, the width increases to 0.1 millimeters. Ideally, it’s important to maintain a consistent impedance throughout the traces. This consistency helps ensure that when the signal is propagating along the trace, it doesn’t encounter any impedance changes that could lead to problems.</p>
+
+        <!-- img12 (Wix node 103) -->
+        <img src="https://raw.githubusercontent.com/dariofresu/Fresu-Electronics-Blog/main/assets/images/pcb-review-imx8-som_img12.png" alt="Figure 11 - Example of impedance mismatch." class="post-img" loading="lazy" width="1617" height="858">
+        <p class="img-caption">Figure 11 - Example of impedance mismatch.</p>
+
+        <p>When the signal reaches a point where the impedance changes, such as from 0.08 millimeters to 0.1 millimeters, it will experience an impedance mismatch. This causes part of the signal to reflect back, leading to a reflection at this point. These impedance discontinuities, depending on the signal under analysis, are problematic because they disrupt its smooth propagation, causing noise and distortion.</p>
+
+        <div class="callout">
+          <p><strong>🔓 When designing traces, we want to maintain controlled impedance, meaning the impedance should be constant across the entire length of the trace!</strong></p>
+        </div>
+
+        <p>The trace can be thought of as a <strong>transmission line</strong> for the signal, with the impedance representing the characteristic impedance of that line. For the signal to propagate properly, the impedance from the beginning to the end of the trace, as well as at the load, <strong>must remain consistent.</strong> If the impedance changes along the trace, the signal may experience reflections, particularly when it encounters a segment with a different impedance.</p>
+
+        <p>For example, if the impedance is 50 ohms at one point along the trace but changes to 30 ohms at another, we create a mismatch between the points, which can potentially results in a reflection. If the instantaneous impedance changes at any point along the trace, the <strong>characteristic impedance</strong> is no longer consistent, and the transmission line loses its defined impedance.</p>
+
+        <p>To avoid such issues, it is essential to minimize changes in impedance wherever possible. While some minor reflection may occur due to impedance mismatch, especially depending on the signal type, significant changes in impedance should be avoided. </p>
+
+        <p>A positive feature of this design, is the relatively large distance between the differential pairs traces. This spacing is beneficial because it reduces the risk of crosstalk, which can occur when signals from adjacent traces interfere with each other. </p>
+
+        <!-- img13 (Wix node 116) -->
+        <img src="https://raw.githubusercontent.com/dariofresu/Fresu-Electronics-Blog/main/assets/images/pcb-review-imx8-som_img13.png" alt="Figure 12 -  Another example of antenna-like structure surrounded by high-speed signals." class="post-img" loading="lazy" width="1614" height="848">
+        <p class="img-caption">Figure 12 -  Another example of antenna-like structure surrounded by high-speed signals.</p>
+
+        <p>However, there are still some areas of concern. For instance, in certain places, the spacing between signal traces is quite dense. While this may still be acceptable, it’s something that needs to be tested and verified, as the density could lead to issues such as crosstalk. In this section (see <em>Figure #</em>), the distance between the traces is about the width of a single trace, which is definitely too small. This reduced spacing could result in signal integrity issues, and in this case, it would be definitely recommended to adjust the layout to increase the distance between these traces to at least two to three times the trace-width.</p>
+
+        <!-- img14 (Wix node 119) -->
+        <img src="https://raw.githubusercontent.com/dariofresu/Fresu-Electronics-Blog/main/assets/images/pcb-review-imx8-som_img14.png" alt="Figure 13 - Example of traces routed too close together, promoting signal crosstalk." class="post-img" loading="lazy" width="1615" height="863">
+        <p class="img-caption">Figure 13 - Example of traces routed too close together, promoting signal crosstalk.</p>
+
+        <p>Moving on to the next issue, even though stitching vias are being used in this design, it is recommended to eliminate the sections of the copper pours and increase the distance between the signal traces, particularly in areas where the traces are not routed as differential pairs.</p>
+
+        <p>For instance, in Figure # we have a clock signal, which is particularly susceptible to coupling with adjacent traces. This can easily lead to crosstalk between the signals, which is undesirable. Therefore, it would be beneficial to increase the spacing between these signal traces to reduce the likelihood of interference.  This is because clock signals are typically trapezoidal, requiring a high harmonic content to construct the waveform. Consequently, a higher amount of energy is transferred in a short period of time.</p>
+
+        <p>To minimize this crosstalk effect, we want to <strong>maximize the distance between these traces.</strong> Increasing the distance between the traces that carry sensitive signals, like clock signals, helps prevent interference and ensures better performance.</p>
+
+        <p>Another common issue, which might seem more advanced but is actually a fundamental practice, is the lack of <strong>return reference vias (RRV).</strong> Return reference vias are those connected to the return reference plane (RRP). These vias are important because, when the signal transitions from one layer to another, such as from the top layer to the bottom layer, it needs to maintain a stable reference potential and provide a lowest impedance path for the return current.</p>
+
+        <div class="callout">
+          <p><strong>🔓 Return and reference vias (RRV) provide the path for the return current and the reference potential when the signal transition from horizontal propagation to vertical propagation.</strong></p>
+        </div>
+
+        <p>The problem here is that when the signal transitions from one layer to another, it can lose its reference if there is no return path established. The return current, which is crucial for the signal's propagation, needs to follow a path that maintains the reference voltage. The signal needs a clear path to follow, that ensures the voltage between the return reference plane, and the signal trace is consistent.</p>
+
+        <!-- img15 (Wix node 131) -->
+        <img src="https://raw.githubusercontent.com/dariofresu/Fresu-Electronics-Blog/main/assets/images/pcb-review-imx8-som_img15.png" alt="Figure 14 - Example of signal vias without a return and reference via adjacent to it, promoting the expansion of the EM fields. " class="post-img" loading="lazy" width="1276" height="865">
+        <p class="img-caption">Figure 14 - Example of signal vias without a return and reference via adjacent to it.</p>
+
+        <p>Unfortunately, in this design, we see that many of the signals lack return reference vias. When signals cross the stack-up without these vias, they can lead to radiation emissions, which can spread throughout the planes and their cavities, and cause resonances. This could result in unwanted radiated emissions from the board that interfere with other parts of the system, or signal integrity issues that interfere with the internal operation of the device.</p>
+
+        <p>The lack of return reference vias when transitioning between layers is a significant issue. These omissions can lead to higher levels of radiation and noise, which can degrade the overall performance of the design. While the rest of the design seems to be in good shape, addressing this issue of transitioning without return reference vias is crucial for ensuring the system functions correctly without emitting unwanted interference.</p>
+
+        <h2 id="layer-2">Layer 2</h2>
+
+        <p>Moving to layer two. As we mentioned before, this layer was almost in good shape, but there are still some issues to address. The problem here is that the plane is not a full solid plane but it presents a split between two planes. </p>
+
+        <p>We have one plane here, which is connected to the GND net, used as return and reference, but there’s also another plane here that’s still connected to the GND net. However, between these two planes, there’s a noticeable gap.</p>
+
+        <!-- img16 (Wix node 144) -->
+        <img src="https://raw.githubusercontent.com/dariofresu/Fresu-Electronics-Blog/main/assets/images/pcb-review-imx8-som_img16.png" alt="Figure 15 - Layer 2 of the PCB with the split of the planes highlighted." class="post-img" loading="lazy" width="1228" height="849">
+        <p class="img-caption">Figure 15 - Layer 2 of the PCB with the split of the planes highlighted.</p>
+
+        <p>This gap between the two planes is an issue because we have signals running on the top layer that cross over this split. When the signal reaches this split, it essentially loses its reference potential underneath, and it no longer has a path for the return current to follow as it crosses this point. The fields associated with the signal will start to spread throughout the gap. This gap between the two planes creates what we call a cavity. The cavity is the void between the planes, and this is where the signal can start to behave unpredictably.</p>
+
+        <p>When the signal crosses this gap, the fields that were initially confined to the plane, start to spread out into this cavity. The return current also loses its reference, causing it to find an alternative path to complete the loop. The spreading fields in the cavity can cause signal integrity and EMI problems, as they can couple with the surrounding signals on the board. This type of coupling can lead to crosstalk, where signals interfere with each other, causing noise and distortion.</p>
+
+        <p>Another problem arises because the cavity between the planes, depending on the signals, behaves like a resonant cavity. As the fields are injected into this cavity, they can cause the cavity to resonate at a certain frequency. This can create issues in terms of electromagnetic compatibility (EMC) because the cavity acts as an antenna and can radiate unwanted emissions. These emissions can be detected when measuring for EMC compliance, which could lead to further complications down the line.</p>
+
+        <!-- img17 (Wix node 151) -->
+        <img src="https://raw.githubusercontent.com/dariofresu/Fresu-Electronics-Blog/main/assets/images/pcb-review-imx8-som_img17.png" alt="Figure 16 - Signals crossing the split in the plane, and simulation of the behaviour on the right corner." class="post-img" loading="lazy" width="1403" height="868">
+        <p class="img-caption">Figure 16 - Signals crossing the split in the plane, and simulation of the behaviour on the right corner.</p>
+
+        <p>This resonant cavity is problematic because it can generate a frequency that radiates outside the board. The impact of this issue depends on the design and how the cavity responds to the trapped energy. While it may not always be easy to measure or predict, it remains a concern that must be addressed. The fact that signals pass through the splits in the planes makes this a high-risk area. Without a proper return current path and attention to the cavity between the planes, the design could face issues with signal integrity, crosstalk, and even EMC compliance.</p>
+
+        <div class="callout">
+          <p><strong>🔓 Allowing signal traces to pass through splits between planes is not good design practice. </strong></p>
+        </div>
+
+        <p>To fix this, the design would need to be modified to eliminate the split, and ensure a proper return current path at all times.</p>
+
+        <p>Looking at layer two, there's another issue with large gaps between the vias, which could easily be avoided. The solution is simple: <strong>increase the distance between the vias.</strong> By spacing them further apart, the copper field can fill the area between them, ensuring the current flows properly. When the gap is too large, it creates a void where the current can't flow. This forces the current to take another path, which can cause problems like bigger current loops.</p>
+
+        <!-- img18 (Wix node 162) -->
+        <img src="https://raw.githubusercontent.com/dariofresu/Fresu-Electronics-Blog/main/assets/images/pcb-review-imx8-som_img18.png" alt="Figure 17 - Example of vias placed too close to each other, limiting the current flow." class="post-img" loading="lazy" width="1602" height="861">
+        <p class="img-caption">Figure 17 - Example of vias placed too close to each other, limiting the current flow.</p>
+
+        <p>Increasing the distance between the vias helps the return current flow more smoothly. This adjustment ensures the current has a clear path without "jumping" gaps. This approach should be applied to similar spots on the board to prevent the issue from occurring elsewhere. Such a small change can greatly enhance the design and performance of the system.</p>
+
+        <p>Another good feature of this design is the use of stitching vias along the edge of the board. This creates a Faraday cage around the entire perimeter, with the stitching vias acting as a barrier to protect the board from external electromagnetic interference (EMI). This approach is helpful in reducing radiated emissions and improving the board's overall shielding.</p>
+
+        <p>However, there's an important issue to consider:</p>
+
+        <p>Where are the stitching vias connected? </p>
+
+        <p>The effectiveness of shielding depends on how the vias are connected across the board layers. If stitching vias are only connected to one layer, they can cause problems. When connected to just one plane, especially with high-frequency signals, the vias can act like antennas. They may resonate at certain frequencies, leading to EMI or interference instead of improving shielding. To avoid this, it's important to connect the vias properly across all relevant layers of the board.</p>
+
+        <h2 id="layer-3">Layer 3</h2>
+
+        <p>Looking at layer three, the first thing to do is remove these polygon pours. They take up valuable space that could be better used for signal routing. The layout is quite dense, with little space between traces, which can lead to potential issues, especially crosstalk.</p>
+
+        <!-- img04 repeat (Wix node 177 — same file as node 46) -->
+        <img src="https://raw.githubusercontent.com/dariofresu/Fresu-Electronics-Blog/main/assets/images/pcb-review-imx8-som_img04.png" alt="Figure 18 - Layer 3 of the PCB." class="post-img" loading="lazy" width="1489" height="859">
+        <p class="img-caption">Figure 18 - Layer 3 of the PCB.</p>
+
+        <p>When traces are placed too close together, their electric fields can couple, causing noise to affect nearby nets and potentially leading to signal integrity issues. If these signals are connected to cables, the coupling could also cause EMC problems. To avoid this, it's recommended to remove the "GND" polygon pours, and use the space more effectively to increase the distance between traces, minimizing the chance of unwanted coupling.</p>
+
+        <p>Especially with fast-switching signals, it's important to focus on trace spacing. Fast signals are more likely to cause noise and interference, so extra care is needed in the layout design. Ensuring enough space between traces helps minimize cross-coupling and interference.</p>
+
+        <p>Additionally, stitching vias have been used in some areas to connect the polygon pours and prevent them from acting like antennas. This is a good practice, but it’s important to consider how the vias are used. While some stitching vias are fine, others may not be ideally placed or may not provide the necessary return paths for the current. These should be reviewed carefully to ensure they don’t cause further issues in the layout.</p>
+
+        <h2 id="layer-4">Layer 4</h2>
+
+        <p>Moving on to layer four, the design can be improved by removing some copper pours and using the space more effectively. One issue is that power is supplied to the DRAM through this layer, as shown by the VCC DRAM connection. However, the return and reference plane is on layer two, which is less than ideal because the power plane on layer four isn't directly next to a return reference plane.</p>
+
+        <!-- img19 (Wix node 189) -->
+        <img src="https://raw.githubusercontent.com/dariofresu/Fresu-Electronics-Blog/main/assets/images/pcb-review-imx8-som_img19.png" alt="Figure 19 - Layer 4 of the PCB" class="post-img" loading="lazy" width="1021" height="696">
+        <p class="img-caption">Figure 19 - Layer 4 of the PCB.</p>
+
+        <p>In a properly designed  layout, <strong>the power and ground planes should be next to each other for proper energy delivery.</strong> However, in this case, the power plane is on layer four, and the ground plane is two layers away on layer two. This creates a problem, as the forward current and return current must travel a greater distance, enlarging the current loop, and having the displacement current crossing two dielectric layers before reaching the return and reference plane. This separation weakens the return current path and can cause issues with signal integrity and electromagnetic compatibility (EMC).</p>
+
+        <p>To better understand the issue, it's important to know that electric fields are created between the power plane and the return reference plane, <strong>not in the copper itself.</strong> When the return and reference plane is far from the power plane, it becomes harder for the current to flow effectively, leading to poor energy delivery to the DRAM. This setup is likely to cause EMC problems because the electric and magnetic fields behave poorly in this configuration. Electromagnetic compatibility depends on how these fields interact, and this stack-up makes it harder to control them.</p>
+
+        <div class="callout">
+          <p><strong>🔓 When choosing a stack-up, it's important to keep signal and return reference planes close together, and similarly, power and return reference planes should always be adjacent. </strong></p>
+        </div>
+
+        <p>This ensures a clear, low impedance path for the current to return to the source. While cost considerations may lead to reducing the number of layers, choosing a stack-up like this could result in higher costs later to resolve EMC issues. For example, expensive EMC testing may be needed, and if the board fails, a costly redesign may be required to meet the necessary standards.</p>
+
+        <p>This board is sold as an industrial module, and the layout may have been chosen due to budget constraints, with limited focus on electromagnetic compatibility. The stack-up choice could be a key reason it struggles to meet EMC requirements for both industrial and domestic standards. </p>
+
+        <h2 id="layer-5">Layer 5</h2>
+
+        <p>Moving to layer 5, the power plane should be a full return reference plane instead, with no splits or cuts. Currently, the power plane is fragmented with unnecessary splits, which complicates the current path. The return current has to travel through large sections of these broken-up planes, and as signals cross the splits, they will experience increased radiation, both differential and common mode. The return current will struggle to find a clean path to the ground plane, leading to inefficiencies and signal integrity issues.</p>
+
+        <!-- img07 repeat (Wix node 205 — same file as node 63) -->
+        <img src="https://raw.githubusercontent.com/dariofresu/Fresu-Electronics-Blog/main/assets/images/pcb-review-imx8-som_img07.png" alt="Figure 20 - Layer 5 of the PCB used as Power Planes." class="post-img" loading="lazy" width="1600" height="850">
+        <p class="img-caption">Figure 20 - Layer 5 of the PCB used as Power Planes.</p>
+
+        <p>An important fact to address here is that some people, suggest using the power plane as a return reference for signals, but there are important factors to consider. The return reference plane provides both the return current path and the signal reference. While the power plane can carry return currents, <strong>it is DC disconnected</strong> from the signal reference "ground". The issue arises because the current loop must be closed for signal propagation, meaning the return current needs to flow back to its source. This raises the question: </p>
+
+        <p>How does the return current return to the source when the power and reference planes are electrically separated?</p>
+
+        <!-- img20 (Wix node 211) -->
+        <img src="https://raw.githubusercontent.com/dariofresu/Fresu-Electronics-Blog/main/assets/images/pcb-review-imx8-som_img20.jpg" alt="Figure 21 - Return current path when a power plane is used in between signal and return reference layer." class="post-img" loading="lazy" width="1004" height="781">
+        <p class="img-caption">Figure 21 - Return current path when a power plane is used in between signal and return reference layer.</p>
+
+        <p>At lower frequencies, coupling capacitors can help by allowing the return current to flow through them. However, this only works for low-frequency signals. For high-frequency signals, the impedance of the capacitors limits their effectiveness. At higher frequencies, the return current depends on the distance between the two planes, which creates impedance between them.</p>
+
+        <!-- img21 (Wix node 214) -->
+        <img src="https://raw.githubusercontent.com/dariofresu/Fresu-Electronics-Blog/main/assets/images/pcb-review-imx8-som_img21.jpg" alt="Figure 22 - Real impedance characteristic of the capacitor." class="post-img" loading="lazy" width="1080" height="713">
+        <p class="img-caption">Figure 22 - Real impedance characteristic of the capacitor.</p>
+
+        <p>The impedance between the planes is the issue. When the return current crosses from the power plane to the "ground" reference plane, it faces this impedance, causing a voltage drop. This voltage drop creates noise, which can potentially show up in EMC testing. Since the power and return reference planes are not DC electrically connected, the return current must find a way to move from one plane to the other. </p>
+
+        <p>This happens through displacement current, but its path is unpredictable and will follow the path of least impedance, which may not be ideal. Relying on the power plane as a return reference is risky because it introduces uncertainty and can lead to difficult-to-manage problems.</p>
+
+        <p>It’s best to avoid using the power plane as the return plane due to the risks and potential problems it may cause. Other lesson explor this concept further so we will not dwelve deeper into this topic here. The best approach is to use a dedicated return reference plane, typically the "GND" plane. For each signal layer, having an adjacent return reference plane ensures a clear and consistent path for the return current, which helps maintain signal integrity and reduce noise.</p>
+
+        <h2 id="layer-6">Layer 6</h2>
+
+        <p>This layer presents similar issues as the first layer.</p>
+        <p>The major issue here is the lack of a full return reference plane adjacent to it on layer 5.</p>
+        <p>As we have seen in this lesson, this will create impedance discontinuities that are not only important in terms of signal integrity, but also even more important in terms of EMI.</p>
+
+        <!-- img08 repeat (Wix node 228 — same file as node 66) -->
+        <img src="https://raw.githubusercontent.com/dariofresu/Fresu-Electronics-Blog/main/assets/images/pcb-review-imx8-som_img08.png" alt="Figure 23 - Layer 6 of the PCB." class="post-img" loading="lazy" width="1605" height="859">
+        <p class="img-caption">Figure 23 - Layer 6 of the PCB.</p>
+
+        <p>The most important fact is that by providing a solid return and reference plane on layer 5 for the signal on layer 6, we avoid the creation of a common mode voltage source, which will drive common mode currents that are very effective at radiating emissions.</p>
+        <p>The second major improvement for these layers is to remove the copper pours so that the available real estate on the board can be used efficiently, maximizing the distance between the traces and reducing signal crosstalk.</p>
+        <p>Obviously, this optimization comes second to the need for having a solid return and reference plane on layer 5.</p>
+
+        <h2 id="conclusions">Conclusions</h2>
+
+        <p>The video lesson dives deeper into the nuances of the project and can do a better job of explaining certain topics that are harder to explain in a text format. Nonetheless, the topics covered in this lesson are already discussed in much greater detail in other lessons. Therefore, the scope of this lesson was to show the application of those core fundamentals in a real-world application.</p>
+
+        <p>At <a href="http://fresuelectronics.com"><u>fresuelectronics.com</u></a>, our primary goal is to help you circumvent the pain associated with this steep learning curve. We believe that by sharing this guide, along with the <a href="https://www.fresuelectronics.com/courses"><u>courses</u></a>, materials, and programs we offer, we can assist you in navigating the complexities of PCB design. </p>
+
+        <p>Our aim is to support you on your path to mastering this field, ensuring that you have the tools and knowledge necessary to succeed. </p>
+        <p>If you would like to master EMC/EMI design, we have a new training program here:</p>
+
+        <p style="text-align:center;"><a href="https://www.fresuelectronics.com/mentoring" target="_blank" class="btn-primary">Get Personalized Training</a></p>
+
+        <p>There, you’ll find details on how to apply for one of our exclusive programs designed to help you achieve that goal. </p>
+
+      </div>
+
+      <div class="tags">
+        <span class="tag">Design Review</span><span class="tag">SOM</span><span class="tag">High-Speed Design</span><span class="tag">PCB Stackup</span><span class="tag">EMI</span>
+      </div>
+    </article>
+
+    <!-- Share -->
+    <div class="share-strip">
+      <span class="share-label">Share</span>
+      <a href="https://www.linkedin.com/shareArticle?mini=true&url=https%3A%2F%2Fblog.fresuelectronics.com%2Fpcb-review-imx8-som&title=i.MX8%20SOM%20-%20EMI%20Design%20Layout%20Review"
+         target="_blank" class="share-btn linkedin">LinkedIn</a>
+      <a href="https://twitter.com/intent/tweet?url=https%3A%2F%2Fblog.fresuelectronics.com%2Fpcb-review-imx8-som&text=i.MX8%20SOM%20-%20EMI%20Design%20Layout%20Review&via=dario_fresu"
+         target="_blank" class="share-btn twitter">X / Twitter</a>
+      <button class="share-btn copylink"
+              onclick="copyLink(this,'https://blog.fresuelectronics.com/pcb-review-imx8-som')">Copy Link</button>
+    </div>
+
+    <!-- CTA -->
+    <div class="cta-section">
+      <div class="cta-inner">
+        <span class="cta-kicker">Work with Fresu Electronics</span>
+        <h3>Stop finding EMC problems in the chamber.</h3>
+        <p>An EMC Design Audit reviews your schematic and PCB layout before fabrication — identifying return path gaps, filter placement errors, and stackup decisions that turn into failures at the test house. Report delivered in 10 business days.</p>
+        <div class="cta-actions">
+          <a href="https://www.fresuelectronics.com/emc-audit" class="btn-primary">Book an EMC Audit — €8,000 →</a>
+          <a href="https://www.fresuelectronics.com/trainings" class="btn-outline">Browse Courses</a>
+        </div>
+      </div>
+      <div class="proof-row">
+        <span class="proof-item">80,000+ engineers reached</span>
+        <span class="proof-item">4,000+ engineers trained</span>
+        <span class="proof-item">Report in 10 business days</span>
+        <span class="proof-item">IPC Certified · Former ETH Zurich</span>
+      </div>
+    </div>
+
+  </div><!-- /.container -->
+</div><!-- /.post-layout -->
+
+<!-- Lightbox -->
+<div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Image viewer">
+  <button class="lightbox-close" aria-label="Close" onclick="lbClose()">✕</button>
+  <img id="lightboxImg" src="" alt="">
+</div>
+
+<!-- Footer -->
+<footer>
+  <div class="site-footer">
+    <span>© 2026 Fresu Electronics SRL — Sardinia, Italy</span>
+    <span>
+      <a href="https://www.fresuelectronics.com/terms-of-services">Terms</a> ·
+      <a href="https://www.freeprivacypolicy.com/live/2e894867-7c2b-4014-aa0c-db0f62e59cb8">Privacy</a> ·
+      <a href="https://blog.fresuelectronics.com">Blog</a>
+    </span>
+  </div>
+</footer>
+
+<script>
+function copyLink(btn, url) {
+  navigator.clipboard.writeText(url).then(function() {
+    var o = btn.innerHTML;
+    btn.innerHTML = '✓ Copied!';
+    setTimeout(function() { btn.innerHTML = o; }, 2000);
+  });
+}
+
+/* Reading progress */
+(function() {
+  var bar = document.getElementById('progressBar');
+  function update() {
+    var h = document.documentElement;
+    var max = h.scrollHeight - h.clientHeight;
+    bar.style.width = (max > 0 ? (h.scrollTop / max) * 100 : 0) + '%';
+  }
+  document.addEventListener('scroll', update, { passive: true });
+  update();
+})();
+
+/* TOC scrollspy */
+(function() {
+  var links = document.querySelectorAll('.toc-rail a');
+  if (!links.length || !('IntersectionObserver' in window)) return;
+  var map = {};
+  links.forEach(function(a) { map[a.getAttribute('href').slice(1)] = a; });
+  var current = null;
+  var obs = new IntersectionObserver(function(entries) {
+    entries.forEach(function(e) {
+      if (e.isIntersecting) {
+        if (current) current.classList.remove('active');
+        current = map[e.target.id];
+        if (current) current.classList.add('active');
+      }
+    });
+  }, { rootMargin: '0px 0px -75% 0px' });
+  document.querySelectorAll('.post-body h2[id]').forEach(function(h) { obs.observe(h); });
+})();
+
+/* Lightbox */
+var lb = document.getElementById('lightbox');
+var lbImg = document.getElementById('lightboxImg');
+function lbClose() { lb.classList.remove('open'); lbImg.src = ''; }
+document.querySelectorAll('.post-img, .post-img-center').forEach(function(img) {
+  img.addEventListener('click', function() {
+    lbImg.src = img.src; lbImg.alt = img.alt || '';
+    lb.classList.add('open');
+  });
+});
+lb.addEventListener('click', function(e) { if (e.target === lb || e.target === lbImg) lbClose(); });
+document.addEventListener('keydown', function(e) { if (e.key === 'Escape') lbClose(); });
+</script>
+
+</body>
+</html>
