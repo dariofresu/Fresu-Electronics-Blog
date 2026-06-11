@@ -1,0 +1,1067 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Understanding Radiated Emissions: What You Need to Know for EMI Compliance — Fresu Electronics</title>
+  <meta name="description" content="In this article, we are going to talk about radiated emissions, how they are created, and how they depend on the layout of the PCB we design">
+  <link rel="canonical" href="https://blog.fresuelectronics.com/radiated-emissions/">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400;1,700&display=swap" rel="stylesheet">
+
+  <meta property="og:title" content="Understanding Radiated Emissions: What You Need to Know for EMI Compliance">
+  <meta property="og:description" content="In this article, we are going to talk about radiated emissions, how they are created, and how they depend on the layout of the PCB we design">
+  <meta property="og:url" content="https://blog.fresuelectronics.com/radiated-emissions/">
+  <meta property="og:image" content="https://raw.githubusercontent.com/dariofresu/Fresu-Electronics-Blog/main/assets/images/radiated-emissions_cover.jpg">
+  <meta property="og:type" content="article">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:site" content="@dario_fresu">
+  <meta name="twitter:image" content="https://raw.githubusercontent.com/dariofresu/Fresu-Electronics-Blog/main/assets/images/radiated-emissions_cover.jpg">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "headline": "Understanding Radiated Emissions: What You Need to Know for EMI Compliance",
+    "description": "In this article, we are going to talk about radiated emissions, how they are created, and how they depend on the layout of the PCB we design",
+    "datePublished": "2024-11-18",
+    "url": "https://blog.fresuelectronics.com/radiated-emissions/",
+    "author": { "@type": "Person", "name": "Dario Fresu", "jobTitle": "Principal EMC Architect", "url": "https://www.fresuelectronics.com/about" },
+    "publisher": { "@type": "Organization", "name": "Fresu Electronics", "url": "https://www.fresuelectronics.com" },
+    "image": "https://raw.githubusercontent.com/dariofresu/Fresu-Electronics-Blog/main/assets/images/radiated-emissions_cover.jpg"
+  }
+  </script>
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:          #0a0a0a;
+      --surface:     #111111;
+      --surface-2:   #181818;
+      --border:      #242424;
+      --fg:          #ffffff;
+      --label:       #a0aab8;
+      --accent:      #00FF94;
+      --accent-dim:  rgba(0, 255, 148, 0.10);
+      --accent-hover:#00e085;
+      --wrong:       #ff4d4d;
+    }
+
+    body {
+      background: var(--bg);
+      color: #ffffff;
+      font-family: 'Poppins', sans-serif;
+      font-size: 17px;
+      line-height: 1.75;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* ── Reading progress ── */
+    .progress-track { position: fixed; top: 0; left: 0; right: 0; height: 3px; z-index: 1100; background: transparent; }
+    .progress-bar { height: 100%; width: 0; background: var(--accent); transition: width 80ms linear; }
+
+    /* ── Header ── */
+    header { border-bottom: 1px solid var(--border); }
+    .site-header {
+      max-width: 1100px; margin: 0 auto;
+      padding: 18px 40px;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .site-header img { height: 44px; width: auto; display: block; }
+    .header-nav { display: flex; align-items: center; gap: 28px; }
+    .header-nav a {
+      font-size: 11px; font-weight: 600;
+      letter-spacing: 0.08em; text-transform: uppercase;
+      color: #ffffff; text-decoration: none; opacity: 0.6;
+      transition: opacity 0.2s;
+    }
+    .header-nav a:hover { opacity: 1; }
+    .header-cta {
+      opacity: 1 !important;
+      background: var(--accent); color: #0a0a0a !important;
+      padding: 9px 20px; border-radius: 999px;
+      transition: background 0.2s;
+    }
+    .header-cta:hover { background: var(--accent-hover) !important; }
+
+    /* ── Layout: TOC rail + article ── */
+    .post-layout { max-width: 1100px; margin: 0 auto; padding: 0 40px; display: grid; grid-template-columns: minmax(0, 740px); justify-content: center; }
+    .toc-rail { display: none; }
+    @media (min-width: 1200px) {
+      .post-layout { grid-template-columns: 240px minmax(0, 740px); gap: 56px; justify-content: center; }
+      .toc-rail { display: block; position: sticky; top: 36px; align-self: start; padding-top: 76px; }
+    }
+    .toc-rail nav { border-left: 1px solid var(--border); padding-left: 18px; }
+    .toc-label { font-size: 10px; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase; color: var(--label); margin-bottom: 14px; display: block; }
+    .toc-rail ul { list-style: none; }
+    .toc-rail li { margin-bottom: 10px; }
+    .toc-rail a { font-size: 12.5px; color: var(--label); text-decoration: none; line-height: 1.45; display: block; transition: color 0.15s; }
+    .toc-rail a:hover { color: #ffffff; }
+    .toc-rail a.active { color: var(--accent); }
+
+    /* Inline TOC for narrow screens */
+    .toc-inline { margin: 0 0 40px; border: 1px solid var(--border); border-radius: 4px; background: var(--surface); }
+    .toc-inline summary { cursor: pointer; padding: 14px 20px; font-size: 12px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--label); list-style: none; }
+    .toc-inline summary::before { content: '☰  '; color: var(--accent); }
+    .toc-inline ul { list-style: none; padding: 0 20px 16px; }
+    .toc-inline li { margin-bottom: 8px; }
+    .toc-inline a { font-size: 14px; color: #ffffff; opacity: 0.85; text-decoration: none; }
+    .toc-inline a:hover { color: var(--accent); opacity: 1; }
+    @media (min-width: 1200px) { .toc-inline { display: none; } }
+
+    /* ── Container ── */
+    .container { padding: 72px 0 100px; min-width: 0; }
+
+    /* ── Breadcrumb ── */
+    .breadcrumb { display: inline-block; font-size: 12px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--label); text-decoration: none; margin-bottom: 28px; transition: color 0.15s; }
+    .breadcrumb:hover { color: var(--accent); }
+
+    /* ── Cover image ── */
+    .post-cover {
+      width: 100%; border-radius: 6px; display: block;
+      margin-bottom: 44px;
+      border: 1px solid var(--border);
+      aspect-ratio: 16/9; object-fit: cover;
+    }
+
+    /* ── Kicker ── */
+    .kicker {
+      display: inline-block;
+      font-size: 10px; font-weight: 600;
+      letter-spacing: 0.18em; text-transform: uppercase;
+      color: var(--accent);
+      border: 1px solid var(--accent);
+      background: var(--accent-dim);
+      padding: 4px 12px; border-radius: 2px;
+      margin-bottom: 24px;
+    }
+
+    /* ── Title ── */
+    h1 {
+      font-size: clamp(28px, 5vw, 44px);
+      font-weight: 800; line-height: 1.1;
+      letter-spacing: -0.025em; color: #ffffff;
+      margin-bottom: 20px;
+    }
+    h1 em { font-style: italic; color: var(--accent); }
+
+    /* ── Deck ── */
+    .deck {
+      font-size: 18px; font-weight: 400;
+      color: #ffffff; line-height: 1.7;
+      margin-bottom: 36px;
+    }
+
+    /* ── Author row ── */
+    .author-row {
+      display: flex; align-items: center; gap: 14px;
+      padding: 20px 0;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 56px;
+    }
+    .author-row img {
+      width: 52px; height: 52px; border-radius: 50%;
+      object-fit: cover; flex-shrink: 0;
+      border: 2px solid var(--accent);
+    }
+    .author-name  { display: block; font-size: 14px; font-weight: 600; color: #ffffff; line-height: 1.3; }
+    .author-title { display: block; font-size: 12px; font-weight: 400; color: var(--label); line-height: 1.3; }
+    .author-date  { display: block; font-size: 11px; color: var(--label); margin-top: 4px; }
+
+    /* ── Body typography ── */
+    p { color: #ffffff; font-weight: 400; margin-bottom: 22px; }
+    strong { color: #ffffff; font-weight: 600; }
+    em { font-style: italic; }
+    .post-body ul, .post-body ol { margin: 0 0 22px 24px; }
+    .post-body li { margin-bottom: 8px; }
+
+    h2 {
+      font-size: 22px; font-weight: 700; color: #ffffff;
+      margin: 56px 0 18px; letter-spacing: -0.015em;
+      scroll-margin-top: 32px;
+    }
+    h2::before {
+      content: ''; display: block;
+      width: 32px; height: 3px;
+      background: var(--accent); margin-bottom: 14px; border-radius: 2px;
+    }
+    h3 {
+      font-size: 17px; font-weight: 600; color: #ffffff;
+      margin: 36px 0 12px;
+      scroll-margin-top: 32px;
+    }
+
+    /* ── Post images ── */
+    .post-img {
+      width: 100%; border-radius: 4px; display: block;
+      margin: 36px 0 10px;
+      border: 1px solid var(--border);
+      cursor: zoom-in;
+    }
+    .post-img-center {
+      display: block; margin: 36px auto 10px;
+      border-radius: 4px;
+      border: 1px solid var(--border);
+      max-width: 100%;
+      cursor: zoom-in;
+    }
+    .img-caption {
+      text-align: center; font-size: 12px;
+      color: var(--label); margin-bottom: 32px;
+      font-style: italic; line-height: 1.5;
+    }
+
+    /* ── Lightbox ── */
+    .lightbox { position: fixed; inset: 0; z-index: 1200; background: rgba(5,5,5,0.93); display: none; align-items: center; justify-content: center; padding: 32px; cursor: zoom-out; }
+    .lightbox.open { display: flex; }
+    .lightbox img { max-width: 96%; max-height: 92vh; border-radius: 4px; }
+    .lightbox-close { position: absolute; top: 18px; right: 24px; background: none; border: none; color: #ffffff; font-size: 26px; cursor: pointer; opacity: 0.7; }
+    .lightbox-close:hover { opacity: 1; }
+
+    /* ── Formula images ── */
+    .formula-wrap { display: flex; justify-content: center; margin: 24px 0 28px; }
+    .formula-wrap img {
+      display: block; background: #ffffff;
+      padding: 14px 20px; border-radius: 4px; max-width: 100%;
+    }
+
+    /* ── Callout block ── */
+    .callout {
+      background: var(--surface);
+      border-left: 3px solid var(--accent);
+      padding: 20px 24px;
+      border-radius: 0 4px 4px 0;
+      margin: 32px 0;
+    }
+    .callout p { margin-bottom: 0; }
+    .callout-label { font-size: 10px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent); margin-bottom: 8px; display: block; }
+
+    /* ── Variable list ── */
+    .var-list {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 20px 24px; margin: 24px 0;
+    }
+    .var-list p { margin-bottom: 10px; font-size: 15px; }
+    .var-list p:last-child { margin-bottom: 0; }
+
+    /* ── Compliance / standard reference block ── */
+    .compliance-block {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 24px; margin: 28px 0;
+    }
+    .compliance-block p { margin-bottom: 10px; font-size: 15px; }
+    .compliance-block p:last-child { margin-bottom: 0; }
+    .compliance-label {
+      font-size: 10px; font-weight: 600;
+      letter-spacing: 0.14em; text-transform: uppercase;
+      color: var(--accent); margin-bottom: 14px; display: block;
+    }
+
+    /* ── Numbered steps ── */
+    .steps { margin: 28px 0; }
+    .step { display: flex; gap: 18px; margin-bottom: 20px; }
+    .step-num {
+      flex-shrink: 0;
+      width: 28px; height: 28px;
+      background: var(--accent-dim);
+      border: 1px solid var(--accent);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 12px; font-weight: 700; color: var(--accent);
+      margin-top: 3px;
+    }
+    .step p { margin-bottom: 0; font-size: 15px; }
+
+    /* ── Tags ── */
+    .tags { display: flex; flex-wrap: wrap; gap: 8px; margin: 48px 0 0; }
+    .tag {
+      font-size: 10px; font-weight: 600;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--accent);
+      border: 1px solid var(--accent);
+      background: var(--accent-dim);
+      padding: 4px 12px; border-radius: 2px;
+    }
+
+    /* ── References ── */
+    .references { margin-top: 48px; padding-top: 28px; border-top: 1px solid var(--border); }
+    .references h3 { margin-top: 0; }
+    .references ul { padding-left: 20px; }
+    .references li { color: #ffffff; font-size: 14px; margin-bottom: 8px; }
+    .references a { color: var(--accent); text-decoration: none; }
+    .references a:hover { text-decoration: underline; }
+
+    /* ── Share strip ── */
+    .share-strip {
+      display: flex; align-items: center; gap: 12px;
+      margin: 56px 0 0; padding-top: 32px;
+      border-top: 1px solid var(--border); flex-wrap: wrap;
+    }
+    .share-label {
+      font-size: 12px; font-weight: 600;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--label);
+    }
+    .share-btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-family: 'Poppins', sans-serif;
+      font-size: 13px; font-weight: 600;
+      padding: 9px 18px; border-radius: 999px;
+      text-decoration: none; border: none; cursor: pointer;
+      transition: opacity 0.2s, transform 0.15s; white-space: nowrap;
+    }
+    .share-btn:hover { opacity: 0.88; transform: translateY(-1px); }
+    .share-btn.linkedin { background: #0A66C2; color: #ffffff; }
+    .share-btn.twitter  { background: #000000; color: #ffffff; }
+    .share-btn.copylink { background: var(--surface); color: var(--accent); border: 1px solid var(--accent); }
+
+    /* ── CTA section ── */
+    .cta-section {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 4px; overflow: hidden;
+      position: relative; margin-top: 72px;
+    }
+    .cta-section::after {
+      content: ''; position: absolute;
+      top: 0; left: 0; right: 0; height: 2px;
+      background: linear-gradient(90deg, var(--accent), transparent);
+    }
+    .cta-inner { padding: 48px 48px 40px; }
+    .cta-kicker {
+      font-size: 10px; font-weight: 600;
+      letter-spacing: 0.18em; text-transform: uppercase;
+      color: var(--accent); margin-bottom: 14px; display: block;
+    }
+    .cta-section h3 {
+      font-size: 24px; font-weight: 700; color: #ffffff;
+      margin: 0 0 12px; letter-spacing: -0.01em;
+    }
+    .cta-section p {
+      font-size: 15px; color: #ffffff; line-height: 1.7; margin-bottom: 28px;
+    }
+    .cta-actions { display: flex; gap: 12px; flex-wrap: wrap; }
+    .btn-primary {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: var(--accent); color: #0a0a0a;
+      font-family: 'Poppins', sans-serif;
+      font-size: 13px; font-weight: 700;
+      padding: 13px 26px; border-radius: 999px;
+      text-decoration: none; transition: background 0.2s;
+    }
+    .btn-primary:hover { background: var(--accent-hover); }
+    .btn-outline {
+      display: inline-flex; align-items: center;
+      color: #ffffff;
+      font-family: 'Poppins', sans-serif;
+      font-size: 13px; font-weight: 600;
+      text-decoration: none;
+      padding: 12px 26px; border-radius: 999px;
+      border: 1px solid var(--border);
+      transition: border-color 0.2s;
+    }
+    .btn-outline:hover { border-color: var(--accent); color: var(--accent); }
+    .proof-row {
+      display: flex; flex-wrap: wrap; gap: 8px 20px;
+      padding: 20px 48px;
+      border-top: 1px solid var(--border);
+    }
+    .proof-item {
+      font-size: 12px; font-weight: 400; color: var(--label);
+      display: flex; align-items: center; gap: 6px;
+    }
+    .proof-item::before { content: '✓'; color: var(--accent); font-weight: 700; }
+
+    /* ── Closing callout ── */
+    .closing {
+      margin-top: 52px;
+      font-style: italic; font-weight: 600;
+      color: #ffffff; font-size: 17px; line-height: 1.7;
+      border-left: 3px solid var(--accent);
+      padding: 18px 24px;
+      background: var(--surface);
+      border-radius: 0 4px 4px 0;
+    }
+    .closing em { color: var(--accent); }
+
+    /* ── Footer ── */
+    footer { border-top: 1px solid var(--border); }
+    .site-footer {
+      max-width: 1100px; margin: 0 auto;
+      padding: 28px 40px;
+      display: flex; align-items: center; justify-content: space-between;
+      font-size: 11px; color: #ffffff; opacity: 0.5;
+      flex-wrap: wrap; gap: 12px;
+    }
+    .site-footer a { color: var(--accent); text-decoration: none; }
+
+    :focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation: none !important; transition: none !important; }
+    }
+
+    /* ── Mobile ── */
+    @media (max-width: 768px) {
+      .site-header, .site-footer { padding-left: 20px; padding-right: 20px; }
+      .post-layout { padding: 0 20px; }
+      .container { padding-top: 48px; padding-bottom: 72px; }
+      .header-nav a:not(.header-cta) { display: none; }
+      h1 { font-size: clamp(24px, 7vw, 36px); }
+      .cta-inner { padding: 28px 20px 24px; }
+      .proof-row { padding: 16px 20px; }
+      .formula-wrap img { padding: 10px 14px; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="progress-track" aria-hidden="true"><div class="progress-bar" id="progressBar"></div></div>
+
+<!-- Header -->
+<header>
+  <div class="site-header">
+    <a href="https://www.fresuelectronics.com">
+      <img src="https://raw.githubusercontent.com/dariofresu/Fresu-Electronics-Blog/main/assets/logo.png" alt="Fresu Electronics">
+    </a>
+    <nav class="header-nav">
+      <a href="https://blog.fresuelectronics.com">Blog</a>
+      <a href="https://blog.fresuelectronics.com/tools/">Tools</a>
+      <a href="https://www.fresuelectronics.com/trainings">Courses</a>
+      <a href="https://www.fresuelectronics.com/emc-audit" class="header-cta">Book EMC Audit</a>
+    </nav>
+  </div>
+</header>
+
+<div class="post-layout">
+
+  <!-- Desktop TOC rail -->
+  <aside class="toc-rail" aria-label="Table of contents">
+    <nav>
+      <span class="toc-label">On this page</span>
+      <ul id="tocList">
+        <li><a href="#controlling-radiated-emissions">Controlling Radiated Emissions</a></li>
+        <li><a href="#application">Application</a></li>
+        <li><a href="#example-calculation">Example Calculation</a></li>
+        <li><a href="#key-design-takeaways">Key Design Takeaways</a></li>
+        <li><a href="#differential-mode-current-spectrum">Differential-Mode Current - Spectrum</a></li>
+        <li><a href="#radiations-from-common-mode-currents">Radiations from Common Mode Currents</a></li>
+        <li><a href="#application-common-mode">Application</a></li>
+        <li><a href="#reducing-common-mode-currents-in-circuits">Reducing Common Mode Currents in Circuits</a></li>
+        <li><a href="#common-mode-current-spectrum">Common-Mode Current Spectrum</a></li>
+        <li><a href="#conclusions">Conclusions</a></li>
+      </ul>
+    </nav>
+  </aside>
+
+  <div class="container">
+
+    <a href="https://blog.fresuelectronics.com" class="breadcrumb">← All posts</a>
+
+    <article>
+      <span class="kicker">Emissions &amp; Testing</span>
+      <h1>Understanding Radiated Emissions: What You Need to Know for EMI Compliance</h1>
+      <p class="deck">In this article, we are going to talk about radiated emissions, how they are created, and how they depend on the layout of the PCB we design</p>
+
+      <div class="author-row">
+        <img src="https://raw.githubusercontent.com/dariofresu/Fresu-Electronics-Blog/main/assets/dario-fresu.jpg" alt="Dario Fresu">
+        <div>
+          <span class="author-name">Dario Fresu</span>
+          <span class="author-title">Principal EMC Architect — Fresu Electronics</span>
+          <span class="author-date">November 2024 · 24 min read</span>
+        </div>
+      </div>
+
+      <!-- Optional cover: remove this <img> entirely if the post has no cover image -->
+      <img class="post-cover" src="https://raw.githubusercontent.com/dariofresu/Fresu-Electronics-Blog/main/assets/images/radiated-emissions_cover.jpg" alt="Professional Perspectives on Crafting Low-EMI PCBs to Minimize Radiated Emissions.">
+
+      <!-- Mobile/tablet TOC -->
+      <details class="toc-inline">
+        <summary>On this page</summary>
+        <ul>
+          <li><a href="#controlling-radiated-emissions">Controlling Radiated Emissions</a></li>
+        <li><a href="#application">Application</a></li>
+        <li><a href="#example-calculation">Example Calculation</a></li>
+        <li><a href="#key-design-takeaways">Key Design Takeaways</a></li>
+        <li><a href="#differential-mode-current-spectrum">Differential-Mode Current - Spectrum</a></li>
+        <li><a href="#radiations-from-common-mode-currents">Radiations from Common Mode Currents</a></li>
+        <li><a href="#application-common-mode">Application</a></li>
+        <li><a href="#reducing-common-mode-currents-in-circuits">Reducing Common Mode Currents in Circuits</a></li>
+        <li><a href="#common-mode-current-spectrum">Common-Mode Current Spectrum</a></li>
+        <li><a href="#conclusions">Conclusions</a></li>
+        </ul>
+      </details>
+
+      <div class="post-body">
+        <div class="callout">
+  <span class="callout-label">Featured resource</span>
+  <p><a href="https://www.fresuelectronics.com/product-page/radiated-emissions-guide">Radiated Emissions &amp; EMI Control  - Guide</a></p>
+</div>
+
+<p>In this lesson, we are going to talk about radiated emissions, how they are created, and how they depend on the layout of the printed circuit boards that we design. </p>
+
+<p>We will also discuss how to design our printed circuit boards to minimize the issues these radiations can cause, allowing us to pass EMC tests and obtain also certifications like FCC and CE marks, enabling us to sell our product in the marketplace.</p>
+
+<p>And so this is going to be a long article, but it's definitely one of the most important lessons that I can share if your goal is to design PCB with low EMI. </p>
+
+<h2 id="controlling-radiated-emissions">Controlling Radiated Emissions</h2>
+
+<p>The control of radiated emissions should always be approached as a design issue from the very beginning of the project. It is essential to allocate both financial and engineering resources early on, particularly when the goal is to minimize emissions and create a product that adheres to the EMC (Electromagnetic Compatibility) directive.</p>
+
+<p>The primary point to understand is that <strong>radiated emissions are caused by time-varying currents, not by voltage.</strong> Currents flowing through wires or printed circuit boards (PCBs) inherently radiate electromagnetic energy. Therefore, the question is not whether they will radiate but rather <strong>how effectively they will radiate and how much energy will be emitted.</strong> This leads to the next consideration: the differentiation between radiated emissions stemming from differential mode currents and those from common mode currents.</p>
+
+<img src="https://raw.githubusercontent.com/dariofresu/Fresu-Electronics-Blog/main/assets/images/radiated-emissions_img01.png" alt="Diagram titled &quot;Radiated Emissions&quot; displaying differential-mode (left, green arrows) and common-mode currents (right, red arrows) with emissions, loads, and earth connections." class="post-img" loading="lazy" width="1920" height="1080">
+<p class="img-caption">Figure 1 - Comparison between Differential and Common-mode currents in a circuit</p>
+
+<p><strong>Differential mode currents</strong> arise from the normal operation of electronic devices and follow the current loop formed by the conductors within the circuit. In other words, differential mode currents represent the expected, desired flow of current for proper circuit operation. As current travels through the system, it forms a loop starting at the current source, reaching the load, and then returning to the source through the reference plane, thus completing the loop.</p>
+
+<p>This current loop, in reality, forms instantaneously, or more accurately, at the speed of light in the dielectric medium between conductors. This is due to the <strong>displacement current</strong>, which follows the signal's wavefront at this speed. However, for the sake of simplicity, we consider the current loop only after the current flows through the load and returns to the source.</p>
+
+<p>These current loops essentially act like antenna structures, which predominantly contribute to the radiation of magnetic fields. This inherent behavior makes it critical to design with emission control in mind from the outset, ensuring the product is compliant with the EMC directive while minimizing the potential for unwanted radiated emissions.</p>
+
+<img src="https://raw.githubusercontent.com/dariofresu/Fresu-Electronics-Blog/main/assets/images/radiated-emissions_img02.png" alt="Differential mode currents in a circuit" class="post-img" loading="lazy" width="1920" height="1080">
+<p class="img-caption">Figure 2  - Differential mode currents in a circuit</p>
+
+<p>Another key concept related to radiated emissions is described by Faraday’s law of electromagnetic induction, which states that a changing magnetic field induces an electromotive force (EMF) in a conductor, which in turn generates an electric current if there is a closed loop. This principle also operates in reverse: <strong>an alternating current flowing through a conductor creates a magnetic field </strong>according to the same law.</p>
+
+<p>Returning to the idea of current loops, while these loops are fundamental to circuit function, managing their size is critical to minimizing radiation.<strong> The larger the loop, the more significant the potential for radiation</strong>, particularly in high-frequency circuits. Controlling the size of these loops is a crucial aspect of reducing emissions. </p>
+
+<p>On the other hand, radiation caused by <strong>common mode currents</strong> results from parasitic effects within circuits and their conductors. These effects create unwanted voltage drops in the system, leading to current flowing through the return reference plane. The differential mode current passing through the return reference plane impedance creates these voltage drops, leading to common mode currents.</p>
+
+<img src="https://raw.githubusercontent.com/dariofresu/Fresu-Electronics-Blog/main/assets/images/radiated-emissions_img03.png" alt="Common mode currents in a circuit" class="post-img" loading="lazy" width="1920" height="1080">
+<p class="img-caption">Figure 3 - Common mode currents in a circuit</p>
+
+<p>The impedance responsible for these issues stems from the actual physical characteristics of conductors, which include not only resistance and capacitance but also inductance. <strong>The inductance of the return path plays a particularly significant role as the frequency increases. </strong>Digital signals, which contain high harmonic content, can exacerbate these effects.</p>
+
+<p>When cables are connected to the return reference plane, they are subjected to the common mode potential, effectively forming an antenna that primarily radiates electric fields. <strong>This common mode voltage drop is caused by the differential mode current flowing through the return path.</strong> The parasitics in the conductors—resistance, capacitance, and impedance—produce this voltage drop, which in turn generates common mode currents that radiate.</p>
+
+<p>The challenge with common mode currents is that they are not explicitly part of the circuit design. These parasitic effects are not accounted for in schematics or layouts, making them difficult to detect and control. Despite often being smaller in magnitude than differential mode currents, <strong>common mode currents can be much more disruptive,</strong> as they produce greater radiation. This is because common mode currents flow in the same direction, causing the electromagnetic fields they generate to add together, unlike differential mode currents whose fields cancel each other out due to opposite flow directions.</p>
+
+<img src="https://raw.githubusercontent.com/dariofresu/Fresu-Electronics-Blog/main/assets/images/radiated-emissions_img04.png" alt="Differential and Common mode currents in a circuit" class="post-img" loading="lazy" width="1920" height="1080">
+<p class="img-caption">Figure 4 - Differential and Common mode currents in a circuit</p>
+
+<p>This behavior highlights two important points when debugging radiated emissions: with differential mode currents, the opposing fields tend to cancel out, particularly if the current-carrying cables are equidistant from the measurement point. The closer the cables are to each other, the more effectively their radiated fields cancel. However, this is not the case for common mode currents, as the currents—and consequently, their fields—flow in the same direction and add together. Even if the cables are close to each other, there is no significant reduction in radiated fields.</p>
+
+<div class="callout">
+  <span class="callout-label">Featured resource</span>
+  <p><a href="https://www.fresuelectronics.com/product-page/radiated-emissions-guide">Radiated Emissions &amp; EMI Control  - Guide</a></p>
+</div>
+
+<p>When troubleshooting radiated emission issues, moving cables closer together can be a helpful diagnostic tool. If the radiated emissions remain unchanged when the cables are brought together, it likely points to a common mode radiation problem, since the distance between cables doesn't affect common mode emissions, but it does influence differential mode emissions.</p>
+
+<p>To summarize, <strong>differential mode currents represent the desired currents </strong>formed by the natural operation of circuits, while <strong>common mode currents are unwanted byproducts caused by parasitic elements</strong> like resistance, capacitance, and inductance within the circuit. The key difference lies in how they radiate: differential mode currents tend to cancel their own fields, while common mode currents amplify them, leading to more pronounced radiation.</p>
+
+<p><strong>Differential mode current radiation</strong></p>
+
+<p>Let's take a closer look at differential mode radiation. To fully grasp how differential mode radiation occurs, we must first examine how these emissions originate. As previously mentioned, radiation stems from the current loops formed during the normal operation of a circuit. To understand this better, we can model the radiation as a small loop antenna. This allows us to calculate the magnitude of the electric field generated by the loop. When we refer to a "small antenna loop," we mean an antenna whose circumference is less than one-quarter of the wavelength of the signal.</p>
+
+<img src="https://raw.githubusercontent.com/dariofresu/Fresu-Electronics-Blog/main/assets/images/radiated-emissions_img05.png" alt="Formula Differential mode currents in a circuit" class="post-img" loading="lazy" width="1920" height="1080">
+<p class="img-caption">Figure 5 - Formula Differential mode currents in a circuit</p>
+
+<p>This distinction is important because, in small loops, the current remains in phase at all points within the loop. To better understand the relationship between differential mode currents and radiation, we can begin by analyzing the ideal propagation of radiation in free space. The magnitude of the electric field in the far field can be determined using the following formula, which includes several variables:</p>
+
+<ul>
+  <li><em><strong>E</strong></em><strong> </strong>is the electric field in volts per meter.</li>
+  <li><em>131.6 x 10</em><em><strong>^</strong></em><em>(-16) </em>relates to the dielectric through which the radiation propagates.</li>
+  <li><em><strong>f</strong></em><strong> </strong>is the frequency of the signal in hertz.</li>
+  <li><em><strong>A</strong></em> is the area of the loop in square meters.</li>
+  <li><em><strong>I</strong></em><strong> </strong>is the differential mode current in amperes.</li>
+  <li><em><strong>r</strong></em> is the distance from the loop to the observation point, in meters.</li>
+  <li><em><strong>θ</strong></em> is the angle between the observation point and, perpendicular to the plane of the loop.</li>
+</ul>
+
+<p>To visualize this, imagine a loop with an observation point located at a perpendicular angle to the plane of the loop. In the far field, the electric field pattern for a small loop antenna resembles a toroid, where the maximum radiation occurs along the sides of the loop, in the same plane as the loop itself. In contrast, there is little to no radiation along the normal (perpendicular) direction to the plane of the loop.</p>
+
+<img src="https://raw.githubusercontent.com/dariofresu/Fresu-Electronics-Blog/main/assets/images/radiated-emissions_img06.png" alt="Radiation pattern of  Differential mode currents in a circuit" class="post-img" loading="lazy" width="1920" height="1080">
+<p class="img-caption">Figure 6 - Radiation pattern of  Differential mode currents in a circuit.</p>
+
+<p>An important takeaway is that an antenna polarized in the same direction as the loop will receive the strongest electric field from that loop. This radiation pattern is specific to small loops, where the loop's circumference is less than one-quarter of the signal's wavelength. However, when the loop’s circumference reaches the wavelength size, the radiation pattern shifts by 90 degrees. In this case, the maximum radiation occurs along the normal direction to the plane of the loop.</p>
+
+<p>This is a critical finding because it means that for the same loop, the type and direction of radiation change depending on the wavelength of the signal. For instance, if the signal has a wavelength larger than four times the loop’s circumference, the maximum radiation will occur along the edge of the loop, in the same direction as the plane of the loop. However, if the signal’s wavelength matches the size of the loop, the maximum radiation will be along the normal direction to the plane of the loop.</p>
+
+<p>This behavior is particularly relevant when analyzing digital signals, which contain multiple harmonics, resulting in varying wavelengths. The same loop can produce different radiation patterns due to the different harmonic frequencies present in the signal.</p>
+
+<p>It’s important to note that <strong>small loops do not need to be circular to behave as electrically small loops. </strong>Whether the loop is circular, square, or another shape, as long as its circumference is less than one-quarter of the signal wavelength, the radiation will follow the same principles. The critical factor is the area enclosed by the loop, not its exact shape.</p>
+
+<p>While the formula for calculating electric field radiation is accurate for free space, practical applications involve more complex conditions. For example, real-world printed circuit boards (PCBs) are typically measured in open areas, with the device under test (DUT) placed above a ground plane. This ground plane introduces a reflective effect, meaning that the radiated field must account for the mirroring effect of the ground. As a result, the previous formula must be multiplied by two to accommodate the reflective influence of the ground plane.</p>
+
+<img src="https://raw.githubusercontent.com/dariofresu/Fresu-Electronics-Blog/main/assets/images/radiated-emissions_img07.png" alt="Differential mode currents in a circuit over a ground plane" class="post-img" loading="lazy" width="1920" height="1080">
+<p class="img-caption">Figure 7 -  Differential mode currents in a circuit over a ground plane</p>
+
+<p>When measuring radiation in open areas, we often assume the observation angle is 90 degrees from the loop. This simplifies the formula for calculating the electric field, making it easier to estimate the magnitude of radiated emissions from differential mode currents. The simplified formula shows that the electric field's magnitude is directly proportional to the current flowing through the loop, the area of the loop, and the square of the frequency.</p>
+
+<p>The frequency dependence is particularly significant, as it underscores how higher frequencies lead to increased radiation. This becomes more important when comparing the behavior of the frequency spectrum between differential and common mode radiations.</p>
+
+<p>It’s also essential to note that this formula applies to far-field measurements. In the near field, the behavior of radiated emissions becomes more complex and requires additional considerations for accurate analysis.</p>
+
+<h2 id="application">Application</h2>
+
+<p>Now, let's consider a scenario where we measure radiated emissions at a distance of three meters, as is commonly done in EMC (Electromagnetic Compatibility) testing. Using this approach, we can modify the earlier formula to fit these measurement conditions.</p>
+
+<img src="https://raw.githubusercontent.com/dariofresu/Fresu-Electronics-Blog/main/assets/images/radiated-emissions_img08.png" alt="Figure 8 -  Simplified equation of differential mode currents in a circuit over a ground plane" class="post-img" loading="lazy" width="1920" height="1080">
+<p class="img-caption">Figure 8 -  Simplified equation of differential mode currents in a circuit over a ground plane</p>
+
+<p>This updated formula shows us that if we aim to control differential mode radiation, there are three primary methods:</p>
+
+<ol>
+  <li><em><strong>Reduce the current flowing through the loop.</strong></em></li>
+  <li><em><strong>Reduce the area enclosed by the loop.</strong></em></li>
+  <li><em><strong>Reduce the frequency or harmonic content of the current in the loop.</strong></em></li>
+</ol>
+
+<p>However, in most cases, the current flowing through the loop is determined by the circuit's operation, making it difficult to modify. </p>
+
+<p>The same goes for the frequency, as changing the signal frequency often compromises the system's performance. Therefore, as designers, <strong>the most feasible and effective option available is to minimize the loop size.</strong> <strong>Reducing the area enclosed by the loop becomes the most practical way to reduce differential mode radiation.</strong></p>
+
+<p>To use this formula in a practical design setting, we can calculate the maximum allowable loop area at a specific frequency and current to ensure that radiated emissions remain below the limits defined by EMC compliance standards. </p>
+
+<p>By rearranging the formula, we express the electric field in microvolts per meter, frequency in megahertz, current in milliamps, and the loop area in square centimeters.</p>
+
+<img src="https://raw.githubusercontent.com/dariofresu/Fresu-Electronics-Blog/main/assets/images/radiated-emissions_img09.png" alt="Loop area equation of differential mode currents in a circuit over a ground plane" class="post-img" loading="lazy" width="1920" height="1080">
+<p class="img-caption">Figure 9 -  Loop area equation of differential mode currents in a circuit over a ground plane</p>
+
+<p>This version of the formula allows us to:</p>
+
+<ul>
+  <li>Input the maximum allowable radiated field strength (as defined by EMC directives).</li>
+  <li>Factor in the operating frequency, current through the loop, and the measurement distance.</li>
+  <li>Calculate the maximum loop area that can be tolerated without exceeding the emission limits.</li>
+</ul>
+
+<h2 id="example-calculation">Example Calculation</h2>
+
+<p>Suppose we are designing a circuit with a current of 25 milliamps and need to meet the Class B radiated emissions limits defined in FCC Part 15. The frequency range for this standard is from 30 MHz to 1 GHz, and we are measuring emissions at a distance of 3 meters. The maximum allowable electric field at 30 MHz is 40 dBμV/m, while at 1 GHz, it is 54 dBμV/m.</p>
+
+<img src="https://raw.githubusercontent.com/dariofresu/Fresu-Electronics-Blog/main/assets/images/radiated-emissions_img10.png" alt="Figure 11 -  Loop area equation example of differential mode currents in a circuit over a ground plane" class="post-img" loading="lazy" width="1920" height="1080">
+<p class="img-caption">Figure 10 -  Loop area equation example of differential mode currents in a circuit over a ground plane.</p>
+
+<p>Using these parameters, we can calculate the maximum allowable loop area:</p>
+
+<ul>
+  <li>At 30 MHz, for a current of 25 mA, the maximum loop area is about 5 square centimeters.</li>
+  <li>At 1 GHz, for the same current, the maximum allowable loop area drops significantly to 0.023 square centimeters.</li>
+</ul>
+
+<h2 id="key-design-takeaways">Key Design Takeaways</h2>
+
+<p>These results highlight how critical it is to design the PCB layout correctly from the start. The layout is one of the most important factors we can control when it comes to reducing radiated emissions caused by differential mode currents.</p>
+
+<p>Additionally, the PCB stack-up plays a crucial role in determining loop size. If the return reference plane (ground plane) is placed far from the signal layer, the loop area increases, which could lead to higher emissions. Therefore, a carefully planned stack-up that minimizes the distance between the signal layer and the return reference plane is essential.</p>
+
+<img src="https://raw.githubusercontent.com/dariofresu/Fresu-Electronics-Blog/main/assets/images/radiated-emissions_img11.jpg" alt="Schematics and layout diagram. Left: forward and return paths with loop area. Right: circuit layout with labeled components and loop area." class="post-img" loading="lazy" width="1920" height="519">
+<p class="img-caption">Figure 11 -  Loop area example in a PCB</p>
+
+<p>Lastly, it's important to remember that when we refer to "loops," we mean electrically small loops, where the loop's circumference is less than one-quarter of the signal wavelength. In these cases, the current remains in phase throughout the loop, and understanding this concept is vital for controlling emissions effectively.</p>
+
+<p>Now, let's discuss the frequencies at which emissions from differential currents typically occur and understand why these emissions take place. To do so, we'll examine the spectrum of radiated emissions due to differential mode currents and explore how we can control these radiations.</p>
+
+<div class="callout">
+  <span class="callout-label">Featured resource</span>
+  <p><a href="https://www.fresuelectronics.com/product-page/radiated-emissions-guide">Radiated Emissions &amp; EMI Control  - Guide</a></p>
+</div>
+
+<p>First, let's clarify the concept of the current loop, which plays a key role in understanding differential mode radiation. Imagine a two-layer printed circuit board (PCB), with the top layer carrying the signal traces and the bottom layer serving as a solid return reference plane. Commonly, this return plane is referred to as "ground," but for clarity, we won't use that term here. Instead, we’ll call it the return reference plane (RRP) to emphasize the current path.</p>
+
+<img src="https://raw.githubusercontent.com/dariofresu/Fresu-Electronics-Blog/main/assets/images/radiated-emissions_img12.png" alt="Figure 12 -  Loop area example in a PCB" class="post-img" loading="lazy" width="1920" height="1080">
+<p class="img-caption">Figure 12 -  Loop area example in a PCB</p>
+
+<p>The loop is formed by the current flowing from the signal trace, starting at the source, such as a processor or microcontroller, and moving toward the load. After reaching the load, the current must return to the source via the return reference plane, completing the loop. In reality, the current does not need to reach the load to begin returning to the source, as this happens instantaneously, but we will simplify things for now.</p>
+
+<p>The crucial aspect of this loop is the area it encloses. This area determines how much radiation is produced by the differential mode currents.</p>
+
+<p>A key factor in controlling radiated emissions from this loop is minimizing its area. The smaller the area enclosed by the loop, the less radiation will be emitted. Therefore, the closer the signal trace is to the return reference plane, the smaller the loop area becomes. This reduction in loop size directly helps in reducing radiated emissions.</p>
+
+<p><strong>Designing PCBs with both layers dedicated to signal traces,</strong> rather than maintaining a solid return reference plane,<strong> greatly increases the likelihood of failing radiated emissions tests due to the larger loop areas.</strong> <br><br>Keeping the return reference plane as close as possible to the signal trace is essential for controlling differential mode emissions. Additionally, it is vital to maintain the lowest possible impedance in the return path, which becomes even more critical when we discuss common mode currents later on.</p>
+
+<p>By designing circuits with minimized loop areas and ensuring that the return reference plane is positioned effectively, we can significantly reduce the radiated emissions generated by differential mode currents.</p>
+
+<h2 id="differential-mode-current-spectrum">Differential-Mode Current - Spectrum</h2>
+
+<p>Let's now examine the frequency spectrum of radiated emissions caused by differential mode currents and explore how we can mitigate these effects.</p>
+
+<p>To start, we need to derive the transfer function of the radiated emission from differential currents. We do this by taking the equation for the radiated electric field produced by a small loop (the one we discussed earlier). By moving the current term to the other side of the equation, we get the transfer function for the electric field.</p>
+
+<img src="https://raw.githubusercontent.com/dariofresu/Fresu-Electronics-Blog/main/assets/images/radiated-emissions_img13.png" alt="Transfer function of diff-mode currents" class="post-img" loading="lazy" width="1920" height="1080">
+<p class="img-caption">Figure 13 -  Transfer function of diff-mode currents</p>
+
+<p>This transfer function includes a constant based on the dielectric properties of free space, which we discussed earlier, and it also factors in the measurement distance (typically three meters). This constant equals 4.39 × 10⁻¹⁵, but you don’t need to memorize this value; it’s just a fixed number. </p>
+
+<p>Next, we can plot the transfer function on a Bode plot, which shows that the transfer function increases at a rate of 40 dB per decade.</p>
+
+<img src="https://raw.githubusercontent.com/dariofresu/Fresu-Electronics-Blog/main/assets/images/radiated-emissions_img14.png" alt="Bode plot of the transfer function example for diff-mode currents" class="post-img" loading="lazy" width="1920" height="1080">
+<p class="img-caption">Figure 14 -  Bode plot of the transfer function example for diff-mode currents</p>
+
+<p>Now, to make this clearer, we also need to consider the Bode plot for the current. </p>
+
+<p>Since we are dealing with digital signals, the waveform of this current will be a trapezoidal signal due to its rise and fall times. </p>
+
+<img src="https://raw.githubusercontent.com/dariofresu/Fresu-Electronics-Blog/main/assets/images/radiated-emissions_img15.png" alt="Figure 15 -  Bode plot of the current example for diff-mode currents" class="post-img" loading="lazy" width="1920" height="1080">
+<p class="img-caption">Figure 15 -  Bode plot of the current example for diff-mode currents</p>
+
+<p>We can calculate its Bode plot using these times. </p>
+
+<p>The Bode plot of this trapezoidal signal will initially have a flat response (0 dB per decade slope) until the first breakpoint, which occurs at 1/(πτ), where τ depends on the signal frequency and the duty cycle.</p>
+
+<p>After this first breakpoint, the signal spectrum decays at a rate of -20 dB per decade, and once it reaches the second breakpoint, which is determined by the rise time or fall time (whichever is shorter), the spectrum decays at -40 dB per decade.</p>
+
+<p><strong>Why is this important? </strong>When we combine the Bode plot of the current with the transfer function (essentially multiplying them), we can visualize the received electric field's intensity. This combination gives us the full spectrum of the radiated electric field caused by the differential current, which is useful for debugging certain situations.</p>
+
+<img src="https://raw.githubusercontent.com/dariofresu/Fresu-Electronics-Blog/main/assets/images/radiated-emissions_img16.png" alt="Bode plot result example for diff-mode currents" class="post-img" loading="lazy" width="1920" height="1080">
+<p class="img-caption">Figure 16 -  Bode plot result example for diff-mode currents</p>
+
+<p>Here’s what happens when we look at the spectrum of the radiated electric field: Initially, it increases at 40 dB per decade until the first breakpoint, which depends on the fundamental frequency and duty cycle. After this point, the slope decreases to 20 dB per decade until it reaches the second breakpoint. Beyond the second breakpoint, the spectrum flattens out to 0 dB per decade.</p>
+
+<p>This is crucial because it tells us that radiated emissions from differential mode currents in digital circuits—where transient currents are present, are typically more significant above 200 MHz. The second breakpoint, which depends on the rise or fall time, is critical in determining the point where emissions level off.</p>
+
+<img src="https://raw.githubusercontent.com/dariofresu/Fresu-Electronics-Blog/main/assets/images/radiated-emissions_img17.png" alt="Figure 17 -  Bode plot example for emission from diff-mode currents" class="post-img" loading="lazy" width="1920" height="1080">
+<p class="img-caption">Figure 17 -  Bode plot example for emission from diff-mode currents</p>
+
+<p>To summarize how we can control differential mode radiations, we have three main strategies:</p>
+
+<ol>
+  <li><em><strong>Reduce the current flowing through the loop.</strong></em></li>
+  <li><em><strong>Minimize the loop area by keeping the signal traces as close as possible to the return reference plane.</strong></em></li>
+  <li><em><strong>Lower the frequency or harmonic content of the signal flowing through the loop.</strong></em></li>
+</ol>
+
+<p>By applying these methods, we can effectively reduce the radiated emissions from differential mode currents.</p>
+
+<p>The final reduction technique you can employ will depend on your specific system and the trade-offs you're willing to make when implementing this technique. </p>
+
+<p><strong>If you're still in the early stages of design, you'll have a broader range of solutions available to you, especially when it comes to minimizing the area enclosed by the loop. This is largely influenced by the layout and stack-up of your printed circuit board (PCB).</strong></p>
+
+<p>As we discussed, the spectrum of the radiated electric field starts with an increase of 40 dB per decade until it reaches the first breakpoint. After this point, it continues at a rate of 20 dB per decade until it hits the second breakpoint, where it then flattens out. This means that the radiated electric field will be significantly higher at frequencies usually above 200 MHz.</p>
+
+<p>Having established the direct correlation between differential mode currents and their radiated emissions, we can now explore the same relationship for common mode currents.</p>
+
+<div class="callout">
+  <span class="callout-label">Featured resource</span>
+  <p><a href="https://www.fresuelectronics.com/product-page/radiated-emissions-guide">Radiated Emissions &amp; EMI Control  - Guide</a></p>
+</div>
+
+<h2 id="radiations-from-common-mode-currents">Radiations from Common Mode Currents</h2>
+
+<p>The first and most critical aspect to grasp regarding the radiation emanating from common mode currents is that<strong> these radiations are generated by currents that are not essential for the proper operation of the device. </strong></p>
+
+<img src="https://raw.githubusercontent.com/dariofresu/Fresu-Electronics-Blog/main/assets/images/radiated-emissions_img18.png" alt="Common mode currents in a PCB" class="post-img" loading="lazy" width="1920" height="1080">
+<p class="img-caption">Figure 18 -  Common mode currents in a PCB</p>
+
+<p>In other words, common mode currents represent unwanted or parasitic currents within our circuits. The primary issue we face with common mode currents and their associated radiation is that these currents are significantly more effective at radiating energy compared to differential mode currents. This effectiveness arises because the currents flow in the same direction, leading to the addition of their radiated fields.</p>
+
+<p>To comprehend the mechanism of radiation from these currents, let us examine the formula that allows us to calculate the radiated electric fields produced by common mode currents. </p>
+
+<p>To utilize the formula in <em>Figure 19</em>, we model the scenario using an electrically short dipole antenna or a monopole antenna, where we assume that the voltage source represents noise in the return path. You can visualize this setup as a source, and when we integrate the cables into the printed circuit boards, this configuration essentially acts as a dipole antenna. </p>
+
+<p>The radiated emissions can be calculated using the established formula, which can be referenced in the renowned <a href="https://amzn.to/3CuGSCU"><u><strong>Balanis book.</strong></u></a><u><strong> </strong></u>In this formula, the electric field is measured in volts per meter (V/m), while the frequency (F) is expressed in hertz (Hz). </p>
+
+<img src="https://raw.githubusercontent.com/dariofresu/Fresu-Electronics-Blog/main/assets/images/radiated-emissions_img19.png" alt="Emission from common mode currents in a PCB" class="post-img" loading="lazy" width="1920" height="1080">
+<p class="img-caption">Figure 19 -  Emission from common mode currents in a PCB</p>
+
+<p>The variable I represents the common mode current flowing through the cable, which functions as the antenna, measured in amperes (A). Additionally, L denotes the length of the antenna, and R indicates the distance from the measurement point, both in meters (m). The angle theta represents the angle from the axis of the antenna at the observation point. </p>
+
+<p>For this type of antenna, the maximum radiated electric field occurs at a 90-degree angle perpendicular to the antenna. This scenario parallels the behavior of a loop antenna, except that it is rotated 90 degrees around an axis that is perpendicular to its plane instead of remaining parallel.</p>
+
+<p>A similar case can be made for a monopole antenna positioned over a larger reference plane; however, the radiation pattern is directed in <strong>only one direction </strong>in this instance. If we assume the observation point is again situated at a 90-degree angle to the antenna, we can simplify the previous formula to obtain a more streamlined expression.</p>
+
+<p>Now, regarding the methods for minimizing these unwanted radiations, we can identify three primary strategies:</p>
+
+<ol>
+  <li><strong>Reducing the Common Mode Current: </strong>This first method is arguably the most crucial for us, as common mode currents are unnecessary for the circuit's operation and are purely parasitic effects stemming from the impedance of the return path.</li>
+  <li><strong>Reducing the Frequency:</strong> Modifying the operating frequency, similar to strategies used for differential mode radiation, is often not a viable option. Lowering the frequency of device operation can frequently lead to decreased performance in many applications.</li>
+  <li><strong>Reducing the Length of the Antenna:</strong> The third strategy involves minimizing the length of the cables or circuit traces, effectively reducing the size of the antenna. As designers, we can leverage this information to make every effort to shorten the length of cables connected to the PCB and reduce the length of traces on the PCB.</li>
+</ol>
+
+<img src="https://raw.githubusercontent.com/dariofresu/Fresu-Electronics-Blog/main/assets/images/radiated-emissions_img20.png" alt="Dipole antenna example for emission from common mode currents in a PCB" class="post-img" loading="lazy" width="1920" height="1080">
+<p class="img-caption">Figure 20 - Dipole antenna example for emission from common mode currents in a PCB</p>
+
+<p>However, it is important to note that this technique is only effective when the length of the antenna is less than one-quarter of the wavelength. Once the antenna exceeds this length, the emissions become less dependent on the antenna length.</p>
+
+<p>This is also why it is vital for crystal oscillators to be placed as close as possible to the device pins they are feeding. The same principle applies to all components and the lengths of their traces. Consequently, placement becomes one of the most important factors we can manipulate to minimize radiation from common mode currents.</p>
+
+<p>Nonetheless, the task becomes more complicated when dealing with cables, as the distances are typically determined by the overall design of the system and its specific application requirements. </p>
+
+<h2 id="application-common-mode">Application</h2>
+
+<p>To effectively address the common mode currents that can generate electromagnetic compatibility (EMC) issues, we can simplify the formula for radiated emissions previously utilized for common mode currents. Instead of focusing on the radiated electric field, we will rework the equation to solve for the currents themselves. </p>
+
+<p>This will enable us to determine the maximum electric field limits established by the relevant standards that we must comply with. By substituting these limits into our calculations, we can ascertain how much common mode current can be present.</p>
+
+<img src="https://raw.githubusercontent.com/dariofresu/Fresu-Electronics-Blog/main/assets/images/radiated-emissions_img21.png" alt="Common mode current calculation" class="post-img" loading="lazy" width="1920" height="1080">
+<p class="img-caption">Figure 21 - Common mode current calculation</p>
+
+<p>This is an essential step because common mode currents can indeed be measured directly. Once we have simplified the formula and solved for the current, we arrive at the following expression: </p>
+
+<ul>
+  <li><strong>E</strong> - the electric field strength is expressed in microvolts per meter (µV/m), while </li>
+  <li><strong>I</strong> - the current measured in microamps (µA). </li>
+  <li><strong>F</strong> - the frequency is specified in megahertz (MHz), </li>
+  <li><strong>R</strong> - is the distance from the observation point to the source of radiation, </li>
+  <li><strong>L</strong> - is the length of the antenna.</li>
+</ul>
+
+<p>and both R and L are given in meters.</p>
+
+<p>Thanks to these formulas, we can insert the limits defined by EMC standards, which will allow us to calculate the maximum common-mode current permissible on a cable or PCB trace at a specific frequency and for a defined cable or PCB trace length.</p>
+
+<p>The practical implication of this calculation is significant: <strong>using a current probe, even a simple homemade one, enables us to conduct pre-compliance measurements ourselves. </strong></p>
+
+<p>This approach allows us to determine whether our common mode currents are below the specified radiated emission limits.</p>
+
+<p>A crucial takeaway from this formula is that, when comparing the same level of radiated emissions between common mode and differential mode currents, <strong>common mode currents require much lower current levels. </strong></p>
+
+<p>This is primarily due to the frequency term in the denominator of the formula, which is not squared for common mode currents. </p>
+
+<p>Consequently, even a small common mode current can result in significantly greater radiated emissions. </p>
+
+<p>This insight underscores the importance of closely monitoring and controlling common mode currents to mitigate potential EMC issues effectively.</p>
+
+<h2 id="reducing-common-mode-currents-in-circuits">Reducing Common Mode Currents in Circuits</h2>
+
+<p>To effectively mitigate common mode currents in our circuits, we must first understand the mechanisms that generate these unwanted currents. The primary step in reducing common mode currents is to minimize the voltage drop across the return reference plane, which occurs as a result of differential mode currents. This voltage drop is a key contributor to the generation of common mode currents.</p>
+
+<p>So, what additional strategies do we have at our disposal to tackle this issue? </p>
+
+<ul>
+  <li>One effective approach is to implement filtering techniques for the cables, thereby reducing the common mode currents that may propagate through them. </li>
+  <li>Alternatively, we can utilize shielded cables, which serve to contain and mitigate the radiated emissions. </li>
+  <li>Another option involves completely isolating the cable from the return reference plane, effectively separating it from the return path.</li>
+</ul>
+
+<img src="https://raw.githubusercontent.com/dariofresu/Fresu-Electronics-Blog/main/assets/images/radiated-emissions_img22.png" alt="Common mode currents example in a PCB" class="post-img" loading="lazy" width="1920" height="1080">
+<p class="img-caption">Figure 22 - Common mode currents example in a PCB</p>
+
+<p><u>Reducing Voltage Drop in the Return Reference Plane</u></p>
+
+<p>The critical factor in reducing the voltage drop across the return reference plane lies in designing the impedance to be as low as possible. By ensuring that the return current, specifically, the portion of the differential mode current that flows back through the plane, does not encounter a significant voltage drop during its return to the source, we can effectively minimize the generation of common mode currents that lead to radiated emissions. </p>
+
+<p>Consequently, it becomes imperative to focus on maintaining a low impedance path for the return current.</p>
+
+<p>This emphasis on the return path is particularly vital in the overall design process. </p>
+
+<p><strong>The return path for signals must be engineered meticulously, ensuring that it operates efficiently from the source to the load.</strong> While the signal current flows towards the load, it is equally important to account for the return current heading back to the source, as this return current is often responsible for the common mode radiated emissions we aim to control.</p>
+
+<p><u>Achieving a Low Impedance Path</u></p>
+
+<p>To achieve a low impedance path for the return current, <strong>the use of a solid return reference plane is essential.</strong> This means utilizing planes that are free from cuts, splits, or any other discontinuities that may introduce additional impedance. </p>
+
+<img src="https://raw.githubusercontent.com/dariofresu/Fresu-Electronics-Blog/main/assets/images/radiated-emissions_img23.png" alt="Comparison inductance between plane and traces" class="post-img" loading="lazy" width="1920" height="1080">
+<p class="img-caption">Figure 23 - Comparison inductance between plane and traces</p>
+
+<p>One significant advantage of employing a solid plane is that its impedance is typically two orders of magnitude lower than that of traces. For instance, the impedance of a plane can measure approximately 0.15 nH per inch, whereas traces can have an impedance of around 15nH per inch.</p>
+
+<p>Moreover, consistency in the return path is vital, especially during signal transitions between layers. It is crucial to ensure that the return path remains intact and effective even as the signal moves from one layer to another in the layer stack. </p>
+
+<p>This is where the implementation of return reference vias comes into play. These vias, often referred to as stitching vias, are employed to facilitate a low impedance path for the return current while also providing a reference for the voltage during transitions.</p>
+
+<img src="https://raw.githubusercontent.com/dariofresu/Fresu-Electronics-Blog/main/assets/images/radiated-emissions_img24.png" alt="Example of return and reference vias" class="post-img" loading="lazy" width="1920" height="1080">
+<p class="img-caption">Figure 24 - Example of return and reference vias</p>
+
+<p>When return vias are not utilized, various problems can arise. For instance, uncontained electromagnetic fields can result in the return current being established through alternative, less desirable paths. </p>
+
+<p>Typically, this occurs through the impedance present between planes, leading to increased voltage drop between the planes. This situation subsequently generates additional common mode currents, exacerbating the radiation issue.</p>
+
+<p><u>Importance of Board Stack-Up</u></p>
+
+<p>The careful selection of the board's stack-up is also critical in this context. Using a power plane as a return plane, for example, is often not the optimal choice, particularly for digital signals. </p>
+
+<img src="https://raw.githubusercontent.com/dariofresu/Fresu-Electronics-Blog/main/assets/images/radiated-emissions_img25.png" alt="Example of poor layer stackup in a PCB" class="post-img" loading="lazy" width="1920" height="1080">
+<p class="img-caption">Figure 25 - Example of poor layer stackup in a PCB</p>
+
+<p>The placement and layout of layers significantly influence the performance and effectiveness of the return path, making it vital for designers to consider these aspects when attempting to minimize common mode currents.</p>
+
+<p><u><strong>Filtering Common Mode Currents</strong></u></p>
+
+<p>Let us now explore the concept of filtering, which serves as a straightforward yet effective strategy for managing common mode currents in electronic circuits. <br><br>The fundamental principle behind filtering is to suppress these unwanted common mode currents, thereby minimizing their potential impact. To achieve this, we can employ <strong>common mode chokes</strong>, which are designed to filter the input or output signals. </p>
+
+<img src="https://raw.githubusercontent.com/dariofresu/Fresu-Electronics-Blog/main/assets/images/radiated-emissions_img26.png" alt="EMI Filtering example in a PCB" class="post-img" loading="lazy" width="1920" height="1080">
+<p class="img-caption">Figure 26 - EMI Filtering example in a PCB</p>
+
+<p>The use of a common mode choke ensures that the common mode current does not propagate to the cable, thereby preventing it from contributing to radiation issues. Selecting the appropriate common mode choke is therefore essential for this process.</p>
+
+<p><u>Shielding</u></p>
+
+<p>Next, we must address the role of <strong>shielding</strong> in mitigating common mode currents. For the shielding to be effective, it is crucial to establish a complete 360-degree connection between the chassis of the product and the shielded cable being utilized. This means that whenever a shielded cable is employed, a 360-degree connection to the chassis must be established. Failing to do so can lead to greater complications than those we are trying to resolve.</p>
+
+<p>The significance of this complete connection lies in its ability to maintain the integrity of the <strong>Faraday cage effect</strong>. By ensuring a 360-degree connection between the shield and the chassis, we can contain the radiation associated with common mode currents. </p>
+
+<img src="https://raw.githubusercontent.com/dariofresu/Fresu-Electronics-Blog/main/assets/images/radiated-emissions_img27.png" alt="Example of shielded cable application" class="post-img" loading="lazy" width="1920" height="1080">
+<p class="img-caption">Figure 27 - Example of shielded cable application</p>
+
+<p>To achieve this, <strong>the shield must be connected with a low impedance,</strong> ensuring that the common mode currents remain confined within the shielded area, much like the principles of a Faraday cage. What we want to avoid at all costs is the so-called <strong>"pigtail connection," </strong>which refers to a high impedance path that connects the shield of the cable at a single point on the chassis. This connection can significantly compromise the shielding effectiveness. </p>
+
+<img src="https://raw.githubusercontent.com/dariofresu/Fresu-Electronics-Blog/main/assets/images/radiated-emissions_img28.png" alt="Example of pigtail connection in a shielded cable application" class="post-img" loading="lazy" width="1920" height="1080">
+<p class="img-caption">Figure 28 - Example of pigtail connection in a shielded cable application</p>
+
+<p>In scenarios where a product lacks a chassis, it remains imperative to connect the shield using a 360-degree connection to a metal connector. Subsequently, this metal connector can be linked to the circuit board, ideally with some form of filtering employed between the connector and the return reference plane.</p>
+
+<h2 id="common-mode-current-spectrum">Common-Mode Current Spectrum</h2>
+
+<p>To better comprehend how common mode currents can present problems, we can apply the same methodology used to determine the transfer function for differential mode radiation. This approach enables us to analyze how the spectrum of radiated electric fields associated with common mode currents behaves. By doing so, we can identify the frequency ranges at which these radiations are most likely to occur.</p>
+
+<img src="https://raw.githubusercontent.com/dariofresu/Fresu-Electronics-Blog/main/assets/images/radiated-emissions_img29.png" alt="Transfer function for common mode currents " class="post-img" loading="lazy" width="1920" height="1080">
+<p class="img-caption">Figure 29 - Transfer function for common mode currents </p>
+
+<p>To derive this understanding, we begin with the equation that represents the common mode radiated electric fields. By rearranging this equation to isolate the current term on one side, we can obtain the transfer function, much like we did in previous analyses. <br>In this case, the constant 𝑘 is included, along with the distance R, which is set for three meters, resulting in a value of 4.19 ×10−7.</p>
+
+<p>Once we plot this transfer function as a Bode plot, similar to previous examples, we observe that the transfer function increases at a rate of 20 dB per decade. When we analyze the trapezoidal current waveform, utilizing the same approach as we did for the differential current, we can overlay these two Bode plots to visualize the radiated emissions associated with common mode currents.</p>
+
+<img src="https://raw.githubusercontent.com/dariofresu/Fresu-Electronics-Blog/main/assets/images/radiated-emissions_img30.png" alt="Bode plot of the transfer function for common mode currents " class="post-img" loading="lazy" width="1920" height="1080">
+<p class="img-caption">Figure 30  - Bode plot of the transfer function for common mode currents </p>
+
+<p>From this analysis, it becomes apparent that the spectrum for common mode radiated emissions increases at a rate of 20 dB per decade, extending up to the first breakpoint. </p>
+
+<p>This first breakpoint is influenced by both the fundamental frequency and the duty cycle of the signal. Beyond this first breakpoint, the spectrum exhibits a flat response, maintaining a rate of 0 dB per decade until it reaches the second frequency breakpoint. After this point, the radiated emissions begin to decline at a rate of -20 dB per decade.</p>
+
+<img src="https://raw.githubusercontent.com/dariofresu/Fresu-Electronics-Blog/main/assets/images/radiated-emissions_img31.png" alt="Bode plot of the emissions from common mode currents " class="post-img" loading="lazy" width="1920" height="1080">
+<p class="img-caption">Figure 31  - Adding the Bode plot of the transfer function To the bode plot of the currents.</p>
+
+<p>Understanding these characteristics is essential, as it indicates that the radiated emissions resulting from common mode currents are more likely to occur within a lower frequency range, typically between <strong>30 MHz and 200 MHz.</strong> </p>
+
+<p>Consequently, when we encounter issues related to radiated emissions, the initial step should be to examine the spectrum of the measured emissions. By identifying the frequency range at which these issues manifest, we can then assess whether they are primarily due to differential currents or common mode currents.</p>
+
+<img src="https://raw.githubusercontent.com/dariofresu/Fresu-Electronics-Blog/main/assets/images/radiated-emissions_img32.png" alt="Bode plot showing CM-mode radiated electric field. Labels: +20dB/d, 0dB/decade, -20dB/d, with black lines and green grid." class="post-img" loading="lazy" width="1920" height="1080">
+<p class="img-caption">Figure 32  -Bode plot of the radiated electric field from common mode currents.</p>
+
+<p>If the problematic emissions are concentrated at the higher end of the frequency spectrum, it is likely that they stem from differential mode radiated emissions. </p>
+
+<p>Conversely, if the issues arise within the lower part of the spectrum, they are more likely to be attributed to common mode radiated emissions. This analytical approach allows us to pinpoint the source of the radiation problems and take the necessary corrective actions to mitigate them effectively.</p>
+
+<h2 id="conclusions">Conclusions</h2>
+
+<p>Solving radiated emission issues is not "black magic." With the right approach and timely intervention, as we've discussed in this article, addressing these challenges can be a straightforward process. By integrating effective solutions into your PCB design routing before production, you can enhance the performance of your device and streamline your development process.</p>
+
+<p>On our site, you’ll discover detailed information about our exclusive mentoring programs specifically designed to help you build and enhance the skills necessary to excel in this important field. These programs are tailored for individuals at various levels of experience, ensuring that you receive the right guidance and knowledge to tackle the challenges of EMI in circuit design. <br><br>Whether you are just starting out or looking to deepen your expertise, we have resources available to support your journey. Don't miss this opportunity to develop your skills and advance your career in EMI.</p>
+
+<div class="callout">
+  <span class="callout-label">Featured resource</span>
+  <p><a href="https://www.fresuelectronics.com/product-page/radiated-emissions-guide">Radiated Emissions &amp; EMI Control  - Guide</a></p>
+</div>
+
+<div class="references">
+  <p><em>Further readings and references:</em></p>
+  <ul>
+    <li><a href="https://amzn.to/44NbpI7"><u><em>Introduction to Electromagnetic Compatibility</em></u></a><em> </em></li>
+    <li><a href="https://amzn.to/3p0C84l"><u><em>Electromagnetic Compatibility Engineering</em></u></a></li>
+  </ul>
+</div>
+      </div>
+
+      <div class="tags">
+        <span class="tag">Radiated Emissions</span><span class="tag">EMC Compliance</span><span class="tag">PCB Layout</span><span class="tag">Common Mode Currents</span>
+      </div>
+    </article>
+
+    <!-- Share -->
+    <div class="share-strip">
+      <span class="share-label">Share</span>
+      <a href="https://www.linkedin.com/shareArticle?mini=true&url=https%3A%2F%2Fblog.fresuelectronics.com%2Fradiated-emissions&title=Understanding%20Radiated%20Emissions%3A%20What%20You%20Need%20to%20Know%20for%20EMI%20Compliance"
+         target="_blank" class="share-btn linkedin">LinkedIn</a>
+      <a href="https://twitter.com/intent/tweet?url=https%3A%2F%2Fblog.fresuelectronics.com%2Fradiated-emissions&text=Understanding%20Radiated%20Emissions%3A%20What%20You%20Need%20to%20Know%20for%20EMI%20Compliance&via=dario_fresu"
+         target="_blank" class="share-btn twitter">X / Twitter</a>
+      <button class="share-btn copylink"
+              onclick="copyLink(this,'https://blog.fresuelectronics.com/radiated-emissions')">Copy Link</button>
+    </div>
+
+    <!-- CTA -->
+    <div class="cta-section">
+      <div class="cta-inner">
+        <span class="cta-kicker">Work with Fresu Electronics</span>
+        <h3>Stop finding EMC problems in the chamber.</h3>
+        <p>An EMC Design Audit reviews your schematic and PCB layout before fabrication — identifying return path gaps, filter placement errors, and stackup decisions that turn into failures at the test house. Report delivered in 10 business days.</p>
+        <div class="cta-actions">
+          <a href="https://www.fresuelectronics.com/emc-audit" class="btn-primary">Book an EMC Audit — €8,000 →</a>
+          <a href="https://www.fresuelectronics.com/trainings" class="btn-outline">Browse Courses</a>
+        </div>
+      </div>
+      <div class="proof-row">
+        <span class="proof-item">80,000+ engineers reached</span>
+        <span class="proof-item">4,000+ engineers trained</span>
+        <span class="proof-item">Report in 10 business days</span>
+        <span class="proof-item">IPC Certified · Former ETH Zurich</span>
+      </div>
+    </div>
+
+  </div><!-- /.container -->
+</div><!-- /.post-layout -->
+
+<!-- Lightbox -->
+<div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Image viewer">
+  <button class="lightbox-close" aria-label="Close" onclick="lbClose()">✕</button>
+  <img id="lightboxImg" src="" alt="">
+</div>
+
+<!-- Footer -->
+<footer>
+  <div class="site-footer">
+    <span>© 2026 Fresu Electronics SRL — Sardinia, Italy</span>
+    <span>
+      <a href="https://www.fresuelectronics.com/terms-of-services">Terms</a> ·
+      <a href="https://www.freeprivacypolicy.com/live/2e894867-7c2b-4014-aa0c-db0f62e59cb8">Privacy</a> ·
+      <a href="https://blog.fresuelectronics.com">Blog</a>
+    </span>
+  </div>
+</footer>
+
+<script>
+function copyLink(btn, url) {
+  navigator.clipboard.writeText(url).then(function() {
+    var o = btn.innerHTML;
+    btn.innerHTML = '✓ Copied!';
+    setTimeout(function() { btn.innerHTML = o; }, 2000);
+  });
+}
+
+/* Reading progress */
+(function() {
+  var bar = document.getElementById('progressBar');
+  function update() {
+    var h = document.documentElement;
+    var max = h.scrollHeight - h.clientHeight;
+    bar.style.width = (max > 0 ? (h.scrollTop / max) * 100 : 0) + '%';
+  }
+  document.addEventListener('scroll', update, { passive: true });
+  update();
+})();
+
+/* TOC scrollspy */
+(function() {
+  var links = document.querySelectorAll('.toc-rail a');
+  if (!links.length || !('IntersectionObserver' in window)) return;
+  var map = {};
+  links.forEach(function(a) { map[a.getAttribute('href').slice(1)] = a; });
+  var current = null;
+  var obs = new IntersectionObserver(function(entries) {
+    entries.forEach(function(e) {
+      if (e.isIntersecting) {
+        if (current) current.classList.remove('active');
+        current = map[e.target.id];
+        if (current) current.classList.add('active');
+      }
+    });
+  }, { rootMargin: '0px 0px -75% 0px' });
+  document.querySelectorAll('.post-body h2[id]').forEach(function(h) { obs.observe(h); });
+})();
+
+/* Lightbox */
+var lb = document.getElementById('lightbox');
+var lbImg = document.getElementById('lightboxImg');
+function lbClose() { lb.classList.remove('open'); lbImg.src = ''; }
+document.querySelectorAll('.post-img, .post-img-center').forEach(function(img) {
+  img.addEventListener('click', function() {
+    lbImg.src = img.src; lbImg.alt = img.alt || '';
+    lb.classList.add('open');
+  });
+});
+lb.addEventListener('click', function(e) { if (e.target === lb || e.target === lbImg) lbClose(); });
+document.addEventListener('keydown', function(e) { if (e.key === 'Escape') lbClose(); });
+</script>
+
+</body>
+</html>
