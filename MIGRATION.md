@@ -15,7 +15,7 @@ Inventory date: 2026-06-11 — **90 published posts on Wix**, 10 migrated so far
 **Phase 0 — DONE (2026-06-11): all 8 posts repaired or verified.**
 - Figures embedded with verbatim Wix captions/alt: `electromagnetic-fields-pcb` (9), `emc-filter-topologies` (6), `emi-design-review-pcb` (25 placements, 20 unique — 16 images newly downloaded), `emi-signal-return-currents` (10), `pcb-90-degree-bends` (6), `pcb-stackup-power-return-path` (6, incl. animated GIF).
 - Verified clean, no changes needed: `why-engineers-fail-emc` (the only Wix body image is the cover banner), `field-centric-charge-energy` (all 13 equation images are already typeset as MathJax locally).
-- ⚠️ Follow-up found during repair: the local `emi-design-review-pcb` body is an editorial **summary**, not the full 23-minute Wix article — the figures are placed at the matching sections, but the long-form text has not been migrated. Revisit in Phase 1/2 (decide: restore full verbatim text or keep the summary deliberately).
+- ~~Follow-up: `emi-design-review-pcb` body was a summary~~ — resolved in Phase 1: full verbatim text restored (100.0% parity). ⚠️ Two verbatim oddities from the Wix ORIGINAL kept per policy and worth fixing at the source too: a leftover editing-artifact sentence before the Layer 6 section ("Here's a revised version of your text…") and a "rerouting.out." typo in Layer 5.
 
 ## 1. Lossless extraction pipeline (per post)
 
@@ -69,8 +69,8 @@ Build on the existing `tools/emc-fundamentals` pattern; each tool lives in `tool
 
 ## 5. Rollout order
 
-1. **Phase 0** — repair images in the 8 already-migrated posts (no new content).
-2. **Phase 1** — 6 remaining pillar posts (ESD, Radiated Emissions, Conducted Emissions, PDN, MPPT review, i.MX8 review).
+1. **Phase 0** — repair images in the 8 already-migrated posts (no new content). **DONE 2026-06-11.**
+2. **Phase 1** — 6 remaining pillar posts (ESD, Radiated Emissions, Conducted Emissions, PDN, MPPT review, i.MX8 review) + full-text restoration of `emi-design-review-pcb` + index redesign (topic filters, search, Deep Dive tier, tools strip) + shared pillar template (`templates/pillar-post.html`: TOC, progress bar, lightbox, JSON-LD). **DONE 2026-06-11.**
 3. **Phase 2** — standard articles, newest first (the 2025 series).
 4. **Phase 3** — micro-notes as the "Notes" section, batched.
 5. **Phase 4** — tools, one per topic cluster, embedded retroactively.
@@ -111,23 +111,23 @@ Status: ✅ migrated (images OK) · ⬜ to migrate · 📝 micro-note (Phase 3)
 | 2025-03-27 | 4 | the-role-of-emi-specialists-in-ensuring-compliance | ⬜ |
 | 2025-03-26 | 5 | understanding-emi-and-emc-in-electrical-systems | ⬜ |
 | 2025-03-21 | 5 | understanding-the-significance-of-radiated-emissions-emi-control-in-achieving-emc-compliance | ⬜ |
-| 2024-11-19 | 23 | pcb-design-review-for-low-emi-motherboard-design | ✅ `emi-design-review-pcb` (figures restored; body is a summary — full text pending, see Phase 0 note) |
+| 2024-11-19 | 23 | pcb-design-review-for-low-emi-motherboard-design | ✅ `emi-design-review-pcb` (full verbatim text + 25 figures, pillar template) |
 | 2024-11-19 | 4 | how-do-signals-propagate-in-a-printed-circuit-board-pcb | ⬜ |
-| 2024-11-19 | 17 | conducted-emissions | ⬜ pillar |
+| 2024-11-19 | 17 | conducted-emissions | ✅ `conducted-emissions` |
 | 2024-11-18 | 6 | the-concept-of-electromagnetic-fields-in-a-pcb | ✅ `electromagnetic-fields-pcb` |
 | 2024-11-18 | 10 | pcb-design-for-low-emi-differential-mode-vs-common-mode-currents | ⬜ |
-| 2024-11-18 | 24 | radiated-emissions | ⬜ pillar |
-| 2024-11-18 | 17 | pcb-design-power-delivery-network-pdn-for-low-emi | ⬜ pillar |
-| 2024-11-18 | 28 | esd-electrostatic-discharge | ⬜ pillar |
+| 2024-11-18 | 24 | radiated-emissions | ✅ `radiated-emissions` |
+| 2024-11-18 | 17 | pcb-design-power-delivery-network-pdn-for-low-emi | ✅ `pdn-low-emi` |
+| 2024-11-18 | 28 | esd-electrostatic-discharge | ✅ `esd-electrostatic-discharge` |
 | 2024-11-18 | 6 | introduction-to-electromagnetic-compatibility-emc | ⬜ |
 | 2024-11-18 | 7 | what-is-impedance | ⬜ |
 | 2024-11-18 | 5 | electromagnetic-fields-in-a-two-layer-pc-board | ⬜ |
 | 2024-11-17 | 1 | mastering-emi-control-in-pcb-design-decoupling-strategies-for-pdn | 📝 |
 | 2024-11-17 | 1 | failing-to-manage-emi-begins-with-the-pcb-stackup | 📝 |
 | 2024-11-16 | 1 | mastering-emi-control-in-pcb-design-how-to-design-pcbs-for-low-emi | 📝 |
-| 2024-11-16 | 17 | pcb-layout-review-for-emc-and-signal-integrity-mppt-charge-controller | ⬜ pillar |
+| 2024-11-16 | 17 | pcb-layout-review-for-emc-and-signal-integrity-mppt-charge-controller | ✅ `pcb-review-mppt-charge-controller` |
 | 2024-11-16 | 1 | mastering-emi-control-in-pcb-design-crosstalk-prevention-for-better-emi | 📝 |
-| 2024-11-16 | 20 | i-mx8-som-emi-design-layout-review | ⬜ pillar |
+| 2024-11-16 | 20 | i-mx8-som-emi-design-layout-review | ✅ `pcb-review-imx8-som` |
 | 2024-11-13 | 9 | fundamentals-of-pcb-design-for-emc-emi | ⬜ |
 | 2024-11-03 | 3 | understanding-the-role-of-electronics-in-modern-engineering | 📝 |
 | 2024-11-02 | 4 | how-open-hardware-is-transforming-the-tech-world | ⬜ |
