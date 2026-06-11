@@ -1,0 +1,704 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Your First Steps in PCB Design: A Beginner’s Guide — Fresu Electronics</title>
+  <meta name="description" content="Master PCB design with this beginner’s guide—learn key terms, pick software like KiCad, and start creating with confidence!">
+  <link rel="canonical" href="https://blog.fresuelectronics.com/first-steps-pcb-design/">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400;1,700&display=swap" rel="stylesheet">
+
+  <meta property="og:title" content="Your First Steps in PCB Design: A Beginner’s Guide">
+  <meta property="og:description" content="Master PCB design with this beginner’s guide—learn key terms, pick software like KiCad, and start creating with confidence!">
+  <meta property="og:url" content="https://blog.fresuelectronics.com/first-steps-pcb-design/">
+  <meta property="og:image" content="https://raw.githubusercontent.com/dariofresu/Fresu-Electronics-Blog/main/assets/images/first-steps-pcb-design_cover.png">
+  <meta property="og:type" content="article">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:site" content="@dario_fresu">
+  <meta name="twitter:image" content="https://raw.githubusercontent.com/dariofresu/Fresu-Electronics-Blog/main/assets/images/first-steps-pcb-design_cover.png">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "headline": "Your First Steps in PCB Design: A Beginner’s Guide",
+    "description": "Master PCB design with this beginner’s guide—learn key terms, pick software like KiCad, and start creating with confidence!",
+    "datePublished": "2025-03-28",
+    "url": "https://blog.fresuelectronics.com/first-steps-pcb-design/",
+    "author": { "@type": "Person", "name": "Dario Fresu", "jobTitle": "Principal EMC Architect", "url": "https://www.fresuelectronics.com/about" },
+    "publisher": { "@type": "Organization", "name": "Fresu Electronics", "url": "https://www.fresuelectronics.com" },
+    "image": "https://raw.githubusercontent.com/dariofresu/Fresu-Electronics-Blog/main/assets/images/first-steps-pcb-design_cover.png"
+  }
+  </script>
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:          #0a0a0a;
+      --surface:     #111111;
+      --surface-2:   #181818;
+      --border:      #242424;
+      --fg:          #ffffff;
+      --label:       #a0aab8;
+      --accent:      #00FF94;
+      --accent-dim:  rgba(0, 255, 148, 0.10);
+      --accent-hover:#00e085;
+      --wrong:       #ff4d4d;
+    }
+
+    body {
+      background: var(--bg);
+      color: #ffffff;
+      font-family: 'Poppins', sans-serif;
+      font-size: 17px;
+      line-height: 1.75;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* ── Reading progress ── */
+    .progress-track { position: fixed; top: 0; left: 0; right: 0; height: 3px; z-index: 1100; background: transparent; }
+    .progress-bar { height: 100%; width: 0; background: var(--accent); transition: width 80ms linear; }
+
+    /* ── Header ── */
+    header { border-bottom: 1px solid var(--border); }
+    .site-header {
+      max-width: 1100px; margin: 0 auto;
+      padding: 18px 40px;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .site-header img { height: 44px; width: auto; display: block; }
+    .header-nav { display: flex; align-items: center; gap: 28px; }
+    .header-nav a {
+      font-size: 11px; font-weight: 600;
+      letter-spacing: 0.08em; text-transform: uppercase;
+      color: #ffffff; text-decoration: none; opacity: 0.6;
+      transition: opacity 0.2s;
+    }
+    .header-nav a:hover { opacity: 1; }
+    .header-cta {
+      opacity: 1 !important;
+      background: var(--accent); color: #0a0a0a !important;
+      padding: 9px 20px; border-radius: 999px;
+      transition: background 0.2s;
+    }
+    .header-cta:hover { background: var(--accent-hover) !important; }
+
+    /* ── Layout: TOC rail + article ── */
+    .post-layout { max-width: 1100px; margin: 0 auto; padding: 0 40px; display: grid; grid-template-columns: minmax(0, 740px); justify-content: center; }
+    .toc-rail { display: none; }
+    @media (min-width: 1200px) {
+      .post-layout { grid-template-columns: 240px minmax(0, 740px); gap: 56px; justify-content: center; }
+      .toc-rail { display: block; position: sticky; top: 36px; align-self: start; padding-top: 76px; }
+    }
+    .toc-rail nav { border-left: 1px solid var(--border); padding-left: 18px; }
+    .toc-label { font-size: 10px; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase; color: var(--label); margin-bottom: 14px; display: block; }
+    .toc-rail ul { list-style: none; }
+    .toc-rail li { margin-bottom: 10px; }
+    .toc-rail a { font-size: 12.5px; color: var(--label); text-decoration: none; line-height: 1.45; display: block; transition: color 0.15s; }
+    .toc-rail a:hover { color: #ffffff; }
+    .toc-rail a.active { color: var(--accent); }
+
+    /* Inline TOC for narrow screens */
+    .toc-inline { margin: 0 0 40px; border: 1px solid var(--border); border-radius: 4px; background: var(--surface); }
+    .toc-inline summary { cursor: pointer; padding: 14px 20px; font-size: 12px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--label); list-style: none; }
+    .toc-inline summary::before { content: '☰  '; color: var(--accent); }
+    .toc-inline ul { list-style: none; padding: 0 20px 16px; }
+    .toc-inline li { margin-bottom: 8px; }
+    .toc-inline a { font-size: 14px; color: #ffffff; opacity: 0.85; text-decoration: none; }
+    .toc-inline a:hover { color: var(--accent); opacity: 1; }
+    @media (min-width: 1200px) { .toc-inline { display: none; } }
+
+    /* ── Container ── */
+    .container { padding: 72px 0 100px; min-width: 0; }
+
+    /* ── Breadcrumb ── */
+    .breadcrumb { display: inline-block; font-size: 12px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--label); text-decoration: none; margin-bottom: 28px; transition: color 0.15s; }
+    .breadcrumb:hover { color: var(--accent); }
+
+    /* ── Cover image ── */
+    .post-cover {
+      width: 100%; border-radius: 6px; display: block;
+      margin-bottom: 44px;
+      border: 1px solid var(--border);
+      aspect-ratio: 16/9; object-fit: cover;
+    }
+
+    /* ── Kicker ── */
+    .kicker {
+      display: inline-block;
+      font-size: 10px; font-weight: 600;
+      letter-spacing: 0.18em; text-transform: uppercase;
+      color: var(--accent);
+      border: 1px solid var(--accent);
+      background: var(--accent-dim);
+      padding: 4px 12px; border-radius: 2px;
+      margin-bottom: 24px;
+    }
+
+    /* ── Title ── */
+    h1 {
+      font-size: clamp(28px, 5vw, 44px);
+      font-weight: 800; line-height: 1.1;
+      letter-spacing: -0.025em; color: #ffffff;
+      margin-bottom: 20px;
+    }
+    h1 em { font-style: italic; color: var(--accent); }
+
+    /* ── Deck ── */
+    .deck {
+      font-size: 18px; font-weight: 400;
+      color: #ffffff; line-height: 1.7;
+      margin-bottom: 36px;
+    }
+
+    /* ── Author row ── */
+    .author-row {
+      display: flex; align-items: center; gap: 14px;
+      padding: 20px 0;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 56px;
+    }
+    .author-row img {
+      width: 52px; height: 52px; border-radius: 50%;
+      object-fit: cover; flex-shrink: 0;
+      border: 2px solid var(--accent);
+    }
+    .author-name  { display: block; font-size: 14px; font-weight: 600; color: #ffffff; line-height: 1.3; }
+    .author-title { display: block; font-size: 12px; font-weight: 400; color: var(--label); line-height: 1.3; }
+    .author-date  { display: block; font-size: 11px; color: var(--label); margin-top: 4px; }
+
+    /* ── Body typography ── */
+    p { color: #ffffff; font-weight: 400; margin-bottom: 22px; }
+    strong { color: #ffffff; font-weight: 600; }
+    em { font-style: italic; }
+    .post-body a { color: var(--accent); }
+    .post-body ul, .post-body ol { margin: 0 0 22px 24px; }
+    .post-body li { margin-bottom: 8px; }
+
+    h2 {
+      font-size: 22px; font-weight: 700; color: #ffffff;
+      margin: 56px 0 18px; letter-spacing: -0.015em;
+      scroll-margin-top: 32px;
+    }
+    h2::before {
+      content: ''; display: block;
+      width: 32px; height: 3px;
+      background: var(--accent); margin-bottom: 14px; border-radius: 2px;
+    }
+    h3 {
+      font-size: 17px; font-weight: 600; color: #ffffff;
+      margin: 36px 0 12px;
+      scroll-margin-top: 32px;
+    }
+
+    /* ── Post images ── */
+    .post-img {
+      width: 100%; border-radius: 4px; display: block;
+      margin: 36px 0 10px;
+      border: 1px solid var(--border);
+      cursor: zoom-in;
+    }
+    .post-img-center {
+      display: block; margin: 36px auto 10px;
+      border-radius: 4px;
+      border: 1px solid var(--border);
+      max-width: 100%;
+      cursor: zoom-in;
+    }
+    .img-caption {
+      text-align: center; font-size: 12px;
+      color: var(--label); margin-bottom: 32px;
+      font-style: italic; line-height: 1.5;
+    }
+
+    /* ── Lightbox ── */
+    .lightbox { position: fixed; inset: 0; z-index: 1200; background: rgba(5,5,5,0.93); display: none; align-items: center; justify-content: center; padding: 32px; cursor: zoom-out; }
+    .lightbox.open { display: flex; }
+    .lightbox img { max-width: 96%; max-height: 92vh; border-radius: 4px; }
+    .lightbox-close { position: absolute; top: 18px; right: 24px; background: none; border: none; color: #ffffff; font-size: 26px; cursor: pointer; opacity: 0.7; }
+    .lightbox-close:hover { opacity: 1; }
+
+    /* ── Formula images ── */
+    .formula-wrap { display: flex; justify-content: center; margin: 24px 0 28px; }
+    .formula-wrap img {
+      display: block; background: #ffffff;
+      padding: 14px 20px; border-radius: 4px; max-width: 100%;
+    }
+
+    /* ── Callout block ── */
+    .callout {
+      background: var(--surface);
+      border-left: 3px solid var(--accent);
+      padding: 20px 24px;
+      border-radius: 0 4px 4px 0;
+      margin: 32px 0;
+    }
+    .callout p { margin-bottom: 0; }
+    .callout-label { font-size: 10px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent); margin-bottom: 8px; display: block; }
+
+    /* ── Variable list ── */
+    .var-list {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 20px 24px; margin: 24px 0;
+    }
+    .var-list p { margin-bottom: 10px; font-size: 15px; }
+    .var-list p:last-child { margin-bottom: 0; }
+
+    /* ── Compliance / standard reference block ── */
+    .compliance-block {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 24px; margin: 28px 0;
+    }
+    .compliance-block p { margin-bottom: 10px; font-size: 15px; }
+    .compliance-block p:last-child { margin-bottom: 0; }
+    .compliance-label {
+      font-size: 10px; font-weight: 600;
+      letter-spacing: 0.14em; text-transform: uppercase;
+      color: var(--accent); margin-bottom: 14px; display: block;
+    }
+
+    /* ── Numbered steps ── */
+    .steps { margin: 28px 0; }
+    .step { display: flex; gap: 18px; margin-bottom: 20px; }
+    .step-num {
+      flex-shrink: 0;
+      width: 28px; height: 28px;
+      background: var(--accent-dim);
+      border: 1px solid var(--accent);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 12px; font-weight: 700; color: var(--accent);
+      margin-top: 3px;
+    }
+    .step p { margin-bottom: 0; font-size: 15px; }
+
+    /* ── Tags ── */
+    .tags { display: flex; flex-wrap: wrap; gap: 8px; margin: 48px 0 0; }
+    .tag {
+      font-size: 10px; font-weight: 600;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--accent);
+      border: 1px solid var(--accent);
+      background: var(--accent-dim);
+      padding: 4px 12px; border-radius: 2px;
+    }
+
+    /* ── References ── */
+    .references { margin-top: 48px; padding-top: 28px; border-top: 1px solid var(--border); }
+    .references h3 { margin-top: 0; }
+    .references ul { padding-left: 20px; }
+    .references li { color: #ffffff; font-size: 14px; margin-bottom: 8px; }
+    .references a { color: var(--accent); text-decoration: none; }
+    .references a:hover { text-decoration: underline; }
+
+    /* ── Share strip ── */
+    .share-strip {
+      display: flex; align-items: center; gap: 12px;
+      margin: 56px 0 0; padding-top: 32px;
+      border-top: 1px solid var(--border); flex-wrap: wrap;
+    }
+    .share-label {
+      font-size: 12px; font-weight: 600;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--label);
+    }
+    .share-btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-family: 'Poppins', sans-serif;
+      font-size: 13px; font-weight: 600;
+      padding: 9px 18px; border-radius: 999px;
+      text-decoration: none; border: none; cursor: pointer;
+      transition: opacity 0.2s, transform 0.15s; white-space: nowrap;
+    }
+    .share-btn:hover { opacity: 0.88; transform: translateY(-1px); }
+    .share-btn.linkedin { background: #0A66C2; color: #ffffff; }
+    .share-btn.twitter  { background: #000000; color: #ffffff; }
+    .share-btn.copylink { background: var(--surface); color: var(--accent); border: 1px solid var(--accent); }
+
+    /* ── CTA section ── */
+    .cta-section {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 4px; overflow: hidden;
+      position: relative; margin-top: 72px;
+    }
+    .cta-section::after {
+      content: ''; position: absolute;
+      top: 0; left: 0; right: 0; height: 2px;
+      background: linear-gradient(90deg, var(--accent), transparent);
+    }
+    .cta-inner { padding: 48px 48px 40px; }
+    .cta-kicker {
+      font-size: 10px; font-weight: 600;
+      letter-spacing: 0.18em; text-transform: uppercase;
+      color: var(--accent); margin-bottom: 14px; display: block;
+    }
+    .cta-section h3 {
+      font-size: 24px; font-weight: 700; color: #ffffff;
+      margin: 0 0 12px; letter-spacing: -0.01em;
+    }
+    .cta-section p {
+      font-size: 15px; color: #ffffff; line-height: 1.7; margin-bottom: 28px;
+    }
+    .cta-actions { display: flex; gap: 12px; flex-wrap: wrap; }
+    .btn-primary {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: var(--accent); color: #0a0a0a;
+      font-family: 'Poppins', sans-serif;
+      font-size: 13px; font-weight: 700;
+      padding: 13px 26px; border-radius: 999px;
+      text-decoration: none; transition: background 0.2s;
+    }
+    .btn-primary:hover { background: var(--accent-hover); }
+    .btn-outline {
+      display: inline-flex; align-items: center;
+      color: #ffffff;
+      font-family: 'Poppins', sans-serif;
+      font-size: 13px; font-weight: 600;
+      text-decoration: none;
+      padding: 12px 26px; border-radius: 999px;
+      border: 1px solid var(--border);
+      transition: border-color 0.2s;
+    }
+    .btn-outline:hover { border-color: var(--accent); color: var(--accent); }
+    .proof-row {
+      display: flex; flex-wrap: wrap; gap: 8px 20px;
+      padding: 20px 48px;
+      border-top: 1px solid var(--border);
+    }
+    .proof-item {
+      font-size: 12px; font-weight: 400; color: var(--label);
+      display: flex; align-items: center; gap: 6px;
+    }
+    .proof-item::before { content: '✓'; color: var(--accent); font-weight: 700; }
+
+    /* ── Closing callout ── */
+    .closing {
+      margin-top: 52px;
+      font-style: italic; font-weight: 600;
+      color: #ffffff; font-size: 17px; line-height: 1.7;
+      border-left: 3px solid var(--accent);
+      padding: 18px 24px;
+      background: var(--surface);
+      border-radius: 0 4px 4px 0;
+    }
+    .closing em { color: var(--accent); }
+
+    /* ── Footer ── */
+    footer { border-top: 1px solid var(--border); }
+    .site-footer {
+      max-width: 1100px; margin: 0 auto;
+      padding: 28px 40px;
+      display: flex; align-items: center; justify-content: space-between;
+      font-size: 11px; color: #ffffff; opacity: 0.5;
+      flex-wrap: wrap; gap: 12px;
+    }
+    .site-footer a { color: var(--accent); text-decoration: none; }
+
+    :focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation: none !important; transition: none !important; }
+    }
+
+    /* ── Mobile ── */
+    @media (max-width: 768px) {
+      .site-header, .site-footer { padding-left: 20px; padding-right: 20px; }
+      .post-layout { padding: 0 20px; }
+      .container { padding-top: 48px; padding-bottom: 72px; }
+      .header-nav a:not(.header-cta) { display: none; }
+      h1 { font-size: clamp(24px, 7vw, 36px); }
+      .cta-inner { padding: 28px 20px 24px; }
+      .proof-row { padding: 16px 20px; }
+      .formula-wrap img { padding: 10px 14px; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="progress-track" aria-hidden="true"><div class="progress-bar" id="progressBar"></div></div>
+
+<!-- Header -->
+<header>
+  <div class="site-header">
+    <a href="https://www.fresuelectronics.com">
+      <img src="https://raw.githubusercontent.com/dariofresu/Fresu-Electronics-Blog/main/assets/logo.png" alt="Fresu Electronics">
+    </a>
+    <nav class="header-nav">
+      <a href="https://blog.fresuelectronics.com">Blog</a>
+      <a href="https://blog.fresuelectronics.com/tools/">Tools</a>
+      <a href="https://www.fresuelectronics.com/trainings">Courses</a>
+      <a href="https://www.fresuelectronics.com/emc-audit" class="header-cta">Book EMC Audit</a>
+    </nav>
+  </div>
+</header>
+
+<div class="post-layout">
+
+  <!-- Desktop TOC rail -->
+  <aside class="toc-rail" aria-label="Table of contents">
+    <nav>
+      <span class="toc-label">On this page</span>
+      <ul id="tocList">
+        <li><a href="#understanding-pcb-design">Understanding PCB Design</a></li>
+        <li><a href="#software-for-pcb-design">Software for PCB Design</a></li>
+        <li><a href="#gathering-resources-and-learning-materials">Gathering Resources and Learning Materials</a></li>
+        <li><a href="#designing-your-first-pcb">Designing Your First PCB</a></li>
+        <li><a href="#testing-and-iterating-your-design">Testing and Iterating Your Design</a></li>
+        <li><a href="#expanding-your-knowledge-beyond-basics">Expanding Your Knowledge Beyond Basics</a></li>
+        <li><a href="#your-next-steps-in-pcb-design-learning">Your Next Steps in PCB Design Learning</a></li>
+      </ul>
+    </nav>
+  </aside>
+
+  <div class="container">
+
+    <a href="https://blog.fresuelectronics.com" class="breadcrumb">← All posts</a>
+
+    <article>
+      <span class="kicker">PCB Design</span>
+      <h1>Your First Steps in PCB Design: A Beginner’s Guide</h1>
+      <p class="deck">Master PCB design with this beginner’s guide—learn key terms, pick software like KiCad, and start creating with confidence!</p>
+
+      <div class="author-row">
+        <img src="https://raw.githubusercontent.com/dariofresu/Fresu-Electronics-Blog/main/assets/dario-fresu.jpg" alt="Dario Fresu">
+        <div>
+          <span class="author-name">Dario Fresu</span>
+          <span class="author-title">Principal EMC Architect — Fresu Electronics</span>
+          <span class="author-date">March 2025 · 5 min read</span>
+        </div>
+      </div>
+
+      <!-- Optional cover: remove this <img> entirely if the post has no cover image -->
+      <img class="post-cover" src="https://raw.githubusercontent.com/dariofresu/Fresu-Electronics-Blog/main/assets/images/first-steps-pcb-design_cover.png" alt="Close-up view of a printed circuit board showcasing different components.">
+
+      <!-- Mobile/tablet TOC -->
+      <details class="toc-inline">
+        <summary>On this page</summary>
+        <ul>
+          <li><a href="#understanding-pcb-design">Understanding PCB Design</a></li>
+        <li><a href="#software-for-pcb-design">Software for PCB Design</a></li>
+        <li><a href="#gathering-resources-and-learning-materials">Gathering Resources and Learning Materials</a></li>
+        <li><a href="#designing-your-first-pcb">Designing Your First PCB</a></li>
+        <li><a href="#testing-and-iterating-your-design">Testing and Iterating Your Design</a></li>
+        <li><a href="#expanding-your-knowledge-beyond-basics">Expanding Your Knowledge Beyond Basics</a></li>
+        <li><a href="#your-next-steps-in-pcb-design-learning">Your Next Steps in PCB Design Learning</a></li>
+        </ul>
+      </details>
+
+      <div class="post-body">
+        <p>Printed Circuit Board (PCB) design is a critical skill in electronics engineering. Whether you are an aspiring electronics engineer, a DIY hobbyist, or someone looking to delve into the world of electronics, mastering PCB design will enable you to bring your ideas to life. This guide provides a structured approach to learning PCB design, breaking down the process into manageable steps.</p>
+
+        <h2 id="understanding-pcb-design">Understanding PCB Design</h2>
+        <p>PCB design involves creating a blueprint for electronic circuits. The primary goal is to design the layout where electronic components will be placed and interconnected. This is crucial because a well-designed PCB can significantly affect the performance and reliability of an electronic device.</p>
+        <p>For beginners, the terminology can be overwhelming. Here are a few key terms you'll encounter:</p>
+        <ul>
+          <li><strong>Schematic</strong>: A representation of the electronic parts and their connections.</li>
+          <li><strong>Footprint</strong>: The physical layout of a component on the PCB.</li>
+          <li><strong>Gerber files</strong>: The standard file format for PCB fabrication.</li>
+        </ul>
+        <p>By becoming familiar with these terms, you will lay the groundwork for your PCB design journey.</p>
+
+        <h2 id="software-for-pcb-design">Software for PCB Design</h2>
+        <p>Before jumping into PCB design, you’ll need to pick the right software to support your learning journey. Options range from beginner-friendly tools to advanced platforms, each with unique strengths. Here’s a concise rundown:</p>
+        <ul>
+          <li><strong>KiCad</strong>: Free and open-source, KiCad strikes a balance between accessibility and power. It’s packed with features like schematic capture and 3D visualization, making it ideal for hobbyists and professionals alike. <em>Bonus</em>: Its active community offers plenty of support.</li>
+          <li><strong>Altium Designer </strong>®: A top-tier, professional-grade tool favored in the electronics industry. It excels at complex, multi-layer designs but comes with a steep learning curve and a higher price tag—think of it as an investment for serious designers.</li>
+          <li><strong>Simbeor </strong>®: Specialized software focused on signal integrity and electromagnetic simulation, perfect for high-speed or RF designs. It’s less beginner-friendly and niche, but invaluable if you’re diving into advanced PCB challenges.</li>
+        </ul>
+        <p>Start with KiCad to build your skills and confidence, it’s free and versatile. As you grow, consider stepping up to Altium Designer for its industry-standard capabilities or exploring Simbeor for specialized projects.</p>
+
+        <img src="https://raw.githubusercontent.com/dariofresu/Fresu-Electronics-Blog/main/assets/images/first-steps-pcb-design_img01.png" alt="High angle view of a workspace with PCB design software on a computer screen" class="post-img" loading="lazy" width="1024" height="576">
+        <p class="img-caption">High angle view of a workspace showcasing PCB design software in use.</p>
+
+        <h2 id="gathering-resources-and-learning-materials">Gathering Resources and Learning Materials</h2>
+        <p>Now that you’ve got your software ready, it’s time to explore resources to guide your PCB design journey. There’s so much out there to suit every learning style, and we’d love to share some options we’ve put together to help you along.</p>
+        <p>Here’s a starting point:</p>
+        <ul>
+          <li><strong>Online Courses</strong>: For a structured path, check out the PCB design courses on our site, <a href="https://www.fresuelectronics.com/courses">Fresu Electronics</a>. They’re packed with video lessons and projects to make the learning process enjoyable and hands-on.</li>
+          <li><strong>YouTube Channels</strong>: There are many great YouTube channels that focus on electronics and PCB design, <a href="https://www.youtube.com/@dario_fresu">Dario's channel</a> is a great place to start.</li>
+          <li><strong>Books</strong>: Perhaps the best book to start in this field is the book: <a href="https://amzn.to/4fv189r"><em>Signal and Power Integrity </em></a><a href="https://amzn.to/4fv189r"><em>by Eric Bogatin</em></a><em> . </em><strong>This book offers a comprehensive guide to understanding and managing signal and power integrity issues in high-speed digital designs. It simplifies complex concepts, making them accessible to beginners and experienced professionals alike.</strong></li>
+        </ul>
+        <p>For a more guided approach, you might also consider engaging with specific <strong>pcb design tutorials</strong> available at <a href="https://www.fresuelectronics.com/challenge-page/pcb-design">Fresu Electronics</a>.</p>
+
+        <img src="https://raw.githubusercontent.com/dariofresu/Fresu-Electronics-Blog/main/assets/images/first-steps-pcb-design_img02.png" alt="Eye-level view of a person working on a PCB layout on a laptop" class="post-img" loading="lazy" width="1024" height="576">
+        <p class="img-caption">Eye-level view of an individual focused on creating a PCB layout on a computer.</p>
+
+        <h2 id="designing-your-first-pcb">Designing Your First PCB</h2>
+        <p>With resources at your disposal, it’s time to embark on designing your first PCB. Follow these straightforward steps:</p>
+        <ol>
+          <li><strong>Create a Schematic</strong>: Start by drawing the circuit diagram of your project. Use the software to select components and connect them properly.</li>
+          <li><strong>Define the Board Outline</strong>: Set dimensions for your PCB. Most software will allow you to specify the size and shape of the board.</li>
+          <li><strong>Place Components</strong>: Position the components on the board layout. Group related components close together to reduce trace lengths.</li>
+          <li><strong>Route the Traces</strong>: Connect the component pads with traces. Be mindful of the width of the traces, as they need to withstand current without overheating.</li>
+          <li><strong>Check for Errors</strong>: Use the design rule check (DRC) tool in your software to ensure there are no errors in your design.</li>
+          <li><strong>Generate Gerber Files</strong>: Once your design is complete, export your layout as Gerber files for manufacturing.</li>
+          <li><strong>Order Your PCB</strong>: With the Gerber files ready, you can either use online PCB manufacturing services or print them at home if you have the necessary equipment.</li>
+        </ol>
+
+        <div class="callout">
+          <span class="callout-label">Featured Guide</span>
+          <p><a href="https://www.fresuelectronics.com/product-page/emi-control-guide">Top 10 PCB Design Mistakes For EMI Control</a></p>
+        </div>
+
+        <h2 id="testing-and-iterating-your-design">Testing and Iterating Your Design</h2>
+        <p>Once you receive your PCB, it’s time to assemble the components. Solder them onto the board carefully, ensuring correct orientation, especially for polarized components like capacitors and diodes.</p>
+        <p>After assembly, testing is vital. Here’s how to approach it:</p>
+        <ol>
+          <li><strong>Initial Power-Up</strong>: Connect the power supply and monitor the board for smoke or overheating components. This initial test helps identify errors.</li>
+          <li><strong>Functional Testing</strong>: Use a multimeter and oscilloscope to verify that the circuit functions according to the schematic.</li>
+          <li><strong>Troubleshooting</strong>: If something doesn’t work, revisit your schematic and ensure all connections were made correctly. Look for cold solder joints or misplaced components.</li>
+          <li><strong>Iteration</strong>: Based on your testing results, you may need to return to your software to adjust the design. PCB design is an iterative process. Each iteration strengthens your skills and understanding.</li>
+        </ol>
+
+        <h2 id="expanding-your-knowledge-beyond-basics">Expanding Your Knowledge Beyond Basics</h2>
+        <p>As you grow more confident in PCB design, consider advancing your skills by exploring specialized areas. These topics can enhance your expertise and open new possibilities.</p>
+        <p>Here are a few to consider:</p>
+        <ul>
+          <li><strong>EMC/EMI</strong>: Understand how to manage electromagnetic compatibility and interference. This involves minimizing electrical noise to ensure your board operates smoothly alongside other devices.</li>
+        </ul>
+        <ul>
+          <li><strong>Signal Integrity</strong>: Focus on maintaining clear, reliable signals across your PCB, especially for high-speed applications like USB or processors. It’s essential for performance in modern designs.</li>
+        </ul>
+        <ul>
+          <li><strong>RF Design</strong>: Explore the unique challenges of designing PCBs for radio frequency applications, such as wireless communication or antennas. This requires attention to layout and signal behavior.</li>
+        </ul>
+        <p>Investing effort in these areas can strengthen your capabilities and distinguish you in the electronics field. Choose one that aligns with your goals and start building on your foundation, it’s a worthwhile step forward.</p>
+
+        <div class="callout">
+          <span class="callout-label">Featured Guide</span>
+          <p><a href="https://www.fresuelectronics.com/product-page/emi-control-guide">Top 10 PCB Design Mistakes For EMI Control</a></p>
+        </div>
+
+        <h2 id="your-next-steps-in-pcb-design-learning">Your Next Steps in PCB Design Learning</h2>
+        <p>In conclusion, learning PCB design is an exciting journey filled with endless possibilities. By following this guide, you will build a solid foundation that allows you to express your creativity and innovate in the field of electronics. Remember, practice is key. The more you create, the better you will become. Don’t be afraid to experiment and learn from your mistakes.</p>
+        <p>Continue exploring various resources, engage with the community, and gradually build up to more complex designs. With dedication and practice, you'll be able to turn your ideas into reality through effective PCB design!</p>
+
+        <div style="text-align:center; margin: 36px 0 0;">
+          <a href="https://www.fresuelectronics.com/trainings" target="_blank" rel="nofollow" class="btn-primary">Check Out Our Training Programs</a>
+        </div>
+      </div>
+
+      <div class="tags">
+        <span class="tag">PCB Design</span>
+        <span class="tag">Beginner Guide</span>
+        <span class="tag">KiCad</span>
+        <span class="tag">Learning Resources</span>
+      </div>
+    </article>
+
+    <!-- Share -->
+    <div class="share-strip">
+      <span class="share-label">Share</span>
+      <a href="https://www.linkedin.com/shareArticle?mini=true&url=https%3A%2F%2Fblog.fresuelectronics.com%2Ffirst-steps-pcb-design&title=Your%20First%20Steps%20in%20PCB%20Design%3A%20A%20Beginner%E2%80%99s%20Guide"
+         target="_blank" class="share-btn linkedin">LinkedIn</a>
+      <a href="https://twitter.com/intent/tweet?url=https%3A%2F%2Fblog.fresuelectronics.com%2Ffirst-steps-pcb-design&text=Your%20First%20Steps%20in%20PCB%20Design%3A%20A%20Beginner%E2%80%99s%20Guide&via=dario_fresu"
+         target="_blank" class="share-btn twitter">X / Twitter</a>
+      <button class="share-btn copylink"
+              onclick="copyLink(this,'https://blog.fresuelectronics.com/first-steps-pcb-design')">Copy Link</button>
+    </div>
+
+    <!-- CTA -->
+    <div class="cta-section">
+      <div class="cta-inner">
+        <span class="cta-kicker">Work with Fresu Electronics</span>
+        <h3>Stop finding EMC problems in the chamber.</h3>
+        <p>An EMC Design Audit reviews your schematic and PCB layout before fabrication — identifying return path gaps, filter placement errors, and stackup decisions that turn into failures at the test house. Report delivered in 10 business days.</p>
+        <div class="cta-actions">
+          <a href="https://www.fresuelectronics.com/emc-audit" class="btn-primary">Book an EMC Audit — €8,000 →</a>
+          <a href="https://www.fresuelectronics.com/trainings" class="btn-outline">Browse Courses</a>
+        </div>
+      </div>
+      <div class="proof-row">
+        <span class="proof-item">80,000+ engineers reached</span>
+        <span class="proof-item">4,000+ engineers trained</span>
+        <span class="proof-item">Report in 10 business days</span>
+        <span class="proof-item">IPC Certified · Former ETH Zurich</span>
+      </div>
+    </div>
+
+  </div><!-- /.container -->
+</div><!-- /.post-layout -->
+
+<!-- Lightbox -->
+<div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Image viewer">
+  <button class="lightbox-close" aria-label="Close" onclick="lbClose()">✕</button>
+  <img id="lightboxImg" src="" alt="">
+</div>
+
+<!-- Footer -->
+<footer>
+  <div class="site-footer">
+    <span>© 2026 Fresu Electronics SRL — Sardinia, Italy</span>
+    <span>
+      <a href="https://www.fresuelectronics.com/terms-of-services">Terms</a> ·
+      <a href="https://www.freeprivacypolicy.com/live/2e894867-7c2b-4014-aa0c-db0f62e59cb8">Privacy</a> ·
+      <a href="https://blog.fresuelectronics.com">Blog</a>
+    </span>
+  </div>
+</footer>
+
+<script>
+function copyLink(btn, url) {
+  navigator.clipboard.writeText(url).then(function() {
+    var o = btn.innerHTML;
+    btn.innerHTML = '✓ Copied!';
+    setTimeout(function() { btn.innerHTML = o; }, 2000);
+  });
+}
+
+/* Reading progress */
+(function() {
+  var bar = document.getElementById('progressBar');
+  function update() {
+    var h = document.documentElement;
+    var max = h.scrollHeight - h.clientHeight;
+    bar.style.width = (max > 0 ? (h.scrollTop / max) * 100 : 0) + '%';
+  }
+  document.addEventListener('scroll', update, { passive: true });
+  update();
+})();
+
+/* TOC scrollspy */
+(function() {
+  var links = document.querySelectorAll('.toc-rail a');
+  if (!links.length || !('IntersectionObserver' in window)) return;
+  var map = {};
+  links.forEach(function(a) { map[a.getAttribute('href').slice(1)] = a; });
+  var current = null;
+  var obs = new IntersectionObserver(function(entries) {
+    entries.forEach(function(e) {
+      if (e.isIntersecting) {
+        if (current) current.classList.remove('active');
+        current = map[e.target.id];
+        if (current) current.classList.add('active');
+      }
+    });
+  }, { rootMargin: '0px 0px -75% 0px' });
+  document.querySelectorAll('.post-body h2[id]').forEach(function(h) { obs.observe(h); });
+})();
+
+/* Lightbox */
+var lb = document.getElementById('lightbox');
+var lbImg = document.getElementById('lightboxImg');
+function lbClose() { lb.classList.remove('open'); lbImg.src = ''; }
+document.querySelectorAll('.post-img, .post-img-center').forEach(function(img) {
+  img.addEventListener('click', function() {
+    lbImg.src = img.src; lbImg.alt = img.alt || '';
+    lb.classList.add('open');
+  });
+});
+lb.addEventListener('click', function(e) { if (e.target === lb || e.target === lbImg) lbClose(); });
+document.addEventListener('keydown', function(e) { if (e.key === 'Escape') lbClose(); });
+</script>
+
+</body>
+</html>
