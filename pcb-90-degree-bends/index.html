@@ -38,6 +38,9 @@
     p{color:#fff;font-weight:400;margin-bottom:20px}
     strong{color:#fff;font-weight:600}
     em{font-style:italic}
+    .post-img { width: 100%; border-radius: 4px; display: block; margin: 36px 0 10px; border: 1px solid var(--border); }
+    .post-img-center { display: block; margin: 36px auto 10px; border-radius: 4px; border: 1px solid var(--border); max-width: 100%; }
+    .img-caption { text-align: center; font-size: 12px; color: var(--label); margin-bottom: 32px; font-style: italic; line-height: 1.5; }
     .contrast-block{display:grid;grid-template-columns:1fr 1fr;gap:2px;margin:44px 0;border-radius:4px;overflow:hidden}
     .contrast-col{padding:28px 24px}
     .contrast-col.wrong{background:var(--surface);border:1px solid var(--border);border-right:none}
@@ -148,12 +151,19 @@
 
   <p>Few PCB design rules are as universally cited — and as poorly understood — as the prohibition on 90-degree bends. Ask any engineer why they should be avoided and you will likely hear: electrons accelerate at the sharp corner, causing electromagnetic radiation and reflections. This explanation is intuitive, memorable, and wrong.</p>
   <p>Signals in a PCB trace at any modern operating frequency do not propagate as individual electrons making sharp turns. They propagate as electromagnetic waves guided by the conductor geometry. The actual concern at 90-degree bends is different, smaller, and frequency-dependent in ways the folklore doesn't capture.</p>
+  <img src="https://raw.githubusercontent.com/dariofresu/Fresu-Electronics-Blog/main/assets/images/pcb-90-degree-bends_img01.png" alt="An electronic circuit board design is under scrutiny, with a highlighted corner and a caption asking if the 90-degree corner feature is good or bad." class="post-img">
+  <p class="img-caption">An electronic circuit board design is under scrutiny, with a highlighted corner and a caption asking if the 90-degree corner feature is good or bad.</p>
 
   <h2>What actually happens at a 90-degree bend</h2>
   <p>A 90-degree bend in a trace creates a localised change in trace width. At the outer corner of a 90-degree bend, the effective width of the trace increases — the corner has more copper than a straight section of the same nominal width. This increased width corresponds to a small increase in capacitance per unit length, which produces a localised impedance discontinuity.</p>
+  <img src="https://raw.githubusercontent.com/dariofresu/Fresu-Electronics-Blog/main/assets/images/pcb-90-degree-bends_img02.png" alt="Diagram illustrating a copper trace rectangular corner, featuring two labeled lines, W1 and W2, that form a right-angled triangle highlighting the corner's geometry." class="post-img">
+  <p class="img-caption">Diagram illustrating a copper trace rectangular corner, featuring two labeled lines, W1 and W2, that form a right-angled triangle highlighting the corner's geometry.</p>
   <p>That's it. The concern is a small capacitive discontinuity — not electron acceleration, not radiation from the bend itself, not a fundamentally different electromagnetic phenomenon.</p>
+  <img src="https://raw.githubusercontent.com/dariofresu/Fresu-Electronics-Blog/main/assets/images/pcb-90-degree-bends_img03.png" alt="Equation showing the calculation for corner capacity based on width and lens capacity." class="post-img-center" style="max-width:473px;border:none;">
+  <img src="https://raw.githubusercontent.com/dariofresu/Fresu-Electronics-Blog/main/assets/images/pcb-90-degree-bends_img04.png" alt="Calculation of corner capacitance, showing the formula and resulting value of 8.5 femtofarads." class="post-img-center" style="max-width:740px;border:none;">
 
   <div class="pull-quote"><p>The corner doesn't radiate. The impedance discontinuity at the corner causes a small reflection. Whether that reflection matters depends entirely on your signal frequency and trace length.</p></div>
+  <img src="https://raw.githubusercontent.com/dariofresu/Fresu-Electronics-Blog/main/assets/images/pcb-90-degree-bends_img05.png" alt="Formula for the characteristic impedance of a transmission line, where \( Z_0 \) equals the square root of the inductance per unit length \( L \) divided by the capacitance per unit length \( C \)." class="post-img-center" style="max-width:320px;border:none;">
 
   <h2>When does the discontinuity actually matter?</h2>
   <p>A reflection caused by an impedance discontinuity becomes significant when the electrical length of the discontinuity approaches a meaningful fraction of the signal wavelength — typically when the discontinuity length exceeds λ/20. For a 90-degree bend on a standard PCB trace, the excess copper at the corner is on the order of 0.5–1mm. At what frequency does 1mm become λ/20?</p>
@@ -169,6 +179,8 @@
   <h2>What actually causes reflections and EMC problems</h2>
   <p>If 90-degree bends are not the primary source of signal integrity problems, what is? The answer is trace geometry changes that create meaningful impedance discontinuities: changes in trace width without a corresponding adjustment in reference plane distance, vias (which introduce significant inductive discontinuities), stubs on unused via barrels, connector footprint geometries, and — most importantly — return path discontinuities caused by splits or voids in the reference plane beneath the trace.</p>
   <p>A trace routed across a slot in the ground plane will have far worse EMC performance than a trace with a hundred 90-degree bends over a continuous, uninterrupted reference plane.</p>
+  <img src="https://raw.githubusercontent.com/dariofresu/Fresu-Electronics-Blog/main/assets/images/pcb-90-degree-bends_img08.jpg" alt="Close-up view of a circuit board, showcasing intricate components and pathways, illuminated by soft, ambient lighting." class="post-img">
+  <p class="img-caption">Close-up view of a circuit board, showcasing intricate components and pathways, illuminated by soft, ambient lighting.</p>
 
   <h2>When should you actually use 45-degree bends?</h2>
   <p>For designs operating above 10 GHz — millimetre-wave, high-speed serial links above 25 Gbps — the capacitive discontinuity of 90-degree bends does become relevant and mitigating it with chamfered or curved bends is justified. For most practical designs operating below this threshold, the choice between 45 and 90 degrees is an aesthetic preference, not a functional requirement. Spend the routing effort on return path continuity, via placement, and reference plane integrity — these have measurable impact at the frequencies you are designing for.</p>
