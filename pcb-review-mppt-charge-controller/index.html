@@ -1,0 +1,894 @@
+<!DOCTYPE html>
+<!--
+  PILLAR POST TEMPLATE — Fresu Electronics Blog
+  House components available: .callout, .var-list, .compliance-block, .steps/.step/.step-num,
+  .post-img, .post-img-center, .img-caption, .formula-wrap, .closing, .references.
+  TOC: add one <li><a href="#section-id">…</a></li> per h2 (h2 elements need matching id attrs).
+-->
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PCB Layout Review for EMC and Signal Integrity - MPPT Charge Controller — Fresu Electronics</title>
+  <meta name="description" content="In this lesson, we'll review an MPPT project for solar panel applications, focusing on EMC and signal integrity.">
+  <link rel="canonical" href="https://blog.fresuelectronics.com/pcb-review-mppt-charge-controller/">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400;1,700&display=swap" rel="stylesheet">
+
+  <meta property="og:title" content="PCB Layout Review for EMC and Signal Integrity - MPPT Charge Controller">
+  <meta property="og:description" content="In this lesson, we'll review an MPPT project for solar panel applications, focusing on EMC and signal integrity.">
+  <meta property="og:url" content="https://blog.fresuelectronics.com/pcb-review-mppt-charge-controller/">
+  <meta property="og:image" content="https://raw.githubusercontent.com/dariofresu/Fresu-Electronics-Blog/main/assets/images/pcb-review-mppt-charge-controller_img01.jpg">
+  <meta property="og:type" content="article">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:site" content="@dario_fresu">
+  <meta name="twitter:image" content="https://raw.githubusercontent.com/dariofresu/Fresu-Electronics-Blog/main/assets/images/pcb-review-mppt-charge-controller_img01.jpg">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "headline": "PCB Layout Review for EMC and Signal Integrity - MPPT Charge Controller",
+    "description": "In this lesson, we'll review an MPPT project for solar panel applications, focusing on EMC and signal integrity.",
+    "datePublished": "2024-11-17",
+    "url": "https://blog.fresuelectronics.com/pcb-review-mppt-charge-controller/",
+    "author": { "@type": "Person", "name": "Dario Fresu", "jobTitle": "Principal EMC Architect", "url": "https://www.fresuelectronics.com/about" },
+    "publisher": { "@type": "Organization", "name": "Fresu Electronics", "url": "https://www.fresuelectronics.com" },
+    "image": "https://raw.githubusercontent.com/dariofresu/Fresu-Electronics-Blog/main/assets/images/pcb-review-mppt-charge-controller_img01.jpg"
+  }
+  </script>
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:          #0a0a0a;
+      --surface:     #111111;
+      --surface-2:   #181818;
+      --border:      #242424;
+      --fg:          #ffffff;
+      --label:       #a0aab8;
+      --accent:      #00FF94;
+      --accent-dim:  rgba(0, 255, 148, 0.10);
+      --accent-hover:#00e085;
+      --wrong:       #ff4d4d;
+    }
+
+    body {
+      background: var(--bg);
+      color: #ffffff;
+      font-family: 'Poppins', sans-serif;
+      font-size: 17px;
+      line-height: 1.75;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* ── Reading progress ── */
+    .progress-track { position: fixed; top: 0; left: 0; right: 0; height: 3px; z-index: 1100; background: transparent; }
+    .progress-bar { height: 100%; width: 0; background: var(--accent); transition: width 80ms linear; }
+
+    /* ── Header ── */
+    header { border-bottom: 1px solid var(--border); }
+    .site-header {
+      max-width: 1100px; margin: 0 auto;
+      padding: 18px 40px;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .site-header img { height: 44px; width: auto; display: block; }
+    .header-nav { display: flex; align-items: center; gap: 28px; }
+    .header-nav a {
+      font-size: 11px; font-weight: 600;
+      letter-spacing: 0.08em; text-transform: uppercase;
+      color: #ffffff; text-decoration: none; opacity: 0.6;
+      transition: opacity 0.2s;
+    }
+    .header-nav a:hover { opacity: 1; }
+    .header-cta {
+      opacity: 1 !important;
+      background: var(--accent); color: #0a0a0a !important;
+      padding: 9px 20px; border-radius: 999px;
+      transition: background 0.2s;
+    }
+    .header-cta:hover { background: var(--accent-hover) !important; }
+
+    /* ── Layout: TOC rail + article ── */
+    .post-layout { max-width: 1100px; margin: 0 auto; padding: 0 40px; display: grid; grid-template-columns: minmax(0, 740px); justify-content: center; }
+    .toc-rail { display: none; }
+    @media (min-width: 1200px) {
+      .post-layout { grid-template-columns: 240px minmax(0, 740px); gap: 56px; justify-content: center; }
+      .toc-rail { display: block; position: sticky; top: 36px; align-self: start; padding-top: 76px; }
+    }
+    .toc-rail nav { border-left: 1px solid var(--border); padding-left: 18px; }
+    .toc-label { font-size: 10px; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase; color: var(--label); margin-bottom: 14px; display: block; }
+    .toc-rail ul { list-style: none; }
+    .toc-rail li { margin-bottom: 10px; }
+    .toc-rail a { font-size: 12.5px; color: var(--label); text-decoration: none; line-height: 1.45; display: block; transition: color 0.15s; }
+    .toc-rail a:hover { color: #ffffff; }
+    .toc-rail a.active { color: var(--accent); }
+
+    /* Inline TOC for narrow screens */
+    .toc-inline { margin: 0 0 40px; border: 1px solid var(--border); border-radius: 4px; background: var(--surface); }
+    .toc-inline summary { cursor: pointer; padding: 14px 20px; font-size: 12px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--label); list-style: none; }
+    .toc-inline summary::before { content: '☰  '; color: var(--accent); }
+    .toc-inline ul { list-style: none; padding: 0 20px 16px; }
+    .toc-inline li { margin-bottom: 8px; }
+    .toc-inline a { font-size: 14px; color: #ffffff; opacity: 0.85; text-decoration: none; }
+    .toc-inline a:hover { color: var(--accent); opacity: 1; }
+    @media (min-width: 1200px) { .toc-inline { display: none; } }
+
+    /* ── Container ── */
+    .container { padding: 72px 0 100px; min-width: 0; }
+
+    /* ── Breadcrumb ── */
+    .breadcrumb { display: inline-block; font-size: 12px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--label); text-decoration: none; margin-bottom: 28px; transition: color 0.15s; }
+    .breadcrumb:hover { color: var(--accent); }
+
+    /* ── Cover image ── */
+    .post-cover {
+      width: 100%; border-radius: 6px; display: block;
+      margin-bottom: 44px;
+      border: 1px solid var(--border);
+      aspect-ratio: 16/9; object-fit: cover;
+    }
+
+    /* ── Kicker ── */
+    .kicker {
+      display: inline-block;
+      font-size: 10px; font-weight: 600;
+      letter-spacing: 0.18em; text-transform: uppercase;
+      color: var(--accent);
+      border: 1px solid var(--accent);
+      background: var(--accent-dim);
+      padding: 4px 12px; border-radius: 2px;
+      margin-bottom: 24px;
+    }
+
+    /* ── Title ── */
+    h1 {
+      font-size: clamp(28px, 5vw, 44px);
+      font-weight: 800; line-height: 1.1;
+      letter-spacing: -0.025em; color: #ffffff;
+      margin-bottom: 20px;
+    }
+    h1 em { font-style: italic; color: var(--accent); }
+
+    /* ── Deck ── */
+    .deck {
+      font-size: 18px; font-weight: 400;
+      color: #ffffff; line-height: 1.7;
+      margin-bottom: 36px;
+    }
+
+    /* ── Author row ── */
+    .author-row {
+      display: flex; align-items: center; gap: 14px;
+      padding: 20px 0;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 56px;
+    }
+    .author-row img {
+      width: 52px; height: 52px; border-radius: 50%;
+      object-fit: cover; flex-shrink: 0;
+      border: 2px solid var(--accent);
+    }
+    .author-name  { display: block; font-size: 14px; font-weight: 600; color: #ffffff; line-height: 1.3; }
+    .author-title { display: block; font-size: 12px; font-weight: 400; color: var(--label); line-height: 1.3; }
+    .author-date  { display: block; font-size: 11px; color: var(--label); margin-top: 4px; }
+
+    /* ── Body typography ── */
+    p { color: #ffffff; font-weight: 400; margin-bottom: 22px; }
+    strong { color: #ffffff; font-weight: 600; }
+    em { font-style: italic; }
+    .post-body ul, .post-body ol { margin: 0 0 22px 24px; }
+    .post-body li { margin-bottom: 8px; }
+    .post-body a { color: var(--accent); }
+
+    h2 {
+      font-size: 22px; font-weight: 700; color: #ffffff;
+      margin: 56px 0 18px; letter-spacing: -0.015em;
+      scroll-margin-top: 32px;
+    }
+    h2::before {
+      content: ''; display: block;
+      width: 32px; height: 3px;
+      background: var(--accent); margin-bottom: 14px; border-radius: 2px;
+    }
+    h3 {
+      font-size: 17px; font-weight: 600; color: #ffffff;
+      margin: 36px 0 12px;
+      scroll-margin-top: 32px;
+    }
+
+    /* ── Post images ── */
+    .post-img {
+      width: 100%; border-radius: 4px; display: block;
+      margin: 36px 0 10px;
+      border: 1px solid var(--border);
+      cursor: zoom-in;
+    }
+    .post-img-center {
+      display: block; margin: 36px auto 10px;
+      border-radius: 4px;
+      border: 1px solid var(--border);
+      max-width: 100%;
+      cursor: zoom-in;
+    }
+    .img-caption {
+      text-align: center; font-size: 12px;
+      color: var(--label); margin-bottom: 32px;
+      font-style: italic; line-height: 1.5;
+    }
+
+    /* ── Lightbox ── */
+    .lightbox { position: fixed; inset: 0; z-index: 1200; background: rgba(5,5,5,0.93); display: none; align-items: center; justify-content: center; padding: 32px; cursor: zoom-out; }
+    .lightbox.open { display: flex; }
+    .lightbox img { max-width: 96%; max-height: 92vh; border-radius: 4px; }
+    .lightbox-close { position: absolute; top: 18px; right: 24px; background: none; border: none; color: #ffffff; font-size: 26px; cursor: pointer; opacity: 0.7; }
+    .lightbox-close:hover { opacity: 1; }
+
+    /* ── Formula images ── */
+    .formula-wrap { display: flex; justify-content: center; margin: 24px 0 28px; }
+    .formula-wrap img {
+      display: block; background: #ffffff;
+      padding: 14px 20px; border-radius: 4px; max-width: 100%;
+    }
+
+    /* ── Callout block ── */
+    .callout {
+      background: var(--surface);
+      border-left: 3px solid var(--accent);
+      padding: 20px 24px;
+      border-radius: 0 4px 4px 0;
+      margin: 32px 0;
+    }
+    .callout p { margin-bottom: 0; }
+    .callout-label { font-size: 10px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent); margin-bottom: 8px; display: block; }
+
+    /* ── Variable list ── */
+    .var-list {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 20px 24px; margin: 24px 0;
+    }
+    .var-list p { margin-bottom: 10px; font-size: 15px; }
+    .var-list p:last-child { margin-bottom: 0; }
+
+    /* ── Compliance / standard reference block ── */
+    .compliance-block {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 24px; margin: 28px 0;
+    }
+    .compliance-block p { margin-bottom: 10px; font-size: 15px; }
+    .compliance-block p:last-child { margin-bottom: 0; }
+    .compliance-label {
+      font-size: 10px; font-weight: 600;
+      letter-spacing: 0.14em; text-transform: uppercase;
+      color: var(--accent); margin-bottom: 14px; display: block;
+    }
+
+    /* ── Numbered steps ── */
+    .steps { margin: 28px 0; }
+    .step { display: flex; gap: 18px; margin-bottom: 20px; }
+    .step-num {
+      flex-shrink: 0;
+      width: 28px; height: 28px;
+      background: var(--accent-dim);
+      border: 1px solid var(--accent);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 12px; font-weight: 700; color: var(--accent);
+      margin-top: 3px;
+    }
+    .step p { margin-bottom: 0; font-size: 15px; }
+
+    /* ── Tags ── */
+    .tags { display: flex; flex-wrap: wrap; gap: 8px; margin: 48px 0 0; }
+    .tag {
+      font-size: 10px; font-weight: 600;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--accent);
+      border: 1px solid var(--accent);
+      background: var(--accent-dim);
+      padding: 4px 12px; border-radius: 2px;
+    }
+
+    /* ── References ── */
+    .references { margin-top: 48px; padding-top: 28px; border-top: 1px solid var(--border); }
+    .references h3 { margin-top: 0; }
+    .references ul { padding-left: 20px; }
+    .references li { color: #ffffff; font-size: 14px; margin-bottom: 8px; }
+    .references a { color: var(--accent); text-decoration: none; }
+    .references a:hover { text-decoration: underline; }
+
+    /* ── Share strip ── */
+    .share-strip {
+      display: flex; align-items: center; gap: 12px;
+      margin: 56px 0 0; padding-top: 32px;
+      border-top: 1px solid var(--border); flex-wrap: wrap;
+    }
+    .share-label {
+      font-size: 12px; font-weight: 600;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--label);
+    }
+    .share-btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-family: 'Poppins', sans-serif;
+      font-size: 13px; font-weight: 600;
+      padding: 9px 18px; border-radius: 999px;
+      text-decoration: none; border: none; cursor: pointer;
+      transition: opacity 0.2s, transform 0.15s; white-space: nowrap;
+    }
+    .share-btn:hover { opacity: 0.88; transform: translateY(-1px); }
+    .share-btn.linkedin { background: #0A66C2; color: #ffffff; }
+    .share-btn.twitter  { background: #000000; color: #ffffff; }
+    .share-btn.copylink { background: var(--surface); color: var(--accent); border: 1px solid var(--accent); }
+
+    /* ── CTA section ── */
+    .cta-section {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 4px; overflow: hidden;
+      position: relative; margin-top: 72px;
+    }
+    .cta-section::after {
+      content: ''; position: absolute;
+      top: 0; left: 0; right: 0; height: 2px;
+      background: linear-gradient(90deg, var(--accent), transparent);
+    }
+    .cta-inner { padding: 48px 48px 40px; }
+    .cta-kicker {
+      font-size: 10px; font-weight: 600;
+      letter-spacing: 0.18em; text-transform: uppercase;
+      color: var(--accent); margin-bottom: 14px; display: block;
+    }
+    .cta-section h3 {
+      font-size: 24px; font-weight: 700; color: #ffffff;
+      margin: 0 0 12px; letter-spacing: -0.01em;
+    }
+    .cta-section p {
+      font-size: 15px; color: #ffffff; line-height: 1.7; margin-bottom: 28px;
+    }
+    .cta-actions { display: flex; gap: 12px; flex-wrap: wrap; }
+    .btn-primary {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: var(--accent); color: #0a0a0a;
+      font-family: 'Poppins', sans-serif;
+      font-size: 13px; font-weight: 700;
+      padding: 13px 26px; border-radius: 999px;
+      text-decoration: none; transition: background 0.2s;
+    }
+    .btn-primary:hover { background: var(--accent-hover); }
+    .btn-outline {
+      display: inline-flex; align-items: center;
+      color: #ffffff;
+      font-family: 'Poppins', sans-serif;
+      font-size: 13px; font-weight: 600;
+      text-decoration: none;
+      padding: 12px 26px; border-radius: 999px;
+      border: 1px solid var(--border);
+      transition: border-color 0.2s;
+    }
+    .btn-outline:hover { border-color: var(--accent); color: var(--accent); }
+    .proof-row {
+      display: flex; flex-wrap: wrap; gap: 8px 20px;
+      padding: 20px 48px;
+      border-top: 1px solid var(--border);
+    }
+    .proof-item {
+      font-size: 12px; font-weight: 400; color: var(--label);
+      display: flex; align-items: center; gap: 6px;
+    }
+    .proof-item::before { content: '✓'; color: var(--accent); font-weight: 700; }
+
+    /* ── Closing callout ── */
+    .closing {
+      margin-top: 52px;
+      font-style: italic; font-weight: 600;
+      color: #ffffff; font-size: 17px; line-height: 1.7;
+      border-left: 3px solid var(--accent);
+      padding: 18px 24px;
+      background: var(--surface);
+      border-radius: 0 4px 4px 0;
+    }
+    .closing em { color: var(--accent); }
+
+    /* ── Footer ── */
+    footer { border-top: 1px solid var(--border); }
+    .site-footer {
+      max-width: 1100px; margin: 0 auto;
+      padding: 28px 40px;
+      display: flex; align-items: center; justify-content: space-between;
+      font-size: 11px; color: #ffffff; opacity: 0.5;
+      flex-wrap: wrap; gap: 12px;
+    }
+    .site-footer a { color: var(--accent); text-decoration: none; }
+
+    :focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation: none !important; transition: none !important; }
+    }
+
+    /* ── Mobile ── */
+    @media (max-width: 768px) {
+      .site-header, .site-footer { padding-left: 20px; padding-right: 20px; }
+      .post-layout { padding: 0 20px; }
+      .container { padding-top: 48px; padding-bottom: 72px; }
+      .header-nav a:not(.header-cta) { display: none; }
+      h1 { font-size: clamp(24px, 7vw, 36px); }
+      .cta-inner { padding: 28px 20px 24px; }
+      .proof-row { padding: 16px 20px; }
+      .formula-wrap img { padding: 10px 14px; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="progress-track" aria-hidden="true"><div class="progress-bar" id="progressBar"></div></div>
+
+<!-- Header -->
+<header>
+  <div class="site-header">
+    <a href="https://www.fresuelectronics.com">
+      <img src="https://raw.githubusercontent.com/dariofresu/Fresu-Electronics-Blog/main/assets/logo.png" alt="Fresu Electronics">
+    </a>
+    <nav class="header-nav">
+      <a href="https://blog.fresuelectronics.com">Blog</a>
+      <a href="https://blog.fresuelectronics.com/tools/">Tools</a>
+      <a href="https://www.fresuelectronics.com/trainings">Courses</a>
+      <a href="https://www.fresuelectronics.com/emc-audit" class="header-cta">Book EMC Audit</a>
+    </nav>
+  </div>
+</header>
+
+<div class="post-layout">
+
+  <!-- Desktop TOC rail -->
+  <aside class="toc-rail" aria-label="Table of contents">
+    <nav>
+      <span class="toc-label">On this page</span>
+      <ul id="tocList">
+        <li><a href="#stackup-analysis">Stackup Analysis</a></li>
+        <li><a href="#layout-analysys">Layout Analysys</a></li>
+        <li><a href="#antenna-like-structures">Antenna-like Structures</a></li>
+        <li><a href="#improving-the-layout">Improving the Layout</a></li>
+        <li><a href="#improving-vias-current-capabilities">Improving Vias' Current Capabilities</a></li>
+        <li><a href="#signal-crosstalk">Signal Crosstalk</a></li>
+        <li><a href="#signals-too-close-to-the-edge">Signals too close to the edge</a></li>
+        <li><a href="#stubs">Stubs</a></li>
+        <li><a href="#ground-bounce">Ground Bounce</a></li>
+        <li><a href="#large-current-loops">Large Current Loops</a></li>
+        <li><a href="#component-placement">Component Placement</a></li>
+        <li><a href="#stitching-vias">Stitching Vias</a></li>
+        <li><a href="#what-if-i-cannot-add-more-layers">What if I cannot add more layers to the stackup?</a></li>
+        <li><a href="#conclusions">Conclusions</a></li>
+      </ul>
+    </nav>
+  </aside>
+
+  <div class="container">
+
+    <a href="https://blog.fresuelectronics.com" class="breadcrumb">← All posts</a>
+
+    <article>
+      <span class="kicker">Design Review</span>
+      <h1>PCB Layout Review for EMC and Signal Integrity - MPPT Charge Controller</h1>
+      <p class="deck">In this lesson, we'll review an MPPT project for solar panel applications, focusing on EMC and signal integrity.</p>
+
+      <div class="author-row">
+        <img src="https://raw.githubusercontent.com/dariofresu/Fresu-Electronics-Blog/main/assets/dario-fresu.jpg" alt="Dario Fresu">
+        <div>
+          <span class="author-name">Dario Fresu</span>
+          <span class="author-title">Principal EMC Architect — Fresu Electronics</span>
+          <span class="author-date">November 2024 · 17 min read</span>
+        </div>
+      </div>
+
+      <!-- Mobile/tablet TOC -->
+      <details class="toc-inline">
+        <summary>On this page</summary>
+        <ul>
+          <li><a href="#stackup-analysis">Stackup Analysis</a></li>
+        <li><a href="#layout-analysys">Layout Analysys</a></li>
+        <li><a href="#antenna-like-structures">Antenna-like Structures</a></li>
+        <li><a href="#improving-the-layout">Improving the Layout</a></li>
+        <li><a href="#improving-vias-current-capabilities">Improving Vias' Current Capabilities</a></li>
+        <li><a href="#signal-crosstalk">Signal Crosstalk</a></li>
+        <li><a href="#signals-too-close-to-the-edge">Signals too close to the edge</a></li>
+        <li><a href="#stubs">Stubs</a></li>
+        <li><a href="#ground-bounce">Ground Bounce</a></li>
+        <li><a href="#large-current-loops">Large Current Loops</a></li>
+        <li><a href="#component-placement">Component Placement</a></li>
+        <li><a href="#stitching-vias">Stitching Vias</a></li>
+        <li><a href="#what-if-i-cannot-add-more-layers">What if I cannot add more layers to the stackup?</a></li>
+        <li><a href="#conclusions">Conclusions</a></li>
+        </ul>
+      </details>
+
+      <div class="post-body">
+        <img src="https://raw.githubusercontent.com/dariofresu/Fresu-Electronics-Blog/main/assets/images/pcb-review-mppt-charge-controller_img01.jpg" alt="" class="post-img" loading="lazy" width="1920" height="1080">
+
+        <h3>Action list:</h3>
+        <h5><a href="https://www.fresuelectronics.com/product-page/emi-quick-fixes-guide"><u><strong>1. </strong></u></a><a href="https://www.fresuelectronics.com/product-page/emi-quick-fixes-guide"><u><strong>Get the New EMI Quick Fixes Guide - 2025</strong></u></a></h5>
+
+        <div class="callout">
+          <p><a href="https://www.fresuelectronics.com/product-page/emi-quick-fixes-guide"><strong>EMI Quick Fixes Guide</strong></a></p>
+        </div>
+
+        <hr style="border:none;border-top:1px solid var(--border);margin:40px 0;">
+
+        <p>In this lesson, we’ll review an MPPT project for solar panel applications, focusing on EMC (Electromagnetic Compatibility) and signal integrity. I’ll highlight some common mistakes that you’re likely to encounter more frequently when reviewing PCBs for low EMI. We’ll also explore techniques that can help improve the project’s performance in these areas.</p>
+
+        <h2 id="stackup-analysis">Stackup Analysis</h2>
+
+        <p>When reviewing any project for EMI (Electromagnetic Interference), the first thing I would usually look at, is the board's stack-up. This is a key factor in the success of the project. The stack-up is particularly important because it affects around 90% of the project's EMC performance.  Looking at the stack-up, we see it's a two-layer design. With signals placed on both the top and bottom layers, we can already anticipate potential issues. The main concern is the lack of a dedicated reference plane for the signal return paths, which can lead to EMC problems.</p>
+
+        <img src="https://raw.githubusercontent.com/dariofresu/Fresu-Electronics-Blog/main/assets/images/pcb-review-mppt-charge-controller_img02.png" alt="Figure 1 - MPPT Project under review" class="post-img" loading="lazy" width="1171" height="714">
+        <p class="img-caption">Figure 1 - MPPT Project under review</p>
+
+        <p>What Do We Mean by Return Reference Plane (RRP)?</p>
+
+        <p>A return reference plane (RRP) refers to a return plane that is adjacent to the signal traces. This is important because it provides the reference for the signal's voltage but also the path for the return current. </p>
+
+        <img src="https://raw.githubusercontent.com/dariofresu/Fresu-Electronics-Blog/main/assets/images/pcb-review-mppt-charge-controller_img03.jpg" alt="Figure 2 - Electromagnetic Fields in a PCB" class="post-img" loading="lazy" width="1827" height="1370">
+        <p class="img-caption">Figure 2 - Electromagnetic Fields in a PCB</p>
+
+        <p>The reference plane also plays a major role in containing electromagnetic fields. Without it, the fields can spread out uncontrollably. In this project we are reviewing, there is no return reference plane underneath the signal traces, which will cause the fields to spread. </p>
+
+        <p>Another issue arises when there are two signal layers, such as signals on the top and bottom layers, as in this design. What happens here is that the fields from the top signal trace can interfere with the fields from the bottom signal trace, and vice versa.</p>
+
+        <p>This creates <strong>crosstalk</strong>, where signals from one trace are "seen" by the other trace. In simple terms, the fields from the top trace contaminate the fields of the bottom trace, and vice versa. When this happens, the signal on the top layer can affect the signal on the bottom layer, leading to unwanted interference.</p>
+
+        <p>Consider an example where you have a trace for a <strong>reset line</strong> and an adjacent trace for an <strong>interrupt signal</strong>. Let’s suppose you want to measure when the temperature rises above a certain level. The interrupt signal on the bottom trace is responsible for detecting this temperature rise. Meanwhile, the reset line on the top trace is used to reset your microcontroller or CPU.</p>
+
+        <img src="https://raw.githubusercontent.com/dariofresu/Fresu-Electronics-Blog/main/assets/images/pcb-review-mppt-charge-controller_img04.png" alt="Figure 3  - Example of signal traces routed too close to each other." class="post-img" loading="lazy" width="1370" height="790">
+        <p class="img-caption">Figure 3  - Example of signal traces routed too close to each other.</p>
+
+        <p>Here’s the issue:  When the interrupt signal triggers, let’s say the temperature reaches 37°C, the CPU is supposed to take certain actions. The interrupt should notify the CPU to perform specific tasks. However, the reset signal, being on the top trace, also detects the high logic voltage level of the interrupt signal on the bottom trace. As a result, the CPU mistakenly interprets this as a reset request. Instead of responding to the interrupt, the CPU resets itself, because it thinks a reset has been triggered. This can lead to catastrophic failure, depending on the system and the actions required by the interrupt signal.</p>
+
+        <p>We want to ensure that the signal is contained within the dielectric in bewteen its conductor traces and that it is not contaminated by other signals. To achieve this, we need to ensure the fields are contained properly, which requires having a return reference plane that manages these fields.</p>
+
+        <p>If you look at the electric field lines in <strong>Figure #</strong>, you'll notice that from the top, they tend to spread outside the board. The fields are on the bottom instead are contained within the dielectric material between the two layers, and they are referenced and contained by the return reference plane.</p>
+
+        <p>A two-layer board presents challenges because, in such a design, you can either have the signal on the top, and the return reference plane on the bottom, or vice versa. However, using two signal layers introduces a significant problem. In this case, with signals on both the top and bottom layers, the fields from each layer interfere with each other, creating unwanted noise and crosstalk. This is also why, to fix this, we typically use a four-layer board. </p>
+
+        <img src="https://raw.githubusercontent.com/dariofresu/Fresu-Electronics-Blog/main/assets/images/pcb-review-mppt-charge-controller_img05.jpg" alt="Figure 4  - Example of electromagnetic fields interfering with each other." class="post-img" loading="lazy" width="1080" height="812">
+        <p class="img-caption">Figure 4  - Example of electromagnetic fields interfering with each other.</p>
+
+        <p>So it should be clear at this point that we need to increase the number of layers. I've also  explained in other videos why we don't want a dedicated power layer in a four-layer stack-up when two layers are already dedicated to signals.  But instead, it's preferable to have an additional GND layer to act as a return reference plane. As a side note, while we commonly call this layer "GND," it's more accurate to refer to it as a "return reference plane" (RRP) to avoid confusion. So, here we will call it RRP for the return reference plane.</p>
+
+        <p>Before proceeding, the action needed at this point is to change the layer stackup into the following:</p>
+
+        <ul>
+          <li>Layer 1 - Signals/Power</li>
+          <li>Layer 2 - Return Reference Plane</li>
+          <li>Layer 3 - Return Reference Plane</li>
+          <li>Layer 4 - Signals/Power</li>
+        </ul>
+
+        <p>For the Return Reference Planes, I will also add solid (no splits or cuts) copper planes, which will act as the return reference plane.</p>
+
+        <h2 id="layout-analysys">Layout Analysys</h2>
+
+        <p>Now, let's take a closer look at the layout. Since we didn't have a return reference plane, but we had the ground net, GND IR 2110, this was previously implemented as traces. Now that we have a return reference plane on the second and third layer, adjacent to the signals, we can remove these GND traces and the copper fills on the signal layers.</p>
+
+        <p>Why is this important?</p>
+
+        <p>Earlier, with just two signal layers, there was a significant distance between the signals and their reference traces (GND IR 2110). This was a large impedance gap. However, by switching to a four-layer design, the distance between the signal and return reference plane has been reduced. This is important because it provides much better coupling between the signal on the top layer and the return reference plane on the second layer, and the same applies between the signal layer on the bottom, and the RRP on the third layer. Additionally, reducing the distance between signals and return reference layers is one of the most effective ways we have to also minimize crosstalk.</p>
+
+        <h2 id="antenna-like-structures">Antenna-like Structures</h2>
+
+        <p>Next, let's focus on avoiding ground pours that create antenna-like structures, like the one shown in <strong>Figure #</strong>. This ground pour has an antenna-like design, for instance like a  dipole antenna-like structure.</p>
+
+        <p>A dipole consists of a signal source with one side having a certain voltage and the other side having the opposite voltage. This configuration acts as a good radiator, which is undesirable. We don't want structures that form this kind of antenna.</p>
+
+        <img src="https://raw.githubusercontent.com/dariofresu/Fresu-Electronics-Blog/main/assets/images/pcb-review-mppt-charge-controller_img06.png" alt="Figure 5 - Example of antenna-like structure." class="post-img" loading="lazy" width="1362" height="839">
+        <p class="img-caption">Figure 5 - Example of antenna-like structure.</p>
+
+        <p>This issue is similar to placing a cable on one side of the board and another cable on the opposite side. This creates a dipole antenna, which can radiate or receive electromagnetic interference, both of which are undesirable. We should avoid creating these antenna-like structures because they promote radiation. </p>
+
+        <p>When the signal from the trace reaches this area near the polygon, it forms a dipole and promotes radiation. Therefore, it's best not to use this type of polygon pour.</p>
+
+        <p>The same applies to <strong>Figure #</strong>, where another antenna-like structure exists. The copper has a specific impedance in between points, and this results in a voltage difference, which in turns creates a dipole. Again, we want to avoid such geometries.</p>
+
+        <img src="https://raw.githubusercontent.com/dariofresu/Fresu-Electronics-Blog/main/assets/images/pcb-review-mppt-charge-controller_img07.png" alt="Figure 6 - Another example of antenna-like structure." class="post-img" loading="lazy" width="1206" height="796">
+        <p class="img-caption">Figure 6 - Another example of antenna-like structure.</p>
+
+        <p>To fix this, we’ll remove the structures that form these antenna-like shapes. Once we do that, the design will also start to look cleaner.</p>
+
+        <p>Similarly, we’ll address the issue in the next section by removing these undesired structures. This will leave us with some unconnected nets, but that's okay, we’ll fix that in the next steps. </p>
+
+        <hr style="border:none;border-top:1px solid var(--border);margin:40px 0;">
+
+        <p><em>💡 By the way, If you would like to master EMC/EMI design, we have a new training program here:</em></p>
+        <p><a href="https://www.fresuelectronics.com/mentoring" class="btn-primary">Get Personalized Training</a></p>
+        <p><em>There, you’ll find details on how to apply for one of our exclusive programs designed to help you achieve that goal. </em></p>
+
+        <h2 id="improving-the-layout">Improving the Layout</h2>
+
+        <p>There are many traces here that can be cleaned up, which will also help reduce their inductance. Currently, these pads in <strong>Figure #</strong> are contributing to inductance in the circuit.</p>
+        <p>You can see that a trace connects the pads, but this adds inductance because the trace itself has some inherent inductance.</p>
+
+        <img src="https://raw.githubusercontent.com/dariofresu/Fresu-Electronics-Blog/main/assets/images/pcb-review-mppt-charge-controller_img08.png" alt="Figure 7 - High inductive paths in the GND net." class="post-img" loading="lazy" width="1298" height="789">
+        <p class="img-caption">Figure 7 - High inductive paths in the GND net.</p>
+
+        <p>Since we now have a return reference plane on the second and third layers, here's what we can do: </p>
+        <p>First, we'll place the via as close as possible to the components' pads. After that, we’ll adjust the trace width. we can use a width of 0.8 for now, but we need to calculate the ideal trace width based on the impedance we require, especially for signal traces. I can use tools like <a href="https://saturnpcb.com/saturn-pcb-toolkit/"><u><em><strong>Saturn PCB</strong></em></u></a> to calculate the width based on the required impedance and the current load.</p>
+
+        <p>Once the width is calculated, we’ll choose the layers we want to connect to. In this case, we want to connect the RRP net. We’ll place the via in the middle and add the via connection.   By reducing the distance between the components and connecting them directly to the return reference plane, We’ve created a path with very low impedance, improving signal integrity.</p>
+
+        <p>What we are doing here is reducing the current loop size for these nets. Now, we are going to apply the same process to the other parts of the layout. We’ll start by selecting all the GND traces, and then we'll remove them. Next, we’ll replace these traces with vias that directly connect to the return reference plane. We’ll do the same for all other traces: select them, delete them, and begin cleaning up the layout. We’ll continue to remove these unnecessary connections. By the end of this process, none of these traces will remain. </p>
+
+        <p>This cleanup process helps remove elements that aren't necessary, making the layout much cleaner and efficient by reducing extra impedance. At worst, these leftover traces could just contribute parasitic effects. </p>
+
+        <p>If we leave these traces, they will create parasitic loops, which can increase the current loop size and, in turn, increase the radiated electromagnetic fields due to the generation of common-mode currents. The larger the current loop, the larger the fields, which is something we want to avoid. This is actually one of the most common problems you'll encounter during EMC tests.</p>
+
+        <h2 id="improving-vias-current-capabilities">Improving Vias' Current Capabilities</h2>
+
+        <p>For trace paths that require a significant amount of current, you need to calculate how much current can safely pass through the via. For example, this via has a hole size of 0.3 millimeters and a diameter of 0.6 millimeters. You can perform a quick calculation, for example with <a href="https://saturnpcb.com/saturn-pcb-toolkit/"><u><em><strong>Saturn PCB</strong></em></u></a> to determine the current capacity. </p>
+
+        <img src="https://raw.githubusercontent.com/dariofresu/Fresu-Electronics-Blog/main/assets/images/pcb-review-mppt-charge-controller_img09.png" alt="Figure 8 - Example of signal via." class="post-img" loading="lazy" width="1314" height="776">
+        <p class="img-caption">Figure 8 - Example of signal via.</p>
+
+        <p>Given the 0.3 mm hole size and 0.6 mm diameter, along with the default plating thickness, this via can carry approximately 2.16 amps. If you need to handle more current, you can either increase the number of layers or increase the size of the via. You'll need to calculate these adjustments based on your specific requirements.</p>
+
+        <h2 id="signal-crosstalk">Signal Crosstalk</h2>
+
+        <p>The next thing we need to address is crosstalk, which is very important. It is often possbile to identify potential issues just by examining the distance between the nets. For example, when we look at these nets, we can see right away that they’re not differential pairs. If I have any doubt, I can check the schematic, but we know that the SWDIO connection is not a differential pair. Looking closely at these traces, we notice that they are very close to each other, just 0.25 millimeters apart, which is about the width of the signal trace, therefore far too close. </p>
+
+        <img src="https://raw.githubusercontent.com/dariofresu/Fresu-Electronics-Blog/main/assets/images/pcb-review-mppt-charge-controller_img10.png" alt="Figure 9 - Example of signals routed too close together." class="post-img" loading="lazy" width="1276" height="793">
+        <p class="img-caption">Figure 9 - Example of signals routed too close together.</p>
+
+        <p>This means the clock signal from one of these nets will likely affect the SWDIO net.  To reduce crosstalk between these traces, we can increase the distance between them. By spacing the traces at least two or three times the width of the net, as a general rule of thumb, we can significantly reduce crosstalk.</p>
+
+        <p>Since we’ve reduced the distance between the signal layer and return reference plane now very close to each other, I know that crosstalk will be minimal. If I have any doubts, I can always double-check even with tools that offer a free crosstalk calculator.</p>
+
+        <p>It's important to note that some signals can be triggered by very low voltages. For example, certain MCUs or CPUs have low threshold voltages for detecting high logic level signals. If the crosstalk is high enough, it could cause the system to mistakenly detect a high signal when none was intended. This is one of the kind of issue we want to avoid. So, to minimize this risk, we increase the distance between the traces.</p>
+
+        <p>Of course, as already mentioned, you’ll want to improve these traces to improve the crosstalk and the EMI behaviour, however, you also want to make them more refined and visually appealing. A good layout isn't just about performance; it’s also about aesthetics. Your clients will see your layout, and they will judge it based not only on its functionality but also on its appearance.</p>
+
+        <h2 id="signals-too-close-to-the-edge">Signals too close to the edge</h2>
+
+        <p>Next, let's focus on the traces near the edge.  Ideally, you want to position them further from the edge to avoid fringe fields, which are essentially fields that extend outside the board. </p>
+
+        <img src="https://raw.githubusercontent.com/dariofresu/Fresu-Electronics-Blog/main/assets/images/pcb-review-mppt-charge-controller_img11.png" alt="Figure 10 - Example of signals routed too close to the board edge." class="post-img" loading="lazy" width="1333" height="768">
+        <p class="img-caption">Figure 10 - Example of signals routed too close to the board edge.</p>
+
+        <p>By keeping the signal trace further inside the board, the fringe fields can better reference the return plane adjacent to the trace. If the fields extend outside the board, they are not contained, which can show up during EMC testing. So, we are going to move the traces inward, and also shorten their length to reduce this risk.</p>
+
+        <h2 id="stubs">Stubs</h2>
+
+        <p>Moving to the next issue, here we have what are called stubs. You want to avoid creating these types of branches. What happens here is that the signal, whether it’s coming from one direction or another, reaches the branching point and encounters these two branches. This is called an impedance discontinuity. </p>
+
+        <img src="https://raw.githubusercontent.com/dariofresu/Fresu-Electronics-Blog/main/assets/images/pcb-review-mppt-charge-controller_img12.png" alt="Figure 11 - Example of stubs (branches)." class="post-img" loading="lazy" width="989" height="727">
+        <p class="img-caption">Figure 11 - Example of stubs (branches).</p>
+
+        <p>For example, if the impedance here is 50 ohms, the signal will split when it reaches the branching point because <strong>the impedance changes.</strong> This mismatch in impedance causes reflections, which can lead to signal integrity issues. Therefore, you should avoid creating branches like this. </p>
+
+        <p>To fix this, we should create point-to-point connections. Instead of branching off here, we continue the connection from pad to pad. In this way the signal no longer splits. It flows in one direction, without encountering any impedance changes.  The key is to ensure that the signal sees minimal impedance mismatch as it propagate through the design.</p>
+
+        <p>If this is a power trace, this branching is less importnat, you may also want a wider trace, sized, of course, according to the current requirements. However, for a signal trace, it's important to maintain a controlled impedance, typically 50 ohms for regular signals, until it connects to the pin.</p>
+
+        <h2 id="ground-bounce">Ground Bounce</h2>
+
+        <p>Now, let's take a look at one of the biggest issues this board had: ground bounce.  The problem, in this case, stems from impedance discontinuities in the return path.</p>
+
+        <p>When two signals share the same return path, like the ground traces we saw earlier, there’s a higher likelihood that they’ll both use the same low-impedance path. As a result, when one signal triggers, the other may also trigger because they are coupled together. In this case, for example, the signal from the bottom layer causes ground bounce because both signals likely share the same return path, leading to interference.</p>
+
+        <p>This issue can occur in both the signal path and the return path. When it happens in the return path, it's referred to as ground bounce. To resolve this, we can either increase the distance between the signals, or reduce the distance between the signal path and the return reference path. By doing so, we ensure that the fields are more tightly contained, preventing interference between them.</p>
+
+        <h2 id="large-current-loops">Large Current Loops</h2>
+
+        <p>Let's look at the buck converter circuit. It includes an inductor that interacts with the system’s magnetic fields, along with a filter composed of inductors and capacitors. The current loop formed by these components is crucial to manage.</p>
+
+        <img src="https://raw.githubusercontent.com/dariofresu/Fresu-Electronics-Blog/main/assets/images/pcb-review-mppt-charge-controller_img13.png" alt="Figure 12 - Example of the large current loop in the buck converter." class="post-img" loading="lazy" width="1331" height="757">
+        <p class="img-caption">Figure 12 - Example of the large current loop in the buck converter.</p>
+
+        <p>When a switching current flows through the circuit, it generates changing magnetic fields. These fields can interfere with other traces and devices on the board. During EMC (electromagnetic compatibility) testing, these fields may exceed limits and cause failures. </p>
+
+        <div class="callout">
+          <p>🔓 <strong>Our goal is to minimize the size of the current loop. </strong></p>
+        </div>
+
+        <p>It starts at the input, passes through the fuse, feeds the buck converter, and then closes the loop through the inductor and capacitors. A large current loop is problematic because the changing magnetic fields it generates can be detected during EMC testing, leading to failure.</p>
+
+        <p>The solution is to minimize the loop's size, ensuring the current follows the shortest, least-impedance path. Initially, a large copper pour connected to the capacitors created a large, poorly optimized loop. By connecting directly to the capacitors, we shorten the return path and reduce the loop size.</p>
+
+        <p>This adjustment improves the return current path, reducing magnetic fields and minimizing the loop's size. The new design after this revision will use full return reference planes, allowing the current to follow the path of least impedance. This also shortens signal paths, reducing potential electromagnetic interference.</p>
+
+        <p>It's important to remeber that, the type of signal and its involved frequencies, affects the return current's behavior. For high-speed signals, the return current flows directly beneath the signal trace, minimizing inductance. For low-speed signals, the resistive path becomes more important, and the return current takes the shortest route back to the source. Also a quick tip here is that if we want to minimize large current loops, components like capacitors should be placed as close to the pins they are feeding or filtering.</p>
+
+        <h2 id="component-placement">Component Placement</h2>
+
+        <p>When placing components, it’s crucial to maintain proper separation, especially based on the type of circuitry they belong to. For example, components should be grouped into distinct sections, such as a digital section and an analog section, <strong>while avoiding the splitting of planes.</strong></p>
+
+        <div class="callout">
+          <p>🔓 <strong>We avoid splitting the return and reference planes (also known as "grounds"), even though some application notes might recommend doing so.</strong></p>
+        </div>
+
+        <p>Instead of separating the analog and digital sections within the return reference plane, we place them apart from each other on the signal layers, providing enough distance to prevent unwanted coupling. This separation is achieved by placing components at a distance, not by cutting or splitting the planes.</p>
+
+        <p>We do not cut planes or create segmented regions within the planes. Solid copper planes should be used, with no splits or cuts for either the analog or digital planes. </p>
+
+        <h2 id="stitching-vias">Stitching Vias</h2>
+
+        <p>Another common issue is managing the transition of signals from one layer to another, such as when a signal moves from the top layer to the bottom layer. The problem occurs during this transition because, as the signal moves downward, there is no longer a return reference plane in the immediate vicinity. This results in uncontained fields, which can lead to electromagnetic interference.</p>
+
+        <img src="https://raw.githubusercontent.com/dariofresu/Fresu-Electronics-Blog/main/assets/images/pcb-review-mppt-charge-controller_img14.png" alt="Figure 14 - Example of signal vias without stitching vias next to each other." class="post-img" loading="lazy" width="1324" height="792">
+        <p class="img-caption">Figure 13 - Example of signal vias without stitching vias next to each other.</p>
+
+        <p>When the signal transitions from one layer to another, the fields are no longer contained. This causes the fields to spread out, and if the levels are too high, will lead to failure during the electromagnetic compatibility (EMC) tests. To prevent this, we add at least a return via next to the signal trace at the transition point, or as in the case below four return reference vias. This ensures the signal has a 360 degree reference and that the fields remain contained even during the vertical propagation of the signal.</p>
+
+        <img src="https://raw.githubusercontent.com/dariofresu/Fresu-Electronics-Blog/main/assets/images/pcb-review-mppt-charge-controller_img15.png" alt="Figure 15 - Example of stitching vias to support the transitions of the signals across layers." class="post-img" loading="lazy" width="1920" height="1080">
+        <p class="img-caption">Figure 14 - Example of stitching vias to support the transitions of the signals across layers.</p>
+
+        <p>With return vias added, the signal transitions smoothly to the bottom layer and finds a return path, ensuring minimal field spread. This approach reduces current loop size, keeping it short as the signal crosses layers. Once the signal reaches the other side, it continues to propagate without any electromagnetic interference problems. Wherever there’s a layer transition, place return vias to ensure proper reference and minimal signal interference.</p>
+
+        <p>Another important step to consider is the impedance in between planes of the same voltage, such as the return reference planes. As we discussed, copper planes (and traces) are not ideal and have a certain resistance and impedance. Between two points on these planes, there is an impedance that causes a voltage drop when current flows through it.</p>
+
+        <p>To minimize this voltage drop, we need to make these planes equipotential. The way to achieve this is by adding stitching vias across the planes. To determine where to place these vias, you should select a grid appropriate for the <strong>fastest signal on the board.</strong></p>
+
+        <p>If the distance between the vias is too large, you create a cavity between the planes, which may resonate at a particular frequency within your frequency of interest. This cavity is defined by the distance between the two points where the vias are placed. </p>
+
+        <p>To calculate this, first, determine the wavelength of the fastest signal, in the dielectric material (such as FR4). You should focus on the wavelength within the material, not in the air. Once you have this, measure one-tenth of the wavelength to find the appropriate distance between the stitching vias. </p>
+
+        <p>For example, if the one-tenth wavelength of the signal in the dielectric material is 2.5 mm or higher, you should place stitching vias at this distance. You can either manually place the vias or use the CAD tool which may have features to automatically add stitching vias.</p>
+
+        <p>By placing the vias in this manner, the multiple return and reference planes will be coupled, and their potential will become uniform across the entire planes. This help eliminate the issue of voltage drops caused by impedance between the two points, which could otherwise induce noise that could couple with other traces.</p>
+
+        <img src="https://raw.githubusercontent.com/dariofresu/Fresu-Electronics-Blog/main/assets/images/pcb-review-mppt-charge-controller_img16.png" alt="Figure 16 - Example of stitching vias arranged in a grid-like pattern." class="post-img" loading="lazy" width="1088" height="766">
+        <p class="img-caption">Figure 15 - Example of stitching vias arranged in a grid-like pattern.</p>
+
+        <p>However, a downside to adding a large number of stitching vias is that it can increase the manufacturing cost of the board due to additional drilling requirements. To ensure the cost stays within budget, you should check with your PCB manufacturer for their drilling cost guidelines. This information is typically available in their capabilities documentation, under the section for drilling costs.</p>
+
+        <p>By adding stitching vias, you ensure that the planes behave like the return vias used during signal transitions. This solves many potential issues, as the stitching vias will effectively serve the same purpose as placing return vias next to signal traces. Even without explicitly adding return vias next to every signal, placing stitching vias improves the likelihood that the return current will have a clear path, minimizing potential issues.</p>
+
+        <h2 id="what-if-i-cannot-add-more-layers">What if I cannot add more layers to the stackup?</h2>
+
+        <p>For those of you whose managers insist on using a two-layer board instead of a four-layer board to reduce costs, the first step is to assess if this is feasible. You need to consider whether it is possible to route all the traces on one side of the board, so the other side can be used as the return reference plane.</p>
+
+        <p>If you plan to make voltage layer transitions (for example, from a top layer to a bottom layer), the key is to keep these transitions as short as possible. For instance, the signal can go from the top layer to the bottom layer, and then return to the top layer before continuing along the top layer. This approach minimizes the length of the trace on the bottom layer.. The goal is to maintain short, direct paths for both the signal and return currents.</p>
+
+        <p>To ensure the trace width is consistent across the transition, the width on the top layer should ideally remain the same. For example, if the trace is 0.24 mm wide, the transition to the bottom layer should preserve this width as much as possible, before returning to the top layer and continuing along the signal path.</p>
+
+        <p>By minimizing the cuts on the bottom layer, and making them as small as possible, you’ll avoid significant interference with the return current. If you use the bottom layer as the return reference plane, these short trace transitions will not cause major problems.</p>
+
+        <div class="callout">
+          <p>🔓 <strong>In some cases, it’s still possible to route the board as a two-layer design, but it’s important to figure out how to place all the traces on one layer while using the other as the return reference plane.</strong></p>
+        </div>
+
+        <p> You can either place all traces on the top layer and use the bottom layer as the reference plane, or place all traces on the bottom layer with the top layer as the reference plane.</p>
+
+        <p>One critical consideration is ensuring the power ratings of the traces and planes are sufficient to handle the required current. For instance, if the board needs to carry 50 amps of current, you need to calculate whether the copper traces can handle this load. If not, you may need to increase the size of the copper traces to support the current.</p>
+
+        <p>Additionally, when using a two-layer stack-up, be mindful of the voltage ratings. If high voltage is involved, ensure that the clearance and creepage distances meet the safety standards. For example, if you have high voltage traces on the bottom layer and use the top layer as the return reference plane, verify that the dielectric material between the layers provides adequate insulation according to the required safety standards.</p>
+
+        <h2 id="conclusions">Conclusions</h2>
+
+        <p>I hope this project review is helpful and enables you to pass EMC testing more easily. There are still a few things we haven't addressed yet, such as checking and providing protection for input and output cables, or any connections extending outside the board. It's important to include protection, such as TVS diodes, filtering, and other essential components. Adding these protections will enhance your board's immunity to EMI and reduce the EMI it generates. These are some of the basic considerations we look for in a design review. As demonstrated in this review, it's quite simple to improve your layout significantly, starting by the PCB stackup, and in certain cases simply by adding two more layers. </p>
+
+        <p>At <a href="http://fresuelectronics.com"><u>fresuelectronics.com</u></a> , our primary goal is to help you circumvent the pain associated with the EMI steep learning curve. We believe that by sharing this guide, along with the <a href="https://www.fresuelectronics.com/courses"><u>courses</u></a>, materials, and programs we offer, we can assist you in navigating the complexities of PCB design. Our aim is to support you on your path to mastering this field, ensuring that you have the tools and knowledge necessary to succeed. </p>
+
+        <p>If you would like to master EMC/EMI design, we have a new training program here:</p>
+        <p><a href="https://www.fresuelectronics.com/mentoring" class="btn-primary">Get Personalized Training</a></p>
+        <p>There, you’ll find details on how to apply for one of our exclusive programs designed to help you achieve that goal. </p>
+      </div>
+
+      <div class="tags">
+        <span class="tag">Design Review</span><span class="tag">EMC</span><span class="tag">Signal Integrity</span><span class="tag">Power Electronics</span>
+      </div>
+    </article>
+
+    <!-- Share -->
+    <div class="share-strip">
+      <span class="share-label">Share</span>
+      <a href="https://www.linkedin.com/shareArticle?mini=true&url=https%3A%2F%2Fblog.fresuelectronics.com%2Fpcb-review-mppt-charge-controller&title=PCB%20Layout%20Review%20for%20EMC%20and%20Signal%20Integrity%20-%20MPPT%20Charge%20Controller"
+         target="_blank" class="share-btn linkedin">LinkedIn</a>
+      <a href="https://twitter.com/intent/tweet?url=https%3A%2F%2Fblog.fresuelectronics.com%2Fpcb-review-mppt-charge-controller&text=PCB%20Layout%20Review%20for%20EMC%20and%20Signal%20Integrity%20-%20MPPT%20Charge%20Controller&via=dario_fresu"
+         target="_blank" class="share-btn twitter">X / Twitter</a>
+      <button class="share-btn copylink"
+              onclick="copyLink(this,'https://blog.fresuelectronics.com/pcb-review-mppt-charge-controller')">Copy Link</button>
+    </div>
+
+    <!-- CTA -->
+    <div class="cta-section">
+      <div class="cta-inner">
+        <span class="cta-kicker">Work with Fresu Electronics</span>
+        <h3>Stop finding EMC problems in the chamber.</h3>
+        <p>An EMC Design Audit reviews your schematic and PCB layout before fabrication — identifying return path gaps, filter placement errors, and stackup decisions that turn into failures at the test house. Report delivered in 10 business days.</p>
+        <div class="cta-actions">
+          <a href="https://www.fresuelectronics.com/emc-audit" class="btn-primary">Book an EMC Audit — €8,000 →</a>
+          <a href="https://www.fresuelectronics.com/trainings" class="btn-outline">Browse Courses</a>
+        </div>
+      </div>
+      <div class="proof-row">
+        <span class="proof-item">80,000+ engineers reached</span>
+        <span class="proof-item">4,000+ engineers trained</span>
+        <span class="proof-item">Report in 10 business days</span>
+        <span class="proof-item">IPC Certified · Former ETH Zurich</span>
+      </div>
+    </div>
+
+  </div><!-- /.container -->
+</div><!-- /.post-layout -->
+
+<!-- Lightbox -->
+<div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Image viewer">
+  <button class="lightbox-close" aria-label="Close" onclick="lbClose()">✕</button>
+  <img id="lightboxImg" src="" alt="">
+</div>
+
+<!-- Footer -->
+<footer>
+  <div class="site-footer">
+    <span>© 2026 Fresu Electronics SRL — Sardinia, Italy</span>
+    <span>
+      <a href="https://www.fresuelectronics.com/terms-of-services">Terms</a> ·
+      <a href="https://www.freeprivacypolicy.com/live/2e894867-7c2b-4014-aa0c-db0f62e59cb8">Privacy</a> ·
+      <a href="https://blog.fresuelectronics.com">Blog</a>
+    </span>
+  </div>
+</footer>
+
+<script>
+function copyLink(btn, url) {
+  navigator.clipboard.writeText(url).then(function() {
+    var o = btn.innerHTML;
+    btn.innerHTML = '✓ Copied!';
+    setTimeout(function() { btn.innerHTML = o; }, 2000);
+  });
+}
+
+/* Reading progress */
+(function() {
+  var bar = document.getElementById('progressBar');
+  function update() {
+    var h = document.documentElement;
+    var max = h.scrollHeight - h.clientHeight;
+    bar.style.width = (max > 0 ? (h.scrollTop / max) * 100 : 0) + '%';
+  }
+  document.addEventListener('scroll', update, { passive: true });
+  update();
+})();
+
+/* TOC scrollspy */
+(function() {
+  var links = document.querySelectorAll('.toc-rail a');
+  if (!links.length || !('IntersectionObserver' in window)) return;
+  var map = {};
+  links.forEach(function(a) { map[a.getAttribute('href').slice(1)] = a; });
+  var current = null;
+  var obs = new IntersectionObserver(function(entries) {
+    entries.forEach(function(e) {
+      if (e.isIntersecting) {
+        if (current) current.classList.remove('active');
+        current = map[e.target.id];
+        if (current) current.classList.add('active');
+      }
+    });
+  }, { rootMargin: '0px 0px -75% 0px' });
+  document.querySelectorAll('.post-body h2[id]').forEach(function(h) { obs.observe(h); });
+})();
+
+/* Lightbox */
+var lb = document.getElementById('lightbox');
+var lbImg = document.getElementById('lightboxImg');
+function lbClose() { lb.classList.remove('open'); lbImg.src = ''; }
+document.querySelectorAll('.post-img, .post-img-center').forEach(function(img) {
+  img.addEventListener('click', function() {
+    lbImg.src = img.src; lbImg.alt = img.alt || '';
+    lb.classList.add('open');
+  });
+});
+lb.addEventListener('click', function(e) { if (e.target === lb || e.target === lbImg) lbClose(); });
+document.addEventListener('keydown', function(e) { if (e.key === 'Escape') lbClose(); });
+</script>
+
+</body>
+</html>
