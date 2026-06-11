@@ -38,6 +38,9 @@
     p{color:#fff;font-weight:400;margin-bottom:20px}
     strong{color:#fff;font-weight:600}
     em{font-style:italic}
+    .post-img { width: 100%; border-radius: 4px; display: block; margin: 36px 0 10px; border: 1px solid var(--border); }
+    .post-img-center { display: block; margin: 36px auto 10px; border-radius: 4px; border: 1px solid var(--border); max-width: 100%; }
+    .img-caption { text-align: center; font-size: 12px; color: var(--label); margin-bottom: 32px; font-style: italic; line-height: 1.5; }
     .contrast-block{display:grid;grid-template-columns:1fr 1fr;gap:2px;margin:44px 0;border-radius:4px;overflow:hidden}
     .contrast-col{padding:28px 24px}
     .contrast-col.wrong{background:var(--surface);border:1px solid var(--border);border-right:none}
@@ -148,15 +151,30 @@
 
   <p>Every signal current that flows out of a source must return to that source. This is fundamental — not a guideline, Kirchhoff's current law. The question is never whether the return current flows, but where it flows. And the answer changes with frequency in a way that has direct consequences for every routing decision you make.</p>
 
+  <img src="https://raw.githubusercontent.com/dariofresu/Fresu-Electronics-Blog/main/assets/images/emi-signal-return-currents_img01.png" alt="Figure 1 - Simulation of a two-layer PCB made with Simbeor" class="post-img">
+  <p class="img-caption">Figure 1 - Simulation of a two-layer PCB made with Simbeor®</p>
+
+  <img src="https://raw.githubusercontent.com/dariofresu/Fresu-Electronics-Blog/main/assets/images/emi-signal-return-currents_img02.jpg" alt="Figure 2 - Example of a two-layer PCB stackup." class="post-img">
+  <p class="img-caption">Figure 2 - Example of a two-layer PCB stackup.</p>
+
   <h2>Low frequency: resistance dominates</h2>
   <p>At low frequencies — below a few kilohertz — the dominant impedance in a conductor is its DC resistance. Return current distributes broadly across the available conducting area, taking the geometrically shortest path back to the source. The current loop is large, but at low frequencies, the radiation from a large loop is proportional to frequency squared, so the absolute radiation is still low.</p>
   <p>This is why problems at low frequencies are rare — not because the current path is clean, but because even a large loop area radiates little at low frequencies.</p>
+
+  <img src="https://raw.githubusercontent.com/dariofresu/Fresu-Electronics-Blog/main/assets/images/emi-signal-return-currents_img03.png" alt="Figure 3 - PCB simulation with a 10kHz signal." class="post-img">
+  <p class="img-caption">Figure 3 - PCB simulation with a 10kHz signal.</p>
 
   <h2>High frequency: inductance dominates</h2>
   <p>As frequency rises, inductive reactance (jωL) grows while resistance stays roughly constant. Above a few kilohertz, impedance is dominated by inductance, not resistance. Return current now seeks the path of least inductance — which is the path that minimises the loop area formed by the signal and its return.</p>
   <p>In a PCB with a continuous reference plane directly beneath the signal trace, this means the return current concentrates in a narrow band directly under the trace. The loop area is minimised automatically by the physics. The field is contained. The board is quiet.</p>
 
+  <img src="https://raw.githubusercontent.com/dariofresu/Fresu-Electronics-Blog/main/assets/images/emi-signal-return-currents_img01.png" alt="Figure 3 - PCB simulation with a 1 GHz signal." class="post-img">
+  <p class="img-caption">Figure 4 - PCB simulation with a 1 GHz signal.</p>
+
   <div class="pull-quote"><p>At high frequency, the return current does not ask you where to go. It finds the path that minimises loop inductance — and if you haven't provided a clean one, it will find a dirty one.</p></div>
+
+  <img src="https://raw.githubusercontent.com/dariofresu/Fresu-Electronics-Blog/main/assets/images/emi-signal-return-currents_img04.jpg" alt="Diagram illustrating signal propagation and current flow in a transmission line, highlighting forward current in the signal trace, displacement current through the dielectric, and return current on the reference plane." class="post-img">
+  <p class="img-caption">Diagram illustrating signal propagation and current flow in a transmission line, highlighting forward current in the signal trace, displacement current through the dielectric, and return current on the reference plane.</p>
 
   <div class="contrast-block">
     <div class="contrast-col wrong"><span class="contrast-label">What Most Engineers Assume</span>
@@ -165,9 +183,25 @@
     <ul class="contrast-list"><li>Return current takes the path of least impedance</li><li>At HF, current concentrates under the trace</li><li>Slots force current to detour — creating loop area</li><li>Return path geometry must be frequency-aware</li><li>Ground vias must be adjacent to signal vias</li></ul></div>
   </div>
 
+  <img src="https://raw.githubusercontent.com/dariofresu/Fresu-Electronics-Blog/main/assets/images/emi-signal-return-currents_img06.png" alt="Figure 5 - PCB simulation with a 1 GHz signal and longer trace." class="post-img">
+  <p class="img-caption">Figure 5 - PCB simulation with a 1 GHz signal and longer trace.</p>
+
+  <img src="https://raw.githubusercontent.com/dariofresu/Fresu-Electronics-Blog/main/assets/images/emi-signal-return-currents_img07.png" alt="Figure 6 - PCB simulation with a 10 kHz signal and longer trace." class="post-img">
+  <p class="img-caption">Figure 6 - PCB simulation with a 10 kHz signal and longer trace.</p>
+
   <h2>What happens when the return path is interrupted</h2>
   <p>A slot, cut, or void in the reference plane beneath a high-speed signal trace forces the return current to detour around the interruption. The current cannot cross the gap capacitively at the frequency of interest — it must route around the edge of the slot. The resulting loop area is determined by the length of the slot, not the trace geometry. A 20mm slot beneath a 0.2mm trace produces a loop that is 100× larger than the trace geometry suggests.</p>
+
+  <img src="https://raw.githubusercontent.com/dariofresu/Fresu-Electronics-Blog/main/assets/images/emi-signal-return-currents_img08.png" alt="Figure 7 - PCB with a split in the Return and Reference Plane." class="post-img">
+  <p class="img-caption">Figure 7 - PCB with a split in the Return and Reference Plane.</p>
+
+  <img src="https://raw.githubusercontent.com/dariofresu/Fresu-Electronics-Blog/main/assets/images/emi-signal-return-currents_img10.png" alt="Figure 8 - Simulation of a 10 kHz signal routed across a split in the RRP." class="post-img">
+  <p class="img-caption">Figure 8 - Simulation of a 10 kHz signal routed across a split in the RRP.</p>
+
   <p>This detour loop radiates in proportion to its area, the current it carries, and the frequency squared. A single slot in the wrong location can be the dominant emission source on an otherwise well-designed board.</p>
+
+  <img src="https://raw.githubusercontent.com/dariofresu/Fresu-Electronics-Blog/main/assets/images/emi-signal-return-currents_img11.png" alt="Figure 9 - Simulation of a 1 GHz signal routed across a split in the RRP." class="post-img">
+  <p class="img-caption">Figure 9 - Simulation of a 1 GHz signal routed across a split in the RRP.</p>
 
   <div class="concept-grid">
     <div class="concept-card"><span class="concept-num">01 — Via placement</span><h3>Return vias adjacent to signal vias</h3><p>Every time a signal changes layers through a via, its return current must also transition layers. Without a nearby return via, the current must travel across the plane surface to find the nearest stitching point — creating a loop. Place a return via within 1–2mm of every signal via for high-speed signals.</p></div>

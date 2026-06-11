@@ -38,6 +38,9 @@
     p{color:#fff;font-weight:400;margin-bottom:20px}
     strong{color:#fff;font-weight:600}
     em{font-style:italic}
+    .post-img { width: 100%; border-radius: 4px; display: block; margin: 36px 0 10px; border: 1px solid var(--border); }
+    .post-img-center { display: block; margin: 36px auto 10px; border-radius: 4px; border: 1px solid var(--border); max-width: 100%; }
+    .img-caption { text-align: center; font-size: 12px; color: var(--label); margin-bottom: 32px; font-style: italic; line-height: 1.5; }
     .contrast-block{display:grid;grid-template-columns:1fr 1fr;gap:2px;margin:44px 0;border-radius:4px;overflow:hidden}
     .contrast-col{padding:28px 24px}
     .contrast-col.wrong{background:var(--surface);border:1px solid var(--border);border-right:none}
@@ -152,11 +155,17 @@
   <p>At low frequencies, return current takes the path of least resistance — the shortest route back to the source. But even at a few kilohertz, inductance begins to dominate. The return current starts concentrating directly beneath the signal trace, following the path of least impedance. At high frequencies — the range where EMC problems live — this concentration becomes very tight. The return current hugs the signal trace from directly below, minimising loop area and containing the electromagnetic field.</p>
   <p>This is not a design choice. It is a physical consequence of how fields minimize energy. The board designer's job is to ensure the return current has a clean, uninterrupted path directly beneath every signal — and that means placing a solid return reference plane adjacent to every signal layer.</p>
 
+  <img src="https://raw.githubusercontent.com/dariofresu/Fresu-Electronics-Blog/main/assets/images/pcb-stackup-power-return-path_img01.gif" alt="Diagram illustrating the signal and current flow through a PCB layer." class="post-img">
+  <p class="img-caption">Diagram illustrating the signal and current flow through a PCB layer.</p>
+
   <div class="pull-quote"><p>Return current doesn't ask permission. It will find a path — the question is whether that path is the one you designed or one you didn't.</p></div>
 
   <h2>Why the power plane fails as a return reference</h2>
   <p>A power plane carries DC supply voltage with superimposed switching noise. When a high-speed signal on the top layer references a power plane instead of a ground plane, its return current must travel through the interplane capacitance between the power and ground planes before it can close the loop. This introduces impedance discontinuities, creates common-mode noise on the power distribution network, and forces the return current through a path that was never designed for signal integrity.</p>
   <p>The result: larger effective loop areas, increased radiation, and coupling paths between signals that share the same power plane reference.</p>
+
+  <img src="https://raw.githubusercontent.com/dariofresu/Fresu-Electronics-Blog/main/assets/images/pcb-stackup-power-return-path_img02.png" alt="Diagram illustrating signal and current flow in a multi-layer PCB, highlighting the effects of impedance and noise across signal layers, power planes, and return reference planes for proper signal propagation." class="post-img">
+  <p class="img-caption">Diagram illustrating signal and current flow in a multi-layer PCB, highlighting the effects of impedance and noise across signal layers, power planes, and return reference planes for proper signal propagation.</p>
 
   <div class="contrast-block">
     <div class="contrast-col wrong"><span class="contrast-label">Common Mistake</span>
@@ -168,16 +177,28 @@
   <h2>The interplane capacitance argument — and why it's not enough</h2>
   <p>A common counterargument is that interplane capacitance between power and ground planes provides a low-impedance return path at high frequencies. This is partially true: tightly spaced power/ground plane pairs do create useful distributed capacitance. But this capacitance is effective for power distribution noise decoupling — not for signal return. The inductance of the path from a signal trace through interplane capacitance and back is significantly higher than a direct return through an adjacent ground plane. At the frequencies that matter for EMC, the difference is significant.</p>
 
+  <img src="https://raw.githubusercontent.com/dariofresu/Fresu-Electronics-Blog/main/assets/images/pcb-stackup-power-return-path_img03.png" alt="Graph illustrating the impedance characteristics of capacitors, showing a transition from capacitive to inductive behavior at the resonant frequency." class="post-img">
+  <p class="img-caption">Graph illustrating the impedance characteristics of capacitors, showing a transition from capacitive to inductive behavior at the resonant frequency.</p>
+
   <div class="concept-grid">
     <div class="concept-card"><span class="concept-num">01 — Adjacency</span><h3>Return plane must be directly adjacent</h3><p>The return reference plane must be immediately above or below the signal layer — not separated by another layer. Every additional layer between the signal and its return plane increases the loop area and the radiated emissions. The tighter the coupling, the smaller the field, the cleaner the board.</p></div>
     <div class="concept-card"><span class="concept-num">02 — Continuity</span><h3>No splits, no cuts</h3><p>Any cut or split in the return reference plane forces return current to detour around it. The detour creates a large loop — effectively an antenna. This is one of the most common causes of a clean-looking board failing EMC. The ground plane must be continuous under every critical signal trace.</p></div>
     <div class="concept-card"><span class="concept-num">03 — Layer transitions</span><h3>Via stitching at every layer change</h3><p>When a signal changes layers through a via, its return current must also change layers. Without a nearby return via, the current must travel laterally across the plane to find a stitching via — creating a loop. Always place a return via adjacent to every signal via, especially for high-speed or high-current signals.</p></div>
   </div>
 
+  <img src="https://raw.githubusercontent.com/dariofresu/Fresu-Electronics-Blog/main/assets/images/pcb-stackup-power-return-path_img04.png" alt="Simulation of a circuit board showing signal trace paths and the return reference plane, illustrating the resonance of the cavity using Simbeor software." class="post-img">
+  <p class="img-caption">Simulation of a circuit board showing signal trace paths and the return reference plane, illustrating the resonance of the cavity using Simbeor software.</p>
+
+  <img src="https://raw.githubusercontent.com/dariofresu/Fresu-Electronics-Blog/main/assets/images/pcb-stackup-power-return-path_img05.png" alt="Cross-sectional illustration of a PCB showing signal and power layers with direction of forward and return currents through a signal via, highlighting displacement current and potential noise within the return reference plane (RRP)." class="post-img">
+  <p class="img-caption">Cross-sectional illustration of a PCB showing signal and power layers with direction of forward and return currents through a signal via, highlighting displacement current and potential noise within the return reference plane (RRP).</p>
+
   <h2>What a well-designed stackup actually looks like</h2>
   <p>For a 4-layer board, the strongest stackup for EMC and signal integrity is: signal — ground — ground — signal. Both outer signal layers reference an adjacent ground plane directly. The two inner ground planes can be tied together at multiple points. Power distribution is handled through the outer signal layers with local decoupling, or on a thin inner layer kept close to a ground plane.</p>
   <p>For 6-layer designs, adding a dedicated power plane between the two ground planes gives you PDN performance without compromising signal return paths. The key invariant is that every signal layer has an adjacent, solid, continuous ground plane — no exceptions, no compromises.</p>
-  
+
+  <img src="https://raw.githubusercontent.com/dariofresu/Fresu-Electronics-Blog/main/assets/images/pcb-stackup-power-return-path_img06.png" alt="Diagram illustrating signal and return current flow through a PCB, featuring signal and stitching vias, and highlighting the containment of signals within the return reference planes (RRP) to ensure effective transmission." class="post-img">
+  <p class="img-caption">Diagram illustrating signal and return current flow through a PCB, featuring signal and stitching vias, and highlighting the containment of signals within the return reference planes (RRP) to ensure effective transmission.</p>
+
   <div class="closing">
     <div class="tags"><span class="tag">#PCBDesign</span> <span class="tag">#StackUp</span> <span class="tag">#EMC</span> <span class="tag">#SignalIntegrity</span> <span class="tag">#HardwareEngineering</span></div>
   </div>

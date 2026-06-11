@@ -38,6 +38,9 @@
     p{color:#fff;font-weight:400;margin-bottom:20px}
     strong{color:#fff;font-weight:600}
     em{font-style:italic}
+    .post-img { width: 100%; border-radius: 4px; display: block; margin: 36px 0 10px; border: 1px solid var(--border); }
+    .post-img-center { display: block; margin: 36px auto 10px; border-radius: 4px; border: 1px solid var(--border); max-width: 100%; }
+    .img-caption { text-align: center; font-size: 12px; color: var(--label); margin-bottom: 32px; font-style: italic; line-height: 1.5; }
     .contrast-block{display:grid;grid-template-columns:1fr 1fr;gap:2px;margin:44px 0;border-radius:4px;overflow:hidden}
     .contrast-col{padding:28px 24px}
     .contrast-col.wrong{background:var(--surface);border:1px solid var(--border);border-right:none}
@@ -153,11 +156,28 @@
   <p>A filter's datasheet insertion loss is measured under standardised 50Ω source and load conditions. Your actual circuit is not 50Ω. The cable is not 50Ω. The impedance environment seen by the filter at your specific interface will differ from test conditions — sometimes dramatically. A filter that shows 40 dB insertion loss in a 50Ω/50Ω test setup may deliver 10 dB or less in the actual circuit. Choosing the right topology mitigates this mismatch.</p>
 
   <div class="concept-grid">
-    <div class="concept-card"><span class="concept-num">01 — Single Component</span><h3>Series inductor or shunt capacitor</h3><p>The simplest approach: a series inductor increases impedance to high-frequency noise in the signal path, while a shunt capacitor diverts noise to the return plane. Works well when source and load impedances are well-defined and stable. In low-impedance environments, series inductors are more effective; in high-impedance environments, shunt capacitors work better. Do not use blindly — the impedance environment must be assessed first.</p></div>
-    <div class="concept-card"><span class="concept-num">02 — Shunt-Series (L-filter)</span><h3>Capacitor first, then inductor</h3><p>A shunt capacitor followed by a series inductor. This topology works best when the source impedance is low — it first diverts high-frequency noise to ground, then blocks what remains with the series inductor. Common at power input interfaces where the source is a low-impedance supply rail.</p></div>
-    <div class="concept-card"><span class="concept-num">03 — Series-Shunt (L-filter, reversed)</span><h3>Inductor first, then capacitor</h3><p>A series inductor followed by a shunt capacitor. Preferred when load impedance is low — the inductor blocks noise from reaching the load, and the capacitor diverts what passes through to ground. Useful at the output of switching regulators driving low-impedance loads.</p></div>
-    <div class="concept-card"><span class="concept-num">04 — π-Filter</span><h3>Shunt — Series — Shunt</h3><p>Two shunt capacitors with a series inductor between them. Provides higher insertion loss than L-filters and works well when both source and load impedances are high. The most effective topology for conducted emissions on high-impedance signal lines, but requires careful component selection to avoid resonance peaks that can amplify noise at specific frequencies.</p></div>
-    <div class="concept-card"><span class="concept-num">05 — T-Filter</span><h3>Series — Shunt — Series</h3><p>Two series inductors with a shunt capacitor between them. Optimised for low source and load impedances. Common in power line filtering where the supply and load are both low impedance. Like the π-filter, component tolerances and parasitic elements must be controlled to avoid undesirable resonance behaviour.</p></div>
+    <div class="concept-card"><span class="concept-num">01 — Single Component</span><h3>Series inductor or shunt capacitor</h3><p>The simplest approach: a series inductor increases impedance to high-frequency noise in the signal path, while a shunt capacitor diverts noise to the return plane. Works well when source and load impedances are well-defined and stable. In low-impedance environments, series inductors are more effective; in high-impedance environments, shunt capacitors work better. Do not use blindly — the impedance environment must be assessed first.</p>
+      <img src="https://raw.githubusercontent.com/dariofresu/Fresu-Electronics-Blog/main/assets/images/emc-filter-topologies_img01.jpg" alt="Series Inductor Filter." class="post-img">
+      <p class="img-caption">Series Inductor Filter.</p>
+      <img src="https://raw.githubusercontent.com/dariofresu/Fresu-Electronics-Blog/main/assets/images/emc-filter-topologies_img02.jpg" alt="Shunt Capacitor Filter." class="post-img">
+      <p class="img-caption">Shunt Capacitor Filter.</p>
+    </div>
+    <div class="concept-card"><span class="concept-num">02 — Shunt-Series (L-filter)</span><h3>Capacitor first, then inductor</h3><p>A shunt capacitor followed by a series inductor. This topology works best when the source impedance is low — it first diverts high-frequency noise to ground, then blocks what remains with the series inductor. Common at power input interfaces where the source is a low-impedance supply rail.</p>
+      <img src="https://raw.githubusercontent.com/dariofresu/Fresu-Electronics-Blog/main/assets/images/emc-filter-topologies_img03.jpg" alt="Shunt-Series Filter." class="post-img">
+      <p class="img-caption">Shunt-Series Filter.</p>
+    </div>
+    <div class="concept-card"><span class="concept-num">03 — Series-Shunt (L-filter, reversed)</span><h3>Inductor first, then capacitor</h3><p>A series inductor followed by a shunt capacitor. Preferred when load impedance is low — the inductor blocks noise from reaching the load, and the capacitor diverts what passes through to ground. Useful at the output of switching regulators driving low-impedance loads.</p>
+      <img src="https://raw.githubusercontent.com/dariofresu/Fresu-Electronics-Blog/main/assets/images/emc-filter-topologies_img05.jpg" alt="Series-Shunt Filter." class="post-img">
+      <p class="img-caption">Series-Shunt Filter.</p>
+    </div>
+    <div class="concept-card"><span class="concept-num">04 — π-Filter</span><h3>Shunt — Series — Shunt</h3><p>Two shunt capacitors with a series inductor between them. Provides higher insertion loss than L-filters and works well when both source and load impedances are high. The most effective topology for conducted emissions on high-impedance signal lines, but requires careful component selection to avoid resonance peaks that can amplify noise at specific frequencies.</p>
+      <img src="https://raw.githubusercontent.com/dariofresu/Fresu-Electronics-Blog/main/assets/images/emc-filter-topologies_img06.jpg" alt="Pi (π) Filter Configuration." class="post-img">
+      <p class="img-caption">Pi (π) Filter Configuration.</p>
+    </div>
+    <div class="concept-card"><span class="concept-num">05 — T-Filter</span><h3>Series — Shunt — Series</h3><p>Two series inductors with a shunt capacitor between them. Optimised for low source and load impedances. Common in power line filtering where the supply and load are both low impedance. Like the π-filter, component tolerances and parasitic elements must be controlled to avoid undesirable resonance behaviour.</p>
+      <img src="https://raw.githubusercontent.com/dariofresu/Fresu-Electronics-Blog/main/assets/images/emc-filter-topologies_img07.jpg" alt="T-Filter configuration" class="post-img">
+      <p class="img-caption">T-Filter configuration</p>
+    </div>
   </div>
 
   <h2>Placement is as important as topology</h2>

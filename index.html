@@ -65,6 +65,31 @@
     .post-card.coming-soon { opacity:0.4; pointer-events:none; }
     .coming-tag { font-size:10px; font-weight:600; letter-spacing:0.1em; text-transform:uppercase; color:var(--label); border:1px solid var(--border); padding:3px 9px; border-radius:2px; }
 
+    /* ── Filter bar ── */
+    .filter-bar { display:flex; flex-wrap:wrap; gap:10px; align-items:center; margin-bottom:36px; }
+    .filter-chip { font-family:'Poppins',sans-serif; font-size:11px; font-weight:600; letter-spacing:0.08em; text-transform:uppercase; color:var(--label); background:var(--surface); border:1px solid var(--border); border-radius:999px; padding:8px 16px; cursor:pointer; transition:color 0.15s, border-color 0.15s; }
+    .filter-chip:hover { color:#ffffff; border-color:var(--label); }
+    .filter-chip.active { color:#0a0a0a; background:var(--accent); border-color:var(--accent); }
+    .filter-search { flex:1 1 220px; min-width:180px; max-width:320px; margin-left:auto; background:var(--surface); border:1px solid var(--border); border-radius:999px; color:#ffffff; font-family:'Poppins',sans-serif; font-size:13px; padding:9px 18px; outline:none; transition:border-color 0.15s; }
+    .filter-search:focus { border-color:var(--accent); }
+    .filter-search::placeholder { color:#555; }
+    .filter-empty { display:none; color:var(--label); font-size:14px; padding:32px 0; }
+
+    .deep-tag { font-size:10px; font-weight:600; letter-spacing:0.1em; text-transform:uppercase; color:#0a0a0a; background:var(--accent); padding:3px 9px; border-radius:2px; }
+
+    /* ── Tools strip ── */
+    .tools-strip { margin-top:48px; display:grid; grid-template-columns:1fr auto; gap:32px; align-items:center; background:var(--surface); border:1px solid var(--border); border-radius:4px; padding:36px 44px; text-decoration:none; position:relative; overflow:hidden; transition:border-color 0.2s; }
+    .tools-strip:hover { border-color:var(--accent); }
+    .tools-strip::after { content:''; position:absolute; top:0; left:0; right:0; height:2px; background:linear-gradient(90deg,var(--accent),transparent); }
+    .tools-strip h3 { font-size:20px; font-weight:700; color:#ffffff; margin-bottom:8px; letter-spacing:-0.01em; }
+    .tools-strip p { font-size:14px; color:var(--label); margin:0; line-height:1.7; }
+    .tools-strip .post-read-more { white-space:nowrap; }
+
+    :focus-visible { outline:2px solid var(--accent); outline-offset:2px; }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation:none !important; transition:none !important; }
+    }
+
     .cta-banner { margin-top:72px; background:var(--surface); border:1px solid var(--border); border-radius:4px; overflow:hidden; position:relative; }
     .cta-banner::after { content:''; position:absolute; top:0; left:0; right:0; height:2px; background:linear-gradient(90deg,var(--accent),transparent); }
     .cta-banner-top { padding:52px 52px 40px; display:grid; grid-template-columns:1fr auto; gap:48px; align-items:center; }
@@ -137,6 +162,7 @@
       <img src="https://raw.githubusercontent.com/dariofresu/Fresu-Electronics-Blog/main/assets/logo.png" alt="Fresu Electronics">
     </a>
     <nav class="header-nav">
+      <a href="./tools/">Tools</a>
       <a href="https://www.fresuelectronics.com/trainings">Courses</a>
       <a href="https://www.fresuelectronics.com/about">About</a>
       <a href="https://www.fresuelectronics.com/emc-audit" class="header-cta">Book EMC Audit</a>
@@ -152,9 +178,24 @@
 
 <main class="posts-section">
   <div class="section-label">All Posts</div>
+
+  <div class="filter-bar" role="group" aria-label="Filter posts by topic">
+    <button class="filter-chip active" data-filter="all">All</button>
+    <button class="filter-chip" data-filter="deep-dive">Deep Dives</button>
+    <button class="filter-chip" data-filter="emc-strategy">EMC Strategy</button>
+    <button class="filter-chip" data-filter="pcb-design">PCB Design</button>
+    <button class="filter-chip" data-filter="return-currents">Return Currents</button>
+    <button class="filter-chip" data-filter="filtering-pdn">Filtering &amp; PDN</button>
+    <button class="filter-chip" data-filter="emissions-testing">Emissions &amp; Testing</button>
+    <button class="filter-chip" data-filter="esd-immunity">ESD &amp; Immunity</button>
+    <button class="filter-chip" data-filter="electromagnetism">Electromagnetism</button>
+    <button class="filter-chip" data-filter="design-reviews">Design Reviews</button>
+    <input class="filter-search" type="search" id="postSearch" placeholder="Search posts…" aria-label="Search posts">
+  </div>
+
   <div class="posts-grid">
 
-    <a href="./emc-mental-model" class="post-card featured">
+    <a href="./emc-mental-model" class="post-card featured" data-topics="emc-strategy">
       <div>
         <div class="post-meta">
           <span class="post-tag">EMC</span>
@@ -187,110 +228,141 @@
     </a>
 
 
-    <a href="./emc-current-clamps" class="post-card">
-      <div class="post-meta"><span class="post-tag">Pre-compliance</span><span class="post-new">New</span><span class="post-date">Apr 2025 · 7 min</span></div>
+    <a href="./emc-current-clamps" class="post-card" data-topics="emissions-testing">
+      <div class="post-meta"><span class="post-tag">Pre-compliance</span><span class="post-date">Apr 2025 · 7 min</span></div>
       <h3 class="post-title">Radiated Emissions Testing and the Role of EMC Current Clamps</h3>
       <p class="post-excerpt">How current clamps capture differential and common mode currents, translate them into estimated field strength, and help engineers identify emission sources before they reach the chamber.</p>
       <span class="post-read-more">Read post →</span>
     </a>
 
-    <a href="./redefining-current-charge" class="post-card">
-      <div class="post-meta"><span class="post-tag">Electromagnetism</span><span class="post-new">New</span><span class="post-date">Apr 2025 · 11 min</span></div>
+    <a href="./redefining-current-charge" class="post-card" data-topics="electromagnetism">
+      <div class="post-meta"><span class="post-tag">Electromagnetism</span><span class="post-date">Apr 2025 · 11 min</span></div>
       <h3 class="post-title">Redefining Current and Charge: A Field-Based Perspective on Electromagnetism</h3>
       <p class="post-excerpt">Electrons drift at 73 µm/s. Signals propagate at 150 million m/s. Something in the classical model is wrong. A field-first reframing resolves the contradiction and changes how you design.</p>
       <span class="post-read-more">Read post →</span>
     </a>
 
-    <a href="./why-engineers-fail-emc" class="post-card">
-      <div class="post-meta"><span class="post-tag">EMC</span><span class="post-date">2025 · 7 min</span></div>
+    <a href="./why-engineers-fail-emc" class="post-card" data-topics="emc-strategy">
+      <div class="post-meta"><span class="post-tag">EMC</span><span class="post-date">Jun 2025 · 7 min</span></div>
       <h3 class="post-title">Why Smart Engineers Fail EMC Tests (It's Not What You Think)</h3>
       <p class="post-excerpt">The failure isn't technical knowledge — it's the mismatch between how engineers model electromagnetic behaviour and how physics actually works.</p>
       <span class="post-read-more">Read post →</span>
     </a>
 
-    <a href="./pcb-stackup-power-return-path" class="post-card">
-      <div class="post-meta"><span class="post-tag">PCB Design</span><span class="post-date">2025 · 8 min</span></div>
+    <a href="./pcb-stackup-power-return-path" class="post-card" data-topics="pcb-design return-currents">
+      <div class="post-meta"><span class="post-tag">PCB Design</span><span class="post-date">May 2025 · 8 min</span></div>
       <h3 class="post-title">Optimizing PCB Stackup Design: Power and Return Path Considerations</h3>
       <p class="post-excerpt">The layer sequence you choose in the first 20 minutes of a new board determines most of your EMC outcome. Here's how to get it right.</p>
       <span class="post-read-more">Read post →</span>
     </a>
 
-    <a href="./emc-filter-topologies" class="post-card">
-      <div class="post-meta"><span class="post-tag">EMC/EMI</span><span class="post-date">2025 · 7 min</span></div>
+    <a href="./emc-filter-topologies" class="post-card" data-topics="filtering-pdn">
+      <div class="post-meta"><span class="post-tag">EMC/EMI</span><span class="post-date">May 2025 · 7 min</span></div>
       <h3 class="post-title">EMC Filter Topologies: EMI Control Strategies in Electronics Design</h3>
       <p class="post-excerpt">Five filter configurations, their insertion loss behaviour, and exactly where each belongs — as a function of the impedance environment, not folklore.</p>
       <span class="post-read-more">Read post →</span>
     </a>
 
-    <a href="./emi-signal-return-currents" class="post-card">
-      <div class="post-meta"><span class="post-tag">Signal Integrity</span><span class="post-date">2025</span></div>
+    <a href="./emi-signal-return-currents" class="post-card" data-topics="return-currents">
+      <div class="post-meta"><span class="post-tag">Signal Integrity</span><span class="post-date">May 2025 · 8 min</span></div>
       <h3 class="post-title">Managing EMI: Low and High-Speed Signal Return Currents</h3>
       <p class="post-excerpt">Return current doesn't follow ground. It follows the path of least impedance — and at high frequency, that's nothing like what you drew in the schematic.</p>
       <span class="post-read-more">Read post →</span>
     </a>
 
-    <a href="./emi-design-review-pcb" class="post-card">
-      <div class="post-meta"><span class="post-tag">EMC Review</span><span class="post-date">2025 · 23 min</span></div>
+    <a href="./emi-design-review-pcb" class="post-card" data-topics="design-reviews" data-deep="1">
+      <div class="post-meta"><span class="post-tag">EMC Review</span><span class="deep-tag">Deep Dive</span><span class="post-date">Nov 2024 · 23 min</span></div>
       <h3 class="post-title">How to Conduct an EMI Design Review for Your PCB</h3>
       <p class="post-excerpt">A structured walkthrough of a full EMI design review — from stackup to connector placement. What to look for, in what order, and why.</p>
       <span class="post-read-more">Read post →</span>
     </a>
 
-    <a href="./electromagnetic-fields-pcb" class="post-card">
-      <div class="post-meta"><span class="post-tag">Electromagnetism</span><span class="post-date">2025 · 6 min</span></div>
+    <a href="./radiated-emissions" class="post-card" data-topics="emissions-testing" data-deep="1">
+      <div class="post-meta"><span class="post-tag">Emissions</span><span class="deep-tag">Deep Dive</span><span class="post-date">Nov 2024 · 24 min</span></div>
+      <h3 class="post-title">Understanding Radiated Emissions: What You Need to Know for EMI Compliance</h3>
+      <p class="post-excerpt">How radiated emissions arise from differential and common mode currents — and how layout, stackup, loop area, filtering, and shielding decide whether your design passes FCC and CE testing.</p>
+      <span class="post-read-more">Read post →</span>
+    </a>
+
+    <a href="./esd-electrostatic-discharge" class="post-card" data-topics="esd-immunity" data-deep="1">
+      <div class="post-meta"><span class="post-tag">ESD</span><span class="deep-tag">Deep Dive</span><span class="post-date">Nov 2024 · 28 min</span></div>
+      <h3 class="post-title">Understanding ESD: How to Protect Your Electronics from Electrostatic Discharge</h3>
+      <p class="post-excerpt">Why ESD current ignores the earth wire and rides parasitic capacitance instead — from the triboelectric effect and human body model to chassis bonding, TVS placement, and plastic enclosures.</p>
+      <span class="post-read-more">Read post →</span>
+    </a>
+
+    <a href="./conducted-emissions" class="post-card" data-topics="emissions-testing" data-deep="1">
+      <div class="post-meta"><span class="post-tag">Emissions</span><span class="deep-tag">Deep Dive</span><span class="post-date">Nov 2024 · 17 min</span></div>
+      <h3 class="post-title">Conducted Emissions</h3>
+      <p class="post-excerpt">Why products fail the 150 kHz–30 MHz conducted emissions test — and how the LISN, SMPS parasitics, and proper EMI filter design determine whether yours passes.</p>
+      <span class="post-read-more">Read post →</span>
+    </a>
+
+    <a href="./pdn-low-emi" class="post-card" data-topics="filtering-pdn" data-deep="1">
+      <div class="post-meta"><span class="post-tag">PDN</span><span class="deep-tag">Deep Dive</span><span class="post-date">Nov 2024 · 17 min</span></div>
+      <h3 class="post-title">Power Delivery Network (PDN) for Low EMI</h3>
+      <p class="post-excerpt">How to design a power delivery network that keeps EMI under control: transient current calculations, decoupling myths, placement strategy, and how many capacitors you actually need.</p>
+      <span class="post-read-more">Read post →</span>
+    </a>
+
+    <a href="./pcb-review-mppt-charge-controller" class="post-card" data-topics="design-reviews" data-deep="1">
+      <div class="post-meta"><span class="post-tag">Design Review</span><span class="deep-tag">Deep Dive</span><span class="post-date">Nov 2024 · 17 min</span></div>
+      <h3 class="post-title">PCB Layout Review for EMC and Signal Integrity — MPPT Charge Controller</h3>
+      <p class="post-excerpt">A line-by-line EMC and signal-integrity review of an MPPT solar charge controller PCB — two-layer stackup pitfalls, antenna-like pours, crosstalk, stubs, and what to do when you can't add layers.</p>
+      <span class="post-read-more">Read post →</span>
+    </a>
+
+    <a href="./pcb-review-imx8-som" class="post-card" data-topics="design-reviews" data-deep="1">
+      <div class="post-meta"><span class="post-tag">Design Review</span><span class="deep-tag">Deep Dive</span><span class="post-date">Nov 2024 · 20 min</span></div>
+      <h3 class="post-title">i.MX8 SOM — EMI Design Layout Review</h3>
+      <p class="post-excerpt">A layer-by-layer EMC review of an i.MX8 system-on-module — stackup pairing, return reference planes, copper-pour antennas, plane splits, and missing return vias.</p>
+      <span class="post-read-more">Read post →</span>
+    </a>
+
+    <a href="./electromagnetic-fields-pcb" class="post-card" data-topics="electromagnetism pcb-design">
+      <div class="post-meta"><span class="post-tag">Electromagnetism</span><span class="post-date">Nov 2024 · 6 min</span></div>
       <h3 class="post-title">The Concept of Electromagnetic Fields in a PCB</h3>
       <p class="post-excerpt">PCBs don't conduct electrons — they guide electromagnetic fields. Understanding what that means changes how you lay out every trace.</p>
       <span class="post-read-more">Read post →</span>
     </a>
 
-    <a href="./pcb-90-degree-bends" class="post-card">
-      <div class="post-meta"><span class="post-tag">PCB Design</span><span class="post-date">2025 · 8 min</span></div>
+    <a href="./pcb-90-degree-bends" class="post-card" data-topics="pcb-design">
+      <div class="post-meta"><span class="post-tag">PCB Design</span><span class="post-date">May 2025 · 8 min</span></div>
       <h3 class="post-title">Understanding 90-Degree Bends in PCB Design</h3>
       <p class="post-excerpt">Settled by impedance discontinuity analysis and the frequencies you're actually running — not by folklore or outdated rules of thumb.</p>
       <span class="post-read-more">Read post →</span>
     </a>
 
-    <a href="./redefining-current-charge" class="post-card">
-      <div class="post-meta"><span class="post-tag">Electromagnetism</span><span class="post-date">2025 · 11 min</span></div>
-      <h3 class="post-title">Redefining Current and Charge: A Field-Based Perspective</h3>
-      <p class="post-excerpt">Current is a boundary condition on a changing electromagnetic field. This reframe has practical consequences for every circuit you design.</p>
-      <span class="post-read-more">Read post →</span>
-    </a>
-
-    <a href="./emi-design-review-pcb" class="post-card">
-      <div class="post-meta"><span class="post-tag">EMC Review</span><span class="post-date">2025 · 23 min</span></div>
-      <h3 class="post-title">How to Conduct an EMI Design Review for Your PCB</h3>
-      <p class="post-excerpt">A structured walkthrough of a full EMI design review — stackup, schematics, layout, filter placement. What to look for, in what order, and why.</p>
-      <span class="post-read-more">Read post →</span>
-    </a>
-
-    <a href="./redefining-current-charge" class="post-card">
-      <div class="post-meta"><span class="post-tag">Electromagnetism</span><span class="post-date">2025 · 11 min</span></div>
-      <h3 class="post-title">Redefining Current and Charge: A Field-Based Perspective</h3>
-      <p class="post-excerpt">Current is a boundary condition on a changing electromagnetic field. This reframe has direct practical consequences for every circuit you design.</p>
-      <span class="post-read-more">Read post →</span>
-    </a>
-
-    <a href="./field-centric-charge-energy" class="post-card">
-      <div class="post-meta"><span class="post-tag">Electromagnetism</span><span class="post-date">2025 · 4 min</span></div>
+    <a href="./field-centric-charge-energy" class="post-card" data-topics="electromagnetism">
+      <div class="post-meta"><span class="post-tag">Electromagnetism</span><span class="post-date">May 2025 · 4 min</span></div>
       <h3 class="post-title">A Field-Centric View of Energy Transfer in Classical Electromagnetism</h3>
       <p class="post-excerpt">Where does electrical energy actually flow? Not through the wire. The Poynting vector and Gauss's law inverted — with practical consequences for PCB design.</p>
       <span class="post-read-more">Read post →</span>
     </a>
 
-    <div class="post-card coming-soon">
+    <div class="post-card coming-soon" data-topics="filtering-pdn">
       <div class="post-meta"><span class="post-tag">EMC</span><span class="coming-tag">Coming Soon</span></div>
       <h3 class="post-title">Common-Mode Filters: Why Most Engineers Install Them In The Wrong Place</h3>
       <p class="post-excerpt">Placement is a physics constraint, not a preference. A filter in the wrong location can make emissions worse.</p>
     </div>
 
-    <div class="post-card coming-soon">
+    <div class="post-card coming-soon" data-topics="emissions-testing">
       <div class="post-meta"><span class="post-tag">Pre-Compliance</span><span class="coming-tag">Coming Soon</span></div>
       <h3 class="post-title">The Pre-Compliance Mindset: Run Your Own EMC Scan Before the Chamber</h3>
       <p class="post-excerpt">Build the diagnostic reflex that connects every bump in the scan to a physical structure in your design.</p>
     </div>
 
   </div>
+
+  <p class="filter-empty" id="filterEmpty">No posts match — try a different topic or search term.</p>
+
+  <a href="./tools/" class="tools-strip">
+    <div>
+      <h3>Interactive EMC Tools</h3>
+      <p>Calculators and visual explorers that accompany the articles — stackup, filters, return currents, and more. Free, no sign-up.</p>
+    </div>
+    <span class="post-read-more">Open the tools →</span>
+  </a>
 
   <div class="cta-banner">
     <div class="cta-banner-top">
@@ -369,6 +441,39 @@
 </div>
 <!-- ═══ END STICKY SUBSCRIBE WIDGET ═══ -->
 <script>
+/* ── Post filtering & search ── */
+(function() {
+  var chips = document.querySelectorAll('.filter-chip');
+  var search = document.getElementById('postSearch');
+  var cards = document.querySelectorAll('.posts-grid .post-card');
+  var empty = document.getElementById('filterEmpty');
+  var activeFilter = 'all';
+
+  function apply() {
+    var q = (search.value || '').trim().toLowerCase();
+    var visible = 0;
+    cards.forEach(function(card) {
+      var topics = (card.getAttribute('data-topics') || '') + (card.getAttribute('data-deep') ? ' deep-dive' : '');
+      var matchTopic = activeFilter === 'all' || topics.split(/\s+/).indexOf(activeFilter) !== -1;
+      var matchText = !q || card.textContent.toLowerCase().indexOf(q) !== -1;
+      var show = matchTopic && matchText;
+      card.style.display = show ? '' : 'none';
+      if (show) visible++;
+    });
+    empty.style.display = visible === 0 ? 'block' : 'none';
+  }
+
+  chips.forEach(function(chip) {
+    chip.addEventListener('click', function() {
+      chips.forEach(function(c) { c.classList.remove('active'); });
+      chip.classList.add('active');
+      activeFilter = chip.getAttribute('data-filter');
+      apply();
+    });
+  });
+  if (search) search.addEventListener('input', apply);
+})();
+
 function swToggle() { var p=document.getElementById('swPanel'); p.hidden=!p.hidden; }
 function handleSub(e,formId) {
   e.preventDefault();

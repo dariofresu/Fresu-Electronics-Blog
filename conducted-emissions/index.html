@@ -1,0 +1,1010 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Conducted Emissions — Fresu Electronics</title>
+  <meta name="description" content="In this article, we’ll dive into the world of conducted emissions, what causes them, how they affect your circuits, and how to fix them.">
+  <link rel="canonical" href="https://blog.fresuelectronics.com/conducted-emissions/">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400;1,700&display=swap" rel="stylesheet">
+
+  <meta property="og:title" content="Conducted Emissions">
+  <meta property="og:description" content="In this article, we’ll dive into the world of conducted emissions, what causes them, how they affect your circuits, and how to fix them.">
+  <meta property="og:url" content="https://blog.fresuelectronics.com/conducted-emissions/">
+  <meta property="og:image" content="https://raw.githubusercontent.com/dariofresu/Fresu-Electronics-Blog/main/assets/images/conducted-emissions_img01.jpg">
+  <meta property="og:type" content="article">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:site" content="@dario_fresu">
+  <meta name="twitter:image" content="https://raw.githubusercontent.com/dariofresu/Fresu-Electronics-Blog/main/assets/images/conducted-emissions_img01.jpg">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "headline": "Conducted Emissions",
+    "description": "In this article, we’ll dive into the world of conducted emissions, what causes them, how they affect your circuits, and how to fix them.",
+    "datePublished": "2024-11-19",
+    "url": "https://blog.fresuelectronics.com/conducted-emissions/",
+    "author": { "@type": "Person", "name": "Dario Fresu", "jobTitle": "Principal EMC Architect", "url": "https://www.fresuelectronics.com/about" },
+    "publisher": { "@type": "Organization", "name": "Fresu Electronics", "url": "https://www.fresuelectronics.com" },
+    "image": "https://raw.githubusercontent.com/dariofresu/Fresu-Electronics-Blog/main/assets/images/conducted-emissions_img01.jpg"
+  }
+  </script>
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:          #0a0a0a;
+      --surface:     #111111;
+      --surface-2:   #181818;
+      --border:      #242424;
+      --fg:          #ffffff;
+      --label:       #a0aab8;
+      --accent:      #00FF94;
+      --accent-dim:  rgba(0, 255, 148, 0.10);
+      --accent-hover:#00e085;
+      --wrong:       #ff4d4d;
+    }
+
+    body {
+      background: var(--bg);
+      color: #ffffff;
+      font-family: 'Poppins', sans-serif;
+      font-size: 17px;
+      line-height: 1.75;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* ── Reading progress ── */
+    .progress-track { position: fixed; top: 0; left: 0; right: 0; height: 3px; z-index: 1100; background: transparent; }
+    .progress-bar { height: 100%; width: 0; background: var(--accent); transition: width 80ms linear; }
+
+    /* ── Header ── */
+    header { border-bottom: 1px solid var(--border); }
+    .site-header {
+      max-width: 1100px; margin: 0 auto;
+      padding: 18px 40px;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .site-header img { height: 44px; width: auto; display: block; }
+    .header-nav { display: flex; align-items: center; gap: 28px; }
+    .header-nav a {
+      font-size: 11px; font-weight: 600;
+      letter-spacing: 0.08em; text-transform: uppercase;
+      color: #ffffff; text-decoration: none; opacity: 0.6;
+      transition: opacity 0.2s;
+    }
+    .header-nav a:hover { opacity: 1; }
+    .header-cta {
+      opacity: 1 !important;
+      background: var(--accent); color: #0a0a0a !important;
+      padding: 9px 20px; border-radius: 999px;
+      transition: background 0.2s;
+    }
+    .header-cta:hover { background: var(--accent-hover) !important; }
+
+    /* ── Layout: TOC rail + article ── */
+    .post-layout { max-width: 1100px; margin: 0 auto; padding: 0 40px; display: grid; grid-template-columns: minmax(0, 740px); justify-content: center; }
+    .toc-rail { display: none; }
+    @media (min-width: 1200px) {
+      .post-layout { grid-template-columns: 240px minmax(0, 740px); gap: 56px; justify-content: center; }
+      .toc-rail { display: block; position: sticky; top: 36px; align-self: start; padding-top: 76px; }
+    }
+    .toc-rail nav { border-left: 1px solid var(--border); padding-left: 18px; }
+    .toc-label { font-size: 10px; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase; color: var(--label); margin-bottom: 14px; display: block; }
+    .toc-rail ul { list-style: none; }
+    .toc-rail li { margin-bottom: 10px; }
+    .toc-rail a { font-size: 12.5px; color: var(--label); text-decoration: none; line-height: 1.45; display: block; transition: color 0.15s; }
+    .toc-rail a:hover { color: #ffffff; }
+    .toc-rail a.active { color: var(--accent); }
+
+    /* Inline TOC for narrow screens */
+    .toc-inline { margin: 0 0 40px; border: 1px solid var(--border); border-radius: 4px; background: var(--surface); }
+    .toc-inline summary { cursor: pointer; padding: 14px 20px; font-size: 12px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--label); list-style: none; }
+    .toc-inline summary::before { content: '☰  '; color: var(--accent); }
+    .toc-inline ul { list-style: none; padding: 0 20px 16px; }
+    .toc-inline li { margin-bottom: 8px; }
+    .toc-inline a { font-size: 14px; color: #ffffff; opacity: 0.85; text-decoration: none; }
+    .toc-inline a:hover { color: var(--accent); opacity: 1; }
+    @media (min-width: 1200px) { .toc-inline { display: none; } }
+
+    /* ── Container ── */
+    .container { padding: 72px 0 100px; min-width: 0; }
+
+    /* ── Breadcrumb ── */
+    .breadcrumb { display: inline-block; font-size: 12px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--label); text-decoration: none; margin-bottom: 28px; transition: color 0.15s; }
+    .breadcrumb:hover { color: var(--accent); }
+
+    /* ── Cover image ── */
+    .post-cover {
+      width: 100%; border-radius: 6px; display: block;
+      margin-bottom: 44px;
+      border: 1px solid var(--border);
+      aspect-ratio: 16/9; object-fit: cover;
+    }
+
+    /* ── Kicker ── */
+    .kicker {
+      display: inline-block;
+      font-size: 10px; font-weight: 600;
+      letter-spacing: 0.18em; text-transform: uppercase;
+      color: var(--accent);
+      border: 1px solid var(--accent);
+      background: var(--accent-dim);
+      padding: 4px 12px; border-radius: 2px;
+      margin-bottom: 24px;
+    }
+
+    /* ── Title ── */
+    h1 {
+      font-size: clamp(28px, 5vw, 44px);
+      font-weight: 800; line-height: 1.1;
+      letter-spacing: -0.025em; color: #ffffff;
+      margin-bottom: 20px;
+    }
+    h1 em { font-style: italic; color: var(--accent); }
+
+    /* ── Deck ── */
+    .deck {
+      font-size: 18px; font-weight: 400;
+      color: #ffffff; line-height: 1.7;
+      margin-bottom: 36px;
+    }
+
+    /* ── Author row ── */
+    .author-row {
+      display: flex; align-items: center; gap: 14px;
+      padding: 20px 0;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 56px;
+    }
+    .author-row img {
+      width: 52px; height: 52px; border-radius: 50%;
+      object-fit: cover; flex-shrink: 0;
+      border: 2px solid var(--accent);
+    }
+    .author-name  { display: block; font-size: 14px; font-weight: 600; color: #ffffff; line-height: 1.3; }
+    .author-title { display: block; font-size: 12px; font-weight: 400; color: var(--label); line-height: 1.3; }
+    .author-date  { display: block; font-size: 11px; color: var(--label); margin-top: 4px; }
+
+    /* ── Body typography ── */
+    p { color: #ffffff; font-weight: 400; margin-bottom: 22px; }
+    strong { color: #ffffff; font-weight: 600; }
+    em { font-style: italic; }
+    .post-body ul, .post-body ol { margin: 0 0 22px 24px; }
+    .post-body li { margin-bottom: 8px; }
+
+    h2 {
+      font-size: 22px; font-weight: 700; color: #ffffff;
+      margin: 56px 0 18px; letter-spacing: -0.015em;
+      scroll-margin-top: 32px;
+    }
+    h2::before {
+      content: ''; display: block;
+      width: 32px; height: 3px;
+      background: var(--accent); margin-bottom: 14px; border-radius: 2px;
+    }
+    h3 {
+      font-size: 17px; font-weight: 600; color: #ffffff;
+      margin: 36px 0 12px;
+      scroll-margin-top: 32px;
+    }
+
+    /* ── Post images ── */
+    .post-img {
+      width: 100%; border-radius: 4px; display: block;
+      margin: 36px 0 10px;
+      border: 1px solid var(--border);
+      cursor: zoom-in;
+    }
+    .post-img-center {
+      display: block; margin: 36px auto 10px;
+      border-radius: 4px;
+      border: 1px solid var(--border);
+      max-width: 100%;
+      cursor: zoom-in;
+    }
+    .img-caption {
+      text-align: center; font-size: 12px;
+      color: var(--label); margin-bottom: 32px;
+      font-style: italic; line-height: 1.5;
+    }
+
+    /* ── Lightbox ── */
+    .lightbox { position: fixed; inset: 0; z-index: 1200; background: rgba(5,5,5,0.93); display: none; align-items: center; justify-content: center; padding: 32px; cursor: zoom-out; }
+    .lightbox.open { display: flex; }
+    .lightbox img { max-width: 96%; max-height: 92vh; border-radius: 4px; }
+    .lightbox-close { position: absolute; top: 18px; right: 24px; background: none; border: none; color: #ffffff; font-size: 26px; cursor: pointer; opacity: 0.7; }
+    .lightbox-close:hover { opacity: 1; }
+
+    /* ── Formula images ── */
+    .formula-wrap { display: flex; justify-content: center; margin: 24px 0 28px; }
+    .formula-wrap img {
+      display: block; background: #ffffff;
+      padding: 14px 20px; border-radius: 4px; max-width: 100%;
+    }
+
+    /* ── Callout block ── */
+    .callout {
+      background: var(--surface);
+      border-left: 3px solid var(--accent);
+      padding: 20px 24px;
+      border-radius: 0 4px 4px 0;
+      margin: 32px 0;
+    }
+    .callout p { margin-bottom: 0; }
+    .callout-label { font-size: 10px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent); margin-bottom: 8px; display: block; }
+
+    /* ── Variable list ── */
+    .var-list {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 20px 24px; margin: 24px 0;
+    }
+    .var-list p { margin-bottom: 10px; font-size: 15px; }
+    .var-list p:last-child { margin-bottom: 0; }
+
+    /* ── Compliance / standard reference block ── */
+    .compliance-block {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 24px; margin: 28px 0;
+    }
+    .compliance-block p { margin-bottom: 10px; font-size: 15px; }
+    .compliance-block p:last-child { margin-bottom: 0; }
+    .compliance-label {
+      font-size: 10px; font-weight: 600;
+      letter-spacing: 0.14em; text-transform: uppercase;
+      color: var(--accent); margin-bottom: 14px; display: block;
+    }
+
+    /* ── Numbered steps ── */
+    .steps { margin: 28px 0; }
+    .step { display: flex; gap: 18px; margin-bottom: 20px; }
+    .step-num {
+      flex-shrink: 0;
+      width: 28px; height: 28px;
+      background: var(--accent-dim);
+      border: 1px solid var(--accent);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 12px; font-weight: 700; color: var(--accent);
+      margin-top: 3px;
+    }
+    .step p { margin-bottom: 0; font-size: 15px; }
+
+    /* ── Tags ── */
+    .tags { display: flex; flex-wrap: wrap; gap: 8px; margin: 48px 0 0; }
+    .tag {
+      font-size: 10px; font-weight: 600;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--accent);
+      border: 1px solid var(--accent);
+      background: var(--accent-dim);
+      padding: 4px 12px; border-radius: 2px;
+    }
+
+    /* ── References ── */
+    .references { margin-top: 48px; padding-top: 28px; border-top: 1px solid var(--border); }
+    .references h3 { margin-top: 0; }
+    .references ul { padding-left: 20px; }
+    .references li { color: #ffffff; font-size: 14px; margin-bottom: 8px; }
+    .references a { color: var(--accent); text-decoration: none; }
+    .references a:hover { text-decoration: underline; }
+
+    /* ── Share strip ── */
+    .share-strip {
+      display: flex; align-items: center; gap: 12px;
+      margin: 56px 0 0; padding-top: 32px;
+      border-top: 1px solid var(--border); flex-wrap: wrap;
+    }
+    .share-label {
+      font-size: 12px; font-weight: 600;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--label);
+    }
+    .share-btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-family: 'Poppins', sans-serif;
+      font-size: 13px; font-weight: 600;
+      padding: 9px 18px; border-radius: 999px;
+      text-decoration: none; border: none; cursor: pointer;
+      transition: opacity 0.2s, transform 0.15s; white-space: nowrap;
+    }
+    .share-btn:hover { opacity: 0.88; transform: translateY(-1px); }
+    .share-btn.linkedin { background: #0A66C2; color: #ffffff; }
+    .share-btn.twitter  { background: #000000; color: #ffffff; }
+    .share-btn.copylink { background: var(--surface); color: var(--accent); border: 1px solid var(--accent); }
+
+    /* ── CTA section ── */
+    .cta-section {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 4px; overflow: hidden;
+      position: relative; margin-top: 72px;
+    }
+    .cta-section::after {
+      content: ''; position: absolute;
+      top: 0; left: 0; right: 0; height: 2px;
+      background: linear-gradient(90deg, var(--accent), transparent);
+    }
+    .cta-inner { padding: 48px 48px 40px; }
+    .cta-kicker {
+      font-size: 10px; font-weight: 600;
+      letter-spacing: 0.18em; text-transform: uppercase;
+      color: var(--accent); margin-bottom: 14px; display: block;
+    }
+    .cta-section h3 {
+      font-size: 24px; font-weight: 700; color: #ffffff;
+      margin: 0 0 12px; letter-spacing: -0.01em;
+    }
+    .cta-section p {
+      font-size: 15px; color: #ffffff; line-height: 1.7; margin-bottom: 28px;
+    }
+    .cta-actions { display: flex; gap: 12px; flex-wrap: wrap; }
+    .btn-primary {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: var(--accent); color: #0a0a0a;
+      font-family: 'Poppins', sans-serif;
+      font-size: 13px; font-weight: 700;
+      padding: 13px 26px; border-radius: 999px;
+      text-decoration: none; transition: background 0.2s;
+    }
+    .btn-primary:hover { background: var(--accent-hover); }
+    .btn-outline {
+      display: inline-flex; align-items: center;
+      color: #ffffff;
+      font-family: 'Poppins', sans-serif;
+      font-size: 13px; font-weight: 600;
+      text-decoration: none;
+      padding: 12px 26px; border-radius: 999px;
+      border: 1px solid var(--border);
+      transition: border-color 0.2s;
+    }
+    .btn-outline:hover { border-color: var(--accent); color: var(--accent); }
+    .proof-row {
+      display: flex; flex-wrap: wrap; gap: 8px 20px;
+      padding: 20px 48px;
+      border-top: 1px solid var(--border);
+    }
+    .proof-item {
+      font-size: 12px; font-weight: 400; color: var(--label);
+      display: flex; align-items: center; gap: 6px;
+    }
+    .proof-item::before { content: '✓'; color: var(--accent); font-weight: 700; }
+
+    /* ── Closing callout ── */
+    .closing {
+      margin-top: 52px;
+      font-style: italic; font-weight: 600;
+      color: #ffffff; font-size: 17px; line-height: 1.7;
+      border-left: 3px solid var(--accent);
+      padding: 18px 24px;
+      background: var(--surface);
+      border-radius: 0 4px 4px 0;
+    }
+    .closing em { color: var(--accent); }
+
+    /* ── Footer ── */
+    footer { border-top: 1px solid var(--border); }
+    .site-footer {
+      max-width: 1100px; margin: 0 auto;
+      padding: 28px 40px;
+      display: flex; align-items: center; justify-content: space-between;
+      font-size: 11px; color: #ffffff; opacity: 0.5;
+      flex-wrap: wrap; gap: 12px;
+    }
+    .site-footer a { color: var(--accent); text-decoration: none; }
+
+    :focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation: none !important; transition: none !important; }
+    }
+
+    /* ── Mobile ── */
+    @media (max-width: 768px) {
+      .site-header, .site-footer { padding-left: 20px; padding-right: 20px; }
+      .post-layout { padding: 0 20px; }
+      .container { padding-top: 48px; padding-bottom: 72px; }
+      .header-nav a:not(.header-cta) { display: none; }
+      h1 { font-size: clamp(24px, 7vw, 36px); }
+      .cta-inner { padding: 28px 20px 24px; }
+      .proof-row { padding: 16px 20px; }
+      .formula-wrap img { padding: 10px 14px; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="progress-track" aria-hidden="true"><div class="progress-bar" id="progressBar"></div></div>
+
+<!-- Header -->
+<header>
+  <div class="site-header">
+    <a href="https://www.fresuelectronics.com">
+      <img src="https://raw.githubusercontent.com/dariofresu/Fresu-Electronics-Blog/main/assets/logo.png" alt="Fresu Electronics">
+    </a>
+    <nav class="header-nav">
+      <a href="https://blog.fresuelectronics.com">Blog</a>
+      <a href="https://blog.fresuelectronics.com/tools/">Tools</a>
+      <a href="https://www.fresuelectronics.com/trainings">Courses</a>
+      <a href="https://www.fresuelectronics.com/emc-audit" class="header-cta">Book EMC Audit</a>
+    </nav>
+  </div>
+</header>
+
+<div class="post-layout">
+
+  <!-- Desktop TOC rail -->
+  <aside class="toc-rail" aria-label="Table of contents">
+    <nav>
+      <span class="toc-label">On this page</span>
+      <ul id="tocList">
+        <li><a href="#conducted-emissions">Conducted Emissions</a></li>
+        <li><a href="#susceptibility-or-immunity">Susceptibility or Immunity</a></li>
+        <li><a href="#testing">Testing</a></li>
+        <li><a href="#the-lisn">The LISN</a></li>
+        <li><a href="#power-supplies-and-conducted-emissions">Power supplies and Conducted Emissions</a></li>
+        <li><a href="#common-mode-noise-sources">Common mode noise sources</a></li>
+        <li><a href="#differential-mode-currents">Differential Mode currents</a></li>
+        <li><a href="#rectifying-diodes">Rectifying diodes</a></li>
+        <li><a href="#filters-for-power-supply">Filters for Power Supply</a></li>
+      </ul>
+    </nav>
+  </aside>
+
+  <div class="container">
+
+    <a href="https://blog.fresuelectronics.com" class="breadcrumb">← All posts</a>
+
+    <article>
+      <span class="kicker">Emissions &amp; Testing</span>
+      <h1>Conducted Emissions</h1>
+      <p class="deck">In this article, we’ll dive into the world of conducted emissions, what causes them, how they affect your circuits, and how to fix them.</p>
+
+      <div class="author-row">
+        <img src="https://raw.githubusercontent.com/dariofresu/Fresu-Electronics-Blog/main/assets/dario-fresu.jpg" alt="Dario Fresu">
+        <div>
+          <span class="author-name">Dario Fresu</span>
+          <span class="author-title">Principal EMC Architect — Fresu Electronics</span>
+          <span class="author-date">November 2024 · 17 min read</span>
+        </div>
+      </div>
+
+
+      <!-- Mobile/tablet TOC -->
+      <details class="toc-inline">
+        <summary>On this page</summary>
+        <ul>
+          <li><a href="#conducted-emissions">Conducted Emissions</a></li>
+        <li><a href="#susceptibility-or-immunity">Susceptibility or Immunity</a></li>
+        <li><a href="#testing">Testing</a></li>
+        <li><a href="#the-lisn">The LISN</a></li>
+        <li><a href="#power-supplies-and-conducted-emissions">Power supplies and Conducted Emissions</a></li>
+        <li><a href="#common-mode-noise-sources">Common mode noise sources</a></li>
+        <li><a href="#differential-mode-currents">Differential Mode currents</a></li>
+        <li><a href="#rectifying-diodes">Rectifying diodes</a></li>
+        <li><a href="#filters-for-power-supply">Filters for Power Supply</a></li>
+        </ul>
+      </details>
+
+      <div class="post-body">
+        <img src="https://raw.githubusercontent.com/dariofresu/Fresu-Electronics-Blog/main/assets/images/conducted-emissions_img01.jpg" alt="" class="post-img" loading="lazy" width="1920" height="1080">
+<p class="img-caption">Optimizing PCB Design to Minimize Conducted EMI Emissions</p>
+
+<div class="callout">
+  <span class="callout-label">Resource</span>
+  <p><a href="https://www.fresuelectronics.com/product-page/emi-quick-fixes-guide" style="color:var(--accent)">EMI Quick Fixes Guide</a></p>
+</div>
+
+<h2 id="conducted-emissions">Conducted Emissions</h2>
+
+<p>In this lesson, we’ll dive into the world of conducted emissions, what causes them, how they affect your circuits, and, most importantly, proven strategies to mitigate these issues right from the Printed Circuit Board Design.</p>
+
+<p>Conducted emissions are simply radiated emissions in disguise.</p>
+<p>The simple reason for dividing them into conducted and radiated emissions is that it makes testing easier.</p>
+
+<p>The problem with measuring emissions below 30MHz using the same testing methodology as radiated emissions is that the wavelengths of the signals can be in the near-field region, leading to results that do not match reality.</p>
+
+<img src="https://raw.githubusercontent.com/dariofresu/Fresu-Electronics-Blog/main/assets/images/conducted-emissions_img02.png" alt="Example of a failed conducted emissions test." class="post-img" loading="lazy" width="1920" height="1080">
+<p class="img-caption">Figure 1 - Example of a failed conducted emissions test.</p>
+
+<p>If we measure emissions above 30MHz using the same testing methodology as the conducted emissions test, we encounter a different issue: the cable can start to resonate at these frequencies, which will also yield incorrect results.</p>
+<p>The main objective of the conductive emissions tests, is to ensure that the emission levels are under certain thresholds. This is because if disturbances find a way to escape from the system, they may potentially spread around and upset other systems.</p>
+
+<p>One common way for this to occur, if left uncontrolled, is when disturbances are conducted out of the systems through the power cords.</p>
+
+<p>What can happen in this scenario is that the conducted disturbance, through the power cord, may reach the power distribution system. This is quite important because the structure of the power distribution system is built in a way that resembles a large antenna structure, which can potentially radiate and upset many other systems that can be susceptible to that.</p>
+
+<p>To aggravate the issue, since the power distribution network is built with long cables, this gives the possibility for large wavelengths to find a radiative structure and potentially radiate.</p>
+
+<img src="https://raw.githubusercontent.com/dariofresu/Fresu-Electronics-Blog/main/assets/images/conducted-emissions_img03.png" alt="Example of conducted emissions radiating path." class="post-img" loading="lazy" width="1920" height="1080">
+<p class="img-caption">Figure 2 - Example of conducted emissions radiating path.</p>
+
+<p>This is why regulatory bodies, like the FCC and the CISPR, impose limits on these emissions, so that we create an environment with fewer emission pollutants, where systems can instead work in harmony with each other.</p>
+
+<h2 id="susceptibility-or-immunity">Susceptibility or Immunity</h2>
+
+<p>In the same way, we want to prevent not only that our system has limited emission levels, but also that its susceptibility, or immunity to these emissions, is controlled, providing robustness for our system.</p>
+
+<p>One of the most common ways susceptibility or immunity issues arise is through disturbances reaching our system, such as lightning strikes on the power transmission lines providing power to the installation.</p>
+
+<img src="https://raw.githubusercontent.com/dariofresu/Fresu-Electronics-Blog/main/assets/images/conducted-emissions_img04.png" alt="Example of Immunity issues through the power outlet." class="post-img" loading="lazy" width="1920" height="1080">
+<p class="img-caption">Figure 3 - Example of Immunity issues through the power outlet.</p>
+
+<p>Some of these disturbances may also cause the loss of power for long periods or short temporary outages. In the former case, the systems are not expected to maintain operation.</p>
+
+<p>However, in the latter case, for example when the circuit breaker is attempting to reestablish power, the product is expected to maintain normal operation without loss of data or function.</p>
+
+<h2 id="testing">Testing</h2>
+
+<p>In order to test the systems, and verify that their level of emissions is within a certain safe range, regulatory agencies such as the <strong>FCC</strong> and <strong>CISPR</strong> have established limits with which systems must comply.</p>
+
+<p>A typical range of frequencies to which the systems are tested against in conducted emission tests is from <strong>150 kHz to 30 MHz</strong>. However, this limit may vary depending on the specific standards that the system has to comply with.</p>
+
+<p>Within this range of frequencies, the FCC and CISPR have specific requirements to be met for different ranges of frequencies.</p>
+
+<p>Conducted emissions are classified into different categories based on their frequency range and the standards they comply with. The most common classes for conducted emissions are: Class A, and Class B.</p>
+
+<p><strong>Class A: </strong></p>
+<p>This class typically applies to industrial environments where there are fewer restrictions on emissions. Devices in this class have emissions limits set at higher levels compared to Class B.</p>
+
+<p><strong>Class B:</strong></p>
+<p>Devices in this class need to meet stricter emissions limits. This is important for devices used in residential or commercial settings where there is a need to minimize interference.</p>
+
+<p>These classes, help ensure that electronic devices meet specific emission standards, depending on their intended use, and the environment in which they will be operating.</p>
+
+<p><strong>For <em>Class A</em> digital devices: </strong>The quasy peak limit is of 79 dBuV, from 150 kHz to 500 kHz. And then from 500 kHz to 30 MHz, the quasy peak limit is of 73 dBuV.</p>
+
+<img src="https://raw.githubusercontent.com/dariofresu/Fresu-Electronics-Blog/main/assets/images/conducted-emissions_img05.png" alt="Example of Class A FCC Conducted Emissions Limits." class="post-img" loading="lazy" width="1920" height="1080">
+<p class="img-caption">Figure 4 - Example of Class A FCC Conducted Emissions Limits.</p>
+
+<p>For the average limit, the light blue line, the limits are set to 66 dBuV and is from 150 kHz to 500 kHz. And then from 500 kHz to 30 MHz, the average peak limit is of 60dBuV.</p>
+
+<p><strong>For <em>Class-B</em> digital devices</strong>: The quasy peak limit goes from 66 dBuV to 56, from 150 kHz to 500 kHz. And then from 500 kHz to 5 MHz, the quasy peak limit is of 56 dBuV. To then again increase to 60 dBuV from 5 MHz to 30 MHz.</p>
+
+<img src="https://raw.githubusercontent.com/dariofresu/Fresu-Electronics-Blog/main/assets/images/conducted-emissions_img06.png" alt="Example of Class B FCC Conducted Emissions Limits." class="post-img" loading="lazy" width="1920" height="1080">
+<p class="img-caption">Figure 5 - Example of Class B FCC Conducted Emissions Limits.</p>
+
+<p>For the average limit, the light blue line, the limit goes from 56 dBuV to 46, from 150 kHz to 500 kHz. And then from 500 kHz to 5 MHz, the quasy peak limit is of 46 dBuV. To then again increase to 50 dBuV from 5 MHz to 30 MHz.</p>
+
+<p>A common approach when doing pre-compliance testing, before going to the certifying EMC lab, is to keep the system's emissions at least 6 dB below the required limits.</p>
+
+<p>This will help to account for the differences between different laboratories, and instruments due to the measurement uncertainty. I personally recommend staying even <strong>below the 10 dB margin.</strong></p>
+
+<hr style="border:none;border-top:1px solid var(--border);margin:40px 0">
+
+<p><em>💡 By the way, If you would like to master EMC/EMI design, we have a new training program here:</em></p>
+
+<p style="text-align:center"><a href="https://www.fresuelectronics.com/mentoring" target="_blank" class="btn-primary">Get Personalized Training</a></p>
+
+<p><em>There, you’ll find details on how to apply for one of our exclusive programs designed to help you achieve that goal. </em></p>
+
+<hr style="border:none;border-top:1px solid var(--border);margin:40px 0">
+
+<h2 id="the-lisn">The LISN</h2>
+
+<p>In order to conduct the test for conducted emission, the <strong><em>Line Impedance Stabilization Network</em></strong>, or also called LISN, should be used.</p>
+
+<p>The LISN is sometimes also called <em>Artificial Main Network</em>, or AMN.</p>
+
+<p>The LISN is used to make the measurements comparable between labs and measurement sites, thereby stabilizing the impedance seen by the product’s outlet into the power distribution network.</p>
+
+<p>The LISN has <strong>three important functions</strong> when conducting the measurement:</p>
+
+<ol>
+  <li>The first function is to provide a constant impedance to the power outlet power cord, maintaining it over the frequency range of the conducted emissions test.</li>
+  <li>The second function is to filter out the noise that is not part of the noise generated by the product, allowing only the conducted emissions of the product to be measured.</li>
+  <li>Additionally, the LISN should be able to transfer the required power at 50 or 60 Hz so that the product can operate.</li>
+</ol>
+
+<p>In Figure 6, we can see that the LISN is connected between the power distribution network and the Device Under Test (DUT).</p>
+
+<img src="https://raw.githubusercontent.com/dariofresu/Fresu-Electronics-Blog/main/assets/images/conducted-emissions_img07.png" alt="Example of LISN Connection for AC systems." class="post-img" loading="lazy" width="1920" height="1080">
+<p class="img-caption">Figure 6 - Example of LISN Connection for AC systems.</p>
+
+<p>The job of the spectrum analyzer connected to the LISN is to measure and report the levels of conducted emissions.</p>
+
+<p>To further explain the testing setup and understand what we are truly measuring during the conducted emissions test, we need to take a closer look inside the LISN circuit.</p>
+
+<img src="https://raw.githubusercontent.com/dariofresu/Fresu-Electronics-Blog/main/assets/images/conducted-emissions_img08.png" alt="Simplified LISN circuit." class="post-img" loading="lazy" width="1920" height="1080">
+<p class="img-caption">Figure 7 - Simplified LISN circuit.</p>
+
+<p>The value of the components will vary depending on the type of test we are performing, ensuring that the 50 Ω characteristic impedance is matched throughout the entire frequency range.</p>
+
+<p>Let’s explain the role of each component in this slide:</p>
+
+<p>The 50 uH inductor is used to block external noise from the Power Distribution System.</p>
+
+<p>The 1 uF capacitors divert external noise from the commercial power side of the LISN, preventing contamination of the measurement signal.</p>
+
+<p>The 0.1 uF capacitors, prevents DC overload at the input of the spectrum analyzer.</p>
+
+<p>The 1 kΩ resistors serve as a static charge path to discharge the 0.1 uF capacitor if the 50 Ω resistors are removed.</p>
+
+<p>One 50 Ω resistor is for the input impedance of the spectrum analyzer, while the other 50 Ω resistors serve as dummy load, ensuring that the impedance between the phase and the safety wire, and between the neutral and the safety wire, remains at 50 Ω at all times.</p>
+
+<p>The green colored arrows that you see are the currents <strong>IP</strong> going from the DUT to the phase wire, and the current <strong>IN</strong> going from the DUT to through the neutral wire.</p>
+
+<p>For the range of frequencies of the test, the LISN circuit will result in the simplified circuit that you see in Figure 8. The inductor becomes an open circuit at the frequencies of the test, while the capacitors become short circuits over the frequency range of the measurement.</p>
+
+<img src="https://raw.githubusercontent.com/dariofresu/Fresu-Electronics-Blog/main/assets/images/conducted-emissions_img09.png" alt="LISN ideal circuit at high frequencies." class="post-img" loading="lazy" width="1920" height="1080">
+<p class="img-caption">Figure 8 - LISN ideal circuit at high frequencies.</p>
+
+<p>The voltages measured during the test are<strong> Vp^</strong> and <strong>Vn^</strong>, measured between the phase wire and the safety wire, and between the neutral wire and the safety wire. These two voltages are measured throughout the entire frequency range of the test, and they must always remain below the specified limits set by the test.</p>
+
+<p>This also explains why conducted emissions are specified in terms of voltage, even though <strong>what we are actually measuring is the conducted emission current</strong>.</p>
+
+<p>By using the LISN circuit, we can measure the noise current related to the product through both the phase and the neutral.</p>
+
+<p><strong>The PCB designer's task in this case is to design the electronic product so that no current flows through the 50 Ω resistors of the LISN.</strong></p>
+
+<p>This also implies that if there is current flowing through the 50 Ω resistors of the LISN, and if this current in the frequency range of the measurement exceeds the specified limits of the test, it will result in a failure of the conducted emission test.</p>
+
+<p>This further emphasizes the importance of carefully designing the PCB layout and the overall system to avoid any signals coupling to the power cords and being detected as current flowing through the LISN resistor.</p>
+
+<p>Now, we will separate the <strong>IP</strong> and <strong>IN</strong> currents into their differential mode and common mode components. These will be important in understanding the influence of each mode.</p>
+
+<img src="https://raw.githubusercontent.com/dariofresu/Fresu-Electronics-Blog/main/assets/images/conducted-emissions_img10.png" alt="LISN ideal circuit at high frequencies, common and differential-mode component." class="post-img" loading="lazy" width="1920" height="1080">
+<p class="img-caption">Figure 9 - LISN ideal circuit at high frequencies, common and differential-mode component.</p>
+
+<p>We can define the current <strong>IP</strong> as the sum of the common mode current component <strong>IC</strong>, and the differential mode current component <strong>ID</strong>.</p>
+
+<p>The same we can do for the current <strong>IN</strong>, and define it as the subtraction of the differential mode current components, from the common mode current component.</p>
+
+<p>If we play around with substitution, and we solve for <strong>IC</strong> and <strong>ID</strong>, we can find how the common mode current and the differential mode current are influenced by the phase current <strong>IP</strong> and the neutral current <strong>IN</strong>.</p>
+
+<img src="https://raw.githubusercontent.com/dariofresu/Fresu-Electronics-Blog/main/assets/images/conducted-emissions_img11.png" alt="Vp^ and Vn^ derivation from Ip and In currents." class="post-img" loading="lazy" width="1920" height="1080">
+<p class="img-caption">Figure 10 - Vp^ and Vn^ derivation from Ip and In currents.</p>
+
+<p>Now we can re-write the voltage <strong>Vp^</strong> and <strong>Vn^</strong> in terms of the phase, and the neutral current, remembering the relationship they have with the differential and the common mode currents.</p>
+
+<p>This mean that by measuring the voltages across the 50 Ω resistors with the spectrum analyzer, we can find the differential and the common mode currents as follows.</p>
+
+<img src="https://raw.githubusercontent.com/dariofresu/Fresu-Electronics-Blog/main/assets/images/conducted-emissions_img12.png" alt="LISN Differential and Common mode measurements." class="post-img" loading="lazy" width="1920" height="1080">
+<p class="img-caption">Figure 11 - LISN Differential and Common mode measurements.</p>
+
+<p>One important aspect here is that the differential mode currents we observe are not the functional 50 or 60 Hz power line currents required for the normal operation of the device.</p>
+
+<p>Additionally, the common mode currents returning through the green wire are unwanted and are not typically intended as part of the design.</p>
+
+<p>This cannot be overstated: <strong>the green safety wire is intended as a safety measure when a fault occurs, not meant to carry currents during normal operation.</strong></p>
+
+<p>Therefore, when the green wire carries currents, as in this case with high-frequencies, carrying common-mode currents, it can result in the failure of regulatory standards.</p>
+
+<h2 id="power-supplies-and-conducted-emissions">Power supplies and Conducted Emissions</h2>
+
+<p>Now that we have seen how the test is conducted, and what we are measuring, we can further investigate the problem itself.</p>
+
+<p>Since we are discussing conducted emissions into the power cords, we need to look into the block, or circuit, connected to the power cord: <strong>the power supply.</strong></p>
+
+<p>The power supplies that we are going to examine are the Switching Mode Power Supplies also called <strong>SMPS</strong>. Today's power supplies have reached very efficient efficiency levels above 85% and are widely used in our electronic products. However, the high efficiency of these power supplies unfortunately comes at a high cost in terms of Electromagnetic Compatibility.</p>
+
+<p>The reason behind this is that for these power supplies to be so efficient, the switching transition time has to be as fast as possible. This means that a large amount of energy has to be condensed and transformed in a very short amount of time.</p>
+
+<p>For us designers, this translates into very sharp transitioning times, which, thanks to the Fourier Transform, we know contain a high-energy harmonic content. <strong><em>The sharper the signal, the more high energy harmonic content there is. The more high-energy harmonic content, the more energy there is.</em></strong></p>
+
+<p>The problem with this high-energy harmonic content is that the energy contained in these harmonics needs to be contained and controlled in order to avoid emissions and to channel the energy where it's actually needed.</p>
+
+<p>After all, what we are measuring with the EMC test is exactly how this energy moves, and how high or above the imposed limits, this energy is.</p>
+
+<p>To better understand what happens during the conversion of energy, and also to understand the difficulties related to this process, we are going to analyze a general Fly-Back converter.</p>
+
+<img src="https://raw.githubusercontent.com/dariofresu/Fresu-Electronics-Blog/main/assets/images/conducted-emissions_img13.png" alt="Simplified SMPS circuit and its parasitic elements." class="post-img" loading="lazy" width="1920" height="1080">
+<p class="img-caption">Figure 12 - Simplified SMPS circuit and its parasitic elements.</p>
+
+<p>The circuit in Figure 12 is simplified so that we can visualize the elements that are more important to us.</p>
+
+<p>At the first stage of the converter, we have the full bridge rectifier, whose job is to rectify or “straighten” the AC voltage at its input.</p>
+
+<img src="https://raw.githubusercontent.com/dariofresu/Fresu-Electronics-Blog/main/assets/images/conducted-emissions_img14.png" alt="First stage rectification process in a SMPS." class="post-img" loading="lazy" width="1920" height="1080">
+<p class="img-caption">Figure 13 - First stage rectification process in a SMPS.</p>
+
+<p>The rectifier then feeds the converted waveform to a filtering capacitor, whose job is to further filter these rectified waveforms and stabilize them at a voltage close to the peak voltage of the waveform.</p>
+
+<img src="https://raw.githubusercontent.com/dariofresu/Fresu-Electronics-Blog/main/assets/images/conducted-emissions_img15.png" alt="Influence of the input capacitor in a SMPS." class="post-img" loading="lazy" width="1920" height="1080">
+<p class="img-caption">Figure 14 - Influence of the input capacitor in a SMPS.</p>
+
+<p>At this point is where we have a PWM controller whose job is to monitor the output of the input capacitor and to feed a PWM signal to the main switching transistor. The transistor's job is to chunk the energy into square waves that are fed to the transformer.</p>
+
+<img src="https://raw.githubusercontent.com/dariofresu/Fresu-Electronics-Blog/main/assets/images/conducted-emissions_img16.png" alt="Example of the Influence of the transistor in a SMPS." class="post-img" loading="lazy" width="1920" height="1080">
+<p class="img-caption">Figure 15 - Example of the Influence of the transistor in a SMPS.</p>
+
+<p>The transformer's job, on the other hand, is to isolate the primary side of the converter from the high voltage, but also to further step down its voltage to its desired output in the secondary side of the transformer. Then, in the secondary side of the transformer, this voltage is further rectified and filtered with an LC filter, producing a DC output.</p>
+
+<img src="https://raw.githubusercontent.com/dariofresu/Fresu-Electronics-Blog/main/assets/images/conducted-emissions_img17.png" alt="Second rectification process and DC output example in a SMPS." class="post-img" loading="lazy" width="1920" height="1080">
+<p class="img-caption">Figure 16 - Second rectification process and DC output example in a SMPS.</p>
+
+<p>As mentioned before, the switching transistor, in order to optimize the power efficiency and reduce the losses, will try to spend as little time as possible in the linear region, and it will produce a trapezoidal wave output.</p>
+
+<p>In order to produce a trapezoidal wave output, its transitioning time has to be as short as possible, so that its rise and fall time is usually in the order of nanoseconds.</p>
+
+<p>As we know from the Fourier transform, in order to generate square wave signals, we need to have an unlimited series of harmonic sinusoidal signals whose frequencies are multiples of the main switching frequency.</p>
+
+<p><strong><em>This is where the high-energy harmonic content is.</em></strong></p>
+
+<img src="https://raw.githubusercontent.com/dariofresu/Fresu-Electronics-Blog/main/assets/images/conducted-emissions_img18.png" alt="Example of harmonic content in a digital signal." class="post-img" loading="lazy" width="1920" height="1080">
+<p class="img-caption">Figure 17 - Example of harmonic content in a digital signal.</p>
+
+<p>The SMPS will then have multiple sources of noise, which are categorized as normal operational noise or differential mode noise, and common mode noise which comes from the parasitics within the circuit.</p>
+
+<h2 id="common-mode-noise-sources">Common mode noise sources</h2>
+
+<p>Let’s see what the major contributors of common mode noise sources are in an SMPS power supply.</p>
+
+<p>1. The first is the transistor to heat sink capacitance, where the heat sink is usually connected to the safety green wire.</p>
+
+<p>2. Then the second is the interwinding transformer capacitance between the primary and the secondary side of the transformer.</p>
+
+<p>3. Stray capacitance to ground from the wiring and/or from the PCB traces to ground.</p>
+
+<p>These three points (See Figure 12) since are sources of common mode currents, will present challenging EMI issues. The question for us designers is:</p>
+
+<p><strong>How can we fix solve these issue at the design stage?</strong></p>
+
+<p>As discussed in other articles and lessons, there are 3 possibilities to solve EMC issues,</p>
+<p>and this possibilities are related to either the source, the path, and or the victim of EMI.</p>
+
+<ol>
+  <li>We can reduce the <strong>source</strong> of emissions, for example taking actions on the switching transistor, and either change its switching frequency or slowing its switching times. Unfortunately, these can result in lower performance and increased losses, as we directly impact the switching wave. And by changing the frequency, it will only shift the level of emissions to other frequencies, which may not solve the issue.</li>
+  <li>The other option, is to disrupt the <strong>path</strong> where the emission propagates. This will mean finding a way to interrupt the common mode current loop and eliminate the parasitic capacitance.</li>
+  <li>The final option is to increase the<strong> immunity</strong> of other devices, to the emissions created by our device, which is not a real option, since we cannot obviously control all the other devices that are going to be around the power supply.</li>
+</ol>
+
+<p>Let's see what are the different possibilities to fix the issues mentioned, by using these methods.</p>
+
+<p>To solve the <strong>first issue</strong> of the stray capacitance between the heat sink and the transistor, we have few options.</p>
+
+<ul>
+  <li>Adding a Faraday shield between the transistor and the heat sink.<br>To do that, we would have to use special thermal pads that integrate the shield, and then connect them to the transistor. Several vendors offer this solution.</li>
+  <li>As a second possibility we can increase the thickness of the washer, and use a thicker ceramic washer which will then reduce the capacitance.</li>
+  <li>And the third option is to leave the heat sink floating, but in this case, we have to ensure that the user has no access to the heat sink and cannot touch it; otherwise, this can create a shock hazard situation for the user.</li>
+</ul>
+
+<img src="https://raw.githubusercontent.com/dariofresu/Fresu-Electronics-Blog/main/assets/images/conducted-emissions_img19.png" alt="Common-mode noise due to heat sink's stray capacitance in a SMPS." class="post-img" loading="lazy" width="1920" height="1080">
+<p class="img-caption">Figure 18 - Common-mode noise due to heat sink's stray capacitance in a SMPS.</p>
+
+<p>The <strong>second issue</strong> can be fixed by either increasing the distance between the two coils of the transformer or by using one with a Faraday cage. However, this may result in increased size and sometimes costs.</p>
+
+<p>The <strong>third issue</strong> can be resolved by <strong>proper layout of the PCB board</strong> and with proper system wiring, so that the stray capacitance is reduced. The proper PCB layout techniques are already covered in many of my other lessons and courses.</p>
+
+<p><strong>The main takeaway is to think in terms of parasitic paths that can emerge from the systems design and connections. </strong></p>
+
+<p>Especially thinking in terms of how these parasitic paths will influence the tests at the specified frequency range of the test, and can result in effective current loops for the common mode currents.</p>
+
+<h2 id="differential-mode-currents">Differential Mode currents</h2>
+
+<p>Now, let’s address how to solve the issues related to the differential mode currents.</p>
+<p>The primary source of problems when dealing with differential mode currents is usually attributed to the non-ideal characteristics of the input capacitor, which is meant to filter the output of the rectifier.</p>
+
+<p>Ideally, the capacitor at higher frequencies acts as a short circuit. <strong>Unfortunately, this is only true for ideal components. </strong></p>
+
+<img src="https://raw.githubusercontent.com/dariofresu/Fresu-Electronics-Blog/main/assets/images/conducted-emissions_img20.png" alt="Parasitic elements in the input capacitor in a SMPS." class="post-img" loading="lazy" width="1920" height="1080">
+<p class="img-caption">Figure 19 - Parasitic elements in the input capacitor in a SMPS.</p>
+
+<p>The issue with real components, such as the capacitor, is that in real-world applications, it will not only exhibit the capacitive behavior we desire but also will have an equivalent series inductance called ESL and an equivalent series resistance called ESR.</p>
+
+<p>The problem with having these two parasitic impedances, is that they will create other preferred paths for certain harmonic frequencies contained in the switching currents.</p>
+
+<p>This means that these currents will not flow through the capacitor, thus generating additional differential mode current loops.</p>
+
+<img src="https://raw.githubusercontent.com/dariofresu/Fresu-Electronics-Blog/main/assets/images/conducted-emissions_img21.png" alt="Differential-mode currents due to non-ideal characterists of the input capacitor in a SMPS." class="post-img" loading="lazy" width="1920" height="1080">
+<p class="img-caption">Figure 20 - Differential-mode currents due to non-ideal characterists of the input capacitor in a SMPS.</p>
+
+<p>The larger the value of the capacitor, the larger these parasitics usually become. Unfortunately, we don’t have many other ways to tackle this issue than to reduce the parasitic effects of the capacitor.</p>
+
+<p>In particular, we want to be careful in selecting a capacitor with small ESL and ESR so that the differential mode current is as small as possible. We want to provide the switching current in the path of least impedance through the capacitor and throughout the whole frequency span of the test.</p>
+
+<p><strong>This means that the key to reducing differential mode currents, and hence passing conducted emissions tests, is to focus on the impedance of the capacitor, taking into account also the parasitic effects.</strong></p>
+
+<h2 id="rectifying-diodes">Rectifying diodes</h2>
+
+<p>The next issue we need to cover is related to the source of noise caused by the rectifiers used during the rectification process.</p>
+
+<p>Different types of diodes can be used for the rectification process, however, the ones subject to more EMI issues are the fast-recovery diodes.</p>
+
+<img src="https://raw.githubusercontent.com/dariofresu/Fresu-Electronics-Blog/main/assets/images/conducted-emissions_img22.png" alt="Effects of the second stage rectification process in a SMPS with Fast Switching Diodes." class="post-img" loading="lazy" width="1920" height="1080">
+<p class="img-caption">Figure 21 - Effects of the second stage rectification process in a SMPS with Fast Switching Diodes.</p>
+
+<p>Fast recovery diodes are preferred by designers as they improve the efficiency of the power supply, but typically these choices result in more issues in the EMI realm.</p>
+
+<p>As usual, these will impose trade-offs between power losses and EMI performance.</p>
+
+<p>The problem is caused during the reverse recovery time of the diode, when the charge accumulated in the diode junction, during the forward bias of the diode, hence during conduction, is suddenly removed, producing a sharp negative spike of current.</p>
+
+<p>The steeper the spike, the more energy needs to be moved fast, and the more high-energy harmonic content is present in the signal generating this type of pulses.</p>
+
+<img src="https://raw.githubusercontent.com/dariofresu/Fresu-Electronics-Blog/main/assets/images/conducted-emissions_img23.png" alt="Effects of the accumulated charge in the diode junction." class="post-img" loading="lazy" width="1920" height="1080">
+<p class="img-caption">Figure 22 - Effects of the accumulated charge in the diode junction.</p>
+
+<p>Typically, this issue is more common on the secondary side of the SMPS, because this part of the power supply usually deals with higher currents than the primary side, where the voltage is usually higher.</p>
+
+<p>But this does not mean that the rectifiers in the primary side of the power supply should be left without consideration, and should be taken for granted. Of course, we would have to take them into account as well.</p>
+
+<p>These differential currents, produced during this reverse transitioning time, can then find ways to couple back to the primary side of the transformer and ultimately to the power distribution network.</p>
+
+<p>It’s important to note that this effect is also common in switching transistors, and in particular for us, this effect needs to be taken into consideration for the switching transistor of the power supply.</p>
+
+<p>One of the possible, and very effective solutions, for these fast-switching differential mode currents is to implement an RC filter across the rectifiers.</p>
+
+<img src="https://raw.githubusercontent.com/dariofresu/Fresu-Electronics-Blog/main/assets/images/conducted-emissions_img24.png" alt="Use of an RC filter across the diodes to dissipate the noisy harmonic content." class="post-img" loading="lazy" width="1920" height="1080">
+<p class="img-caption">Figure 23 - Use of an RC filter across the diodes to dissipate the noisy harmonic content.</p>
+
+<p>This allows filtering out the noisy differential mode currents.</p>
+
+<p>The side effects of these techniques are that the energy will now be dissipated through the RC filter, thus increase the power losses, and the voltages and currents across the used devices can increase.</p>
+
+<p>One thing worth mentioning is that the principles we have discussed so far in this article can also be applied to DC/DC converters.</p>
+
+<h2 id="filters-for-power-supply">Filters for Power Supply</h2>
+
+<p>Finally let's see how to apply the filters for both the common mode and the differential mode in SMPS.</p>
+
+<p>The filter we see in Figure 24 is a typical EMI filter, used to suppress both common mode currents, and differential mode currents.</p>
+
+<img src="https://raw.githubusercontent.com/dariofresu/Fresu-Electronics-Blog/main/assets/images/conducted-emissions_img25.png" alt="Typical EMI filter in a SMPS (values may differ)." class="post-img" loading="lazy" width="1920" height="1080">
+<p class="img-caption">Figure 24 - Typical EMI filter in a SMPS (values may differ).</p>
+
+<p>The Y capacitors, together with the common-mode choke, form the common-mode suppression section, while the X capacitor is used to suppress the differential mode side.</p>
+
+<p><strong><em>The values and characteristics of the capacitors used in the filter are regulated by safety agencies.</em></strong></p>
+
+<p>For example, for line-to-earth connection, a special capacitor called a Y capacitor is used, which is listed and approved by safety agencies such as <strong><em>Underwriting Laboratories</em></strong> (UL), and its value is limited to limit the leakage currents, since leakage currents are considered a shock hazard and are regulated.</p>
+
+<p><strong>The Y capacitor is also special because in case of failure it does not create a short circuit but will fail open.</strong> This is important because in this way the phase, which is connected to one side of the capacitor, is not going to be connected to the earth system, which is typically connected to the chassis and therefore can put the user in a hazardous situation.</p>
+
+<p>Similar safety regulation requirements apply to X capacitors, which are intended for line-to-line operation.</p>
+
+<p>For building this filters the first thing that needs to be chosen is the common mode capacitance. This is selected as the sum of the two capacitors which are placed in parallel from the common-mode current point of view.</p>
+
+<p>The total capacitance is derived from the safety current leakage requirement of the safety agency. Once the current leakage is determined, then the total capacitance, based on that limitation, is typically divided in two between the two capacitors.</p>
+
+<p>The filter needs to have the X capacitor side facing the high impedance connection with the LISN, while the two common mode capacitors should face the power supply side, as shown in the Figure 24.</p>
+
+<p>The two Y capacitors need to be connected to the metallic filter enclosure, to optimize their effectiveness and reduce the stray inductance of the connection.</p>
+
+<p>For the filter to be effective, it should be placed as close as possible to the enclosure, where the power cord enter as an input.</p>
+
+<img src="https://raw.githubusercontent.com/dariofresu/Fresu-Electronics-Blog/main/assets/images/conducted-emissions_img26.png" alt="Recommended filter placement in a product." class="post-img" loading="lazy" width="1920" height="1080">
+<p class="img-caption">Figure 25 - Recommended filter placement in a product.</p>
+
+<p>This is essential because if noise couples into the circuit after the filter stage, the filter becomes ineffective in suppressing or reducing that noise.</p>
+
+<p>Filters are designed to block or attenuate unwanted frequencies up to the point where they are placed in the signal path, any noise that enters the system beyond the filter bypasses its intended function.</p>
+
+<p>I hope you find this article informative and that it will help you solve more conducted emissions issues in the future.</p>
+
+<hr style="border:none;border-top:1px solid var(--border);margin:40px 0">
+
+<p><em>💡 By the way, If you would like to master EMC/EMI design, we have a new training program here:</em></p>
+
+<p style="text-align:center"><a href="https://www.fresuelectronics.com/mentoring" target="_blank" class="btn-primary">Get Personalized Training</a></p>
+
+<p><em>There, you’ll find details on how to apply for one of our exclusive programs designed to help you achieve that goal. </em></p>
+
+<hr style="border:none;border-top:1px solid var(--border);margin:40px 0">
+
+<p><em>Further readings and references:</em></p>
+
+<p><a href="http://fresuelectronics.com/books" style="color:var(--accent)"><strong>fresuelectronics.com/books</strong></a></p>
+      </div>
+
+      <div class="tags">
+        <span class="tag">Conducted Emissions</span><span class="tag">EMC Testing</span><span class="tag">LISN</span><span class="tag">SMPS</span><span class="tag">EMI Filters</span>
+      </div>
+    </article>
+
+    <!-- Share -->
+    <div class="share-strip">
+      <span class="share-label">Share</span>
+      <a href="https://www.linkedin.com/shareArticle?mini=true&url=https%3A%2F%2Fblog.fresuelectronics.com%2Fconducted-emissions&title=Conducted%20Emissions"
+         target="_blank" class="share-btn linkedin">LinkedIn</a>
+      <a href="https://twitter.com/intent/tweet?url=https%3A%2F%2Fblog.fresuelectronics.com%2Fconducted-emissions&text=Conducted%20Emissions&via=dario_fresu"
+         target="_blank" class="share-btn twitter">X / Twitter</a>
+      <button class="share-btn copylink"
+              onclick="copyLink(this,'https://blog.fresuelectronics.com/conducted-emissions')">Copy Link</button>
+    </div>
+
+    <!-- CTA -->
+    <div class="cta-section">
+      <div class="cta-inner">
+        <span class="cta-kicker">Work with Fresu Electronics</span>
+        <h3>Stop finding EMC problems in the chamber.</h3>
+        <p>An EMC Design Audit reviews your schematic and PCB layout before fabrication — identifying return path gaps, filter placement errors, and stackup decisions that turn into failures at the test house. Report delivered in 10 business days.</p>
+        <div class="cta-actions">
+          <a href="https://www.fresuelectronics.com/emc-audit" class="btn-primary">Book an EMC Audit — €8,000 →</a>
+          <a href="https://www.fresuelectronics.com/trainings" class="btn-outline">Browse Courses</a>
+        </div>
+      </div>
+      <div class="proof-row">
+        <span class="proof-item">80,000+ engineers reached</span>
+        <span class="proof-item">4,000+ engineers trained</span>
+        <span class="proof-item">Report in 10 business days</span>
+        <span class="proof-item">IPC Certified · Former ETH Zurich</span>
+      </div>
+    </div>
+
+  </div><!-- /.container -->
+</div><!-- /.post-layout -->
+
+<!-- Lightbox -->
+<div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Image viewer">
+  <button class="lightbox-close" aria-label="Close" onclick="lbClose()">✕</button>
+  <img id="lightboxImg" src="" alt="">
+</div>
+
+<!-- Footer -->
+<footer>
+  <div class="site-footer">
+    <span>© 2026 Fresu Electronics SRL — Sardinia, Italy</span>
+    <span>
+      <a href="https://www.fresuelectronics.com/terms-of-services">Terms</a> ·
+      <a href="https://www.freeprivacypolicy.com/live/2e894867-7c2b-4014-aa0c-db0f62e59cb8">Privacy</a> ·
+      <a href="https://blog.fresuelectronics.com">Blog</a>
+    </span>
+  </div>
+</footer>
+
+<script>
+function copyLink(btn, url) {
+  navigator.clipboard.writeText(url).then(function() {
+    var o = btn.innerHTML;
+    btn.innerHTML = '✓ Copied!';
+    setTimeout(function() { btn.innerHTML = o; }, 2000);
+  });
+}
+
+/* Reading progress */
+(function() {
+  var bar = document.getElementById('progressBar');
+  function update() {
+    var h = document.documentElement;
+    var max = h.scrollHeight - h.clientHeight;
+    bar.style.width = (max > 0 ? (h.scrollTop / max) * 100 : 0) + '%';
+  }
+  document.addEventListener('scroll', update, { passive: true });
+  update();
+})();
+
+/* TOC scrollspy */
+(function() {
+  var links = document.querySelectorAll('.toc-rail a');
+  if (!links.length || !('IntersectionObserver' in window)) return;
+  var map = {};
+  links.forEach(function(a) { map[a.getAttribute('href').slice(1)] = a; });
+  var current = null;
+  var obs = new IntersectionObserver(function(entries) {
+    entries.forEach(function(e) {
+      if (e.isIntersecting) {
+        if (current) current.classList.remove('active');
+        current = map[e.target.id];
+        if (current) current.classList.add('active');
+      }
+    });
+  }, { rootMargin: '0px 0px -75% 0px' });
+  document.querySelectorAll('.post-body h2[id]').forEach(function(h) { obs.observe(h); });
+})();
+
+/* Lightbox */
+var lb = document.getElementById('lightbox');
+var lbImg = document.getElementById('lightboxImg');
+function lbClose() { lb.classList.remove('open'); lbImg.src = ''; }
+document.querySelectorAll('.post-img, .post-img-center').forEach(function(img) {
+  img.addEventListener('click', function() {
+    lbImg.src = img.src; lbImg.alt = img.alt || '';
+    lb.classList.add('open');
+  });
+});
+lb.addEventListener('click', function(e) { if (e.target === lb || e.target === lbImg) lbClose(); });
+document.addEventListener('keydown', function(e) { if (e.key === 'Escape') lbClose(); });
+</script>
+
+</body>
+</html>

@@ -149,6 +149,11 @@ h3{font-size:14px;font-weight:700;color:var(--fg);margin-bottom:8px}
 /* ── DIVIDER ── */
 .div{height:1px;background:var(--border);margin:36px 0}
 
+/* ── POST IMAGES ── */
+.post-img { width: 100%; border-radius: 4px; display: block; margin: 36px 0 10px; border: 1px solid var(--border); }
+.post-img-center { display: block; margin: 36px auto 10px; border-radius: 4px; border: 1px solid var(--border); max-width: 100%; }
+.img-caption { text-align: center; font-size: 12px; color: var(--meta); margin-bottom: 32px; font-style: italic; line-height: 1.5; }
+
 /* ── VIZ CONTAINER ── */
 .viz{
   background:var(--surface);border:1px solid var(--border);
@@ -405,6 +410,9 @@ h3{font-size:14px;font-weight:700;color:var(--fg);margin-bottom:8px}
     <div class="viz-cap">Fig 1 — Single conductor cross-section (after Steinmetz, 1911). Magnetic field (green) forms closed concentric loops. Electric field (amber, dashed) radiates outward to infinity — uncontained.</div>
   </div>
 
+  <img src="https://raw.githubusercontent.com/dariofresu/Fresu-Electronics-Blog/main/assets/images/electromagnetic-fields-pcb_img01.png" alt="Electric Field of Conductor." class="post-img-center" style="max-width:657px;">
+  <p class="img-caption">Figure 1 - Electric Field of Conductor.</p>
+
   <div class="key-point">
     <div class="key-dot"></div>
     <p><strong>Key observation:</strong> With a single conductor, the electric field lines radiate outward to infinity. There is no containment. This is exactly what happens when a PCB trace has no adjacent Return Reference Plane — the fields spread uncontrolled into free space.</p>
@@ -513,6 +521,9 @@ h3{font-size:14px;font-weight:700;color:var(--fg);margin-bottom:8px}
     <div class="viz-cap" id="twoCaption">Fig 2a — Single conductor: both fields spread freely in all directions.</div>
   </div>
 
+  <img src="https://raw.githubusercontent.com/dariofresu/Fresu-Electronics-Blog/main/assets/images/electromagnetic-fields-pcb_img02.png" alt="Electric and magnetic fields around the conductors in a circuit." class="post-img">
+  <p class="img-caption">Figure 2 - Electric and magnetic fields around the conductors in a circuit.</p>
+
   <div class="key-point">
     <div class="key-dot"></div>
     <p><strong>The transformation:</strong> Adding the return conductor changes everything. Magnetic field lines become concentrated loops in the space between conductors. Electric field lines now originate from one conductor and <strong>terminate at the other</strong> — they no longer radiate to infinity. This is field containment.</p>
@@ -530,6 +541,12 @@ h3{font-size:14px;font-weight:700;color:var(--fg);margin-bottom:8px}
       <p>Electric field lines now originate from the signal conductor and <strong>terminate at the return conductor</strong>. This is the key — they no longer radiate outward. The return conductor provides the reference that contains the field.</p>
     </div>
   </div>
+
+  <img src="https://raw.githubusercontent.com/dariofresu/Fresu-Electronics-Blog/main/assets/images/electromagnetic-fields-pcb_img03.png" alt="Electric bodies with equal but opposite charges." class="post-img">
+  <p class="img-caption">Figure 3 - Electric bodies with equal but opposite charges.</p>
+
+  <img src="https://raw.githubusercontent.com/dariofresu/Fresu-Electronics-Blog/main/assets/images/electromagnetic-fields-pcb_img04.png" alt="Electric bodies with equal charges;" class="post-img">
+  <p class="img-caption">Figure 4 - Electric bodies with equal charge.</p>
 </div>
 
 <!-- ══ PANEL 3: PCB CROSS-SECTION ══ -->
@@ -543,6 +560,9 @@ h3{font-size:14px;font-weight:700;color:var(--fg);margin-bottom:8px}
     <div class="c-lbl">The Riverbank Analogy</div>
     <p>Think of the two conductors as <strong>riverbanks</strong> — they don't carry the water, they contain and direct it. In PCB design, the trace and reference plane are the riverbanks, and the electromagnetic fields are the river flowing in between. <strong>Your job as a designer is to engineer these riverbanks, not the current in the copper.</strong></p>
   </div>
+
+  <img src="https://raw.githubusercontent.com/dariofresu/Fresu-Electronics-Blog/main/assets/images/electromagnetic-fields-pcb_img05.jpg" alt="Electric and Magnetic Field in a PCB." class="post-img">
+  <p class="img-caption">Figure 5 - Electric and Magnetic Field in a PCB.</p>
 
   <div class="ctrl-row">
     <span class="ctrl-lbl">View:</span>
@@ -637,10 +657,16 @@ h3{font-size:14px;font-weight:700;color:var(--fg);margin-bottom:8px}
     <div class="viz-cap">Fig 3 — Left: single conductor trace — fields expand in all directions (radiating antenna). Right: trace + solid RRP — fields are concentrated in the dielectric between them. Energy travels in the dielectric, not the copper.</div>
   </div>
 
+  <img src="https://raw.githubusercontent.com/dariofresu/Fresu-Electronics-Blog/main/assets/images/electromagnetic-fields-pcb_img06.jpg" alt="Electric and Magnetic Field in a PCB, cross-section view." class="post-img">
+  <p class="img-caption">Figure 6 - Electric and Magnetic Field in a PCB, cross-section view.</p>
+
   <div class="key-point">
     <div class="key-dot"></div>
     <p><strong>The rotation insight:</strong> The PCB trace + RRP is exactly the same as the two-conductor system — just rotated 90°. The signal trace is one riverbank. The RRP is the other. The FR4 dielectric between them is where the electromagnetic energy actually propagates. The dielectric is more important than the conductors themselves.</p>
   </div>
+
+  <img src="https://raw.githubusercontent.com/dariofresu/Fresu-Electronics-Blog/main/assets/images/electromagnetic-fields-pcb_img07.jpg" alt="Electric and Magnetic Field in a PCB in compared to two wires topology." class="post-img">
+  <p class="img-caption">Figure 7 - Electric and Magnetic Field in a PCB in compared to two wires topology.</p>
 
   <div class="card-grid">
     <div class="card">
@@ -913,6 +939,9 @@ h3{font-size:14px;font-weight:700;color:var(--fg);margin-bottom:8px}
     <p>For <strong>every signal layer, there must be a Return Reference Plane adjacent to it</strong>. That plane must be solid and continuous — free of holes, cuts, gaps, or splits. Without this, the PCB is a radiating antenna, not a controlled transmission system. This single rule is responsible for more EMC pass/fail outcomes than any other design decision.</p>
   </div>
 
+  <img src="https://raw.githubusercontent.com/dariofresu/Fresu-Electronics-Blog/main/assets/images/electromagnetic-fields-pcb_img06.jpg" alt="Electric and Magnetic Field in a PCB, cross-section view." class="post-img">
+  <p class="img-caption">Figure 8 - Electric and Magnetic Field in a PCB, cross-section view.</p>
+
   <div class="card-grid">
     <div class="card">
       <div class="card-tag">With Solid RRP</div>
@@ -935,6 +964,9 @@ h3{font-size:14px;font-weight:700;color:var(--fg);margin-bottom:8px}
       <p>Adding copper pour is not the same as a proper RRP. Fragmented, disconnected patches create antenna-like structures that generate additional common-mode noise. <strong>A proper RRP must be solid and continuous.</strong></p>
     </div>
   </div>
+
+  <img src="https://raw.githubusercontent.com/dariofresu/Fresu-Electronics-Blog/main/assets/images/electromagnetic-fields-pcb_img08.png" alt="Electric and Magnetic fields in a two layers PCB." class="post-img">
+  <p class="img-caption">Figure 9 - Electric and Magnetic fields in a two layers PCB.</p>
 </div>
 
 </div><!-- /main -->
