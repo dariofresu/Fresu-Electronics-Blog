@@ -53,6 +53,9 @@
     .pull-quote{margin:44px 0;padding:32px 36px;border-left:3px solid var(--accent);background:var(--accent-dim);border-radius:0 4px 4px 0;position:relative}
     .pull-quote::before{content:'"';font-size:80px;color:var(--accent);opacity:0.2;position:absolute;top:-10px;left:24px;line-height:1;font-weight:800}
     .pull-quote p{font-size:20px;font-weight:500;font-style:italic;line-height:1.55;color:#fff;margin:0;padding-top:8px}
+    .post-img { width: 100%; border-radius: 4px; display: block; margin: 36px 0 10px; border: 1px solid var(--border); }
+    .post-img-center { display: block; margin: 36px auto 10px; border-radius: 4px; border: 1px solid var(--border); max-width: 100%; }
+    .img-caption { text-align: center; font-size: 12px; color: var(--label); margin-bottom: 32px; font-style: italic; line-height: 1.5; }
     .concept-grid{display:grid;gap:2px;margin:44px 0}
     .concept-card{background:var(--surface);border:1px solid var(--border);padding:24px 28px;border-radius:4px;position:relative;overflow:hidden;transition:border-color 0.2s}
     .concept-card:hover{border-color:var(--accent)}
@@ -151,7 +154,17 @@
 
   <h2>Step 1: The stackup — 90% of your EMC outcome</h2>
   <p>The stackup determines how electromagnetic fields are contained within the PCB. Before looking at a single trace or component, verify: does every signal layer have an adjacent, solid, continuous reference plane? Is the power plane separated from the signal return path? Are the high-speed layers paired with dedicated ground planes rather than power planes?</p>
+  <img src="https://raw.githubusercontent.com/dariofresu/Fresu-Electronics-Blog/main/assets/images/emi-design-review-pcb_img01.jpg" alt="Comparison between 2 layers PCB stackup" class="post-img">
+  <p class="img-caption">Figure 1 - Comparison between 2 layers PCB stackup</p>
+  <img src="https://raw.githubusercontent.com/dariofresu/Fresu-Electronics-Blog/main/assets/images/emi-design-review-pcb_img02.jpg" alt="Example of a Power plane used instead of a RRP." class="post-img">
+  <p class="img-caption">Figure 2  - Example of a Power plane used instead of a RRP.</p>
+  <img src="https://raw.githubusercontent.com/dariofresu/Fresu-Electronics-Blog/main/assets/images/emi-design-review-pcb_img03.jpg" alt="Example of the capacitor Impedance " class="post-img">
+  <p class="img-caption">Figure 3 - Example of the capacitor Impedance </p>
   <p>If the stackup is wrong, nothing else matters. A well-routed board on a bad stackup will still fail. Fix the stackup first.</p>
+  <img src="https://raw.githubusercontent.com/dariofresu/Fresu-Electronics-Blog/main/assets/images/emi-design-review-pcb_img04.png" alt="PCB stackup of the board." class="post-img">
+  <p class="img-caption">Figure 4 - PCB Stackup of the board.</p>
+  <img src="https://raw.githubusercontent.com/dariofresu/Fresu-Electronics-Blog/main/assets/images/emi-design-review-pcb_img05.jpg" alt="Skin depth effect in the PCB stackup." class="post-img">
+  <p class="img-caption">Figure 5 - Skin depth effect in the PCB stackup.</p>
 
   <div class="concept-grid">
     <div class="concept-card"><span class="concept-num">01 — Stackup Review</span><h3>Signal-reference plane adjacency</h3><p>Every signal layer must be directly adjacent to a reference (ground) plane — not separated by another signal layer or a power plane. Verify that no signal layer is "floating" without an adjacent reference. This is the single most impactful check in an EMI review.</p></div>
@@ -164,9 +177,49 @@
   <div class="pull-quote"><p>An EMI review is not about finding problems. It is about finding them before the chamber does — when they cost a routing change rather than a respin.</p></div>
 
   <h2>What a real board looks like under review</h2>
+  <img src="https://raw.githubusercontent.com/dariofresu/Fresu-Electronics-Blog/main/assets/images/emi-design-review-pcb_img06.jpg" alt="Layer 1" class="post-img">
+  <p class="img-caption">Figure 6 - Layer 1</p>
+  <img src="https://raw.githubusercontent.com/dariofresu/Fresu-Electronics-Blog/main/assets/images/emi-design-review-pcb_img07.jpg" alt="Layer 2" class="post-img">
+  <p class="img-caption">Figure 7 - Layer 2</p>
+  <img src="https://raw.githubusercontent.com/dariofresu/Fresu-Electronics-Blog/main/assets/images/emi-design-review-pcb_img08.jpg" alt="Layer 3" class="post-img">
+  <p class="img-caption">Figure 8 - Layer 3</p>
+  <img src="https://raw.githubusercontent.com/dariofresu/Fresu-Electronics-Blog/main/assets/images/emi-design-review-pcb_img09.jpg" alt="Layer 4" class="post-img">
+  <p class="img-caption">Figure 9 - Layer 4</p>
+  <img src="https://raw.githubusercontent.com/dariofresu/Fresu-Electronics-Blog/main/assets/images/emi-design-review-pcb_img10.jpg" alt="Layer 5" class="post-img">
+  <p class="img-caption">Figure 10 - Layer 5</p>
+  <img src="https://raw.githubusercontent.com/dariofresu/Fresu-Electronics-Blog/main/assets/images/emi-design-review-pcb_img11.jpg" alt="Layer 6" class="post-img">
+  <p class="img-caption">Figure 11 - Layer 6</p>
   <p>In practice, most designs have a predictable set of issues when reviewed against these criteria. The stackup often has a power plane adjacent to a signal layer instead of a ground plane. Decoupling capacitors are placed near their ICs but with long via connections to the power and ground planes, creating inductive parasitic paths. Filters exist on connector interfaces but are placed 10–20mm back from the connector with unfiltered traces completing the connection. Ground plane voids exist beneath connectors or around mounting holes, creating slots in the return path for nearby signals.</p>
+  <img src="https://raw.githubusercontent.com/dariofresu/Fresu-Electronics-Blog/main/assets/images/emi-design-review-pcb_img12.png" alt="Example of an antenna-like structure" class="post-img">
+  <p class="img-caption">Figure 12 - Example of an antenna-like structure</p>
+  <img src="https://raw.githubusercontent.com/dariofresu/Fresu-Electronics-Blog/main/assets/images/emi-design-review-pcb_img13.png" alt="Example of missing vias per each GND pad to reduce inductance" class="post-img-center" style="max-width:512px;">
+  <p class="img-caption">Figure 13 - Example of missing vias per each GND pad to reduce inductance</p>
+  <img src="https://raw.githubusercontent.com/dariofresu/Fresu-Electronics-Blog/main/assets/images/emi-design-review-pcb_img14.png" alt="Example of traces spaced too closed to each other for avoiding crosstalk" class="post-img">
+  <p class="img-caption">Figure 14 - Example of traces spaced too closed to each other for avoiding crosstalk</p>
+  <img src="https://raw.githubusercontent.com/dariofresu/Fresu-Electronics-Blog/main/assets/images/emi-design-review-pcb_img15.jpg" alt="Example of stub traces." class="post-img">
+  <p class="img-caption">Figure 15 - Example of stub traces.</p>
+  <img src="https://raw.githubusercontent.com/dariofresu/Fresu-Electronics-Blog/main/assets/images/emi-design-review-pcb_img16.png" alt="Example of stub traces through via connection." class="post-img-center" style="max-width:512px;">
+  <p class="img-caption">Figure 16 - Example of stub traces through via connection.</p>
+  <img src="https://raw.githubusercontent.com/dariofresu/Fresu-Electronics-Blog/main/assets/images/emi-design-review-pcb_img17.png" alt="Example  of length matching traces. " class="post-img">
+  <p class="img-caption">Figure 17 - Example  of length matching traces. </p>
+  <img src="https://raw.githubusercontent.com/dariofresu/Fresu-Electronics-Blog/main/assets/images/emi-design-review-pcb_img18.jpg" alt="Example of big &quot;bumps&quot; in length matching." class="post-img">
+  <p class="img-caption">Figure 18 - Example of big "bumps" in length matching.</p>
+  <img src="https://raw.githubusercontent.com/dariofresu/Fresu-Electronics-Blog/main/assets/images/emi-design-review-pcb_img19.png" alt="Example of impedance mismatch along the traces." class="post-img-center" style="max-width:512px;">
+  <p class="img-caption">Figure 19 - Example of impedance mismatch along the traces.</p>
+  <img src="https://raw.githubusercontent.com/dariofresu/Fresu-Electronics-Blog/main/assets/images/emi-design-review-pcb_img20.jpg" alt="Power Converter" class="post-img">
+  <p class="img-caption">Figure 20 - Power Converter</p>
   <p>None of these are exotic problems. All of them are identifiable at the design stage, before a single board is fabricated, if the review is conducted systematically with the field model in mind.</p>
-  
+  <img src="https://raw.githubusercontent.com/dariofresu/Fresu-Electronics-Blog/main/assets/images/emi-design-review-pcb_img07.jpg" alt="Layer 2" class="post-img">
+  <p class="img-caption">Figure 21 - Layer 2</p>
+  <img src="https://raw.githubusercontent.com/dariofresu/Fresu-Electronics-Blog/main/assets/images/emi-design-review-pcb_img08.jpg" alt="Layer 3" class="post-img">
+  <p class="img-caption">Figure 22 - Layer 3</p>
+  <img src="https://raw.githubusercontent.com/dariofresu/Fresu-Electronics-Blog/main/assets/images/emi-design-review-pcb_img09.jpg" alt="Layer 4" class="post-img">
+  <p class="img-caption">Figure 23 - Layer 4</p>
+  <img src="https://raw.githubusercontent.com/dariofresu/Fresu-Electronics-Blog/main/assets/images/emi-design-review-pcb_img10.jpg" alt="Layer 5" class="post-img">
+  <p class="img-caption">Figure 24 - Layer 5</p>
+  <img src="https://raw.githubusercontent.com/dariofresu/Fresu-Electronics-Blog/main/assets/images/emi-design-review-pcb_img11.jpg" alt="Layer 6" class="post-img">
+  <p class="img-caption">Figure 25 - Layer 6</p>
+
   <div class="closing">
     <div class="tags"><span class="tag">#EMCReview</span> <span class="tag">#PCBDesign</span> <span class="tag">#EMI</span> <span class="tag">#DesignProcess</span> <span class="tag">#HardwareEngineering</span></div>
   </div>

@@ -12,7 +12,10 @@ Inventory date: 2026-06-11 — **90 published posts on Wix**, 10 migrated so far
 - `emc-current-clamps` (11 figures) and `redefining-current-charge` (12 figures) embed the original images correctly — use these as the reference pattern.
 - Titles of migrated posts were editorially rewritten; body text policy is **verbatim** (see commit "Fix: verbatim content, remove fabricated cover image").
 
-**Phase 0 (before migrating anything new): repair the 8 posts above by embedding the already-downloaded figures in their correct positions, with original captions and alt text.**
+**Phase 0 — DONE (2026-06-11): all 8 posts repaired or verified.**
+- Figures embedded with verbatim Wix captions/alt: `electromagnetic-fields-pcb` (9), `emc-filter-topologies` (6), `emi-design-review-pcb` (25 placements, 20 unique — 16 images newly downloaded), `emi-signal-return-currents` (10), `pcb-90-degree-bends` (6), `pcb-stackup-power-return-path` (6, incl. animated GIF).
+- Verified clean, no changes needed: `why-engineers-fail-emc` (the only Wix body image is the cover banner), `field-centric-charge-energy` (all 13 equation images are already typeset as MathJax locally).
+- ⚠️ Follow-up found during repair: the local `emi-design-review-pcb` body is an editorial **summary**, not the full 23-minute Wix article — the figures are placed at the matching sections, but the long-form text has not been migrated. Revisit in Phase 1/2 (decide: restore full verbatim text or keep the summary deliberately).
 
 ## 1. Lossless extraction pipeline (per post)
 
@@ -78,16 +81,16 @@ Each phase = one PR: posts + index update + QA report.
 
 ## Full manifest (90 Wix posts)
 
-Status: ✅ migrated (images OK) · ⚠️ migrated, figures not embedded · ⬜ to migrate · 📝 micro-note (Phase 3)
+Status: ✅ migrated (images OK) · ⬜ to migrate · 📝 micro-note (Phase 3)
 
 | Date | Min | Wix slug | Status → target folder |
 |---|---|---|---|
-| 2025-06-24 | 7 | why-smart-engineers-fail-emc-tests-it-s-not-what-you-think | ⚠️ `why-engineers-fail-emc` |
-| 2025-05-25 | 4 | a-field-centric-perspective-on-charge-and-energy-transfer-in-classical-electromagnetism | ⚠️ `field-centric-charge-energy` |
-| 2025-05-17 | 8 | optimizing-pcb-stackup-design-power-and-return-path-considerations | ⚠️ `pcb-stackup-power-return-path` (verify source mapping vs power-planes post below) |
-| 2025-05-12 | 7 | emc-filter-topologies-emi-control-strategies-in-electronics-design | ⚠️ `emc-filter-topologies` |
-| 2025-05-07 | 8 | current-return-path-high-speed-vs-low-speed-signals | ⚠️ `emi-signal-return-currents` |
-| 2025-05-02 | 8 | 90-degree-bends-in-a-pcb-design | ⚠️ `pcb-90-degree-bends` |
+| 2025-06-24 | 7 | why-smart-engineers-fail-emc-tests-it-s-not-what-you-think | ✅ `why-engineers-fail-emc` |
+| 2025-05-25 | 4 | a-field-centric-perspective-on-charge-and-energy-transfer-in-classical-electromagnetism | ✅ `field-centric-charge-energy` |
+| 2025-05-17 | 8 | optimizing-pcb-stackup-design-power-and-return-path-considerations | ✅ `pcb-stackup-power-return-path` (mapping confirmed via figure byte-match) |
+| 2025-05-12 | 7 | emc-filter-topologies-emi-control-strategies-in-electronics-design | ✅ `emc-filter-topologies` |
+| 2025-05-07 | 8 | current-return-path-high-speed-vs-low-speed-signals | ✅ `emi-signal-return-currents` |
+| 2025-05-02 | 8 | 90-degree-bends-in-a-pcb-design | ✅ `pcb-90-degree-bends` |
 | 2025-04-27 | 6 | emc-design-for-multilayer-pcb-be-aware-of-using-power-planes-as-return-reference-planes | ⬜ (may overlap with `pcb-stackup-power-return-path` — verify) |
 | 2025-04-23 | 7 | mastering-electromagnetic-interference | ⬜ |
 | 2025-04-20 | 11 | redefining-current-and-charge-a-field-based-perspective-on-electromagnetism | ✅ `redefining-current-charge` |
@@ -108,10 +111,10 @@ Status: ✅ migrated (images OK) · ⚠️ migrated, figures not embedded · ⬜
 | 2025-03-27 | 4 | the-role-of-emi-specialists-in-ensuring-compliance | ⬜ |
 | 2025-03-26 | 5 | understanding-emi-and-emc-in-electrical-systems | ⬜ |
 | 2025-03-21 | 5 | understanding-the-significance-of-radiated-emissions-emi-control-in-achieving-emc-compliance | ⬜ |
-| 2024-11-19 | 23 | pcb-design-review-for-low-emi-motherboard-design | ⚠️ `emi-design-review-pcb` |
+| 2024-11-19 | 23 | pcb-design-review-for-low-emi-motherboard-design | ✅ `emi-design-review-pcb` (figures restored; body is a summary — full text pending, see Phase 0 note) |
 | 2024-11-19 | 4 | how-do-signals-propagate-in-a-printed-circuit-board-pcb | ⬜ |
 | 2024-11-19 | 17 | conducted-emissions | ⬜ pillar |
-| 2024-11-18 | 6 | the-concept-of-electromagnetic-fields-in-a-pcb | ⚠️ `electromagnetic-fields-pcb` |
+| 2024-11-18 | 6 | the-concept-of-electromagnetic-fields-in-a-pcb | ✅ `electromagnetic-fields-pcb` |
 | 2024-11-18 | 10 | pcb-design-for-low-emi-differential-mode-vs-common-mode-currents | ⬜ |
 | 2024-11-18 | 24 | radiated-emissions | ⬜ pillar |
 | 2024-11-18 | 17 | pcb-design-power-delivery-network-pdn-for-low-emi | ⬜ pillar |
