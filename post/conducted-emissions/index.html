@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Conducted Emissions — Fresu Electronics</title>
+  <meta name="description" content="In this article, we’ll dive into the world of conducted emissions, what causes them, how they affect your circuits, and how to fix them.">
+  <link rel="canonical" href="https://blog.fresuelectronics.com/post/conducted-emissions/">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Conducted Emissions">
+  <meta property="og:description" content="In this article, we’ll dive into the world of conducted emissions, what causes them, how they affect your circuits, and how to fix them.">
+  <meta property="og:url" content="https://blog.fresuelectronics.com/post/conducted-emissions/">
+  <meta property="og:image" content="https://blog.fresuelectronics.com/assets/images/wix/yt-hDdr5ryJVtk.jpg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400;1,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/assets/wix-exact.css">
+</head>
+<body>
+<header>
+  <div class="site-header">
+    <a href="https://www.fresuelectronics.com">
+      <img src="https://raw.githubusercontent.com/dariofresu/Fresu-Electronics-Blog/main/assets/logo.png" alt="Fresu Electronics">
+    </a>
+    <nav class="header-nav">
+      <a href="https://blog.fresuelectronics.com/">Blog</a>
+      <a href="https://blog.fresuelectronics.com/tools/">Tools</a>
+      <a href="https://www.fresuelectronics.com/trainings">Courses</a>
+      <a href="https://www.fresuelectronics.com/about">About</a>
+      <a href="https://www.fresuelectronics.com/emc-audit" class="header-cta">Book EMC Audit</a>
+    </nav>
+  </div>
+</header>
+<article class="post">
+  <p class="crumb"><a href="https://blog.fresuelectronics.com/">Blog</a> · <a href="https://blog.fresuelectronics.com/#wix-archive">Original posts</a></p>
+  <header class="post-head">
+    <h1>Conducted Emissions</h1>
+    <p class="meta"><time datetime="2024-11-19">2024-11-19</time> · <a href="https://info3761185.wixsite.com/dario-fresu-electron/post/conducted-emissions">Original on Wix</a></p>
+  <p class="taxo">Tags: EMI, EMC, PCB DESIGN</p>
+  </header>
+  <div class="wix-embed wix-cover-embed"><iframe src="https://www.youtube.com/embed/hDdr5ryJVtk" title="https://youtu.be/hDdr5ryJVtk?si=TIrzgHXwONm71dU8" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen loading="lazy"></iframe></div>
+<div class="wix-body" id="wix-body">
+<p></p>
+<figure class="wix-fig"><img src="/assets/images/wix/61d609_370dd69a7b7f4905818ad2b6c92faad9~mv2.jpg" alt="" loading="lazy"><figcaption>Optimizing PCB Design to Minimize Conducted EMI Emissions</figcaption></figure>
+<aside class="wix-card"><a href="https://www.fresuelectronics.com/product-page/emi-quick-fixes-guide"><img src="/assets/images/wix/61d609_6a6d3bf9bd114bcfb82d5236e516195a~mv2.png" alt=""><span class="wix-card-name">EMI Quick Fixes Guide</span></a></aside>
+<p></p>
+<hr>
+<p><strong><span style="font-size:24px">Conducted Emissions</span></strong></p>
+<p></p>
+<p style="text-align:justify">In this lesson, we’ll dive into the world of conducted emissions, what causes them, how they affect your circuits, and, most importantly, proven strategies to mitigate these issues right from the Printed Circuit Board Design. </p>
+<p></p>
+<p style="text-align:justify">Conducted emissions are simply radiated emissions in disguise.</p>
+<p style="text-align:justify">The simple reason for dividing them into conducted and radiated emissions is that it makes testing easier.</p>
+<p style="text-align:justify"></p>
+<p style="text-align:justify">The problem with measuring emissions below 30MHz using the same testing methodology as radiated emissions is that the wavelengths of the signals can be in the near-field region, leading to results that do not match reality. </p>
+<p style="text-align:justify"></p>
+<figure class="wix-fig"><img src="/assets/images/wix/61d609_8fcab6b9e0a2459a8121f01dbe0b4661~mv2.png" alt="Example of a failed conducted emissions test." loading="lazy"><figcaption>Figure 1 - Example of a failed conducted emissions test.</figcaption></figure>
+<p style="text-align:justify">If we measure emissions above 30MHz using the same testing methodology as the conducted emissions test, we encounter a different issue: the cable can start to resonate at these frequencies, which will also yield incorrect results.<br></p>
+<p style="text-align:justify">The main objective of the conductive emissions tests, is to ensure that the emission levels are under certain thresholds. This is because if disturbances find a way to escape from the system, they may potentially spread around and upset other systems.</p>
+<p style="text-align:justify"></p>
+<p style="text-align:justify">One common way for this to occur, if left uncontrolled, is when disturbances are conducted out of the systems through the power cords. </p>
+<p style="text-align:justify"></p>
+<p style="text-align:justify">What can happen in this scenario is that the conducted disturbance, through the power cord, may reach the power distribution system. This is quite important because the structure of the power distribution system is built in a way that resembles a large antenna structure, which can potentially radiate and upset many other systems that can be susceptible to that.</p>
+<p style="text-align:justify"></p>
+<p style="text-align:justify">To aggravate the issue, since the power distribution network is built with long cables, this gives the possibility for large wavelengths to find a radiative structure and potentially radiate.</p>
+<p></p>
+<figure class="wix-fig"><img src="/assets/images/wix/61d609_4c90ca19f29046f1ad630d0a3f9b9eab~mv2.png" alt="Example of conducted emissions radiating path." loading="lazy"><figcaption>Figure 2 - Example of conducted emissions radiating path.</figcaption></figure>
+<p style="text-align:justify"></p>
+<p style="text-align:justify">This is why regulatory bodies, like the FCC and the CISPR, impose limits on these emissions, so that we create an environment with fewer emission pollutants, where systems can instead work in harmony with each other.</p>
+<p></p>
+<hr>
+<p></p>
+<p style="text-align:justify"><strong><span style="font-size:24px">Susceptibility or Immunity</span></strong></p>
+<p style="text-align:justify"></p>
+<p style="text-align:justify">In the same way, we want to prevent not only that our system has limited emission levels, but also that its susceptibility, or immunity to these emissions, is controlled, providing robustness for our system.</p>
+<p style="text-align:justify"></p>
+<p style="text-align:justify">One of the most common ways susceptibility or immunity issues arise is through disturbances reaching our system, such as  lightning strikes on the power transmission lines providing power to the installation.</p>
+<p></p>
+<figure class="wix-fig"><img src="/assets/images/wix/61d609_b6bef5d2531a4f0db8e4477f5a6b4421~mv2.png" alt="Example of Immunity issues through the power outlet." loading="lazy"><figcaption>Figure 3 - Example of Immunity issues through the power outlet.</figcaption></figure>
+<p style="text-align:justify">Some of these disturbances may also cause the loss of power for long periods or short temporary outages. In the former case, the systems are not expected to maintain operation. </p>
+<p style="text-align:justify"></p>
+<p style="text-align:justify">However, in the latter case, for example when the circuit breaker is attempting to reestablish power, the product is expected to maintain normal operation without loss of data or function.</p>
+<p></p>
+<hr>
+<p></p>
+<p style="text-align:justify"><strong><span style="font-size:24px">Testing</span></strong></p>
+<p style="text-align:justify"></p>
+<p style="text-align:justify">In order to test the systems, and verify that their level of emissions is within a certain safe range, regulatory agencies such as the <strong>FCC</strong> and <strong>CISPR</strong> have established limits with which systems must comply.</p>
+<p style="text-align:justify"></p>
+<p style="text-align:justify">A typical range of frequencies to which the systems are tested against in conducted emission tests is from <strong>150 kHz to 30 MHz</strong>. However, this limit may vary depending on the specific standards that the system has to comply with.</p>
+<p style="text-align:justify"></p>
+<p style="text-align:justify">Within this range of frequencies, the FCC and CISPR have specific requirements to be met for different ranges of frequencies.</p>
+<p style="text-align:justify"></p>
+<p style="text-align:justify">Conducted emissions are classified into different categories based on their frequency range and the standards they comply with.  The most common classes for conducted emissions are: Class A, and Class B.</p>
+<p style="text-align:justify"></p>
+<p style="text-align:justify"><strong>Class A: </strong></p>
+<p style="text-align:justify">This class typically applies to industrial environments where there are fewer restrictions on emissions. Devices in this class have emissions limits set at higher levels compared to Class B.</p>
+<p style="text-align:justify"></p>
+<p style="text-align:justify"><strong>Class B:</strong> </p>
+<p style="text-align:justify">Devices in this class need to meet stricter emissions limits. This is important for devices used in residential or commercial settings where there is a need to minimize interference.</p>
+<p style="text-align:justify"></p>
+<p style="text-align:justify">These classes, help ensure that electronic devices meet specific emission standards, depending on their intended use, and the environment in which they will be operating.</p>
+<p style="text-align:justify"></p>
+<p style="text-align:justify"><strong>For </strong><strong><em>Class A</em></strong><strong> digital devices: </strong>The quasy peak limit is of 79 dBuV, from 150 kHz to 500 kHz. And then from 500 kHz to 30 MHz, the quasy peak limit is of 73 dBuV.</p>
+<p style="text-align:justify"></p>
+<p></p>
+<figure class="wix-fig"><img src="/assets/images/wix/61d609_53e53734c22145a4a8fa554f81c1ad1c~mv2.png" alt="Example of Class A FCC Conducted Emissions Limits." loading="lazy"><figcaption>Figure 4 - Example of Class A FCC Conducted Emissions Limits.</figcaption></figure>
+<p style="text-align:justify">For the average limit, the light blue line, the limits are set to 66 dBuV and is from 150 kHz to 500 kHz. And then from 500 kHz to 30 MHz, the average peak limit is of 60dBuV.</p>
+<p style="text-align:justify"></p>
+<p style="text-align:justify"><strong>For </strong><strong><em>Class-B</em></strong><strong> digital devices</strong>: The quasy peak limit goes from 66 dBuV to 56, from 150 kHz to 500 kHz. And then from 500 kHz to 5 MHz, the quasy peak limit is of 56 dBuV. To then again increase to 60 dBuV from 5 MHz to 30 MHz.</p>
+<p></p>
+<figure class="wix-fig"><img src="/assets/images/wix/61d609_c06a9445f8b44c3cbb091d4682e4a2bb~mv2.png" alt="Example of Class B FCC Conducted Emissions Limits." loading="lazy"><figcaption>Figure 5 - Example of Class B FCC Conducted Emissions Limits.</figcaption></figure>
+<p style="text-align:justify">For the average limit, the light blue line, the limit goes from 56 dBuV to 46, from 150 kHz to 500 kHz. And then from 500 kHz to 5 MHz, the quasy peak limit is of 46 dBuV. To then again increase to 50 dBuV from 5 MHz to 30 MHz.</p>
+<p style="text-align:justify"></p>
+<p style="text-align:justify">A common approach when doing pre-compliance testing, before going to the certifying EMC lab, is to keep the system&#x27;s emissions at least 6 dB below the required limits. </p>
+<p style="text-align:justify"></p>
+<p style="text-align:justify">This will help to account for the differences between different laboratories, and instruments due to the measurement uncertainty. I personally recommend staying even <strong>below the 10 dB margin.</strong></p>
+<p></p>
+<hr>
+<p><em>💡 By the way, If you would like to master EMC/EMI design, we have a new training program here:</em></p>
+<p class="wix-btn-wrap"><a class="wix-btn" href="https://www.fresuelectronics.com/mentoring" target="_blank" rel="noreferrer noopener" style="background:#116dff;border-radius:8px;color:#ffffff">Get Personalized Training</a></p>
+<p></p>
+<p><em>There, you’ll find details on how to apply for one of our exclusive programs designed to help you achieve that goal. </em></p>
+<p></p>
+<hr>
+<p></p>
+<p style="text-align:justify"><strong><span style="font-size:24px">The LISN</span></strong></p>
+<p style="text-align:justify"></p>
+<p style="text-align:justify">In order to conduct the test for conducted emission, the <strong><em>Line Impedance Stabilization Network</em></strong>, or also called LISN, should be used.</p>
+<p style="text-align:justify"></p>
+<p style="text-align:justify">The LISN is sometimes also called <em>Artificial Main Network</em>, or AMN.</p>
+<p style="text-align:justify"></p>
+<p style="text-align:justify">The LISN is used to make the measurements comparable between labs and measurement sites, thereby stabilizing the impedance seen by the product’s outlet into the power distribution network.</p>
+<p style="text-align:justify"></p>
+<p style="text-align:justify">The LISN has <strong>three important functions</strong> when conducting the measurement:</p>
+<p style="text-align:justify"></p>
+<ol>
+<li>
+<p style="text-align:justify">The first function is to provide a constant impedance to the power outlet power cord, maintaining it over the frequency range of the conducted emissions test.</p>
+</li>
+</ol>
+<p style="text-align:justify"></p>
+<ol>
+<li>
+<p style="text-align:justify">The second function is to filter out the noise that is not part of the noise generated by the product, allowing only the conducted emissions of the product to be measured.</p>
+</li>
+</ol>
+<p style="text-align:justify"></p>
+<ol>
+<li>
+<p style="text-align:justify">Additionally, the LISN should be able to transfer the required power at 50 or 60 Hz so that the product can operate.</p>
+</li>
+</ol>
+<p style="text-align:justify"></p>
+<p style="text-align:justify">In Figure 6, we can see that the LISN is connected between the power distribution network and the Device Under Test (DUT).</p>
+<p style="text-align:justify"></p>
+<p></p>
+<figure class="wix-fig"><img src="/assets/images/wix/61d609_bb3fddbc123f46e3adc200ff8256d40f~mv2.png" alt="Example of LISN Connection for AC systems." loading="lazy"><figcaption>Figure 6 - Example of LISN Connection for AC systems.</figcaption></figure>
+<p style="text-align:justify"></p>
+<p style="text-align:justify">The job of the spectrum analyzer connected to the LISN is to measure and report the levels of conducted emissions.</p>
+<p style="text-align:justify"></p>
+<p style="text-align:justify">To further explain the testing setup and understand what we are truly measuring during the conducted emissions test, we need to take a closer look inside the LISN circuit.</p>
+<p style="text-align:justify"></p>
+<p></p>
+<figure class="wix-fig"><img src="/assets/images/wix/61d609_245e2cd469c645a0bd8f6e54e9cc38fa~mv2.png" alt="Simplified LISN circuit." loading="lazy"><figcaption>Figure 7 - Simplified LISN circuit.</figcaption></figure>
+<p style="text-align:justify"></p>
+<p style="text-align:justify">The value of the components will vary depending on the type of test we are performing, ensuring that the 50 Ω characteristic impedance is matched throughout the entire frequency range.</p>
+<p style="text-align:justify"></p>
+<p style="text-align:justify">Let’s explain the role of each component in this slide:</p>
+<p style="text-align:justify"></p>
+<p style="text-align:justify">The 50 uH inductor is used to block external noise from the Power Distribution System.</p>
+<p style="text-align:justify"></p>
+<p style="text-align:justify">The 1 uF capacitors divert external noise from the commercial power side of the LISN, preventing contamination of the measurement signal.</p>
+<p style="text-align:justify"></p>
+<p style="text-align:justify">The 0.1 uF capacitors, prevents DC overload at the input of the spectrum analyzer.</p>
+<p style="text-align:justify"></p>
+<p style="text-align:justify">The 1 kΩ resistors serve as a static charge path to discharge the 0.1 uF capacitor if the 50 Ω resistors are removed.</p>
+<p style="text-align:justify"></p>
+<p style="text-align:justify">One 50 Ω resistor is for the input impedance of the spectrum analyzer, while the other 50 Ω resistors serve as dummy load, ensuring that the impedance between the phase and the safety wire, and between the neutral and the safety wire, remains at 50 Ω at all times.</p>
+<p style="text-align:justify"></p>
+<p style="text-align:justify">The green colored arrows that you see are the currents <strong>IP</strong> going from the DUT to the phase wire, and the current <strong>IN</strong> going from the DUT to through the neutral wire.</p>
+<p style="text-align:justify"></p>
+<p style="text-align:justify">For the range of frequencies of the test, the LISN circuit will result in the simplified circuit that you see in Figure 8. The inductor becomes an open circuit at the frequencies of the test, while the capacitors become short circuits over the frequency range of the measurement.</p>
+<p></p>
+<figure class="wix-fig"><img src="/assets/images/wix/61d609_93d974e7635144b58291480ce3a9cdb5~mv2.png" alt="LISN ideal circuit at high frequencies." loading="lazy"><figcaption>Figure 8 - LISN ideal circuit at high frequencies.</figcaption></figure>
+<p style="text-align:justify"></p>
+<p style="text-align:justify">The voltages measured during the test are<strong> Vp^</strong> and <strong>Vn^</strong>, measured between the phase wire and the safety wire, and between the neutral wire and the safety wire. These two voltages are measured throughout the entire frequency range of the test, and they must always remain below the specified limits set by the test.</p>
+<p style="text-align:justify"></p>
+<p style="text-align:justify">This also explains why conducted emissions are specified in terms of voltage, even though <strong>what we are actually measuring is the conducted emission current</strong>.</p>
+<p style="text-align:justify"></p>
+<p style="text-align:justify">By using the LISN circuit, we can measure the noise current related to the product through both the phase and the neutral.</p>
+<p style="text-align:justify"></p>
+<p style="text-align:justify"><strong>The PCB designer&#x27;s task in this case is to design the electronic product so that no current flows through the 50 Ω resistors of the LISN.</strong></p>
+<p style="text-align:justify"></p>
+<p style="text-align:justify">This also implies that if there is current flowing through the 50 Ω resistors of the LISN, and if this current in the frequency range of the measurement exceeds the specified limits of the test, it will result in a failure of the conducted emission test.</p>
+<p style="text-align:justify"></p>
+<p style="text-align:justify">This further emphasizes the importance of carefully designing the PCB layout and the overall system to avoid any signals coupling to the power cords and being detected as current flowing through the LISN resistor.</p>
+<p style="text-align:justify"></p>
+<p style="text-align:justify">Now, we will separate the <strong>IP</strong> and <strong>IN</strong> currents into their differential mode and common mode components. These will be important in understanding the influence of each mode.</p>
+<p style="text-align:justify"></p>
+<p></p>
+<figure class="wix-fig"><img src="/assets/images/wix/61d609_7d7ea580058d43a4b0c76ef520c6a0e6~mv2.png" alt="LISN ideal circuit at high frequencies, common and differential-mode component." loading="lazy"><figcaption>Figure 9 - LISN ideal circuit at high frequencies, common and differential-mode component.</figcaption></figure>
+<p style="text-align:justify">We can define the current <strong>IP</strong> as the sum of the common mode current component <strong>IC</strong>, and the differential mode current component <strong>ID</strong>.</p>
+<p style="text-align:justify"></p>
+<p style="text-align:justify">The same we can do for the current <strong>IN</strong>, and define it as the subtraction of the differential mode current components, from the common mode current component.</p>
+<p style="text-align:justify"></p>
+<p style="text-align:justify">If we play around with substitution, and we solve for <strong>IC</strong> and <strong>ID</strong>, we can find how the common mode current and the differential mode current are influenced by the phase current <strong>IP</strong> and the neutral current <strong>IN</strong>.</p>
+<p></p>
+<figure class="wix-fig"><img src="/assets/images/wix/61d609_96d6781a49254cec8378a7fdb0856959~mv2.png" alt="Vp^ and Vn^ derivation from Ip and In currents." loading="lazy"><figcaption>Figure 10 - Vp^ and Vn^ derivation from Ip and In currents.</figcaption></figure>
+<p style="text-align:justify">Now we can re-write the voltage <strong>Vp^</strong> and <strong>Vn^</strong> in terms of the phase, and the neutral current, remembering the relationship they have with the differential and the common mode currents.</p>
+<p style="text-align:justify"></p>
+<p style="text-align:justify">This mean that by measuring the voltages across the 50 Ω resistors with the spectrum analyzer, we can find the differential and the common mode currents as follows.</p>
+<p style="text-align:justify"></p>
+<figure class="wix-fig"><img src="/assets/images/wix/61d609_dbe368cf11ed45099bc7103f96bbf95b~mv2.png" alt="LISN Differential and Common mode measurements." loading="lazy"><figcaption>Figure 11 - LISN Differential and Common mode measurements.</figcaption></figure>
+<p style="text-align:justify">One important aspect here is that the differential mode currents we observe are not the functional 50 or 60 Hz power line currents required for the normal operation of the device.</p>
+<p style="text-align:justify"></p>
+<p style="text-align:justify">Additionally, the common mode currents returning through the green wire are unwanted and are not typically intended as part of the design.</p>
+<p style="text-align:justify"></p>
+<p style="text-align:justify">This cannot be overstated: <strong>the green safety wire is intended as a safety measure when a fault occurs, not meant to carry currents during normal operation.</strong></p>
+<p style="text-align:justify"></p>
+<p style="text-align:justify">Therefore, when the green wire carries currents, as in this case with high-frequencies, carrying common-mode currents, it can result in the failure of regulatory standards.</p>
+<p></p>
+<hr>
+<p></p>
+<p style="text-align:justify"><strong><span style="font-size:24px">Power supplies and Conducted Emissions</span></strong></p>
+<p style="text-align:justify"></p>
+<p style="text-align:justify">Now that we have seen how the test is conducted, and what we are measuring, we can further investigate the problem itself. </p>
+<p style="text-align:justify"></p>
+<p style="text-align:justify">Since we are discussing conducted emissions into the power cords, we need to look into the block, or circuit, connected to the power cord:  <strong>the power supply.</strong></p>
+<p style="text-align:justify"></p>
+<p style="text-align:justify">The power supplies that we are going to examine are the Switching Mode Power Supplies also called <strong>SMPS</strong>. Today&#x27;s power supplies have reached very efficient efficiency levels above 85% and are widely used in our electronic products. However, the high efficiency of these power supplies unfortunately comes at a high cost in terms of Electromagnetic Compatibility.</p>
+<p style="text-align:justify"></p>
+<p style="text-align:justify">The reason behind this is that for these power supplies to be so efficient, the switching transition time has to be as fast as possible. This means that a large amount of energy has to be condensed and transformed in a very short amount of time.</p>
+<p style="text-align:justify"></p>
+<p style="text-align:justify">For us designers, this translates into very sharp transitioning times,  which, thanks to the Fourier Transform, we know contain a high-energy harmonic content. <strong><em>The sharper the signal, the more high energy harmonic content there is.  The more high-energy harmonic content, the more energy there is.</em></strong></p>
+<p style="text-align:justify"></p>
+<p style="text-align:justify">The problem with this high-energy harmonic content is that the energy contained in these harmonics needs to be contained and controlled in order to avoid emissions and to channel the energy where it&#x27;s actually needed.</p>
+<p style="text-align:justify"></p>
+<p style="text-align:justify">After all, what we are measuring with the EMC test is exactly how this energy moves, and how high or above the imposed limits, this energy is. </p>
+<p style="text-align:justify"></p>
+<p style="text-align:justify">To better understand what happens during the conversion of energy, and also to understand the difficulties related to this process, we are going to analyze a general Fly-Back converter.</p>
+<p></p>
+<figure class="wix-fig"><img src="/assets/images/wix/61d609_751b62f8e3f2470f8d0401fb1eab823d~mv2.png" alt="Simplified SMPS circuit and its parasitic elements." loading="lazy"><figcaption>Figure 12 - Simplified SMPS circuit and its parasitic elements.</figcaption></figure>
+<p style="text-align:center"><em>	</em></p>
+<p style="text-align:justify">The circuit in Figure 12 is simplified so that we can visualize the elements that are more important to us.</p>
+<p style="text-align:justify"></p>
+<p style="text-align:justify">At the first stage of the converter, we have the full bridge rectifier, whose job is to rectify or “straighten” the AC voltage at its input. </p>
+<figure class="wix-fig"><img src="/assets/images/wix/61d609_4ebc37f4b19b45f2a7f7a7c9160e532f~mv2.png" alt="First stage rectification process in a SMPS." loading="lazy"><figcaption>Figure 13 - First stage rectification process in a SMPS.</figcaption></figure>
+<p style="text-align:justify">The rectifier then feeds the converted waveform to a filtering capacitor, whose job is to further filter these rectified waveforms and stabilize them at a voltage close to the peak voltage of the waveform.</p>
+<p></p>
+<figure class="wix-fig"><img src="/assets/images/wix/61d609_e63dcc6e650446539a3e258a78c70fbe~mv2.png" alt="Influence of the input capacitor in a SMPS." loading="lazy"><figcaption>Figure 14 - Influence of the input capacitor in a SMPS.</figcaption></figure>
+<p style="text-align:justify"></p>
+<p style="text-align:justify">At this point is where we have a PWM controller whose job is to monitor the output of the input capacitor and to feed a PWM signal to the main switching transistor. The transistor&#x27;s job is to chunk the energy into square waves that are fed to the transformer.</p>
+<p></p>
+<figure class="wix-fig"><img src="/assets/images/wix/61d609_2d0c5912ee4b40ec8cec86e21753dd6a~mv2.png" alt="Example of the Influence of the transistor in a SMPS." loading="lazy"><figcaption>Figure 15 - Example of the Influence of the transistor in a SMPS.</figcaption></figure>
+<p style="text-align:justify"></p>
+<p style="text-align:justify">The transformer&#x27;s job, on the other hand, is to isolate the primary side of the converter from the high voltage, but also to further step down its voltage to its desired output in the secondary side of the transformer. Then, in the secondary side of the transformer, this voltage is further rectified and filtered with an LC filter, producing a DC output.</p>
+<p></p>
+<figure class="wix-fig"><img src="/assets/images/wix/61d609_3791fdf15e784b459e90c93065d8dffb~mv2.png" alt="Second rectification process and DC output example in a SMPS." loading="lazy"><figcaption>Figure 16 - Second rectification process and DC output example in a SMPS.</figcaption></figure>
+<p style="text-align:justify">As mentioned before, the switching transistor, in order to optimize the power efficiency and reduce the losses, will try to spend as little time as possible in the linear region, and it will produce a trapezoidal wave output. </p>
+<p style="text-align:justify"></p>
+<p style="text-align:justify">In order to produce a trapezoidal wave output, its transitioning time has to be as short as possible, so that its rise and fall time is usually in the order of nanoseconds. </p>
+<p style="text-align:justify"></p>
+<p style="text-align:justify">As we know from the Fourier transform, in order to generate square wave signals, we need to have an unlimited series of harmonic sinusoidal signals whose frequencies are multiples of the main switching frequency.</p>
+<p style="text-align:justify"></p>
+<p style="text-align:justify"><strong><em>This is where the high-energy harmonic content is.</em></strong></p>
+<p></p>
+<figure class="wix-fig"><img src="/assets/images/wix/61d609_b08a7c8d650d42d88dcdaf685a967064~mv2.png" alt="Example of harmonic content in a digital signal." loading="lazy"><figcaption>Figure 17 - Example of harmonic content in a digital signal.</figcaption></figure>
+<p style="text-align:justify">The SMPS will then have multiple sources of noise, which are categorized as normal operational noise or differential mode noise, and common mode noise which comes from the parasitics within the circuit.</p>
+<p></p>
+<hr>
+<p></p>
+<p style="text-align:justify"><strong><span style="font-size:24px">Common mode noise sources</span></strong></p>
+<p></p>
+<p>Let’s see what the major contributors of common mode noise sources are in an SMPS power supply.</p>
+<p></p>
+<p>1. The first is the transistor to heat sink capacitance, where the heat sink is usually connected to the safety green wire.</p>
+<p></p>
+<p>2. Then the second is the interwinding transformer capacitance between the primary and the secondary side of the transformer.</p>
+<p></p>
+<p>3. Stray capacitance to ground from the wiring and/or from the PCB traces to ground.</p>
+<p></p>
+<p>These three points (See Figure 12) since are sources of common mode currents, will present challenging EMI issues. The question for us designers is:</p>
+<p></p>
+<p><strong>How can we fix solve these issue at the design stage?</strong></p>
+<p></p>
+<p>As discussed in other articles and lessons, there are 3 possibilities to solve EMC issues,</p>
+<p>and this possibilities are related to either the source, the path, and or the victim of EMI.</p>
+<p></p>
+<ol>
+<li>
+<p>We can reduce the <strong>source</strong> of emissions, for example taking actions on the switching transistor, and either change its switching frequency or slowing its switching times. Unfortunately, these can result in lower performance and increased losses, as we directly impact the switching wave. And by changing the frequency, it will only shift the level of emissions to other frequencies, which may not solve the issue.</p>
+</li>
+</ol>
+<p></p>
+<ol>
+<li>
+<p>The other option, is to disrupt the <strong>path</strong> where the emission propagates. This will mean finding a way to interrupt the common mode current loop and eliminate the parasitic capacitance. </p>
+</li>
+</ol>
+<p></p>
+<ol>
+<li>
+<p>The final option is to increase the<strong> immunity</strong> of other devices, to the emissions created by our device, which is not a real option, since we cannot obviously control all the other devices that are going to be around the power supply.</p>
+</li>
+</ol>
+<p></p>
+<p>Let&#x27;s see what are the different possibilities to fix the issues mentioned, by using these methods.</p>
+<p></p>
+<p>To solve the <strong>first issue</strong> of the stray capacitance between the heat sink and the transistor, we have few options.</p>
+<p></p>
+<ul>
+<li>
+<p>Adding a Faraday shield between the transistor and the heat sink. <br>To do that, we would have to use special thermal pads that integrate the shield, and then connect them to the transistor. Several vendors offer this solution.</p>
+</li>
+</ul>
+<p></p>
+<ul>
+<li>
+<p>As a second possibility we can increase the thickness of the washer, and use a thicker ceramic washer which will then reduce the capacitance.<br></p>
+</li>
+<li>
+<p>And the third option is to leave the heat sink floating, but in this case, we have to ensure that the user has no access to the heat sink and cannot touch it; otherwise, this can create a shock hazard situation for the user. </p>
+</li>
+</ul>
+<p></p>
+<figure class="wix-fig"><img src="/assets/images/wix/61d609_693f08f00ed04a2b953776b69522ea12~mv2.png" alt="Common-mode noise due to heat sink&#x27;s stray capacitance in a SMPS." loading="lazy"><figcaption>Figure 18 - Common-mode noise due to heat sink&#x27;s stray capacitance in a SMPS.</figcaption></figure>
+<p>The <strong>second issue</strong> can be fixed by either increasing the distance between the two coils of the transformer or by using one with a Faraday cage. However, this may result in increased size and sometimes costs.</p>
+<p></p>
+<p>The <strong>third issue</strong> can be resolved by <strong>proper layout of the PCB board</strong> and with proper system wiring, so that the stray capacitance is reduced. The proper PCB layout techniques are already covered in many of my other lessons and courses.</p>
+<p></p>
+<p><strong>The main takeaway is to think in terms of parasitic paths that can emerge from the systems design and connections. </strong></p>
+<p></p>
+<p>Especially thinking in terms of how these parasitic paths will influence the tests at the specified frequency range of the test, and can result in effective current loops for the common mode currents.</p>
+<p></p>
+<hr>
+<p></p>
+<p><strong><span style="font-size:24px">Differential Mode currents</span></strong></p>
+<p></p>
+<p>Now, let’s address how to solve the issues related to the differential mode currents.</p>
+<p>The primary source of problems when dealing with differential mode currents is usually attributed to the non-ideal characteristics of the input capacitor, which is meant to filter the output of the rectifier.</p>
+<p></p>
+<p>Ideally, the capacitor at higher frequencies acts as a short circuit. <strong>Unfortunately, this is only true for ideal components. </strong></p>
+<p></p>
+<figure class="wix-fig"><img src="/assets/images/wix/61d609_2e7d5112bca54f7396729224f3753d11~mv2.png" alt="Parasitic elements in the input capacitor in a SMPS." loading="lazy"><figcaption>Figure 19 - Parasitic elements in the input capacitor in a SMPS.</figcaption></figure>
+<p>The issue with real components, such as the capacitor, is that in real-world applications, it will not only exhibit the capacitive behavior we desire but also will have an equivalent series inductance called ESL and an equivalent series resistance called ESR.</p>
+<p></p>
+<p>The problem with having these two parasitic impedances, is that they will create other preferred paths for certain harmonic frequencies contained in the switching currents. </p>
+<p></p>
+<p>This means that these currents will not flow through the capacitor, thus generating additional differential mode current loops<strong><em>.</em></strong></p>
+<p></p>
+<figure class="wix-fig"><img src="/assets/images/wix/61d609_f8748619daec47189d84c254f8cec45a~mv2.png" alt="Differential-mode currents due to non-ideal characterists of the input capacitor in a SMPS." loading="lazy"><figcaption>Figure 20 - Differential-mode currents due to non-ideal characterists of the input capacitor in a SMPS.</figcaption></figure>
+<p>The larger the value of the capacitor, the larger these parasitics usually become. Unfortunately, we don’t have many other ways to tackle this issue than to reduce the parasitic effects of the capacitor.</p>
+<p></p>
+<p>In particular, we want to be careful in selecting a capacitor with small ESL and ESR so that the differential mode current is as small as possible. We want to provide the switching current in the path of least impedance through the capacitor and throughout the whole frequency span of the test. </p>
+<p></p>
+<p><strong>This means that the key to reducing differential mode currents, and hence passing conducted emissions tests, is to focus on the impedance of the capacitor, taking into account also the parasitic effects.</strong></p>
+<p></p>
+<hr>
+<p></p>
+<p><strong><span style="font-size:24px">Rectifying diodes</span></strong></p>
+<p></p>
+<p>The next issue we need to cover is related to the source of noise caused by the rectifiers used during the rectification process.</p>
+<p></p>
+<p>Different types of diodes can be used for the rectification process, however, the ones subject to more EMI issues are the fast-recovery diodes. </p>
+<p></p>
+<p></p>
+<figure class="wix-fig"><img src="/assets/images/wix/61d609_d2626dda76074e478157f1f7605a51d2~mv2.png" alt="Effects of the second stage rectification process in a SMPS with Fast Switching Diodes." loading="lazy"><figcaption>Figure 21 - Effects of the second stage rectification process in a SMPS with Fast Switching Diodes.</figcaption></figure>
+<p></p>
+<p>Fast recovery diodes are preferred by designers as they improve the efficiency of the power supply, but typically these choices result in more issues in the EMI realm.</p>
+<p></p>
+<p>As usual, these will impose trade-offs between power losses and EMI performance.</p>
+<p></p>
+<p>The problem is caused during the reverse recovery time of the diode, when the charge accumulated in the diode junction, during the forward bias of the diode, hence during conduction, is suddenly removed, producing a sharp negative spike of current.</p>
+<p></p>
+<p>The steeper the spike, the more energy needs to be moved fast, and the more high-energy harmonic content is present in the signal generating this type of pulses.</p>
+<p></p>
+<figure class="wix-fig"><img src="/assets/images/wix/61d609_92f8c6b6388e4f33be4d199ac8dab6db~mv2.png" alt="Effects of the accumulated charge in the diode junction." loading="lazy"><figcaption>Figure 22 - Effects of the accumulated charge in the diode junction.</figcaption></figure>
+<p>Typically, this issue is more common on the secondary side of the SMPS, because this part of the power supply usually deals with higher currents than the primary side, where the voltage is usually higher. </p>
+<p></p>
+<p>But this does not mean that the rectifiers in the primary side of the power supply should be left without consideration, and should be taken for granted. Of course, we would have to take them into account as well.</p>
+<p></p>
+<p>These differential currents, produced during this reverse transitioning time, can then find ways to couple back to the primary side of the transformer and ultimately to the power distribution network.</p>
+<p></p>
+<p>It’s important to note that this effect is also common in switching transistors, and in particular for us, this effect needs to be taken into consideration for the switching transistor of the power supply.</p>
+<p></p>
+<p>One of the possible, and very effective solutions, for these fast-switching differential mode currents is to implement an RC filter across the rectifiers. </p>
+<p></p>
+<figure class="wix-fig"><img src="/assets/images/wix/61d609_aca51a3138954e6aba943421aed64f06~mv2.png" alt="Use of an RC filter across the diodes to dissipate the noisy harmonic content." loading="lazy"><figcaption>Figure 23 - Use of an RC filter across the diodes to dissipate the noisy harmonic content.</figcaption></figure>
+<p>This allows filtering out the noisy differential mode currents. </p>
+<p></p>
+<p>The side effects of these techniques are that the energy will now be dissipated through the RC filter, thus increase the power losses, and the voltages and currents across the used devices can increase.</p>
+<p></p>
+<p>One thing worth mentioning is that the principles we have discussed so far in this article can also be applied to DC/DC converters.</p>
+<p></p>
+<hr>
+<p></p>
+<p><strong><span style="font-size:24px">Filters for Power Supply</span></strong></p>
+<p></p>
+<p>Finally let&#x27;s see how to apply the filters for both the common mode and the differential mode in SMPS.</p>
+<p></p>
+<p>The filter we see in Figure 24 is a typical EMI filter, used to suppress both common mode currents, and differential mode currents.</p>
+<p></p>
+<figure class="wix-fig"><img src="/assets/images/wix/61d609_2f6ec5d10b584d61802a1081c3f71c14~mv2.png" alt="Typical EMI filter in a SMPS (values may differ)." loading="lazy"><figcaption>Figure 24 - Typical EMI filter in a SMPS (values may differ).</figcaption></figure>
+<p>The Y capacitors, together with the common-mode choke, form the common-mode suppression section, while the X capacitor is used to suppress the differential mode side. </p>
+<p></p>
+<p><strong><em>The values and characteristics of the capacitors used in the filter are regulated by safety agencies.</em></strong></p>
+<p></p>
+<p>For example, for line-to-earth connection, a special capacitor called a Y capacitor is used, which is listed and approved by safety agencies such as <strong><em>Underwriting Laboratories</em></strong> (UL), and its value is limited to limit the leakage currents, since leakage currents are considered a shock hazard and are regulated.</p>
+<p></p>
+<p><strong>The Y capacitor is also special because in case of failure it does not create a short circuit but will fail open.</strong> This is important because in this way the phase, which is connected to one side of the capacitor, is not going to be connected to the earth system, which is typically connected to the chassis and therefore can put the user in a hazardous situation.</p>
+<p></p>
+<p>Similar safety regulation requirements apply to X capacitors, which are intended for line-to-line operation.</p>
+<p></p>
+<p>For building this filters the first thing that needs to be chosen is the common mode capacitance. This is selected as the sum of the two capacitors which are placed in parallel from the common-mode current point of view. </p>
+<p></p>
+<p>The total capacitance is derived from the safety current leakage requirement of the safety agency. Once the current leakage is determined, then the total capacitance, based on that limitation, is typically divided in two between the two capacitors.</p>
+<p></p>
+<p>The filter needs to have the X capacitor side facing the high impedance connection with the LISN, while the two common mode capacitors should face the power supply side, as shown in the Figure 24. </p>
+<p></p>
+<p>The two Y capacitors need to be connected to the metallic filter enclosure, to optimize their effectiveness and reduce the stray inductance of the connection.</p>
+<p></p>
+<p>For the filter to be effective, it should be placed as close as possible to the enclosure, where the power cord enter as an input. </p>
+<p></p>
+<figure class="wix-fig"><img src="/assets/images/wix/61d609_eaf9409892b34235bbcb9da3fb2841a1~mv2.png" alt="Recommended filter placement in a product. " loading="lazy"><figcaption>Figure 25 - Recommended filter placement in a product. </figcaption></figure>
+<p>This is essential because if noise couples into the circuit after the filter stage, the filter becomes ineffective in suppressing or reducing that noise. </p>
+<p></p>
+<p>Filters are designed to block or attenuate unwanted frequencies up to the point where they are placed in the signal path, any noise that enters the system beyond the filter bypasses its intended function.</p>
+<p></p>
+<p>I hope you find this article informative and that it will help you solve more conducted emissions issues in the future.</p>
+<p></p>
+<hr>
+<p><em>💡 By the way, If you would like to master EMC/EMI design, we have a new training program here:</em></p>
+<p class="wix-btn-wrap"><a class="wix-btn" href="https://www.fresuelectronics.com/mentoring" target="_blank" rel="noreferrer noopener" style="background:#116dff;border-radius:8px;color:#ffffff">Get Personalized Training</a></p>
+<p></p>
+<p><em>There, you’ll find details on how to apply for one of our exclusive programs designed to help you achieve that goal. </em></p>
+<hr>
+<p><em>Further readings and references:</em></p>
+<p></p>
+<p><a href="http://fresuelectronics.com/books" target="_blank" rel="noreferrer noopener"><strong><u><span style="background-color:rgb(255, 255, 255);color:rgb(32, 33, 36);font-size:16px">fresuelectronics.com/books</span></u></strong></a></p>
+<p></p>
+<p></p>
+<p style="text-align:justify"></p>
+</div><!-- /wix-body -->
+</article>
+<footer>
+  <div class="site-footer">
+    <span>© 2026 Fresu Electronics SRL</span>
+    <span><a href="https://www.fresuelectronics.com">fresuelectronics.com</a> · <a href="https://www.fresuelectronics.com/free-tool-1">Free Stackup Tool</a></span>
+  </div>
+</footer>
+</body>
+</html>

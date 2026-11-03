@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Capacitors choice in high-frequency EMI issues — Fresu Electronics</title>
+  <meta name="description" content="Often when dealing with EMC issues, we hear the common phrase: just add a filtering capacitor for the high frequency and the problem is...">
+  <link rel="canonical" href="https://blog.fresuelectronics.com/post/capacitors-choice-in-high-frequency-emi-issues/">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Capacitors choice in high-frequency EMI issues">
+  <meta property="og:description" content="Often when dealing with EMC issues, we hear the common phrase: just add a filtering capacitor for the high frequency and the problem is...">
+  <meta property="og:url" content="https://blog.fresuelectronics.com/post/capacitors-choice-in-high-frequency-emi-issues/">
+  <meta property="og:image" content="https://blog.fresuelectronics.com/assets/images/wix/61d609_7d7f06a721b74500aaa9c0ad8cce7219~mv2.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400;1,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/assets/wix-exact.css">
+</head>
+<body>
+<header>
+  <div class="site-header">
+    <a href="https://www.fresuelectronics.com">
+      <img src="https://raw.githubusercontent.com/dariofresu/Fresu-Electronics-Blog/main/assets/logo.png" alt="Fresu Electronics">
+    </a>
+    <nav class="header-nav">
+      <a href="https://blog.fresuelectronics.com/">Blog</a>
+      <a href="https://blog.fresuelectronics.com/tools/">Tools</a>
+      <a href="https://www.fresuelectronics.com/trainings">Courses</a>
+      <a href="https://www.fresuelectronics.com/about">About</a>
+      <a href="https://www.fresuelectronics.com/emc-audit" class="header-cta">Book EMC Audit</a>
+    </nav>
+  </div>
+</header>
+<article class="post">
+  <p class="crumb"><a href="https://blog.fresuelectronics.com/">Blog</a> · <a href="https://blog.fresuelectronics.com/#wix-archive">Original posts</a></p>
+  <header class="post-head">
+    <h1>Capacitors choice in high-frequency EMI issues</h1>
+    <p class="meta"><time datetime="2024-09-10">2024-09-10</time> · <a href="https://info3761185.wixsite.com/dario-fresu-electron/post/capacitors-choice-in-high-frequency-emi-issues">Original on Wix</a></p>
+  <p class="taxo">Categories: EMI  - Short Post</p>
+  </header>
+  <figure class="wix-cover"><img src="/assets/images/wix/61d609_7d7f06a721b74500aaa9c0ad8cce7219~mv2.png" alt=""></figure>
+<div class="wix-body" id="wix-body">
+<figure class="wix-fig"><img src="/assets/images/wix/61d609_7d7f06a721b74500aaa9c0ad8cce7219~mv2.png" alt="" loading="lazy"></figure>
+<p>Often when dealing with EMC issues, we hear the common phrase: just add a filtering capacitor for the high frequency and the problem is solved.</p>
+<p></p>
+<p>But it&#x27;s not that simple...</p>
+<p></p>
+<p>The first thing we have to remember is that components in reality are not as ideal as we would like them to be.</p>
+<p></p>
+<p>They actually present non-ideal behaviors that require further consideration when adding them into our circuits to solve the problems we&#x27;re facing.</p>
+<p></p>
+<p>For example, let&#x27;s consider capacitors, when we want to use them for filtering high frequencies.</p>
+<p></p>
+<p>Not every capacitor will be suitable for solving our specific problem.</p>
+<p></p>
+<p>And this is true even if we are considering ceramic capacitors SMD as the first choice.</p>
+<p></p>
+<p>One of the most important things we need to remember is the impedance profile that characterizes the capacitor.</p>
+<p></p>
+<p>In reality, capacitors exhibit capacitive behavior only up to the point of the resonant frequency.</p>
+<p></p>
+<p>After this point, the behavior of the capacitor starts to change and becomes inductive.</p>
+<p></p>
+<p>The higher the frequency, the more inductive the capacitor becomes.</p>
+<p></p>
+<p>So, this can become a problem when:</p>
+<p></p>
+<p>We use capacitors as filters for high frequency without first checking if they will work for the frequencies we are targeting, and in the case of digital signals, for their subsequent harmonics with high levels of energy.</p>
+<p></p>
+<p>Moreover, this problem is significant when we select multiple capacitors with different values as bypass capacitors placed in parallel.</p>
+<p></p>
+<p>The logic often taught behind this application is that by placing different capacitors, we address different frequencies.</p>
+<p></p>
+<p>One issue with this technique is that if we don&#x27;t select them cautiously based on their impedance profile, we can encounter a phenomenon called anti-resonance.</p>
+<p></p>
+<p>This means that not only will we reduce the impedance at certain frequencies, but we will also have the opposite effect for other frequencies, which will translate into peaks of high impedance that can result in the opposite effect of what we were trying to achieve.</p>
+<p></p>
+<p>So, the next time we select bypass capacitors, make sure to double-check the impedance profile first.</p>
+<p></p>
+<p>I hope this helps,</p>
+<p></p>
+<p>Dario</p>
+<p><a href="http://fresuelectronics.com" target="_blank" rel="noreferrer noopener"><u>fresuelectronics.com</u></a></p>
+<p></p>
+<hr>
+<p></p>
+<h3><strong><span style="font-size:18px">Action list:</span></strong></h3>
+<h5><a href="https://www.fresuelectronics.com/product-page/emi-quick-fixes-guide" target="_blank" rel="nofollow noreferrer noopener"><strong><u>1. </u></strong></a><a href="https://www.fresuelectronics.com/product-page/emi-quick-fixes-guide" target="_blank" rel="nofollow noreferrer noopener"><strong><u><span style="background-color:rgb(2, 255, 135);color:#141414">Get the New EMI Quick Fixes Guide - 2025</span></u></strong></a></h5>
+<p></p>
+<aside class="wix-card"><a href="https://www.fresuelectronics.com/product-page/emi-quick-fixes-guide"><img src="/assets/images/wix/61d609_6a6d3bf9bd114bcfb82d5236e516195a~mv2.png" alt=""><span class="wix-card-name">EMI Quick Fixes Guide</span></a></aside>
+<p></p>
+<hr>
+<p></p>
+</div><!-- /wix-body -->
+</article>
+<footer>
+  <div class="site-footer">
+    <span>© 2026 Fresu Electronics SRL</span>
+    <span><a href="https://www.fresuelectronics.com">fresuelectronics.com</a> · <a href="https://www.fresuelectronics.com/free-tool-1">Free Stackup Tool</a></span>
+  </div>
+</footer>
+</body>
+</html>

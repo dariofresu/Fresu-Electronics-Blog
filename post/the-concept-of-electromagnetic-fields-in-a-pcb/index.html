@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The concept of Electromagnetic Fields in a PCB — Fresu Electronics</title>
+  <meta name="description" content="Explore the concept of fields in PCB and learn how to control electromagnetic fields in PCB design for low EMI. Master fields in PCB today!">
+  <link rel="canonical" href="https://blog.fresuelectronics.com/post/the-concept-of-electromagnetic-fields-in-a-pcb/">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="The concept of Electromagnetic Fields in a PCB">
+  <meta property="og:description" content="Explore the concept of fields in PCB and learn how to control electromagnetic fields in PCB design for low EMI. Master fields in PCB today!">
+  <meta property="og:url" content="https://blog.fresuelectronics.com/post/the-concept-of-electromagnetic-fields-in-a-pcb/">
+  <meta property="og:image" content="https://blog.fresuelectronics.com/assets/images/wix/61d609_2264d53654e446ce852af1cf26749efb~mv2.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400;1,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/assets/wix-exact.css">
+</head>
+<body>
+<header>
+  <div class="site-header">
+    <a href="https://www.fresuelectronics.com">
+      <img src="https://raw.githubusercontent.com/dariofresu/Fresu-Electronics-Blog/main/assets/logo.png" alt="Fresu Electronics">
+    </a>
+    <nav class="header-nav">
+      <a href="https://blog.fresuelectronics.com/">Blog</a>
+      <a href="https://blog.fresuelectronics.com/tools/">Tools</a>
+      <a href="https://www.fresuelectronics.com/trainings">Courses</a>
+      <a href="https://www.fresuelectronics.com/about">About</a>
+      <a href="https://www.fresuelectronics.com/emc-audit" class="header-cta">Book EMC Audit</a>
+    </nav>
+  </div>
+</header>
+<article class="post">
+  <p class="crumb"><a href="https://blog.fresuelectronics.com/">Blog</a> · <a href="https://blog.fresuelectronics.com/#wix-archive">Original posts</a></p>
+  <header class="post-head">
+    <h1>The concept of Electromagnetic Fields in a PCB</h1>
+    <p class="meta"><time datetime="2024-11-18">2024-11-18</time> · <a href="https://info3761185.wixsite.com/dario-fresu-electron/post/the-concept-of-electromagnetic-fields-in-a-pcb">Original on Wix</a></p>
+  <p class="taxo">Categories: Electromagnetism, EMC/EMI Design · Tags: EMI, EMC, PCB DESIGN</p>
+  </header>
+  <figure class="wix-cover"><img src="/assets/images/wix/61d609_2264d53654e446ce852af1cf26749efb~mv2.png" alt="Understanding Electromagnetic Fields in PCBs: Key Insights for Designing Low-EMI Boards - An Illustrated Guide by Dario Fresu."></figure>
+<div class="wix-body" id="wix-body">
+<figure class="wix-fig"><img src="/assets/images/wix/61d609_2264d53654e446ce852af1cf26749efb~mv2.png" alt="Understanding Electromagnetic Fields in PCBs: Key Insights for Designing Low-EMI Boards - An Illustrated Guide by Dario Fresu." loading="lazy"></figure>
+<p></p>
+<blockquote>
+<p><strong><span style="font-size:16px">Note: </span></strong><span style="font-size:16px">The article you are about to read is directly extracted from one of the lessons in the comprehensive </span><a href="https://www.fresuelectronics.com/challenge-page/emi-design" target="_blank" rel="noreferrer noopener"><strong><u><span style="font-size:16px">EMC/EMI Design Course</span></u></strong></a><span style="font-size:16px">. </span><strong><span style="font-size:16px">Visit the course page to find out how to enroll.</span></strong></p>
+</blockquote>
+<h2 style="text-align:justify"><br>Introduction: The Foundation of Low-EMI PCB Design</h2>
+<p style="text-align:justify"></p>
+<p style="text-align:justify">One of the most important concepts in designing printed circuit boards (PCBs) for low electromagnetic interference (EMI) is understanding electromagnetic fields, specifically, how to contain and control them. EMI is fundamentally about field containment: controlling where fields need to be strong and where they need to be weakened. When we discuss fields, we&#x27;re referring to both electric and magnetic fields. Therefore, if our goal is to design PCBs with low EMI, we must understand how these fields behave and how to control them. By mastering this understanding, we can achieve high-performing circuits that pass electromagnetic compatibility (EMC) tests, an essential requirement before any product can be sold in the marketplace.</p>
+<p style="text-align:justify"></p>
+<h2 style="text-align:justify">Visualizing Electromagnetic Fields</h2>
+<p style="text-align:justify"></p>
+<p style="text-align:justify">One of the most effective approaches to understanding electromagnetic (EM) fields is to visualize them. While these phenomena can be complex, simplified visual representations help us grasp the fundamentals that are essential when designing or debugging products for low EMI.</p>
+<p style="text-align:justify"></p>
+<h3 style="text-align:justify">Single Conductor Field Behavior</h3>
+<p style="text-align:justify">The first visualization we need to understand shows how fields surround a single conductor.</p>
+<p></p>
+<figure class="wix-fig" data-wix-width="SMALL"><img src="/assets/images/wix/61d609_f36dbfcd3c76446b9f93eac9b1a7ac7c~mv2.png" alt="Electric Field of Conductor." loading="lazy"><figcaption>Figure 1 - Electric Field of Conductor.</figcaption></figure>
+<p style="text-align:center"><a href="https://wiki.opensourceecology.de/Introduction_to_Dielectricity_%26_Capacitance_(Eric_P._Dollard)#Steinmetz_1911" target="_blank" rel="noreferrer noopener"><em><u>[ Φ magnetic flux; Ψ dielectric flux; from Steinmetz (1911, p.10) ]</u></em></a></p>
+<p></p>
+<p style="text-align:justify">In this scenario, the circle at the center represents a conductor viewed in cross-section. Surrounding this conductor are the magnetic and electric fields, which together form the electromagnetic field.</p>
+<p style="text-align:justify"></p>
+<p style="text-align:justify">The <strong>magnetic field</strong> is quantified by the number of lines of magnetic force, denoted by the symbol Φ (PHI). These magnetic field lines encircle the conductor, forming closed loops that represent the magnetic flux generated by the current flowing through the conductor.</p>
+<p style="text-align:justify"></p>
+<p style="text-align:justify">The <strong>electric field</strong> is represented by dashed lines in the diagram. These lines originate from the conductor and are measured by the number of lines of electric force, denoted by the symbol Ψ (PSI). In the case of a single conductor, the electric field lines radiate outward as straight lines from the conductor.</p>
+<p style="text-align:justify"></p>
+<h3 style="text-align:justify">Two-Conductor System: The Return Path Effect</h3>
+<p style="text-align:justify"></p>
+<p style="text-align:justify">However, when a return conductor is introduced, the behavior of the fields changes dramatically, as illustrated in Figure 2.</p>
+<p style="text-align:justify"></p>
+<figure class="wix-fig" data-wix-width="SMALL"><img src="/assets/images/wix/61d609_c21013ab3e6c48ee81fe0f96881208b3~mv2.png" alt="Electric and magnetic fields around the conductors in a circuit." loading="lazy"><figcaption>Figure 2 - Electric and magnetic fields around the conductors in a circuit.</figcaption></figure>
+<p style="text-align:center"><a href="https://wiki.opensourceecology.de/Introduction_to_Dielectricity_%26_Capacitance_(Eric_P._Dollard)#Steinmetz_1911" target="_blank" rel="noreferrer noopener"><u>[ Φ magnetic flux; Ψ electric flux; from Steinmetz (1911, p.11) ]</u></a></p>
+<p></p>
+<p style="text-align:justify">In this two-conductor scenario:</p>
+<p style="text-align:justify"></p>
+<ul>
+<li>
+<p style="text-align:justify"><strong>Magnetic field lines</strong> become concentrated between the two conductors, forming stronger, more focused loops in the space between them. Outside of this space, the magnetic field lines spread out more broadly.<br></p>
+</li>
+<li>
+<p style="text-align:justify"><strong>Electric field lines</strong> change their behavior significantly. Instead of radiating outward from a single conductor, the electric field lines now start from one conductor and terminate at the other.</p>
+<p style="text-align:justify"></p>
+</li>
+</ul>
+<h3 style="text-align:justify">Key Field Characteristics</h3>
+<p style="text-align:justify"></p>
+<p style="text-align:justify">The key takeaway from these visualizations is fundamental: <strong>magnetic field lines always form closed loops, while electric field lines terminate at conductors</strong>.</p>
+<p style="text-align:justify"></p>
+<p style="text-align:justify">This distinction leads us to describe:<br></p>
+<ul>
+<li>
+<p style="text-align:justify">The <strong>magnetic field</strong> as a &quot;magnetic circuit,&quot; where field lines loop continuously<br></p>
+</li>
+<li>
+<p style="text-align:justify">The <strong>electric field</strong> as an &quot;electric circuit,&quot; where field lines originate and terminate at specific points<br></p>
+</li>
+</ul>
+<h2 style="text-align:justify">Field Polarity and Interaction</h2>
+<h3><br>Opposite Polarities: Field Termination</h3>
+<p style="text-align:justify"></p>
+<p></p>
+<figure class="wix-fig" data-wix-width="479" style="max-width:479px"><img src="/assets/images/wix/61d609_991d37fdb86f43a8afbb08382df65159~mv2.png" alt="Electric bodies with equal but opposite charges." loading="lazy"><figcaption>Figure 3 - Electric bodies with equal but opposite charges.</figcaption></figure>
+<p style="text-align:center"><a href="https://wiki.opensourceecology.de/Introduction_to_Dielectricity_%26_Capacitance_(Eric_P._Dollard)#Thomson_1904" target="_blank" rel="noreferrer noopener"><u>[From Thomson (1904, p.10)]</u></a></p>
+<p></p>
+<p style="text-align:justify">When conductors have opposite polarities, electric field lines originate from one polarity and terminate on the opposite polarity. This demonstrates how fields interact between positive and negative conductors, with lines of force creating a direct path between them.</p>
+<p style="text-align:justify"></p>
+<h3 style="text-align:justify">Like Polarities: Field Repulsion</h3>
+<p></p>
+<figure class="wix-fig" data-wix-width="531" style="max-width:531px"><img src="/assets/images/wix/61d609_fb7fa21e20db4d43829c6351a6977fb0~mv2.png" alt="Electric bodies with equal charges;" loading="lazy"><figcaption>Figure 4 - Electric bodies with equal charge.</figcaption></figure>
+<p style="text-align:center"><a href="https://wiki.opensourceecology.de/Introduction_to_Dielectricity_%26_Capacitance_(Eric_P._Dollard)#Thomson_1904" target="_blank" rel="noreferrer noopener"><u>[ From Thomson (1904, p.11) ]</u></a></p>
+<p></p>
+<p style="text-align:justify">Conversely, when two conductors have the same polarity, the fields repel each other. The electric field lines push away from each other, illustrating how like charges repel and how this affects the distribution of the electric field.</p>
+<p style="text-align:justify"></p>
+<h2 style="text-align:justify">Application to PCB Design</h2>
+<p style="text-align:justify"></p>
+<h3 style="text-align:justify">Basic PCB Field Behavior</h3>
+<p style="text-align:justify"></p>
+<p style="text-align:justify">These fundamental principles apply directly to printed circuit board design, as shown in Figure 5. </p>
+<p style="text-align:justify"></p>
+<figure class="wix-fig" data-wix-width="564" style="max-width:564px"><img src="/assets/images/wix/61d609_8ee2cb9ac964447597b89923a79ee5bd~mv2.jpg" alt="Electric and Magnetic Field in a PCB." loading="lazy"><figcaption>Figure 5 - Electric and Magnetic Field in a PCB.</figcaption></figure>
+<p style="text-align:justify">This representation shows a PCB formed by a two-layer stackup consisting of:<br></p>
+<ul>
+<li>
+<p style="text-align:justify">A <strong>signal layer</strong> (shown in red) containing the signal traces<br></p>
+</li>
+<li>
+<p style="text-align:justify">A <strong>return reference plane</strong> (depicted in blue)<br></p>
+</li>
+</ul>
+<p style="text-align:justify">The term &quot;stackup&quot; refers to the specific arrangement of PCB layers, including the conductive copper layers where signal traces and reference planes are located, as well as the insulating layers and prepreg or core materials that separate and support these conductive layers.</p>
+<p></p>
+<figure class="wix-fig" data-wix-width="499" style="max-width:499px"><img src="/assets/images/wix/61d609_15226ff86682443f9bdbba34ce9e801d~mv2.jpg" alt="Electric and Magnetic Field in a PCB, cross-section view." loading="lazy"><figcaption>Figure 6 - Electric and Magnetic Field in a PCB, cross-section view.</figcaption></figure>
+<p style="text-align:justify">When we observe the fields in this PCB configuration, the behavior is similar to the two-conductor scenario shown in Figure 2. However, in this instance, the two conductors are oriented at a 90-degree angle.</p>
+<figure class="wix-fig" data-wix-width="589" style="max-width:589px"><img src="/assets/images/wix/61d609_8830be2cc06647e9b74f2314f19bedae~mv2.jpg" alt="Electric and Magnetic Field in a PCB in compared to two wires topology." loading="lazy"><figcaption>Figure 7 - Electric and Magnetic Field in a PCB in compared to two wires topology.</figcaption></figure>
+<p style="text-align:justify">This comparison lays the foundation for understanding how to design PCBs with low EMI. Our objective is to design the PCB to contain and redirect the fields exactly where we want them by carefully shaping the geometries of the circuit board.<br></p>
+<h2 style="text-align:justify">The Critical Role of Return Reference Planes</h2>
+<p style="text-align:justify"></p>
+<h3 style="text-align:justify">Field Containment Mechanism</h3>
+<p style="text-align:justify"></p>
+<p style="text-align:justify">In practical terms, the fields of the signal trace in a PCB are significantly influenced by the return reference plane. The fields not only terminate at the surface of the return plane but also tend to bend towards it from the opposite side. This bending effect helps contain the fields and prevents them from spreading outward as they would in the absence of the return plane. The return reference plane acts as a boundary that contains the fields, preventing them from dispersing freely into the surrounding space. Without this plane, the fields would continue spreading outward from the signal trace, as illustrated in Figure 1.</p>
+<p style="text-align:justify"></p>
+<h3 style="text-align:justify">The Consequences of Missing Return Planes</h3>
+<p style="text-align:justify"></p>
+<p style="text-align:justify">Understanding how fields are contained by the return reference plane is essential for PCB design. The choice of stackup—how the layers of the board are arranged—must be based on this principle.</p>
+<p style="text-align:justify"></p>
+<blockquote>
+<p style="text-align:justify"><strong><span style="font-size:18px">The key takeaway</span></strong><span style="font-size:18px">: Removing the return reference plane allows the fields to expand uncontrollably. This is a major reason why PCBs often fail EMC tests and generate EMI issues. Signal traces without an adjacent return reference plane lack the necessary containment for the fields, leading to excessive radiation.</span></p>
+</blockquote>
+<p style="text-align:justify"></p>
+<p style="text-align:justify">When we measure fields during EMC testing, we often find that levels exceed requirements because, without a return reference plane, the PCB effectively becomes a radiator, emitting unwanted electromagnetic energy.</p>
+<p style="text-align:justify"></p>
+<h3 style="text-align:justify">Real-World Implications</h3>
+<p style="text-align:justify"></p>
+<p style="text-align:justify">In practical scenarios, particularly with common electronic consumer products, if a PCB lacks a return reference plane adjacent to the signal traces, the earth ground will act as the return path. This causes the fields to continue expanding until they eventually reach the earth ground or other nearby conductive structures. This expansion can lead to the formation of common-mode currents, which are highly effective at radiating electromagnetic energy. These currents can easily cause a product to fail EMC tests if the radiated fields exceed acceptable limits.</p>
+<p style="text-align:justify"></p>
+<h2 style="text-align:justify">The Fundamental Design Rule</h2>
+<p style="text-align:justify"></p>
+<p style="text-align:justify">To mitigate EMI issues, the first and most important rule of thumb in PCB design is:</p>
+<p style="text-align:justify"></p>
+<blockquote>
+<p style="text-align:justify"><strong><span style="font-size:18px">For each signal layer, there must be a return reference plane adjacent to it. </span></strong><span style="font-size:18px">This return plane should be free of discontinuities, such as large holes, gaps, cuts, or any other malformations that could compromise its effectiveness.</span></p>
+</blockquote>
+<p></p>
+<figure class="wix-fig" data-wix-width="499" style="max-width:499px"><img src="/assets/images/wix/61d609_15226ff86682443f9bdbba34ce9e801d~mv2.jpg" alt="Electric and Magnetic Field in a PCB, cross-section view." loading="lazy"><figcaption>Figure 8 - Electric and Magnetic Field in a PCB, cross-section view.</figcaption></figure>
+<p style="text-align:justify">The return reference plane should be as integral and as close as possible to the signal trace. This approach is key to successfully passing EMC tests on the first attempt. Proper design with an adjacent, continuous return reference plane ensures that fields are effectively contained, reducing the chances of EMI issues.</p>
+<p></p>
+<figure class="wix-fig" data-wix-width="632" style="max-width:632px"><img src="/assets/images/wix/61d609_37b736f4331545ed89f9d7ad2130ece3~mv2.png" alt="Electric and Magnetic fields in a two layers PCB." loading="lazy"><figcaption>Figure 9 - Electric and Magnetic fields in a two layers PCB.</figcaption></figure>
+<p style="text-align:justify">This final image highlights a crucial concept to remember when designing printed circuit boards. It visually emphasizes the significance of field containment through an appropriate layer stackup, which is essential for effective low-EMI PCB design. Additionally, a key point to be explored further in other lessons and articles is that energy is carried by the fields, not within the conductor. Instead, it resides in the medium between the conductors, where permittivity and permeability control the energy transfer. At Fresu Electronics, we are dedicated to helping engineers grasp and implement best design practices from the outset. If you&#x27;re interested in enhancing your skills, we invite you to explore our courses and EMI control guides.</p>
+<p style="text-align:justify"></p>
+<p></p>
+<p class="wix-btn-wrap"><a class="wix-btn" href="https://www.fresuelectronics.com/courses" target="_blank" rel="noreferrer noopener" style="background:#116dff;border-radius:8px;color:#ffffff;width:min(523px,100%)">Check Out Our Online Training Courses Here</a></p>
+<p></p>
+<aside class="wix-card"><a href="https://www.fresuelectronics.com/product-page/emi-control-guides-bundle-offer"><img src="/assets/images/wix/61d609_a3dd869d762641cda7e4069aadc81638~mv2.png" alt=""><span class="wix-card-name">EMI Control Bundle Offer - Digital Guides (3-eBooks)</span></a></aside>
+<p></p>
+</div><!-- /wix-body -->
+</article>
+<footer>
+  <div class="site-footer">
+    <span>© 2026 Fresu Electronics SRL</span>
+    <span><a href="https://www.fresuelectronics.com">fresuelectronics.com</a> · <a href="https://www.fresuelectronics.com/free-tool-1">Free Stackup Tool</a></span>
+  </div>
+</footer>
+</body>
+</html>

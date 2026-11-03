@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ESD - Chassis and Parasitic Capacitance — Fresu Electronics</title>
+  <meta name="description" content="One of the classic ESD misconceptions is thinking: &quot;We won&#x27;t have Electrostatic Discharge problems; we connected the chassis to the...">
+  <link rel="canonical" href="https://blog.fresuelectronics.com/post/esd-chassis-and-parasitic-capacitance/">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="ESD - Chassis and Parasitic Capacitance">
+  <meta property="og:description" content="One of the classic ESD misconceptions is thinking: &quot;We won&#x27;t have Electrostatic Discharge problems; we connected the chassis to the...">
+  <meta property="og:url" content="https://blog.fresuelectronics.com/post/esd-chassis-and-parasitic-capacitance/">
+  <meta property="og:image" content="https://blog.fresuelectronics.com/assets/images/wix/61d609_25a36a8a43f24a14827f6106f43631e4~mv2.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400;1,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/assets/wix-exact.css">
+</head>
+<body>
+<header>
+  <div class="site-header">
+    <a href="https://www.fresuelectronics.com">
+      <img src="https://raw.githubusercontent.com/dariofresu/Fresu-Electronics-Blog/main/assets/logo.png" alt="Fresu Electronics">
+    </a>
+    <nav class="header-nav">
+      <a href="https://blog.fresuelectronics.com/">Blog</a>
+      <a href="https://blog.fresuelectronics.com/tools/">Tools</a>
+      <a href="https://www.fresuelectronics.com/trainings">Courses</a>
+      <a href="https://www.fresuelectronics.com/about">About</a>
+      <a href="https://www.fresuelectronics.com/emc-audit" class="header-cta">Book EMC Audit</a>
+    </nav>
+  </div>
+</header>
+<article class="post">
+  <p class="crumb"><a href="https://blog.fresuelectronics.com/">Blog</a> · <a href="https://blog.fresuelectronics.com/#wix-archive">Original posts</a></p>
+  <header class="post-head">
+    <h1>ESD - Chassis and Parasitic Capacitance</h1>
+    <p class="meta"><time datetime="2024-09-10">2024-09-10</time> · <a href="https://info3761185.wixsite.com/dario-fresu-electron/post/esd-chassis-and-parasitic-capacitance">Original on Wix</a></p>
+  <p class="taxo">Categories: EMI  - Short Post</p>
+  </header>
+  <figure class="wix-cover"><img src="/assets/images/wix/61d609_25a36a8a43f24a14827f6106f43631e4~mv2.png" alt=""></figure>
+<div class="wix-body" id="wix-body">
+<figure class="wix-fig"><img src="/assets/images/wix/61d609_25a36a8a43f24a14827f6106f43631e4~mv2.png" alt="" loading="lazy"></figure>
+<p>One of the classic ESD misconceptions is thinking:</p>
+<p></p>
+<p>&quot;We won&#x27;t have Electrostatic Discharge problems; we connected the chassis to the protective earth!&quot;</p>
+<p></p>
+<p>I know, I used to think that too.</p>
+<p></p>
+<p>Unfortunately, this mindset is limited to the analogy of water flowing through pipes: resistance, voltage, and current.</p>
+<p></p>
+<p>This approach has many limitations. It works, but only for very simple applications.</p>
+<p></p>
+<p>A better approach is to think in terms of EM fields and impedance.</p>
+<p></p>
+<p>This becomes important when dealing with phenomena like Electrostatic Discharge (ESD).</p>
+<p></p>
+<p>Let&#x27;s take this case as an example.</p>
+<p></p>
+<p>When a discharge event happens, the protective earth connection is seen as a high impedance path by the ESD pulse.</p>
+<p></p>
+<p>This causes the discharge current to find alternative paths of least impedance to complete the discharge.</p>
+<p></p>
+<p>In this case, the path of least impedance is found in the parasitic capacitance between the chassis and the earth ground.</p>
+<p></p>
+<p>This causes the majority of the ESD current to flow through this path instead of the protective earth (PE) connection, where only a small portion will flow.</p>
+<p></p>
+<p>If there were no cables connected to the circuit and coming out of the chassis, this wouldn&#x27;t be a problem.</p>
+<p></p>
+<p>But the problem lies in the fact that the circuit is still connected to an external voltage reference without having physical connections to the chassis.</p>
+<p></p>
+<p>Unfortunately for the circuit, the parasitic capacitance between the chassis and the PC board will cause a secondary ESD event, which can be even more disruptive than the first one.</p>
+<p></p>
+<p>This happens because the chassis builds up a voltage greater than the PC board voltage, which remains at the external reference voltage.</p>
+<p></p>
+<p>In the first ESD event (human to chassis), the body resistance limited the ESD current. In the second ESD event (chassis to PCB), there is no body resistance to limit the current, making the event much more disruptive.</p>
+<p></p>
+<p>The takeaways are the following:</p>
+<p></p>
+<p>- Think about how you can divert ESD away from the circuit.</p>
+<p></p>
+<p>- Create low impedance connections for diverting the ESD event.</p>
+<p></p>
+<p>- Worry about parasitic elements, as these are not part of the schematics.</p>
+<p></p>
+<p>- Keep it simple; think in terms of electromagnetic fields and fundamentals.</p>
+<p></p>
+<p>I hope this helps,</p>
+<p></p>
+<p>Dario</p>
+<p><a href="http://fresuelectronics.com" target="_blank" rel="noreferrer noopener"><u>fresuelectronics.com</u></a></p>
+<p></p>
+<hr>
+<p></p>
+<h3><strong><span style="font-size:18px">Action list:</span></strong></h3>
+<h5><a href="https://www.fresuelectronics.com/product-page/emi-quick-fixes-guide" target="_blank" rel="nofollow noreferrer noopener"><strong><u>1. </u></strong></a><a href="https://www.fresuelectronics.com/product-page/emi-quick-fixes-guide" target="_blank" rel="nofollow noreferrer noopener"><strong><u><span style="background-color:rgb(2, 255, 135);color:#141414">Get the New EMI Quick Fixes Guide - 2025</span></u></strong></a></h5>
+<p></p>
+<aside class="wix-card"><a href="https://www.fresuelectronics.com/product-page/emi-quick-fixes-guide"><img src="/assets/images/wix/61d609_6a6d3bf9bd114bcfb82d5236e516195a~mv2.png" alt=""><span class="wix-card-name">EMI Quick Fixes Guide</span></a></aside>
+<p></p>
+<hr>
+<p></p>
+</div><!-- /wix-body -->
+</article>
+<footer>
+  <div class="site-footer">
+    <span>© 2026 Fresu Electronics SRL</span>
+    <span><a href="https://www.fresuelectronics.com">fresuelectronics.com</a> · <a href="https://www.fresuelectronics.com/free-tool-1">Free Stackup Tool</a></span>
+  </div>
+</footer>
+</body>
+</html>

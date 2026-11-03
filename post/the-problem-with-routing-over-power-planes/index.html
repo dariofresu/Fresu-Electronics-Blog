@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Problem With Routing Signal Traces Over Power Planes.  — Fresu Electronics</title>
+  <meta name="description" content="What do you notice here? Action list: 1. Get the New EMI Quick Fixes Guide - 2025 For some PCB designers, this might just look like a...">
+  <link rel="canonical" href="https://blog.fresuelectronics.com/post/the-problem-with-routing-over-power-planes/">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="The Problem With Routing Signal Traces Over Power Planes. ">
+  <meta property="og:description" content="What do you notice here? Action list: 1. Get the New EMI Quick Fixes Guide - 2025 For some PCB designers, this might just look like a...">
+  <meta property="og:url" content="https://blog.fresuelectronics.com/post/the-problem-with-routing-over-power-planes/">
+  <meta property="og:image" content="https://blog.fresuelectronics.com/assets/images/wix/61d609_8c29426a776b48e58b33ab628b464050~mv2.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400;1,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/assets/wix-exact.css">
+</head>
+<body>
+<header>
+  <div class="site-header">
+    <a href="https://www.fresuelectronics.com">
+      <img src="https://raw.githubusercontent.com/dariofresu/Fresu-Electronics-Blog/main/assets/logo.png" alt="Fresu Electronics">
+    </a>
+    <nav class="header-nav">
+      <a href="https://blog.fresuelectronics.com/">Blog</a>
+      <a href="https://blog.fresuelectronics.com/tools/">Tools</a>
+      <a href="https://www.fresuelectronics.com/trainings">Courses</a>
+      <a href="https://www.fresuelectronics.com/about">About</a>
+      <a href="https://www.fresuelectronics.com/emc-audit" class="header-cta">Book EMC Audit</a>
+    </nav>
+  </div>
+</header>
+<article class="post">
+  <p class="crumb"><a href="https://blog.fresuelectronics.com/">Blog</a> · <a href="https://blog.fresuelectronics.com/#wix-archive">Original posts</a></p>
+  <header class="post-head">
+    <h1>The Problem With Routing Signal Traces Over Power Planes. </h1>
+    <p class="meta"><time datetime="2024-10-11">2024-10-11</time> · <a href="https://info3761185.wixsite.com/dario-fresu-electron/post/the-problem-with-routing-over-power-planes">Original on Wix</a></p>
+  <p class="taxo">Categories: EMI  - Short Post</p>
+  </header>
+  <figure class="wix-cover"><img src="/assets/images/wix/61d609_8c29426a776b48e58b33ab628b464050~mv2.png" alt=""></figure>
+<div class="wix-body" id="wix-body">
+<p></p>
+<p><strong>What do you notice here?</strong></p>
+<figure class="wix-fig" data-wix-width="484" style="max-width:484px"><img src="/assets/images/wix/61d609_8c29426a776b48e58b33ab628b464050~mv2.png" alt="Traces over split planes" loading="lazy"></figure>
+<p></p>
+<hr>
+<h3><strong><span style="font-size:18px">Action list:</span></strong></h3>
+<h5><a href="https://www.fresuelectronics.com/product-page/emi-quick-fixes-guide" target="_blank" rel="nofollow noreferrer noopener"><strong><u>1. </u></strong></a><a href="https://www.fresuelectronics.com/product-page/emi-quick-fixes-guide" target="_blank" rel="nofollow noreferrer noopener"><strong><u><span style="background-color:rgb(2, 255, 135);color:#141414">Get the New EMI Quick Fixes Guide - 2025</span></u></strong></a></h5>
+<p></p>
+<aside class="wix-card"><a href="https://www.fresuelectronics.com/product-page/emi-quick-fixes-guide"><img src="/assets/images/wix/61d609_6a6d3bf9bd114bcfb82d5236e516195a~mv2.png" alt=""><span class="wix-card-name">EMI Quick Fixes Guide</span></a></aside>
+<p></p>
+<hr>
+<p></p>
+<p>For some PCB designers, this might just look like a common PCB design.</p>
+<p>And fair enough, I was there once too.</p>
+<p></p>
+<p>But for those striving to achieve the best EMI performance, they will immediately notice one big problem.</p>
+<p></p>
+<p>The signal traces in this motherboard PCB are not matched with the Return Reference Plane (RRP); instead, they are routed over multiple power planes divided into different sections.</p>
+<p></p>
+<p>As a consequence, they are also routed over the splits that separate the copper fills.</p>
+<p></p>
+<p>The issue is that when signals reach these splits, they encounter what is called an impedance discontinuity, which simply means the impedance changes.</p>
+<p></p>
+<p>But if we recall, impedance is defined as the ratio between voltage and current. </p>
+<p></p>
+<p>So, if the impedance changes, this ratio changes as well.</p>
+<p></p>
+<p>Which simply means our signal is now in trouble.</p>
+<p></p>
+<p>In terms of EMI, the worst issue arises from the excitation of the space between the planes, called the cavity, and from the enlargement of the return current loop, which is now forced to find alternative paths rather than staying under the trace.</p>
+<p></p>
+<p>This is one of the reasons why I’m not a fan of using power planes as a return path. There&#x27;s more to it, but I&#x27;ll leave that for another time.</p>
+<p></p>
+<p>My recommendation when choosing the stackup: </p>
+<p></p>
+<p>For each signal layer, make sure you have a Return Reference Plane (RRP) adjacent to it. And if you want to save on RRPs, take advantage of the skin effect by using one RRP for two signal layers, one on each side of the RRP.</p>
+<p></p>
+<p>I hope this helps you avoid EMI,</p>
+<p>Dario</p>
+<p>fresuelectronics.com</p>
+<p></p>
+<hr>
+<p><em>💡 By the way, If you would like to master EMC/EMI design, we have a new training program here:</em></p>
+<p class="wix-btn-wrap"><a class="wix-btn" href="https://www.fresuelectronics.com/mentoring" target="_blank" rel="noreferrer noopener" style="background:#116dff;border-radius:8px;color:#ffffff">Get Personalized Training</a></p>
+<p></p>
+<p><em>There, you’ll find details on how to apply for one of our exclusive programs designed to help you achieve that goal. </em></p>
+</div><!-- /wix-body -->
+</article>
+<footer>
+  <div class="site-footer">
+    <span>© 2026 Fresu Electronics SRL</span>
+    <span><a href="https://www.fresuelectronics.com">fresuelectronics.com</a> · <a href="https://www.fresuelectronics.com/free-tool-1">Free Stackup Tool</a></span>
+  </div>
+</footer>
+</body>
+</html>

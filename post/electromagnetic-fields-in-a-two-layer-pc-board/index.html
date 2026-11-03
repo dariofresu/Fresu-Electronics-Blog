@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Electromagnetic Fields in a Two-Layer PC Board — Fresu Electronics</title>
+  <meta name="description" content="In this article, we are going to explore what happens when, instead of a return reference plane, we have another signal trace in the layers">
+  <link rel="canonical" href="https://blog.fresuelectronics.com/post/electromagnetic-fields-in-a-two-layer-pc-board/">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Electromagnetic Fields in a Two-Layer PC Board">
+  <meta property="og:description" content="In this article, we are going to explore what happens when, instead of a return reference plane, we have another signal trace in the layers">
+  <meta property="og:url" content="https://blog.fresuelectronics.com/post/electromagnetic-fields-in-a-two-layer-pc-board/">
+  <meta property="og:image" content="https://blog.fresuelectronics.com/assets/images/wix/61d609_a418e976419540e28a599c8042147791~mv2.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400;1,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/assets/wix-exact.css">
+</head>
+<body>
+<header>
+  <div class="site-header">
+    <a href="https://www.fresuelectronics.com">
+      <img src="https://raw.githubusercontent.com/dariofresu/Fresu-Electronics-Blog/main/assets/logo.png" alt="Fresu Electronics">
+    </a>
+    <nav class="header-nav">
+      <a href="https://blog.fresuelectronics.com/">Blog</a>
+      <a href="https://blog.fresuelectronics.com/tools/">Tools</a>
+      <a href="https://www.fresuelectronics.com/trainings">Courses</a>
+      <a href="https://www.fresuelectronics.com/about">About</a>
+      <a href="https://www.fresuelectronics.com/emc-audit" class="header-cta">Book EMC Audit</a>
+    </nav>
+  </div>
+</header>
+<article class="post">
+  <p class="crumb"><a href="https://blog.fresuelectronics.com/">Blog</a> · <a href="https://blog.fresuelectronics.com/#wix-archive">Original posts</a></p>
+  <header class="post-head">
+    <h1>Electromagnetic Fields in a Two-Layer PC Board</h1>
+    <p class="meta"><time datetime="2024-11-18">2024-11-18</time> · <a href="https://info3761185.wixsite.com/dario-fresu-electron/post/electromagnetic-fields-in-a-two-layer-pc-board">Original on Wix</a></p>
+  </header>
+  <figure class="wix-cover"><img src="/assets/images/wix/61d609_a418e976419540e28a599c8042147791~mv2.png" alt=" Electric and Magnetic fields in a PCB with both layers used as signal layers."></figure>
+<div class="wix-body" id="wix-body">
+<p></p>
+<figure class="wix-fig" data-wix-width="573" style="max-width:573px"><img src="/assets/images/wix/61d609_8b7cdadf6d444341a145f4c67e56149e~mv2.jpg" alt="" loading="lazy"></figure>
+<p></p>
+<p></p>
+<aside class="wix-card"><a href="https://www.fresuelectronics.com/product-page/emi-control-guides-bundle-offer"><img src="/assets/images/wix/61d609_866071c3d3f041ac8bcaab783ac8a655~mv2.png" alt=""><span class="wix-card-name">EMI Control Guides - Bundle Offer</span></a></aside>
+<p></p>
+<hr>
+<p></p>
+<p>In this article, we are going to explore what happens when, instead of a return reference plane, we have another signal trace in the layer stackup. Unfortunately, this topology is becoming increasingly common. </p>
+<p></p>
+<p>The reason for this is often a lack of understanding of the concepts of fields and signals among designers. Sometimes, stakeholders who do not grasp how electromagnetic fields or printed circuit boards behave, make decisions about the stackup design.</p>
+<p></p>
+<p>When a PCB design uses two conductive layers, both dedicated to signal traces, we encounter a scenario like the one illustrated in the image here:</p>
+<figure class="wix-fig" data-wix-width="733" style="max-width:733px"><img src="/assets/images/wix/61d609_a418e976419540e28a599c8042147791~mv2.png" alt="Figure 1 - Electric and Magnetic fields in a PCB with both layers used as signal layers." loading="lazy"><figcaption>Figure 1 - Electric and Magnetic fields in a PCB with both layers used as signal layers.</figcaption></figure>
+<p></p>
+<p>In this scenario, the fields from both signal traces are spreading out and interfering with each other. This situation exemplifies a classic mistake in printed circuit board (PCB) design—something that should be avoided at all costs.</p>
+<p></p>
+<p>I cannot emphasize this enough: </p>
+<p></p>
+<h2><strong>DO NOT CHOOSE THIS TYPE OF STACKUP!</strong></h2>
+<p></p>
+<p><u><span style="font-size:20px">Why is this so critical? </span></u></p>
+<p></p>
+<p>As explained earlier, the fields are no longer confined to a specific area. Instead, they are expanding outward from both signal traces. This means that not only do the fields from one signal trace interfere with the fields from the other, but they also contribute to further expansion of the electromagnetic fields. </p>
+<p></p>
+<p>The result is a significant increase in electromagnetic interference (EMI), which is precisely what we aim to prevent in low-EMI PCB design. The primary goal of PCB design for low EMI is to contain the fields, preventing them from spreading outwards. </p>
+<p></p>
+<p></p>
+<p>However, with this type of stackup, the fields are doing the opposite—they&#x27;re expanding and interacting, leading to higher levels of EMI and also Signal Integrity problems. This design approach is counterproductive to what we are trying to achieve.</p>
+<p></p>
+<p>To address this problem, designers often attempt to compensate by adding copper to both layers and connecting it to “ground” pins. </p>
+<p></p>
+<p>These copper areas, often referred to as copper pours or copper fills, are placed adjacent to the signal traces rather than directly above or below them. While this strategy might seem like a potential solution, it doesn&#x27;t effectively resolve the underlying issue of field containment.</p>
+<p></p>
+<figure class="wix-fig" data-wix-width="740" style="max-width:740px"><img src="/assets/images/wix/61d609_12aec9c0aa204a59b95ba9eedc6fa89b~mv2.png" alt="Figure 2 - Top view of a 2 layers PCB with copper pours on the side of the signal traces." loading="lazy"><figcaption>Figure 2 - Top view of a 2 layers PCB with copper pours on the side of the signal traces.</figcaption></figure>
+<p>This strategy, unfortunately, fails to provide the correct reference potential to the fields and also does not offer a proper path for the return currents. As we will explore later in this course, the absence of an adequate return path can lead to several issues, including the generation of common mode currents. These currents are particularly problematic because they are highly effective at radiating electromagnetic energy, which contributes to unwanted emissions.</p>
+<h1><strong><span style="font-size:24px">Microstrips</span></strong></h1>
+<p></p>
+<p>Now, let’s explore the topologies that we will use when designing printed circuit boards.</p>
+<p>The most common topology is the one we discussed earlier, where the signal line is adjacent to a return reference plane (RRP). This configuration is known as the <strong>microstrip topology</strong>.</p>
+<p></p>
+<figure class="wix-fig" data-wix-width="725" style="max-width:725px"><img src="/assets/images/wix/61d609_175d54676fb545c7b84d2bd63ae51381~mv2.png" alt="Figure 3 - Example of a microstrip transmission line in a PCB." loading="lazy"><figcaption>Figure 3 - Example of a microstrip transmission line in a PCB.</figcaption></figure>
+<p>In a microstrip topology, the signal layer can be positioned either on the top or bottom of the board, with the return reference plane on the opposite side. </p>
+<p></p>
+<p>For example, you could have the signal line on the top layer with the reference plane beneath it, or you could reverse this, placing the signal on the bottom layer and the reference plane above.</p>
+<p></p>
+<p>What’s crucial in this topology is that the return reference plane is directly adjacent to the signal layer and positioned as close as possible to ensure that the electromagnetic fields are well-contained. </p>
+<p></p>
+<p>This containment of fields is essential for minimizing electromagnetic interference (EMI) and achieving a design that meets electromagnetic compatibility (EMC) requirements.</p>
+<h1><strong><span style="font-size:24px">Strip lines</span></strong></h1>
+<p></p>
+<p>The other topology we use is known as the <strong>stripline</strong>. In this configuration, the return reference plane (RRP) is adjacent to both sides of the signal layer. When the planes are symmetrically placed with respect to the signal layer, both provide equal reference potential to the signal trace, effectively containing the fields on both sides.</p>
+<figure class="wix-fig" data-wix-width="708" style="max-width:708px"><img src="/assets/images/wix/61d609_f4c7f13c25974d44b64dc4de08631a25~mv2.png" alt="Figure 4 - Example of a stripline transmission line in a PCB." loading="lazy"><figcaption>Figure 4 - Example of a stripline transmission line in a PCB.</figcaption></figure>
+<p>This symmetry ensures that the electromagnetic fields are well-contained, reducing the chances of radiating unwanted energy and minimizing electromagnetic interference (EMI). </p>
+<p></p>
+<p>By having reference planes on both sides of the signal, the stripline topology provides excellent field containment compared to the microstrip topology, where the field containment is primarily on one side.</p>
+<p></p>
+<p>However, this topology requires an additional layer in the PCB stackup, which increases the overall cost of PCB fabrication. </p>
+<p></p>
+<p>Despite the extra cost, the enhanced field containment and improved EMI performance make stripline topology a valuable option for designs where minimizing interference is critical, especially with high frequency design.</p>
+<h1><strong><span style="font-size:24px">Co-planar waveguide</span></strong></h1>
+<p></p>
+<p>Another important topology is the coplanar waveguide. In this configuration, not only do we have a return reference plane adjacent to the signal trace, but we also provide return and reference at the sides of the signal trace. </p>
+<p></p>
+<p></p>
+<figure class="wix-fig" data-wix-width="717" style="max-width:717px"><img src="/assets/images/wix/61d609_6ba6187b176042e1ba0ed6c070e105a7~mv2.png" alt="Figure 5- Example of a Coplanar transmission line in a PCB." loading="lazy"><figcaption>Figure 5- Example of a Coplanar transmission line in a PCB.</figcaption></figure>
+<p></p>
+<p style="text-align:center"></p>
+<p>This topology is particularly popular in RF circuits due to its ability to tightly control the electromagnetic fields around the signal.</p>
+<p></p>
+<p>A coplanar waveguide essentially consists of two return reference traces or planes that run adjacent to the signal trace. These are then connected, or &quot;stitched,&quot; to the return reference plane using vias. </p>
+<p></p>
+<p>By surrounding the signal trace with return and reference structures on multiple sides, this topology offers even better field containment than the microstrip or stripline configurations.</p>
+<p></p>
+<p>It’s important to note that the poorly designed, non-recommended topology we discussed earlier (where copper pours are placed near signal traces) is essentially a cheaper and less effective modification of the coplanar waveguide structure. </p>
+<p></p>
+<p>This modified version often leads to issues because it does not provide proper field containment and can result in increased electromagnetic interference (EMI).</p>
+<p></p>
+<p>The true coplanar waveguide topology, however, is more advanced and requires careful design. If not implemented correctly, it can create resonances between the cavities formed by vias and the spaces between traces. </p>
+<p></p>
+<p>These resonances can lead to additional emission problems, undermining the very benefits this topology is supposed to provide.</p>
+<p></p>
+<p>Therefore, while the coplanar waveguide is highly effective for field containment when used properly, it also demands precision in design to avoid potential issues that could lead to EMC test failures or other performance problems.</p>
+<p></p>
+<p>I hope this helps,</p>
+<p>Dario</p>
+<p><a href="http://fresuelectronics.com" target="_blank" rel="noreferrer noopener"><u><span style="color:#116dff">fresuelectronics.com</span></u></a></p>
+<p></p>
+<hr>
+<p><em>💡 By the way, If you would like to master EMC/EMI design, we have a new training program here:</em></p>
+<p class="wix-btn-wrap"><a class="wix-btn" href="https://www.fresuelectronics.com/mentoring" target="_blank" rel="noreferrer noopener" style="background:#116dff;border-radius:8px;color:#ffffff">Get Personalized Training</a></p>
+<p></p>
+<p><em>There, you’ll find details on how to apply for one of our exclusive programs designed to help you achieve that goal. </em></p>
+<p></p>
+</div><!-- /wix-body -->
+</article>
+<footer>
+  <div class="site-footer">
+    <span>© 2026 Fresu Electronics SRL</span>
+    <span><a href="https://www.fresuelectronics.com">fresuelectronics.com</a> · <a href="https://www.fresuelectronics.com/free-tool-1">Free Stackup Tool</a></span>
+  </div>
+</footer>
+</body>
+</html>

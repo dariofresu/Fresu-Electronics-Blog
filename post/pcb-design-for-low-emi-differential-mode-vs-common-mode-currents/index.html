@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Differential Mode vs. Common Mode Currents — Fresu Electronics</title>
+  <meta name="description" content="In this article, we’ll explore the coupling methods of EMI, specifically focusing on differential mode and common mode currents.">
+  <link rel="canonical" href="https://blog.fresuelectronics.com/post/pcb-design-for-low-emi-differential-mode-vs-common-mode-currents/">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Differential Mode vs. Common Mode Currents">
+  <meta property="og:description" content="In this article, we’ll explore the coupling methods of EMI, specifically focusing on differential mode and common mode currents.">
+  <meta property="og:url" content="https://blog.fresuelectronics.com/post/pcb-design-for-low-emi-differential-mode-vs-common-mode-currents/">
+  <meta property="og:image" content="https://blog.fresuelectronics.com/assets/images/wix/61d609_9cec66106f134899b4f1000e763d59ce~mv2.jpg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400;1,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/assets/wix-exact.css">
+</head>
+<body>
+<header>
+  <div class="site-header">
+    <a href="https://www.fresuelectronics.com">
+      <img src="https://raw.githubusercontent.com/dariofresu/Fresu-Electronics-Blog/main/assets/logo.png" alt="Fresu Electronics">
+    </a>
+    <nav class="header-nav">
+      <a href="https://blog.fresuelectronics.com/">Blog</a>
+      <a href="https://blog.fresuelectronics.com/tools/">Tools</a>
+      <a href="https://www.fresuelectronics.com/trainings">Courses</a>
+      <a href="https://www.fresuelectronics.com/about">About</a>
+      <a href="https://www.fresuelectronics.com/emc-audit" class="header-cta">Book EMC Audit</a>
+    </nav>
+  </div>
+</header>
+<article class="post">
+  <p class="crumb"><a href="https://blog.fresuelectronics.com/">Blog</a> · <a href="https://blog.fresuelectronics.com/#wix-archive">Original posts</a></p>
+  <header class="post-head">
+    <h1>Differential Mode vs. Common Mode Currents</h1>
+    <p class="meta"><time datetime="2024-11-18">2024-11-18</time> · <a href="https://info3761185.wixsite.com/dario-fresu-electron/post/pcb-design-for-low-emi-differential-mode-vs-common-mode-currents">Original on Wix</a></p>
+  <p class="taxo">Tags: EMI, EMC, Lessons</p>
+  </header>
+  <figure class="wix-cover"><img src="/assets/images/wix/61d609_9cec66106f134899b4f1000e763d59ce~mv2.jpg" alt=""></figure>
+<div class="wix-body" id="wix-body">
+<p></p>
+<figure class="wix-fig"><img src="/assets/images/wix/61d609_276b5de2f58e421e89b3786687d815ea~mv2.jpg" alt="" loading="lazy"></figure>
+<h3><strong><span style="font-size:18px">Action list:</span></strong></h3>
+<h5><a href="https://www.fresuelectronics.com/product-page/emi-quick-fixes-guide" target="_blank" rel="nofollow noreferrer noopener"><strong><u>1. </u></strong></a><a href="https://www.fresuelectronics.com/product-page/emi-quick-fixes-guide" target="_blank" rel="nofollow noreferrer noopener"><strong><u><span style="background-color:rgb(2, 255, 135);color:#141414">Get the New EMI Quick Fixes Guide - 2025</span></u></strong></a></h5>
+<p></p>
+<aside class="wix-card"><a href="https://www.fresuelectronics.com/product-page/emi-quick-fixes-guide"><img src="/assets/images/wix/61d609_6a6d3bf9bd114bcfb82d5236e516195a~mv2.png" alt=""><span class="wix-card-name">EMI Quick Fixes Guide</span></a></aside>
+<p></p>
+<hr>
+<p></p>
+<p style="text-align:justify">In this article, we’ll explore the coupling methods of electromagnetic interference (EMI) and delve into the types of currents that EMI generates in printed circuit boards, specifically focusing on differential mode and common mode currents. Understanding these currents is fundamental to designing circuits that can effectively manage interference, maintaining performance across diverse environments.</p>
+<p style="text-align:justify"></p>
+<p style="text-align:justify">In one of the previous lessons, we reviewed how <strong>electromagnetic compatibility (EMC) </strong>breaks down into two main branches: <strong>electromagnetic interference</strong>, often shortened to EMI, and <strong>electromagnetic susceptibility</strong>, also known as electromagnetic immunity. These two branches help us categorize and address the different aspects of how electronics interact with electromagnetic energy, whether it’s to prevent unintentional emissions or protect devices from interference. Within these branches, each is further divided for more targeted analysis and control. </p>
+<p style="text-align:justify"></p>
+<p style="text-align:justify"></p>
+<figure class="wix-fig"><img src="/assets/images/wix/61d609_208d9820145a49499aabf21879e63a1a~mv2.png" alt="Branches of EMC" loading="lazy"><figcaption>Figure 1  - Branches of EMC</figcaption></figure>
+<p style="text-align:justify">For electromagnetic interference, or emissions, we typically separate these into <strong>conducted emissions</strong> and <strong>radiated emissions</strong>. For susceptibility or immunity, we similarly split this into <strong>conducted susceptibility</strong> and <strong>radiated susceptibility</strong>. </p>
+<p style="text-align:justify"></p>
+<p style="text-align:justify">To better understand how these types of emissions and susceptibilities arise and how they travel, it’s important to clarify two main distinctions regarding the origin and distance of a signal. The space around an EMI source divides into two primary regions:</p>
+<p style="text-align:justify"></p>
+<ul>
+<li>
+<p style="text-align:justify">The Near Field region</p>
+</li>
+<li>
+<p style="text-align:justify">The Far Field region. </p>
+<p style="text-align:justify"></p>
+</li>
+</ul>
+<p style="text-align:justify">Close to the source, in the near field, we analyze electric and magnetic fields separately. Their properties are influenced strongly by the source itself. As we move farther away, in what’s known as the far field region, these fields merge into what we call an electromagnetic plane wave.</p>
+<p style="text-align:justify"></p>
+<figure class="wix-fig"><img src="/assets/images/wix/61d609_994e3dc931964adba660634e4bcaaeea~mv2.png" alt="Near Field vs. Far Field Regions" loading="lazy"><figcaption>Figure 2  - Near Field vs. Far Field Regions</figcaption></figure>
+<p style="text-align:justify"> Here, the field characteristics are shaped less by the source and more by the properties of the medium through which they propagate. The boundaries between these regions are determined by the signal’s wavelength.</p>
+<p style="text-align:justify"></p>
+<p style="text-align:justify">This separation between near and far fields doesn’t have an exact cutoff point but instead passes through what we call the transition region. Typically, this transitional zone is located at a distance of about lambda over two pi (where lambda represents the signal wavelength), although this can vary. </p>
+<p style="text-align:justify"></p>
+<p style="text-align:justify">In the far field, the ratio between the electric field and magnetic field stabilizes, reaching a consistent value referred to as the<strong> wave impedance</strong>, equal to approximately 377 ohms in free space.</p>
+<p style="text-align:justify"></p>
+<p style="text-align:justify">In the near field, however, the ratio between electric and magnetic fields depends on the source and varies with the observation distance. This variability occurs because electric and magnetic fields attenuate differently depending on the type of source. </p>
+<p style="text-align:justify"></p>
+<p style="text-align:justify">For example, in a <strong>dipole antenna</strong> (a source tipically characterized by high voltage and low current), the wave impedance is greater than <strong>377 ohms</strong>, making the electric field dominant. Here, the electric field strength decreases inversely with the cube of the distance, while the magnetic field diminishes inversely with the square of the distance. As the distance increases, this ratio lowers until it reaches the wave impedance of 377 ohms. </p>
+<p style="text-align:justify"></p>
+<p style="text-align:justify">In contrast, with a source like a <strong>loop antenna</strong>, where higher current and lower voltage characterize the source, the magnetic field dominates. The electric field, in this case, diminishes inversely with the square of the distance, while the magnetic field weakens inversely with the cube of the distance. This means that in this configuration, the impedance ratio between electric and magnetic fields starts below 377 ohms and rises until it reaches this value.</p>
+<p style="text-align:justify"></p>
+<p style="text-align:justify">In the far field, both the electric and magnetic fields attenuate at the same rate, inversely with the distance. Now that we’ve introduced these concepts, we can delve deeper into how noise couples into our circuits.</p>
+<p style="text-align:justify"></p>
+<hr>
+<p style="text-align:justify"><strong><span style="font-size:24px">Coupling Methods</span></strong></p>
+<p style="text-align:justify"></p>
+<p style="text-align:justify">In electronics, several coupling methods influence how noise and signals transfer from one component to another. </p>
+<p></p>
+<figure class="wix-fig"><img src="/assets/images/wix/61d609_c8b8a0a9b23a4aec92640e16be1b86ae~mv2.png" alt="Coupling Methods" loading="lazy"><figcaption>Figure 3 - Coupling Methods</figcaption></figure>
+<p style="text-align:justify">These coupling types are broadly classified into four main categories: </p>
+<p style="text-align:justify"></p>
+<ul>
+<li>
+<p style="text-align:justify">Capacitive coupling, </p>
+</li>
+<li>
+<p style="text-align:justify">Inductive coupling, </p>
+</li>
+<li>
+<p style="text-align:justify">Radiative coupling,</p>
+</li>
+<li>
+<p style="text-align:justify">Conductive coupling.</p>
+</li>
+</ul>
+<p style="text-align:justify"></p>
+<p></p>
+<hr>
+<p style="text-align:justify"><strong><span style="font-size:24px">Capacitive coupling</span></strong></p>
+<p style="text-align:justify"></p>
+<p style="text-align:justify">Capacitive coupling occurs when two electrical conductors separated by an insulating material, known as a dielectric, transfer energy between each other through an electric field. This transfer is driven by the capacitance between the two conductors, which allows them to store and release electric charge. </p>
+<p></p>
+<figure class="wix-fig"><img src="/assets/images/wix/61d609_b808cb3ec03a4f67bfc98f8d92f57011~mv2.png" alt="Capacitive coupling." loading="lazy"><figcaption>Figure 4  - Capacitive coupling.</figcaption></figure>
+<p></p>
+<p style="text-align:justify">For capacitive coupling to occur, there must be a changing voltage source and two conductors, or metal plates, placed close together. When an electric potential is applied to one of the conductors, it generates an electric field in the surrounding space, which induces an equal but opposite charge on the adjacent conductor.</p>
+<p style="text-align:justify"></p>
+<p style="text-align:justify">This induced charge creates an electric potential difference between the conductors. Capacitive coupling often arises unintentionally, especially in circuits with closely spaced conductors or thin insulating layers. This can lead to undesired signal coupling or interference across different circuit sections, or even in neighboring circuits.</p>
+<p></p>
+<figure class="wix-fig"><img src="/assets/images/wix/61d609_6350e776faae4b97b3003aed0098a553~mv2.png" alt="Capacitive and Inductive coupling in a PCB" loading="lazy"><figcaption>Figure 5  - Capacitive and Inductive coupling in a PCB</figcaption></figure>
+<p></p>
+<p style="text-align:justify">While capacitive coupling is deliberately utilized in components like capacitors for energy storage or in touchscreens for detecting inputs, in the realm of EMC, it can lead to signal degradation or interference. As a result, careful design practices are needed to minimize its unintentional effects. </p>
+<p style="text-align:justify"></p>
+<p style="text-align:justify">For instance, when two traces run parallel and close together, the changing electric field of one trace can couple into the other via capacitive coupling. </p>
+<p></p>
+<hr>
+<p style="text-align:justify"><strong><span style="font-size:24px">Inductive coupling</span></strong></p>
+<p style="text-align:justify"></p>
+<p style="text-align:justify">Inductive coupling occurs when two conductors transfer energy between each other without a direct physical connection, relying instead on a magnetic field generated by the time-varying current flowing through one conductor. For inductive coupling to be effective, a varying current source and two conductive loops or parallel wires with return paths are needed. These conductors form separate loops that are magnetically linked.</p>
+<p></p>
+<figure class="wix-fig"><img src="/assets/images/wix/61d609_daed9a173c484f649ce0e952fc5896ff~mv2.png" alt="Inductive coupling." loading="lazy"><figcaption>Figure 6  - Inductive coupling.</figcaption></figure>
+<p style="text-align:justify">The coupling effect between them can be strengthened by winding the conductors into coils and aligning them on a common axis. Like capacitive coupling, inductive coupling also has practical applications, such as near-field communication (NFC) technologies used in RFID or NFC devices, and in powering medical implants without requiring physical connections. However, in the context of EMC, inductive coupling in the near field requires attention, as it can occur when circuits are closely spaced within a product.</p>
+<p></p>
+<hr>
+<p style="text-align:justify"><strong><span style="font-size:24px">Radiative Coupling</span></strong></p>
+<p style="text-align:justify"></p>
+<p style="text-align:justify">Radiative coupling, on the other hand, involves the transmission of electromagnetic energy between two circuits through electromagnetic waves propagating through space. This type of coupling does not require physical contact and can be intentional, such as in radio communications, or unintentional, where a source circuit emits electromagnetic waves that are then received by a nearby circuit, creating unwanted interference.</p>
+<p></p>
+<figure class="wix-fig"><img src="/assets/images/wix/61d609_086b0b8fa4ba42388ae200e3e307d7d4~mv2.png" alt="Radiative coupling." loading="lazy"><figcaption>Figure 7  - Radiative coupling.</figcaption></figure>
+<p></p>
+<p style="text-align:justify">Radiative coupling involves two antenna-like structures: one that transmits the interference (<strong>the aggressor</strong>) and another that receives it (<strong>the victim</strong>). These can be any conductive components, such as wires, traces, or cables, which may unintentionally radiate or receive signals. Unlike capacitive and inductive coupling, radiative coupling occurs in the far field, typically external to the product.</p>
+<p></p>
+<hr>
+<p style="text-align:justify"><strong><span style="font-size:24px">Conductive Coupling</span></strong></p>
+<p style="text-align:justify"></p>
+<p style="text-align:justify">Finally, we have conductive coupling, where noise transfers directly between circuits through a shared conductor. Here, noise couples into a conductor and transmits through wiring to other circuits, with one common example being interference from a motor coupling into another connected circuit, making it a victim of the noise. </p>
+<p style="text-align:justify"></p>
+<p></p>
+<figure class="wix-fig"><img src="/assets/images/wix/61d609_7731de0eb62048dcaacce8b60412a990~mv2.png" alt="Conductive Coupling." loading="lazy"><figcaption>Figure 8 - Conductive Coupling.</figcaption></figure>
+<p></p>
+<p style="text-align:justify">This category also includes what’s known as common impedance coupling. In this case, two circuits share the same impedance path, as seen when both circuit one and circuit two share a common impedance path. The current from circuit one passing through this shared impedance creates a voltage drop in the return path, affecting circuit two by introducing an unwanted voltage in its circuit.</p>
+<p style="text-align:justify"></p>
+<p style="text-align:justify">It’s important to recognize that in such scenarios, we must account for not only the resistance of the shared connection but also its inductance. At higher frequencies, the inductive component of this impedance becomes more significant due to its frequency dependency. Therefore, when evaluating the coupling, it’s better to consider the overall impedance rather than focusing solely on its resistive, inductive, or capacitive components individually. </p>
+<p style="text-align:justify"></p>
+<p style="text-align:justify">A notable aspect of this phenomenon is its reciprocal nature. If circuit one affects circuit two through this shared impedance, circuit two will similarly impact circuit one, leading to bidirectional interference.</p>
+<hr>
+<p><em>💡 By the way, If you would like to master EMC/EMI design, we have a new training program here:</em></p>
+<p class="wix-btn-wrap"><a class="wix-btn" href="https://www.fresuelectronics.com/mentoring" target="_blank" rel="noreferrer noopener" style="background:#116dff;border-radius:8px;color:#ffffff">Get Personalized Training</a></p>
+<p></p>
+<p><em>There, you’ll find details on how to apply for one of our exclusive programs designed to help you achieve that goal. </em></p>
+<hr>
+<p></p>
+<p style="text-align:justify"><strong><span style="font-size:24px">Differential and Common Mode Currents</span></strong></p>
+<p style="text-align:justify"></p>
+<p style="text-align:justify">Let’s delve into the exciting topic of differential mode currents and common mode currents. This is an area that I initially found quite perplexing until I began to conceptualize these currents in a straightforward manner. Essentially, differential mode currents can be understood as currents flowing in opposite directions, which is precisely why we refer to them as differential or different. On the other hand, common mode currents move in the same direction, and this shared direction is the reason behind the term &quot;common.&quot;</p>
+<p></p>
+<figure class="wix-fig"><img src="/assets/images/wix/61d609_675ef6f7b5c34416b09880b664dfdd24~mv2.png" alt="Differential vs. Common Mode Currents" loading="lazy"><figcaption>Figure 9 - Differential vs. Common Mode Currents</figcaption></figure>
+<p style="text-align:justify">If we adopt this perspective, I assure you that it will significantly simplify our understanding of these concepts. </p>
+<p style="text-align:justify"></p>
+<p style="text-align:justify"><strong><span style="font-size:24px">Differential Mode Currents</span></strong><br></p>
+<p style="text-align:justify">When we talk about differential currents, the most effective way to visualize them is by considering how signal current flows within a circuit. According to circuit theory, we know that <strong>current consistently flows in a loop</strong>. This fundamental principle applies here as well, but for clarity’s sake, we will divide this loop into two distinct parts.</p>
+<p style="text-align:justify"></p>
+<p style="text-align:justify">We can conceptualize the signal current as being divided into two components: <br></p>
+<ul>
+<li>
+<p style="text-align:justify">The forward current, </p>
+</li>
+<li>
+<p style="text-align:justify">The return current.</p>
+</li>
+</ul>
+<p style="text-align:justify"></p>
+<p style="text-align:justify">The signal consists of the<strong> forward current</strong>, which travels from the source to the load, and the<strong> return current</strong>, which makes its way back from the load to the source. Together, these currents complete the current loop. </p>
+<p></p>
+<hr>
+<p style="text-align:justify">🔓 <strong>In a previous discussion on signal propagation, I explained that this current loop actually forms instantaneously as the signal moves through the printed circuit boards.</strong></p>
+<hr>
+<p></p>
+<p style="text-align:justify">This instantaneous formation is facilitated by what we refer to as <strong>displacement current</strong>. Thus, this current loop is established even before the signal reaches the load. However, for simplicity in our discussion, we will assume that the signal must first reach the load and then return. Since these currents flow in opposing directions, we can categorize them as differential. </p>
+<p></p>
+<figure class="wix-fig"><img src="/assets/images/wix/61d609_29c8988d248846cba9629f9895b4fa84~mv2.png" alt="Differential Mode Currents" loading="lazy"><figcaption>Figure 10 - Differential Mode Currents</figcaption></figure>
+<p style="text-align:justify">When we have a circuit designed for signal transmission, the differential mode represents the standard propagation mode we have learned about through circuit theory. This is indeed the useful signal. However, it’s essential to remain vigilant about the size of the loop formed by this signal current. As illustrated in the <strong>Figure 9</strong>, the dimensions of the signal current loop are influenced by both the forward current and the return path.</p>
+<p style="text-align:justify"></p>
+<p style="text-align:justify">Consequently, when we are designing these two paths, we must pay careful attention to their distances to ensure that we maintain the loop as compact as possible. Engineering the return path involves not just ensuring that the signal reaches the load efficiently but also guaranteeing that it returns effectively. In the context of printed circuit boards, the loop created by the differential mode current is contained within the PCB itself.</p>
+<p style="text-align:justify"></p>
+<figure class="wix-fig"><img src="/assets/images/wix/61d609_8a9570ea46f5459bb17bbefb4f498131~mv2.png" alt="Differential mode currents in a PCB." loading="lazy"><figcaption>Figure 11 - Differential mode currents in a PCB.</figcaption></figure>
+<p style="text-align:justify">As designers, it is imperative to prioritize this aspect rather than leaving it to chance, as one of the primary considerations is to keep this return path characterized by low impedance. This strategy helps prevent the return current from seeking <strong>alternative paths </strong>that may have lower impedance back to the source. It is essential to understand that such lower impedance paths can introduce <strong>parasitic elements</strong> that we are unable to control.</p>
+<p style="text-align:justify"></p>
+<p style="text-align:justify">By keeping the forward and return paths closely aligned, we effectively minimize the size of the current loop. Unfortunately, this important consideration is often overlooked because we have adopted simplifications from circuit schematic design, which can inadvertently work against us. For instance, we might mistakenly assume that there is a sink for the currents rather than a proper return path.</p>
+<p></p>
+<figure class="wix-fig"><img src="/assets/images/wix/61d609_07a0910b9f91447283cccb6853e1c2b0~mv2.png" alt="Circuit simplification which leads to errors." loading="lazy"><figcaption>Figure 12 - Circuit simplification which leads to errors.</figcaption></figure>
+<p style="text-align:justify">A smaller current loop results in lower magnetic fields generated by the currents flowing within this loop, thereby reducing the electromagnetic radiation produced. However, it is also worth noting that a smaller loop is less effective at receiving interference.</p>
+<p style="text-align:justify"></p>
+<p style="text-align:justify">One key point to clarify from the <strong><em>Figure 10</em></strong> is that the circuit is not connected to any external connections, such as earth grounding. This situation changes significantly when we consider common mode currents where the circuit loses its isolation, introducing a parasitic component that creates a larger loop.</p>
+<p></p>
+<hr>
+<p style="text-align:justify"><strong><span style="font-size:24px">Common Mode Currents</span></strong></p>
+<p style="text-align:justify"></p>
+<p style="text-align:justify">We define common mode currents as having a shared characteristic, which is their direction. In this instance, the currents Ic1 and Ic2 run parallel to each other, both moving in the same direction. This configuration implies that the return reference plane not only carries the return current from the signal, as we noted in the differential mode, but also includes the Ic2 current, which represents noise.</p>
+<p></p>
+<figure class="wix-fig"><img src="/assets/images/wix/61d609_a77b87b501794bd686ab0698a6efcc20~mv2.png" alt="Common Mode Currents" loading="lazy"><figcaption>Figure 13 - Common Mode Currents</figcaption></figure>
+<p style="text-align:justify"></p>
+<p style="text-align:justify">This noise current flows in the opposite direction to the return current we observed previously. </p>
+<hr>
+<p>🔓<strong> It is important to emphasize that these two currents are not part of the original signal and can be categorized purely as noise. </strong></p>
+<hr>
+<p style="text-align:justify">Thus, the common mode current consists of the forward Ic1 and also the forward Ic2, forming a loop closed by the return current Ic through the earth ground parasitic elements indicated.</p>
+<p style="text-align:justify"></p>
+<p style="text-align:justify">These parasitic elements can vary considerably; for instance, they may include <strong>capacitance between the cables</strong> connected to the circuits and the earth ground or the <strong>inductance</strong> associated with the system chassis and its connection to earth ground via the thin cables we utilize.</p>
+<p style="text-align:justify"></p>
+<p style="text-align:justify">The challenge presented by the common mode current loop is that it is often larger and, importantly, uncontrollable. This contrasts with the differential mode current loop, which remains confined within the circuit and is carefully designed by the printed circuit board designer. Interestingly, even a minute common mode current in the microamp range can lead to electromagnetic compatibility (EMC) failures and significant emissions.</p>
+<p style="text-align:justify"></p>
+<p style="text-align:justify">Moreover, since common mode loops are generally larger than differential mode loops, their capacity for radiation is notably higher. This characteristic also implies that, regarding immunity or susceptibility, even minor interference can be effectively captured by this loop and potentially disrupt the entire system.</p>
+<p style="text-align:justify"></p>
+<p style="text-align:justify">One significant distinction between the signal current in differential mode and the interference in common mode lies in the propagation dynamics. The signal in differential mode cannot propagate without a designated return path, while common mode currents and their accompanying interferences will invariably find their own return path, typically through parasitic elements that were either unaccounted for or not designed into the circuit.</p>
+<p style="text-align:justify"></p>
+<p style="text-align:justify">It is essential to remain cognizant of several factors, particularly when working with differential pair connections. In these scenarios, maintaining symmetry between the two conductors is vital to avoid any conversion from differential mode propagation to common mode propagation. Failing to do so can lead to the creation of common mode currents that may result in interference issues, ultimately causing significant disruptions in the electronic circuits we have designed.</p>
+<p style="text-align:justify"></p>
+<p style="text-align:justify">As we explore the exciting world of EMI, you might be wondering how you can deepen your knowledge and skills in this area.  If you would like to master EMC/EMI design, we have a new training program here:</p>
+<p style="text-align:justify"></p>
+<p class="wix-btn-wrap"><a class="wix-btn" href="https://www.fresuelectronics.com/mentoring" target="_blank" rel="noreferrer noopener" style="background:#116dff;border-radius:8px;color:#ffffff">Get Personalized Training</a></p>
+<p></p>
+<p>There, you’ll find details on how to apply for one of our exclusive programs designed to help you achieve that goal. </p>
+</div><!-- /wix-body -->
+</article>
+<footer>
+  <div class="site-footer">
+    <span>© 2026 Fresu Electronics SRL</span>
+    <span><a href="https://www.fresuelectronics.com">fresuelectronics.com</a> · <a href="https://www.fresuelectronics.com/free-tool-1">Free Stackup Tool</a></span>
+  </div>
+</footer>
+</body>
+</html>

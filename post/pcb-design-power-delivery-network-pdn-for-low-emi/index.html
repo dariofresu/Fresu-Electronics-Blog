@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Power Delivery Network (PDN) for Low EMI — Fresu Electronics</title>
+  <meta name="description" content="In this article, we will explore the intricacies of building a power delivery network (PDN) for low EMI.">
+  <link rel="canonical" href="https://blog.fresuelectronics.com/post/pcb-design-power-delivery-network-pdn-for-low-emi/">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Power Delivery Network (PDN) for Low EMI">
+  <meta property="og:description" content="In this article, we will explore the intricacies of building a power delivery network (PDN) for low EMI.">
+  <meta property="og:url" content="https://blog.fresuelectronics.com/post/pcb-design-power-delivery-network-pdn-for-low-emi/">
+  <meta property="og:image" content="https://blog.fresuelectronics.com/assets/images/wix/yt-5yUmlSl6JUI.jpg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400;1,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/assets/wix-exact.css">
+</head>
+<body>
+<header>
+  <div class="site-header">
+    <a href="https://www.fresuelectronics.com">
+      <img src="https://raw.githubusercontent.com/dariofresu/Fresu-Electronics-Blog/main/assets/logo.png" alt="Fresu Electronics">
+    </a>
+    <nav class="header-nav">
+      <a href="https://blog.fresuelectronics.com/">Blog</a>
+      <a href="https://blog.fresuelectronics.com/tools/">Tools</a>
+      <a href="https://www.fresuelectronics.com/trainings">Courses</a>
+      <a href="https://www.fresuelectronics.com/about">About</a>
+      <a href="https://www.fresuelectronics.com/emc-audit" class="header-cta">Book EMC Audit</a>
+    </nav>
+  </div>
+</header>
+<article class="post">
+  <p class="crumb"><a href="https://blog.fresuelectronics.com/">Blog</a> · <a href="https://blog.fresuelectronics.com/#wix-archive">Original posts</a></p>
+  <header class="post-head">
+    <h1>Power Delivery Network (PDN) for Low EMI</h1>
+    <p class="meta"><time datetime="2024-11-18">2024-11-18</time> · <a href="https://info3761185.wixsite.com/dario-fresu-electron/post/pcb-design-power-delivery-network-pdn-for-low-emi">Original on Wix</a></p>
+  </header>
+  <div class="wix-embed wix-cover-embed"><iframe src="https://www.youtube.com/embed/5yUmlSl6JUI" title="https://youtu.be/5yUmlSl6JUI" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen loading="lazy"></iframe></div>
+<div class="wix-body" id="wix-body">
+<p></p>
+<figure class="wix-fig"><img src="/assets/images/wix/61d609_144196187269429288fc73a5abc9bef5~mv2.png" alt="" loading="lazy"></figure>
+<h3><strong><span style="font-size:18px">Action list:</span></strong></h3>
+<h5><a href="https://www.fresuelectronics.com/product-page/emi-quick-fixes-guide" target="_blank" rel="nofollow noreferrer noopener"><strong><u>1. </u></strong></a><a href="https://www.fresuelectronics.com/product-page/emi-quick-fixes-guide" target="_blank" rel="nofollow noreferrer noopener"><strong><u><span style="background-color:rgb(2, 255, 135);color:#141414">Get the New EMI Quick Fixes Guide - 2025</span></u></strong></a></h5>
+<p></p>
+<aside class="wix-card"><a href="https://www.fresuelectronics.com/product-page/emi-quick-fixes-guide"><img src="/assets/images/wix/61d609_6a6d3bf9bd114bcfb82d5236e516195a~mv2.png" alt=""><span class="wix-card-name">EMI Quick Fixes Guide</span></a></aside>
+<p></p>
+<hr>
+<p>In this lesson, we will explore the intricacies of building a power delivery network (PDN), with a specific focus on maintaining electromagnetic interference (EMI) integrity for the digital circuits we design. Before diving into the construction of a power delivery network, it is essential to first understand the key requirements of such a system. </p>
+<p style="text-align:justify"></p>
+<p style="text-align:justify">Defining the requirements upfront is crucial, as it ensures that the network will function properly once implemented. Much like any other system, specifying what is needed at the outset guides the entire process, ensuring that the final product performs as expected.</p>
+<p style="text-align:justify"></p>
+<p style="text-align:justify">The primary requirement of a power delivery network is to <strong>provide a constant and uninterrupted DC voltage source to the load.</strong> This stability is critical for ensuring smooth operation of the components within the system, particularly for processors or microcontrollers that must function without interruption. </p>
+<p style="text-align:justify"></p>
+<p style="text-align:justify">The PDN must supply a consistent voltage source to the load, which in most cases are integrated circuits (ICs). If the voltage supply fluctuates or is interrupted, the performance of these ICs may degrade, leading to potential failures in the system.</p>
+<p style="text-align:justify"></p>
+<p style="text-align:justify">Another important requirement is <strong>the minimization of any AC noise within the power delivery network.</strong> AC noise, if not controlled, can propagate through the entire network, leading to signal integrity issues that affect other ICs or components within the system.<br></p>
+<p style="text-align:justify">Beyond internal signal interference, this noise can also generate EMI problems, either by coupling with cables or by radiating outward and impacting the performance of nearby electronics. Properly managing this noise is essential to ensuring the reliability and stability of the entire PDN.</p>
+<p style="text-align:justify"></p>
+<p style="text-align:justify">The next requirement we must consider is <strong>the goal of achieving zero ohms AC impedance between the power source and the return reference plane.</strong> This is essential for maintaining the integrity of the power delivery network. One key method to meet this requirement is by <strong>selecting the right decoupling strategy. </strong></p>
+<p style="text-align:justify"></p>
+<p style="text-align:justify">But what exactly do we mean by decoupling? </p>
+<p style="text-align:justify"></p>
+<p style="text-align:justify">In this context, decoupling involves using capacitors strategically to ensure that the power delivery network functions smoothly under varying conditions.</p>
+<p style="text-align:justify"></p>
+<p style="text-align:justify">Decoupling capacitors serve several important functions. One of the primary purposes is to minimize the dependency between different integrated circuits (ICs) in the system. This is critical because ICs often have different power requirements, and ensuring they don’t interfere with each other is vital for stable operation.</p>
+<p style="text-align:justify"></p>
+<p style="text-align:justify">To illustrate, imagine two processors in a system, one demanding high transient currents from the power delivery network while the other also requires transient currents at the same time. If the network cannot meet these simultaneous demands, voltage dips occur, leading to disruptions in the operation of the processors. </p>
+<p style="text-align:justify"></p>
+<p style="text-align:justify">In some cases, these processors may shut down or experience momentary failures, which is something we want to avoid. By selecting an effective decoupling strategy, we reduce this dependency between ICs, allowing each one to operate independently without affecting the other.</p>
+<p style="text-align:justify"></p>
+<p style="text-align:justify">Choosing the right decoupling capacitors helps in two ways. First, <strong>it isolates one IC from another, minimizing cross-dependency. </strong>Second, it <strong>reduces the impedance between the power source and the return reference plane. </strong>This is especially important for digital circuits, which are composed of logic gates. </p>
+<p style="text-align:justify"></p>
+<p style="text-align:justify">These logic gates need to switch rapidly in order to generate the required digital signals, and such fast switching events demand transient current from the power delivery network. Whenever these logic gates switch, the ICs require transient current to power the switching process. </p>
+<p style="text-align:justify"></p>
+<p style="text-align:justify">This current flows through the power delivery network and encounters impedance along the way. The greater the distance from the power source, the higher the impedance, which can cause voltage drops that hinder performance. To maintain the required voltage levels, we must work to reduce this impedance as much as possible. Reducing impedance also reduces the voltage drop caused by the current flowing through the network, ensuring more stable power delivery.</p>
+<p style="text-align:justify"></p>
+<p style="text-align:justify">It’s important to <strong>think beyond just the resistance of the copper traces in the power network. </strong>While resistance is certainly a factor, the more significant issues often arise from inductance and capacitance within the system. Inductance, in particular, plays a critical role in determining how much impedance exists between the power source and the load. Managing inductance effectively is key to maintaining the performance of the power delivery network.</p>
+<p style="text-align:justify"></p>
+<p style="text-align:justify">This is important because transient currents generated during the switching of logic gates are tied to specific frequencies. The inductance within the power delivery network (PDN) is frequency-dependent, meaning that at higher frequencies, the inductive effects become more pronounced. </p>
+<p style="text-align:justify"></p>
+<p style="text-align:justify">Consequently, the voltage drops caused by these transient currents can become problematic not just for a single IC, but for all ICs connected to the same power delivery network. If one IC experiences a voltage drop, the others in the network may be impacted as well, leading to potential system instability.</p>
+<p style="text-align:justify"></p>
+<p style="text-align:justify">Another key issue related to transient currents is the formation of current loops between the power source, the load, and the return reference plane. These loops can act as highly effective antennas, radiating electromagnetic interference (EMI) throughout the system.</p>
+<p style="text-align:justify"></p>
+<p style="text-align:justify">To reduce the voltage noise generated by transient currents, we have two primary options. The first is to reduce the magnitude of the transient current itself, but doing so would negatively affect the system’s timing and overall efficiency, which is not an ideal solution. The second, and more practical approach, is to minimize the impedance of the power delivery network, with a specific focus on reducing the inductance. <strong>As designers, we have the greatest influence on the PDN&#x27;s performance by reducing its inductance. </strong></p>
+<p style="text-align:justify"></p>
+<p style="text-align:justify">While we cannot fundamentally alter the transient current requirements of the system, we can optimize the power delivery path by designing it with the lowest possible inductance and resistance. One effective strategy is to implement return reference planes and carefully engineer the power path to minimize impedance.</p>
+<p style="text-align:justify"></p>
+<p style="text-align:justify">One of the most efficient methods to improve PDN performance is by reducing the size of the current loops created between the power source and the load. By shortening these loops, we minimize inductive losses and improve overall power delivery efficiency. To achieve this, we need to bring the power source as close to the load as possible. This is where decoupling capacitors play a critical role.</p>
+<p style="text-align:justify"></p>
+<p style="text-align:justify">Using decoupling capacitors strategically allows us to position a localized source of energy near the IC. By placing these capacitors close to the IC, we effectively reduce the inductance between the capacitors and the IC, minimizing the impedance of the traces. This, in turn, ensures that transient currents can be delivered quickly and efficiently, reducing the likelihood of voltage drops and improving the stability of the entire power delivery network.</p>
+<p style="text-align:justify"></p>
+<hr>
+<p><em>💡 By the way, If you would like to master EMC/EMI design, we have a new training program here:</em></p>
+<p class="wix-btn-wrap"><a class="wix-btn" href="https://www.fresuelectronics.com/mentoring" target="_blank" rel="noreferrer noopener" style="background:#116dff;border-radius:8px;color:#ffffff">Get Personalized Training</a></p>
+<p></p>
+<p><em>There, you’ll find details on how to apply for one of our exclusive programs designed to help you achieve that goal. </em></p>
+<hr>
+<p style="text-align:justify"></p>
+<p style="text-align:justify">We’ve established that transient currents are generated by the switching of logic gates as they move from a low state to a high state or vice versa. This switching is a fundamental aspect of digital circuit operation, meaning that any attempt to alter the timing of these transitions would compromise the performance of the logic gates. Instead of modifying the timing, our goal is to create an optimal environment within the power delivery network (PDN) to ensure that transient currents are available exactly when they are needed.</p>
+<p style="text-align:justify"></p>
+<p style="text-align:justify">It’s essential to recognize that there are two main sources of these transient currents, each contributing to the overall power demand of the system. Understanding these sources allows us to better manage the PDN and ensure that it can handle the required loads efficiently.</p>
+<p></p>
+<figure class="wix-fig"><img src="/assets/images/wix/61d609_cbd4525631b343f6b047b60d7470a70a~mv2.jpg" alt="Logic Gates Currents" loading="lazy"><figcaption>Figure 1 - Logic Gates Currents</figcaption></figure>
+<p style="text-align:justify">The first source of transient current is the <strong>shoot-through current</strong>, which occurs when both the pull-up and pull-down transistors (typically FETs) in a logic gate are momentarily switched on at the same time. </p>
+<p style="text-align:justify"></p>
+<p style="text-align:justify">This condition happens during the transition between logic states and results in a brief but significant current surge. Shoot-through current is especially prevalent in circuits where many logic gates are switching simultaneously, such as in processors, field-programmable gate arrays (FPGAs), and microcontrollers. These devices contain large numbers of logic gates that contribute to substantial shoot-through currents during operation.</p>
+<p style="text-align:justify"></p>
+<p style="text-align:justify">The second source is the<strong> transient load current</strong>, which arises when the complementary metal-oxide-semiconductor (CMOS) logic gates switch and charge the load capacitance. This current depends on the specific load that the logic gates are driving, and it becomes particularly prominent in integrated circuits (ICs) with a large number of input/output pins that are connected to external loads. </p>
+<p style="text-align:justify"></p>
+<p style="text-align:justify">For example, in systems where many pins are used for communication with external devices, the transient load current can become the dominant factor. The magnitude of each type of current is largely determined by the type of IC and the specific application in which it is used. In processors, FPGAs, and other ICs with dense logic operations, shoot-through current typically takes precedence. </p>
+<p style="text-align:justify"></p>
+<p style="text-align:justify">Conversely, in systems with significant external connectivity, such as ICs with many I/O pins, the transient load current may play a larger role. Recognizing this distinction helps in tailoring the PDN design to the specific requirements of the circuit, ensuring both currents are managed effectively to maintain system stability and performance.</p>
+<p style="text-align:justify"></p>
+<p style="text-align:justify">If you&#x27;re interested in exploring these topics further, you can reference works by <a href="https://amzn.to/3Vl9EhT" target="_blank" rel="noreferrer noopener"><strong><u>Archambault </u></strong></a>and <a href="https://amzn.to/3p0C84l" target="_blank" rel="noreferrer noopener"><strong><u>Ott</u></strong></a>, who provide in-depth analysis on power delivery networks and related subjects. </p>
+<p></p>
+<hr>
+<p style="text-align:justify"><strong><span style="font-size:24px">Calculations</span></strong></p>
+<p style="text-align:justify"></p>
+<p style="text-align:justify">Now, let&#x27;s focus on how we can actually calculate these transient currents.</p>
+<p style="text-align:justify"></p>
+<p style="text-align:justify">To estimate the transient load current, we can use a straightforward formula: </p>
+<p style="text-align:justify"></p>
+<figure class="wix-fig" data-wix-width="221" style="max-width:221px"><img src="/assets/images/wix/61d609_49a9db86d5e84c14ac431924d4af2359~mv2.png" alt="" loading="lazy"></figure>
+<p style="text-align:justify"></p>
+<ul>
+<li>
+<p><strong>IL​</strong>: Transient load current, which is the current that charges the load capacitance when the CMOS gates switch.</p>
+</li>
+<li>
+<p><strong>n</strong>: Number of logic gates or the effective capacitance factors depending on how many gates are switching.</p>
+</li>
+<li>
+<p><strong>CL​</strong>: Load capacitance that the logic gates are driving.</p>
+</li>
+<li>
+<p><strong>VCC</strong>: Supply voltage applied to the CMOS circuit.</p>
+</li>
+<li>
+<p><strong>tr​</strong>: Rise time, which is the time it takes for the output to transition from low to high.</p>
+</li>
+</ul>
+<p style="text-align:justify"></p>
+<p style="text-align:justify">This gives us a baseline current for a single logic gate. To scale this for an entire integrated circuit (IC), we then multiply this value by the total number of logic gates (n) inside the IC. This calculation gives us a reasonable estimate of the transient load current that the PDN must handle during switching events.</p>
+<p style="text-align:justify"></p>
+<p style="text-align:justify">When it comes to calculating the shoot-through current, the process is slightly more complex because this information is often not readily available in the IC datasheet. </p>
+<p style="text-align:justify">One approach is to use the equivalent power dissipation capacitance, which is typically provided. This value can be understood as the capacitance per gate, and manufacturers sometimes supply this data in terms of shoot-through current as a function of frequency (e.g., amps per megahertz).</p>
+<p style="text-align:justify">Once we have this parameter, the calculation becomes straightforward. To determine the shoot-through current, we simply multiply the current per megahertz by the operating frequency of the system. </p>
+<figure class="wix-fig" data-wix-width="179" style="max-width:179px"><img src="/assets/images/wix/61d609_474719d053474404be48e3dee2906448~mv2.png" alt="" loading="lazy"></figure>
+<p style="text-align:justify"></p>
+<ul>
+<li>
+<p><strong>IST​</strong>: Shoot-through current, which can occur in CMOS circuits when both the NMOS and PMOS transistors conduct simultaneously, leading to a direct path from VCC​ to ground.</p>
+</li>
+<li>
+<p><strong>tr​</strong>: Rise time, which is the time it takes for the output to transition from low to high.</p>
+</li>
+<li>
+<p><strong>F0: </strong>operating frequency of the system in MHz. </p>
+</li>
+<li>
+<p><strong>Iccd: </strong>Shoot-through current A per MHz.<br></p>
+</li>
+</ul>
+<p style="text-align:justify">Another method is to use the power dissipation capacitance directly. We can multiply this value by VCC and divide it by the transient time of the shoot-through current. Just like with the transient load current, we also multiply by the total number of logic gates inside the IC.</p>
+<figure class="wix-fig" data-wix-width="227" style="max-width:227px"><img src="/assets/images/wix/61d609_7cf5d02c748f40a1aba33fb13954667e~mv2.png" alt="" loading="lazy"></figure>
+<p></p>
+<ul>
+<li>
+<p><strong>IST​</strong>: Shoot-through current, which can occur in CMOS circuits when both the NMOS and PMOS transistors conduct simultaneously, leading to a direct path from VCC​ to ground.</p>
+</li>
+<li>
+<p><strong>CPD​</strong>: Equivalent power dissipation capacitance, which accounts for the capacitance contributing to power loss in the circuit during switching.</p>
+</li>
+<li>
+<p><strong>VCC</strong>: Supply voltage applied to the CMOS circuit.</p>
+</li>
+<li>
+<p><strong>tr​</strong>: Rise time, which is the time it takes for the output to transition from low to high.</p>
+</li>
+<li>
+<p><strong>n</strong>: Number of logic gates or the effective capacitance factors depending on how many gates are switching.</p>
+<p></p>
+</li>
+</ul>
+<p style="text-align:justify">Both methods of calculating shoot-through current are fairly similar in that they involve scaling capacitance values by the number of gates and the operating frequency. For transient load current, we focus on load capacitance, while for shoot-through current, we use power dissipation capacitance provided in the datasheet. Additionally, these calculations require dividing by the transient time, which typically corresponds to the rise and fall times of the logic gates—information that is often included in the IC datasheet.</p>
+<p></p>
+<hr>
+<p><strong><span style="font-size:24px">Decoupling Capacitors Misconceptions</span></strong></p>
+<p style="text-align:justify"></p>
+<p style="text-align:justify">Before we move forward, it&#x27;s important to address some common misconceptions about decoupling capacitors, which are frequently discussed within the printed circuit board (PCB) design community. One widespread belief is that selecting different capacitance values can automatically improve the performance of the PDN. </p>
+<p style="text-align:justify"></p>
+<p style="text-align:justify">However, this is not necessarily true, and there’s a deeper issue to consider. As I’ve explained in a previous video, the concept of <strong>anti-resonant frequency</strong>, or crossing impedances of capacitors, plays a critical role here. This phenomenon can actually counteract the expected benefits of using capacitors with varying values.</p>
+<p style="text-align:justify"></p>
+<p></p>
+<figure class="wix-fig" data-wix-width="496" style="max-width:496px"><img src="/assets/images/wix/61d609_88797d070fd44966b4effc1d0ab4253c~mv2.jpg" alt="Antiresonance effect in parallel capacitors" loading="lazy"><figcaption>Figure 2 - Antiresonance effect in parallel capacitors</figcaption></figure>
+<p style="text-align:justify">Understanding the nuances of how different capacitances interact with the PDN is key to effective decoupling design. Simply adding capacitors of different values does not guarantee improved performance, and can sometimes introduce new issues, particularly when it comes to managing resonance and impedance mismatches in the system.</p>
+<p style="text-align:justify"></p>
+<p style="text-align:justify">We know that capacitors have a specific impedance profile, behaving capacitively up to a certain point known as the resonance frequency. At this resonance frequency, the behavior of the capacitor changes, and it starts to act inductively due to parasitic effects. </p>
+<p style="text-align:justify"></p>
+<p style="text-align:justify">So, while capacitors function as intended up to a certain frequency, once that frequency is exceeded, their inductive properties dominate. This shift from capacitive to inductive behavior is a critical factor to consider when designing a power delivery network (PDN).</p>
+<p style="text-align:justify"></p>
+<p style="text-align:justify">If different types of capacitors, with varying capacitance values, are used in an overlapping manner, <strong>their impedance profiles will cross over one another. </strong>This crossing of impedance profiles can result in a significant impedance peak within the PDN, which is highly undesirable. </p>
+<p style="text-align:justify"></p>
+<p style="text-align:justify">These impedance peaks can lead to several issues, including increased electromagnetic interference (EMI) and compromised signal integrity. Therefore, selecting capacitors with varied capacitance values does not necessarily improve the PDN and may even introduce serious problems.</p>
+<p style="text-align:justify"></p>
+<p style="text-align:justify">Instead of choosing capacitors of different values to attempt to &quot;improve&quot; the network, it is much more effective to select capacitors with a specific value that matches the requirements of the package. By doing so, we can calculate how many capacitors are needed to create the desired impedance profile. This method ensures a more stable PDN by preventing impedance peaks and maintaining a smooth impedance curve across a range of frequencies.</p>
+<p style="text-align:justify"></p>
+<p style="text-align:justify">It’s also important to remember that every time a capacitor is placed, it’s not just a simple component being added, what we are introducing is an LC network. This means that we are also introducing <strong>resonant frequencies</strong>, as seen in any LC circuit. We need to be mindful of this phenomenon because it can influence the behavior of the PDN at various frequencies.</p>
+<p style="text-align:justify"></p>
+<p style="text-align:justify">Now, let’s focus on where the inductance in these circuits comes from. The inductance arises from several sources, the first being the package itself, the physical form of the capacitor. This is why the type of capacitor package (whether it&#x27;s a through-hole component or a surface-mounted device, or <strong>SMD</strong>) is significant. The inductance of the package can greatly impact the performance of the PDN.</p>
+<p style="text-align:justify"></p>
+<p style="text-align:justify">Inductance is also introduced by the traces that connect the capacitors to the pins they are feeding. The routing of these traces is critical, as the inductance depends on their length, geometry, and proximity to other components. Additionally, the pins themselves contribute to the inductance, although this is something designers have little control over.</p>
+<p style="text-align:justify"></p>
+<p style="text-align:justify">As designers, we have control over two main factors when it comes to reducing inductance:</p>
+<p style="text-align:justify"></p>
+<ol>
+<li>
+<p style="text-align:justify">The first is the <strong>inductance of the capacitor package</strong>, which we can minimize by selecting an appropriate package for our design. </p>
+</li>
+<li>
+<p style="text-align:justify">The second is the <strong>inductance of the traces</strong>, which we can control through careful PCB layout design. <br></p>
+</li>
+</ol>
+<p style="text-align:justify">By optimizing trace design, through shortening their length and adjusting their geometry, we can minimize the inductance, improving both the EMI and signal integrity performance of the PDN.</p>
+<p style="text-align:justify"></p>
+<p style="text-align:justify"><strong>This highlights a</strong> <strong>clear connection between the layout of the PCB and the overall performance of the system, especially in terms of EMI and signal integrity.</strong> The way capacitors are placed and connected on the board plays a major role in how well the PDN can manage high-frequency currents without introducing noise or voltage dips.</p>
+<p style="text-align:justify"></p>
+<p style="text-align:justify">Given that inductance plays such a critical role in defining the performance of the PDN, we must account for how it affects the resonant frequency of the capacitors. The inductance from the package, traces, and pins will all influence the capacitor&#x27;s resonant frequency, and this needs to be considered when selecting capacitors for high-frequency applications. The resonant frequency can be calculated using the standard formula for LC circuits:</p>
+<figure class="wix-fig" data-wix-width="222" style="max-width:222px"><img src="/assets/images/wix/61d609_26ddf3be0de340539a52865316129e33~mv2.png" alt="" loading="lazy"></figure>
+<p style="text-align:justify"></p>
+<p style="text-align:justify">Where L is the inductance and C is the capacitance. By knowing these values, we can determine the resonant frequency, which tells us the point at which the capacitor will shift from capacitive to inductive behavior. This information is very important when designing for high-frequency environments, as it shows that the actual capacitance value may be less important than ensuring the capacitor operates effectively at the required frequency range.</p>
+<p></p>
+<hr>
+<p style="text-align:justify"><strong><span style="font-size:24px">Understanding Inductance in Power Delivery Networks</span></strong></p>
+<p style="text-align:justify"></p>
+<p style="text-align:justify">To begin with, let&#x27;s take a closer look at the inductances associated with the capacitor package itself. For example, consider using a 0.1 microfarad capacitor. When we calculate the combined inductance from the package, traces, and the pins, we typically find that it amounts to about 15 nanohenries. <br><br>If we take this information and calculate the resonant frequency of the capacitor using the total package inductance, plus the trace inductance, plus the inductance from the IC leads, we find that the capacitor will be effective only up to a frequency of 4MHz.</p>
+<p style="text-align:justify"></p>
+<p style="text-align:justify">This means that, up to4MHz, we can expect a nice capacitive filtering behavior from the capacitor. However, frequencies above 4MHz. ill shift the capacitor’s behavior into the inductive realm. Therefore, <strong>to design an effective power delivery network, it’s important to select both the package and capacitance value wisely</strong>. By doing this, we can achieve the desired effect of parallel capacitance.</p>
+<p style="text-align:justify"></p>
+<p style="text-align:justify">When we think about using multiple capacitors of the same value in parallel, we can see that the current gets distributed evenly across these capacitors. Each capacitor will handle the same amount of current, but the overall capacitance increases with the number of capacitors used in parallel. Additionally, this configuration helps to reduce the overall inductance because we are effectively combining them in parallel. This is exactly the kind of effect we want to achieve, especially if our goal is to obtain low impedance.</p>
+<p></p>
+<hr>
+<p style="text-align:justify"><strong><span style="font-size:24px">Decoupling capacitors placement</span></strong><br></p>
+<p style="text-align:justify">Next, let&#x27;s examine how selecting the right strategy for decoupling capacitors, along with their proper placement, can influence radiated emissions. The primary concern arises from the inductive loop that is formed during operation. For instance, if we consider the power pin and the ground pin of the circuit, the loop we create from the power pin to the capacitor and then back through the return path is critical. The return path goes through a via that connects to the return reference plane (RRP), before returning to the ground pin through another via.</p>
+<p style="text-align:justify"></p>
+<figure class="wix-fig" data-wix-width="451" style="max-width:451px"><img src="/assets/images/wix/61d609_09238c28fb3b43f2b80b0abc1c2c0772~mv2.png" alt="Figure 3 - Example of a current loop" loading="lazy"><figcaption>Figure 3 - Example of a current loop in a PCB</figcaption></figure>
+<p style="text-align:justify">It’s important to note that if you place the decoupling capacitor far away from the power pin, the loop created becomes much larger. This larger loop will carry transient currents. Since a <strong>changing current generates an induced magnetic field</strong>, the size of this loop becomes significant. The induced magnetic field can couple with other traces and cables, leading to propagation and potential radiation of noise.</p>
+<p style="text-align:justify"></p>
+<p style="text-align:justify">Moreover, the issue of radiated emissions escalates when transient currents flow through these loops. The impedance associated with the return reference plane also plays a role in this context. When considering the current flow, it is essential to recognize where that current is moving. The larger the loop becomes, the greater the voltage drop that occurs. This voltage drop can couple with other traces and cables, leading to radiation problems.</p>
+<p style="text-align:justify"></p>
+<p style="text-align:justify">Additionally, if the decoupling capacitors are placed farther away from the ICs, this distance introduces another factor to consider. The connection path may also couple noise from other traces routed nearby. This noise can then affect the power delivery network, allowing it to propagate through to other ICs. The coupling of noise may not only impact the performance of these ICs but could also affect the cables connected to them, causing these cables to radiate certain frequencies.</p>
+<p></p>
+<hr>
+<p style="text-align:justify"><strong><span style="font-size:24px">Optimizing Power Delivery Network Strategy</span></strong></p>
+<p style="text-align:justify"></p>
+<p style="text-align:justify">Now, let’s delve into the strategies we can adopt to optimize the power delivery network (PDN). A key aspect of this optimization process involves calculating the <strong>target impedance</strong> of the system and determining the allowable impedance for our setup. To establish the target impedance we desire in the power delivery network, we start by assessing the maximum voltage drop permissible for the integrated circuit (IC) we are using.</p>
+<p style="text-align:justify"></p>
+<p style="text-align:justify">From this voltage allowance, we can then divide it by the transient current calculated earlier in our analysis. The formula is straightforward: the voltage drop permitted in the IC is divided by the total transient current derived from the two main sources we identified—shoot-through current and transient load current. This simple calculation will yield the target impedance we need for the board.</p>
+<p style="text-align:justify"></p>
+<p style="text-align:justify">Once we have this target impedance, it can be used to inform how many capacitors are necessary and what total capacitance is required to achieve this target impedance at low frequencies. It&#x27;s important to note that while we focus on low frequencies for this part of the design, at higher frequencies, our approach shifts. To mitigate inductive effects at high frequencies, we must use multiple capacitors connected in parallel.</p>
+<p style="text-align:justify"></p>
+<p style="text-align:justify">Observing the impedance behavior of the capacitors, we note that their impedance rises at a rate of approximately 20 dB per decade. This means that from one frequency point to another, the inductive component of the impedance increases steadily. However, the reason we don’t need to be overly concerned about this increase in impedance at higher frequencies is that the signal itself, as described by the <strong>Fourier transform</strong>, typically decreases at a rate of 40 dB per decade after reaching a certain harmonic level.</p>
+<p style="text-align:justify"></p>
+<p style="text-align:justify">To clarify this point, I will refer to insights from an article published in <a href="https://incompliancemag.com/spectra-of-digital-clock-signals/" target="_blank" rel="noreferrer noopener"><strong><u>InCompliance Magazine by Bogdan Adamczyk</u></strong></a>, which outlines this phenomenon effectively. The focus here is to distill this information into actionable insights for designers. Essentially, when we have a trapezoidal-shaped pulse, representative of the transient currents demanded by the IC during logic gate switching, we can analyze the Fourier spectrum of these signals. The result is a boundary of harmonic frequencies encapsulated within this spectrum.</p>
+<p></p>
+<figure class="wix-fig" data-wix-width="557" style="max-width:557px"><img src="/assets/images/wix/61d609_5f52c20334754917b91b214faacbd2ce~mv2.jpg" alt="Frequency spectrum of a trapezoidal-shaped current pulse." loading="lazy"><figcaption>Figure 4  - Frequency spectrum of a trapezoidal-shaped current pulse.</figcaption></figure>
+<p></p>
+<p style="text-align:justify">This analysis reveals that the signal&#x27;s spectrum will start to diminish at a specific point, defined as 1/π<span style="background-color:rgb(255, 255, 255);color:rgb(31, 31, 31)">τ</span> and 1/πτr​, where τr​ represents the switching time of the trapezoidal pulse. By determining the rate at which this spectrum declines at -40 dB per decade, we can then compare it to the response of the PDN. </p>
+<p style="text-align:justify"></p>
+<p style="text-align:justify">The response of the PDN typically grows at +20 dB per decade. This comparison indicates that the signal will ultimately decrease at a net rate of -20 dB per decade after reaching this specific point in the frequency spectrum.</p>
+<p style="text-align:justify"></p>
+<p style="text-align:justify">This analysis suggests that at high frequencies, the amplification of the noise does not pose as significant an issue. The harmonics that extend beyond this frequency threshold will gradually diminish at a rate of -40 dB per decade. Consequently, the power they carry will not be a significant concern for us anymore, as the amplitudes of these higher frequencies will become increasingly negligible.</p>
+<p style="text-align:justify"></p>
+<hr>
+<p style="text-align:justify"></p>
+<p style="text-align:justify"><strong><span style="font-size:24px">Calculating the Number of Capacitors for Target Impedance</span></strong></p>
+<p style="text-align:justify"></p>
+<p style="text-align:justify">Now, the pressing question is how we can determine the number of capacitors required in our circuits to ensure that we meet the target impedance?</p>
+<p style="text-align:justify"></p>
+<p style="text-align:justify">To begin, we first need to establish the target impedance permissible in our system. This understanding is vital, as it forms the foundation for the subsequent calculations. Once we have defined the target impedance, we can easily calculate the necessary number of capacitors using a straightforward formula: </p>
+<p style="text-align:justify"></p>
+<figure class="wix-fig" data-wix-width="163" style="max-width:163px"><img src="/assets/images/wix/61d609_3df89e2243474af8898bc5bf5460609e~mv2.png" alt="" loading="lazy"></figure>
+<p style="text-align:justify">where:</p>
+<ul>
+<li>
+<p style="text-align:justify"><strong>n</strong>: Number of capacitors.</p>
+</li>
+<li>
+<p><strong>L</strong>: Series inductance of the selected capacitor.</p>
+</li>
+<li>
+<p><strong>Zt​</strong>: Target impedance.</p>
+</li>
+<li>
+<p><strong>tr​</strong>: Time required for the transient current needed by the integrated circuit (IC).</p>
+</li>
+</ul>
+<p style="text-align:justify"></p>
+<p style="text-align:justify">By applying this formula, we can determine how many capacitors we will need to achieve the desired target impedance effectively. While calculating this target impedance, it&#x27;s important to incorporate adjusting factors that account for noise, temperature variations, parasitic elements, and manufacturing tolerances. Including these factors ensures that the target impedance aligns more closely with the real-world performance requirements of our design.</p>
+<p></p>
+<hr>
+<p style="text-align:justify"><strong><span style="font-size:24px">Conclusions</span></strong></p>
+<p style="text-align:justify"></p>
+<p style="text-align:justify">So, what is the optimal solution we can implement in our design? </p>
+<p style="text-align:justify"></p>
+<p style="text-align:justify">The first step is to calculate the target impedance accurately. Following that, we need to choose the appropriate surface-mount technology (<strong>SMT</strong>) capacitor package size. Once we have determined the package size, it’s advisable to select the largest capacitance value available within that size.</p>
+<p style="text-align:justify"></p>
+<p style="text-align:justify">Another crucial point to consider is <strong>inter-plane capacitance</strong>. Utilizing this capacitance can provide significant benefits at lower frequencies, allowing us to leverage the capacitance between power and return planes to further decrease our target impedance.</p>
+<p style="text-align:justify"></p>
+<p style="text-align:justify">However, we must also be aware of the trade-offs involved, as the power and return reference planes will exhibit certain resonances. These resonant frequencies will consequently influence the impedance profile of the power delivery network.</p>
+<p style="text-align:justify"></p>
+<p style="text-align:justify">One reason to incorporate capacitors with <strong>higher equivalent series resistance (ESR)</strong> is that we can utilize this ESR to dampen the resonant frequencies introduced by the inter-plane capacitance. </p>
+<p style="text-align:justify"></p>
+<p style="text-align:justify">Thus, these capacitors are not only responsible for providing the energy required by the IC but also play a role throughout the entire board. Their strategic placement is essential, not only must they help achieve the target impedance, but they must also effectively dampen any resonances that arise in the power and return reference planes.</p>
+<p style="text-align:justify"></p>
+<p style="text-align:justify">In practice, this means we will be using a combination of low ESR capacitors situated as close as possible to the IC, supplemented by capacitors with slightly higher ESR distributed around the board. This approach ensures that we can meet our target impedance while also managing the resonant frequencies inherent to the design.</p>
+<p style="text-align:justify"></p>
+<p>If you would like to master EMC/EMI design, we have a new training program here:</p>
+<p></p>
+<p class="wix-btn-wrap"><a class="wix-btn" href="https://www.fresuelectronics.com/mentoring" target="_blank" rel="noreferrer noopener" style="background:#116dff;border-radius:8px;color:#ffffff">Get Personalized Training</a></p>
+<p></p>
+<p>There, you’ll find details on how to apply for one of our exclusive programs designed to help you achieve that goal. </p>
+</div><!-- /wix-body -->
+</article>
+<footer>
+  <div class="site-footer">
+    <span>© 2026 Fresu Electronics SRL</span>
+    <span><a href="https://www.fresuelectronics.com">fresuelectronics.com</a> · <a href="https://www.fresuelectronics.com/free-tool-1">Free Stackup Tool</a></span>
+  </div>
+</footer>
+</body>
+</html>

@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GND connections in a PCB — Fresu Electronics</title>
+  <meta name="description" content="Action list: 1. Get the New EMI Quick Fixes Guide - 2025 How can this create EMI issues? One of the things I am starting to notice more...">
+  <link rel="canonical" href="https://blog.fresuelectronics.com/post/gnd-connections-in-a-pcb/">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="GND connections in a PCB">
+  <meta property="og:description" content="Action list: 1. Get the New EMI Quick Fixes Guide - 2025 How can this create EMI issues? One of the things I am starting to notice more...">
+  <meta property="og:url" content="https://blog.fresuelectronics.com/post/gnd-connections-in-a-pcb/">
+  <meta property="og:image" content="https://blog.fresuelectronics.com/assets/images/wix/61d609_7d449b7916234709945d86a65b5033e9~mv2.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400;1,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/assets/wix-exact.css">
+</head>
+<body>
+<header>
+  <div class="site-header">
+    <a href="https://www.fresuelectronics.com">
+      <img src="https://raw.githubusercontent.com/dariofresu/Fresu-Electronics-Blog/main/assets/logo.png" alt="Fresu Electronics">
+    </a>
+    <nav class="header-nav">
+      <a href="https://blog.fresuelectronics.com/">Blog</a>
+      <a href="https://blog.fresuelectronics.com/tools/">Tools</a>
+      <a href="https://www.fresuelectronics.com/trainings">Courses</a>
+      <a href="https://www.fresuelectronics.com/about">About</a>
+      <a href="https://www.fresuelectronics.com/emc-audit" class="header-cta">Book EMC Audit</a>
+    </nav>
+  </div>
+</header>
+<article class="post">
+  <p class="crumb"><a href="https://blog.fresuelectronics.com/">Blog</a> · <a href="https://blog.fresuelectronics.com/#wix-archive">Original posts</a></p>
+  <header class="post-head">
+    <h1>GND connections in a PCB</h1>
+    <p class="meta"><time datetime="2024-10-15">2024-10-15</time> · <a href="https://info3761185.wixsite.com/dario-fresu-electron/post/gnd-connections-in-a-pcb">Original on Wix</a></p>
+  <p class="taxo">Categories: EMI  - Short Post</p>
+  </header>
+  <figure class="wix-cover"><img src="/assets/images/wix/61d609_7d449b7916234709945d86a65b5033e9~mv2.png" alt=""></figure>
+<div class="wix-body" id="wix-body">
+<p></p>
+<figure class="wix-fig" data-wix-width="449" style="max-width:449px"><img src="/assets/images/wix/61d609_7d449b7916234709945d86a65b5033e9~mv2.png" alt="" loading="lazy"></figure>
+<p></p>
+<hr>
+<h3><strong><span style="font-size:18px">Action list:</span></strong></h3>
+<h5><a href="https://www.fresuelectronics.com/product-page/emi-quick-fixes-guide" target="_blank" rel="nofollow noreferrer noopener"><strong><u>1. </u></strong></a><a href="https://www.fresuelectronics.com/product-page/emi-quick-fixes-guide" target="_blank" rel="nofollow noreferrer noopener"><strong><u><span style="background-color:rgb(2, 255, 135);color:#141414">Get the New EMI Quick Fixes Guide - 2025</span></u></strong></a></h5>
+<p></p>
+<aside class="wix-card"><a href="https://www.fresuelectronics.com/product-page/emi-quick-fixes-guide"><img src="/assets/images/wix/61d609_6a6d3bf9bd114bcfb82d5236e516195a~mv2.png" alt=""><span class="wix-card-name">EMI Quick Fixes Guide</span></a></aside>
+<p></p>
+<hr>
+<p>How can this create EMI issues?</p>
+<p></p>
+<p>One of the things I am starting to notice more often during EMI PCB Design Reviews is that the importance of reducing the inductance of the return and reference path is often overlooked.</p>
+<p></p>
+<p>What I’m seeing is that the pads requiring the lowest inductance connection, in this case, the GND pads, are being left for routing in the final stages instead of at the beginning.</p>
+<p></p>
+<p>One of the first phases of layout design should be placing the vias that connect to the Return and Reference Plane (RRP).</p>
+<p></p>
+<p>However, I often observe that these nets are left to be connected at the end of the design process, resulting in insufficient low-inductance connections, and not enough space to route them appropriately.</p>
+<p></p>
+<p>For example, this happens when two pads share the same vias or when pads are connected to polygon fills that are not properly connected to the RRP with low inductance as they should be.</p>
+<p></p>
+<p>Connecting these nets to polygon fills doesn’t guarantee a low-inductance connection to the RRP.</p>
+<p></p>
+<p>From an EMI perspective, this can lead to differences in voltage potential in the return path.</p>
+<p></p>
+<p>These voltage sources in the return path are among the biggest contributors to conducted emission issues.</p>
+<p></p>
+<p>So, if you want to avoid failing an EMC test, I highly encourage you to prioritize the connections of these return and reference nets at the start of the design phase, not at the end.</p>
+<p></p>
+<p>Hope this helps!</p>
+<p></p>
+<p>Dario</p>
+<p><a href="http://fresuelectronics.com" target="_blank" rel="noreferrer noopener"><u>fresuelectronics.com</u></a></p>
+<p></p>
+<p></p>
+<aside class="wix-card"><a href="https://www.fresuelectronics.com/product-page/emi-control-guides-bundle-offer"><img src="/assets/images/wix/61d609_866071c3d3f041ac8bcaab783ac8a655~mv2.png" alt=""><span class="wix-card-name">EMI Control Guides - Bundle Offer</span></a></aside>
+<p></p>
+<p></p>
+<p></p>
+</div><!-- /wix-body -->
+</article>
+<footer>
+  <div class="site-footer">
+    <span>© 2026 Fresu Electronics SRL</span>
+    <span><a href="https://www.fresuelectronics.com">fresuelectronics.com</a> · <a href="https://www.fresuelectronics.com/free-tool-1">Free Stackup Tool</a></span>
+  </div>
+</footer>
+</body>
+</html>

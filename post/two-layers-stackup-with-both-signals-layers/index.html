@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Two Layers stackup with both signals layers — Fresu Electronics</title>
+  <meta name="description" content="The first thing I look at when a client&#x27;s project fails EMI: The Stackup! I like to think about the stackup as the foundation of a...">
+  <link rel="canonical" href="https://blog.fresuelectronics.com/post/two-layers-stackup-with-both-signals-layers/">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Two Layers stackup with both signals layers">
+  <meta property="og:description" content="The first thing I look at when a client&#x27;s project fails EMI: The Stackup! I like to think about the stackup as the foundation of a...">
+  <meta property="og:url" content="https://blog.fresuelectronics.com/post/two-layers-stackup-with-both-signals-layers/">
+  <meta property="og:image" content="https://blog.fresuelectronics.com/assets/images/wix/61d609_2eff28be66324404b019911078f41b1b~mv2.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400;1,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/assets/wix-exact.css">
+</head>
+<body>
+<header>
+  <div class="site-header">
+    <a href="https://www.fresuelectronics.com">
+      <img src="https://raw.githubusercontent.com/dariofresu/Fresu-Electronics-Blog/main/assets/logo.png" alt="Fresu Electronics">
+    </a>
+    <nav class="header-nav">
+      <a href="https://blog.fresuelectronics.com/">Blog</a>
+      <a href="https://blog.fresuelectronics.com/tools/">Tools</a>
+      <a href="https://www.fresuelectronics.com/trainings">Courses</a>
+      <a href="https://www.fresuelectronics.com/about">About</a>
+      <a href="https://www.fresuelectronics.com/emc-audit" class="header-cta">Book EMC Audit</a>
+    </nav>
+  </div>
+</header>
+<article class="post">
+  <p class="crumb"><a href="https://blog.fresuelectronics.com/">Blog</a> · <a href="https://blog.fresuelectronics.com/#wix-archive">Original posts</a></p>
+  <header class="post-head">
+    <h1>Two Layers stackup with both signals layers</h1>
+    <p class="meta"><time datetime="2024-09-10">2024-09-10</time> · <a href="https://info3761185.wixsite.com/dario-fresu-electron/post/two-layers-stackup-with-both-signals-layers">Original on Wix</a></p>
+  <p class="taxo">Categories: EMI  - Short Post</p>
+  </header>
+  <figure class="wix-cover"><img src="/assets/images/wix/61d609_2eff28be66324404b019911078f41b1b~mv2.png" alt=""></figure>
+<div class="wix-body" id="wix-body">
+<figure class="wix-fig"><img src="/assets/images/wix/61d609_2eff28be66324404b019911078f41b1b~mv2.png" alt="" loading="lazy"></figure>
+<p>The first thing I look at when a client&#x27;s project fails EMI: The Stackup!</p>
+<p></p>
+<p>I like to think about the stackup as the foundation of a building. </p>
+<p></p>
+<p>If the foundation is not done right, the whole building collapses.</p>
+<p></p>
+<p>Selecting the stackup is such a fundamental part of the PCB design process and of passing the EMC test that it cannot be simply overlooked and discarded because of price.</p>
+<p></p>
+<p>But of course, EMC design is simple, but not easy.</p>
+<p></p>
+<p>Most of the issues I see when a project fails the EMC test are because the stackup is totally off.</p>
+<p></p>
+<p>The most common issue I see is selecting a two-layer stackup where both layers are used for routing signals.</p>
+<p></p>
+<p>The reality is that signals and their return path, especially the digital ones, don&#x27;t care about how you name your layers. </p>
+<p></p>
+<p>The only thing they care about is impedance, particularly the path with the least of it.</p>
+<p></p>
+<p>The problem with this type of stackup is that fields are left uncontained and are free to couple with whatever they find most suitable.</p>
+<p></p>
+<p>In most cases, this is found through parasitic coupling through the earth ground, or in cases of EMC tests, through the ground plane.</p>
+<p></p>
+<p>This allows them to expand and results in the PCB failing the tests simply because they are above the allowed limits.</p>
+<p></p>
+<p>The other part to consider is that now we have established a parasitic path that allows parasitic currents to flow through. </p>
+<p></p>
+<p>More EMI troubles for us.</p>
+<p></p>
+<p>Also, as it should be clear from this image, not only do you create Inter-system EMI, but also Intra-system EMI, meaning signal integrity issues!</p>
+<p></p>
+<p>Because now the signals will compromise one another.</p>
+<p></p>
+<p>This will result in a board that not only will fail the EMC test but also will not work properly!</p>
+<p></p>
+<p>Take good care of the return path, and it will take good care of you.</p>
+<p></p>
+<p>Show this picture to your project stakeholders next time you are asked to get rid of the &quot;ground&quot; planes.</p>
+<p></p>
+<p>EMC is NOT black magic.</p>
+<p></p>
+<p>Dario</p>
+<p><a href="http://fresuelectronics.com" target="_blank" rel="noreferrer noopener"><u>fresuelectronics.com</u></a></p>
+<p></p>
+<hr>
+<h3><strong><span style="font-size:18px">Action list:</span></strong></h3>
+<h5><a href="https://www.fresuelectronics.com/product-page/emi-quick-fixes-guide" target="_blank" rel="nofollow noreferrer noopener"><strong><u>1. </u></strong></a><a href="https://www.fresuelectronics.com/product-page/emi-quick-fixes-guide" target="_blank" rel="nofollow noreferrer noopener"><strong><u><span style="background-color:rgb(2, 255, 135);color:#141414">Get the New EMI Quick Fixes Guide - 2025</span></u></strong></a></h5>
+<p></p>
+<aside class="wix-card"><a href="https://www.fresuelectronics.com/product-page/emi-quick-fixes-guide"><img src="/assets/images/wix/61d609_6a6d3bf9bd114bcfb82d5236e516195a~mv2.png" alt=""><span class="wix-card-name">EMI Quick Fixes Guide</span></a></aside>
+<p></p>
+<hr>
+<p></p>
+</div><!-- /wix-body -->
+</article>
+<footer>
+  <div class="site-footer">
+    <span>© 2026 Fresu Electronics SRL</span>
+    <span><a href="https://www.fresuelectronics.com">fresuelectronics.com</a> · <a href="https://www.fresuelectronics.com/free-tool-1">Free Stackup Tool</a></span>
+  </div>
+</footer>
+</body>
+</html>

@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Creepage and Clearance — Fresu Electronics</title>
+  <meta name="description" content="In this and the next article, we&#x27;re digging into the basics of high-voltage PCB design, with a focus on two crucial concepts: Clearance...">
+  <link rel="canonical" href="https://blog.fresuelectronics.com/post/creepage-and-clearance/">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Creepage and Clearance">
+  <meta property="og:description" content="In this and the next article, we&#x27;re digging into the basics of high-voltage PCB design, with a focus on two crucial concepts: Clearance...">
+  <meta property="og:url" content="https://blog.fresuelectronics.com/post/creepage-and-clearance/">
+  <meta property="og:image" content="https://blog.fresuelectronics.com/assets/images/wix/61d609_3e52246b2a454879bfcc66ced3a8af4e~mv2.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400;1,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/assets/wix-exact.css">
+</head>
+<body>
+<header>
+  <div class="site-header">
+    <a href="https://www.fresuelectronics.com">
+      <img src="https://raw.githubusercontent.com/dariofresu/Fresu-Electronics-Blog/main/assets/logo.png" alt="Fresu Electronics">
+    </a>
+    <nav class="header-nav">
+      <a href="https://blog.fresuelectronics.com/">Blog</a>
+      <a href="https://blog.fresuelectronics.com/tools/">Tools</a>
+      <a href="https://www.fresuelectronics.com/trainings">Courses</a>
+      <a href="https://www.fresuelectronics.com/about">About</a>
+      <a href="https://www.fresuelectronics.com/emc-audit" class="header-cta">Book EMC Audit</a>
+    </nav>
+  </div>
+</header>
+<article class="post">
+  <p class="crumb"><a href="https://blog.fresuelectronics.com/">Blog</a> · <a href="https://blog.fresuelectronics.com/#wix-archive">Original posts</a></p>
+  <header class="post-head">
+    <h1>Creepage and Clearance</h1>
+    <p class="meta"><time datetime="2024-09-10">2024-09-10</time> · <a href="https://info3761185.wixsite.com/dario-fresu-electron/post/creepage-and-clearance">Original on Wix</a></p>
+  <p class="taxo">Categories: EMI  - Short Post</p>
+  </header>
+  <figure class="wix-cover"><img src="/assets/images/wix/61d609_3e52246b2a454879bfcc66ced3a8af4e~mv2.png" alt=""></figure>
+<div class="wix-body" id="wix-body">
+<figure class="wix-fig"><img src="/assets/images/wix/61d609_3e52246b2a454879bfcc66ced3a8af4e~mv2.png" alt="" loading="lazy"></figure>
+<p>In this and the next article, we&#x27;re digging into the basics of high-voltage PCB design, with a focus on two crucial concepts: <strong>Clearance and Creepage</strong>.  These are the safety features that keep our high-voltage devices in check.</p>
+<p></p>
+<h3><strong>What is CREEPAGE? </strong></h3>
+<p></p>
+<p>Creepage refers to the <strong>minimum distance between two conductive surfaces along the surface of an insulating material</strong>. </p>
+<p></p>
+<p>In high-voltage PCB design, creepage distance plays a crucial role in ensuring electrical safety and preventing arcing or short circuits. When designing a high-voltage board, it is essential to consider the required creepage distance based on the voltage levels involved and the environmental conditions.</p>
+<p></p>
+<p>Regulatory standards, such as <strong>IEC 60664-1</strong> and <strong>UL 840</strong>, provide specific guidelines for creepage distance requirements based on the voltage ratings of the circuit. Always be aware of the applicable safety product standards to ensure compliance with mandatory creepage requirements for your product.</p>
+<p></p>
+<p>It is important to acknowledge that the <strong>breakdown of creepage distance is a gradual process influenced by DC or RMS voltage, rather than peak events or transients. </strong>Insufficient creepage spacing can persist for extended periods, ranging from days to weeks or even months before a failure occurs.</p>
+<p></p>
+<p>To achieve adequate <strong>creepage</strong> distance, here are some guidelines:</p>
+<p></p>
+<ol>
+<li>
+<p><strong>Identify the voltage level: </strong> Determine the highest voltage present on the PCB and refer to the relevant standards or regulations to determine the required creepage distance. <br></p>
+</li>
+<li>
+<p><strong>Select appropriate materials: </strong> Choose insulating materials with suitable dielectric strength and tracking resistance to maintain the required creepage distance. High-quality PCB laminates and insulating coatings can help ensure electrical isolation and prevent creepage failures. <br></p>
+</li>
+<li>
+<p><strong>Maintain spacing between conductive elements: </strong> Maintain the required creepage distance by carefully designing the layout to avoid proximity between conductive traces, pads, vias, and other components. Consider the minimum creepage distance required for clearance between different voltage levels and between high-voltage and low-voltage areas on the PCB.  <br></p>
+</li>
+<li>
+<p><strong>Consider environmental factors: </strong> Environmental conditions, such as <strong>humidity, pollution levels, pressure (i.e. sea level), and temperature,</strong> can affect creepage distance requirements. Take these factors into account during the design process to ensure reliable performance under varying conditions. <br></p>
+</li>
+<li>
+<p><strong>Insulation coordination: </strong> Insulation coordination involves considering the voltage withstand capabilities of various components and insulation systems within the PCB. Ensure that the components used in the high-voltage circuit can handle the specified voltage levels and maintain the required creepage distance.</p>
+<p></p>
+</li>
+</ol>
+<p>It&#x27;s worth noting that <strong>conformal coatings or potting materials</strong> can serve as valuable tools for providing additional insulation and extending the creepage distance in high-voltage designs. However, it&#x27;s crucial to recognize that when dealing with <strong>UL-certified </strong>products, not only must the conformal coating be <strong>UL certified,</strong> but the application process must also undergo<strong> UL </strong>audit to ensure compliance with the specified coating thickness requirements.  </p>
+<p></p>
+<h3><strong><span style="font-size:24px">What is CLEARANCE?</span></strong></h3>
+<p></p>
+<p>Clearance in high-voltage PCB design refers to the <strong>minimum distance between two conductive elements, measured through the air or other insulating mediums</strong>. It plays a vital role in ensuring electrical safety and preventing arcing or electrical breakdown between adjacent conductive elements.</p>
+<p></p>
+<p>When designing a high-voltage board, it is crucial to consider the required clearance based on the voltage levels involved and the applicable standards or regulations. The clearance distance is typically specified in millimeters or inches and depends on factors such as <strong>voltage level, pollution degree, and overvoltage category</strong>.</p>
+<p></p>
+<p>The breakdown occurring along a clearance path is <strong>characterized by its swift nature, as damage can be inflicted by a brief and powerful impulse.</strong> Therefore, it is essential to consider the maximum peak voltage, including transients, when determining the required clearance spacing.</p>
+<p></p>
+<p>To ensure proper clearance in high-voltage PCB design, consider the following guidelines:</p>
+<p></p>
+<ol>
+<li>
+<p><strong>Determine voltage levels and applicable standards</strong>:   Identify the highest voltage present on the PCB and refer to applicable product standards, such as <strong>IEC/EN/UL/CSA 60730-1:2022</strong>, other standards as<strong> IEC 60664-1</strong> and <strong>UL 840</strong>, can be of further guidance to determine the required clearance distance.<br></p>
+</li>
+<li>
+<p><strong>Choose appropriate materials and PCB stackup</strong>:   Select insulating materials and PCB laminates with suitable dielectric strength to maintain the required clearance distance. The PCB stack-up should consider the voltage levels and insulation requirements to minimize the risk of electrical breakdown. Talk with the board manufacturer to make sure of its capabilities and the costs implied. <br></p>
+</li>
+<li>
+<p><strong>Maintain safe distances between conductive elements:</strong>  Design the layout with sufficient spacing between conductive traces, pads, vias, and other components to meet the required clearance distance. Consider the minimum clearance distance needed for isolation between different voltage levels and between high-voltage and low-voltage areas on the PCB. <br></p>
+</li>
+<li>
+<p><strong>Follow the guidelines for high-voltage connectors: </strong>  Pay attention to the clearance requirements for high-voltage connectors and ensure adequate spacing between connector pins and nearby conductive elements. </p>
+</li>
+</ol>
+<p></p>
+<p>It is important to note that the required clearance distances can vary based on the specific application and regulatory requirements. Designers should refer to the appropriate standards and consult with experienced engineers to determine the precise clearance distance for their high-voltage PCB designs.   </p>
+<p></p>
+<p>As we conclude our journey through this electrifying landscape, let&#x27;s remember that mastering <strong>high-voltage PCB design</strong> is not just a technical feat, but also a commitment to <strong>safety and excellence</strong>. </p>
+<p></p>
+<p>Whether you&#x27;re building electronic devices that power our homes, industries, or the cutting-edge technologies of the future, the knowledge of <strong>clearance and creepage</strong> is your compass, guiding you toward safer, more efficient, and more robust designs. </p>
+<p></p>
+<p>Dario</p>
+<p><a href="http://fresuelectronics.com" target="_blank" rel="noreferrer noopener"><u>fresuelectronics.com</u></a></p>
+<p></p>
+<hr>
+<h3><strong><span style="font-size:18px">Action list:</span></strong></h3>
+<h5><a href="https://www.fresuelectronics.com/product-page/emi-quick-fixes-guide" target="_blank" rel="nofollow noreferrer noopener"><strong><u>1. </u></strong></a><a href="https://www.fresuelectronics.com/product-page/emi-quick-fixes-guide" target="_blank" rel="nofollow noreferrer noopener"><strong><u><span style="background-color:rgb(2, 255, 135);color:#141414">Get the New EMI Quick Fixes Guide - 2025</span></u></strong></a></h5>
+<p></p>
+<aside class="wix-card"><a href="https://www.fresuelectronics.com/product-page/emi-quick-fixes-guide"><img src="/assets/images/wix/61d609_6a6d3bf9bd114bcfb82d5236e516195a~mv2.png" alt=""><span class="wix-card-name">EMI Quick Fixes Guide</span></a></aside>
+<p></p>
+<hr>
+<p></p>
+</div><!-- /wix-body -->
+</article>
+<footer>
+  <div class="site-footer">
+    <span>© 2026 Fresu Electronics SRL</span>
+    <span><a href="https://www.fresuelectronics.com">fresuelectronics.com</a> · <a href="https://www.fresuelectronics.com/free-tool-1">Free Stackup Tool</a></span>
+  </div>
+</footer>
+</body>
+</html>

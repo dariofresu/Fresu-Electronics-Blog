@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Understanding 90-Degree Bends in PCB Design: A Practical Guide — Fresu Electronics</title>
+  <meta name="description" content="Explore the intricacies of pcb design with our practical guide on 90-degree bends. Master pcb design techniques for optimized performance.">
+  <link rel="canonical" href="https://blog.fresuelectronics.com/post/90-degree-bends-in-a-pcb-design/">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Understanding 90-Degree Bends in PCB Design: A Practical Guide">
+  <meta property="og:description" content="Explore the intricacies of pcb design with our practical guide on 90-degree bends. Master pcb design techniques for optimized performance.">
+  <meta property="og:url" content="https://blog.fresuelectronics.com/post/90-degree-bends-in-a-pcb-design/">
+  <meta property="og:image" content="https://blog.fresuelectronics.com/assets/images/wix/61d609_ad0b40349b1844e9a2c35914085ff510~mv2.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400;1,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/assets/wix-exact.css">
+</head>
+<body>
+<header>
+  <div class="site-header">
+    <a href="https://www.fresuelectronics.com">
+      <img src="https://raw.githubusercontent.com/dariofresu/Fresu-Electronics-Blog/main/assets/logo.png" alt="Fresu Electronics">
+    </a>
+    <nav class="header-nav">
+      <a href="https://blog.fresuelectronics.com/">Blog</a>
+      <a href="https://blog.fresuelectronics.com/tools/">Tools</a>
+      <a href="https://www.fresuelectronics.com/trainings">Courses</a>
+      <a href="https://www.fresuelectronics.com/about">About</a>
+      <a href="https://www.fresuelectronics.com/emc-audit" class="header-cta">Book EMC Audit</a>
+    </nav>
+  </div>
+</header>
+<article class="post">
+  <p class="crumb"><a href="https://blog.fresuelectronics.com/">Blog</a> · <a href="https://blog.fresuelectronics.com/#wix-archive">Original posts</a></p>
+  <header class="post-head">
+    <h1>Understanding 90-Degree Bends in PCB Design: A Practical Guide</h1>
+    <p class="meta"><time datetime="2025-05-02">2025-05-02</time> · <a href="https://info3761185.wixsite.com/dario-fresu-electron/post/90-degree-bends-in-a-pcb-design">Original on Wix</a></p>
+  <p class="taxo">Categories: EMC/EMI Design · Tags: Hardware Design, EMC Compliance, PCB Design, Signal Integrity</p>
+  </header>
+  <figure class="wix-cover"><img src="/assets/images/wix/61d609_ad0b40349b1844e9a2c35914085ff510~mv2.png" alt=""></figure>
+<div class="wix-body" id="wix-body">
+<p style="text-align:justify">In the realm of printed circuit board (PCB) design, certain guidelines have become deeply ingrained, often passed down through generations of engineers as fundamental principles. One such guideline is the caution against using 90-degree bends when routing PCB traces. The advice is frequently accompanied by a widely accepted explanation: electrons accelerate at the sharp corner of a 90-degree bend, leading to electromagnetic radiations and reflections that can degrade signal integrity. But how accurate is this explanation, and should engineers genuinely be concerned about the presence of 90-degree bends in their designs? </p>
+<p style="text-align:justify"></p>
+<p style="text-align:justify">This article aims to provide a thorough and practical understanding of the effects of 90-degree bends in PCB traces. We will debunk common misconceptions, explore the true causes of signal reflections, quantify their impact, and discuss actionable strategies for managing any potential issues. By the end, you will be equipped with the knowledge to evaluate the significance of 90-degree bends in your own projects and make informed decisions to optimize your PCB designs for both performance and reliability.</p>
+<p style="text-align:justify"></p>
+<figure class="wix-fig"><img src="/assets/images/wix/61d609_cc280e3226d74817a3f656a7f0b38c98~mv2.png" alt="An electronic circuit board design is under scrutiny, with a highlighted corner and a caption asking if the 90-degree corner feature is good or bad." loading="lazy"><figcaption>An electronic circuit board design is under scrutiny, with a highlighted corner and a caption asking if the 90-degree corner feature is good or bad.</figcaption></figure>
+<p style="text-align:justify"></p>
+<h2 style="text-align:justify">The Misconception About 90-Degree Bends</h2>
+<p style="text-align:justify"></p>
+<p style="text-align:justify">The warning against 90-degree bends often comes with a simplified explanation: as electrons travel along a trace and encounter a sharp 90-degree corner, they are forced to change direction abruptly, causing acceleration. This acceleration, the reasoning goes, generates electromagnetic radiation and reflections that can interfere with the signal. While this explanation may seem intuitive, it is not entirely accurate and oversimplifies the physics at play.</p>
+<p style="text-align:justify"></p>
+<p style="text-align:justify">In reality, the behavior of signals in a PCB trace is governed by the principles of signal transmission, where the trace functions as a transmission line. At the frequencies typically encountered in modern electronics—ranging from a few megahertz to several gigahertz—signals propagate as electromagnetic waves, not as individual electrons making sharp turns. The idea of electrons accelerating at a corner and causing radiation is more of a metaphorical description than a precise representation of the phenomenon. To understand the true source of reflections, we need to examine the electrical properties of the trace itself.</p>
+<p></p>
+<aside class="wix-card"><a href="https://www.fresuelectronics.com/product-page/emi-control-guides-bundle-offer"><img src="/assets/images/wix/61d609_a3dd869d762641cda7e4069aadc81638~mv2.png" alt=""><span class="wix-card-name">EMI Control Bundle Offer - Digital Guides (3-eBooks)</span></a></aside>
+<p></p>
+<h2 style="text-align:justify">The Real Cause: Capacitance at the Corner</h2>
+<p style="text-align:justify"></p>
+<p style="text-align:justify">The primary issue with a 90-degree bend is not related to electron acceleration but rather to a change in the electrical characteristics of the trace at the corner. Specifically, a 90-degree bend introduces an <strong>increase in capacitance</strong> due to the geometry of the trace. To understand why this happens, let’s take a closer look at the structure of a 90-degree bend. When a trace makes a 90-degree turn, the outer edge of the corner extends outward, effectively increasing the width of the trace at that point. This is illustrated in the diagram below, where the trace width at the corner (W2) is greater than the nominal trace width (W1).</p>
+<p style="text-align:justify"></p>
+<figure class="wix-fig" data-wix-width="553" style="max-width:553px"><img src="/assets/images/wix/61d609_c5818cb2b6c94f75b3ca5b3b08f7cf1e~mv2.png" alt="Diagram illustrating a copper trace rectangular corner, featuring two labeled lines, W1 and W2, that form a right-angled triangle highlighting the corner&#x27;s geometry." loading="lazy"><figcaption><em>Diagram illustrating a copper trace rectangular corner, featuring two labeled lines, W1 and W2, that form a right-angled triangle highlighting the corner&#x27;s geometry.</em></figcaption></figure>
+<p style="text-align:justify"></p>
+<p style="text-align:justify">This increase in width results in a larger surface area of conductive material at the corner. In a PCB, the capacitance of a trace is directly related to the area of the conductor and inversely related to the distance between the conductor and the reference plane. A larger conductor area at the corner increases the capacitance between the trace and the reference plane, creating what is known as <strong>excess capacitance</strong>.</p>
+<p style="text-align:justify"></p>
+<p style="text-align:justify">This excess capacitance can be quantified using a simplified formula for a 50-ohm transmission line:</p>
+<p style="text-align:justify"></p>
+<p style="text-align:justify"></p>
+<figure class="wix-fig" data-wix-width="546" style="max-width:546px"><img src="/assets/images/wix/61d609_d24b32fefc1b4c67ad4c11e2096692d1~mv2.png" alt="Equation showing the calculation for corner capacity based on width and lens capacity." loading="lazy"></figure>
+<p style="text-align:justify">Where:</p>
+<ul>
+<li>
+<p style="text-align:justify">C_corner: The excess capacitance at the corner (in farads).</p>
+</li>
+<li>
+<p style="text-align:justify">w: The nominal width of the trace (in mils or another unit of length).</p>
+</li>
+<li>
+<p style="text-align:justify">C_len: The capacitance per unit length of the trace, typically around 3.4 fF/mil for a 50-ohm line with a dielectric constant (Dk) of 4.</p>
+</li>
+</ul>
+<p style="text-align:justify"></p>
+<p style="text-align:justify">For a typical PCB trace with a width of 5 mils, the excess capacitance at a 90-degree corner would be:</p>
+<p style="text-align:justify"></p>
+<figure class="wix-fig" data-wix-width="594" style="max-width:594px"><img src="/assets/images/wix/61d609_79edb4b8242b421f9b90d7ebcfd566e5~mv2.png" alt="Calculation of corner capacitance, showing the formula and resulting value of 8.5 femtofarads." loading="lazy"></figure>
+<p style="text-align:justify">While 8.5 femtofarads (fF) may seem small, its impact depends on the signal frequency and the overall capacitance budget of the transmission line, which we will explore further.</p>
+<p style="text-align:justify"></p>
+<h2 style="text-align:justify">The Impact of Excess Capacitance</h2>
+<p style="text-align:justify"></p>
+<p style="text-align:justify">Capacitance in a transmission line affects its characteristic impedance. A 50-ohm transmission line, for example, is designed to maintain a consistent impedance along its length to ensure proper signal transmission. The characteristic impedance ( Zo ) of a transmission line is given by:</p>
+<figure class="wix-fig" data-wix-width="312" style="max-width:312px"><img src="/assets/images/wix/61d609_ae845fda465348be8e75f496cfbcf5ab~mv2.png" alt="Formula for the characteristic impedance of a transmission line, where \( Z_0 \) equals the square root of the inductance per unit length \( L \) divided by the capacitance per unit length \( C \)." loading="lazy"></figure>
+<p style="text-align:justify">Where ( L ) is the inductance per unit length, and ( C ) is the capacitance per unit length. An abrupt increase in capacitance at the corner (i.e., C_corner) lowers the impedance locally at that point, causing an impedance mismatch. This mismatch is what leads to signal reflections, as the electromagnetic wave traveling along the trace encounters a sudden change in the transmission line’s properties.</p>
+<p style="text-align:justify"></p>
+<p style="text-align:justify">The severity of these reflections depends on the magnitude of the impedance mismatch and the frequency of the signal. At low frequencies, where the wavelength of the signal is much larger than the physical dimensions of the corner, the effect of the excess capacitance is negligible. However, at higher frequencies—such as those used in modern high-speed digital circuits or RF applications—the wavelength becomes comparable to or smaller than the corner’s dimensions, making the impedance mismatch more significant.</p>
+<p style="text-align:justify"></p>
+<h2 style="text-align:justify">Narrow Traces vs. Wide Traces</h2>
+<p style="text-align:justify"></p>
+<p style="text-align:justify">The impact of a 90-degree bend is not the same for all traces; it depends heavily on the trace width. Let’s break this down:</p>
+<p style="text-align:justify"></p>
+<ul>
+<li>
+<p style="text-align:justify"><strong>Narrow traces</strong>: A trace with a smaller width (e.g., 4 mils) has less added metal at the corner, resulting in a smaller increase in capacitance. Using the formula above, a 4-mil trace would have an excess capacitance of: C_corner =  6.8 fF.</p>
+<p style="text-align:justify">This smaller capacitance leads to a less pronounced impedance mismatch and, consequently, fewer reflections.<br></p>
+</li>
+<li>
+<p style="text-align:justify"><strong>Wide traces</strong>: A wider trace (e.g., 10 mils) has more added metal at the corner, increasing the capacitance significantly: C_corner = 17 fF.</p>
+<p style="text-align:justify">This larger capacitance causes a more significant impedance mismatch, resulting in stronger reflections.<br></p>
+</li>
+</ul>
+<p style="text-align:justify">In practical terms, if you are working with narrow traces, the impact of a 90-degree bend may be minimal. However, for wider traces—often used in power delivery networks or high-current paths—the added capacitance can have a more noticeable effect on signal integrity.</p>
+<p style="text-align:justify"></p>
+<aside class="wix-card"><a href="https://www.fresuelectronics.com/product-page/radiated-emissions-guide"><img src="/assets/images/wix/61d609_89dfbda4558b472e95bdc20bd30af0b6~mv2.png" alt=""><span class="wix-card-name">Radiated Emissions and EMI Control  - Digital Guide (eBook)</span></a></aside>
+<p></p>
+<h2 style="text-align:justify">Assessing Your Capacitance Budget</h2>
+<p style="text-align:justify"></p>
+<p style="text-align:justify">To determine whether the excess capacitance from a 90-degree bend will affect your design, you need to evaluate your capacitance budget—the maximum variation in capacitance that your signal can tolerate without significant degradation. This budget depends on the type of signal you are transmitting and the requirements of your circuit.<br></p>
+<p style="text-align:justify">For high-speed digital signals, such as those used in USB, PCIe, or DDR memory interfaces, the capacitance budget is typically quite small. These signals operate at frequencies ranging from 1 GHz to several GHz, where even a small impedance mismatch can lead to reflections that cause bit errors or signal distortion. For example, a DDR4 memory interface operating at 3.2 Gbps may require the total capacitance variation along a trace to be less than 50fF to maintain signal integrity.<br></p>
+<p style="text-align:justify">In contrast, low-speed signals, such as those used for control lines or sensors, can tolerate much larger variations in capacitance—often several hundred femtofarads—because their longer wavelengths make them less sensitive to small discontinuities.<br></p>
+<p style="text-align:justify">To assess your capacitance budget, you can use simulation tools such as <strong><span style="background-color:rgb(255, 255, 255);color:rgb(66, 66, 66)">SIMBEOR®</span></strong> to model the transmission line and calculate the acceptable range of impedance variation. Alternatively, you can refer to the signal integrity specifications provided by the interface standard you are using (e.g., USB, PCIe). Once you know your capacitance budget, you can compare it to the excess capacitance introduced by a 90-degree bend. If your trace has multiple bends, the cumulative effect could exceed your budget, leading to signal integrity problems.<br></p>
+<h2 style="text-align:justify">Practical Example: High-Speed Digital Design<br></h2>
+<p style="text-align:justify">To illustrate the impact of 90-degree bends, let’s consider a practical example: a PCB designed for a DDR4 memory interface operating at 3.2 Gbps. At this frequency, the signal wavelength is approximately 50 mm (assuming a signal propagation speed of 160 mm/ns in FR4). A typical 90-degree bend in a 5-mil trace introduces an excess capacitance of 8.5 fF, which may seem small. However, DDR4 signals are highly sensitive to reflections, and the standard typically allows for a total capacitance variation of less than 50 fF across the entire trace.<br></p>
+<p style="text-align:justify">If the trace has multiple 90-degree bends—say, five bends along its length—the cumulative excess capacitance would be: 42.5 fF<br></p>
+<p style="text-align:justify">This is dangerously close to the 50 fF budget, leaving little margin for other variations, such as those caused by vias, connectors, or manufacturing tolerances. In this scenario, the presence of 90-degree bends could lead to signal integrity issues, making it necessary to consider alternative routing strategies.<br></p>
+<aside class="wix-card"><a href="https://www.fresuelectronics.com/product-page/emi-control-guide"><img src="/assets/images/wix/61d609_5c0f46df7ce441528852e5925be22989~mv2.png" alt=""><span class="wix-card-name">Top 10 PCB Design Mistakes for EMI Control - Digital Guide (eBook)</span></a></aside>
+<p></p>
+<h2 style="text-align:justify">Mitigating Reflections: Alternative Routing Techniques<br></h2>
+<p style="text-align:justify">If you determine that the excess capacitance from 90-degree bends exceeds your capacitance budget—or if you simply want to adopt best practices for signal integrity—there are several strategies you can employ to minimize reflections.<br></p>
+<h3 style="text-align:justify">Use Rounded Corners or 135-Degree Bends<br></h3>
+<p style="text-align:justify">One of the most effective ways to reduce the impact of a 90-degree bend is to avoid sharp corners altogether. Instead, you can use rounded corners or 135-degree bends when routing your traces. These approaches minimize the abrupt change in trace width, reducing the excess capacitance and the resulting impedance mismatch.<br></p>
+<ul>
+<li>
+<p style="text-align:justify"><strong>Rounded corners</strong>: A rounded corner provides a smooth transition between two perpendicular segments of a trace, eliminating the sharp increase in width that occurs at a 90-degree bend. This results in a more uniform impedance along the trace, minimizing reflections.<br></p>
+</li>
+<li>
+<p style="text-align:justify"><strong>135-degree bends</strong>: If your PCB design software does not support rounded corners, you can approximate a smooth transition by using 135-degree bends instead of a 90-degree bend. This creates a chamfered corner, which still reduces the excess capacitance compared to a sharp 90-degree turn.<br></p>
+</li>
+</ul>
+<p style="text-align:justify">Both rounded corners and 135-degree bends are widely supported in modern PCB design tools, making them easy to implement in your layouts.<br></p>
+<h3 style="text-align:justify">Benefits Beyond Signal Integrity<br></h3>
+<p style="text-align:justify">In addition to improving signal integrity, using rounded corners can enhance the overall quality of your PCB design in other ways:<br></p>
+<ol>
+<li>
+<p style="text-align:justify"><strong>Improved manufacturability</strong>: Sharp corners can sometimes lead to manufacturing issues, such as over-etching or uneven copper distribution during the fabrication process. Rounded or chamfered corners reduce the risk of these issues, improving the reliability of the PCB.<br></p>
+</li>
+<li>
+<p style="text-align:justify"><strong>Aesthetic appeal</strong>: While not a primary concern in PCB design, the visual appearance of a board can reflect the care and attention put into the design process. Rounded or 135-degree bends give the PCB a polished, professional look, which can be an advantage in presentations or product demonstrations.<br></p>
+</li>
+</ol>
+<figure class="wix-fig" data-wix-width="740" style="max-width:740px"><img src="/assets/images/wix/61d609_4ecbe228dc044243b503cff04d2d4a94~mv2.jpg" alt="Close-up view of a circuit board, showcasing intricate components and pathways, illuminated by soft, ambient lighting." loading="lazy"><figcaption>Close-up view of a circuit board, showcasing intricate components and pathways, illuminated by soft, ambient lighting.</figcaption></figure>
+<h2 style="text-align:justify">When to Worry About 90-Degree Bends in PCB Design<br></h2>
+<p style="text-align:justify">Given the availability of alternative routing techniques, you might wonder whether 90-degree bends should ever be used in PCB design. The answer depends on the specific requirements of your project.<br></p>
+<p style="text-align:justify">For low-speed signals or applications where signal integrity is not a primary concern—such as a simple LED driver circuit or a low-frequency sensor interface—a 90-degree bend is unlikely to cause any noticeable issues. In these cases, the excess capacitance is small compared to the capacitance budget, and the signal wavelength is long enough that the impedance mismatch has minimal impact. However, for high-speed or sensitive signals, such as those in RF circuits, high-speed digital interfaces, or precision analog applications, even a small impedance mismatch can lead to significant problems. In these cases, it is best to avoid 90-degree bends and opt for rounded corners as a standard practice. This approach ensures that your design meets the strict signal integrity requirements of modern electronics.<br></p>
+<h2 style="text-align:justify">Conclusion<br></h2>
+<p style="text-align:justify">The caution against 90-degree bends in PCB traces is rooted in a real phenomenon, but the explanation often given—electron acceleration causing radiations—is a misconception. The true issue lies in the excess capacitance introduced at the corner due to the increased trace width, which leads to an impedance mismatch and potential signal reflections. The severity of this effect depends on the trace width, the frequency of the signals, and the capacitance budget of your design.<br></p>
+<p style="text-align:justify">By understanding the physics behind 90-degree bends, you can make informed decisions about their use in your PCB designs. For low-speed signals or narrow traces, the impact may be minimal, but for high-speed or sensitive applications, adopting rounded corners is a simple and effective way to minimize reflections and ensure signal integrity. These alternative routing techniques also offer additional benefits, such as improved manufacturability and a more professional appearance for your PCB. At Fresu Electronics, we are dedicated to helping engineers grasp and implement best design practices from the outset. If you&#x27;re interested in enhancing your skills, we invite you to explore our courses and EMI control guides.<br></p>
+<p class="wix-btn-wrap"><a class="wix-btn" href="https://www.fresuelectronics.com/courses" target="_blank" rel="noreferrer noopener" style="background:#116dff;border-radius:8px;color:#ffffff">Check Out Our Online Training Courses Here</a></p>
+<p style="text-align:justify"></p>
+<aside class="wix-card"><a href="https://www.fresuelectronics.com/product-page/emi-control-guides-bundle-offer"><img src="/assets/images/wix/61d609_a3dd869d762641cda7e4069aadc81638~mv2.png" alt=""><span class="wix-card-name">EMI Control Bundle Offer - Digital Guides (3-eBooks)</span></a></aside>
+<p style="text-align:justify"></p>
+<p style="text-align:justify"></p>
+<p style="text-align:justify"></p>
+</div><!-- /wix-body -->
+</article>
+<footer>
+  <div class="site-footer">
+    <span>© 2026 Fresu Electronics SRL</span>
+    <span><a href="https://www.fresuelectronics.com">fresuelectronics.com</a> · <a href="https://www.fresuelectronics.com/free-tool-1">Free Stackup Tool</a></span>
+  </div>
+</footer>
+</body>
+</html>

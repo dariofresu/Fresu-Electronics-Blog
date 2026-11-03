@@ -152,6 +152,22 @@
       .sw-tab-icon { transform: none; }
       .sw-panel { border: none; border-top: 1px solid #2a2a2a; border-radius: 0; width: 100%; box-shadow: 0 -4px 24px rgba(0,0,0,0.6); max-height: 80vh; overflow-y: auto; }
     }
+
+    /* WIX-ARCHIVE-LIST */
+    .wix-archive { margin-top: 72px; }
+    .wix-archive h2 { font-size: 28px; font-weight: 800; letter-spacing: -0.02em; color: #fff; margin-bottom: 8px; }
+    .wix-archive .archive-note { color: var(--label); font-size: 14px; line-height: 1.6; margin-bottom: 20px; max-width: 680px; }
+    .archive-list { list-style: none; border-top: 1px solid var(--border); }
+    .archive-list li { border-bottom: 1px solid var(--border); }
+    .archive-list a { display: flex; gap: 18px; align-items: baseline; padding: 12px 2px; text-decoration: none; color: #fff; }
+    .archive-list a:hover .archive-title { color: var(--accent); }
+    .archive-date { flex: 0 0 108px; color: var(--label); font-size: 13px; font-variant-numeric: tabular-nums; }
+    .archive-title { font-size: 15px; font-weight: 500; line-height: 1.4; }
+    @media (max-width: 760px) {
+      .archive-list a { flex-direction: column; gap: 2px; }
+      .archive-date { flex-basis: auto; }
+    }
+    /* /WIX-ARCHIVE-LIST */
   </style>
 </head>
 <body>
@@ -479,6 +495,104 @@
     </div>
   </div>
 
+
+<!-- WIX-ARCHIVE-LIST -->
+<section class="wix-archive" id="wix-archive">
+  <h2>Original posts</h2>
+  <p class="archive-note">Exact copies of the 89 English posts from the Wix blog, with the original text, figures, captions, and order. Edited posts above are unchanged.</p>
+  <ul class="archive-list">
+    <li><a href="./post/why-smart-engineers-fail-emc-tests-it-s-not-what-you-think/"><span class="archive-date">2025-06-24</span><span class="archive-title">Why smart engineers fail EMC tests (it&#x27;s not what you think)</span></a></li>
+    <li><a href="./post/a-field-centric-perspective-on-charge-and-energy-transfer-in-classical-electromagnetism/"><span class="archive-date">2025-05-25</span><span class="archive-title">A Field-Centric Perspective on Charge and Energy Transfer in Classical Electromagnetism</span></a></li>
+    <li><a href="./post/optimizing-pcb-stackup-design-power-and-return-path-considerations/"><span class="archive-date">2025-05-17</span><span class="archive-title">Optimizing PCB Stackup Design: Power and Return Path Considerations</span></a></li>
+    <li><a href="./post/emc-filter-topologies-emi-control-strategies-in-electronics-design/"><span class="archive-date">2025-05-12</span><span class="archive-title">EMC Filter Topologies: EMI Control Strategies in Electronics Design</span></a></li>
+    <li><a href="./post/current-return-path-high-speed-vs-low-speed-signals/"><span class="archive-date">2025-05-07</span><span class="archive-title">Effective Strategies for Managing EMI in PCBs with Low and High-Speed Signal Return Currents</span></a></li>
+    <li><a href="./post/90-degree-bends-in-a-pcb-design/"><span class="archive-date">2025-05-02</span><span class="archive-title">Understanding 90-Degree Bends in PCB Design: A Practical Guide</span></a></li>
+    <li><a href="./post/emc-design-for-multilayer-pcb-be-aware-of-using-power-planes-as-return-reference-planes/"><span class="archive-date">2025-04-27</span><span class="archive-title">Power Planes as Return Reference Planes in PCB Design: Challenges and Solutions in Multilayer Stackups</span></a></li>
+    <li><a href="./post/mastering-electromagnetic-interference/"><span class="archive-date">2025-04-23</span><span class="archive-title">Mastering Electromagnetic Interference: Elevate Electronics with EMC Design</span></a></li>
+    <li><a href="./post/redefining-current-and-charge-a-field-based-perspective-on-electromagnetism/"><span class="archive-date">2025-04-20</span><span class="archive-title">Redefining Current and Charge: A Field-Based Perspective on Electromagnetism</span></a></li>
+    <li><a href="./post/why-ground-falls-short-a-call-for-a-clearer-term-in-circuit-design/"><span class="archive-date">2025-04-17</span><span class="archive-title">Why ‘Ground’ Falls Short: A Call for a Clearer Term in Circuit Design</span></a></li>
+    <li><a href="./post/understanding-emc-current-clamps-a-key-tool-for-assessing-radiated-emissions/"><span class="archive-date">2025-04-14</span><span class="archive-title">Radiated Emissions Testing and the Role of EMC Current Clamps</span></a></li>
+    <li><a href="./post/understanding-en-61000-4-6-a-key-standard-for-conducted-rf-immunity-in-emc-design/"><span class="archive-date">2025-04-13</span><span class="archive-title">Understanding EN 61000-4-6: A Key Standard for Conducted RF Immunity in EMC Design</span></a></li>
+    <li><a href="./post/how-return-reference-planes-impact-emi-control-in-pcb-design/"><span class="archive-date">2025-04-12</span><span class="archive-title">How Return Reference Planes Impact EMI Control in PCB Design</span></a></li>
+    <li><a href="./post/the-essentials-of-electromagnetic-compatibility-training/"><span class="archive-date">2025-04-11</span><span class="archive-title">The Essentials of Electromagnetic Compatibility Training</span></a></li>
+    <li><a href="./post/the-pitfalls-of-overreliance-on-post-design-fixes-in-electromagnetic-compatibility-compliance/"><span class="archive-date">2025-04-10</span><span class="archive-title">The Pitfalls of Overreliance on Post-Design Fixes in Electromagnetic Compatibility Compliance</span></a></li>
+    <li><a href="./post/mastering-pcb-design-with-ipc-2221-the-industry-s-foundational-standard/"><span class="archive-date">2025-04-08</span><span class="archive-title">Mastering PCB Design with IPC-2221: The Industry’s Foundational Standard</span></a></li>
+    <li><a href="./post/signal-integrity-the-key-to-emc-compliance-for-electronic-engineers/"><span class="archive-date">2025-04-06</span><span class="archive-title">Signal Integrity: The Key to EMC Compliance for Electronic Engineers</span></a></li>
+    <li><a href="./post/why-emi-keeps-ruining-your-pcb-designs-and-what-to-do-before-it-s-too-late/"><span class="archive-date">2025-04-05</span><span class="archive-title">Why EMI Keeps Ruining Your PCB Designs (And What to Do Before It’s Too Late)</span></a></li>
+    <li><a href="./post/optimizing-pcb-layout-for-emi-control/"><span class="archive-date">2025-04-04</span><span class="archive-title">Optimizing PCB Layout for EMI Control: Managing Fast-Changing Currents</span></a></li>
+    <li><a href="./post/input-filter-design-emc-compliance-for-power-converters/"><span class="archive-date">2025-04-03</span><span class="archive-title">Mastering Input Filter Design: Achieving EMC Compliance for Power Converters</span></a></li>
+    <li><a href="./post/mastering-pcb-design-tips-for-beginners/"><span class="archive-date">2025-04-02</span><span class="archive-title">Mastering PCB Design: Tips for Beginners</span></a></li>
+    <li><a href="./post/your-first-steps-in-pcb-design-a-beginner-s-guide/"><span class="archive-date">2025-03-28</span><span class="archive-title">Your First Steps in PCB Design: A Beginner’s Guide</span></a></li>
+    <li><a href="./post/the-role-of-emi-specialists-in-ensuring-compliance/"><span class="archive-date">2025-03-27</span><span class="archive-title">The Role of EMI Specialists in Ensuring Compliance</span></a></li>
+    <li><a href="./post/understanding-emi-and-emc-in-electrical-systems/"><span class="archive-date">2025-03-26</span><span class="archive-title">Understanding EMI and EMC in Electrical Systems</span></a></li>
+    <li><a href="./post/understanding-the-significance-of-radiated-emissions-emi-control-in-achieving-emc-compliance/"><span class="archive-date">2025-03-21</span><span class="archive-title">Understanding the Significance of Radiated Emissions &amp; EMI Control in Achieving EMC Compliance </span></a></li>
+    <li><a href="./post/how-do-signals-propagate-in-a-printed-circuit-board-pcb/"><span class="archive-date">2024-11-19</span><span class="archive-title">Understanding Signal Propagation in a Printed Circuit Board (PCB)</span></a></li>
+    <li><a href="./post/pcb-design-review-for-low-emi-motherboard-design/"><span class="archive-date">2024-11-19</span><span class="archive-title">How to Effectively Conduct an EMI Design Review for Your PCB</span></a></li>
+    <li><a href="./post/conducted-emissions/"><span class="archive-date">2024-11-19</span><span class="archive-title">Conducted Emissions</span></a></li>
+    <li><a href="./post/pcb-design-for-low-emi-differential-mode-vs-common-mode-currents/"><span class="archive-date">2024-11-18</span><span class="archive-title">Differential Mode vs. Common Mode Currents</span></a></li>
+    <li><a href="./post/radiated-emissions/"><span class="archive-date">2024-11-18</span><span class="archive-title">Understanding Radiated Emissions: What You Need to Know for EMI Compliance</span></a></li>
+    <li><a href="./post/pcb-design-power-delivery-network-pdn-for-low-emi/"><span class="archive-date">2024-11-18</span><span class="archive-title">Power Delivery Network (PDN) for Low EMI</span></a></li>
+    <li><a href="./post/esd-electrostatic-discharge/"><span class="archive-date">2024-11-18</span><span class="archive-title">Understanding ESD: How to Protect Your Electronics from Electrostatic Discharge</span></a></li>
+    <li><a href="./post/introduction-to-electromagnetic-compatibility-emc/"><span class="archive-date">2024-11-18</span><span class="archive-title">Introduction to Electromagnetic Compatibility (EMC)</span></a></li>
+    <li><a href="./post/what-is-impedance/"><span class="archive-date">2024-11-18</span><span class="archive-title">What is Impedance?</span></a></li>
+    <li><a href="./post/electromagnetic-fields-in-a-two-layer-pc-board/"><span class="archive-date">2024-11-18</span><span class="archive-title">Electromagnetic Fields in a Two-Layer PC Board</span></a></li>
+    <li><a href="./post/the-concept-of-electromagnetic-fields-in-a-pcb/"><span class="archive-date">2024-11-18</span><span class="archive-title">The concept of Electromagnetic Fields in a PCB</span></a></li>
+    <li><a href="./post/mastering-emi-control-in-pcb-design-decoupling-strategies-for-pdn/"><span class="archive-date">2024-11-17</span><span class="archive-title">Mastering EMI Control in PCB Design: Decoupling Strategies for PDN</span></a></li>
+    <li><a href="./post/failing-to-manage-emi-begins-with-the-pcb-stackup/"><span class="archive-date">2024-11-17</span><span class="archive-title">Failing to manage EMI begins with the PCB stackup!</span></a></li>
+    <li><a href="./post/mastering-emi-control-in-pcb-design-how-to-design-pcbs-for-low-emi/"><span class="archive-date">2024-11-16</span><span class="archive-title">Mastering EMI Control in PCB Design: How to Design PCBs for Low EMI</span></a></li>
+    <li><a href="./post/pcb-layout-review-for-emc-and-signal-integrity-mppt-charge-controller/"><span class="archive-date">2024-11-16</span><span class="archive-title">PCB Layout Review for EMC and Signal Integrity - MPPT Charge Controller</span></a></li>
+    <li><a href="./post/mastering-emi-control-in-pcb-design-crosstalk-prevention-for-better-emi/"><span class="archive-date">2024-11-16</span><span class="archive-title">Mastering EMI Control in PCB Design: Crosstalk Prevention for better EMI</span></a></li>
+    <li><a href="./post/i-mx8-som-emi-design-layout-review/"><span class="archive-date">2024-11-16</span><span class="archive-title">i.MX8 SOM - EMI Design Layout Review</span></a></li>
+    <li><a href="./post/fundamentals-of-pcb-design-for-emc-emi/"><span class="archive-date">2024-11-13</span><span class="archive-title">Fundamentals of PCB Design For EMC &amp; Low EMI</span></a></li>
+    <li><a href="./post/understanding-the-role-of-electronics-in-modern-engineering/"><span class="archive-date">2024-11-03</span><span class="archive-title">Understanding the Role of Electronics in Modern Engineering</span></a></li>
+    <li><a href="./post/how-open-hardware-is-transforming-the-tech-world/"><span class="archive-date">2024-11-02</span><span class="archive-title">How Open Hardware is Transforming the Tech World</span></a></li>
+    <li><a href="./post/decoupling-strategies-for-emc-design/"><span class="archive-date">2024-11-01</span><span class="archive-title">Decoupling Strategies For EMC Design</span></a></li>
+    <li><a href="./post/how-to-avoid-signal-crosstalk/"><span class="archive-date">2024-11-01</span><span class="archive-title">How To Avoid Signal Crosstalk</span></a></li>
+    <li><a href="./post/the-role-of-stitching-vias-in-layer-transitions-of-pcb-stackups-and-emi/"><span class="archive-date">2024-11-01</span><span class="archive-title">Stitching Vias in Multilayer PCB Stackups and Their Role in Reducing EMI</span></a></li>
+    <li><a href="./post/step-by-step-guide-to-mastering-pcb-design/"><span class="archive-date">2024-10-31</span><span class="archive-title">Unraveling the Mystery: A Step-by-Step Guide to Mastering PCB Design</span></a></li>
+    <li><a href="./post/is-this-the-best-choice-to-avoid-emi-in-your-pcb/"><span class="archive-date">2024-10-18</span><span class="archive-title">Is this the best choice to avoid EMI in your PCB?</span></a></li>
+    <li><a href="./post/how-to-choose-the-stackup-for-emc-design/"><span class="archive-date">2024-10-16</span><span class="archive-title">How To Choose The Stackup For EMC Design</span></a></li>
+    <li><a href="./post/gnd-connections-in-a-pcb/"><span class="archive-date">2024-10-15</span><span class="archive-title">GND connections in a PCB</span></a></li>
+    <li><a href="./post/the-problem-with-routing-over-power-planes/"><span class="archive-date">2024-10-11</span><span class="archive-title">The Problem With Routing Signal Traces Over Power Planes. </span></a></li>
+    <li><a href="./post/2-layers-board-stackup-for-low-emi/"><span class="archive-date">2024-10-10</span><span class="archive-title">2-Layers Board Stackup for Low EMI</span></a></li>
+    <li><a href="./post/mastering-emi-control-in-pcb-design-component-placement-for-emc/"><span class="archive-date">2024-10-08</span><span class="archive-title">Mastering EMI Control in PCB Design: Component Placement for EMC</span></a></li>
+    <li><a href="./post/mastering-emi-the-key-to-successful-pcb-design/"><span class="archive-date">2024-10-07</span><span class="archive-title">Mastering EMI: The Key to Successful PCB Design</span></a></li>
+    <li><a href="./post/you-don-t-have-to-be-10-years-into-pcb-design-to-become-an-emi-specialist/"><span class="archive-date">2024-10-04</span><span class="archive-title">You don&#x27;t have to be 10 years into PCB Design to become an EMI specialist.</span></a></li>
+    <li><a href="./post/5-simple-steps-to-avoid-emi-in-your-pcb-design/"><span class="archive-date">2024-10-03</span><span class="archive-title">5 Simple Steps to Avoid EMI in your PCB Design.</span></a></li>
+    <li><a href="./post/this-is-why-you-keep-failing-emi/"><span class="archive-date">2024-09-29</span><span class="archive-title">This Is Why You Keep Failing EMI.</span></a></li>
+    <li><a href="./post/does-electricity-work-like-water-in-the-pipes/"><span class="archive-date">2024-09-25</span><span class="archive-title">Does electricity work like water in the pipes?</span></a></li>
+    <li><a href="./post/pcb-design-for-low-emi-in-practice-ground-is-the-place-where-potatoes-and-carrots-thrive/"><span class="archive-date">2024-09-23</span><span class="archive-title">PCB Design For Low EMI in practice: &quot;Ground is the place where potatoes and carrots thrive&quot;</span></a></li>
+    <li><a href="./post/don-t-rely-too-much-on-your-emi-filters/"><span class="archive-date">2024-09-18</span><span class="archive-title">Don’t rely too much on your EMI filters!</span></a></li>
+    <li><a href="./post/the-real-job-of-a-pcb-designer-controlling-electromagnetic-energy/"><span class="archive-date">2024-09-13</span><span class="archive-title">The Real Job of a PCB Designer: Controlling Electromagnetic Energy</span></a></li>
+    <li><a href="./post/emi-how-an-invisible-force-challenges-the-very-essence-of-pcb-design/"><span class="archive-date">2024-09-10</span><span class="archive-title">EMI: How an invisible force challenges the very essence of PCB design</span></a></li>
+    <li><a href="./post/maximising-the-value-of-the-schematics/"><span class="archive-date">2024-09-10</span><span class="archive-title">Maximising the Value of the Schematics</span></a></li>
+    <li><a href="./post/common-mode-currents-what-a-nightmare/"><span class="archive-date">2024-09-10</span><span class="archive-title">Common-mode currents... What a nightmare!</span></a></li>
+    <li><a href="./post/want-to-pass-emc-tests-avoid-this/"><span class="archive-date">2024-09-10</span><span class="archive-title">Want to Pass EMC tests? Avoid this...</span></a></li>
+    <li><a href="./post/creepage-and-clearance/"><span class="archive-date">2024-09-10</span><span class="archive-title">Creepage and Clearance</span></a></li>
+    <li><a href="./post/low-emi-layer-stackup-tips-picture-this-first/"><span class="archive-date">2024-09-10</span><span class="archive-title">Low EMI Layer stackup tips - Picture this first!</span></a></li>
+    <li><a href="./post/two-layers-pcbs-be-aware-of-this/"><span class="archive-date">2024-09-10</span><span class="archive-title">Two Layers PCBs - Be aware of this!</span></a></li>
+    <li><a href="./post/capacitors-choice-in-high-frequency-emi-issues/"><span class="archive-date">2024-09-10</span><span class="archive-title">Capacitors choice in high-frequency EMI issues</span></a></li>
+    <li><a href="./post/transitioning-stitching-vias-emc-simulations/"><span class="archive-date">2024-09-10</span><span class="archive-title">Transitioning Stitching Vias - EMC Simulations</span></a></li>
+    <li><a href="./post/the-most-important-picture-you-need-to-see-in-emi/"><span class="archive-date">2024-09-10</span><span class="archive-title">The most important picture you need to see in EMI</span></a></li>
+    <li><a href="./post/emc-common-mode-currents-through-parasitic-paths/"><span class="archive-date">2024-09-10</span><span class="archive-title">EMC - Common Mode Currents Through Parasitic Paths</span></a></li>
+    <li><a href="./post/emc-design-in-practice-conducted-emissions/"><span class="archive-date">2024-09-10</span><span class="archive-title">EMC Design In Practice - Conducted Emissions</span></a></li>
+    <li><a href="./post/emc-in-practice-conducted-emissions-smps/"><span class="archive-date">2024-09-10</span><span class="archive-title">EMC in Practice: Conducted Emissions - SMPS</span></a></li>
+    <li><a href="./post/digital-signals-harmonics-in-emc/"><span class="archive-date">2024-09-10</span><span class="archive-title">Digital Signals &amp; Harmonics in EMC</span></a></li>
+    <li><a href="./post/radiations-from-differential-mode-currents/"><span class="archive-date">2024-09-10</span><span class="archive-title">Radiations from Differential mode currents</span></a></li>
+    <li><a href="./post/shielding/"><span class="archive-date">2024-09-10</span><span class="archive-title">Shielding</span></a></li>
+    <li><a href="./post/radiations-from-differential-mode-currents-ribbon-cables/"><span class="archive-date">2024-09-10</span><span class="archive-title">Radiations from Differential Mode Currents Ribbon Cables</span></a></li>
+    <li><a href="./post/two-layers-stackup-with-both-signals-layers/"><span class="archive-date">2024-09-10</span><span class="archive-title">Two Layers stackup with both signals layers</span></a></li>
+    <li><a href="./post/electrostatic-discharge-esd/"><span class="archive-date">2024-09-10</span><span class="archive-title">Electrostatic Discharge - ESD</span></a></li>
+    <li><a href="./post/radiations-from-common-mode-currents-in-pcbs/"><span class="archive-date">2024-09-10</span><span class="archive-title">Radiations from Common Mode Currents in PCBs</span></a></li>
+    <li><a href="./post/subtle-design-mistakes-in-emc/"><span class="archive-date">2024-09-10</span><span class="archive-title">Subtle Design Mistakes in EMC</span></a></li>
+    <li><a href="./post/esd-chassis-and-parasitic-capacitance/"><span class="archive-date">2024-09-10</span><span class="archive-title">ESD - Chassis and Parasitic Capacitance</span></a></li>
+    <li><a href="./post/how-to-choose-the-stackup-of-the-board/"><span class="archive-date">2024-09-10</span><span class="archive-title">How to choose the stackup of the board.</span></a></li>
+    <li><a href="./post/signal-propagation-in-a-pcb/"><span class="archive-date">2024-09-10</span><span class="archive-title">Signal Propagation in a PCB</span></a></li>
+    <li><a href="./post/radiated-emissions-and-current-loops/"><span class="archive-date">2024-09-10</span><span class="archive-title">Radiated Emissions and Current Loops.</span></a></li>
+    <li><a href="./post/how-to-reduce-crosstalk-in-our-pcb-and-reduce-emi/"><span class="archive-date">2024-09-10</span><span class="archive-title">How to reduce crosstalk in our PCB and reduce EMI?</span></a></li>
+  </ul>
+</section>
+<!-- /WIX-ARCHIVE-LIST -->
 </main>
 
 <footer>
