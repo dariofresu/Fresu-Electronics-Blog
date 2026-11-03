@@ -16,9 +16,9 @@
   --fg:        #ffffff;
   --fg-2:      #e2e8f0;
   --meta:      #94a3b8;
-  --accent:    #00FF94;
-  --a-dim:     rgba(0,255,148,0.07);
-  --a-mid:     rgba(0,255,148,0.18);
+  --accent:    #2E9BFF;
+  --a-dim:     rgba(46, 155, 255,0.07);
+  --a-mid:     rgba(46, 155, 255,0.18);
   --red:       #ff4d4d;
   --r-dim:     rgba(255,77,77,0.08);
   --amber:     #f5a623;
@@ -46,7 +46,7 @@ body{
 .hdr-logo img{height:32px;display:block}
 .hdr-badge{font-size:10px;font-weight:700;letter-spacing:0.2em;
   text-transform:uppercase;color:var(--accent);
-  border:1px solid rgba(0,255,148,0.3);padding:5px 12px;border-radius:2px}
+  border:1px solid rgba(46, 155, 255,0.3);padding:5px 12px;border-radius:2px}
 .mob-toggle{
   display:none;align-items:center;gap:8px;
   background:var(--surface);border:1px solid var(--border);
@@ -213,7 +213,7 @@ h3{font-size:14px;font-weight:700;color:var(--fg);margin-bottom:8px}
 
 /* ── KEY POINT ── */
 .key-point{
-  background:var(--a-dim);border:1px solid rgba(0,255,148,0.2);
+  background:var(--a-dim);border:1px solid rgba(46, 155, 255,0.2);
   border-radius:3px;padding:20px 24px;margin:16px 0;
   display:flex;align-items:flex-start;gap:14px;
 }
@@ -363,14 +363,14 @@ h3{font-size:14px;font-weight:700;color:var(--fg);margin-bottom:8px}
 
       <!-- MAGNETIC FIELD — concentric rings (Φ), solid -->
       <g id="magGroup" opacity="1">
-        <circle id="mR1" cx="250" cy="180" r="30"  fill="none" stroke="#00FF94" stroke-width="1.8" opacity="0.95"/>
-        <circle id="mR2" cx="250" cy="180" r="54"  fill="none" stroke="#00FF94" stroke-width="1.5" opacity="0.85"/>
-        <circle id="mR3" cx="250" cy="180" r="80"  fill="none" stroke="#00FF94" stroke-width="1.2" opacity="0.72"/>
-        <circle id="mR4" cx="250" cy="180" r="108" fill="none" stroke="#00FF94" stroke-width="1.0" opacity="0.55"/>
-        <circle id="mR5" cx="250" cy="180" r="138" fill="none" stroke="#00FF94" stroke-width="0.8" opacity="0.38"/>
-        <circle id="mR6" cx="250" cy="180" r="170" fill="none" stroke="#00FF94" stroke-width="0.6" opacity="0.22"/>
-        <text x="318" y="112" fill="#00FF94" font-family="Poppins" font-size="13" font-weight="700">Φ</text>
-        <text x="330" y="112" fill="#00FF94" font-family="Poppins" font-size="9">(magnetic)</text>
+        <circle id="mR1" cx="250" cy="180" r="30"  fill="none" stroke="#2E9BFF" stroke-width="1.8" opacity="0.95"/>
+        <circle id="mR2" cx="250" cy="180" r="54"  fill="none" stroke="#2E9BFF" stroke-width="1.5" opacity="0.85"/>
+        <circle id="mR3" cx="250" cy="180" r="80"  fill="none" stroke="#2E9BFF" stroke-width="1.2" opacity="0.72"/>
+        <circle id="mR4" cx="250" cy="180" r="108" fill="none" stroke="#2E9BFF" stroke-width="1.0" opacity="0.55"/>
+        <circle id="mR5" cx="250" cy="180" r="138" fill="none" stroke="#2E9BFF" stroke-width="0.8" opacity="0.38"/>
+        <circle id="mR6" cx="250" cy="180" r="170" fill="none" stroke="#2E9BFF" stroke-width="0.6" opacity="0.22"/>
+        <text x="318" y="112" fill="#2E9BFF" font-family="Poppins" font-size="13" font-weight="700">Φ</text>
+        <text x="330" y="112" fill="#2E9BFF" font-family="Poppins" font-size="9">(magnetic)</text>
       </g>
 
       <!-- ELECTRIC FIELD — 16 radial dashed spokes (Ψ) -->
@@ -402,8 +402,8 @@ h3{font-size:14px;font-weight:700;color:var(--fg);margin-bottom:8px}
       <text x="250" y="187" text-anchor="middle" fill="#0a0a0a" font-family="Poppins" font-size="8">Trace</text>
 
       <!-- Legend -->
-      <line x1="30" y1="322" x2="54" y2="322" stroke="#00FF94" stroke-width="2"/>
-      <text x="60" y="326" fill="#00FF94" font-family="Poppins" font-size="11" font-weight="600">Magnetic field (Φ) — closed loops</text>
+      <line x1="30" y1="322" x2="54" y2="322" stroke="#2E9BFF" stroke-width="2"/>
+      <text x="60" y="326" fill="#2E9BFF" font-family="Poppins" font-size="11" font-weight="600">Magnetic field (Φ) — closed loops</text>
       <line x1="30" y1="342" x2="54" y2="342" stroke="#f5a623" stroke-width="2" stroke-dasharray="5,4"/>
       <text x="60" y="346" fill="#f5a623" font-family="Poppins" font-size="11" font-weight="600">Electric field (Ψ) — radiates outward</text>
     </svg>
@@ -459,11 +459,11 @@ h3{font-size:14px;font-weight:700;color:var(--fg);margin-bottom:8px}
       <g id="twoSingleMode">
         <text x="250" y="20" text-anchor="middle" fill="#94a3b8" font-family="Poppins" font-size="10">Single conductor — uncontained fields</text>
         <!-- Magnetic rings -->
-        <circle id="tsR1" cx="250" cy="175" r="28" fill="none" stroke="#00FF94" stroke-width="1.6" opacity="0.9"/>
-        <circle id="tsR2" cx="250" cy="175" r="52" fill="none" stroke="#00FF94" stroke-width="1.3" opacity="0.75"/>
-        <circle id="tsR3" cx="250" cy="175" r="80" fill="none" stroke="#00FF94" stroke-width="1.0" opacity="0.55"/>
-        <circle id="tsR4" cx="250" cy="175" r="110" fill="none" stroke="#00FF94" stroke-width="0.7" opacity="0.35"/>
-        <circle id="tsR5" cx="250" cy="175" r="142" fill="none" stroke="#00FF94" stroke-width="0.5" opacity="0.18"/>
+        <circle id="tsR1" cx="250" cy="175" r="28" fill="none" stroke="#2E9BFF" stroke-width="1.6" opacity="0.9"/>
+        <circle id="tsR2" cx="250" cy="175" r="52" fill="none" stroke="#2E9BFF" stroke-width="1.3" opacity="0.75"/>
+        <circle id="tsR3" cx="250" cy="175" r="80" fill="none" stroke="#2E9BFF" stroke-width="1.0" opacity="0.55"/>
+        <circle id="tsR4" cx="250" cy="175" r="110" fill="none" stroke="#2E9BFF" stroke-width="0.7" opacity="0.35"/>
+        <circle id="tsR5" cx="250" cy="175" r="142" fill="none" stroke="#2E9BFF" stroke-width="0.5" opacity="0.18"/>
         <!-- Radial electric spokes -->
         <line id="tsE0" x1="266" y1="175" x2="390" y2="175" stroke="#f5a623" stroke-width="1.1" opacity="0.75" stroke-dasharray="6 5"/>
         <line id="tsE1" x1="262" y1="163" x2="370" y2="105" stroke="#f5a623" stroke-width="1.0" opacity="0.60" stroke-dasharray="6 5"/>
@@ -481,14 +481,14 @@ h3{font-size:14px;font-weight:700;color:var(--fg);margin-bottom:8px}
 
       <!-- TWO CONDUCTOR MODE: dipole-style field pattern -->
       <g id="twoMode" style="display:none">
-        <text x="250" y="20" text-anchor="middle" fill="#00FF94" font-family="Poppins" font-size="10" font-weight="600">Two conductors — fields now contained between them</text>
+        <text x="250" y="20" text-anchor="middle" fill="#2E9BFF" font-family="Poppins" font-size="10" font-weight="600">Two conductors — fields now contained between them</text>
         <!-- Magnetic loops — ellipses around each conductor -->
-        <ellipse id="ttM1" cx="175" cy="175" rx="38" ry="22" fill="none" stroke="#00FF94" stroke-width="1.6" opacity="0.9"/>
-        <ellipse id="ttM2" cx="175" cy="175" rx="62" ry="38" fill="none" stroke="#00FF94" stroke-width="1.3" opacity="0.7"/>
-        <ellipse id="ttM3" cx="325" cy="175" rx="38" ry="22" fill="none" stroke="#00FF94" stroke-width="1.6" opacity="0.9"/>
-        <ellipse id="ttM4" cx="325" cy="175" rx="62" ry="38" fill="none" stroke="#00FF94" stroke-width="1.3" opacity="0.7"/>
+        <ellipse id="ttM1" cx="175" cy="175" rx="38" ry="22" fill="none" stroke="#2E9BFF" stroke-width="1.6" opacity="0.9"/>
+        <ellipse id="ttM2" cx="175" cy="175" rx="62" ry="38" fill="none" stroke="#2E9BFF" stroke-width="1.3" opacity="0.7"/>
+        <ellipse id="ttM3" cx="325" cy="175" rx="38" ry="22" fill="none" stroke="#2E9BFF" stroke-width="1.6" opacity="0.9"/>
+        <ellipse id="ttM4" cx="325" cy="175" rx="62" ry="38" fill="none" stroke="#2E9BFF" stroke-width="1.3" opacity="0.7"/>
         <!-- Combined outer magnetic loop enclosing both -->
-        <ellipse id="ttM5" cx="250" cy="175" rx="120" ry="55" fill="none" stroke="#00FF94" stroke-width="1.0" opacity="0.45"/>
+        <ellipse id="ttM5" cx="250" cy="175" rx="120" ry="55" fill="none" stroke="#2E9BFF" stroke-width="1.0" opacity="0.45"/>
         <!-- Electric field lines: arcs from + to − (terminate between conductors) -->
         <!-- Centre direct line -->
         <line id="ttE0" x1="191" y1="175" x2="309" y2="175" stroke="#f5a623" stroke-width="1.8" opacity="0.95" stroke-dasharray="7 5"/>
@@ -513,8 +513,8 @@ h3{font-size:14px;font-weight:700;color:var(--fg);margin-bottom:8px}
       </g>
 
       <!-- Shared legend -->
-      <line x1="30" y1="312" x2="54" y2="312" stroke="#00FF94" stroke-width="2"/>
-      <text x="60" y="316" fill="#00FF94" font-family="Poppins" font-size="11">Magnetic field (Φ)</text>
+      <line x1="30" y1="312" x2="54" y2="312" stroke="#2E9BFF" stroke-width="2"/>
+      <text x="60" y="316" fill="#2E9BFF" font-family="Poppins" font-size="11">Magnetic field (Φ)</text>
       <line x1="30" y1="330" x2="54" y2="330" stroke="#f5a623" stroke-width="2" stroke-dasharray="6,4"/>
       <text x="60" y="334" fill="#f5a623" font-family="Poppins" font-size="11">Electric field (Ψ)</text>
     </svg>
@@ -593,11 +593,11 @@ h3{font-size:14px;font-weight:700;color:var(--fg);margin-bottom:8px}
         <text x="154" y="123.5" text-anchor="middle" fill="#0a0a0a" font-family="Poppins" font-size="7" font-weight="700">SIGNAL TRACE</text>
         <!-- MAGNETIC GROUP (left) -->
         <g id="pcbLeftMag">
-          <text x="54" y="36" text-anchor="middle" fill="#00FF94" font-family="Poppins" font-size="8.5" opacity="0.85">Φ magnetic</text>
+          <text x="54" y="36" text-anchor="middle" fill="#2E9BFF" font-family="Poppins" font-size="8.5" opacity="0.85">Φ magnetic</text>
           <!-- Proper ellipses (not circles with rx/ry) -->
-          <ellipse id="pL1" cx="154" cy="121" rx="38" ry="22" fill="none" stroke="#00FF94" stroke-width="1.8" opacity="0.9"/>
-          <ellipse id="pL2" cx="154" cy="121" rx="68" ry="44" fill="none" stroke="#00FF94" stroke-width="1.3" opacity="0.65"/>
-          <ellipse id="pL3" cx="154" cy="121" rx="104" ry="72" fill="none" stroke="#00FF94" stroke-width="0.9" opacity="0.35"/>
+          <ellipse id="pL1" cx="154" cy="121" rx="38" ry="22" fill="none" stroke="#2E9BFF" stroke-width="1.8" opacity="0.9"/>
+          <ellipse id="pL2" cx="154" cy="121" rx="68" ry="44" fill="none" stroke="#2E9BFF" stroke-width="1.3" opacity="0.65"/>
+          <ellipse id="pL3" cx="154" cy="121" rx="104" ry="72" fill="none" stroke="#2E9BFF" stroke-width="0.9" opacity="0.35"/>
         </g>
         <!-- ELECTRIC GROUP (left) -->
         <g id="pcbLeftElec">
@@ -618,7 +618,7 @@ h3{font-size:14px;font-weight:700;color:var(--fg);margin-bottom:8px}
 
       <!-- ══ RIGHT: TWO CONDUCTORS ══ -->
       <g clip-path="url(#clipRight)">
-        <text x="466" y="20" text-anchor="middle" fill="#00FF94" font-family="Poppins" font-size="10.5" font-weight="700">TWO CONDUCTORS PCB</text>
+        <text x="466" y="20" text-anchor="middle" fill="#2E9BFF" font-family="Poppins" font-size="10.5" font-weight="700">TWO CONDUCTORS PCB</text>
         <!-- Dielectric -->
         <rect x="330" y="130" width="272" height="54" fill="#13181e" stroke="#1e2a3a" stroke-width="0.8" rx="1"/>
         <text x="466" y="160" text-anchor="middle" fill="#222e3a" font-family="Poppins" font-size="9" font-weight="700">Dielectric (FR4)</text>
@@ -630,10 +630,10 @@ h3{font-size:14px;font-weight:700;color:var(--fg);margin-bottom:8px}
         <text x="466" y="197" text-anchor="middle" fill="#fff" font-family="Poppins" font-size="7.5" font-weight="700">RETURN REFERENCE PLANE</text>
         <!-- MAGNETIC GROUP (right) -->
         <g id="pcbRightMag">
-          <text x="380" y="36" text-anchor="middle" fill="#00FF94" font-family="Poppins" font-size="8.5" opacity="0.85">Φ magnetic</text>
-          <ellipse id="pR1" cx="466" cy="157" rx="52"  ry="18" fill="none" stroke="#00FF94" stroke-width="1.8" opacity="0.95"/>
-          <ellipse id="pR2" cx="466" cy="157" rx="90"  ry="30" fill="none" stroke="#00FF94" stroke-width="1.3" opacity="0.65"/>
-          <ellipse id="pR3" cx="466" cy="157" rx="126" ry="42" fill="none" stroke="#00FF94" stroke-width="0.9" opacity="0.35"/>
+          <text x="380" y="36" text-anchor="middle" fill="#2E9BFF" font-family="Poppins" font-size="8.5" opacity="0.85">Φ magnetic</text>
+          <ellipse id="pR1" cx="466" cy="157" rx="52"  ry="18" fill="none" stroke="#2E9BFF" stroke-width="1.8" opacity="0.95"/>
+          <ellipse id="pR2" cx="466" cy="157" rx="90"  ry="30" fill="none" stroke="#2E9BFF" stroke-width="1.3" opacity="0.65"/>
+          <ellipse id="pR3" cx="466" cy="157" rx="126" ry="42" fill="none" stroke="#2E9BFF" stroke-width="0.9" opacity="0.35"/>
         </g>
         <!-- ELECTRIC GROUP (right) -->
         <g id="pcbRightElec">
@@ -647,9 +647,9 @@ h3{font-size:14px;font-weight:700;color:var(--fg);margin-bottom:8px}
           <line id="pRetI" x1="570" y1="194" x2="510" y2="194" stroke="#00ddff" stroke-width="2.2" opacity="0.85" stroke-dasharray="8 5"/>
           <text x="595" y="198" text-anchor="middle" fill="#00ddff" font-family="Poppins" font-size="7.5">I ret</text>
         </g>
-        <text x="466" y="250" text-anchor="middle" fill="#00FF94" font-family="Poppins" font-size="10" font-weight="700">EM FIELDS CONCENTRATE</text>
+        <text x="466" y="250" text-anchor="middle" fill="#2E9BFF" font-family="Poppins" font-size="10" font-weight="700">EM FIELDS CONCENTRATE</text>
         <text x="466" y="264" text-anchor="middle" fill="#94a3b8" font-family="Poppins" font-size="9">between trace and RRP</text>
-        <text x="466" y="282" text-anchor="middle" fill="#00FF94" font-family="Poppins" font-size="17">✓</text>
+        <text x="466" y="282" text-anchor="middle" fill="#2E9BFF" font-family="Poppins" font-size="17">✓</text>
       </g>
 
       <text x="310" y="305" text-anchor="middle" fill="#94a3b8" font-family="Poppins" font-size="10" id="pcbModeLabel">Showing: Both Fields</text>
@@ -766,13 +766,13 @@ h3{font-size:14px;font-weight:700;color:var(--fg);margin-bottom:8px}
         <!-- EM Field space between conductors -->
         <rect x="94" y="88" width="414" height="116" rx="2" fill="rgba(20,60,180,0.16)" stroke="rgba(58,123,213,0.5)" stroke-width="1.2"/>
         <!-- Source box -->
-        <rect x="42" y="68" width="52" height="154" rx="4" fill="#0d1a2e" stroke="#00FF94" stroke-width="1.8"/>
-        <text x="68" y="138" text-anchor="middle" fill="#00FF94" font-family="Poppins" font-size="11" font-weight="700">~</text>
-        <text x="68" y="152" text-anchor="middle" fill="#00FF94" font-family="Poppins" font-size="7">SOURCE</text>
+        <rect x="42" y="68" width="52" height="154" rx="4" fill="#0d1a2e" stroke="#2E9BFF" stroke-width="1.8"/>
+        <text x="68" y="138" text-anchor="middle" fill="#2E9BFF" font-family="Poppins" font-size="11" font-weight="700">~</text>
+        <text x="68" y="152" text-anchor="middle" fill="#2E9BFF" font-family="Poppins" font-size="7">SOURCE</text>
         <!-- Load box -->
-        <rect x="506" y="68" width="52" height="154" rx="4" fill="#0d1a2e" stroke="#00FF94" stroke-width="1.8"/>
-        <text x="532" y="138" text-anchor="middle" fill="#00FF94" font-family="Poppins" font-size="11" font-weight="700">▭</text>
-        <text x="532" y="152" text-anchor="middle" fill="#00FF94" font-family="Poppins" font-size="7">LOAD</text>
+        <rect x="506" y="68" width="52" height="154" rx="4" fill="#0d1a2e" stroke="#2E9BFF" stroke-width="1.8"/>
+        <text x="532" y="138" text-anchor="middle" fill="#2E9BFF" font-family="Poppins" font-size="11" font-weight="700">▭</text>
+        <text x="532" y="152" text-anchor="middle" fill="#2E9BFF" font-family="Poppins" font-size="7">LOAD</text>
         <!-- E-field verticals (downward through dielectric) -->
         <line id="rE1" x1="155" y1="90" x2="155" y2="202" stroke="#f5a623" stroke-width="1.3" opacity="0.75" stroke-dasharray="6 5"/>
         <line id="rE2" x1="220" y1="90" x2="220" y2="202" stroke="#f5a623" stroke-width="1.3" opacity="0.75" stroke-dasharray="6 5"/>
@@ -780,14 +780,14 @@ h3{font-size:14px;font-weight:700;color:var(--fg);margin-bottom:8px}
         <line id="rE4" x1="382" y1="90" x2="382" y2="202" stroke="#f5a623" stroke-width="1.3" opacity="0.75" stroke-dasharray="6 5"/>
         <line id="rE5" x1="447" y1="90" x2="447" y2="202" stroke="#f5a623" stroke-width="1.3" opacity="0.75" stroke-dasharray="6 5"/>
         <!-- Poynting vector — dominant horizontal arrow marching rightward -->
-        <line id="poyLine" x1="110" y1="146" x2="488" y2="146" stroke="#00FF94" stroke-width="3.5" opacity="0.95" stroke-dasharray="16 7"/>
+        <line id="poyLine" x1="110" y1="146" x2="488" y2="146" stroke="#2E9BFF" stroke-width="3.5" opacity="0.95" stroke-dasharray="16 7"/>
         <!-- S label -->
-        <text x="301" y="134" text-anchor="middle" fill="#00FF94" font-family="Poppins" font-size="10" font-weight="700">S = E × H — Poynting vector (energy flow →)</text>
+        <text x="301" y="134" text-anchor="middle" fill="#2E9BFF" font-family="Poppins" font-size="10" font-weight="700">S = E × H — Poynting vector (energy flow →)</text>
         <!-- EM label -->
         <text x="301" y="175" text-anchor="middle" fill="#3a7bd5" font-family="Poppins" font-size="10" font-weight="700" opacity="0.7">ELECTROMAGNETIC FIELDS</text>
         <!-- Correct label -->
-        <rect x="42" y="238" width="516" height="44" rx="3" fill="rgba(0,255,148,0.05)" stroke="rgba(0,255,148,0.22)" stroke-width="1"/>
-        <text x="300" y="256" text-anchor="middle" fill="#00FF94" font-family="Poppins" font-size="11" font-weight="700">✓ CORRECT — Energy flows in the space between conductors</text>
+        <rect x="42" y="238" width="516" height="44" rx="3" fill="rgba(46, 155, 255,0.05)" stroke="rgba(46, 155, 255,0.22)" stroke-width="1"/>
+        <text x="300" y="256" text-anchor="middle" fill="#2E9BFF" font-family="Poppins" font-size="11" font-weight="700">✓ CORRECT — Energy flows in the space between conductors</text>
         <text x="300" y="272" text-anchor="middle" fill="#94a3b8" font-family="Poppins" font-size="10">Conductors guide the fields — they are the riverbanks, not the river</text>
       </g>
     </svg>
@@ -867,12 +867,12 @@ h3{font-size:14px;font-weight:700;color:var(--fg);margin-bottom:8px}
         <line id="rC5" x1="130" y1="213" x2="80"  y2="213" stroke="#00ddff" stroke-width="2.2" opacity="0.9" stroke-dasharray="10 6"/>
         <text x="300" y="235" text-anchor="middle" fill="#00ddff" font-family="Poppins" font-size="9" font-weight="700">← RETURN CURRENT</text>
         <!-- Source + Load boxes -->
-        <rect x="22" y="75" width="38" height="160" rx="3" fill="#1a1a1a" stroke="#00FF94" stroke-width="1.5"/>
-        <text x="41" y="152" text-anchor="middle" fill="#00FF94" font-family="Poppins" font-size="8" font-weight="700">SRC</text>
+        <rect x="22" y="75" width="38" height="160" rx="3" fill="#1a1a1a" stroke="#2E9BFF" stroke-width="1.5"/>
+        <text x="41" y="152" text-anchor="middle" fill="#2E9BFF" font-family="Poppins" font-size="8" font-weight="700">SRC</text>
         <rect x="560" y="75" width="38" height="160" rx="3" fill="#1a1a1a" stroke="#3a7bd5" stroke-width="1.5"/>
         <text x="579" y="152" text-anchor="middle" fill="#3a7bd5" font-family="Poppins" font-size="8" font-weight="700">LOAD</text>
         <!-- Outcome label -->
-        <text x="300" y="268" text-anchor="middle" fill="#00FF94" font-family="Poppins" font-size="12" font-weight="700">✓ Fields contained — Low EMI</text>
+        <text x="300" y="268" text-anchor="middle" fill="#2E9BFF" font-family="Poppins" font-size="12" font-weight="700">✓ Fields contained — Low EMI</text>
         <text x="300" y="284" text-anchor="middle" fill="#94a3b8" font-family="Poppins" font-size="10">Return current mirrors forward current directly beneath the trace</text>
       </g>
 

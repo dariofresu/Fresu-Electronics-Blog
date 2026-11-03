@@ -27,9 +27,9 @@
     --fg-secondary: #e8edf5;
     --label:        #a0aab8;
     --label-dim:    #6b7d8f;
-    --accent:       #00FF94;
-    --accent-dim:   rgba(0,255,148,0.08);
-    --accent-glow:  rgba(0,255,148,0.25);
+    --accent:       #2E9BFF;
+    --accent-dim:   rgba(46, 155, 255,0.08);
+    --accent-glow:  rgba(46, 155, 255,0.25);
     --wrong:        #ff4d4d;
   }
   * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -58,7 +58,7 @@
     position: absolute;
     top: -120px; right: -80px;
     width: 520px; height: 520px;
-    background: radial-gradient(circle, rgba(0,255,148,0.12) 0%, transparent 70%);
+    background: radial-gradient(circle, rgba(46, 155, 255,0.12) 0%, transparent 70%);
     pointer-events: none;
   }
   .hero-eyebrow {
@@ -133,7 +133,7 @@
   }
   .paradigm-card.new {
     border-color: var(--accent);
-    box-shadow: 0 0 32px rgba(0,255,148,0.06);
+    box-shadow: 0 0 32px rgba(46, 155, 255,0.06);
   }
   .p-card-label {
     font-size: 10px; font-weight: 700; letter-spacing: 0.14em;
@@ -218,7 +218,7 @@
     text-transform: uppercase; padding: 3px 10px; border-radius: 2px;
     margin-bottom: 10px;
   }
-  .charge-badge.pos { background: rgba(0,255,148,0.1); color: var(--accent); }
+  .charge-badge.pos { background: rgba(46, 155, 255,0.1); color: var(--accent); }
   .charge-badge.neg { background: rgba(255,77,77,0.1); color: var(--wrong); }
   .charge-card p { font-size: 13px; color: var(--fg-secondary); margin-top: 6px; }
 
@@ -328,13 +328,13 @@
     padding: 28px 32px;
     margin-top: 28px;
     text-align: center;
-    box-shadow: 0 0 60px rgba(0,255,148,0.05);
+    box-shadow: 0 0 60px rgba(46, 155, 255,0.05);
     position: relative; overflow: hidden;
   }
   .velocity-block::before {
     content: '';
     position: absolute; inset: 0;
-    background: radial-gradient(circle at 50% 100%, rgba(0,255,148,0.07), transparent 60%);
+    background: radial-gradient(circle at 50% 100%, rgba(46, 155, 255,0.07), transparent 60%);
     pointer-events: none;
   }
   .velocity-label { font-size: 11px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent); margin-bottom: 12px; }
@@ -795,7 +795,7 @@ function drawFieldCanvas() {
         points[points.length-1].x, points[points.length-1].y
       );
       if (c.q > 0) {
-        grad.addColorStop(0, 'rgba(0,255,148,0.7)');
+        grad.addColorStop(0, 'rgba(46, 155, 255,0.7)');
         grad.addColorStop(0.5, 'rgba(74,158,255,0.5)');
         grad.addColorStop(1, 'rgba(255,77,77,0.1)');
       } else {
@@ -834,13 +834,13 @@ function drawFieldCanvas() {
     }
 
     // Charge node glow
-    const color = c.q > 0 ? '#00FF94' : '#ff4d4d';
+    const color = c.q > 0 ? '#2E9BFF' : '#ff4d4d';
     const glow = fctx.createRadialGradient(c.x, c.y, 0, c.x, c.y, 28);
-    glow.addColorStop(0, color.replace(')', ', 0.25)').replace('#', 'rgba(').replace('00FF94', '0,255,148').replace('ff4d4d', '255,77,77'));
+    glow.addColorStop(0, c.q > 0 ? 'rgba(46,155,255,0.25)' : 'rgba(255,77,77,0.25)');
     glow.addColorStop(1, 'transparent');
     fctx.beginPath();
     fctx.arc(c.x, c.y, 28, 0, Math.PI * 2);
-    fctx.fillStyle = c.q > 0 ? 'rgba(0,255,148,0.15)' : 'rgba(255,77,77,0.15)';
+    fctx.fillStyle = c.q > 0 ? 'rgba(46, 155, 255,0.15)' : 'rgba(255,77,77,0.15)';
     fctx.fill();
 
     fctx.beginPath();
@@ -860,7 +860,7 @@ function drawFieldCanvas() {
 
     // Annotation
     fctx.font = '500 10px Poppins, sans-serif';
-    fctx.fillStyle = c.q > 0 ? 'rgba(0,255,148,0.7)' : 'rgba(255,77,77,0.7)';
+    fctx.fillStyle = c.q > 0 ? 'rgba(46, 155, 255,0.7)' : 'rgba(255,77,77,0.7)';
     fctx.textAlign = 'center';
     fctx.textBaseline = 'top';
     fctx.fillText(c.q > 0 ? '∇·E > 0' : '∇·E < 0', c.x, c.y + 18);
@@ -897,7 +897,7 @@ function drawPoynting() {
 
   // Wire glow
   const wGlow = pctx.createRadialGradient(cx, cy, wireR, cx, cy, wireR + 40);
-  wGlow.addColorStop(0, 'rgba(0,255,148,0.08)');
+  wGlow.addColorStop(0, 'rgba(46, 155, 255,0.08)');
   wGlow.addColorStop(1, 'transparent');
   pctx.beginPath();
   pctx.arc(cx, cy, wireR + 40, 0, Math.PI * 2);
@@ -963,10 +963,10 @@ function drawPoynting() {
   // E-field arrow (vertical, into/out of page — shown as double-headed)
   const eY1 = cy - wireR - 4, eY2 = cy + wireR + 4;
   pctx.save();
-  pctx.strokeStyle = 'rgba(0,255,148,0.9)';
-  pctx.fillStyle = 'rgba(0,255,148,0.9)';
+  pctx.strokeStyle = 'rgba(46, 155, 255,0.9)';
+  pctx.fillStyle = 'rgba(46, 155, 255,0.9)';
   pctx.lineWidth = 2.5;
-  pctx.shadowColor = '#00FF94';
+  pctx.shadowColor = '#2E9BFF';
   pctx.shadowBlur = 12;
   // Up arrow
   pctx.beginPath();
@@ -980,7 +980,7 @@ function drawPoynting() {
 
   // E label
   pctx.font = 'bold 13px Poppins, sans-serif';
-  pctx.fillStyle = 'rgba(0,255,148,0.9)';
+  pctx.fillStyle = 'rgba(46, 155, 255,0.9)';
   pctx.textAlign = 'center';
   pctx.fillText('E', cx + 16, eY1 + 10);
 
@@ -1004,13 +1004,13 @@ function drawPoynting() {
   pctx.arc(cx, cy, wireR, 0, Math.PI * 2);
   pctx.fillStyle = wireGrad;
   pctx.fill();
-  pctx.strokeStyle = '#00FF94';
+  pctx.strokeStyle = '#2E9BFF';
   pctx.lineWidth = 1.5;
   pctx.stroke();
 
   // Conductor label
   pctx.font = '600 10px Poppins, sans-serif';
-  pctx.fillStyle = 'rgba(0,255,148,0.6)';
+  pctx.fillStyle = 'rgba(46, 155, 255,0.6)';
   pctx.textAlign = 'center';
   pctx.textBaseline = 'middle';
   pctx.fillText('CONDUCTOR', cx, cy);

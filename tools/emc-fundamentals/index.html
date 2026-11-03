@@ -15,9 +15,9 @@
   --fg:        #ffffff;
   --fg-2:      #e2e8f0;   /* secondary text — still very readable */
   --meta:      #94a3b8;   /* ONLY for figure captions and footnotes */
-  --accent:    #00FF94;
-  --a-dim:     rgba(0,255,148,0.08);
-  --a-mid:     rgba(0,255,148,0.18);
+  --accent:    #2E9BFF;
+  --a-dim:     rgba(46, 155, 255,0.08);
+  --a-mid:     rgba(46, 155, 255,0.18);
   --red:       #ff4d4d;
   --r-dim:     rgba(255,77,77,0.08);
   --amber:     #f5a623;
@@ -61,7 +61,7 @@ body {
   letter-spacing: 0.2em;
   text-transform: uppercase;
   color: var(--accent);
-  border: 1px solid rgba(0,255,148,0.3);
+  border: 1px solid rgba(46, 155, 255,0.3);
   padding: 5px 12px;
   border-radius: 2px;
 }
@@ -410,7 +410,7 @@ h3 { font-size: 14px; font-weight: 700; color: var(--fg); margin-bottom: 8px; }
   -webkit-appearance: none;
 }
 .field input::placeholder { color: #444; }
-.field input:focus, .field select:focus { border-color: rgba(0,255,148,0.5); }
+.field input:focus, .field select:focus { border-color: rgba(46, 155, 255,0.5); }
 .field select option { background: var(--surface-2); }
 .btn-primary {
   width: 100%;
@@ -441,7 +441,7 @@ h3 { font-size: 14px; font-weight: 700; color: var(--fg); margin-bottom: 8px; }
 .result-box {
   margin-top: 14px;
   background: var(--a-dim);
-  border: 1px solid rgba(0,255,148,0.2);
+  border: 1px solid rgba(46, 155, 255,0.2);
   border-radius: 2px;
   padding: 14px;
   display: none;
@@ -452,7 +452,7 @@ h3 { font-size: 14px; font-weight: 700; color: var(--fg); margin-bottom: 8px; }
   justify-content: space-between;
   align-items: baseline;
   padding: 4px 0;
-  border-bottom: 1px solid rgba(0,255,148,0.07);
+  border-bottom: 1px solid rgba(46, 155, 255,0.07);
 }
 .r-row:last-child { border-bottom: none; padding-bottom: 0; }
 .r-lbl { font-size: 12px; color: var(--fg-2); font-weight: 500; }
@@ -554,7 +554,7 @@ input[type=range] { width: 100%; accent-color: var(--accent); cursor: pointer; }
   background: var(--surface);
   transition: border-color 200ms, background 200ms;
 }
-.q-block.q-correct { border-color: rgba(0,255,148,0.4); background: var(--a-dim); }
+.q-block.q-correct { border-color: rgba(46, 155, 255,0.4); background: var(--a-dim); }
 .q-block.q-wrong   { border-color: rgba(255,77,77,0.4);  background: var(--r-dim); }
 .q-num { font-size: 10px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--fg-2); margin-bottom: 8px; }
 .q-text { font-size: 14px; font-weight: 600; color: var(--fg); margin-bottom: 16px; line-height: 1.55; }
@@ -577,7 +577,7 @@ input[type=range] { width: 100%; accent-color: var(--accent); cursor: pointer; }
   transition: all 140ms;
 }
 .q-opt:hover { border-color: #333; color: var(--fg); }
-.q-opt.sel      { border-color: rgba(0,255,148,0.4); color: var(--fg); }
+.q-opt.sel      { border-color: rgba(46, 155, 255,0.4); color: var(--fg); }
 .q-opt.opt-ok   { border-color: var(--accent); background: var(--a-mid); color: var(--fg); }
 .q-opt.opt-bad  { border-color: var(--red);    background: var(--r-dim); color: var(--fg); }
 .q-dot {
@@ -679,7 +679,7 @@ input[type=range] { width: 100%; accent-color: var(--accent); cursor: pointer; }
   text-transform: uppercase;
   color: var(--accent);
   background: var(--a-dim);
-  border: 1px solid rgba(0,255,148,0.2);
+  border: 1px solid rgba(46, 155, 255,0.2);
   padding: 2px 8px;
   border-radius: 2px;
 }
@@ -942,21 +942,21 @@ input[type=range] { width: 100%; accent-color: var(--accent); cursor: pointer; }
         <svg viewBox="0 0 740 230" xmlns="http://www.w3.org/2000/svg">
           <defs>
             <marker id="mGr" markerWidth="7" markerHeight="7" refX="5" refY="3.5" orient="auto"><polygon points="0,0 7,3.5 0,7" fill="#7a8699"/></marker>
-            <marker id="mGn" markerWidth="7" markerHeight="7" refX="5" refY="3.5" orient="auto"><polygon points="0,0 7,3.5 0,7" fill="#00FF94"/></marker>
+            <marker id="mGn" markerWidth="7" markerHeight="7" refX="5" refY="3.5" orient="auto"><polygon points="0,0 7,3.5 0,7" fill="#2E9BFF"/></marker>
             <marker id="mRd" markerWidth="7" markerHeight="7" refX="5" refY="3.5" orient="auto"><polygon points="0,0 7,3.5 0,7" fill="#ff4d4d"/></marker>
           </defs>
           <!-- LUMPED -->
-          <text x="180" y="16" text-anchor="middle" fill="#00FF94" font-family="Poppins" font-size="10" font-weight="700" letter-spacing="2">LUMPED — Safe</text>
+          <text x="180" y="16" text-anchor="middle" fill="#2E9BFF" font-family="Poppins" font-size="10" font-weight="700" letter-spacing="2">LUMPED — Safe</text>
           <rect x="18" y="26" width="324" height="110" rx="3" fill="#111" stroke="#242424" stroke-width="1"/>
           <line x1="38" y1="116" x2="324" y2="116" stroke="#242424" stroke-width="1" stroke-dasharray="3,3"/>
           <line x1="38" y1="46"  x2="324" y2="46"  stroke="#242424" stroke-width="1" stroke-dasharray="3,3"/>
-          <polyline points="38,116 62,116 188,46 324,46" fill="none" stroke="#00FF94" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+          <polyline points="38,116 62,116 188,46 324,46" fill="none" stroke="#2E9BFF" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
           <!-- Prop arrow -->
           <line x1="62" y1="150" x2="134" y2="150" stroke="#7a8699" stroke-width="1.5" marker-start="url(#mGr)" marker-end="url(#mGr)"/>
           <text x="98" y="163" text-anchor="middle" fill="#e2e8f0" font-family="Poppins" font-size="10" font-weight="500">Prop time</text>
           <!-- Rise time arrow -->
-          <line x1="62" y1="182" x2="324" y2="182" stroke="#00FF94" stroke-width="1.5" marker-start="url(#mGn)" marker-end="url(#mGn)"/>
-          <text x="193" y="195" text-anchor="middle" fill="#00FF94" font-family="Poppins" font-size="10" font-weight="500">Rise time (long)</text>
+          <line x1="62" y1="182" x2="324" y2="182" stroke="#2E9BFF" stroke-width="1.5" marker-start="url(#mGn)" marker-end="url(#mGn)"/>
+          <text x="193" y="195" text-anchor="middle" fill="#2E9BFF" font-family="Poppins" font-size="10" font-weight="500">Rise time (long)</text>
           <text x="180" y="216" text-anchor="middle" fill="#94a3b8" font-family="Poppins" font-size="10">t_prop ≪ t_rise → no reflections</text>
 
           <!-- DISTRIBUTED -->
@@ -1121,10 +1121,10 @@ input[type=range] { width: 100%; accent-color: var(--accent); cursor: pointer; }
         <svg viewBox="0 0 680 160" xmlns="http://www.w3.org/2000/svg">
           <defs>
             <marker id="ef" markerWidth="6" markerHeight="6" refX="3" refY="3" orient="auto">
-              <polygon points="0,0 6,3 0,6" fill="#00FF94" opacity="0.7"/>
+              <polygon points="0,0 6,3 0,6" fill="#2E9BFF" opacity="0.7"/>
             </marker>
           </defs>
-          <text x="340" y="14" text-anchor="middle" fill="#00FF94" font-family="Poppins" font-size="10" font-weight="700" letter-spacing="1.5">Energy propagates in this direction →</text>
+          <text x="340" y="14" text-anchor="middle" fill="#2E9BFF" font-family="Poppins" font-size="10" font-weight="700" letter-spacing="1.5">Energy propagates in this direction →</text>
           <!-- Trace -->
           <rect x="190" y="24" width="300" height="15" rx="2" fill="#b87333"/>
           <text x="340" y="35" text-anchor="middle" fill="#0a0a0a" font-family="Poppins" font-size="8" font-weight="700">Signal Trace</text>
@@ -1132,15 +1132,15 @@ input[type=range] { width: 100%; accent-color: var(--accent); cursor: pointer; }
           <rect x="50" y="41" width="580" height="58" fill="#181818" stroke="#242424" stroke-width="1" rx="1"/>
           <text x="340" y="57" text-anchor="middle" fill="#2e2e2e" font-family="Poppins" font-size="10" font-weight="600">FR4 Dielectric</text>
           <!-- E-field lines -->
-          <line x1="340" y1="41" x2="340" y2="99" stroke="#00FF94" stroke-width="2" opacity="0.95" marker-end="url(#ef)"/>
-          <line x1="308" y1="41" x2="308" y2="99" stroke="#00FF94" stroke-width="1.8" opacity="0.8" marker-end="url(#ef)"/>
-          <line x1="372" y1="41" x2="372" y2="99" stroke="#00FF94" stroke-width="1.8" opacity="0.8" marker-end="url(#ef)"/>
-          <line x1="275" y1="41" x2="275" y2="99" stroke="#00FF94" stroke-width="1.3" opacity="0.55" marker-end="url(#ef)"/>
-          <line x1="405" y1="41" x2="405" y2="99" stroke="#00FF94" stroke-width="1.3" opacity="0.55" marker-end="url(#ef)"/>
-          <line x1="242" y1="44" x2="242" y2="99" stroke="#00FF94" stroke-width="0.9" opacity="0.3" marker-end="url(#ef)"/>
-          <line x1="438" y1="44" x2="438" y2="99" stroke="#00FF94" stroke-width="0.9" opacity="0.3" marker-end="url(#ef)"/>
-          <line x1="195" y1="50" x2="195" y2="99" stroke="#00FF94" stroke-width="0.6" opacity="0.15" marker-end="url(#ef)"/>
-          <line x1="485" y1="50" x2="485" y2="99" stroke="#00FF94" stroke-width="0.6" opacity="0.15" marker-end="url(#ef)"/>
+          <line x1="340" y1="41" x2="340" y2="99" stroke="#2E9BFF" stroke-width="2" opacity="0.95" marker-end="url(#ef)"/>
+          <line x1="308" y1="41" x2="308" y2="99" stroke="#2E9BFF" stroke-width="1.8" opacity="0.8" marker-end="url(#ef)"/>
+          <line x1="372" y1="41" x2="372" y2="99" stroke="#2E9BFF" stroke-width="1.8" opacity="0.8" marker-end="url(#ef)"/>
+          <line x1="275" y1="41" x2="275" y2="99" stroke="#2E9BFF" stroke-width="1.3" opacity="0.55" marker-end="url(#ef)"/>
+          <line x1="405" y1="41" x2="405" y2="99" stroke="#2E9BFF" stroke-width="1.3" opacity="0.55" marker-end="url(#ef)"/>
+          <line x1="242" y1="44" x2="242" y2="99" stroke="#2E9BFF" stroke-width="0.9" opacity="0.3" marker-end="url(#ef)"/>
+          <line x1="438" y1="44" x2="438" y2="99" stroke="#2E9BFF" stroke-width="0.9" opacity="0.3" marker-end="url(#ef)"/>
+          <line x1="195" y1="50" x2="195" y2="99" stroke="#2E9BFF" stroke-width="0.6" opacity="0.15" marker-end="url(#ef)"/>
+          <line x1="485" y1="50" x2="485" y2="99" stroke="#2E9BFF" stroke-width="0.6" opacity="0.15" marker-end="url(#ef)"/>
           <!-- Reference Plane -->
           <rect x="50" y="99" width="580" height="15" fill="#555" rx="1" opacity="0.85"/>
           <text x="340" y="110" text-anchor="middle" fill="#ddd" font-family="Poppins" font-size="8" font-weight="700">Reference Plane — Return Current Flows Here</text>
@@ -1199,7 +1199,7 @@ input[type=range] { width: 100%; accent-color: var(--accent); cursor: pointer; }
           <rect x="60" y="20" width="480" rx="2" fill="#b87333" opacity="0.8" id="skinTop"/>
           <rect x="60"       width="480" rx="2" fill="#b87333" opacity="0.8" id="skinBot"/>
           <text x="300" y="82" text-anchor="middle" fill="#e2e8f0" font-family="Poppins" font-size="10" id="skinInfo">Skin depth ≈ 1.87 μm at 100 MHz</text>
-          <text x="300" y="96" text-anchor="middle" fill="#00FF94" font-family="Poppins" font-size="10" id="skinPct">~100% of copper cross-section active</text>
+          <text x="300" y="96" text-anchor="middle" fill="#2E9BFF" font-family="Poppins" font-size="10" id="skinPct">~100% of copper cross-section active</text>
         </svg>
       </div>
 
@@ -1260,22 +1260,22 @@ input[type=range] { width: 100%; accent-color: var(--accent); cursor: pointer; }
       <div id="rc-hf" style="display:none">
         <div class="diagram">
           <svg viewBox="0 0 640 160" xmlns="http://www.w3.org/2000/svg">
-            <defs><marker id="mGrn" markerWidth="7" markerHeight="7" refX="5" refY="3.5" orient="auto"><polygon points="0,0 7,3.5 0,7" fill="#00FF94"/></marker></defs>
+            <defs><marker id="mGrn" markerWidth="7" markerHeight="7" refX="5" refY="3.5" orient="auto"><polygon points="0,0 7,3.5 0,7" fill="#2E9BFF"/></marker></defs>
             <rect x="40" y="112" width="560" height="20" rx="2" fill="#333" opacity="0.85"/>
             <text x="320" y="125" text-anchor="middle" fill="#ccc" font-family="Poppins" font-size="9" font-weight="700">Reference Plane</text>
             <rect x="200" y="52" width="240" height="14" rx="2" fill="#b87333" opacity="0.85"/>
             <text x="320" y="62" text-anchor="middle" fill="#0a0a0a" font-family="Poppins" font-size="9" font-weight="700">Signal Trace</text>
             <!-- Tight arrows, only under trace -->
-            <line x1="228" y1="91" x2="228" y2="112" stroke="#00FF94" stroke-width="1.5" opacity="0.5" marker-end="url(#mGrn)"/>
-            <line x1="260" y1="86" x2="260" y2="112" stroke="#00FF94" stroke-width="2"   opacity="0.75" marker-end="url(#mGrn)"/>
-            <line x1="295" y1="82" x2="295" y2="112" stroke="#00FF94" stroke-width="2.5" opacity="0.9" marker-end="url(#mGrn)"/>
-            <line x1="320" y1="80" x2="320" y2="112" stroke="#00FF94" stroke-width="3"   opacity="1"   marker-end="url(#mGrn)"/>
-            <line x1="345" y1="82" x2="345" y2="112" stroke="#00FF94" stroke-width="2.5" opacity="0.9" marker-end="url(#mGrn)"/>
-            <line x1="380" y1="86" x2="380" y2="112" stroke="#00FF94" stroke-width="2"   opacity="0.75" marker-end="url(#mGrn)"/>
-            <line x1="412" y1="91" x2="412" y2="112" stroke="#00FF94" stroke-width="1.5" opacity="0.5" marker-end="url(#mGrn)"/>
+            <line x1="228" y1="91" x2="228" y2="112" stroke="#2E9BFF" stroke-width="1.5" opacity="0.5" marker-end="url(#mGrn)"/>
+            <line x1="260" y1="86" x2="260" y2="112" stroke="#2E9BFF" stroke-width="2"   opacity="0.75" marker-end="url(#mGrn)"/>
+            <line x1="295" y1="82" x2="295" y2="112" stroke="#2E9BFF" stroke-width="2.5" opacity="0.9" marker-end="url(#mGrn)"/>
+            <line x1="320" y1="80" x2="320" y2="112" stroke="#2E9BFF" stroke-width="3"   opacity="1"   marker-end="url(#mGrn)"/>
+            <line x1="345" y1="82" x2="345" y2="112" stroke="#2E9BFF" stroke-width="2.5" opacity="0.9" marker-end="url(#mGrn)"/>
+            <line x1="380" y1="86" x2="380" y2="112" stroke="#2E9BFF" stroke-width="2"   opacity="0.75" marker-end="url(#mGrn)"/>
+            <line x1="412" y1="91" x2="412" y2="112" stroke="#2E9BFF" stroke-width="1.5" opacity="0.5" marker-end="url(#mGrn)"/>
             <!-- Highlight box -->
-            <rect x="198" y="68" width="244" height="44" fill="rgba(0,255,148,0.04)" stroke="rgba(0,255,148,0.15)" stroke-width="1" stroke-dasharray="4,3" rx="2"/>
-            <text x="320" y="152" text-anchor="middle" fill="#00FF94" font-family="Poppins" font-size="11" font-weight="600">Return current concentrates directly under trace — path of lowest impedance √(L/C)</text>
+            <rect x="198" y="68" width="244" height="44" fill="rgba(46, 155, 255,0.04)" stroke="rgba(46, 155, 255,0.15)" stroke-width="1" stroke-dasharray="4,3" rx="2"/>
+            <text x="320" y="152" text-anchor="middle" fill="#2E9BFF" font-family="Poppins" font-size="11" font-weight="600">Return current concentrates directly under trace — path of lowest impedance √(L/C)</text>
           </svg>
           <div class="fig-cap">Above audio frequencies, return current concentrates in the reference plane directly under the signal trace — the path of minimum inductance and maximum capacitance simultaneously.</div>
         </div>
@@ -1326,19 +1326,19 @@ input[type=range] { width: 100%; accent-color: var(--accent); cursor: pointer; }
             <span class="plane-name">Solid RRP — Adjacent to Signal</span>
           </div>
           <svg viewBox="0 0 260 70" xmlns="http://www.w3.org/2000/svg" style="width:100%">
-            <defs><marker id="pa" markerWidth="6" markerHeight="6" refX="3" refY="3" orient="auto"><polygon points="0,0 6,3 0,6" fill="#00FF94" opacity="0.75"/></marker></defs>
+            <defs><marker id="pa" markerWidth="6" markerHeight="6" refX="3" refY="3" orient="auto"><polygon points="0,0 6,3 0,6" fill="#2E9BFF" opacity="0.75"/></marker></defs>
             <rect x="80" y="4" width="100" height="12" rx="2" fill="#b87333" opacity="0.85"/>
             <text x="130" y="13.5" text-anchor="middle" fill="#0a0a0a" font-family="Poppins" font-size="8" font-weight="700">Trace</text>
             <rect x="20" y="18" width="220" height="28" fill="#181818" stroke="#242424" stroke-width="1" rx="1"/>
-            <line x1="110" y1="18" x2="110" y2="46" stroke="#00FF94" stroke-width="1.5" opacity="0.9" marker-end="url(#pa)"/>
-            <line x1="124" y1="18" x2="124" y2="46" stroke="#00FF94" stroke-width="1.5" opacity="0.9" marker-end="url(#pa)"/>
-            <line x1="138" y1="18" x2="138" y2="46" stroke="#00FF94" stroke-width="1.5" opacity="0.9" marker-end="url(#pa)"/>
-            <line x1="152" y1="18" x2="152" y2="46" stroke="#00FF94" stroke-width="1.2" opacity="0.65" marker-end="url(#pa)"/>
-            <line x1="96"  y1="18" x2="96"  y2="46" stroke="#00FF94" stroke-width="1.2" opacity="0.65" marker-end="url(#pa)"/>
-            <line x1="168" y1="20" x2="168" y2="46" stroke="#00FF94" stroke-width="0.8" opacity="0.3" marker-end="url(#pa)"/>
-            <line x1="80"  y1="20" x2="80"  y2="46" stroke="#00FF94" stroke-width="0.8" opacity="0.3" marker-end="url(#pa)"/>
-            <rect x="20" y="48" width="220" height="14" rx="1" fill="#00FF94" opacity="0.15" stroke="#00FF94" stroke-width="1"/>
-            <text x="130" y="58" text-anchor="middle" fill="#00FF94" font-family="Poppins" font-size="8" font-weight="700">Solid RRP — No Splits</text>
+            <line x1="110" y1="18" x2="110" y2="46" stroke="#2E9BFF" stroke-width="1.5" opacity="0.9" marker-end="url(#pa)"/>
+            <line x1="124" y1="18" x2="124" y2="46" stroke="#2E9BFF" stroke-width="1.5" opacity="0.9" marker-end="url(#pa)"/>
+            <line x1="138" y1="18" x2="138" y2="46" stroke="#2E9BFF" stroke-width="1.5" opacity="0.9" marker-end="url(#pa)"/>
+            <line x1="152" y1="18" x2="152" y2="46" stroke="#2E9BFF" stroke-width="1.2" opacity="0.65" marker-end="url(#pa)"/>
+            <line x1="96"  y1="18" x2="96"  y2="46" stroke="#2E9BFF" stroke-width="1.2" opacity="0.65" marker-end="url(#pa)"/>
+            <line x1="168" y1="20" x2="168" y2="46" stroke="#2E9BFF" stroke-width="0.8" opacity="0.3" marker-end="url(#pa)"/>
+            <line x1="80"  y1="20" x2="80"  y2="46" stroke="#2E9BFF" stroke-width="0.8" opacity="0.3" marker-end="url(#pa)"/>
+            <rect x="20" y="48" width="220" height="14" rx="1" fill="#2E9BFF" opacity="0.15" stroke="#2E9BFF" stroke-width="1"/>
+            <text x="130" y="58" text-anchor="middle" fill="#2E9BFF" font-family="Poppins" font-size="8" font-weight="700">Solid RRP — No Splits</text>
           </svg>
           <p>Solid, uninterrupted plane directly adjacent to the signal layer. Return current flows directly under the trace. Fields are maximally contained. This is the only configuration that correctly performs both RRP roles. <strong>Always the target.</strong></p>
         </div>
