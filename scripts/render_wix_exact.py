@@ -414,8 +414,9 @@ class Renderer:
         text = b.get("text") or ""
         link = b.get("link") or {}
         styles = b.get("styles") or {}
-        colors = styles.get("colors") or {}
-        bg = colors.get("background") or "#116dff"
+        # Brand lock: every button is solid Azure with dark text, including
+        # Wix buttons that stored #116dff or #25A55A.
+        bg = "#2E9BFF"
         radius = (styles.get("border") or {}).get("radius")
         radius_css = f"{int(radius)}px" if isinstance(radius, (int, float)) else "8px"
         if not styles:
@@ -423,7 +424,7 @@ class Renderer:
         css = [
             f"background:{bg}",
             f"border-radius:{radius_css}",
-            "color:#ffffff",
+            "color:#0a0a0a",
         ]
         width = (b.get("containerData") or {}).get("width") or {}
         if "custom" in width and str(width["custom"]).isdigit():
@@ -954,9 +955,9 @@ CSS = r"""*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0
   --border: #242424;
   --fg: #ffffff;
   --label: #a0aab8;
-  --accent: #00FF94;
-  --accent-dim: rgba(0, 255, 148, 0.10);
-  --accent-hover: #00e085;
+  --accent: #2E9BFF;
+  --accent-dim: rgba(46, 155, 255, 0.10);
+  --accent-hover: #1E88F0;
 }
 body {
   background: var(--bg);
@@ -1035,7 +1036,7 @@ header { border-bottom: 1px solid var(--border); }
 .wix-body h3 { font-size: 1.3rem; }
 .wix-body h4 { font-size: 1.12rem; }
 .wix-body h5, .wix-body h6 { font-size: 1rem; }
-.wix-body a { color: #8ec5ff; text-decoration: underline; text-underline-offset: 2px; }
+.wix-body a { color: #2E9BFF; text-decoration: underline; text-underline-offset: 2px; }
 .wix-body strong { font-weight: 700; }
 .wix-body em { font-style: italic; }
 .wix-body u { text-decoration: underline; }
@@ -1043,10 +1044,10 @@ header { border-bottom: 1px solid var(--border); }
 .wix-body li { margin: 0.28em 0; }
 .wix-body li > p { margin: 0.2em 0; }
 .wix-body blockquote {
-  border-left: 4px solid #116dff;
+  border-left: 4px solid #2E9BFF;
   margin: 1.2em 0;
   padding: 0.15em 0 0.15em 1em;
-  color: #e7eef7;
+  color: #ffffff;
 }
 .wix-body hr { border: 0; border-top: 1px solid #3a3a3a; margin: 1.8em 0; }
 .wix-body figure { margin: 1.4em auto; text-align: center; }
@@ -1055,7 +1056,7 @@ header { border-bottom: 1px solid var(--border); }
 .wix-btn-wrap { text-align: center; margin: 1.3em 0; }
 a.wix-btn, span.wix-btn {
   display: inline-block;
-  color: #ffffff !important;
+  color: #0a0a0a !important;
   text-decoration: none !important;
   font-weight: 600;
   font-size: 16px;
@@ -1069,10 +1070,10 @@ a.wix-btn, span.wix-btn {
   gap: 16px;
   align-items: center;
   padding: 12px;
-  color: #ffffff !important;
+  color: #2E9BFF !important;
   text-decoration: none !important;
 }
-.wix-card a:hover { color: var(--accent) !important; }
+.wix-card a:hover { color: #1E88F0 !important; }
 .wix-card img { width: 96px; height: auto; flex: 0 0 96px; background: #fff; }
 .wix-card-name { font-weight: 600; font-size: 16px; line-height: 1.35; }
 .wix-embed { position: relative; width: 100%; padding-top: 56.25%; margin: 1.2em 0; background: #000; }
