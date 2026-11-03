@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Radiations from Common Mode Currents in PCBs — Fresu Electronics</title>
+  <meta name="description" content="One of the toughest EMC issues you are likely to encounter when designing printed circuit boards is managing radiations from common mode...">
+  <link rel="canonical" href="https://blog.fresuelectronics.com/post/radiations-from-common-mode-currents-in-pcbs/">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Radiations from Common Mode Currents in PCBs">
+  <meta property="og:description" content="One of the toughest EMC issues you are likely to encounter when designing printed circuit boards is managing radiations from common mode...">
+  <meta property="og:url" content="https://blog.fresuelectronics.com/post/radiations-from-common-mode-currents-in-pcbs/">
+  <meta property="og:image" content="https://blog.fresuelectronics.com/assets/images/wix/61d609_19bb47c25a8b40959dadac475cbe64c9~mv2.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400;1,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/assets/wix-exact.css">
+</head>
+<body>
+<header>
+  <div class="site-header">
+    <a href="https://www.fresuelectronics.com">
+      <img src="https://raw.githubusercontent.com/dariofresu/Fresu-Electronics-Blog/main/assets/logo.png" alt="Fresu Electronics">
+    </a>
+    <nav class="header-nav">
+      <a href="https://blog.fresuelectronics.com/">Blog</a>
+      <a href="https://blog.fresuelectronics.com/tools/">Tools</a>
+      <a href="https://www.fresuelectronics.com/trainings">Courses</a>
+      <a href="https://www.fresuelectronics.com/about">About</a>
+      <a href="https://www.fresuelectronics.com/emc-audit" class="header-cta">Book EMC Audit</a>
+    </nav>
+  </div>
+</header>
+<article class="post">
+  <p class="crumb"><a href="https://blog.fresuelectronics.com/">Blog</a> · <a href="https://blog.fresuelectronics.com/#wix-archive">Original posts</a></p>
+  <header class="post-head">
+    <h1>Radiations from Common Mode Currents in PCBs</h1>
+    <p class="meta"><time datetime="2024-09-10">2024-09-10</time> · <a href="https://info3761185.wixsite.com/dario-fresu-electron/post/radiations-from-common-mode-currents-in-pcbs">Original on Wix</a></p>
+  <p class="taxo">Categories: EMI  - Short Post</p>
+  </header>
+  <figure class="wix-cover"><img src="/assets/images/wix/61d609_19bb47c25a8b40959dadac475cbe64c9~mv2.png" alt=""></figure>
+<div class="wix-body" id="wix-body">
+<figure class="wix-fig"><img src="/assets/images/wix/61d609_19bb47c25a8b40959dadac475cbe64c9~mv2.png" alt="" loading="lazy"></figure>
+<p>One of the toughest EMC issues you are likely to encounter when designing printed circuit boards is managing radiations from common mode currents.</p>
+<p></p>
+<p>What makes this so difficult is that the actual parts generating the common mode current, which are the parasitics, are not visible in the schematics.</p>
+<p></p>
+<p>This is why designing the PCB is not intuitive.</p>
+<p></p>
+<p>One way to understand and mitigate radiations from common mode currents is to model our system as a dipole (or monopole) antenna.</p>
+<p></p>
+<p>In this model, the source of the common mode noise is the source of the antenna.</p>
+<p></p>
+<p>What also becomes clearer is that we have very few ways to mitigate these issues. </p>
+<p></p>
+<p>Basically, we have to do everything in our control to make this antenna as inefficient as possible!</p>
+<p></p>
+<p>Here are a few steps we can take:</p>
+<p></p>
+<p>- Reduce the source of voltage drop in the return reference path: This requires designing the return path very carefully.</p>
+<p></p>
+<p>- Filter and/or shield the cables: Sometimes easier said than done, especially with high power applications.</p>
+<p></p>
+<p>- Completely isolate the cables from the return reference path: This solution can sometimes be a bit bulky.</p>
+<p></p>
+<p>My favorite approach is to design the return reference path with as much or more dedication than the signal forward path. </p>
+<p></p>
+<p>By doing so, you aim to control the parasitics as much as possible, reducing the common mode voltage source to a minimum.</p>
+<p></p>
+<p>Another important point to remember is that common mode currents are much more efficient at radiating than differential mode currents. </p>
+<p></p>
+<p>In fact, only a few microamps of common mode currents are necessary to fail some radiated emissions tests!</p>
+<p></p>
+<p>I hope this post brings a bit more clarity on the topic.</p>
+<p></p>
+<p>Dario</p>
+<p><a href="http://fresuelectronics.com" target="_blank" rel="noreferrer noopener"><u>fresuelectronics.com</u></a></p>
+<p></p>
+<hr>
+<h3><strong><span style="font-size:18px">Action list:</span></strong></h3>
+<h5><a href="https://www.fresuelectronics.com/product-page/emi-quick-fixes-guide" target="_blank" rel="nofollow noreferrer noopener"><strong><u>1. </u></strong></a><a href="https://www.fresuelectronics.com/product-page/emi-quick-fixes-guide" target="_blank" rel="nofollow noreferrer noopener"><strong><u><span style="background-color:rgb(2, 255, 135);color:#141414">Get the New EMI Quick Fixes Guide - 2025</span></u></strong></a></h5>
+<p></p>
+<aside class="wix-card"><a href="https://www.fresuelectronics.com/product-page/emi-quick-fixes-guide"><img src="/assets/images/wix/61d609_6a6d3bf9bd114bcfb82d5236e516195a~mv2.png" alt=""><span class="wix-card-name">EMI Quick Fixes Guide</span></a></aside>
+<p></p>
+<hr>
+<p></p>
+</div><!-- /wix-body -->
+</article>
+<footer>
+  <div class="site-footer">
+    <span>© 2026 Fresu Electronics SRL</span>
+    <span><a href="https://www.fresuelectronics.com">fresuelectronics.com</a> · <a href="https://www.fresuelectronics.com/free-tool-1">Free Stackup Tool</a></span>
+  </div>
+</footer>
+</body>
+</html>

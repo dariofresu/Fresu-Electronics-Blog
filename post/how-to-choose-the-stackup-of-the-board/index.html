@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>How to choose the stackup of the board. — Fresu Electronics</title>
+  <meta name="description" content="Good EMC results start with a well-chosen stackup. Is it that simple? Almost. I like to think about EMC as the test which measures how...">
+  <link rel="canonical" href="https://blog.fresuelectronics.com/post/how-to-choose-the-stackup-of-the-board/">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="How to choose the stackup of the board.">
+  <meta property="og:description" content="Good EMC results start with a well-chosen stackup. Is it that simple? Almost. I like to think about EMC as the test which measures how...">
+  <meta property="og:url" content="https://blog.fresuelectronics.com/post/how-to-choose-the-stackup-of-the-board/">
+  <meta property="og:image" content="https://blog.fresuelectronics.com/assets/images/wix/61d609_6d58ca7e0d2e4414996c2a5b2fa85d8e~mv2.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400;1,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/assets/wix-exact.css">
+</head>
+<body>
+<header>
+  <div class="site-header">
+    <a href="https://www.fresuelectronics.com">
+      <img src="https://raw.githubusercontent.com/dariofresu/Fresu-Electronics-Blog/main/assets/logo.png" alt="Fresu Electronics">
+    </a>
+    <nav class="header-nav">
+      <a href="https://blog.fresuelectronics.com/">Blog</a>
+      <a href="https://blog.fresuelectronics.com/tools/">Tools</a>
+      <a href="https://www.fresuelectronics.com/trainings">Courses</a>
+      <a href="https://www.fresuelectronics.com/about">About</a>
+      <a href="https://www.fresuelectronics.com/emc-audit" class="header-cta">Book EMC Audit</a>
+    </nav>
+  </div>
+</header>
+<article class="post">
+  <p class="crumb"><a href="https://blog.fresuelectronics.com/">Blog</a> · <a href="https://blog.fresuelectronics.com/#wix-archive">Original posts</a></p>
+  <header class="post-head">
+    <h1>How to choose the stackup of the board.</h1>
+    <p class="meta"><time datetime="2024-09-10">2024-09-10</time> · <a href="https://info3761185.wixsite.com/dario-fresu-electron/post/how-to-choose-the-stackup-of-the-board">Original on Wix</a></p>
+  <p class="taxo">Categories: EMI  - Short Post</p>
+  </header>
+  <figure class="wix-cover"><img src="/assets/images/wix/61d609_6d58ca7e0d2e4414996c2a5b2fa85d8e~mv2.png" alt=""></figure>
+<div class="wix-body" id="wix-body">
+<figure class="wix-fig"><img src="/assets/images/wix/61d609_6d58ca7e0d2e4414996c2a5b2fa85d8e~mv2.png" alt="" loading="lazy"></figure>
+<p>Good EMC results start with a well-chosen stackup.</p>
+<p></p>
+<p>Is it that simple?</p>
+<p></p>
+<p>Almost.</p>
+<p></p>
+<p>I like to think about EMC as the test which measures how well I contain the electromagnetic fields and how well I protect the PC board from external unwanted fields.</p>
+<p></p>
+<p>I try to keep it simple, to start with.</p>
+<p></p>
+<p>This is also why the stackup is one of the first things I check when reviewing a PC board layout that is failing EMI tests.</p>
+<p></p>
+<p>Because it all starts from there.</p>
+<p></p>
+<p>The EM field is bounded by the conductors, which in this case are the copper layers.</p>
+<p></p>
+<p>Since we do not want the signal to radiate, we need to have two conductors to guide the signals.</p>
+<p></p>
+<p>Because the EM fields are in the dielectric space, not in the conductor itself.</p>
+<p></p>
+<p>This is why the best choice when selecting the stackup is to have a return reference plane adjacent to the signal/power layer.</p>
+<p></p>
+<p>Notice one absolutely important thing:</p>
+<p></p>
+<p>I did not call it &quot;GROUND&quot;.</p>
+<p></p>
+<p>Nope. </p>
+<p></p>
+<p>I called it Return Reference Plane, or for short, RRP.</p>
+<p></p>
+<p>Why?</p>
+<p></p>
+<p>Because the name implies three absolutely important things:</p>
+<p></p>
+<p>1. It has to provide the path for the signal return current to flow back to the source it originated from.</p>
+<p></p>
+<p>2. It has to provide the reference for the signal voltage (you don&#x27;t measure voltage with only one lead of the voltmeter).</p>
+<p></p>
+<p>3. It has to be a plane. With no cuts, splits, or special shapes. This is important because it has to be the path of least impedance for the two requirements above.</p>
+<p></p>
+<p>Start from here, and watch the harmonic envelope collapse in the spectrum analyzer.</p>
+<p></p>
+<p>I hope this helps,</p>
+<p></p>
+<p>Dario</p>
+<p></p>
+<hr>
+<p></p>
+<h3><strong><span style="font-size:18px">Action list:</span></strong></h3>
+<h5><a href="https://www.fresuelectronics.com/product-page/emi-quick-fixes-guide" target="_blank" rel="nofollow noreferrer noopener"><strong><u>1. </u></strong></a><a href="https://www.fresuelectronics.com/product-page/emi-quick-fixes-guide" target="_blank" rel="nofollow noreferrer noopener"><strong><u><span style="background-color:rgb(2, 255, 135);color:#141414">Get the New EMI Quick Fixes Guide - 2025</span></u></strong></a></h5>
+<p></p>
+<aside class="wix-card"><a href="https://www.fresuelectronics.com/product-page/emi-quick-fixes-guide"><img src="/assets/images/wix/61d609_6a6d3bf9bd114bcfb82d5236e516195a~mv2.png" alt=""><span class="wix-card-name">EMI Quick Fixes Guide</span></a></aside>
+<p></p>
+<hr>
+<p></p>
+</div><!-- /wix-body -->
+</article>
+<footer>
+  <div class="site-footer">
+    <span>© 2026 Fresu Electronics SRL</span>
+    <span><a href="https://www.fresuelectronics.com">fresuelectronics.com</a> · <a href="https://www.fresuelectronics.com/free-tool-1">Free Stackup Tool</a></span>
+  </div>
+</footer>
+</body>
+</html>

@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>How to reduce crosstalk in our PCB and reduce EMI? — Fresu Electronics</title>
+  <meta name="description" content="Crosstalk can not only be a signal integrity problem, but it can also become a very painful EMI problem if noise couples from a trace to...">
+  <link rel="canonical" href="https://blog.fresuelectronics.com/post/how-to-reduce-crosstalk-in-our-pcb-and-reduce-emi/">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="How to reduce crosstalk in our PCB and reduce EMI?">
+  <meta property="og:description" content="Crosstalk can not only be a signal integrity problem, but it can also become a very painful EMI problem if noise couples from a trace to...">
+  <meta property="og:url" content="https://blog.fresuelectronics.com/post/how-to-reduce-crosstalk-in-our-pcb-and-reduce-emi/">
+  <meta property="og:image" content="https://blog.fresuelectronics.com/assets/images/wix/61d609_0e8dbb392e96414283b0c141643b8145~mv2.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400;1,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/assets/wix-exact.css">
+</head>
+<body>
+<header>
+  <div class="site-header">
+    <a href="https://www.fresuelectronics.com">
+      <img src="https://raw.githubusercontent.com/dariofresu/Fresu-Electronics-Blog/main/assets/logo.png" alt="Fresu Electronics">
+    </a>
+    <nav class="header-nav">
+      <a href="https://blog.fresuelectronics.com/">Blog</a>
+      <a href="https://blog.fresuelectronics.com/tools/">Tools</a>
+      <a href="https://www.fresuelectronics.com/trainings">Courses</a>
+      <a href="https://www.fresuelectronics.com/about">About</a>
+      <a href="https://www.fresuelectronics.com/emc-audit" class="header-cta">Book EMC Audit</a>
+    </nav>
+  </div>
+</header>
+<article class="post">
+  <p class="crumb"><a href="https://blog.fresuelectronics.com/">Blog</a> · <a href="https://blog.fresuelectronics.com/#wix-archive">Original posts</a></p>
+  <header class="post-head">
+    <h1>How to reduce crosstalk in our PCB and reduce EMI?</h1>
+    <p class="meta"><time datetime="2024-09-10">2024-09-10</time> · <a href="https://info3761185.wixsite.com/dario-fresu-electron/post/how-to-reduce-crosstalk-in-our-pcb-and-reduce-emi">Original on Wix</a></p>
+  <p class="taxo">Categories: EMI  - Short Post</p>
+  </header>
+  <figure class="wix-cover"><img src="/assets/images/wix/61d609_0e8dbb392e96414283b0c141643b8145~mv2.png" alt=""></figure>
+<div class="wix-body" id="wix-body">
+<p></p>
+<figure class="wix-fig"><img src="/assets/images/wix/61d609_0e8dbb392e96414283b0c141643b8145~mv2.png" alt="" loading="lazy"></figure>
+<p>Crosstalk can not only be a signal integrity problem, but it can also become a very painful EMI problem if noise couples from a trace to a nearby conductor, such as a wire. </p>
+<p></p>
+<p>This coupling can lead to significant interference, resulting in degraded performance, data errors, and potentially failing compliance tests for electromagnetic interference.</p>
+<p></p>
+<p>To address crosstalk issues, we need to first understand that it is caused by inductive and capacitive coupling and how the Electric and Magnetic fields interact with nearby conductors.</p>
+<p></p>
+<p>When dealing with a PCB, our primary concern is how these fringe fields from the traces couple to other nearby traces.</p>
+<p></p>
+<p>To reduce crosstalk, there are various approaches, but the two most important ones on my list, and those that you can use right now to improve your design, are the following:</p>
+<p></p>
+<ol>
+<li>
+<p><strong>Have enough space between the signal traces:</strong> Increasing the distance between traces reduces the capacitive and inductive coupling, thereby minimizing crosstalk. This is one of the simplest and most effective methods to mitigate crosstalk.</p>
+</li>
+<li>
+<p><strong>Have the return reference plane (RRP) adjacent to the signal traces and closely coupled to it: </strong>A closely coupled RRP ensures a low impedance return path for the signal and reduces the range with which the fringe fields extend, which essentially helps in containing the electromagnetic fields and reducing the potential for crosstalk.</p>
+</li>
+</ol>
+<p></p>
+<p>Once these measures are in place, we are already 90% on the way to avoiding coupling.</p>
+<p>But what if we need a more precise understanding of the crosstalk between different nets? </p>
+<p>In that case, we need to get the numbers and find a trade-off that suits our layout and project requirements.</p>
+<p></p>
+<p>For those using Altium Designer, there is a highly effective integrated tool to simulate the level of crosstalk between your layout traces. </p>
+<p>You can find this in Tool -&gt; Signal Integrity. </p>
+<p></p>
+<p>This tool allows you to:</p>
+<ul>
+<li>
+<p>Simulate the amount of crosstalk (and reflections) based on the layout of your traces.</p>
+</li>
+<li>
+<p>Identify critical areas where crosstalk is highest.</p>
+</li>
+<li>
+<p>Experiment with different layout modifications to see their impact on crosstalk in real-time.</p>
+</li>
+</ul>
+<p></p>
+<p>By iterating between the integrated tool and the PCB layout tool, you can see the effects of your improvements in real-time and fine-tune your design to meet your specific needs. </p>
+<p>This process enables you to optimize your PCB design for minimal crosstalk, ensuring better signal integrity and EMI performance.</p>
+<p></p>
+<p>Give it a shot!</p>
+<p>I hope this helps, Dario</p>
+<p></p>
+<hr>
+<h3><strong><span style="font-size:18px">Action list:</span></strong></h3>
+<h5><a href="https://www.fresuelectronics.com/product-page/emi-quick-fixes-guide" target="_blank" rel="nofollow noreferrer noopener"><strong><u>1. </u></strong></a><a href="https://www.fresuelectronics.com/product-page/emi-quick-fixes-guide" target="_blank" rel="nofollow noreferrer noopener"><strong><u><span style="background-color:rgb(2, 255, 135);color:#141414">Get the New EMI Quick Fixes Guide - 2025</span></u></strong></a></h5>
+<p></p>
+<aside class="wix-card"><a href="https://www.fresuelectronics.com/product-page/emi-quick-fixes-guide"><img src="/assets/images/wix/61d609_6a6d3bf9bd114bcfb82d5236e516195a~mv2.png" alt=""><span class="wix-card-name">EMI Quick Fixes Guide</span></a></aside>
+<p></p>
+<hr>
+<p></p>
+</div><!-- /wix-body -->
+</article>
+<footer>
+  <div class="site-footer">
+    <span>© 2026 Fresu Electronics SRL</span>
+    <span><a href="https://www.fresuelectronics.com">fresuelectronics.com</a> · <a href="https://www.fresuelectronics.com/free-tool-1">Free Stackup Tool</a></span>
+  </div>
+</footer>
+</body>
+</html>

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>This Is Why You Keep Failing EMI. — Fresu Electronics</title>
+  <meta name="description" content="Routing over a split in the return reference plane is one of the surest recipes for EMI failure. It took me some time to understand this....">
+  <link rel="canonical" href="https://blog.fresuelectronics.com/post/this-is-why-you-keep-failing-emi/">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="This Is Why You Keep Failing EMI.">
+  <meta property="og:description" content="Routing over a split in the return reference plane is one of the surest recipes for EMI failure. It took me some time to understand this....">
+  <meta property="og:url" content="https://blog.fresuelectronics.com/post/this-is-why-you-keep-failing-emi/">
+  <meta property="og:image" content="https://blog.fresuelectronics.com/assets/images/wix/61d609_85d0b73ce5714666aee96f1f1fef4730~mv2.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400;1,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/assets/wix-exact.css">
+</head>
+<body>
+<header>
+  <div class="site-header">
+    <a href="https://www.fresuelectronics.com">
+      <img src="https://raw.githubusercontent.com/dariofresu/Fresu-Electronics-Blog/main/assets/logo.png" alt="Fresu Electronics">
+    </a>
+    <nav class="header-nav">
+      <a href="https://blog.fresuelectronics.com/">Blog</a>
+      <a href="https://blog.fresuelectronics.com/tools/">Tools</a>
+      <a href="https://www.fresuelectronics.com/trainings">Courses</a>
+      <a href="https://www.fresuelectronics.com/about">About</a>
+      <a href="https://www.fresuelectronics.com/emc-audit" class="header-cta">Book EMC Audit</a>
+    </nav>
+  </div>
+</header>
+<article class="post">
+  <p class="crumb"><a href="https://blog.fresuelectronics.com/">Blog</a> · <a href="https://blog.fresuelectronics.com/#wix-archive">Original posts</a></p>
+  <header class="post-head">
+    <h1>This Is Why You Keep Failing EMI.</h1>
+    <p class="meta"><time datetime="2024-09-29">2024-09-29</time> · <a href="https://info3761185.wixsite.com/dario-fresu-electron/post/this-is-why-you-keep-failing-emi">Original on Wix</a></p>
+  <p class="taxo">Categories: EMI  - Short Post</p>
+  </header>
+  <figure class="wix-cover"><img src="/assets/images/wix/61d609_85d0b73ce5714666aee96f1f1fef4730~mv2.png" alt=""></figure>
+<div class="wix-body" id="wix-body">
+<p></p>
+<figure class="wix-fig" data-wix-width="384" style="max-width:384px"><img src="/assets/images/wix/61d609_85d0b73ce5714666aee96f1f1fef4730~mv2.png" alt="" loading="lazy"></figure>
+<p></p>
+<p>Routing over a split in the return reference plane is one of the surest recipes for EMI failure.</p>
+<p></p>
+<p>It took me some time to understand this.</p>
+<p></p>
+<p>I didn&#x27;t realize that when a signal crosses a split, it loses its reference potential, and the return current has to find a longer path to return to the source that generated it.</p>
+<p></p>
+<p>Little did I know that the size of the current loop is directly related to the radiated emissions from differential-mode currents.</p>
+<p></p>
+<p>What was even more painful was that I didn&#x27;t understand how the parasitics created by the signal crossing the split would also generate common-mode current, which is even more efficient at radiating than differential-mode currents.</p>
+<p></p>
+<p>What you see in this image is one of the most common issues when a project fails EMC tests due to EMI.</p>
+<p></p>
+<p>Make sure your signals are always supported by a solid return reference plane (RRP) adjacent to them.</p>
+<p></p>
+<p>This will save you from a lot of EMI troubles.</p>
+<p></p>
+<p>I hope this helps.</p>
+<p>Dario</p>
+<p><a href="http://fresuelectronics.com" target="_blank" rel="noreferrer noopener"><u>fresuelectronics.com</u></a></p>
+<p></p>
+<hr>
+<h3><strong><span style="font-size:18px">Action list:</span></strong></h3>
+<h5><a href="https://www.fresuelectronics.com/product-page/emi-quick-fixes-guide" target="_blank" rel="nofollow noreferrer noopener"><strong><u>1. </u></strong></a><a href="https://www.fresuelectronics.com/product-page/emi-quick-fixes-guide" target="_blank" rel="nofollow noreferrer noopener"><strong><u><span style="background-color:rgb(2, 255, 135);color:#141414">Get the New EMI Quick Fixes Guide - 2025</span></u></strong></a></h5>
+<p></p>
+<aside class="wix-card"><a href="https://www.fresuelectronics.com/product-page/emi-quick-fixes-guide"><img src="/assets/images/wix/61d609_6a6d3bf9bd114bcfb82d5236e516195a~mv2.png" alt=""><span class="wix-card-name">EMI Quick Fixes Guide</span></a></aside>
+<p></p>
+<hr>
+<p></p>
+</div><!-- /wix-body -->
+</article>
+<footer>
+  <div class="site-footer">
+    <span>© 2026 Fresu Electronics SRL</span>
+    <span><a href="https://www.fresuelectronics.com">fresuelectronics.com</a> · <a href="https://www.fresuelectronics.com/free-tool-1">Free Stackup Tool</a></span>
+  </div>
+</footer>
+</body>
+</html>

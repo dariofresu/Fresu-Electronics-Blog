@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Radiated Emissions Testing and the Role of EMC Current Clamps — Fresu Electronics</title>
+  <meta name="description" content="Discover how EMC current clamps can help you estimate radiated emissions effectively. Learn how radiated emissions impact EMC compliance.">
+  <link rel="canonical" href="https://blog.fresuelectronics.com/post/understanding-emc-current-clamps-a-key-tool-for-assessing-radiated-emissions/">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Radiated Emissions Testing and the Role of EMC Current Clamps">
+  <meta property="og:description" content="Discover how EMC current clamps can help you estimate radiated emissions effectively. Learn how radiated emissions impact EMC compliance.">
+  <meta property="og:url" content="https://blog.fresuelectronics.com/post/understanding-emc-current-clamps-a-key-tool-for-assessing-radiated-emissions/">
+  <meta property="og:image" content="https://blog.fresuelectronics.com/assets/images/wix/61d609_26127a38bf0f4e9c81074d94c600c76f~mv2.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400;1,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/assets/wix-exact.css">
+</head>
+<body>
+<header>
+  <div class="site-header">
+    <a href="https://www.fresuelectronics.com">
+      <img src="https://raw.githubusercontent.com/dariofresu/Fresu-Electronics-Blog/main/assets/logo.png" alt="Fresu Electronics">
+    </a>
+    <nav class="header-nav">
+      <a href="https://blog.fresuelectronics.com/">Blog</a>
+      <a href="https://blog.fresuelectronics.com/tools/">Tools</a>
+      <a href="https://www.fresuelectronics.com/trainings">Courses</a>
+      <a href="https://www.fresuelectronics.com/about">About</a>
+      <a href="https://www.fresuelectronics.com/emc-audit" class="header-cta">Book EMC Audit</a>
+    </nav>
+  </div>
+</header>
+<article class="post">
+  <p class="crumb"><a href="https://blog.fresuelectronics.com/">Blog</a> · <a href="https://blog.fresuelectronics.com/#wix-archive">Original posts</a></p>
+  <header class="post-head">
+    <h1>Radiated Emissions Testing and the Role of EMC Current Clamps</h1>
+    <p class="meta"><time datetime="2025-04-14">2025-04-14</time> · <a href="https://info3761185.wixsite.com/dario-fresu-electron/post/understanding-emc-current-clamps-a-key-tool-for-assessing-radiated-emissions">Original on Wix</a></p>
+  <p class="taxo">Categories: Electromagnetism, EMC/EMI Design</p>
+  </header>
+  <figure class="wix-cover"><img src="/assets/images/wix/61d609_26127a38bf0f4e9c81074d94c600c76f~mv2.png" alt=""></figure>
+<div class="wix-body" id="wix-body">
+<p>Radiated emissions testing is essential for achieving electromagnetic compatibility (EMC) compliance. This testing ensures electronic devices do not interfere with one another by emitting excessive electromagnetic energy. Traditionally, specialized EMC chambers are used for this testing, employing antennas to measure radiated fields. However, an <strong>EMC current clamp</strong> provides a practical alternative, allowing engineers to estimate radiated emissions without the need for a full chamber setup. This tool is invaluable during the design and pre-compliance phases, facilitating rapid debugging and assessment of a device’s EMC performance. This article explores the principles of the EMC current clamp, its operational mechanism, and the methodology for estimating radiated emissions.</p>
+<p></p>
+<figure class="wix-fig"><img src="/assets/images/wix/61d609_99113877d73e4a5bbb3d931a1db57dc3~mv2.png" alt="Basic operation of current transformer" loading="lazy"><figcaption>Basic operation of current transformer - By Biezl - Own work, CC BY 3.0, - https://commons.wikimedia.org/w/index.php?curid=6527791</figcaption></figure>
+<p></p>
+<h2>What is an EMC Current Clamp?</h2>
+<p></p>
+<p>An EMC current clamp is a versatile diagnostic tool used to measure the current flowing through a cable, which correlates to radiated emissions. It resembles a hinged ring with a magnetic core and a pickup coil wound around it. A connector links the clamp to a measurement device, typically a spectrum analyzer. </p>
+<p></p>
+<p>The clamp encircles the cable from the device under test (DUT), capturing electromagnetic currents without interrupting the circuit. This non-invasive technique is ideal for troubleshooting and pre-compliance evaluations.</p>
+<p></p>
+<aside class="wix-card"><a href="https://www.fresuelectronics.com/product-page/emi-control-guides-bundle-offer"><img src="/assets/images/wix/61d609_866071c3d3f041ac8bcaab783ac8a655~mv2.png" alt=""><span class="wix-card-name">EMI Control Guides - Bundle Offer</span></a></aside>
+<p></p>
+<h2>The Principle of Operation</h2>
+<p></p>
+<p>The clamp operates based on electromagnetic induction principles. As current flows through the cable, it generates a magnetic field that induces voltage in the pickup coil. This voltage is then transmitted to the spectrum analyzer, which displays it across probe transfer impedance. </p>
+<p></p>
+<p>The resulting signal provides insight into the current’s magnitude and frequency content, serving as the basis for estimating radiated emissions. Unlike direct field measurements in a chamber, the current clamp focuses on conducted currents, providing an indirect yet effective way to predict radiation.</p>
+<p></p>
+<h2>Understanding Differential and Common Mode Currents</h2>
+<p></p>
+<p>To estimate radiated emissions accurately, it&#x27;s crucial to understand differential mode and common mode currents. These two types of currents flow through a cable and contribute differently to electromagnetic radiation.</p>
+<p></p>
+<p>In a two-wire system (like a signal or power and return line), differential mode current flows out through one conductor and returns through the other. Ideally, with perfect cable coupling and no leakage, these currents would cancel each other, resulting in a net current of zero. However, imperfections, such as poor shielding or physical separation between the wires, prevent this cancellation, leaving residual current that may radiate.</p>
+<p></p>
+<p>Conversely, common mode current flows in the same direction through all conductors, often returning via an unintended path, such as a chassis or an earth ground plane. In a three-wire system (like power, return, and protective earth), common mode current may loop through the DUT and return via the chassis. This type of current does not cancel within the cable and poses a primary source of radiated emissions, as it creates a larger radiating loop.</p>
+<p></p>
+<p>When the clamp encircles all conductors, it measures the net current—the portion that does not cancel. This uncanceled current, whether from differential mode leakage or common mode flow, drives radiated emissions. The clamp&#x27;s ability to isolate this current makes it a powerful tool for EMC analysis.</p>
+<p></p>
+<aside class="wix-card"><a href="https://www.fresuelectronics.com/product-page/radiated-emissions-guide"><img src="/assets/images/wix/61d609_4f53b33108884374b3d293418eaf7862~mv2.png" alt=""><span class="wix-card-name">Radiated Emissions &amp; EMI Control  - Guide</span></a></aside>
+<p></p>
+<h2>Estimating Radiated Emissions with the EMC Current Clamp</h2>
+<p></p>
+<p>Estimating radiated emissions from the current measurements relies on a well-established equation that translates clamp data into electric field strength, expressed in volts per meter (V/m). This approach mirrors what would be detected by an antenna in a test chamber. The commonly used formula is:</p>
+<p></p>
+<figure class="wix-fig" data-wix-width="262" style="max-width:262px"><img src="/assets/images/wix/61d609_73259f152a1d4798ae5b24eb87d0b688~mv2.jpg" alt="Estimated radiated emissions from a cable acting as a short monopole or loop antenna." loading="lazy"></figure>
+<p></p>
+<p>Where:</p>
+<p></p>
+<ul>
+<li>
+<p><strong>E = Electric field strength (V/m)</strong></p>
+</li>
+<li>
+<p><strong>K = A constant (approximately 1.257 × 10⁻⁶ for simplified calculations in free space)</strong></p>
+</li>
+<li>
+<p><strong>Icm = Common mode current (A), or the uncanceled current measured by the clamp</strong></p>
+</li>
+<li>
+<p><strong>f = Frequency of the current (Hz)</strong></p>
+</li>
+<li>
+<p><strong>L = Length of the cable (m)</strong></p>
+</li>
+<li>
+<p><strong>d = Distance from the cable to the measurement antenna (m)</strong></p>
+<p></p>
+</li>
+</ul>
+<p>This equation assumes the cable functions as a radiating antenna. The field strength is proportional to the current, frequency, and cable length, while being inversely proportional to the distance from the antenna. </p>
+<p></p>
+<figure class="wix-fig"><img src="/assets/images/wix/61d609_39c22896ef8445f5b13c34e1d7422a80~mv2.png" alt="Example of an RF current probe designed for efficient measurement and analysis of radio frequency currents." loading="lazy"><figcaption>Example of an RF current probe designed for efficient measurement and analysis of radio frequency currents.</figcaption></figure>
+<p></p>
+<p>As an example, a 1-meter power cable with a clamp-measured current of 10 µA at 40 MHz, with an antenna 3 meters away, can yield: </p>
+<p></p>
+<p>E = 167.6 µV/m. </p>
+<p></p>
+<p>This result estimates the radiated field, allowing for comparisons with EMC standards (like CISPR limits) to assess compliance. The frequency dependence emphasizes that higher frequencies amplify emissions, while longer cables increase the radiating loop size, both critical factors in EMC design.</p>
+<p></p>
+<aside class="wix-card"><a href="https://www.fresuelectronics.com/product-page/emi-quick-fixes-guide"><img src="/assets/images/wix/61d609_576e5db55bae46b48d92629c93d6fa1b~mv2.png" alt=""><span class="wix-card-name">EMI Quick Fixes Guide</span></a></aside>
+<p></p>
+<h2>Transfer Impedance of the RF Current Probe</h2>
+<p></p>
+<p>Accurate measurement of current flowing through a cable using an EMC current clamp requires understanding the probe’s <strong>transfer impedance</strong>. This critical parameter is provided by the manufacturer and represents the voltage output of the probe relative to the current flowing through the cable. Transfer impedance (Zt) is expressed in ohms (Ω):</p>
+<p></p>
+<figure class="wix-fig" data-wix-width="186" style="max-width:186px"><img src="/assets/images/wix/61d609_91f89b3e0d46470791364ff34dfb90c1~mv2.png" alt="Transfer Impedance formula" loading="lazy"></figure>
+<p></p>
+<p>To calculate the actual current in the cable:</p>
+<p></p>
+<figure class="wix-fig" data-wix-width="197" style="max-width:197px"><img src="/assets/images/wix/61d609_26590c318b1c4afe829eba1ffae6f31e~mv2.png" alt="Current calculation with the current probe method" loading="lazy"></figure>
+<p></p>
+<p>The transfer impedance varies with frequency and is typically shown in charts or tables in the probe’s datasheet. </p>
+<p></p>
+<figure class="wix-fig"><img src="/assets/images/wix/61d609_9f728be02d54435bab645b84b36066a2~mv2.png" alt="Fischer F-33-1 Current Monitoring Probe datasheet -Transfer Impedance Characteristic" loading="lazy"><figcaption>Fischer F-33-1 Current Monitoring Probe datasheet -Transfer Impedance Characteristic</figcaption></figure>
+<p></p>
+<p>For instance, if a probe has a transfer impedance of 5 Ω at 40 MHz, and the spectrum analyzer measures a voltage of 100µV, the current can be calculated as follows:</p>
+<p></p>
+<figure class="wix-fig" data-wix-width="298" style="max-width:298px"><img src="/assets/images/wix/61d609_59491674330241aab1c58bc05497dc74~mv2.jpg" alt="Formula Calculating Icable" loading="lazy"></figure>
+<p></p>
+<p>This current can then be integrated into the radiated emissions equation to estimate electric field strength. The transfer impedance ensures correct translation of the measured voltage into current, which is essential for accurate EMC analysis. Engineers should always refer to the probe&#x27;s transfer impedance chart.</p>
+<p></p>
+<aside class="wix-card"><a href="https://www.fresuelectronics.com/product-page/emi-control-guide"><img src="/assets/images/wix/61d609_9159b6dd8b3f48979f181c84471771f2~mv2.png" alt=""><span class="wix-card-name">Top 10 PCB Design Mistakes For EMI Control</span></a></aside>
+<p></p>
+<h2>Measurement Setup and Procedure</h2>
+<p></p>
+<p>An effective methodology for using an EMC current clamp entails a controlled measurement setup. Below is a common configuration for a two-wire system, with notes for three-wire systems where applicable:</p>
+<p></p>
+<ol>
+<li>
+<p><strong>Connect the Device Under Test (DUT):</strong> Attach it to a power source. A direct power connection suffices since the clamp measures cable currents independent of the power line&#x27;s impedance.</p>
+<p></p>
+</li>
+<li>
+<p><strong>Encircle the Power Cable:</strong> Ensure the current clamp encircles all relevant conductors. For a two-wire system, include both wires to measure the net current. Confirm the clamp is secure to maximize magnetic coupling and measurement accuracy.</p>
+<p></p>
+</li>
+<li>
+<p><strong>Connect to the Spectrum Analyzer:</strong> Use a coaxial cable to link the clamp’s output to the spectrum analyzer. The analyzer&#x27;s input should match the clamp’s design, typically requiring no additional termination.</p>
+<p></p>
+</li>
+<li>
+<p><strong>Monitor the Spectrum Analyzer Display:</strong> As the DUT runs, observe voltage peaks at varying frequencies. Measure these peaks and convert voltage to current using the respective transfer impedance. For example, if the analyzer records V = 100 μV at 40 MHz with Zt = 5 Ω, use this to ascertain the current:</p>
+<p></p>
+</li>
+</ol>
+<figure class="wix-fig" data-wix-width="376" style="max-width:376px"><img src="/assets/images/wix/61d609_3883045dcfe44449a5e34aaada887bcc~mv2.jpg" alt="Calculating the current with the RF current probe method." loading="lazy"></figure>
+<p></p>
+<p>The spectrum analyzer will show emissions, emphasizing peaks at specific frequencies or harmonics. For instance, a flyback converter may show significant current at 40 MHz due to its switching frequency. Measure each peak&#x27;s voltage amplitude, convert it to current using Zt, and apply the current in the radiated emissions equation to estimate electric field strength.</p>
+<p></p>
+<p>Utilize Icable = 20μA in the radiated emissions formula:</p>
+<p></p>
+<figure class="wix-fig"><img src="/assets/images/wix/61d609_f4d74680f84a4b95bf4e94303e26c5de~mv2.jpg" alt="Radiated electric field calculation" loading="lazy"></figure>
+<p></p>
+<figure class="wix-fig"><img src="/assets/images/wix/61d609_478c9d8160a0460f954e2e2dd262da4b~mv2.jpg" alt="Radiated Emissions calculated with the RF current probe method." loading="lazy"></figure>
+<p></p>
+<p>The calculated field strength of <strong>335.2 µV/m</strong> at 3 meters exceeds EMC tests for all standards:</p>
+<p></p>
+<ul>
+<li>
+<p><strong>FCC Class B:</strong> Exceeds 100 µV/m at 3 m (335.2 µV/m).</p>
+</li>
+<li>
+<p><strong>FCC Class A:</strong> Exceeds 90 µV/m at 10 m (adjusted to 100.56 µV/m).</p>
+</li>
+<li>
+<p><strong>MIL-STD 461:</strong> Exceeds 16 µV/m at 1 m (adjusted to 1005.6 µV/m).</p>
+<p></p>
+</li>
+</ul>
+<p>To enhance harmonic detection, reposition the current clamp along the cable while monitoring the spectrum analyzer. This technique reveals current peaks caused by standing waves at specific frequencies. For example, at 40 MHz (λ ≈ 7.5 m), peaks may appear every 1.875 m. Identify the most prominent harmonic frequencies, compute the current at each using the transfer impedance chart, and trace potential EMI sources in the DUT, such as unfiltered circuits or inadequate grounding.</p>
+<p></p>
+<p>Small currents can induce considerable radiated emissions. High-frequency currents, even as low as 5 to 8 μA (at 30–100 MHz), can approach or surpass <strong>FCC Part 15</strong> or <strong>CISPR 32 Class B</strong> limits (~40 dBμV/m at 3 m), influenced by cable length and setup. Calculate the radiated field for each measured current and compare it with relevant standard limits to determine compliance. If currents exceed this range, investigate mitigation strategies as outlined in our <a href="https://fresuelectronics.com/shop" target="_top"><strong><em><u>EMI Control Guides</u></em></strong></a>.</p>
+<p></p>
+<aside class="wix-card"><a href="https://www.fresuelectronics.com/product-page/radiated-emissions-guide"><img src="/assets/images/wix/61d609_4f53b33108884374b3d293418eaf7862~mv2.png" alt=""><span class="wix-card-name">Radiated Emissions &amp; EMI Control  - Guide</span></a></aside>
+<p></p>
+<h2>Practical Applications and Limitations</h2>
+<p></p>
+<p>The current clamp excels in pre-compliance testing, enabling engineers to identify emission sources early in the development phase. By clamping different cables or DUT sections, they can pinpoint problematic areas, like noisy power lines or unshielded signal cables, then implement solutions such as filters or improved grounding. This iterative process reduces the need for costly chamber testing until the design is refined.</p>
+<p></p>
+<figure class="wix-fig"><img src="/assets/images/wix/61d609_26127a38bf0f4e9c81074d94c600c76f~mv2.png" alt="An RF current probe is securely fitted around a blue cable, showcasing its role in measuring and monitoring electrical currents efficiently." loading="lazy"><figcaption>An RF current probe is securely fitted around a blue cable, showcasing its role in measuring and monitoring electrical currents efficiently.</figcaption></figure>
+<p></p>
+<p>However, the method has limitations. The equation makes simplified assumptions (like straight cables in free space). Real-world setups involve complex geometries and environmental factors that can influence radiation patterns. The clamp measures conducted currents, not the radiated field directly, meaning the estimate is an approximation. For formal compliance, chamber testing remains the gold standard, but the clamp offers a reliable starting point.</p>
+<p></p>
+<h2>Navigating the EMC Compliance Landscape</h2>
+<p></p>
+<p>The EMC current clamp is a vital tool for estimating radiated emissions, linking conducted currents to radiated fields. By capturing uncanceled differential and common mode currents, it provides data that approximates electric field strength via a simple equation. Its ease of use, portability, and effectiveness in pre-compliance testing make it essential for EMC debugging. While it is not a substitute for formal certification, it empowers engineers to optimize designs efficiently, ensuring compliance with electromagnetic standards. </p>
+<p></p>
+<p>At Fresu Electronics, we are committed to helping engineers grasp and implement best design practices from the outset. If you&#x27;re interested in enhancing your skills, we invite you to explore our courses and EMI control guides.</p>
+<p></p>
+<p class="wix-btn-wrap"><a class="wix-btn" href="https://www.fresuelectronics.com/courses" target="_blank" rel="noreferrer noopener" style="background:#25A55A;border-radius:15px;color:#ffffff;width:min(471px,100%)">Check Out Our Online Training Courses Here</a></p>
+<p></p>
+<aside class="wix-card"><a href="https://www.fresuelectronics.com/product-page/emi-control-guides-bundle-offer"><img src="/assets/images/wix/61d609_866071c3d3f041ac8bcaab783ac8a655~mv2.png" alt=""><span class="wix-card-name">EMI Control Guides - Bundle Offer</span></a></aside>
+<p></p>
+<p></p>
+<p><strong>Further readings and references:</strong><br></p>
+<ul>
+<li>
+<p><a href="https://interferencetechnology.com/the-hf-current-probe-theory-and-application/" target="_top"><em><u>Kenneth Wyatt, The HF Current Probe: Theory and Application</u></em></a></p>
+</li>
+<li>
+<p><a href="https://amzn.to/4hWBRqd" target="_top"><em><u>Henry Ott, Electromagnetic Compatibility Engineering</u></em></a></p>
+</li>
+<li>
+<p><a href="https://amzn.to/4i4nAbh" target="_top"><em><u>Clayton Paul, Introduction to Electromagnetic Compatibility</u></em></a></p>
+</li>
+</ul>
+</div><!-- /wix-body -->
+</article>
+<footer>
+  <div class="site-footer">
+    <span>© 2026 Fresu Electronics SRL</span>
+    <span><a href="https://www.fresuelectronics.com">fresuelectronics.com</a> · <a href="https://www.fresuelectronics.com/free-tool-1">Free Stackup Tool</a></span>
+  </div>
+</footer>
+</body>
+</html>

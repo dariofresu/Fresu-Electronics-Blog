@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Why smart engineers fail EMC tests (it&#x27;s not what you think) — Fresu Electronics</title>
+  <meta name="description" content="Discover why smart engineers fail EMC tests and what you can do about it. Learn the secrets to mastering EMC tests and improving your designs.">
+  <link rel="canonical" href="https://blog.fresuelectronics.com/post/why-smart-engineers-fail-emc-tests-it-s-not-what-you-think/">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Why smart engineers fail EMC tests (it&#x27;s not what you think)">
+  <meta property="og:description" content="Discover why smart engineers fail EMC tests and what you can do about it. Learn the secrets to mastering EMC tests and improving your designs.">
+  <meta property="og:url" content="https://blog.fresuelectronics.com/post/why-smart-engineers-fail-emc-tests-it-s-not-what-you-think/">
+  <meta property="og:image" content="https://blog.fresuelectronics.com/assets/images/wix/61d609_ea76cc7f33dc4d95b3314b2835d9cb05~mv2.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400;1,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/assets/wix-exact.css">
+</head>
+<body>
+<header>
+  <div class="site-header">
+    <a href="https://www.fresuelectronics.com">
+      <img src="https://raw.githubusercontent.com/dariofresu/Fresu-Electronics-Blog/main/assets/logo.png" alt="Fresu Electronics">
+    </a>
+    <nav class="header-nav">
+      <a href="https://blog.fresuelectronics.com/">Blog</a>
+      <a href="https://blog.fresuelectronics.com/tools/">Tools</a>
+      <a href="https://www.fresuelectronics.com/trainings">Courses</a>
+      <a href="https://www.fresuelectronics.com/about">About</a>
+      <a href="https://www.fresuelectronics.com/emc-audit" class="header-cta">Book EMC Audit</a>
+    </nav>
+  </div>
+</header>
+<article class="post">
+  <p class="crumb"><a href="https://blog.fresuelectronics.com/">Blog</a> · <a href="https://blog.fresuelectronics.com/#wix-archive">Original posts</a></p>
+  <header class="post-head">
+    <h1>Why smart engineers fail EMC tests (it&#x27;s not what you think)</h1>
+    <p class="meta"><time datetime="2025-06-24">2025-06-24</time> · <a href="https://info3761185.wixsite.com/dario-fresu-electron/post/why-smart-engineers-fail-emc-tests-it-s-not-what-you-think">Original on Wix</a></p>
+  </header>
+  <figure class="wix-cover"><img src="/assets/images/wix/61d609_ea76cc7f33dc4d95b3314b2835d9cb05~mv2.png" alt="Struggling with EMC Challenges: Understanding Why Even Skilled Engineers Face Test Failures and Overcoming Unexpected Hurdles."></figure>
+<div class="wix-body" id="wix-body">
+<figure class="wix-fig"><img src="/assets/images/wix/61d609_ea76cc7f33dc4d95b3314b2835d9cb05~mv2.png" alt="Struggling with EMC Challenges: Understanding Why Even Skilled Engineers Face Test Failures and Overcoming Unexpected Hurdles." loading="lazy"></figure>
+<p></p>
+<h2 style="text-align:justify"><strong>The Journey We All Take</strong><br></h2>
+<p style="text-align:justify">Picture this scenario: You&#x27;ve spent years learning about electricity through a simple, intuitive model. In your mind, electrical current flows like tiny marble-like objects moving through wires, following predictable paths from one component to another. This mental model serves you well in the beginning.</p>
+<p style="text-align:justify"></p>
+<p style="text-align:justify">You start with small, exciting projects. Maybe you build your first circuit with an Arduino, experiment with an ESP32, or if you&#x27;re more traditionally minded, you dive into the classic 555 timer. The experience is both fun and rewarding, even when things don&#x27;t work perfectly the first time around.</p>
+<p style="text-align:justify"></p>
+<p style="text-align:justify">Your early projects look chaotic—like spiderwebs made of wires sprawling across breadboards in every direction. But here&#x27;s the beautiful thing: despite the mess, your projects actually work. Sure, it might take several attempts, countless hours of troubleshooting, and more than a few moments of frustration, but eventually, you make everything function as intended.<br></p>
+<h2 style="text-align:justify"><strong>From Wires to Copper Traces</strong></h2>
+<p style="text-align:justify"></p>
+<p style="text-align:justify">As you progress through your education, earn your engineering degree, and land your first job, you naturally begin exploring the world of printed circuit boards (PCBs). This transition usually happens either during university coursework or through personal experimentation during your leisure time.</p>
+<p style="text-align:justify"></p>
+<p style="text-align:justify">The standard approach at this stage is straightforward: take those sprawling spider web circuits you created on breadboards and translate them into neat, organized copper traces on a printed circuit board. You&#x27;re essentially recreating the same electrical connections, but now they&#x27;re embedded in a professional-looking green (or blue, or red) substrate.</p>
+<p style="text-align:justify"></p>
+<p style="text-align:justify">As you become more proficient with PCB design tools, something remarkable happens. Not only do your circuits continue to work reliably, but they also begin to look genuinely professional. Your confidence grows, and you start taking on more complex challenges.</p>
+<p style="text-align:justify"></p>
+<p style="text-align:justify">The natural progression continues as your career advances. Depending on your specific role, you&#x27;ll encounter increasingly complex circuits with more components, more sophisticated system integrations, and higher performance requirements. This complexity drives you to use multi-layer PCB stackups with greater numbers of layers and higher density interconnections between components.</p>
+<p style="text-align:justify"></p>
+<p style="text-align:justify">Some engineers find this progression intuitive and spend the majority of their careers mastering these increasingly sophisticated design challenges. Others eventually move into different roles where circuit design becomes less central to their daily responsibilities.</p>
+<p style="text-align:justify"></p>
+<h2 style="text-align:justify"><strong>Where Things Go Wrong</strong></h2>
+<p style="text-align:justify"></p>
+<p style="text-align:justify">What appears to be a smooth, logical progression from breadboard prototypes to advanced circuit design actually conceals a significant roadblock that most engineers only discover when they begin doing PCB design professionally. This obstacle becomes particularly apparent when working for companies that need to sell products in the marketplace or serve </p>
+<p style="text-align:justify">customers with stringent reliability requirements.</p>
+<p style="text-align:justify"></p>
+<p style="text-align:justify">The roadblock has a name: <strong>EMC testing.</strong></p>
+<p style="text-align:justify"></p>
+<p style="text-align:justify">EMC stands for Electromagnetic Compatibility, and these tests serve a dual purpose. First, they ensure that your circuits can operate reliably without being disrupted by electromagnetic interference from other devices. Second, they verify that your circuits don&#x27;t create electromagnetic disturbances that could interfere with other electronic systems.</p>
+<p style="text-align:justify">This is precisely where the majority of designers encounter their greatest struggles.</p>
+<p style="text-align:justify"></p>
+<h2 style="text-align:justify"><strong>The Real Problem</strong></h2>
+<p style="text-align:justify"></p>
+<p style="text-align:justify">Here&#x27;s the problem that countless engineers face: they&#x27;ve become highly efficient at designing circuits that look professional and function correctly on the bench. Their designs appear polished and sophisticated. Yet when these same circuits undergo EMC testing, many fail spectacularly.</p>
+<p style="text-align:justify"></p>
+<p style="text-align:justify">The failure isn&#x27;t a one-time setback, either. Often, circuits require multiple design revisions, each involving a cycle of trial-and-error modifications, followed by retesting, in an attempt to pass EMC requirements. This process is not only technically challenging but also financially devastating.</p>
+<p style="text-align:justify"></p>
+<p style="text-align:justify">EMC testing is expensive—typically requiring thousands upon thousands of dollars for each round of testing. Even when companies try to minimize costs by conducting preliminary testing using internal pre-compliance setups, the engineering costs remain substantial. Add to this the opportunity cost of delayed product launches, where revenue-generating products remain stuck in development rather than reaching the market, and the financial impact becomes enormous.</p>
+<p style="text-align:justify"></p>
+<h2 style="text-align:justify"><strong>The Puzzling Question</strong></h2>
+<p style="text-align:justify"></p>
+<p style="text-align:justify">This situation raises several important questions:</p>
+<p style="text-align:justify">Why do the majority of designers fail EMC tests? Are these tests exceptionally difficult to understand? Perhaps the requirements are unreasonably stringent? Or maybe most engineers simply aren&#x27;t intelligent enough to master this aspect of design?</p>
+<p style="text-align:justify"></p>
+<p style="text-align:justify">I seriously doubt the last possibility. The reality is that most engineers are incredibly intelligent, capable professionals. Yes, we&#x27;ve all encountered that one person with an engineering degree who might benefit everyone by pursuing a different career path, but such individuals are rare exceptions rather than the rule.</p>
+<p style="text-align:justify"></p>
+<p style="text-align:justify">So if intelligence isn&#x27;t the limiting factor, what exactly went wrong along the way?</p>
+<p style="text-align:justify">Why do so many of us refer to EMC as &quot;Black Magic&quot;—a mysterious, unpredictable force that seems to operate outside the bounds of logical engineering principles?</p>
+<p style="text-align:justify"></p>
+<h2 style="text-align:justify"><strong>The Fundamental Disconnect</strong></h2>
+<p style="text-align:justify"></p>
+<p style="text-align:justify">After years of obsessive research into understanding how things truly work—driven by curiosity and perhaps what some might call autism-like attention to detail—I made a crucial discovery. Thanks to the groundbreaking work of other pioneers in this field, I learned that what we&#x27;ve been taught about electricity provides an incomplete picture of reality. In fact, much of what we learned may not be accurate at all.</p>
+<p style="text-align:justify"></p>
+<p style="text-align:justify">The problem stems from decades of simplification. Many electrical concepts have been streamlined for educational purposes to the point where they no longer adequately represent how electrical systems actually behave in the real world.</p>
+<p style="text-align:justify"></p>
+<p style="text-align:justify">Consider this fundamental contradiction in our approach: We design circuits by imagining marble-like &quot;objects&quot; (electrons) flowing through conductors like water through pipes. Yet when we need to verify that our circuits work properly, we measure electromagnetic fields.</p>
+<p style="text-align:justify">This disconnect should be a clear signal that something in our understanding didn&#x27;t evolve correctly.</p>
+<p style="text-align:justify"></p>
+<p style="text-align:justify">Why do we design for electron flow in circuits, but then measure fields to determine whether our designs will pass EMC tests? This inconsistency reveals a fundamental gap in our mental model.</p>
+<p style="text-align:justify"></p>
+<h2 style="text-align:justify"><strong>Where Most Engineers Get Stuck</strong></h2>
+<p style="text-align:justify"></p>
+<p style="text-align:justify">This is precisely where most designers find themselves trapped. They can&#x27;t seem to figure out how to bridge the gap between their circuit design methodology and the electromagnetic field measurements that determine EMC compliance.</p>
+<p style="text-align:justify"></p>
+<p style="text-align:justify">Faced with this frustrating disconnect, engineers often begin creating myths and folklore around what EMC and EMI (Electromagnetic Interference) actually are. These stories serve as psychological coping mechanisms, helping to justify why they consistently fail to resolve EMC problems.</p>
+<p style="text-align:justify"></p>
+<p style="text-align:justify">Let me be clear about something important: if you find yourself stuck at this point in your career, it is not your fault. The educational system and traditional engineering approaches have set you up for this confusion.</p>
+<p style="text-align:justify"></p>
+<p style="text-align:justify">However, while it&#x27;s not your fault, it unfortunately becomes your problem to solve.</p>
+<p style="text-align:justify">The good news is that you are absolutely smart enough to understand all of this material. You can master EMC principles and learn to control EMI effectively. But you certainly cannot achieve this mastery using the outdated mental models that schools continue to teach—models that, in my opinion, are now useful primarily for entertainment value rather than practical engineering.</p>
+<p style="text-align:justify"></p>
+<h2 style="text-align:justify"><strong>What the Specialists Know</strong></h2>
+<p style="text-align:justify"></p>
+<p style="text-align:justify">There&#x27;s another part of this story that I haven&#x27;t yet mentioned. There exists a very small group of designers who, when they reach this point of feeling stuck and confused about failing EMC tests, respond differently than the majority.</p>
+<p style="text-align:justify"></p>
+<p style="text-align:justify">Instead of accepting the situation or creating justifying myths, these individuals double down on their efforts. They dive deeper into research, design experiments, conduct studies, and commit to the hard work necessary to truly understand what&#x27;s happening. They persist until they finally grasp the critical concepts and successfully bridge the gap between EMI control models that actually work and pass tests quickly, and the old models that only appear to work until a problem occurs or a test fails.</p>
+<p style="text-align:justify"></p>
+<p style="text-align:justify">I call this minority group EMI Control Specialists.</p>
+<p style="text-align:justify"></p>
+<p style="text-align:justify">These engineers have fundamentally shifted their design philosophy. Instead of designing circuits with electrons in mind, they design for electromagnetic fields. Then, they measure how these fields behave to verify their designs will work as intended.</p>
+<p style="text-align:justify"></p>
+<p style="text-align:justify">Throughout my career, I&#x27;ve met very few people who have truly mastered this approach. The way you can identify these specialists is through their results.</p>
+<p style="text-align:justify"></p>
+<p style="text-align:justify">You recognize EMI Control Specialists because their EMC tests consistently deliver outstanding performance. When problems do occur, they understand—even if not immediately and even if it requires significant work—what&#x27;s going wrong and, most importantly, how to fix it.</p>
+<p style="text-align:justify"></p>
+<h2 style="text-align:justify"><strong>Become a Student, Not a Follower</strong></h2>
+<p style="text-align:justify"></p>
+<p style="text-align:justify">The key lesson from this lengthy story is this: Become a student, not a follower.</p>
+<p style="text-align:justify">If something doesn&#x27;t work the way you expect it to—and even when it does work—maintain a healthy skepticism. Question the underlying assumptions and models you&#x27;re using.</p>
+<p style="text-align:justify">As technology continues to advance at an unprecedented pace, old models and explanations need to be continuously revised and updated. We need better, more accurate explanations that help us understand how things work in real-world applications, not just in idealized textbook scenarios.</p>
+<p style="text-align:justify"></p>
+<p style="text-align:justify">If you want to see outstanding results in your EMC performance, start designing with electromagnetic fields in mind rather than imagining electron marbles flowing through &quot;pipes.&quot; This shift in perspective can transform your approach to circuit design and dramatically improve your success rate with EMC testing.</p>
+<p style="text-align:justify"></p>
+<h2 style="text-align:justify"><strong>What This Means for You</strong></h2>
+<p style="text-align:justify"></p>
+<p style="text-align:justify">This fundamental shift in thinking—from electron flow to electromagnetic field design—represents the core concept behind the new Academy we&#x27;re building.</p>
+<p style="text-align:justify"></p>
+<p style="text-align:justify">Our mission is to help you design for EMI control regardless of what type of circuit you&#x27;re working on. The key is understanding these principles from first principles and then scaling that understanding to real-world practical applications.</p>
+<p style="text-align:justify"></p>
+<p style="text-align:justify">We&#x27;re not interested in teaching more of the same outdated approaches that got us into this mess. Instead, we&#x27;re focused on providing the tools and knowledge you need to consistently pass EMC tests.</p>
+<p style="text-align:justify"></p>
+<p style="text-align:justify">If you&#x27;re interested in joining our first group of founding members, you can learn more and</p>
+<p style="text-align:justify"><a href="https://www.skool.com/pcb-design-mastery-9530" target="_blank" rel="nofollow noreferrer noopener"><strong><u>sign up by clicking here.</u></strong></a></p>
+<p style="text-align:justify">​</p>
+<p style="text-align:justify">If this opportunity doesn&#x27;t interest you, that&#x27;s perfectly fine. It probably means you&#x27;re satisfied with your current situation and approach—though I have my doubts about that.</p>
+<p style="text-align:justify"></p>
+<h2 style="text-align:justify"><strong>Final Thoughts</strong></h2>
+<p style="text-align:justify"></p>
+<p style="text-align:justify">I hope this message has provided you with valuable insights into why so many intelligent engineers struggle with EMC testing and what you can do about it. If nothing else, I hope it has at least entertained you and given you something interesting to think about.</p>
+<p style="text-align:justify">Here&#x27;s to your journey toward electromagnetic enlightenment.</p>
+<p style="text-align:justify"><br>Dario<br></p>
+<p style="text-align:justify"><em>P.S. More ways we can help you with EMC &amp; EMI control</em>:</p>
+<ul>
+<li>
+<p style="text-align:justify">​<a href="https://www.fresuelectronics.com/product-page/emi-control-guides-bundle-offer" target="_blank" rel="nofollow noreferrer noopener"><u>EMI Control Guides series​</u></a></p>
+</li>
+<li>
+<p style="text-align:justify"><a href="https://www.fresuelectronics.com/courses" target="_blank" rel="nofollow noreferrer noopener"><u>​Professional Courses</u></a></p>
+</li>
+</ul>
+<p style="text-align:justify"></p>
+</div><!-- /wix-body -->
+</article>
+<footer>
+  <div class="site-footer">
+    <span>© 2026 Fresu Electronics SRL</span>
+    <span><a href="https://www.fresuelectronics.com">fresuelectronics.com</a> · <a href="https://www.fresuelectronics.com/free-tool-1">Free Stackup Tool</a></span>
+  </div>
+</footer>
+</body>
+</html>

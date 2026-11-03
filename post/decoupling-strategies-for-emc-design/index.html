@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Decoupling Strategies For EMC Design — Fresu Electronics</title>
+  <meta name="description" content="In this lesson, I intend to discuss two significant considerations that arise when attempting to address EMC issues.">
+  <link rel="canonical" href="https://blog.fresuelectronics.com/post/decoupling-strategies-for-emc-design/">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Decoupling Strategies For EMC Design">
+  <meta property="og:description" content="In this lesson, I intend to discuss two significant considerations that arise when attempting to address EMC issues.">
+  <meta property="og:url" content="https://blog.fresuelectronics.com/post/decoupling-strategies-for-emc-design/">
+  <meta property="og:image" content="https://blog.fresuelectronics.com/assets/images/wix/yt-ndkH_1g0yb0.jpg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400;1,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/assets/wix-exact.css">
+</head>
+<body>
+<header>
+  <div class="site-header">
+    <a href="https://www.fresuelectronics.com">
+      <img src="https://raw.githubusercontent.com/dariofresu/Fresu-Electronics-Blog/main/assets/logo.png" alt="Fresu Electronics">
+    </a>
+    <nav class="header-nav">
+      <a href="https://blog.fresuelectronics.com/">Blog</a>
+      <a href="https://blog.fresuelectronics.com/tools/">Tools</a>
+      <a href="https://www.fresuelectronics.com/trainings">Courses</a>
+      <a href="https://www.fresuelectronics.com/about">About</a>
+      <a href="https://www.fresuelectronics.com/emc-audit" class="header-cta">Book EMC Audit</a>
+    </nav>
+  </div>
+</header>
+<article class="post">
+  <p class="crumb"><a href="https://blog.fresuelectronics.com/">Blog</a> · <a href="https://blog.fresuelectronics.com/#wix-archive">Original posts</a></p>
+  <header class="post-head">
+    <h1>Decoupling Strategies For EMC Design</h1>
+    <p class="meta"><time datetime="2024-11-01">2024-11-01</time> · <a href="https://info3761185.wixsite.com/dario-fresu-electron/post/decoupling-strategies-for-emc-design">Original on Wix</a></p>
+  </header>
+  <div class="wix-embed wix-cover-embed"><iframe src="https://www.youtube.com/embed/ndkH_1g0yb0" title="https://www.youtube.com/watch?v=ndkH_1g0yb0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen loading="lazy"></iframe></div>
+<div class="wix-body" id="wix-body">
+<div class="wix-embed"><iframe src="https://www.youtube.com/embed/ndkH_1g0yb0" title="Capacitors for EMI  and anti-resonance frequency - PCB Layout for EMC" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen loading="lazy"></iframe></div>
+<h5 style="text-align:justify"><strong><span style="background-color:rgb(255, 249, 0);color:rgb(7, 31, 47)">CLICK THE PLAY BUTTON TO WATCH THE LESSON.</span></strong></h5>
+<hr>
+<h3><strong><span style="font-size:18px">Action list:</span></strong></h3>
+<h5><a href="https://www.fresuelectronics.com/product-page/emi-quick-fixes-guide" target="_blank" rel="nofollow noreferrer noopener"><strong><u>1. </u></strong></a><a href="https://www.fresuelectronics.com/product-page/emi-quick-fixes-guide" target="_blank" rel="nofollow noreferrer noopener"><strong><u><span style="background-color:rgb(2, 255, 135);color:#141414">Get the New EMI Quick Fixes Guide - 2025</span></u></strong></a></h5>
+<p></p>
+<aside class="wix-card"><a href="https://www.fresuelectronics.com/product-page/emi-quick-fixes-guide"><img src="/assets/images/wix/61d609_6a6d3bf9bd114bcfb82d5236e516195a~mv2.png" alt=""><span class="wix-card-name">EMI Quick Fixes Guide</span></a></aside>
+<p></p>
+<hr>
+<p></p>
+<p style="text-align:justify">In this lesson, I intend to discuss two significant considerations that arise when attempting to address <strong>EMC</strong> (Electromagnetic Compatibility) issues, particularly at high frequencies. Typically, the standard approach involves the use of bypass capacitors as a means of filtering signals. While this method is widely adopted, there are specific challenges that must be recognized to ensure its effectiveness.</p>
+<p style="text-align:justify"></p>
+<p style="text-align:justify">One of the key factors to examine is related to the impedance profile of the capacitor. As we know, no electronic component behaves in an ideal manner; every component exhibits certain non-ideal characteristics in addition to its expected behavior. Capacitors are no exception to this rule. The way a capacitor performs at high frequencies depends on these non-ideal characteristics, which significantly influence its impedance profile.</p>
+<p style="text-align:justify"></p>
+<p style="text-align:justify">It is a common misconception that the impedance of a capacitor is always purely capacitive. In practice, when analyzing capacitors in the context of frequency, a more complex behavior emerges. </p>
+<figure class="wix-fig"><img src="/assets/images/wix/61d609_7d47929bc3a047348d145bd7fa8d4f57~mv2.jpg" alt="Figure 1 - Characteristic impedance of a capacitor" loading="lazy"><figcaption>Figure 1 - Characteristic impedance of a capacitor.</figcaption></figure>
+<p></p>
+<p style="text-align:justify">Initially, the impedance is indeed <strong>capacitive</strong>. However, beyond the resonant frequency of the capacitor, it begins to exhibit <strong>inductive</strong> behavior. This shift in characteristics is critical to understand, as it can have adverse effects when the capacitor is used to mitigate EMC issues. Therefore, selecting capacitors based on their impedance profiles, as outlined in their datasheets, becomes an essential step in ensuring optimal performance.</p>
+<p style="text-align:justify"></p>
+<p style="text-align:justify">When choosing a capacitor, it is particularly important to verify that the frequency range of interest, falls within the capacitive region of its impedance curve, rather than the inductive region or beyond. This consideration becomes even more significant when dealing with digital signals. Digital signals are not limited to a single frequency, but instead, they encompass a fundamental frequency along with numerous harmonic frequencies. </p>
+<p></p>
+<figure class="wix-fig"><img src="/assets/images/wix/61d609_50d277c6f3864ffdb76bbdc659046619~mv2.jpg" alt="Figure 2  - Example of digital signal composition with its harmonics" loading="lazy"><figcaption>Figure 2  - Example of digital signal composition with its harmonics.</figcaption></figure>
+<p style="text-align:justify">These harmonics are a result of the sharp transitions inherent in digital signals, whether from high to low, or from low to high. Each of these transitions introduces a wide range of frequencies, all of which must be accounted for when selecting a capacitor. If the capacitor’s impedance characteristics are not appropriately aligned with these frequencies, it can lead to ineffective filtering, potentially worsening the EMC challenges rather than resolving them.</p>
+<p style="text-align:justify"></p>
+<p style="text-align:justify"><strong><span style="font-size:24px">Placing different capacitors sizes in parallel</span></strong></p>
+<p style="text-align:justify"></p>
+<p style="text-align:justify">Another critical topic to address is the common practice of using multiple capacitors with varying capacitance values in parallel to enhance the performance of the decoupling network. This approach is often employed to achieve a lower overall impedance within the network. While this strategy has its merits, it introduces an additional phenomenon known as <strong>anti-resonance</strong>, which requires careful consideration and understanding.</p>
+<p style="text-align:justify"></p>
+<figure class="wix-fig"><img src="/assets/images/wix/61d609_88797d070fd44966b4effc1d0ab4253c~mv2.jpg" alt="Figure 3 - Example of antiresonance frequency" loading="lazy"><figcaption>Figure 3 - Example of antiresonance frequency.</figcaption></figure>
+<p style="text-align:justify">Anti-resonance occurs when the impedance curves of the individual capacitors <strong>overlap </strong>in a manner that creates <strong>peaks of high impedance</strong> at specific frequencies. These peaks can directly counteract the intended goal of minimizing impedance within the decoupling network. For example, if capacitors with values such as 0.1 µF, 0.01 µF, 0.001 µF, and 100 pF are combined, their individual impedance profiles interact, resulting in the formation of anti-resonant points. At these points, the overall impedance of the network rises significantly, which undermines the network’s ability to perform effectively.</p>
+<p style="text-align:justify"></p>
+<p style="text-align:justify">To avoid encountering these issues, it is essential to thoroughly analyze the combined impedance characteristics of the capacitors being used. This involves a detailed understanding of the interactions between the impedance curves of each capacitor and how they influence the overall behavior of the circuit. By carefully studying the resulting impedance graph, one can ensure that the decoupling network performs as expected, providing the desired level of impedance reduction without introducing unintended high-impedance points.</p>
+<p style="text-align:justify"></p>
+<hr>
+<p style="text-align:justify"><strong><span style="font-size:24px">Conclusions</span></strong></p>
+<p style="text-align:justify"></p>
+<p style="text-align:justify">When someone begins their journey in PCB design, the theoretical knowledge gained in classical electrical engineering classes does not always translate seamlessly into practical PCB layout practices. This often leaves hardware designers in a challenging position, learning through trial and error.</p>
+<p style="text-align:justify"></p>
+<p style="text-align:justify">At <a href="http://fresuelectronics.com" target="_blank" rel="noreferrer noopener"><u>fresuelectronics.com</u></a>, our primary goal is to help you circumvent the pain associated with this steep learning curve. We believe that by sharing this guide, along with the <a href="https://www.fresuelectronics.com/courses" target="_blank" rel="noreferrer noopener"><u>courses</u></a>, materials, and programs we offer, we can assist you in navigating the complexities of PCB design. </p>
+<p style="text-align:justify"></p>
+<p style="text-align:justify">Our aim is to support you on your path to mastering this field, ensuring that you have the tools and knowledge necessary to succeed. </p>
+<p style="text-align:justify"></p>
+<p>If you would like to master EMC/EMI design, we have a new training program here:</p>
+<p class="wix-btn-wrap"><a class="wix-btn" href="https://www.fresuelectronics.com/mentoring" target="_blank" rel="noreferrer noopener" style="background:#116dff;border-radius:8px;color:#ffffff">Get Personalized Training</a></p>
+<p></p>
+<p>There, you’ll find details on how to apply for one of our exclusive programs designed to help you achieve that goal. </p>
+</div><!-- /wix-body -->
+</article>
+<footer>
+  <div class="site-footer">
+    <span>© 2026 Fresu Electronics SRL</span>
+    <span><a href="https://www.fresuelectronics.com">fresuelectronics.com</a> · <a href="https://www.fresuelectronics.com/free-tool-1">Free Stackup Tool</a></span>
+  </div>
+</footer>
+</body>
+</html>

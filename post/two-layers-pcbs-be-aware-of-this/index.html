@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Two Layers PCBs - Be aware of this! — Fresu Electronics</title>
+  <meta name="description" content="Are you designing two-layer PCBs? Then you need to read this further… While reviewing hardware designs for clients, one of the most...">
+  <link rel="canonical" href="https://blog.fresuelectronics.com/post/two-layers-pcbs-be-aware-of-this/">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Two Layers PCBs - Be aware of this!">
+  <meta property="og:description" content="Are you designing two-layer PCBs? Then you need to read this further… While reviewing hardware designs for clients, one of the most...">
+  <meta property="og:url" content="https://blog.fresuelectronics.com/post/two-layers-pcbs-be-aware-of-this/">
+  <meta property="og:image" content="https://blog.fresuelectronics.com/assets/images/wix/61d609_0a4c42d0a0ff4308ab304cccc4b1dade~mv2.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400;1,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/assets/wix-exact.css">
+</head>
+<body>
+<header>
+  <div class="site-header">
+    <a href="https://www.fresuelectronics.com">
+      <img src="https://raw.githubusercontent.com/dariofresu/Fresu-Electronics-Blog/main/assets/logo.png" alt="Fresu Electronics">
+    </a>
+    <nav class="header-nav">
+      <a href="https://blog.fresuelectronics.com/">Blog</a>
+      <a href="https://blog.fresuelectronics.com/tools/">Tools</a>
+      <a href="https://www.fresuelectronics.com/trainings">Courses</a>
+      <a href="https://www.fresuelectronics.com/about">About</a>
+      <a href="https://www.fresuelectronics.com/emc-audit" class="header-cta">Book EMC Audit</a>
+    </nav>
+  </div>
+</header>
+<article class="post">
+  <p class="crumb"><a href="https://blog.fresuelectronics.com/">Blog</a> · <a href="https://blog.fresuelectronics.com/#wix-archive">Original posts</a></p>
+  <header class="post-head">
+    <h1>Two Layers PCBs - Be aware of this!</h1>
+    <p class="meta"><time datetime="2024-09-10">2024-09-10</time> · <a href="https://info3761185.wixsite.com/dario-fresu-electron/post/two-layers-pcbs-be-aware-of-this">Original on Wix</a></p>
+  <p class="taxo">Categories: EMI  - Short Post</p>
+  </header>
+  <figure class="wix-cover"><img src="/assets/images/wix/61d609_0a4c42d0a0ff4308ab304cccc4b1dade~mv2.png" alt=""></figure>
+<div class="wix-body" id="wix-body">
+<figure class="wix-fig"><img src="/assets/images/wix/61d609_0a4c42d0a0ff4308ab304cccc4b1dade~mv2.png" alt="" loading="lazy"></figure>
+<p>Are you designing two-layer PCBs? Then you need to read this further…</p>
+<p></p>
+<p>While reviewing hardware designs for clients, one of the most common mistakes I often see is the use of two-layer Printed Circuit Boards with both layers used for signals, without the presence of a return reference plane. </p>
+<p></p>
+<p>Unfortunately, for those wanting to save money on the PCB stackup, this is the number one cause of EMI and Signal Integrity failure that you are going to encounter.</p>
+<p></p>
+<p>The problem with this stackup, as you can see here, is that the fields are uncontained and are spreading around, contaminating each other&#x27;s signals.</p>
+<p></p>
+<p>The money you think you&#x27;re going to save from choosing this stackup will need to be used to repeat the EMC tests until you find a solution that will allow you to pass the test. </p>
+<p></p>
+<p>This also means that you might need to repeat the tests until you find a solution, which in my view is far more expensive than choosing the right stackup in the first place. </p>
+<p></p>
+<p>Additionally, you will have to use the “saved” money (plus some more) to cover the expenses of the newly implemented solution, not only during the prototyping to pass the EMC test, but also for the whole production.</p>
+<p></p>
+<p>I doubt this is going to be a cheap solution, considering the limited amount of solutions that you will have available at this late stage of the development.</p>
+<p></p>
+<p>The right solution? </p>
+<p></p>
+<p>Don’t fall into this trap in the first place. </p>
+<p></p>
+<p>Choose the right stackup to begin with, and you’ll improve the EMC results tenfold, as well as the signal integrity performance and robustness of the entire system.</p>
+<p></p>
+<p>I hope this helps,</p>
+<p></p>
+<p>Dario</p>
+<p><a href="http://fresuelectronics.com" target="_blank" rel="noreferrer noopener"><u>fresuelectronics.com</u></a></p>
+</div><!-- /wix-body -->
+</article>
+<footer>
+  <div class="site-footer">
+    <span>© 2026 Fresu Electronics SRL</span>
+    <span><a href="https://www.fresuelectronics.com">fresuelectronics.com</a> · <a href="https://www.fresuelectronics.com/free-tool-1">Free Stackup Tool</a></span>
+  </div>
+</footer>
+</body>
+</html>

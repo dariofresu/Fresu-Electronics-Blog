@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Signal Propagation in a PCB — Fresu Electronics</title>
+  <meta name="description" content="This is one of the reasons why many hardware designers fail to pass EMC tests. This is also one of the hardest concepts I struggled with...">
+  <link rel="canonical" href="https://blog.fresuelectronics.com/post/signal-propagation-in-a-pcb/">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Signal Propagation in a PCB">
+  <meta property="og:description" content="This is one of the reasons why many hardware designers fail to pass EMC tests. This is also one of the hardest concepts I struggled with...">
+  <meta property="og:url" content="https://blog.fresuelectronics.com/post/signal-propagation-in-a-pcb/">
+  <meta property="og:image" content="https://blog.fresuelectronics.com/assets/images/wix/61d609_2f878a37b4d743e6ae03f63c52aafecb~mv2.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400;1,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/assets/wix-exact.css">
+</head>
+<body>
+<header>
+  <div class="site-header">
+    <a href="https://www.fresuelectronics.com">
+      <img src="https://raw.githubusercontent.com/dariofresu/Fresu-Electronics-Blog/main/assets/logo.png" alt="Fresu Electronics">
+    </a>
+    <nav class="header-nav">
+      <a href="https://blog.fresuelectronics.com/">Blog</a>
+      <a href="https://blog.fresuelectronics.com/tools/">Tools</a>
+      <a href="https://www.fresuelectronics.com/trainings">Courses</a>
+      <a href="https://www.fresuelectronics.com/about">About</a>
+      <a href="https://www.fresuelectronics.com/emc-audit" class="header-cta">Book EMC Audit</a>
+    </nav>
+  </div>
+</header>
+<article class="post">
+  <p class="crumb"><a href="https://blog.fresuelectronics.com/">Blog</a> · <a href="https://blog.fresuelectronics.com/#wix-archive">Original posts</a></p>
+  <header class="post-head">
+    <h1>Signal Propagation in a PCB</h1>
+    <p class="meta"><time datetime="2024-09-10">2024-09-10</time> · <a href="https://info3761185.wixsite.com/dario-fresu-electron/post/signal-propagation-in-a-pcb">Original on Wix</a></p>
+  <p class="taxo">Categories: EMI  - Short Post</p>
+  </header>
+  <figure class="wix-cover"><img src="/assets/images/wix/61d609_2f878a37b4d743e6ae03f63c52aafecb~mv2.png" alt=""></figure>
+<div class="wix-body" id="wix-body">
+<figure class="wix-fig"><img src="/assets/images/wix/61d609_2f878a37b4d743e6ae03f63c52aafecb~mv2.png" alt="" loading="lazy"></figure>
+<p></p>
+<p>This is one of the reasons why many hardware designers fail to pass EMC tests.</p>
+<p></p>
+<p>This is also one of the hardest concepts I struggled with when I started with PCB design.</p>
+<p></p>
+<p>But I promise you that once you integrate it, your designs will be halfway to passing EMC tests.</p>
+<p></p>
+<p>I say halfway because the other missing part of this picture is understanding the importance of the current loop and return current. But we&#x27;ll leave that for another day.</p>
+<p></p>
+<p>What you see in this picture is the representation of a signal propagating in the PCB.</p>
+<p></p>
+<p>This is when the digital signal (in red) is propagating from the source towards the load as an electromagnetic wave between the conductors, which are only guiding the wave.</p>
+<p></p>
+<p>The thing that I struggled to understand was the fact that the signal is established between the two conductors, in this case, the signal trace and the return reference plane.</p>
+<p></p>
+<p>This is important because it also means that the energy is in the space between the two conductors.</p>
+<p></p>
+<p>So, why did I say that many fail EMC tests because of this?</p>
+<p></p>
+<p>Because clients keep showing me boards that are built without the return reference plane adjacent to the signal trace in their PCB stackup.</p>
+<p></p>
+<p>What&#x27;s the result of doing this?</p>
+<p></p>
+<p>Simply that the electromagnetic (EM) fields are no longer contained.</p>
+<p></p>
+<p>This means that when you are measuring the EM fields during the EMC test, these fields are going to be large.</p>
+<p></p>
+<p>Large enough that they are no longer within the limits set by the EMC standards.</p>
+<p></p>
+<p>So it is not a question of whether your circuit will work or not.</p>
+<p></p>
+<p>Because even if it &quot;works&quot;, which means the fields are now established through different paths, that does not mean that the fields are contained.</p>
+<p></p>
+<p>I wanted to show you this picture just so that when you are deciding on how to set up the stackup, you keep this in mind.</p>
+<p></p>
+<p>You need two conductors adjacent to each other, not just one, if you want to contain the fields between them.</p>
+<p></p>
+<p>This is setting the boundary conditions for the EM fields.</p>
+<p></p>
+<p>One is for potential A and the other one for potential B (the reference potential).</p>
+<p></p>
+<p>That&#x27;s why when you design PCBs with 2 layers and both of them are dedicated to signals (only potential A), and none is dedicated to the return current and the reference potential (potential B), you are most likely to fail EMC tests and generate EMI.</p>
+<p></p>
+<p>I explain this more in-depth in my video lessons.</p>
+<p></p>
+<p>For now, I hope this helps get a portion of the picture.</p>
+<p></p>
+<p>Dario</p>
+<p></p>
+<hr>
+<p></p>
+<h3><strong><span style="font-size:18px">Action list:</span></strong></h3>
+<h5><a href="https://www.fresuelectronics.com/product-page/emi-quick-fixes-guide" target="_blank" rel="nofollow noreferrer noopener"><strong><u>1. </u></strong></a><a href="https://www.fresuelectronics.com/product-page/emi-quick-fixes-guide" target="_blank" rel="nofollow noreferrer noopener"><strong><u><span style="background-color:rgb(2, 255, 135);color:#141414">Get the New EMI Quick Fixes Guide - 2025</span></u></strong></a></h5>
+<p></p>
+<aside class="wix-card"><a href="https://www.fresuelectronics.com/product-page/emi-quick-fixes-guide"><img src="/assets/images/wix/61d609_6a6d3bf9bd114bcfb82d5236e516195a~mv2.png" alt=""><span class="wix-card-name">EMI Quick Fixes Guide</span></a></aside>
+<p></p>
+<hr>
+<p></p>
+</div><!-- /wix-body -->
+</article>
+<footer>
+  <div class="site-footer">
+    <span>© 2026 Fresu Electronics SRL</span>
+    <span><a href="https://www.fresuelectronics.com">fresuelectronics.com</a> · <a href="https://www.fresuelectronics.com/free-tool-1">Free Stackup Tool</a></span>
+  </div>
+</footer>
+</body>
+</html>

@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EMC in Practice: Conducted Emissions - SMPS — Fresu Electronics</title>
+  <meta name="description" content="Here are several issues that can arise in your PCB Design if these things are not well taken care of. My hope is to help you see these...">
+  <link rel="canonical" href="https://blog.fresuelectronics.com/post/emc-in-practice-conducted-emissions-smps/">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="EMC in Practice: Conducted Emissions - SMPS">
+  <meta property="og:description" content="Here are several issues that can arise in your PCB Design if these things are not well taken care of. My hope is to help you see these...">
+  <meta property="og:url" content="https://blog.fresuelectronics.com/post/emc-in-practice-conducted-emissions-smps/">
+  <meta property="og:image" content="https://blog.fresuelectronics.com/assets/images/wix/61d609_17bd5638e77f4be2a1b1079b413e56c3~mv2.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400;1,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/assets/wix-exact.css">
+</head>
+<body>
+<header>
+  <div class="site-header">
+    <a href="https://www.fresuelectronics.com">
+      <img src="https://raw.githubusercontent.com/dariofresu/Fresu-Electronics-Blog/main/assets/logo.png" alt="Fresu Electronics">
+    </a>
+    <nav class="header-nav">
+      <a href="https://blog.fresuelectronics.com/">Blog</a>
+      <a href="https://blog.fresuelectronics.com/tools/">Tools</a>
+      <a href="https://www.fresuelectronics.com/trainings">Courses</a>
+      <a href="https://www.fresuelectronics.com/about">About</a>
+      <a href="https://www.fresuelectronics.com/emc-audit" class="header-cta">Book EMC Audit</a>
+    </nav>
+  </div>
+</header>
+<article class="post">
+  <p class="crumb"><a href="https://blog.fresuelectronics.com/">Blog</a> · <a href="https://blog.fresuelectronics.com/#wix-archive">Original posts</a></p>
+  <header class="post-head">
+    <h1>EMC in Practice: Conducted Emissions - SMPS</h1>
+    <p class="meta"><time datetime="2024-09-10">2024-09-10</time> · <a href="https://info3761185.wixsite.com/dario-fresu-electron/post/emc-in-practice-conducted-emissions-smps">Original on Wix</a></p>
+  <p class="taxo">Categories: EMI  - Short Post</p>
+  </header>
+  <figure class="wix-cover"><img src="/assets/images/wix/61d609_17bd5638e77f4be2a1b1079b413e56c3~mv2.png" alt=""></figure>
+<div class="wix-body" id="wix-body">
+<figure class="wix-fig"><img src="/assets/images/wix/61d609_17bd5638e77f4be2a1b1079b413e56c3~mv2.png" alt="" loading="lazy"></figure>
+<p>Here are several issues that can arise in your PCB Design if these things are not well taken care of.</p>
+<p></p>
+<p>My hope is to help you see these issues before the test even fails.</p>
+<p></p>
+<p>Let&#x27;s see what these potential issues are.</p>
+<p></p>
+<p>We can divide the issues into Differential-Mode Currents and Common-Mode currents.</p>
+<p></p>
+<p>Starting with Differential-Mode currents:</p>
+<p></p>
+<p>1. The most visible here would be the rectifying diodes, on the primary side, but more importantly on the secondary side of the SMPS.</p>
+<p></p>
+<p>I say more importantly on the secondary side because typically this is where we have higher currents compared to the primary side where the voltage is usually higher.</p>
+<p></p>
+<p>The problems these diodes can cause depend a lot on their selection, and this can highly affect the differential mode currents that they generate.</p>
+<p></p>
+<p>The goal here is to try to reduce the energy of the harmonic signal contained in the transitioning time of the diode. The sharper (faster) the transitioning time, the more energy you will have to control.</p>
+<p></p>
+<p>2. This is not clearly visible from the picture, but it&#x27;s definitely something you want to watch out for.</p>
+<p></p>
+<p>The filtering capacitor on the primary side.</p>
+<p></p>
+<p>This component you want to be careful in selecting the right one in terms of parasitic effects. Meaning, selecting a low Equivalent Series Inductance (ESL) and a low Equivalent Series Resistance (ESR).</p>
+<p></p>
+<p>Especially the first (ESL) would be extremely important because of its dependency on frequency.</p>
+<p></p>
+<p>Remember the harmonics contained in the Switching Transistor&#x27;s frequency?</p>
+<p></p>
+<p>Those will give you some headaches otherwise.</p>
+<p></p>
+<p>3. The other issues that we can see from this picture are the sources of common mode currents:</p>
+<p></p>
+<p>- Stray Capacitance between the wiring/traces of the circuit board and the Earth Ground.</p>
+<p></p>
+<p>- Stray Capacitance between the primary and the secondary side of the transformer, then closing the loop to Earth Ground.</p>
+<p></p>
+<p>- Stray capacitance between the heat sink of the switching transistor and the Earth ground.</p>
+<p></p>
+<p>All of those stray capacitances create very nice paths for the common-mode current loops.</p>
+<p></p>
+<p>Remember that capacitors ideally become a short at high frequencies.</p>
+<p></p>
+<p>The key here would be to try to reduce as much as possible the stray capacitance.</p>
+<p></p>
+<p>So the easiest way you can really think of, is:</p>
+<p></p>
+<p>How can I make a poor capacitor?</p>
+<p></p>
+<p>This will help you to think about how you can interrupt the loop of the common mode currents.</p>
+<p></p>
+<p>I hope this helps,</p>
+<p></p>
+<p>Dario</p>
+<p><a href="http://fresuelectronics.com" target="_blank" rel="noreferrer noopener"><u>fresuelectronics.com</u></a></p>
+<p></p>
+<hr>
+<p></p>
+<h3><strong><span style="font-size:18px">Action list:</span></strong></h3>
+<h5><a href="https://www.fresuelectronics.com/product-page/emi-quick-fixes-guide" target="_blank" rel="nofollow noreferrer noopener"><strong><u>1. </u></strong></a><a href="https://www.fresuelectronics.com/product-page/emi-quick-fixes-guide" target="_blank" rel="nofollow noreferrer noopener"><strong><u><span style="background-color:rgb(2, 255, 135);color:#141414">Get the New EMI Quick Fixes Guide - 2025</span></u></strong></a></h5>
+<p></p>
+<aside class="wix-card"><a href="https://www.fresuelectronics.com/product-page/emi-quick-fixes-guide"><img src="/assets/images/wix/61d609_6a6d3bf9bd114bcfb82d5236e516195a~mv2.png" alt=""><span class="wix-card-name">EMI Quick Fixes Guide</span></a></aside>
+<p></p>
+<hr>
+<p></p>
+</div><!-- /wix-body -->
+</article>
+<footer>
+  <div class="site-footer">
+    <span>© 2026 Fresu Electronics SRL</span>
+    <span><a href="https://www.fresuelectronics.com">fresuelectronics.com</a> · <a href="https://www.fresuelectronics.com/free-tool-1">Free Stackup Tool</a></span>
+  </div>
+</footer>
+</body>
+</html>

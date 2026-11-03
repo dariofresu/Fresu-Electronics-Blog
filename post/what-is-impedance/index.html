@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>What is Impedance? — Fresu Electronics</title>
+  <meta name="description" content="In this article, we are going to talk about the different types of impedance, what we need to care about, and why are important for us.">
+  <link rel="canonical" href="https://blog.fresuelectronics.com/post/what-is-impedance/">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="What is Impedance?">
+  <meta property="og:description" content="In this article, we are going to talk about the different types of impedance, what we need to care about, and why are important for us.">
+  <meta property="og:url" content="https://blog.fresuelectronics.com/post/what-is-impedance/">
+  <meta property="og:image" content="https://blog.fresuelectronics.com/assets/images/wix/yt-jJwlQz54zi8.jpg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400;1,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/assets/wix-exact.css">
+</head>
+<body>
+<header>
+  <div class="site-header">
+    <a href="https://www.fresuelectronics.com">
+      <img src="https://raw.githubusercontent.com/dariofresu/Fresu-Electronics-Blog/main/assets/logo.png" alt="Fresu Electronics">
+    </a>
+    <nav class="header-nav">
+      <a href="https://blog.fresuelectronics.com/">Blog</a>
+      <a href="https://blog.fresuelectronics.com/tools/">Tools</a>
+      <a href="https://www.fresuelectronics.com/trainings">Courses</a>
+      <a href="https://www.fresuelectronics.com/about">About</a>
+      <a href="https://www.fresuelectronics.com/emc-audit" class="header-cta">Book EMC Audit</a>
+    </nav>
+  </div>
+</header>
+<article class="post">
+  <p class="crumb"><a href="https://blog.fresuelectronics.com/">Blog</a> · <a href="https://blog.fresuelectronics.com/#wix-archive">Original posts</a></p>
+  <header class="post-head">
+    <h1>What is Impedance?</h1>
+    <p class="meta"><time datetime="2024-11-18">2024-11-18</time> · <a href="https://info3761185.wixsite.com/dario-fresu-electron/post/what-is-impedance">Original on Wix</a></p>
+  </header>
+  <div class="wix-embed wix-cover-embed"><iframe src="https://www.youtube.com/embed/jJwlQz54zi8" title="https://www.youtube.com/watch?v=jJwlQz54zi8" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen loading="lazy"></iframe></div>
+<div class="wix-body" id="wix-body">
+<p></p>
+<figure class="wix-fig"><img src="/assets/images/wix/61d609_9da6f0e9cdb5483a8a9e5fe2252915e2~mv2.webp" alt="" loading="lazy"></figure>
+<h3><strong><span style="font-size:18px">Action list:</span></strong></h3>
+<h5><a href="https://www.fresuelectronics.com/product-page/emi-quick-fixes-guide" target="_blank" rel="nofollow noreferrer noopener"><strong><u>1. </u></strong></a><a href="https://www.fresuelectronics.com/product-page/emi-quick-fixes-guide" target="_blank" rel="nofollow noreferrer noopener"><strong><u><span style="background-color:rgb(2, 255, 135);color:#141414">Get the New EMI Quick Fixes Guide - 2025</span></u></strong></a></h5>
+<p></p>
+<aside class="wix-card"><a href="https://www.fresuelectronics.com/product-page/emi-quick-fixes-guide"><img src="/assets/images/wix/61d609_6a6d3bf9bd114bcfb82d5236e516195a~mv2.png" alt=""><span class="wix-card-name">EMI Quick Fixes Guide</span></a></aside>
+<p></p>
+<hr>
+<p>If you are new to electronic circuit design, or even if you have been designing printed circuit board (PCB) for a while, you have heard all over again about Impedance.</p>
+<p style="text-align:justify"> </p>
+<p style="text-align:justify">The real question here is, which type of impedance are we talking about? </p>
+<p style="text-align:justify"></p>
+<p style="text-align:justify">In this lesson, we are going to talk about the different types of impedance, what we need to care about, and why are important for us, as electronic engineers and printed circuit board (PCB) designers.</p>
+<hr>
+<p><strong><span style="font-size:24px">Impedance fundamentals</span></strong><br></p>
+<p style="text-align:justify">Before we start, we have to define three important fundamentals: </p>
+<p style="text-align:justify"></p>
+<ul>
+<li>
+<p style="text-align:justify">Definition of a <strong>net</strong>, </p>
+</li>
+<li>
+<p style="text-align:justify">Definition of <strong>impedance</strong>,<strong> </strong></p>
+</li>
+<li>
+<p style="text-align:justify">Definition of <strong>round trip-time of flight</strong>. </p>
+</li>
+</ul>
+<p style="text-align:justify"></p>
+<p style="text-align:justify">A <em>net</em> in electronics is an electrical path that joins two or more points, or pins, on a circuit board. It consists of conductive pathways or interconnected routes that allow the transmission of signals between them. When we talk about a net, we need to consider two elements: a <strong><em>signal path</em></strong> and a <strong><em>return path</em></strong><strong>.</strong> There is no net if one of these is missing.  </p>
+<p style="text-align:justify"></p>
+<p style="text-align:justify">This also makes sense, because if we think in terms of current, we know that current always flows in loops. This means that we need to have one path, where the signal current flows, and the counterpart, where the return current flows (instantaneously) back to the source. </p>
+<p style="text-align:justify"></p>
+<p style="text-align:justify">The <strong>Impedance, Z,</strong> is defined as the <strong>ratio between voltage and current,</strong> so <strong><span style="background-color:rgb(255, 255, 255);color:rgb(4, 12, 40)">Z = V/I. </span></strong></p>
+<p style="text-align:justify">In mathematical terms, this ratio <strong>Z </strong>includes a real part, <strong>R</strong>, which we call <strong>resistance, </strong>and an imaginary part, <strong>X</strong>, which we call <strong>reactance.</strong></p>
+<p style="text-align:justify"></p>
+<figure class="wix-fig" data-wix-width="422" style="max-width:422px"><img src="/assets/images/wix/61d609_25f5c2c927c34e44a0240caf4717737f~mv2.png" alt="Figure 5  - Impedance Formula" loading="lazy"><figcaption>Figure 1  - Impedance Formula</figcaption></figure>
+<p style="text-align:justify">Now, let&#x27;s talk about something called <strong>round trip time of flight. </strong>This is basically the time it takes for something to go from one point to another and then come back. In our context, it&#x27;s the time it takes for our measurement signal to travel down a transmission line, and then return.</p>
+<p style="text-align:justify"></p>
+<figure class="wix-fig"><img src="/assets/images/wix/61d609_c5a5278cafa8489e8620b01c0da79338~mv2.png" alt="Figure 2 - Approx. formula to calculate the Round-trip time of flight (RTTF))" loading="lazy"><figcaption>Figure 2 - Approx. formula to calculate the Round-trip time of flight (RTTF))</figcaption></figure>
+<p style="text-align:justify">Now that we have defined these fundamentals, let&#x27;s explain what we mean when we talk about impedance. We often hear the term impedance, and most of the time we don&#x27;t really specify what type of impedance we are talking about. </p>
+<p style="text-align:justify"></p>
+<p style="text-align:justify">For instance, when talking about fabricating a printed circuit board with<strong> controlled impedance, </strong>which impedance do we mean? Is this impedance dependent on the length of the net, or not? Let&#x27;s see what the three types of impedance that we need to distinguish are.</p>
+<p></p>
+<hr>
+<p><strong><span style="font-size:24px">Instantaneous Impedance</span></strong><br></p>
+<p>Firstly, we need to define the <strong>instantaneous impedance:</strong></p>
+<hr>
+<p><strong>🔓 Instantaneous impedance is the impedance of a transmission line at a specific location and time. </strong></p>
+<hr>
+<p style="text-align:justify">As we have previously defined, this is the ratio between voltage and current at a specific location and time. This also means that this value could differ in other parts of the same transmission line. Let&#x27;s take a net and suppose we want to send a signal from the source to the load, which is connected at the end of the transmission line.  As the signal propagates, it&#x27;s important to clarify that <strong>the propagating signal has no idea what is connected at the end of the line yet. </strong></p>
+<p style="text-align:justify"></p>
+<p></p>
+<p style="text-align:justify">Before the signal reaches the end of the transmission line, it doesn&#x27;t know if the line is shorted, if there is a load connected to it, or if the line is open. The only thing the signal &quot;knows&quot; at each moment in time, as it propagates through the transmission line, is its ratio between the signal voltage, and its current; in other words, its <strong>instantaneous impedance.</strong> </p>
+<p></p>
+<hr>
+<p><strong><span style="font-size:24px">Characteristic Impedance</span></strong></p>
+<p style="text-align:justify"></p>
+<p style="text-align:justify">Now, let&#x27;s discuss what we mean when we say we want to produce a PCB with controlled impedance. </p>
+<hr>
+<p><strong>🔓 When we say that a net has a characteristic impedance, we mean that its instantaneous impedance is consistent along the entire length of the net. </strong></p>
+<hr>
+<p style="text-align:justify">This means that if I were to measure the instantaneous impedance of this net, I would find that the value is the same regardless of where I measure it. This is crucial because it means that the signal will find a clear path throughout its journey from source to destination.</p>
+<p style="text-align:justify"></p>
+<p style="text-align:justify">If the transmission line is not uniform, then we will have varying values of instantaneous impedance at different locations. This also means that we no longer have a characteristic impedance for the line, as the impedance is not consistent at each point of the transmission line.  </p>
+<p style="text-align:justify"></p>
+<figure class="wix-fig"><img src="/assets/images/wix/61d609_51ec620dfb0c4c66a8eefab7dab9a569~mv2.png" alt="Figure 3 - Example of non uniform impedance values along the transmission line." loading="lazy"><figcaption>Figure 3 - Example of non-uniform impedance values along the transmission line.</figcaption></figure>
+<hr>
+<p><em>💡 By the way, If you would like to master EMC/EMI design, we have a new training program here:</em></p>
+<p class="wix-btn-wrap"><a class="wix-btn" href="https://www.fresuelectronics.com/mentoring" target="_blank" rel="noreferrer noopener" style="background:#116dff;border-radius:8px;color:#ffffff">Get Personalized Training</a></p>
+<p></p>
+<p><em>There, you’ll find details on how to apply for one of our exclusive programs designed to help you achieve that goal. </em></p>
+<p></p>
+<hr>
+<p></p>
+<p>One of the most important points about characteristic impedance is that this type of impedance is <strong>independent of the length of the transmission line.</strong></p>
+<p style="text-align:justify"></p>
+<p style="text-align:justify">This is why we can say that our traces, for instance, have a <strong>50 Ohm</strong> impedance, even without specifying their length. The characteristic impedance is exactly the value we communicate to the PCB manufacturer when we want to design a controlled impedance Printed Circuit Board. </p>
+<p style="text-align:justify"></p>
+<hr>
+<p><strong><span style="font-size:24px">Input Impedance</span></strong></p>
+<p></p>
+<p style="text-align:justify">Now, let&#x27;s examine the third type of impedance we must distinguish: <strong>the input impedance. </strong>This is perhaps the trickiest, as <strong>its value depends on the time it takes for the signal to reach the end of the transmission line and come back. </strong></p>
+<p style="text-align:justify"></p>
+<p style="text-align:justify">This is also why we define the round trip time of flight. The round trip time of flight depends on the length of the transmission line because of the time it takes for the signal to reach the end of the transmission line, and come back.</p>
+<hr>
+<p><strong>🔓 The input impedance is the value of the impedance &quot;seen&quot; by the signal before it completes a round-trip time of flight. </strong></p>
+<hr>
+<p style="text-align:justify">To explain it better, imagine we have a very long PCB with a net, from Earth to Mars. Our job is to measure the input impedance of this PCB with a multimeter. When we touch the net in the PCB with the tips of the multimeter probes, meaning one probe is touching the signal path and the other the return path (a.k.a. ground), a signal is injected into the transmission line. </p>
+<p style="text-align:justify"></p>
+<p style="text-align:justify">The signal starts to travel through the PCB net and the multimeter begins reporting the measurement. As the signal propagates through the transmission line, the impedance it measures will be the <em>instantaneous impedance</em> of the net at each point in time because the signal still has no clue what is connected at the end of the line.</p>
+<figure class="wix-fig"><img src="/assets/images/wix/61d609_0d02e53a2b5b45f2a28a96c6cae40c1b~mv2.png" alt="Figure 3 - Signal during propagation before it arrives to the load." loading="lazy"><figcaption>Figure 4 - Signal during propagation before it arrives to the load.</figcaption></figure>
+<p style="text-align:justify"></p>
+<p style="text-align:justify">In fact, there could be anything at the end of the transmission line: an open line, a shorted line, or a load. Until the signal reaches the end of the line and then comes back, we will keep seeing the value of the instantaneous impedance displayed on the multimeter. </p>
+<p style="text-align:justify"></p>
+<p style="text-align:justify">Only after the signal has completed one round trip time of flight might the value displayed on the multimeter changes.</p>
+<p style="text-align:justify"></p>
+<p style="text-align:justify">This is because, by then, the signal will have informed us if the line is open, has a short, or has a load. After at least one trip time of flight has been completed, the value we see displayed on the multimeter will reflect the condition at the end of the line. </p>
+<p style="text-align:justify"></p>
+<p style="text-align:justify">If there is a 2 kilo Ohm resistor connected at the end of the line, that is the value we will see. If there is a short circuit at the end of the line, then the value we see will be zero. Or, if there is an open line, the value will be undefined. </p>
+<p></p>
+<hr>
+<p style="text-align:justify"><strong><span style="font-size:24px">Application to PCB Design</span></strong></p>
+<p style="text-align:justify"></p>
+<p style="text-align:justify">The same principle applies for a small PCB, but the time it takes the signal to complete one round trip time of flight will be typically much shorter since the boards are fairly  small compared to the distance between Earth to Mars, and therefore, the value measured on the multimeter, will change faster from being the value of the instantaneous impedance, to the value at the end of the transmission line.</p>
+<p style="text-align:justify"></p>
+<p style="text-align:justify">This is also why, when we buy one meter of coaxial cable with a 50 ohm impedance, if we try to measure the impedance of this cable with a regular multimeter, the value will not be 50 ohm, because the time it takes the signal to complete a trip time of flight, is very short, and we would be measuring the open end of the cable.</p>
+<p style="text-align:justify"></p>
+<p style="text-align:justify"><strong>Now, why do we care so much about all these impedance terms? </strong></p>
+<p style="text-align:justify"></p>
+<p style="text-align:justify">When designing printed circuit boards, it&#x27;s important to understand that since impedance is the ratio between voltage and current, if the impedance changes, it means that this ratio changes. But if this ratio changes, then our signal changes, and this is not what we want to happen.</p>
+<p style="text-align:justify"></p>
+<p style="text-align:justify">Especially when we have very low margins for signal voltage errors, such as in LVDS signals or similar, we need to be extra careful in maintaining the integrity of the signal throughout its propagation journey. The change in impedance that a signal sees is what causes the reflection of the signal. </p>
+<p style="text-align:justify"></p>
+<p style="text-align:justify">That&#x27;s why we want to make sure we design traces with controlled impedance, exactly to avoid impedance mismatches and, therefore, reflections! </p>
+<p style="text-align:justify"></p>
+<p style="text-align:justify">So, what is the takeaway from all of this? Design the traces with a characteristic impedance, therefore, with a uniform width and geometry along the entire net. </p>
+<p style="text-align:justify"></p>
+<p style="text-align:justify">Typical values for a regular signal net are 50 Ohms, but be aware of the requirements of certain interfaces. For instance, for interfaces such as USB, CAN-BUS, LVDS, and Ethernet, the requirements for the impedance change, so you need to be aware of the required characteristic impedance for these special nets.</p>
+<p></p>
+<hr>
+<p><strong><span style="font-size:24px">Conclusions</span></strong></p>
+<p></p>
+<p style="text-align:justify">When someone begins their journey in PCB design, the theoretical knowledge gained in classical electrical engineering classes does not always translate seamlessly into practical PCB layout practices. This often leaves hardware designers in a challenging position, learning through trial and error.</p>
+<p style="text-align:justify"></p>
+<p style="text-align:justify">At <a href="http://fresuelectronics.com" target="_blank" rel="noreferrer noopener"><u>fresuelectronics.com</u></a>, our primary goal is to help you circumvent the pain associated with this steep learning curve. We believe that by sharing this guide, along with the <a href="https://www.fresuelectronics.com/courses" target="_blank" rel="noreferrer noopener"><u>courses</u></a>, materials, and programs we offer, we can assist you in navigating the complexities of PCB design. </p>
+<p style="text-align:justify"></p>
+<p style="text-align:justify">Our aim is to support you on your path to mastering this field, ensuring that you have the tools and knowledge necessary to succeed. <br></p>
+<p>If you would like to master EMC/EMI design, we have a new training program here:</p>
+<p class="wix-btn-wrap"><a class="wix-btn" href="https://www.fresuelectronics.com/mentoring" target="_blank" rel="noreferrer noopener" style="background:#116dff;border-radius:8px;color:#ffffff">Get Personalized Training</a></p>
+<p></p>
+<p>There, you’ll find details on how to apply for one of our exclusive programs designed to help you achieve that goal. </p>
+<p></p>
+<p></p>
+<p style="text-align:justify"></p>
+<p></p>
+</div><!-- /wix-body -->
+</article>
+<footer>
+  <div class="site-footer">
+    <span>© 2026 Fresu Electronics SRL</span>
+    <span><a href="https://www.fresuelectronics.com">fresuelectronics.com</a> · <a href="https://www.fresuelectronics.com/free-tool-1">Free Stackup Tool</a></span>
+  </div>
+</footer>
+</body>
+</html>

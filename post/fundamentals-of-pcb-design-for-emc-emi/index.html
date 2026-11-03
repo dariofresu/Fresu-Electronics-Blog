@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fundamentals of PCB Design For EMC &amp; Low EMI — Fresu Electronics</title>
+  <meta name="description" content="In this article, we are going to explore the fundamental concepts necessary to understand Printed Circuit Board design for passing EMC.">
+  <link rel="canonical" href="https://blog.fresuelectronics.com/post/fundamentals-of-pcb-design-for-emc-emi/">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Fundamentals of PCB Design For EMC &amp; Low EMI">
+  <meta property="og:description" content="In this article, we are going to explore the fundamental concepts necessary to understand Printed Circuit Board design for passing EMC.">
+  <meta property="og:url" content="https://blog.fresuelectronics.com/post/fundamentals-of-pcb-design-for-emc-emi/">
+  <meta property="og:image" content="https://blog.fresuelectronics.com/assets/images/wix/yt-RlcPCRizRec.jpg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400;1,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/assets/wix-exact.css">
+</head>
+<body>
+<header>
+  <div class="site-header">
+    <a href="https://www.fresuelectronics.com">
+      <img src="https://raw.githubusercontent.com/dariofresu/Fresu-Electronics-Blog/main/assets/logo.png" alt="Fresu Electronics">
+    </a>
+    <nav class="header-nav">
+      <a href="https://blog.fresuelectronics.com/">Blog</a>
+      <a href="https://blog.fresuelectronics.com/tools/">Tools</a>
+      <a href="https://www.fresuelectronics.com/trainings">Courses</a>
+      <a href="https://www.fresuelectronics.com/about">About</a>
+      <a href="https://www.fresuelectronics.com/emc-audit" class="header-cta">Book EMC Audit</a>
+    </nav>
+  </div>
+</header>
+<article class="post">
+  <p class="crumb"><a href="https://blog.fresuelectronics.com/">Blog</a> · <a href="https://blog.fresuelectronics.com/#wix-archive">Original posts</a></p>
+  <header class="post-head">
+    <h1>Fundamentals of PCB Design For EMC &amp; Low EMI</h1>
+    <p class="meta"><time datetime="2024-11-13">2024-11-13</time> · <a href="https://info3761185.wixsite.com/dario-fresu-electron/post/fundamentals-of-pcb-design-for-emc-emi">Original on Wix</a></p>
+  <p class="taxo">Tags: EMI, EMC</p>
+  </header>
+  <div class="wix-embed wix-cover-embed"><iframe src="https://www.youtube.com/embed/RlcPCRizRec" title="https://youtu.be/RlcPCRizRec?si=xJQ6Fo8REwqP43Ns" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen loading="lazy"></iframe></div>
+<div class="wix-body" id="wix-body">
+<div class="wix-embed"><iframe src="https://www.youtube.com/embed/RlcPCRizRec" title="How to Design PCB Layouts for EMC" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen loading="lazy"></iframe></div>
+<h5 style="text-align:justify"><strong><span style="background-color:#FFF900;color:rgb(7, 31, 47)">CLICK THE PLAY BUTTON TO WATCH THE LESSON.</span></strong></h5>
+<hr>
+<h3><strong><span style="font-size:18px">Action list:</span></strong></h3>
+<h5><a href="https://www.fresuelectronics.com/product-page/emi-quick-fixes-guide" target="_blank" rel="nofollow noreferrer noopener"><strong><u>1. </u></strong></a><a href="https://www.fresuelectronics.com/product-page/emi-quick-fixes-guide" target="_blank" rel="nofollow noreferrer noopener"><strong><u><span style="background-color:rgb(2, 255, 135);color:#141414">Get the New EMI Quick Fixes Guide - 2025</span></u></strong></a></h5>
+<p></p>
+<aside class="wix-card"><a href="https://www.fresuelectronics.com/product-page/emi-quick-fixes-guide"><img src="/assets/images/wix/61d609_6a6d3bf9bd114bcfb82d5236e516195a~mv2.png" alt=""><span class="wix-card-name">EMI Quick Fixes Guide</span></a></aside>
+<p></p>
+<hr>
+<p>In this article, we are going to explore the fundamental concepts necessary to understand Printed Circuit Board design for passing EMC.</p>
+<p style="text-align:justify"></p>
+<p style="text-align:justify">In electronics or electrical circuits classes, we have learned to design circuits according to the <strong>water through the pipes analogy.</strong> Although those analogies are helpful for simplifying circuit design, when we discuss printed circuit board design, we have to take one step back and consider the true fundamentals, the <strong>Maxwell&#x27;s equations. </strong></p>
+<p style="text-align:justify"></p>
+<figure class="wix-fig" data-wix-width="737" style="max-width:737px"><img src="/assets/images/wix/61d609_1d36e3e1ece644d2908caa0ce27e3e59~mv2.png" alt="Figure 1  - Ampere-Maxwell Law" loading="lazy"><figcaption>Figure 1  - Ampere-Maxwell Law</figcaption></figure>
+<p style="text-align:justify">Before you decide to run away from this lesson, what we need at this point as designers is not so much to go back and understand the math of the equations, but rather to understand the principles behind them, in this way, we can visualize these effects and build boards that excel in terms of reliability, immunity to disturbances, and compatibility with other systems.</p>
+<hr>
+<p style="text-align:justify"><strong> </strong><span style="background-color:rgb(253, 253, 253);color:rgb(7, 31, 47)">🔓 </span><strong>This means that we ensure that our system can work with other nearby devices and systems, without disrupting its normal operation, or the normal operation of other devices. </strong></p>
+<hr>
+<p style="text-align:justify">To be able to do that, we need to visualize the electromagnetic fields in a printed circuit board trace, at least at a basic level. Let&#x27;s now take a simple example of a printed circuit board and analyze how it can helps us visualize the fields. In this picture, we can see a cross section view of a double layer printed circuit board. </p>
+<p style="text-align:justify"></p>
+<figure class="wix-fig"><img src="/assets/images/wix/61d609_8ee2cb9ac964447597b89923a79ee5bd~mv2.jpg" alt="Figure 1 - Two-Layer Printed Circuit Board (PCB)" loading="lazy"><figcaption>Figure 2 - Two-Layer Printed Circuit Board (PCB)</figcaption></figure>
+<p style="text-align:justify"></p>
+<p style="text-align:justify">The top layer is represented by the red colored signal trace, and the bottom trace for the reference plane is represented by the blue color. Also, to complete the picture, we have the dielectric layer (in green), which is placed between the signal layer on the top, and the return reference plane on the bottom layer.</p>
+<p style="text-align:justify"></p>
+<p style="text-align:justify">From this picture, we can observe that different phenomena are occurring. The first thing we notice is <strong>the presence of fields</strong>. The electric field described from the black arrows and the magnetic field described by the blue circles. Of course, this assumes that a signal is present on the signal trace. Here, we can observe that the electric field lines are radiating from the signal trace.</p>
+<figure class="wix-fig"><img src="/assets/images/wix/61d609_15226ff86682443f9bdbba34ce9e801d~mv2.jpg" alt="Figure 2 - Two-Layer PCB and its Electric and Magnetic Fields" loading="lazy"><figcaption>Figure 3 - Two-Layer PCB and its Electric and Magnetic Fields</figcaption></figure>
+<p style="text-align:justify">Their direction changes depending on the position of the trace in relation to the return reference plane. In this PCB, where the return reference plane is close to a signal trace, the electric fields generated by the signal trace are naturally drawn towards this plane and terminate there. On the top side of the signal trace instead, where there is no return reference plane, the electric field lines from the signal trace are <strong>partially uncontained</strong>.</p>
+<p style="text-align:justify"></p>
+<p style="text-align:justify"><strong><span style="font-size:22px">Why is this important for us? </span></strong></p>
+<p style="text-align:justify"></p>
+<p style="text-align:justify">Without a <strong>return reference plane (RRP)</strong> close to the signal trace, electric fields can extend further, grow larger, and may interact with unintended parts of the circuit, or external environments, potentially leading to electromagnetic interference issues. This is why return reference planes are critical in PCB design, to ensure <strong>controlled propagation of electric and magnetic fields and to minimize interference.</strong></p>
+<p style="text-align:justify"></p>
+<p style="text-align:justify">Many of the problems we encounter during EMC tests, in fact, arise from poorly designed layouts where the fields are not well contained and extend further disrupting the operation of other devices or components. </p>
+<hr>
+<p style="text-align:justify"><span style="background-color:rgb(253, 253, 253);color:rgb(7, 31, 47)">🔓 </span><strong>If you think about it, during EMC tests such as radiated and conducted tests, what we are measuring is the energy level of these fields.</strong></p>
+<hr>
+<p style="text-align:justify">The quickest way to encounter EMC issues, in fact, is to remove the return reference plane from the vicinity of the signal trace. This allows the fields to expand and create disruptions in undesired locations. In simple terms, when this is done,<strong> the electric fields are no longer confined and can grow larger,</strong> possibly reaching other devices or component structures. When this occurs, the return current loops, formed through parasitic paths, will also grow, causing an increase in electromagnetic fields that can further disrupt operations. </p>
+<hr>
+<p style="text-align:justify"><strong><span style="font-size:24px">The concept of Return Reference Plane (RRP)</span></strong></p>
+<p style="text-align:justify"></p>
+<p style="text-align:justify">The Return Reference Plane gets its name for two reasons. </p>
+<p style="text-align:justify"></p>
+<ul>
+<li>
+<p style="text-align:justify">Firstly, it serves as <strong>the return path for the signal traces.</strong> This means that the return current generated by the signal will flow back to the source through the Return Reference Plane (RRP), completing the current loop. </p>
+</li>
+</ul>
+<p style="text-align:justify"></p>
+<ul>
+<li>
+<p style="text-align:justify">Secondly, it earns this name because it provides <strong>the reference potential for the signal </strong>trace. In other words, it offers the signal a reference for its electric fields.  <br></p>
+</li>
+</ul>
+<hr>
+<p style="text-align:justify"><span style="background-color:rgb(253, 253, 253);color:rgb(7, 31, 47)">🔓</span><strong>Before we proceed to the next steps, I&#x27;d like to point out that I haven&#x27;t referred to the return reference plane as &quot;ground&quot;. This is because, more often than not, the term ground is misused and wrongly used to describe the location where current sinks.</strong></p>
+<hr>
+<p style="text-align:justify">What we&#x27;ve explained so far should also address why having the return reference plane adjacent to the signal trace in the stackup is the optimal choice. </p>
+<p style="text-align:justify"></p>
+<ul>
+<li>
+<p style="text-align:justify">Firstly, it&#x27;s because if the fields generated from different signals are not separated, they could interfere with one another. <br></p>
+</li>
+<li>
+<p style="text-align:justify">Secondly, it&#x27;s due to the importance of <strong>completing the current loops.</strong> If the current loops are not closed, the current cannot flow. </p>
+</li>
+</ul>
+<p style="text-align:justify"></p>
+<p style="text-align:justify">These loops can be completed through two types of current:  <br></p>
+<ul>
+<li>
+<p style="text-align:justify"><strong>Conduction current</strong>, which includes signal (or forward) current, and return current. </p>
+</li>
+<li>
+<p style="text-align:justify"><strong>Displacement current</strong>, </p>
+</li>
+</ul>
+<p style="text-align:justify"><br>or a combination of both.  You can find a more detailed explanation of these concepts in the lesson on <em>&quot;How Signals Propagate in a Printed Circuit Board (PCB)&quot;</em>.</p>
+<hr>
+<p style="text-align:justify"><strong><span style="font-size:24px">Power Plane are not good as Return and Reference Planes</span></strong><br></p>
+<p style="text-align:justify">What happens when we introduce between the signal trace and the return reference plane another plane with a voltage different than the driving voltage?</p>
+<p style="text-align:justify"></p>
+<figure class="wix-fig"><img src="/assets/images/wix/61d609_aedf52116dff40e2a1310d781394582b~mv2.jpg" alt="Figure 3 - Using a power plane as a reference voltage is not the best choice." loading="lazy"><figcaption>Figure 4 - Using a power plane as a reference voltage is not the best choice.</figcaption></figure>
+<p style="text-align:justify">For the return current, the voltage of the return plane doesn&#x27;t really matter. <br>What matters is the path of least impedance. Therefore, the current will still flow through the power plane. <strong>The problem now is returning to the source to complete the current loop. </strong></p>
+<p style="text-align:justify"></p>
+<p style="text-align:justify">Since the power plane is not DC connected to the return reference plane (because this would create a short-circuit), the return current will still need to find a way to complete the loop and return to the source. Only now, there will be an <strong>additional impedance</strong> that the signals see between the power layer and the return reference layer.</p>
+<p></p>
+<hr>
+<p><em>💡 By the way, If you would like to master EMC/EMI design, we have a new training program here:</em></p>
+<p class="wix-btn-wrap"><a class="wix-btn" href="https://www.fresuelectronics.com/mentoring" target="_blank" rel="noreferrer noopener" style="background:#116dff;border-radius:8px;color:#ffffff">Get Personalized Training</a></p>
+<p><em>There, you’ll find details on how to apply for one of our exclusive programs designed to help you achieve that goal. </em></p>
+<hr>
+<p></p>
+<p style="text-align:justify">In this case, the return current will have to reach the reference plane not through conduction current, but via the displacement current, because the planes are not connected to the same DC voltage. </p>
+<p style="text-align:justify"></p>
+<p style="text-align:justify">This means that there will be an <strong>impedance between the two planes.</strong> If we have an impedance, it means that we will have a voltage drop, which can cause noise and create problems such as <em>&quot;ground bounce.&quot;</em></p>
+<p style="text-align:justify"></p>
+<hr>
+<p style="text-align:justify"><span style="background-color:rgb(253, 253, 253);color:rgb(7, 31, 47)">🔓</span><strong>Ground bounce is essentially a voltage fluctuation in the Return and Reference plane of a circuit. </strong></p>
+<hr>
+<p style="text-align:justify">We won&#x27;t go into too much detail in this article. The only thing we really need to know is that the best way for us to minimize noise and electromagnetic interferences is to have the return reference plane adjacent to the signal trace. </p>
+<p style="text-align:justify"></p>
+<hr>
+<p style="text-align:justify"><strong><span style="font-size:24px">Signal transitioning layers</span></strong></p>
+<p style="text-align:justify"></p>
+<p style="text-align:justify">This brings us to the next point. What happens when the signal transitions from the top layer to the bottom layer? </p>
+<p style="text-align:justify"></p>
+<figure class="wix-fig" data-wix-width="605" style="max-width:605px"><img src="/assets/images/wix/61d609_436d276c11f34225ad67004796700663~mv2.jpg" alt="Figure 4 - Signal transitioning layers and EM field containment." loading="lazy"><figcaption>Figure 5 - Signal transitioning layers and EM field containment.</figcaption></figure>
+<p style="text-align:justify">If we have layer 2 and layer 3 at the same voltage, and we use return stitching vias to connect the planes together, keeping them equipped potential, the <strong>return current</strong> will utilize the stitching vias to return to the source, and there won&#x27;t be any problems. </p>
+<p style="text-align:justify"></p>
+<p style="text-align:justify">However, if layer two and layer three have different voltages, as in the case we previously analyzed, we cannot add stitching via because the planes have different voltages.</p>
+<p style="text-align:justify">In this scenario, the signal would have to traverse the impedance between the two planes until it finds its way back to the driving source. </p>
+<p style="text-align:justify"></p>
+<p style="text-align:justify">This can lead to voltage drops between the planes (depending on the signals), potentially causing noise in the circuit. </p>
+<p style="text-align:justify"></p>
+<hr>
+<p style="text-align:justify"><strong><span style="font-size:24px">Using decoupling capacitors for signals transitioning layers. </span></strong></p>
+<p style="text-align:justify"></p>
+<p style="text-align:justify">The problem persists even if we decide to use capacitors to connect the two planes.</p>
+<p style="text-align:justify">The issue with decoupling capacitors is that the impedance of the capacitors changes with frequency, and is only effective for signals at low frequencies. </p>
+<p style="text-align:justify"></p>
+<figure class="wix-fig"><img src="/assets/images/wix/61d609_7d47929bc3a047348d145bd7fa8d4f57~mv2.jpg" alt="Figure 6 - Impedance profile example of a real capacitor." loading="lazy"><figcaption>Figure 6 - Impedance profile example of a real capacitor.</figcaption></figure>
+<p style="text-align:justify">This is why we are going to use the stack up configuration, where we have a return reference plane next to the signal layer.  We are also going to use stitching vias to connect the planes, and add a return via next to the signal layers, <strong>each time the signals cross from one layer to the other.</strong></p>
+<p style="text-align:justify"></p>
+<p style="text-align:justify">It&#x27;s also important to note here that the planes should be designed to have the lowest possible impedance for the signal return current to flow back to the source. The most effective way to achieve this is by using a plane that <strong>doesn&#x27;t have splits, cuts or other irregularities</strong> that would alter the impedance of the plane.</p>
+<p style="text-align:justify"></p>
+<hr>
+<p style="text-align:justify"><strong><span style="font-size:24px">How return current changes based on frequency</span></strong><br></p>
+<p style="text-align:justify">Let&#x27;s now discuss another important point: differences in return current. This is one of the reasons many application notes recommend separating the analog and digital sections on the board, yet it remains one of the most misunderstood concepts.</p>
+<p style="text-align:justify"></p>
+<p style="text-align:justify">As we know from the fundamentals of electronics, impedance Z is frequency dependent. </p>
+<p style="text-align:justify"></p>
+<figure class="wix-fig" data-wix-width="422" style="max-width:422px"><img src="/assets/images/wix/61d609_25f5c2c927c34e44a0240caf4717737f~mv2.png" alt="Figure 5  - Impedance Formula" loading="lazy"><figcaption>Figure 7  - Impedance Formula</figcaption></figure>
+<p style="text-align:justify">This is because we have the real part of the impedance, which is resistance, and the imaginary part of the impedance, which is called reactance.</p>
+<p style="text-align:justify"></p>
+<figure class="wix-fig"><img src="/assets/images/wix/61d609_5483fe47d82440588259fd8a5e71864d~mv2.png" alt="Figure 6  - Inductive reactance formula" loading="lazy"><figcaption>Figure 8  - Inductive reactance formula</figcaption></figure>
+<p style="text-align:justify">The reactance term in the impedance equation, which includes inductive reactance and capacitive reactance, makes it frequency dependent. This is because both inductive reactance and capacitive reactance change based on frequency. </p>
+<p style="text-align:justify"></p>
+<figure class="wix-fig"><img src="/assets/images/wix/61d609_f9acac8d799343a18dac24c22f028501~mv2.jpg" alt="Figure 7  - Capacitive reactance formula" loading="lazy"><figcaption>Figure 9  - Capacitive reactance formula</figcaption></figure>
+<p style="text-align:justify">For low frequency or DC signals, the return current spreads out over the return reference plane, seeking the path of least resistance. This spreading allows the return current to take a more distributed path back to the source.  In contrast, for high frequency signals, the return current path is much more localized, and It tends to follow directly underneath the signal trace. </p>
+<p style="text-align:justify"></p>
+<figure class="wix-fig"><img src="/assets/images/wix/61d609_f47c4cd73da5454c8fec0461cb7a62d3~mv2.jpg" alt="Figure 8 - Return Current Path: Low frequency vs High frequency" loading="lazy"><figcaption>Figure 10 - Return Current Path: Low frequency vs High frequency</figcaption></figure>
+<p style="text-align:justify">This phenomenon is explained by the <strong>skin effect</strong>, and the principle of minimizing the loop area, between the signal trace and its return path to reduce the total inductance and, consequently, the reactance. The high frequency return current effectively follows the <strong>path of least inductance</strong>, rather than the path of least resistance. </p>
+<p style="text-align:justify"></p>
+<p style="text-align:justify">Digital signals characterized by the sharp transitions inherently contain a broad spectrum of frequency components due to their <strong>harmonic content</strong>. This includes a fundamental frequency and its harmonics at integer multiples of the fundamental frequency.  According to Fourier analysis, any square or sharp edged signal can be decomposed into a series of sine waves at different frequencies. </p>
+<p style="text-align:justify"></p>
+<figure class="wix-fig"><img src="/assets/images/wix/61d609_50d277c6f3864ffdb76bbdc659046619~mv2.jpg" alt="Figure 9 - Harmonics composing a digital signal." loading="lazy"><figcaption>Figure 11 - Harmonics composing a digital signal.</figcaption></figure>
+<p style="text-align:justify">The faster the edge rate, meaning the sharper the transition from low to high or high to low, the higher the frequency of the harmonics that compose the signal. These harmonics mean that even a digital signal, which might be considered low frequency, based on its fundamental frequency, can have high frequency components.</p>
+<p style="text-align:justify"></p>
+<p style="text-align:justify">High frequency signals, therefore, can generate significant amounts of electromagnetic interference that can couple into low frequency signal lines, causing noise and potentially corrupting the signals, called crosstalk. </p>
+<p style="text-align:justify"></p>
+<p style="text-align:justify">Crosstalk is an unwanted coupling between signal paths, which can be particularly problematic when high frequency signals induce disturbances in low frequency or sensitive analog signal paths. </p>
+<p style="text-align:justify"></p>
+<p style="text-align:justify">High frequency signals have a higher tendency to couple with adjacent traces due to their electromagnetic fields. By physically separating these signals, the risk of crosstalk is minimized, ensuring that the low frequency signals remain clean and undisturbed. </p>
+<p style="text-align:justify"></p>
+<p style="text-align:justify">This is especially critical for analog signals, which are susceptible to even small levels of noise.  Separating these signals on the PCB layout helps to reduce the noise coupling from high frequency digital circuits to low frequency and analog circuits. </p>
+<p style="text-align:justify"></p>
+<hr>
+<p style="text-align:justify"><span style="background-color:rgb(253, 253, 253);color:rgb(7, 31, 47)">🔓 </span><strong>Please note that we have never mentioned separating the return reference planes as certain application notes may suggest.</strong></p>
+<hr>
+<p style="text-align:justify">Avoiding this bad practice is important as it can lead to more issues than benefits. </p>
+<p style="text-align:justify"></p>
+<hr>
+<p style="text-align:justify"><strong><span style="font-size:24px">Conclusion</span></strong></p>
+<p style="text-align:justify"></p>
+<p style="text-align:justify">I hope this lesson helps you identify some potential pitfalls in circuit design and empowers you to avoid them altogether. When someone begins their journey in PCB design, the theoretical knowledge gained in classical electrical engineering classes does not always translate seamlessly into practical PCB layout practices. This often leaves hardware designers in a challenging position, learning through trial and error.</p>
+<p style="text-align:justify"></p>
+<p style="text-align:justify">At <a href="http://fresuelectronics.com" target="_blank" rel="noreferrer noopener"><u><span style="color:#116dff">fresuelectronics.com</span></u></a> , our primary goal is to help you circumvent the pain associated with this steep learning curve. We believe that by sharing this guide, along with the <a href="https://www.fresuelectronics.com/courses" target="_blank" rel="noreferrer noopener"><u><span style="color:#116dff">courses</span></u></a>, materials, and programs we offer, we can assist you in navigating the complexities of PCB design. Our aim is to support you on your path to mastering this field, ensuring that you have the tools and knowledge necessary to succeed.</p>
+<p style="text-align:justify"></p>
+<p> If you would like to master EMC/EMI design, we have a new training program here:</p>
+<p class="wix-btn-wrap"><a class="wix-btn" href="https://www.fresuelectronics.com/mentoring" target="_blank" rel="noreferrer noopener" style="background:#116dff;border-radius:8px;color:#ffffff">Get Personalized Training</a></p>
+<p></p>
+<p>There, you’ll find details on how to apply for one of our exclusive programs designed to help you achieve that goal. </p>
+<p style="text-align:justify"></p>
+<p style="text-align:justify"></p>
+<p style="text-align:justify"></p>
+<p style="text-align:justify"></p>
+<p style="text-align:justify"></p>
+</div><!-- /wix-body -->
+</article>
+<footer>
+  <div class="site-footer">
+    <span>© 2026 Fresu Electronics SRL</span>
+    <span><a href="https://www.fresuelectronics.com">fresuelectronics.com</a> · <a href="https://www.fresuelectronics.com/free-tool-1">Free Stackup Tool</a></span>
+  </div>
+</footer>
+</body>
+</html>

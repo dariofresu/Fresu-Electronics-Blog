@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Is this the best choice to avoid EMI in your PCB? — Fresu Electronics</title>
+  <meta name="description" content="Action list: 1. Get the New EMI Quick Fixes Guide - 2025 I keep seeing this recommendation for low EMI from many PCB designers, including...">
+  <link rel="canonical" href="https://blog.fresuelectronics.com/post/is-this-the-best-choice-to-avoid-emi-in-your-pcb/">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Is this the best choice to avoid EMI in your PCB?">
+  <meta property="og:description" content="Action list: 1. Get the New EMI Quick Fixes Guide - 2025 I keep seeing this recommendation for low EMI from many PCB designers, including...">
+  <meta property="og:url" content="https://blog.fresuelectronics.com/post/is-this-the-best-choice-to-avoid-emi-in-your-pcb/">
+  <meta property="og:image" content="https://blog.fresuelectronics.com/assets/images/wix/61d609_9f391e50c58642f7a17c6dd46f299135~mv2.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400;1,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/assets/wix-exact.css">
+</head>
+<body>
+<header>
+  <div class="site-header">
+    <a href="https://www.fresuelectronics.com">
+      <img src="https://raw.githubusercontent.com/dariofresu/Fresu-Electronics-Blog/main/assets/logo.png" alt="Fresu Electronics">
+    </a>
+    <nav class="header-nav">
+      <a href="https://blog.fresuelectronics.com/">Blog</a>
+      <a href="https://blog.fresuelectronics.com/tools/">Tools</a>
+      <a href="https://www.fresuelectronics.com/trainings">Courses</a>
+      <a href="https://www.fresuelectronics.com/about">About</a>
+      <a href="https://www.fresuelectronics.com/emc-audit" class="header-cta">Book EMC Audit</a>
+    </nav>
+  </div>
+</header>
+<article class="post">
+  <p class="crumb"><a href="https://blog.fresuelectronics.com/">Blog</a> · <a href="https://blog.fresuelectronics.com/#wix-archive">Original posts</a></p>
+  <header class="post-head">
+    <h1>Is this the best choice to avoid EMI in your PCB?</h1>
+    <p class="meta"><time datetime="2024-10-18">2024-10-18</time> · <a href="https://info3761185.wixsite.com/dario-fresu-electron/post/is-this-the-best-choice-to-avoid-emi-in-your-pcb">Original on Wix</a></p>
+  <p class="taxo">Categories: EMI  - Short Post</p>
+  </header>
+  <figure class="wix-cover"><img src="/assets/images/wix/61d609_9f391e50c58642f7a17c6dd46f299135~mv2.png" alt=""></figure>
+<div class="wix-body" id="wix-body">
+<p></p>
+<figure class="wix-fig"><img src="/assets/images/wix/61d609_9f391e50c58642f7a17c6dd46f299135~mv2.png" alt="" loading="lazy"></figure>
+<p></p>
+<hr>
+<p></p>
+<h3><strong><span style="font-size:18px">Action list:</span></strong></h3>
+<h5><a href="https://www.fresuelectronics.com/product-page/emi-quick-fixes-guide" target="_blank" rel="nofollow noreferrer noopener"><strong><u>1. </u></strong></a><a href="https://www.fresuelectronics.com/product-page/emi-quick-fixes-guide" target="_blank" rel="nofollow noreferrer noopener"><strong><u><span style="background-color:rgb(2, 255, 135);color:#141414">Get the New EMI Quick Fixes Guide - 2025</span></u></strong></a></h5>
+<p></p>
+<aside class="wix-card"><a href="https://www.fresuelectronics.com/product-page/emi-quick-fixes-guide"><img src="/assets/images/wix/61d609_6a6d3bf9bd114bcfb82d5236e516195a~mv2.png" alt=""><span class="wix-card-name">EMI Quick Fixes Guide</span></a></aside>
+<p></p>
+<hr>
+<p></p>
+<p>I keep seeing this recommendation for low EMI from many PCB designers, including those with more experience, who say that having a power plane instead of a Return Reference Plane (RRP) adjacent to the signal layers makes no difference for the return current and actually helps reduce emissions.</p>
+<p></p>
+<p>However, as the image below hopefully illustrates, having a plane that differs from the RRP between the signal layer and the RRP does make a difference, and is not the best choice when it comes to EMI.</p>
+<p></p>
+<p>The first issue is that, as we know, current always flows in a loop, and this means that the return current must return to the source it originated from. </p>
+<p></p>
+<p>Since the power plane and the RRP are not DC-linked (short-circuit), the current has to take a longer path, crossing an extra layer via displacement current, before it can finally close the loop, and reach the source pin.</p>
+<p></p>
+<p>But the spaces between the layers and the additional return path introduce impedance. </p>
+<p></p>
+<p>This results in the return current generating an extra voltage drop, which depends on this added impedance, and the current flowing through it.</p>
+<p></p>
+<p>This is simply noise in the return path, which not only can cause common mode current, but can also lead to crosstalk between signals transitioning between layers, easily turning into emissions from the board.</p>
+<p></p>
+<p>This is why I do not recommend using the following 4-layer stack-up, especially for high-speed signals:</p>
+<p></p>
+<p>- L1: Signal</p>
+<p>- L2: Power</p>
+<p>- L3: &quot;Ground&quot;</p>
+<p>- L4: Signal</p>
+<p></p>
+<p>To me, this is definitely a second choice, and requires a good understanding of the physics involved if used.</p>
+<p></p>
+<p>I hope this helps,</p>
+<p>Dario</p>
+<p><a href="http://fresuelectronics.com" target="_blank" rel="noreferrer noopener"><u>fresuelectronics.com</u></a></p>
+<p></p>
+<hr>
+<p><em>💡 By the way, If you would like to master EMC/EMI design, we have a new training program here:</em></p>
+<p class="wix-btn-wrap"><a class="wix-btn" href="https://www.fresuelectronics.com/mentoring" target="_blank" rel="noreferrer noopener" style="background:#116dff;border-radius:8px;color:#ffffff">Get Personalized Training</a></p>
+<p></p>
+<p><em>There, you’ll find details on how to apply for one of our exclusive programs designed to help you achieve that goal. </em></p>
+</div><!-- /wix-body -->
+</article>
+<footer>
+  <div class="site-footer">
+    <span>© 2026 Fresu Electronics SRL</span>
+    <span><a href="https://www.fresuelectronics.com">fresuelectronics.com</a> · <a href="https://www.fresuelectronics.com/free-tool-1">Free Stackup Tool</a></span>
+  </div>
+</footer>
+</body>
+</html>

@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>2-Layers Board Stackup for Low EMI — Fresu Electronics</title>
+  <meta name="description" content="Action list: 1. Get the New EMI Quick Fixes Guide - 2025 One of the fastest ways to fail EMI with your PCB: Choose the wrong stackup. The...">
+  <link rel="canonical" href="https://blog.fresuelectronics.com/post/2-layers-board-stackup-for-low-emi/">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="2-Layers Board Stackup for Low EMI">
+  <meta property="og:description" content="Action list: 1. Get the New EMI Quick Fixes Guide - 2025 One of the fastest ways to fail EMI with your PCB: Choose the wrong stackup. The...">
+  <meta property="og:url" content="https://blog.fresuelectronics.com/post/2-layers-board-stackup-for-low-emi/">
+  <meta property="og:image" content="https://blog.fresuelectronics.com/assets/images/wix/61d609_d9c351db0cae4d209dd2fde9954eb984~mv2.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400;1,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/assets/wix-exact.css">
+</head>
+<body>
+<header>
+  <div class="site-header">
+    <a href="https://www.fresuelectronics.com">
+      <img src="https://raw.githubusercontent.com/dariofresu/Fresu-Electronics-Blog/main/assets/logo.png" alt="Fresu Electronics">
+    </a>
+    <nav class="header-nav">
+      <a href="https://blog.fresuelectronics.com/">Blog</a>
+      <a href="https://blog.fresuelectronics.com/tools/">Tools</a>
+      <a href="https://www.fresuelectronics.com/trainings">Courses</a>
+      <a href="https://www.fresuelectronics.com/about">About</a>
+      <a href="https://www.fresuelectronics.com/emc-audit" class="header-cta">Book EMC Audit</a>
+    </nav>
+  </div>
+</header>
+<article class="post">
+  <p class="crumb"><a href="https://blog.fresuelectronics.com/">Blog</a> · <a href="https://blog.fresuelectronics.com/#wix-archive">Original posts</a></p>
+  <header class="post-head">
+    <h1>2-Layers Board Stackup for Low EMI</h1>
+    <p class="meta"><time datetime="2024-10-10">2024-10-10</time> · <a href="https://info3761185.wixsite.com/dario-fresu-electron/post/2-layers-board-stackup-for-low-emi">Original on Wix</a></p>
+  <p class="taxo">Categories: EMI  - Short Post</p>
+  </header>
+  <figure class="wix-cover"><img src="/assets/images/wix/61d609_d9c351db0cae4d209dd2fde9954eb984~mv2.png" alt=""></figure>
+<div class="wix-body" id="wix-body">
+<p></p>
+<figure class="wix-fig"><img src="/assets/images/wix/61d609_d9c351db0cae4d209dd2fde9954eb984~mv2.png" alt="" loading="lazy"></figure>
+<p></p>
+<hr>
+<h3><strong><span style="font-size:18px">Action list:</span></strong></h3>
+<h5><a href="https://www.fresuelectronics.com/product-page/emi-quick-fixes-guide" target="_blank" rel="nofollow noreferrer noopener"><strong><u>1. </u></strong></a><a href="https://www.fresuelectronics.com/product-page/emi-quick-fixes-guide" target="_blank" rel="nofollow noreferrer noopener"><strong><u><span style="background-color:rgb(2, 255, 135);color:#141414">Get the New EMI Quick Fixes Guide - 2025</span></u></strong></a></h5>
+<p></p>
+<aside class="wix-card"><a href="https://www.fresuelectronics.com/product-page/emi-quick-fixes-guide"><img src="/assets/images/wix/61d609_6a6d3bf9bd114bcfb82d5236e516195a~mv2.png" alt=""><span class="wix-card-name">EMI Quick Fixes Guide</span></a></aside>
+<p></p>
+<hr>
+<p>One of the fastest ways to fail EMI with your PCB: Choose the wrong stackup.</p>
+<p></p>
+<p>The stackup is one of the most important factors you can control when designing PCBs for low EMI.</p>
+<p></p>
+<p>In fact, this is the first thing I usually ask my clients about when reviewing a PCB that has failed due to EMI.</p>
+<p></p>
+<p>As EMI specialists, we need to ensure that the stackup is configured properly to contain the fields.</p>
+<p></p>
+<p>The first basic step is to ensure that each signal layer has an adjacent Return Reference Plane (RRP), which allows us to define the boundaries of the electromagnetic fields.</p>
+<p></p>
+<p>In the first stackup example of a two-layer PCB, one layer is dedicated to signals (and power), while the second layer, at the bottom, is dedicated entirely to the return currents and the reference potential of the signal layer above. In this case, we can see that the majority of the electric fields terminate on the RRP, which essentially means low electromagnetic interference.</p>
+<p></p>
+<p>In the second example, the PCB layers are dedicated to signals (and power) as well as the copper pours or traces for the return current and reference potential. In this scenario, the fields interfere with each other, struggle to find the return path and reference potential (enlarging current loops), and in many cases, they will find the parasitics of the circuit as the easiest way to establish a closed loop instead of following the engineered path designed by the PCB designer.</p>
+<p></p>
+<p>This uncontrolled behavior of the electromagnetic fields is why the second stackup is one of the poorest choices when designing two-layer PCBs for low EMI.</p>
+<p></p>
+<p>My recommendations for two-layer PCBs:</p>
+<p></p>
+<p>- Dedicate one layer to signal and power, and the second layer to the Return Reference Plane (RRP).</p>
+<p>- The RRP should have no splits, cuts, or large loop holes and should ensure that each signal trace has its own uninterrupted path for the return current and reference potential to establish the signal voltage.</p>
+<p>- Place the RRP as close as possible to the signal layer to contain the fields.</p>
+<p></p>
+<p>I hope this helps,</p>
+<p>Dario Fresu</p>
+<p>fresuelectronics.com</p>
+<p></p>
+<p></p>
+<hr>
+<p><em>💡 By the way, If you would like to master EMC/EMI design, we have a new training program here:</em></p>
+<p class="wix-btn-wrap"><a class="wix-btn" href="https://www.fresuelectronics.com/mentoring" target="_blank" rel="noreferrer noopener" style="background:#116dff;border-radius:8px;color:#ffffff">Get Personalized Training</a></p>
+<p></p>
+<p><em>There, you’ll find details on how to apply for one of our exclusive programs designed to help you achieve that goal. </em></p>
+</div><!-- /wix-body -->
+</article>
+<footer>
+  <div class="site-footer">
+    <span>© 2026 Fresu Electronics SRL</span>
+    <span><a href="https://www.fresuelectronics.com">fresuelectronics.com</a> · <a href="https://www.fresuelectronics.com/free-tool-1">Free Stackup Tool</a></span>
+  </div>
+</footer>
+</body>
+</html>

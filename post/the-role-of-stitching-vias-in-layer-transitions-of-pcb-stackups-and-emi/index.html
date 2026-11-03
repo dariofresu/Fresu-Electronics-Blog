@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Stitching Vias in Multilayer PCB Stackups and Their Role in Reducing EMI — Fresu Electronics</title>
+  <meta name="description" content="This article explores the role of stitching vias in maintaining signal integrity and EMC as signals transition between layers in a PCB.">
+  <link rel="canonical" href="https://blog.fresuelectronics.com/post/the-role-of-stitching-vias-in-layer-transitions-of-pcb-stackups-and-emi/">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Stitching Vias in Multilayer PCB Stackups and Their Role in Reducing EMI">
+  <meta property="og:description" content="This article explores the role of stitching vias in maintaining signal integrity and EMC as signals transition between layers in a PCB.">
+  <meta property="og:url" content="https://blog.fresuelectronics.com/post/the-role-of-stitching-vias-in-layer-transitions-of-pcb-stackups-and-emi/">
+  <meta property="og:image" content="https://blog.fresuelectronics.com/assets/images/wix/yt-M1Gt79MuM4s.jpg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400;1,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/assets/wix-exact.css">
+</head>
+<body>
+<header>
+  <div class="site-header">
+    <a href="https://www.fresuelectronics.com">
+      <img src="https://raw.githubusercontent.com/dariofresu/Fresu-Electronics-Blog/main/assets/logo.png" alt="Fresu Electronics">
+    </a>
+    <nav class="header-nav">
+      <a href="https://blog.fresuelectronics.com/">Blog</a>
+      <a href="https://blog.fresuelectronics.com/tools/">Tools</a>
+      <a href="https://www.fresuelectronics.com/trainings">Courses</a>
+      <a href="https://www.fresuelectronics.com/about">About</a>
+      <a href="https://www.fresuelectronics.com/emc-audit" class="header-cta">Book EMC Audit</a>
+    </nav>
+  </div>
+</header>
+<article class="post">
+  <p class="crumb"><a href="https://blog.fresuelectronics.com/">Blog</a> · <a href="https://blog.fresuelectronics.com/#wix-archive">Original posts</a></p>
+  <header class="post-head">
+    <h1>Stitching Vias in Multilayer PCB Stackups and Their Role in Reducing EMI</h1>
+    <p class="meta"><time datetime="2024-11-01">2024-11-01</time> · <a href="https://info3761185.wixsite.com/dario-fresu-electron/post/the-role-of-stitching-vias-in-layer-transitions-of-pcb-stackups-and-emi">Original on Wix</a></p>
+  </header>
+  <div class="wix-embed wix-cover-embed"><iframe src="https://www.youtube.com/embed/M1Gt79MuM4s" title="https://www.youtube.com/watch?v=M1Gt79MuM4s" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen loading="lazy"></iframe></div>
+<div class="wix-body" id="wix-body">
+<div class="wix-embed"><iframe src="https://www.youtube.com/embed/M1Gt79MuM4s" title="Stitching Vias PCB Simulation - PCB Layout for EMC and Signal Integrity" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen loading="lazy"></iframe></div>
+<h5><strong><span style="background-color:rgb(255, 249, 0);color:rgb(7, 31, 47)">CLICK THE PLAY BUTTON TO WATCH THE LESSON.</span></strong></h5>
+<hr>
+<h3><strong><span style="font-size:18px">Action list:</span></strong></h3>
+<h5><a href="https://www.fresuelectronics.com/product-page/emi-quick-fixes-guide" target="_blank" rel="nofollow noreferrer noopener"><strong><u>1. </u></strong></a><a href="https://www.fresuelectronics.com/product-page/emi-quick-fixes-guide" target="_blank" rel="nofollow noreferrer noopener"><strong><u><span style="background-color:rgb(2, 255, 135);color:#141414">Get the New EMI Quick Fixes Guide - 2025</span></u></strong></a></h5>
+<p></p>
+<aside class="wix-card"><a href="https://www.fresuelectronics.com/product-page/emi-quick-fixes-guide"><img src="/assets/images/wix/61d609_6a6d3bf9bd114bcfb82d5236e516195a~mv2.png" alt=""><span class="wix-card-name">EMI Quick Fixes Guide</span></a></aside>
+<p></p>
+<hr>
+<p>This article explores the role of stitching vias in maintaining signal integrity and electromagnetic compatibility (EMC) as signals transition between layers in a PCB stackup. We will examine how the number and placement of stitching vias can influence the behavior of electromagnetic fields, and how proper design can prevent unwanted signal degradation and interference. Through simulation and comparison of different configurations, we will demonstrate how stitching vias contribute to the overall efficiency and reliability of PCB designs, ensuring signals travel cleanly from one layer to the next while keeping fields under control.</p>
+<p></p>
+<hr>
+<p style="text-align:justify">In modern PCB design, managing signal integrity and minimizing electromagnetic interference (EMI) are essential for ensuring optimal performance and reliability, especially as circuit speeds continue to increase. One of the key components in achieving this is the use of stitching vias. These small yet crucial features connect different layers of a PCB to the return reference plane, helping to control the flow of return currents and stabilize electromagnetic fields during signal transitions.</p>
+<p style="text-align:justify"></p>
+<p style="text-align:justify">They serve three essential purposes:</p>
+<p style="text-align:justify"></p>
+<ol>
+<li>
+<p style="text-align:justify"><strong>Providing a path for the return current to flow back to its source</strong> – This ensures a continuous and defined current loop, which is critical for maintaining the integrity of high-speed signals.</p>
+</li>
+<li>
+<p style="text-align:justify"><strong>Serving as a stable reference for the electric field</strong> – By acting as a reliable reference point, stitching vias help stabilize field behavior and support proper signal propagation.</p>
+</li>
+<li>
+<p style="text-align:justify"><strong>Maintaining equipotential across multiple metal structures</strong> – By connecting these structures with a low-impedance path, stitching vias help equalize potential differences, improving the overall electromagnetic performance of the PCB.</p>
+<p style="text-align:justify"></p>
+</li>
+</ol>
+<p style="text-align:justify">Together, these functions play a vital role in maintaining signal integrity and minimizing electromagnetic interference within the PCB. The significance of stitching vias becomes clear when analyzing their impact on electromagnetic field behavior during layer transitions. </p>
+<p style="text-align:justify"></p>
+<p style="text-align:justify">With the help of <a href="https://simberian.com" target="_blank" rel="noreferrer noopener"><strong><em><u>Simbeor ®</u></em></strong></a> a simulation tool developed by <a href="https://simberian.com" target="_blank" rel="noreferrer noopener"><em>simberian.com</em></a>, it is possible to visualize how electromagnetic fields behave under different conditions, specifically, when two stitching vias are used compared to four. This analysis reveals how design choices affect the containment and propagation of electromagnetic fields.</p>
+<p style="text-align:justify"></p>
+<p style="text-align:justify">In our scenario, a multilayer PCB stackup with several planes is examined. Here, electromagnetic fields spread in the cavity between the planes.</p>
+<p></p>
+<figure class="wix-fig"><img src="/assets/images/wix/61d609_833ebcdc7bb84ef9857b6f66c8ef4c3a~mv2.png" alt="Figure 1 - Simulation setup with Simbeor Software. Two stitching vias (left) vs. Four stitching vias (right)." loading="lazy"><figcaption>Figure 1 - Simulation setup with Simbeor Software. Two stitching vias (left) vs. Four stitching vias (right).</figcaption></figure>
+<p style="text-align:justify"></p>
+<p style="text-align:justify">In the first, non-optimal scenario (left side of <em>Figure 1</em>), as signals transition between layers, the electromagnetic fields are confined by only two stitching vias. This limited number of vias allows the fields to propagate freely within the stackup, leading to uncontrolled energy dispersal.</p>
+<p style="text-align:justify"></p>
+<p style="text-align:justify">By contrast, the second scenario (right side of Figure 1) involves the placement of four stitching vias around the signal path. These vias provide a 360-degree reference for the signal during its transition, containing the fields within a defined area, as seen in <em>Figure 2</em>. </p>
+<p></p>
+<figure class="wix-fig"><img src="/assets/images/wix/61d609_6b8f84d4ed23429caa4aa300e25d6a9d~mv2.png" alt="Figure 2 - Fields uncontained (left side) vs 360 degree EM fields containment (right)." loading="lazy"><figcaption>Figure 2 - Fields uncontained (left side) vs 360 degree EM fields containment (right).</figcaption></figure>
+<p style="text-align:justify">This setup prevents the uncontrolled spreading seen in the first scenario (left side of <em>Figure 2</em>) and ensures the electromagnetic fields remain localized. Such control over field behavior is essential for improving the performance and reliability of PCB designs.</p>
+<p style="text-align:justify"></p>
+<p style="text-align:justify">When signals transition between layers, they require both a clear <strong>return current path</strong> and a stable <strong>reference for the electric fields.</strong> Proper design of these elements is critical for maintaining signal integrity and addressing electromagnetic compatibility (EMC).  This makes it vital to engineer both the return path and the field reference to prevent disruptions and limit field spreading.</p>
+<p style="text-align:justify"></p>
+<p style="text-align:justify">In the optimized design (right side of <em>Figure 2</em>), four stitching vias are strategically placed around the signal path. These vias ensure a <strong>continuous reference</strong> for the electric fields as the signal transitions between layers, confining the fields to the return plane and preventing unwanted propagation. This behavior ensures that the fields remain controlled even as the signal transitions along the trace.</p>
+<p style="text-align:justify"></p>
+<figure class="wix-fig"><img src="/assets/images/wix/61d609_a3fe4a88f6694f4a9e9fa0a39814de47~mv2.png" alt="Figure 3 - Practical application of  four stitching vias in a PCB layout." loading="lazy"><figcaption>Figure 3 - Practical application of  four stitching vias in a PCB layout.</figcaption></figure>
+<p style="text-align:justify">Without these stitching vias, fields would begin to spread uncontrollably in between the layers as the signal transitions from horizontal to vertical paths. This spreading is particularly problematic at high frequencies, such as 30 GHz, where precise control over field containment is critical to maintaining proper signal behavior. At these frequencies, even minor field disruptions can cause significant performance issues, including signal degradation and unintended radiation.</p>
+<p style="text-align:justify"></p>
+<p style="text-align:justify">However, effective containment and proper return path design are not limited to high-speed signals. Lower-frequency signals also benefit from careful engineering, as these principles help maintain signal integrity and EMC across a broad range of operating conditions. Regardless of the signal speed, ensuring controlled transitions between layers is essential for achieving reliable and efficient PCB performance.</p>
+<p></p>
+<hr>
+<p style="text-align:justify"><strong><span style="font-size:24px">Conclusion</span></strong></p>
+<p style="text-align:justify"></p>
+<p>The analysis demonstrates that the number and placement of stitching vias significantly impact the behavior of electromagnetic fields during layer transitions. In the non-optimal scenario with only two stitching vias, the fields are allowed to spread uncontrollably, leading to potential signal integrity and EMC issues. However, by strategically placing four stitching vias, the fields are contained, preventing unwanted energy dispersal and ensuring better signal quality and reliability.</p>
+<p></p>
+<p>While the need for proper field containment is especially critical for high-speed signals, the principles of effective stitching via placement apply to all signal frequencies. Careful engineering of the return path and field reference during layer transitions is essential for achieving optimal PCB performance and minimizing electromagnetic interference across a wide range of operating conditions.</p>
+<p style="text-align:justify"></p>
+<p style="text-align:justify">At <a href="https://fresuelectronics.com" target="_blank" rel="noreferrer noopener"><strong><em><u>fresuelectronics.com</u></em></strong></a>, we are committed to easing the understanding of the design process for low electromagnetic interferences (EMI). Our goal is to help you avoid the common pitfalls and frustrations that come with mastering PCB design. Through the resources we provide, including guides, courses, and other learning tools, we aim to make your journey more efficient and less daunting.</p>
+<p style="text-align:justify"></p>
+<p style="text-align:justify">We’re here to equip you with the knowledge and skills needed to excel in this field, offering you a solid foundation to build upon as you grow into a confident PCB designer.</p>
+<p>If you would like to master EMC/EMI design, we have a new training program here:</p>
+<p></p>
+<p class="wix-btn-wrap"><a class="wix-btn" href="https://www.fresuelectronics.com/mentoring" target="_blank" rel="noreferrer noopener" style="background:#116dff;border-radius:8px;color:#ffffff">Get Personalized Training</a></p>
+<p></p>
+<p>There, you’ll find details on how to apply for one of our exclusive programs designed to help you achieve that goal. </p>
+</div><!-- /wix-body -->
+</article>
+<footer>
+  <div class="site-footer">
+    <span>© 2026 Fresu Electronics SRL</span>
+    <span><a href="https://www.fresuelectronics.com">fresuelectronics.com</a> · <a href="https://www.fresuelectronics.com/free-tool-1">Free Stackup Tool</a></span>
+  </div>
+</footer>
+</body>
+</html>

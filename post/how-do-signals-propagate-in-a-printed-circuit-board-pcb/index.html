@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Understanding Signal Propagation in a Printed Circuit Board (PCB) — Fresu Electronics</title>
+  <meta name="description" content="In this lesson, we&#x27;re going to discuss how signals propagate in PCB, and most importantly, what happens through the transmission line.">
+  <link rel="canonical" href="https://blog.fresuelectronics.com/post/how-do-signals-propagate-in-a-printed-circuit-board-pcb/">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Understanding Signal Propagation in a Printed Circuit Board (PCB)">
+  <meta property="og:description" content="In this lesson, we&#x27;re going to discuss how signals propagate in PCB, and most importantly, what happens through the transmission line.">
+  <meta property="og:url" content="https://blog.fresuelectronics.com/post/how-do-signals-propagate-in-a-printed-circuit-board-pcb/">
+  <meta property="og:image" content="https://blog.fresuelectronics.com/assets/images/wix/yt-JVdtKGk0fWM.jpg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400;1,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/assets/wix-exact.css">
+</head>
+<body>
+<header>
+  <div class="site-header">
+    <a href="https://www.fresuelectronics.com">
+      <img src="https://raw.githubusercontent.com/dariofresu/Fresu-Electronics-Blog/main/assets/logo.png" alt="Fresu Electronics">
+    </a>
+    <nav class="header-nav">
+      <a href="https://blog.fresuelectronics.com/">Blog</a>
+      <a href="https://blog.fresuelectronics.com/tools/">Tools</a>
+      <a href="https://www.fresuelectronics.com/trainings">Courses</a>
+      <a href="https://www.fresuelectronics.com/about">About</a>
+      <a href="https://www.fresuelectronics.com/emc-audit" class="header-cta">Book EMC Audit</a>
+    </nav>
+  </div>
+</header>
+<article class="post">
+  <p class="crumb"><a href="https://blog.fresuelectronics.com/">Blog</a> · <a href="https://blog.fresuelectronics.com/#wix-archive">Original posts</a></p>
+  <header class="post-head">
+    <h1>Understanding Signal Propagation in a Printed Circuit Board (PCB)</h1>
+    <p class="meta"><time datetime="2024-11-19">2024-11-19</time> · <a href="https://info3761185.wixsite.com/dario-fresu-electron/post/how-do-signals-propagate-in-a-printed-circuit-board-pcb">Original on Wix</a></p>
+  <p class="taxo">Tags: EMI, EMC, PCB DESIGN, Hardware Design</p>
+  </header>
+  <div class="wix-embed wix-cover-embed"><iframe src="https://www.youtube.com/embed/JVdtKGk0fWM" title="https://youtu.be/JVdtKGk0fWM?si=pvOukHRBJKxootCg" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen loading="lazy"></iframe></div>
+<div class="wix-body" id="wix-body">
+<p><span style="background-color:rgb(255, 255, 255);color:rgb(0, 0, 0)">What if I told you that what you know about signal propagation in a printed circuit board is not entirely true?</span><br></p>
+<figure class="wix-fig"><img src="/assets/images/wix/61d609_9555f458a9fa4fcb969a99d3cf8c3470~mv2.jpg" alt="Image of a PCB next to Dario Fresu" loading="lazy"><figcaption>Understanding the Mysterious Signals: A Deep Dive into Microchip Technology</figcaption></figure>
+<p style="text-align:justify"><span style="background-color:rgb(255, 255, 255);color:rgb(0, 0, 0)">In this lesson, we&#x27;re going to discuss how signals propagate in a PCB and, most importantly, what happens at the instant when the signal is propagating through the transmission line.</span></p>
+<p style="text-align:justify"></p>
+<aside class="wix-card"><a href="https://www.fresuelectronics.com/product-page/emi-control-guide"><img src="/assets/images/wix/61d609_9159b6dd8b3f48979f181c84471771f2~mv2.png" alt=""><span class="wix-card-name">Top 10 PCB Design Mistakes For EMI Control</span></a></aside>
+<p style="text-align:justify"></p>
+<hr>
+<h2>The focus is on energy within electromagnetic fields</h2>
+<p style="text-align:justify"></p>
+<p style="text-align:justify"><span style="background-color:rgb(255, 255, 255);color:rgb(0, 0, 0)">One common way to think about signal transmission is in terms of voltage and current. We often compare the flow of current in a conductor to </span><strong><span style="background-color:rgb(255, 255, 255);color:rgb(0, 0, 0)">water flowing through pipes.</span></strong></p>
+<figure class="wix-fig" data-wix-width="740" style="max-width:740px"><img src="/assets/images/wix/61d609_5173cfe6506548fa8c384ecdb7856063~mv2.gif" alt="Figure 1 - Classical water flowing through the pipes analogy to interpret electrical circuits." loading="lazy"><figcaption>Figure 1 - Classical water flowing through the pipes analogy to interpret electrical circuits.</figcaption></figure>
+<p style="text-align:justify">This analogy is helpful for building simple circuits, but <strong>does it suffice to describe what really happens inside the PCB? </strong></p>
+<p style="text-align:justify"></p>
+<p style="text-align:justify"><span style="background-color:rgb(255, 255, 255);color:rgb(0, 0, 0)">A more in-depth approach is to think about signal propagation in terms of fields. This requires revisiting the fundamentals: </span><strong><span style="background-color:rgb(255, 255, 255);color:rgb(0, 0, 0)">Maxwell&#x27;s equations.</span></strong><br></p>
+<figure class="wix-fig" data-wix-width="740" style="max-width:740px"><img src="/assets/images/wix/61d609_5c8919b548f34f5182d95b614de05db4~mv2.png" alt="Figure 2 - Maxwell&#x27;s equations" loading="lazy"><figcaption>Figure 2 - Maxwell&#x27;s equations</figcaption></figure>
+<p></p>
+<p style="text-align:justify"><span style="background-color:rgb(255, 255, 255);color:rgb(0, 0, 0)">Without delving deeply into the math, the key takeaway here is the fourth of Maxwell&#x27;s equations: </span><strong><span style="background-color:rgb(255, 255, 255);color:rgb(0, 0, 0)">The Ampere-Maxwell law.</span></strong></p>
+<p></p>
+<figure class="wix-fig"><img src="/assets/images/wix/61d609_1d36e3e1ece644d2908caa0ce27e3e59~mv2.png" alt="Figure 3 - Ampere-Maxwell&#x27;s equation" loading="lazy"><figcaption>Figure 3 - Ampere-Maxwell&#x27;s equation</figcaption></figure>
+<p style="text-align:justify">This law tells us that a circulating magnetic field (<strong>B</strong>) is produced by an electric current (<strong>J</strong>), and by a time-varying electric field (<strong>E</strong>). Conversely, a circulating magnetic field, generates an electric current, and a time-varying electric field.</p>
+<p style="text-align:justify"></p>
+<p style="text-align:justify"><span style="background-color:rgb(255, 255, 255);color:rgb(0, 0, 0)">These phenomena are represented by two terms:</span></p>
+<ul>
+<li>
+<p><strong><span style="background-color:rgb(255, 255, 255);color:#141414">The electric current density (J)</span></strong></p>
+</li>
+<li>
+<p><strong><span style="background-color:rgb(255, 255, 255);color:#141414">The displacement current density</span></strong></p>
+</li>
+</ul>
+<p style="text-align:justify"></p>
+<p style="text-align:justify">the latter, being on the right side of the equation. The first concept, <strong>conduction current </strong>density, is commonly explained by comparing it to water flowing through pipes<strong>.</strong> The second concept, <strong>displacement current</strong> density, can be understood more easily by thinking of the current behavior in a capacitor.</p>
+<p style="text-align:justify"></p>
+<p style="text-align:justify">It&#x27;s often assumed that when a capacitor is charged with a DC signal, no current flows through it. </p>
+<p style="text-align:justify"></p>
+<figure class="wix-fig"><img src="/assets/images/wix/61d609_67c49b6e40984d8e8b6b0f99606b1485~mv2.gif" alt="Figure 4 - DC Conduction current flowing through a capacitor" loading="lazy"><figcaption>Figure 4 - DC Conduction current flowing through a capacitor</figcaption></figure>
+<p></p>
+<p style="text-align:justify">However, with an AC signal, especially at high frequencies, the capacitor appears to conduct electric current.</p>
+<p></p>
+<figure class="wix-fig"><img src="/assets/images/wix/61d609_7bb1f18c2fdc4088b324a1fbccb3e22b~mv2.gif" alt="Figure 5 - AC Conduction current flowing through a capacitor" loading="lazy"><figcaption>Figure 5 - AC Conduction current flowing through a capacitor</figcaption></figure>
+<p style="text-align:justify"></p>
+<p style="text-align:justify"><strong>This is not true. </strong>In reality, no electric current flows through the plates and dielectric of the capacitor, as this would contradict the definition of a dielectric. </p>
+<p style="text-align:justify"></p>
+<p style="text-align:justify">What happens instead, and this is Maxwell&#x27;s actual contribution to Ampere&#x27;s law, is that when the capacitor is charging, the voltage change across it, causes a displacement of charges within its dielectric. In the dielectric, bound charges align towards the capacitor&#x27;s plates. </p>
+<figure class="wix-fig"><img src="/assets/images/wix/61d609_40e955ee49474c6ab9c1d7e98e495781~mv2.gif" alt="Figure 6 - Displacement current mechanism" loading="lazy"><figcaption>Figure 6 - Displacement current mechanism</figcaption></figure>
+<p></p>
+<p style="text-align:justify">Positive charges on one side, and negative charges on the other. </p>
+<hr>
+<p style="text-align:justify"><strong>🔓</strong><span style="background-color:rgb(255, 255, 255);color:rgb(0, 0, 0)">This movement, which Maxwell called &#x27;displacement,&#x27; creates an apparent polarization current through the capacitor known as the displacement current.</span></p>
+<hr>
+<p style="text-align:justify">Now, considering these concepts of conduction current, and displacement current, <strong>how do they connect to PCB design? </strong></p>
+<p style="text-align:justify"></p>
+<p style="text-align:justify">Let&#x27;s consider this model of a PCB, where the metal conductors are shown in yellow on the top and bottom sides. At the top, we have the signal trace connected to the load on the right, and on the bottom side, there&#x27;s the return plane for the signal, also connected to the load. The green layer beneath the signal trace is the dielectric material, insulating the two metal conductors. </p>
+<p></p>
+<figure class="wix-fig"><img src="/assets/images/wix/61d609_8b7cdadf6d444341a145f4c67e56149e~mv2.jpg" alt="Figure 7 - Model of  a PCB " loading="lazy"><figcaption>Figure 7 - Model of  a PCB </figcaption></figure>
+<p style="text-align:justify">This forms the transmission line for signal transmission. In this model, the two metal conductors separated by a dielectric material can be compared to a capacitor. This comparison helps us grasp what happens when a signal is sent through the transmission line. Moreover, since these are conductors, they naturally have inductance, so to simplify, we can view the PCB as a sequence of small capacitors and inductors. </p>
+<p style="text-align:justify"></p>
+<p style="text-align:justify"><strong><span style="font-size:20px">Now, what happens when a signal is injected into the transmission line? </span></strong></p>
+<p style="text-align:justify"></p>
+<p style="text-align:justify">The propagating signal, at the point where the electric field shifts from low to high, creates a displacement current, forming a current wavefront.</p>
+<figure class="wix-fig"><img src="/assets/images/wix/61d609_d359fc3662974b148149de84f3e56965~mv2.gif" alt="Figure 8  - Signal Propagation in a PCB" loading="lazy"><figcaption>Figure 8  - Signal Propagation in a PCB</figcaption></figure>
+<p></p>
+<p style="text-align:justify">In this situation, we see Maxwell&#x27;s equations in action. </p>
+<p style="text-align:justify"></p>
+<p style="text-align:justify">First, there&#x27;s the <strong>conduction current</strong>, which includes the signal current (also called forward current) on the top trace, and the return current on the bottom. </p>
+<p style="text-align:justify">Second, we have the <strong>displacement current</strong>, which arises from the changing electric field at the front of the signal wave.</p>
+<hr>
+<p style="text-align:justify"><strong>🔓 Interesting fact: Until the signal gets to the end of the transmission line, it doesn&#x27;t &#x27;know&#x27; what&#x27;s at the end!</strong></p>
+<hr>
+<p style="text-align:justify">There could be a load that uses the signal, an empty line with nothing connected, or a short circuit due to a wrong connection. As the signal travels along the transmission line, it responds only to the <strong>instantaneous impedance</strong> it encounters at each specific point. </p>
+<p style="text-align:justify"></p>
+<p style="text-align:justify"><strong>What happens when the signal reaches the end of the transmission line? </strong></p>
+<p style="text-align:justify"></p>
+<p style="text-align:justify">This outcome, is determined by how well the connected <strong>load&#x27;s impedance</strong> matches the transmission <strong>line&#x27;s</strong> <strong>characteristic impedance.</strong> If there&#x27;s a mismatch, meaning the load&#x27;s impedance is different from the line&#x27;s, the signal will reflect back. </p>
+<p style="text-align:justify"></p>
+<p style="text-align:justify">On the other hand, if the load&#x27;s impedance perfectly matches the line&#x27;s impedance, there won&#x27;t be any signal reflection. This concept is crucial for the entire journey of the signal along the line.  At any point where the signal encounters a change in impedance, it can cause a reflection of the signal. </p>
+<p></p>
+<h2>Conclusion</h2>
+<p></p>
+<p style="text-align:justify"><span style="background-color:rgb(255, 255, 255);color:rgb(0, 0, 0)">When someone begins their journey in PCB design, the theoretical knowledge gained in classical electrical engineering classes does not always translate seamlessly into practical PCB layout practices. This often leaves hardware designers in a challenging position, learning through trial and error.</span><br></p>
+<p style="text-align:justify">At <a href="http://fresuelectronics.com" target="_blank" rel="noreferrer noopener"><u>fresuelectronics.com</u></a>, our primary goal is to help you circumvent the pain associated with this steep learning curve. We believe that by sharing this guide, along with the <a href="https://www.fresuelectronics.com/courses" target="_blank" rel="noreferrer noopener"><u>courses</u></a>, materials, and programs we offer, we can assist you in navigating the complexities of PCB design. </p>
+<p style="text-align:justify"></p>
+<p style="text-align:justify">Our aim is to support you on your path to mastering this field, ensuring that you have the tools and knowledge necessary to succeed. </p>
+<p></p>
+<p></p>
+<aside class="wix-card"><a href="https://www.fresuelectronics.com/product-page/emi-control-guide"><img src="/assets/images/wix/61d609_9159b6dd8b3f48979f181c84471771f2~mv2.png" alt=""><span class="wix-card-name">Top 10 PCB Design Mistakes For EMI Control</span></a></aside>
+<p></p>
+</div><!-- /wix-body -->
+</article>
+<footer>
+  <div class="site-footer">
+    <span>© 2026 Fresu Electronics SRL</span>
+    <span><a href="https://www.fresuelectronics.com">fresuelectronics.com</a> · <a href="https://www.fresuelectronics.com/free-tool-1">Free Stackup Tool</a></span>
+  </div>
+</footer>
+</body>
+</html>
